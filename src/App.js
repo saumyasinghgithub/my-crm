@@ -1,25 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+/*
+  Author: Surojit Basu
+  Date: June 01, 2020
+*/
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import React , {useEffect } from 'react';
+import './App.css';
+import CustomRoutes from './CustomRoutes';
+
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
+
+import {UserProvider} from './contexts/UserContext';
+
+import Utils from './Utils';
+import {NotFound} from './components';
+
+
+const App = (props) => {
+
+  const RoutedLayout = () => {
+    return <Router basename={process.env.REACT_APP_BASENAME || ""}>
+      <Routes>
+        {CustomRoutes.map((route, index) => {
+          if(route.secure && !Utils.isLoggedIn()){
+            return <Route key={index} path={`${process.env.PUBLIC_URL}/login`} component={() => <route.layout {...props}>
+            <route.component {...props} />
+          </route.layout>} />
+          }else{
+            return (
+              <Route
+                key={index}
+                path={process.env.PUBLIC_URL + route.path}
+                exact={route.exact || false}
+                element={<route.layout {...props}>
+                      <route.component {...props} />
+                    </route.layout>}
+              />
+            );
+          }
+        })}
+		    <Route component={NotFound}></Route>
+      </Routes>
+    </Router>
+  }
+  
+  const Provider = () => {
+    return <UserProvider>
+      <RoutedLayout />
+    </UserProvider>;
+  }
+
+  return <Provider />;
 }
 
 export default App;
