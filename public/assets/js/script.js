@@ -40,14 +40,7 @@ $(document).ready(function(){
     $(".filterCloseBtn").click(function(){
         $(".filterResultBox").slideUp("slow");
       });
-    $(".menu-toggle").click(function() {
-        $(".sidenav").toggleClass("width100");
-        $("body").addClass("menuopen");
-    });
-     $(".closemenu").click(function() {
-        $(".sidenav").removeClass("width100");
-        $("body").removeClass("menuopen")
-    });
+    
      $(".navbarList li a").click(function() {
         $(".sidenav").removeClass("width100");
      });

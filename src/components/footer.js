@@ -18,6 +18,7 @@ const Footer = (props) => {
         </ul>
     </div>
 </footer>
+  
     </>
 
     );

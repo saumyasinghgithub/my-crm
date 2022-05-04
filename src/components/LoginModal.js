@@ -1,12 +1,24 @@
-import React from "react";
+import React,{useEffect} from "react";
 
 const LoginModal = (props) => {
+
+    const $ = window.$;
+        
+    useEffect(()=>{
+        $('.modal').on('show.bs.modal', function (e) {
+            $('.modal .modal-dialog').attr('class', 'modal-dialog modal-full  zoomIn  animated');
+        });
+        $('.modal').on('hide.bs.modal', function (e) {
+            $('.modal .modal-dialog').attr('class', 'modal-dialog  zoomOut modal-full  animated');
+        });
+    },[]);
+
     return(<>
-    <div className="modal fade show" id="loginModal" >
+    <div className="modal" id="loginModal" >
     <div className="modal-dialog modal-full" >
         <div className="modal-content">
                 <div className="overlay"></div>
-                <button type="button" className="close" data-bs-dismiss="modal" aria-label="Close">
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                     <img className="img-fluid" src="assets/images/close-circle.png" />
                     </button>
                 <div className="loginWrapper">
@@ -23,13 +35,14 @@ const LoginModal = (props) => {
                     <p>Forgot password ? <a href="">Click here!</a></p>
                     <p>By signing up, you agree to our Terms of Use and Privacy Policy.</p>
                     <ul>
-                        <li><a  href="#signUpTrainer"  data-bs-toggle="modal" data-bs-dismiss="modal" >Join as a Trainer</a></li>
-                        <li><a  href="#signUpStudent"  data-bs-toggle="modal" data-bs-dismiss="modal" >Join as a Student</a></li>
+                        <li><a  href="#signUpTrainer"  data-toggle="modal" data-dismiss="modal" >Join as a Trainer</a></li>
+                        <li><a  href="#signUpStudent"  data-toggle="modal" data-dismiss="modal" >Join as a Student</a></li>
                     </ul>
                 </div>           
         </div>
     </div>
 </div>
+
     </>);
 }
 
