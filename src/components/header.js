@@ -41,8 +41,8 @@ const Header = (props) => {
                 </div> 
             </form>
             <ul className="navbar-nav">
-                <li className="nav-item"><a href="shopping-cart.php"><img className="img-fluid shoppingIcon" src="assets/images/cart-white.png"/></a></li>
-                <li className="nav-item" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">
+                <li className="nav-item"><a href="shopping-cart.php"><img className="img-fluid shoppingIcon" src="assets/images/cart-white.png" alt="autodidact"/></a></li>
+                <li className="nav-item" data-bs-toggle="modal" data-bs-target="#loginModal" >
                     Log in
                 </li>
                 <li className="nav-item ">
