@@ -59,10 +59,6 @@ $(document).ready(function(){
       $(this).parent().find("tr").remove();
     });
 
-
-
-
-
         // Detect request animation frame
     var scroll = window.requestAnimationFrame ||
     // IE Fallback
@@ -82,36 +78,15 @@ $(document).ready(function(){
     // Call the loop for the first time
     loop();
 
-    var scrollTransfer = window.requestAnimationFrame ||
-    // IE Fallback
-    function(callback1){ window.setTimeout(callback1, 1000/60)};
     
-
-
-
-
-
-
-   
-
     var $body = $('body');
     var $box = $('.box');
     for (var i = 0; i < 20; i++) {
       $box.clone().appendTo($body);
     }
   
-    // Helper function for add element box list in WOW
-    WOW.prototype.addBox = function(element) {
-      this.boxes.push(element);
-    };
+   
   
-    // Init WOW.js and get instance
-    var wow = new WOW();
-    wow.init();
-  
-    // Attach scrollSpy to .wow elements for detect view exit events,
-    // then reset elements and add again for animation
-
 });
 
 $(function() {
@@ -161,22 +136,33 @@ $(function() {
     AddReadMore();
 });
 
+
+ // Helper function for add element box list in WOW
+ WOW.prototype.addBox = function(element) {
+  this.boxes.push(element);
+};
+
+
 window['scrollEffect'] = function () {
-  var elementsToShow1 = document.querySelectorAll('.imgTransfer'); 
 
-   function loopTransfer() {
-    Array.prototype.forEach.call(elementsToShow1, function(element1){
-    if (isElementInViewport(element1)) {
-    element1.classList.add('is-visible');
-    } else {
-    element1.classList.remove('is-visible');
-    }
+  var wow = new WOW();
+    wow.init();
+
+  var scrollTransfer = window.requestAnimationFrame ||
+  // IE Fallback
+  function(callback1){ window.setTimeout(callback1, 1000/60)};
+  
+  scrollTransfer(() => {
+    $('.imgTransfer').each(function(){
+    
+      if (isElementInViewport(this)) {
+        this.classList.add('is-visible');
+      } else {
+        this.classList.remove('is-visible');
+      }
     });
-    scrollTransfer(loopTransfer);
-    }
-    // Call the loop for the first time
-    loopTransfer(); 
-
+  });
+  
   $('.wow').on('scrollSpy:exit', function() {
     $(this).css({
       'visibility': 'hidden',
@@ -184,16 +170,18 @@ window['scrollEffect'] = function () {
     }).removeClass('animated');
     wow.addBox(this);
   }).scrollSpy();
+
 };
 
     // Helper function from: http://stackoverflow.com/a/7557433/274826
-    function isElementInViewport(el) {
-      // special bonus for those using jQuery
-      if (typeof jQuery === "function" && el instanceof jQuery) {
+function isElementInViewport(el) {
+    // special bonus for those using jQuery
+    if (typeof window.jQuery === "function" && el instanceof window.jQuery) {
       el = el[0];
-      }
-      var rect = el.getBoundingClientRect();
-      return (
+    }
+    if(!el) return false;
+    var rect = el.getBoundingClientRect();
+    return (
       (rect.top <= 10
       && rect.bottom >= 0)
       ||
@@ -202,8 +190,5 @@ window['scrollEffect'] = function () {
       ||
       (rect.top >= 0 &&
       rect.bottom <= (window.innerHeight || document.documentElement.clientHeight))
-      );
-      }
-
-
-
+    );
+};
