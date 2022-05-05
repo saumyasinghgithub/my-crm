@@ -14,6 +14,13 @@ const HeaderTrainer = (props) => {
                 $(".sidenav").removeClass("width100");
                 $("body").removeClass("menuopen")
             });
+
+            $('.profile_toggle').on('click',function() {
+                $('.profile_menu').addClass('profile_width100');
+            });
+               $('.student_prof_cross').on('click',function() {
+               $('.profile_menu').removeClass('profile_width100');
+            });
     },[]);
 
     return(<>

@@ -25,7 +25,7 @@ const Header = (props) => {
                 <input className="form-control" type="text" placeholder="How can I help you ?" />
                 </form>
                 <ul className="navList">
-                    <li><a href="about.php">About us <span>Any queries? Problems with upload? No matter what the issue is, 
+                    <li><a href="/about">About us <span>Any queries? Problems with upload? No matter what the issue is, 
                         we will help, support and find a way!</span></a></li>
                     <li><a href="404.php">AD Studio <span>Lorem Ipsum is simply dummy text</span></a></li>
                     <li><a href="">Help for Trainer <span>Lorem Ipsum is simply dummy text .</span></a></li>
