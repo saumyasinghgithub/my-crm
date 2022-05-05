@@ -1,5 +1,5 @@
-import {LoginLayout, DefaultLayout} from './layouts';
-import {Login, Home} from './pages';
+import {LoginLayout, StaticPageLayout, DefaultLayout} from './layouts';
+import {Login, Home, About} from './pages';
 
 const CustomRoutes = [  
   
@@ -9,6 +9,13 @@ const CustomRoutes = [
     'exact'     : true,
     'layout'    : LoginLayout, 
     'component' : Login
+  },
+  {
+    'path'      : '/about', 
+    'secure'    : false,    
+    'exact'     : true,
+    'layout'    : StaticPageLayout, 
+    'component' : About
   },
   {
     'path'      : '/',

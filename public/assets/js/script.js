@@ -85,43 +85,13 @@ $(document).ready(function(){
     var scrollTransfer = window.requestAnimationFrame ||
     // IE Fallback
     function(callback1){ window.setTimeout(callback1, 1000/60)};
-    var elementsToShow1 = document.querySelectorAll('.imgTransfer'); 
-
-    function loopTransfer() {
-    Array.prototype.forEach.call(elementsToShow1, function(element1){
-    if (isElementInViewport(element1)) {
-    element1.classList.add('is-visible');
-    } else {
-    element1.classList.remove('is-visible');
-    }
-    });
-    scrollTransfer(loopTransfer);
-    }
-    // Call the loop for the first time
-    loopTransfer();
+    
 
 
 
 
 
-    // Helper function from: http://stackoverflow.com/a/7557433/274826
-    function isElementInViewport(el) {
-    // special bonus for those using jQuery
-    if (typeof jQuery === "function" && el instanceof jQuery) {
-    el = el[0];
-    }
-    var rect = el.getBoundingClientRect();
-    return (
-    (rect.top <= 10
-    && rect.bottom >= 0)
-    ||
-    (rect.bottom >= (window.innerHeight || document.documentElement.clientHeight) &&
-    rect.top <= (window.innerHeight || document.documentElement.clientHeight))
-    ||
-    (rect.top >= 0 &&
-    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight))
-    );
-    }
+
    
 
     var $body = $('body');
@@ -141,13 +111,7 @@ $(document).ready(function(){
   
     // Attach scrollSpy to .wow elements for detect view exit events,
     // then reset elements and add again for animation
-    $('.wow').on('scrollSpy:exit', function() {
-      $(this).css({
-        'visibility': 'hidden',
-        'animation-name': 'none'
-      }).removeClass('animated');
-      wow.addBox(this);
-    }).scrollSpy();
+
 });
 
 $(function() {
@@ -197,9 +161,49 @@ $(function() {
     AddReadMore();
 });
 
+window['scrollEffect'] = function () {
+  var elementsToShow1 = document.querySelectorAll('.imgTransfer'); 
 
+   function loopTransfer() {
+    Array.prototype.forEach.call(elementsToShow1, function(element1){
+    if (isElementInViewport(element1)) {
+    element1.classList.add('is-visible');
+    } else {
+    element1.classList.remove('is-visible');
+    }
+    });
+    scrollTransfer(loopTransfer);
+    }
+    // Call the loop for the first time
+    loopTransfer(); 
 
+  $('.wow').on('scrollSpy:exit', function() {
+    $(this).css({
+      'visibility': 'hidden',
+      'animation-name': 'none'
+    }).removeClass('animated');
+    wow.addBox(this);
+  }).scrollSpy();
+};
 
+    // Helper function from: http://stackoverflow.com/a/7557433/274826
+    function isElementInViewport(el) {
+      // special bonus for those using jQuery
+      if (typeof jQuery === "function" && el instanceof jQuery) {
+      el = el[0];
+      }
+      var rect = el.getBoundingClientRect();
+      return (
+      (rect.top <= 10
+      && rect.bottom >= 0)
+      ||
+      (rect.bottom >= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.top <= (window.innerHeight || document.documentElement.clientHeight))
+      ||
+      (rect.top >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight))
+      );
+      }
 
 
 
