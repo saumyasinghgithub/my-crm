@@ -27,8 +27,8 @@ const Header = (props) => {
                 <ul className="navList">
                     <li><a href="/about">About us <span>Any queries? Problems with upload? No matter what the issue is, 
                         we will help, support and find a way!</span></a></li>
-                    <li><a href="404.php">AD Studio <span>Lorem Ipsum is simply dummy text</span></a></li>
-                    <li><a href="">Help for Trainer <span>Lorem Ipsum is simply dummy text .</span></a></li>
+                    <li><a href="/ad-studio">AD Studio <span>Lorem Ipsum is simply dummy text</span></a></li>
+                    <li><a href="/ad-trainer">Help for Trainer <span>Lorem Ipsum is simply dummy text .</span></a></li>
                     <li><a href="">Help for Student <span>Lorem Ipsum is simply dummy text .</span></a></li>
                     <li><a href="">Contact <span>Lorem Ipsum is simply dummy text of.</span></a></li>
                 </ul>

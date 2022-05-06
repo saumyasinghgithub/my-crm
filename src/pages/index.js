@@ -1,5 +1,7 @@
 import Login from "./Login";
-import Home from "./Home";
 import About from "./About";
+import Home from "./Home";
+import ADStudio from "./ADStudio";
+import ADTrainer from "./ADTrainer";
 
-export {Login, Home, About};
+export {Login, About, Home, ADStudio, ADTrainer};

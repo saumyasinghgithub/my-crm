@@ -10,17 +10,11 @@ const About = (props) => {
     <div className="container100">
         <div className="flex404">
             <div className="flexItem40 slideInUp wow">
-                <p>Sime peles ut ut mi, sinum fugita volorundi 
-                    quo vita quatur?
-                    Icipsant omnimus ut fugitat emporum eic 
-                    tem. Feriam quae por si ut apid quistinus 
-                    dolorro quassuntibus pedi del inciure 
-                    ptaspic itemque quis venia dignihictore ea 
-                    voluptat voluptatus audigenimpor rehent unt, 
-                    quo eium facereriatia que comnim dolorempos 
-                    aut officiant.</p>
-                <p>Sime peles ut ut mi, sinum fugita volorundi 
-                    quo vita quatur?</p>
+                <p>Autodidact was launched with the vision to provide a digital marketplace for both Trainers and Learners worldwide.</p>
+                <p>It is the first global trainers and instructors listing with an elaborated and scientific rating and filtration engine. These filters will help corporates and executives look for and reach out to the most appropriate trainers for their content training, coaching and consulting needs.</p>
+                <p>It allows Trainers to create a free digital presence and identity, that will help them market themselves to prospective trainees, students, executives and organisations looking for professional engagement beyond content.</p>
+                <p>They can create their own digital learning asset catalogue along with services portfolio. Trainers can create a digital presence and sell (Modes of training) Training and Performance improvement tools, assets, curriculums and services to anyone anywhere in the world.</p>
+                <p>Its advanced filter system helps Learners find trainers or performance improvement consultants whose programs will help them improve their business relevancy.</p>
             </div>
             <div className="flexItem60 slideInUp wow">
                 <div className="headingBold">About us</div>

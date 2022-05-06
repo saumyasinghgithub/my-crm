@@ -819,7 +819,7 @@ img.shoppingIcon {
 
 .modal-full .modal-content {
     min-height: 100vh;
-    background: url(../images/menu-bg.jpg)center no-repeat;
+    background: url(../images/menu-bg.jpg) center no-repeat;
     background-size: cover;
     position: relative;
     border: 0px solid rgba(0, 0, 0, 0.2);
@@ -1552,11 +1552,11 @@ p {
     }
     
     .headingtext {
-        /* margin-top: 80px; */
-        font-size: 63px;
+        margin-top: 80px;
+        font-size: 40px;
         font-weight: bold;
         line-height: 63px;
-        /* font-family: 'Segoe UI Semibold'; */
+        font-family: 'Segoe UI Semibold'; 
         position: relative;    padding-right: 30px; display: inline-block;
     }
     .aboutMe-pr0fle .headingtext,
@@ -3288,7 +3288,44 @@ h2.subheading {
 
   }
 
+.AD-studio img {
+    margin: 40px 0px;
+}
 
+.help-wrapper img {
+    width: 100%;
+}
 
+.AD-studio ul{padding-left:60px; margin-bottom:0px;}
+.AD-studio{width:100%; max-width:100%;}
+.AD-studio li:first-child:before{    
+background: #4f5052;
+content: '';
+margin-right:10px;
+display: inline-block;
+height: 1px;
+width:50px;
+transition: all 300ms;
+margin-left:0px;
+margin-left:-60px;}
+.AD-studio ul li{margin-bottom:20px;}
+.AD-studio ul li:last-child{margin-bottom:0px;}
+.AD-studio .headingtext{margin:20px 0px; font-size:40px;}
+.AD-studio h1.headingtext{margin-top:0px;}
+.AD-studio p{margin-bottom:5px;}
+.AD-studio img{margin:40px 0px;}
+.AD-help h1{margin-bottom:0px; margin-top:30px; margin-left:40px;}
+.AD-help p{margin-bottom:0px;}
+.faq {
+    list-style: none;
+    counter-reset: li;
+}
+.faq li {
+    counter-increment: step;
+    position: relative;
+    clear: both;
+    padding-left: 50px;
+    margin-top: 50px;
+}
 
 /* *************************end css zigzag for timeline******************************* */
