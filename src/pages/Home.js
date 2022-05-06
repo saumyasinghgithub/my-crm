@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react';
 
 const Home = (props) => {
-	//useEffect(window.drumEffect,[]);
+	useEffect(window.drumEffect,[]);
     return(<>
         <section className="home-wrapper">
         <div className="container-fluid">
@@ -104,8 +104,7 @@ const Home = (props) => {
 						</select>
 					</div>
 				</div>
-			</div>
-			<div className="mySlides fade">
+			
 				<div className="row">
 					<div className="col-md-3">
 						<select>
@@ -189,10 +188,7 @@ const Home = (props) => {
 					</div>
 				</div>
 			</div>
-			<div className="sliderDot">
-				<a className="prev dot" onClick={()=>window.plusSlides(-1)}></a>
-				<a className="next dot" onClick={()=>window.plusSlides(1)}></a>
-			</div>
+			
 				
 			<div className="doneText"><a href="home-result.php">Done</a></div> 
 		</div>

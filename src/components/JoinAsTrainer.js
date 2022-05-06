@@ -14,7 +14,7 @@ const JoinAsTrainer = (props) => {
     },[]);
 
     return(<>
-<div className="modal" id="signUpTrainer" tabindex="-1" role="dialog" aria-hidden="true">
+<div className="modal" id="signUpTrainer" tabIndex="-1" role="dialog" aria-hidden="true">
         <div className="modal-dialog modal-full" role="document">
             <div className="modal-content">
                 <div className="overlay"></div>
