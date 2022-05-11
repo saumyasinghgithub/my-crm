@@ -33,8 +33,21 @@ const UserProvider = (props) => {
     callback();
   }
 
+  const getProfileAttributes = () => {
+    return new Promise((resolve,reject) => {
+      axios.get(Utils.apiUrl('profile_attributes'),Utils.apiHeaders())
+      .then(res => {   
+        if(res.data.success){
+          resolve(res.data.data);
+        }else{
+          reject(res.data.message);
+        }
+      });
+    });
+  }
+
   
-  return <UserContext.Provider value={{ userData, goLogin,logout}}>
+  return <UserContext.Provider value={{ userData, goLogin,logout, getProfileAttributes}}>
     {props.children}
   </UserContext.Provider>;
 

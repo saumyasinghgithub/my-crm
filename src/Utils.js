@@ -7,7 +7,7 @@ const Utils = {
   apiHeaders: (extraparams = null) => {
     let headers = {
       "headers": {        
-        //"apikey": "ZWEyYjVlZGNkYTMyMTA3OWRiYjhmNTkzYTRkMzNkNjc=",
+        "x-api-key": "$2a$08$66e6e.5m5kDsdU/O7guw/ej8ETNuSfe9k5W1AME4V/Lno6PjvMbay",
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
         "Access-Control-Allow-Origin": "*",        
         "Access-Control-Allow-Methods": "PUT,GET,POST,DELETE,OPTIONS,PATCH",        
