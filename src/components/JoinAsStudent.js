@@ -6,13 +6,14 @@ import _ from 'lodash';
 const JoinAsStudent = (props) => {
 
     const $ = window.$;
-    const [setError] = useState(false);
+    const [error,setError] = useState(false);
     const submitForm = (e) => {
 
-        setError(false);
        const frm = e.currentTarget;
        e.preventDefault();
    
+       setError(false);
+       
        let frmdata = new FormData(frm);
   
        if(_.get(frm,'password.value',false)){
@@ -21,16 +22,16 @@ const JoinAsStudent = (props) => {
             return false;
           }
        }
-       axios.post(Utils.apiUrl(`admin/add`),frmdata,Utils.apiHeaders())
+       axios.post(Utils.apiUrl(`user/add`),frmdata,Utils.apiHeaders())
        .then(res => {
           if(res.data.success){
              window.alert("Record saved successfully!");
-             props.onSubmit();
-             props.onClose();
+             //props.onSubmit();
+             //props.onClose();
           }else{
-             window.alert(res.data.message);
+             throw(res.data);
           }
-       }) 
+       }).catch(err => setError(err.message)) 
    
      };    
     useEffect(()=>{
@@ -64,7 +65,7 @@ const JoinAsStudent = (props) => {
                                 <li>or</li>
                                 <li><a href=""><img className="img-fluid" src="assets/images/mail.png" alt="AD on Email" /></a></li>
                             </ul>
-                            <form onSubmit={submitForm}>
+                            <form method="post" onSubmit={submitForm}>
                                 <div className="row">
                                     <div className="col-sm-6">
                                         <div className="form-group">
@@ -83,7 +84,7 @@ const JoinAsStudent = (props) => {
                                             <input className="form-control" name="address" placeholder="Address" type="text"/>
                                         </div>
                                         <div className="form-group width50">
-                                            <input className="form-control" name="zip" placeholder="Pin Code" type="text"/>
+                                            <input className="form-control" name="zipcode" placeholder="Pin Code" type="text"/>
                                         </div>
                                         <div className="form-group width50 width50R downArrow">
                                             <input className="form-control" name="state" placeholder="State" type="text"/>
@@ -91,7 +92,7 @@ const JoinAsStudent = (props) => {
                                     </div>
                                     <div className="col-sm-6">
                                         <div className="form-group">
-                                            <input className="form-control" name="phone" placeholder="Phone" type="text"/>
+                                            <input className="form-control" name="mobile" placeholder="Phone" type="text"/>
                                         </div>
                                         <div className="form-group">
                                             <input className="form-control" name="email" placeholder="Email" type="email"/>
