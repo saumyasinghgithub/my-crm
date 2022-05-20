@@ -1,7 +1,10 @@
 import _ from 'lodash';
+import moment from 'moment';
 
 const Utils = {
 
+  dateTime: (dt) => moment(dt).format('DD-MM-YYYY HH:mm'),
+  
   apiUrl: (path) => process.env.REACT_APP_API_URL+'/'+path,
 
   apiHeaders: (extraparams = null) => {

@@ -103,11 +103,8 @@ const JoinAsStudent = (props) => {
                                         <div className="form-group">
                                             <input className="form-control" name="conf_password" placeholder="Re-enter Password" type="password" />
                                         </div>
-                                        <div className="form-group clearfix">
-                                        <div className="custom-control custom-checkbox">
-                                            <input type="checkbox" name="role" className="custom-control-input" value="3" id="customCheck1" checked />
-                                            <label className="custom-control-label" for="customCheck1">Role Active</label>
-                                        </div> 
+                                        <div className="form-group">
+                                            <input type="hidden" name="role"  value="3"  />
                                         </div>
                                         <button type="submit" className="btn btnSubmit btnSubmitRed">Sign Up</button>
                                         <p>By signing up, you agree to our Terms of Use and Privacy Policy.</p>
