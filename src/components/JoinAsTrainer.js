@@ -1,9 +1,11 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState, useEffect, useRef} from 'react';
 import Utils from './../Utils';
 import axios from 'axios';
 import _ from 'lodash';
 
 const JoinAsTrainer = (props) => {
+
+    const frmRef = useRef('trainerForm');
  
     const [showMessage,setShowMessage] = useState(false);
     const $ = window.$;
@@ -11,12 +13,13 @@ const JoinAsTrainer = (props) => {
     
     const submitForm = (e) => {
         
-       const frm = e.currentTarget;
+       const frm = frmRef.current;
        e.preventDefault();
+       console.log(frm.checkValidity());
+       frm.classList.add('was-validated');
        if (frm.checkValidity() === false) {
         return false;
       }
-      frm.classList.add('was-validated');
        setError(false);
        setShowMessage(false);
        let frmdata = new FormData(frm);
@@ -42,6 +45,15 @@ const JoinAsTrainer = (props) => {
            ) 
    
      };  
+
+    const validatePassword = () => {
+        const frm = frmRef.current;
+        if(frm.password.value != frm.conf_password.value) {
+            frm.conf_password.setCustomValidity("Passwords Don't Match");
+        } else {
+            frm.conf_password.setCustomValidity('');
+        }
+    };
         
     useEffect(()=>{
         $('.modal').on('show.bs.modal', function (e) {
@@ -74,7 +86,7 @@ const JoinAsTrainer = (props) => {
                                 <li>or</li>
                                 <li><a href=""><img className="img-fluid" src="assets/images/mail.png" alt="AD on Email" /></a></li>
                             </ul>
-                            <form method="post" className="needs-validation" noValidate onSubmit={submitForm}>
+                            <form ref={frmRef} method="post" className="needs-validation" noValidate onSubmit={submitForm}>
                                 { showMessage &&  
                                         <div className='alert alert-info p-3'>
                                             
@@ -92,7 +104,7 @@ const JoinAsTrainer = (props) => {
                                 <div className="row">
                                     <div className="col-sm-6">
                                         <div className="form-group">
-                                            <input className="form-control" name="firstname" placeholder="First name" type="text" required/>
+                                            <input className="form-control" name="firstname" placeholder="First name" type="text" required />
                                             <div className="invalid-feedback">First Name is required!</div>
                                         </div>
                                         <div className="form-group">
@@ -117,16 +129,19 @@ const JoinAsTrainer = (props) => {
                                     </div>
                                     <div className="col-sm-6">
                                         <div className="form-group">
-                                            <input className="form-control" name="mobile" placeholder="Phone" type="text"/>
+                                            <input className="form-control" name="mobile" placeholder="Phone" type="text" required />
+                                            <div className="invalid-feedback">Phone cannot be empty!</div>
                                         </div>
                                         <div className="form-group">
-                                            <input className="form-control" name="email" placeholder="Email" type="email"/>
+                                            <input className="form-control" name="email" placeholder="Email" type="email" required />
+                                            <div className="invalid-feedback">Email cannot be empty!</div>
                                         </div>
                                         <div className="form-group">
-                                            <input className="form-control" name="password" placeholder="Password" type="password" />
+                                            <input className="form-control" name="password" onChange={validatePassword} placeholder="Password" type="password" required />
                                         </div>
                                         <div className="form-group">
-                                            <input className="form-control" name="conf_password" placeholder="Re-enter Password" type="password" />
+                                            <input className="form-control" name="conf_password" onKeyUp={validatePassword} placeholder="Re-enter Password" type="password" />
+                                            <div className="invalid-feedback">Passwords Don't Match</div>
                                         </div>
                                         <div className="form-group">
                                             <input type="hidden" name="role"  value="4"  />
