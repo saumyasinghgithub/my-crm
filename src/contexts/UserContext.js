@@ -11,16 +11,17 @@ const UserContext = createContext();
 const UserProvider = (props) => {
 
   const [userData, setUserData] = useState(Utils.getUserData());
-  const [stepData, setUCStepData] = useState({});
-
-  const goLogin = ({username, password},callback) => {    
-    axios.post(Utils.apiUrl('auth/login'),`&username=${username}&password=${password}`,Utils.apiHeaders()).then(res => {      
-      callback(res.data.success,res.data.message, res.data.flag);      
+  
+  const goLogin = ({email, pass},callback) => {    
+    axios.post(Utils.apiUrl('user/login'),`&user=${email}&pass=${pass}`,Utils.apiHeaders()).then(res => {      
       if(res.data.success){        
-        setUserData(res.data.data);        
+        setUserData(res.data.userData);        
         Utils.setUserData(res.data);            
       }
-    }).catch(err => {
+      return res;
+    })
+    .then(res => callback(res.data.success,res.data.message, res.data.flag))
+    .catch(err => {
       callback(false, err.message);
     });
   }

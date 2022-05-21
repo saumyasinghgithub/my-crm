@@ -1,6 +1,22 @@
-import React,{useEffect} from "react";
+import React,{useEffect, useState, useContext} from "react";
+
+import Utils from './../Utils';
+
+import UserContext from './../contexts/UserContext';
 
 const Header = (props) => {
+
+    const [loggedIn,setLoggedIn] = useState(Utils.isLoggedIn());
+
+    const {logout} = useContext(UserContext);
+
+    const onLogout = (e) => {
+        e.preventDefault();
+        logout(() => {
+            window.location.href='/';
+        })
+        return false;
+    }
 
     const $ = window.$;
         
@@ -14,6 +30,16 @@ const Header = (props) => {
                 $(".sidenav").removeClass("width100");
                 $("body").removeClass("menuopen")
             });
+
+            if(loggedIn){
+                $('.profile_toggle').on('click',function() {
+                    $('.profile_menu').addClass('profile_width100');
+                });
+                $('.student_prof_cross').on('click',function() {
+                $('.profile_menu').removeClass('profile_width100');
+                });
+            }
+
     },[]);
 
     return(<>
@@ -55,14 +81,44 @@ const Header = (props) => {
                 </form>
                 <ul className="navbar-nav">
                     <li className="nav-item"><a href="shopping-cart.php"><img className="img-fluid shoppingIcon" src="assets/images/cart-white.png" alt="autodidact"/></a></li>
-                    <li className="nav-item" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">
+                    {!loggedIn && <li className="nav-item" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">
                         Log in
-                    </li>
+                    </li>}
+                    
+                    {loggedIn && <li className="nav-item profile_toggle">
+                        <img className="img-fluid" src="assets/images/userImg.png" alt="AD" />
+                    </li>}
+
                     <li className="nav-item ">
                         <img className="img-fluid menu-toggle" src="assets/images/toggle.png" alt="toggle-img" />
-                    </li> 
+                    </li>
                 </ul>
             </div>
+
+            {loggedIn && <div className="profile_menu from-right">
+                <div className="slide-in-content slide-in-contentteacher">
+                    <div className="student_prof_cross"><img src="assets/images/student_profile_crossicon.png" alt="AD" /></div>
+                    <div className="row">
+                    <div className="col-sm-6">
+                        <ul className="profile_menu_list">
+                            <li><a href="teacher-profile-edit.php" className="active">My Profile</a></li>
+                            <li><a href="sales.php">Sales</a></li>
+                            <li><a href="my-students.php">My Students</a></li>
+                            <li><a href="home-result.php">Ad Studio</a></li>
+                            <li><a href="">Help for you</a></li>   
+                        </ul>
+                    </div>
+                    <div className="col-sm-6">
+                        <ul className="profile_menu_list">                                    
+                            <li><a href="" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Switch to Student</a></li>
+                            <li><a href="index.php" onClick={onLogout}>Log Out</a></li>
+                        </ul>
+                    </div>
+                    </div>
+                </div>
+            </div>}
+
+
         </header>
     </>);
 };

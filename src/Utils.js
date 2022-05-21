@@ -55,7 +55,7 @@ const Utils = {
   },
 
   setUserData: (data) => {    
-    const uData = _.get(data,'data',false);
+    const uData = _.get(data,'userData',false);
     // return;
     if(uData===false){
       //=== logout
@@ -72,9 +72,9 @@ const Utils = {
     }
   },
 
-  saveUserData: (data, stepData) => {
+  saveUserData: (data, otherData) => {
     if(_.get(data, 'token', false )){     
-      data[`stepData${data.id}`] = stepData;
+      data[`otherData${data.id}`] = otherData;
      localStorage.setItem(process.env.REACT_APP_APPNAME + '-userData',JSON.stringify(data));
     }
   },

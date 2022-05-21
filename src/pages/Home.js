@@ -18,10 +18,10 @@ const Home = (props) => {
 
 
 	const renderPA = () => {
-		return pa.map(p => <div className="col-md-3">
+		return pa.map(p => <div className="col-md-3" key={p.title}>
 			<div className="alert bg-light text-dark"><b>{p.title}</b></div>
 			<select>
-				{_.get(p,'children.length',0) > 0 && p.children.map(pc => <option value={pc.id}>{pc.title}</option>)}
+				{_.get(p,'children.length',0) > 0 && p.children.map(pc => <option key={pc.id} value={pc.id}>{pc.title}</option>)}
 			</select>
 		</div>)
 	};
