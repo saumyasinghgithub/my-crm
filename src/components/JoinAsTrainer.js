@@ -105,17 +105,19 @@ const JoinAsTrainer = (props) => {
                                     <div className="col-sm-6">
                                         <div className="form-group">
                                             <input className="form-control" name="firstname" placeholder="First name" type="text" required />
-                                            <div className="invalid-feedback">First Name is required!</div>
+                                            <div className="invalid-feedback">First name is required!</div>
                                         </div>
                                         <div className="form-group">
                                             <input className="form-control" name="middlename" placeholder="Middle name" type="text"/>
                                             <div className="invalid-feedback"></div>
                                         </div>
                                         <div className="form-group">
-                                            <input className="form-control" name="lastname" placeholder="Last name" type="text"/>
+                                            <input className="form-control" name="lastname" placeholder="Last name" type="text" required />
+                                            <div className="invalid-feedback">Last name is required!</div>
                                         </div>
                                         <div className="form-group downArrow">
-                                            <input className="form-control" name="country" placeholder="country" type="text"/>
+                                            <input className="form-control" name="country" placeholder="country" type="text" required />
+                                            <div className="invalid-feedback">Contry name required!</div>
                                         </div>
                                         <div className="form-group">
                                             <input className="form-control" name="address" placeholder="Address" type="text"/>
