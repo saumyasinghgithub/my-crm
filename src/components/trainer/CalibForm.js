@@ -11,7 +11,7 @@ const CalibForm = (props) => {
   const [pa,setPA] = useState([]);
   const [myc, setMyc] = useState([]);
   const [saving, setSaving] = useState(false);
-  const [response, setResponse] = useState({success: true, message: "Record saved!"});
+  const [response, setResponse] = useState({success: false, message: ""});
   const {getProfileAttributes} = useContext(UserContext);
   const {myCalibs,saveCalibs} = useContext(TrainerContext);
 
