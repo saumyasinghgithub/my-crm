@@ -59,7 +59,7 @@ const HeaderTrainer = (props) => {
             <div className="row">
             <div className="col-sm-6">
                 <ul className="profile_menu_list">
-                    <li><a href="teacher-profile-edit.php" className="active">My Profile</a></li>
+                    <li><a href={`${process.env.PUBLIC_URL}/my-profile`} className="active">My Profile</a></li>
                     <li><a href="sales.php">Sales</a></li>
                     <li><a href="my-students.php">My Students</a></li>
                     <li><a href="home-result.php">Ad Studio</a></li>

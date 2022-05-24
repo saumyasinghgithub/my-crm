@@ -10,6 +10,7 @@ import CustomRoutes from './CustomRoutes';
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 import {UserProvider} from './contexts/UserContext';
+import {TrainerProvider} from './contexts/TrainerContext';
 
 import Utils from './Utils';
 import {NotFound} from './components';
@@ -45,7 +46,9 @@ const App = (props) => {
   
   const Provider = () => {
     return <UserProvider>
-      <RoutedLayout />
+      <TrainerProvider>
+        <RoutedLayout />
+      </TrainerProvider>
     </UserProvider>;
   }
 

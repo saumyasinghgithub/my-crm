@@ -3,6 +3,6 @@ import About from "./About";
 import Home from "./Home";
 import ADStudio from "./ADStudio";
 import ADTrainer from "./ADTrainer";
-import AddTrainer from "./AddTrainer";
+import MyProfile from "./MyProfile";
 
-export {Login, About, Home, ADStudio, ADTrainer, AddTrainer};
+export {Login, About, Home, ADStudio, ADTrainer, MyProfile};

@@ -101,7 +101,7 @@ const Header = (props) => {
                     <div className="row">
                     <div className="col-sm-6">
                         <ul className="profile_menu_list">
-                            <li><a href="teacher-profile-edit.php" className="active">My Profile</a></li>
+                            <li><a href={`${process.env.PUBLIC_URL}/my-profile`} className="active">My Profile</a></li>
                             <li><a href="sales.php">Sales</a></li>
                             {Utils.isTrainer() && 
                             <li><a href="my-students.php">My Students</a></li>
@@ -115,7 +115,7 @@ const Header = (props) => {
 
                             <li><a href="/add-trainer-profile">My Profile</a></li>                              
                             <li><a href="" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Switch to Student</a></li>
-                            <li><a href="index.php" onClick={onLogout}>Log Out</a></li>
+                            <li><a href="logout" onClick={onLogout}>Log Out</a></li>
                         </ul>
                     </div>
                     </div>

@@ -1,5 +1,5 @@
 import {LoginLayout, StaticPageLayout, DefaultLayout} from './layouts';
-import {Login, About, Home, ADStudio, ADTrainer,AddTrainer} from './pages';
+import {Login, About, Home, ADStudio, ADTrainer,MyProfile} from './pages';
 
 const CustomRoutes = [  
   
@@ -32,11 +32,11 @@ const CustomRoutes = [
     'component' : ADTrainer
   },
   {
-    'path'      : '/add-trainer-profile', 
+    'path'      : '/my-profile', 
     'secure'    : false,    
     'exact'     : true,
     'layout'    : StaticPageLayout, 
-    'component' : AddTrainer
+    'component' : MyProfile
   },
   {
     'path'      : '/',
