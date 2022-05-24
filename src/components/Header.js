@@ -3,11 +3,11 @@ import React,{useEffect, useState, useContext} from "react";
 import Utils from './../Utils';
 
 import UserContext from './../contexts/UserContext';
+import _ from "lodash";
 
 const Header = (props) => {
 
     const [loggedIn,setLoggedIn] = useState(Utils.isLoggedIn());
-
     const {logout} = useContext(UserContext);
 
     const onLogout = (e) => {
@@ -103,13 +103,17 @@ const Header = (props) => {
                         <ul className="profile_menu_list">
                             <li><a href="teacher-profile-edit.php" className="active">My Profile</a></li>
                             <li><a href="sales.php">Sales</a></li>
+                            {Utils.isTrainer() && 
                             <li><a href="my-students.php">My Students</a></li>
+                            }
                             <li><a href="home-result.php">Ad Studio</a></li>
                             <li><a href="">Help for you</a></li>   
                         </ul>
                     </div>
                     <div className="col-sm-6">
-                        <ul className="profile_menu_list">                                    
+                        <ul className="profile_menu_list">
+
+                            <li><a href="/add-trainer-profile">My Profile</a></li>                              
                             <li><a href="" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Switch to Student</a></li>
                             <li><a href="index.php" onClick={onLogout}>Log Out</a></li>
                         </ul>

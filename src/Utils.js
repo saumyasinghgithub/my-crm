@@ -86,9 +86,18 @@ const Utils = {
     }
     userData = {...userData,...data};
     localStorage.setItem(process.env.REACT_APP_APPNAME + '-userData',JSON.stringify(userData));
+  },
+
+  isStudent: () => {
+    let userData = Utils.getUserData();
+    return _.get(userData, "role_id", false) === process.env.STUDENT_ROLE;
+  },
+  isTrainer: () => {
+    let userData = Utils.getUserData();
+    return _.get(userData, "role_id", false) === process.env.TRAINER_ROLE;
   }
-  
 };
+
 
 export default Utils;
 
