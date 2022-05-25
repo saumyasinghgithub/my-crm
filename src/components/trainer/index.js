@@ -1,3 +1,4 @@
 import CalibForm from './CalibForm';
-
-export {CalibForm};
+import AboutForm from './AboutForm';
+import AcademicQualification from './AcademicQualification';
+export {CalibForm, AboutForm, AcademicQualification};
