@@ -36,8 +36,34 @@ const TrainerProvider = (props) => {
     });
   }
 
+  const myAcademic = () => {
+    return new Promise((resolve,reject) => {
+      axios.get(Utils.apiUrl('trainer/my-academic'),Utils.apiHeaders())
+      .then(res => {   
+        if(res.data.success){
+          resolve(res.data.data);
+        }else{
+          reject(res.data.message);
+        }
+      });
+    });
+  }
+
+  const saveAcademic = (data) => {
+    return new Promise((resolve,reject) => {
+      axios.put(Utils.apiUrl('trainer/my-academic'),data,Utils.apiHeaders())
+      .then(res => {   
+        if(res.data.success){
+          resolve(res.data);
+        }else{
+          reject(res.data.message);
+        }
+      });
+    });
+  }
+
   
-  return <TrainerContext.Provider value={{ myCalibs,saveCalibs}}>
+  return <TrainerContext.Provider value={{ myCalibs,saveCalibs, myAcademic, saveAcademic}}>
     {props.children}
   </TrainerContext.Provider>;
 

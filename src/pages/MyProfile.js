@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React,{useEffect, useContext, useState} from 'react';
 import {Container, Tab, Nav, Row, Col} from 'react-bootstrap';
-import { CalibForm, AboutForm, AcademicQualification } from '../components/trainer';
+import { CalibForm, AboutForm, AcademicForm } from '../components/trainer';
 import UserContext from './../contexts/UserContext';
 const MyProfile = (props) => {
     useEffect(window.scrollEffect,[]);
@@ -36,7 +36,7 @@ const MyProfile = (props) => {
                         <CalibForm />
                     </Tab.Pane>
                     <Tab.Pane eventKey="academic">
-                    <AcademicQualification />
+                    <AcademicForm />
                     </Tab.Pane>
                 </Tab.Content>
                 </Col>

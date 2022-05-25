@@ -95,7 +95,11 @@ const Utils = {
   isTrainer: () => {
     let userData = Utils.getUserData();
     return _.get(userData, "role_id", false) === process.env.TRAINER_ROLE;
-  }
+  },
+
+
+  academicQualifications: ['10th Grade', '12th Grade', 'Graduation', 'Post-Graduation', 'Professional Degree', 'PhD']
+
 };
 
 
