@@ -1,9 +1,18 @@
 import _ from 'lodash';
-import React,{useEffect, useContext, useState} from 'react';
+import React,{useEffect, useContext, useState, Component} from 'react';
 import {Container, Tab, Nav, Row, Col} from 'react-bootstrap';
-import { CalibForm, AboutForm, AcademicForm } from '../components/trainer';
+import TrainerForms from '../components/trainer';
 import UserContext from './../contexts/UserContext';
 const MyProfile = (props) => {
+
+    const allTabs = {
+        'about': 'About Me',
+        'calib': 'My Calibrations',
+        'academic': 'Academic Qualifications',
+        'exp': 'Professional Experiences'
+    };
+
+    const [tab, setTab] = useState('about');
     useEffect(window.scrollEffect,[]);
     
     return (<>
@@ -12,31 +21,22 @@ const MyProfile = (props) => {
     <div className="container100">
         <h1>My Profile </h1>
         
-        <Tab.Container id="left-tabs-example" defaultActiveKey="calib">
+        <Tab.Container id="left-tabs-example" defaultActiveKey={tab}>
             <Row>
                 <Col sm={3}>
                 <Nav variant="pills" className="flex-column">
-                    <Nav.Item>
-                        <Nav.Link eventKey="about">About Me</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="calib">My Calibrations</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="academic">Academic Qualification</Nav.Link>
-                    </Nav.Item>
+                    {_.map(allTabs, (v,k) => <Nav.Item key={k}>
+                        <Nav.Link eventKey={k} onClick={() => setTab(k)} className="profile-pills">{v}</Nav.Link>
+                    </Nav.Item>)}
                 </Nav>
                 </Col>
                 <Col sm={9}>
                 <Tab.Content>
-                    <Tab.Pane eventKey="about">
-                       <AboutForm />
-                    </Tab.Pane>
-                    <Tab.Pane eventKey="calib">
-                        <CalibForm />
-                    </Tab.Pane>
-                    <Tab.Pane eventKey="academic">
-                    <AcademicForm />
+                    <Tab.Pane eventKey={tab}>
+                        {tab==='about' && <TrainerForms.AboutForm />}
+                        {tab==='calib' && <TrainerForms.CalibForm />}
+                        {tab==='academic' && <TrainerForms.AcademicForm />}
+                        {tab==='exp' && <TrainerForms.ExperienceForm />}
                     </Tab.Pane>
                 </Tab.Content>
                 </Col>

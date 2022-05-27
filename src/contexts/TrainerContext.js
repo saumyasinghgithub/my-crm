@@ -10,9 +10,9 @@ const TrainerContext = createContext();
 
 const TrainerProvider = (props) => {
 
-  const myCalibs = () => {
+  const getMyData = (url) => {
     return new Promise((resolve,reject) => {
-      axios.get(Utils.apiUrl('trainer/my-calibs'),Utils.apiHeaders())
+      axios.get(Utils.apiUrl(url),Utils.apiHeaders())
       .then(res => {   
         if(res.data.success){
           resolve(res.data.data);
@@ -23,35 +23,9 @@ const TrainerProvider = (props) => {
     });
   }
 
-  const saveCalibs = (data) => {
+  const setMyData = (url,data) => {
     return new Promise((resolve,reject) => {
-      axios.put(Utils.apiUrl('trainer/calibs'),data,Utils.apiHeaders())
-      .then(res => {   
-        if(res.data.success){
-          resolve(res.data);
-        }else{
-          reject(res.data.message);
-        }
-      });
-    });
-  }
-
-  const myAcademic = () => {
-    return new Promise((resolve,reject) => {
-      axios.get(Utils.apiUrl('trainer/my-academic'),Utils.apiHeaders())
-      .then(res => {   
-        if(res.data.success){
-          resolve(res.data.data);
-        }else{
-          reject(res.data.message);
-        }
-      });
-    });
-  }
-
-  const saveAcademic = (data) => {
-    return new Promise((resolve,reject) => {
-      axios.put(Utils.apiUrl('trainer/my-academic'),data,Utils.apiHeaders())
+      axios.put(Utils.apiUrl(url),data,Utils.apiHeaders())
       .then(res => {   
         if(res.data.success){
           resolve(res.data);
@@ -63,7 +37,8 @@ const TrainerProvider = (props) => {
   }
 
   
-  return <TrainerContext.Provider value={{ myCalibs,saveCalibs, myAcademic, saveAcademic}}>
+  
+  return <TrainerContext.Provider value={{ getMyData, setMyData}}>
     {props.children}
   </TrainerContext.Provider>;
 

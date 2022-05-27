@@ -13,12 +13,12 @@ const CalibForm = (props) => {
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({success: false, message: ""});
   const {getProfileAttributes} = useContext(UserContext);
-  const {myCalibs,saveCalibs} = useContext(TrainerContext);
+  const {getMyData,setMyData} = useContext(TrainerContext);
 
   useEffect(() => {
     getProfileAttributes()
     .then(setPA)
-    .then(myCalibs)
+    .then(() => getMyData('trainer/my-calibs'))
     .then(setMyc)
     .catch(err => console.log(err));
   },[]);
@@ -32,7 +32,7 @@ const CalibForm = (props) => {
     e.preventDefault();
     let frmdata = new FormData(frm);
     setSaving(true);
-    saveCalibs(frmdata)
+    setMyData('trainer/my-calibs',frmdata)
     .then(res => {
       setSaving(false);
       setResponse(res);
@@ -59,7 +59,7 @@ const CalibForm = (props) => {
       {renderPA()}
       <Col md={12} className="text-right">
         {saving && <>Saving.. <Spinner animation="border" /></>}
-        {!saving && response.message==="" && <Button type="submit" variant="warning">Save</Button>}
+        {!saving && response.message==="" && <Button type="submit" className="profile-save">Save</Button>}
         {!saving && response.message!=="" && <Alert variant={response.success ? 'info' : 'danger'} className="p-3 mt-2 text-center">{response.message}</Alert>}
       </Col>
     </Row>

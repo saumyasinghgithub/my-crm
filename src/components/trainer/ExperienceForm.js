@@ -8,10 +8,10 @@ import Utils from './../../Utils';
 import moment from 'moment';
 
 
-const AcademicForm = (props) => {
+const ExperienceForm = (props) => {
 
   const [count, setCount] = useState(4);
-  const [academicData, setAcademicData] = useState([]);
+  const [expData, setExpData] = useState([]);
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({success: false, message: ""});
   const {getMyData,setMyData} = useContext(TrainerContext);
@@ -22,25 +22,23 @@ const AcademicForm = (props) => {
   }
 
   useEffect(() => {
-    getMyData('trainer/my-academic')
-    .then(setAcademicData)
+    getMyData('trainer/my-exp')
+    .then(setExpData)
     .catch(err => console.log(err));
   },[]);
 
   useEffect(() => {
-    setCount(_.max([4,academicData.length]));
-  }, [academicData]);
-
-  useEffect(window.scrollEffect,[]);
+    setCount(_.max([4,expData.length]));
+  }, [expData]);
 
   useEffect(window.scrollEffect,[]);
 
   useEffect(() => {window.setTimeout(() => setResponse({message: ""}), 5000)},[response]);
 
-  const removeAData = (pos) => (e) => {
-    let newdata = [...academicData];
+  const removeEData = (pos) => (e) => {
+    let newdata = [...expData];
     newdata.splice(pos,1);
-    setAcademicData(newdata);
+    setExpData(newdata);
   }
   
 
@@ -49,41 +47,33 @@ const AcademicForm = (props) => {
     e.preventDefault();
     let frmdata = new FormData(frm);
     setSaving(true);
-    setMyData('trainer/my-academic',frmdata)
+    setMyData('trainer/my-exp',frmdata)
     .then(res => {
       setSaving(false);
       setResponse(res);
     })
   }
 
-  const renderAcademicFields = () => {
+  const renderExpFields = () => {
     let year = 0;
     return <>
         {(new Array(count)).fill(1).map((v,k) => <Row key={k}>
         <Col md={8} className="mt-3">
-          <Form.Control as="select" name="qualification">
-            <option value=""> - Select Qualification - </option>
-            {Utils.academicQualifications.map(v => <option key={v} value={v} selected={_.get(academicData,`${k}.qualification`,'')===v}>{v}</option>)}
-          </Form.Control></Col>
-        <Col md={3} className="mt-3">
-          <Form.Control as="select" name="year">
-            <option value=""> - Select Passing year - </option>
-            {(new Array(50)).fill(1).map((v,k1) => {
-              year = moment().year()-50+k1;
-              return <option key={k1} value={year} selected={_.get(academicData,`${k}.year`,'')===year}>{year}</option>;
-            })}
-          </Form.Control>
+          <Form.Control type="text" name="company" placeholder='Enter your Company Name' defaultValue={_.get(expData,`${k}.company`,'')} />
         </Col>
-        <Col md={1} className="mt-3">{k > 3 && <i className="fa fa-minus-circle fa-2x text-danger" onClick={removeAData(k)} />}</Col>
+        <Col md={3} className="mt-3">
+          <Form.Control type="text" name="location" placeholder='Enter your Company Location' defaultValue={_.get(expData,`${k}.location`,'')} />
+        </Col>
+        <Col md={1} className="mt-3">{k > 3 && <i className="fa fa-minus-circle fa-2x text-danger" onClick={removeEData(k)} />}</Col>
       </Row>)}
     </>;
   }
 
   return <Form onSubmit={onSave}>
     
-    <h1>Academic Qualification <i className="fa fa-plus-circle text-success" onClick={() => setCount(count+1)} /></h1>
+    <h1>Experience Qualification <i className="fa fa-plus-circle text-success" onClick={() => setCount(count+1)} /></h1>
 
-    {count > 0 && renderAcademicFields()}
+    {count > 0 && renderExpFields()}
     
     <Row>
       <Col md={12} className="text-right">
@@ -97,4 +87,4 @@ const AcademicForm = (props) => {
 
 };
 
-export default AcademicForm;
+export default ExperienceForm;

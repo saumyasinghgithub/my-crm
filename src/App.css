@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+
+.nav-item a.profile-pills{
+  cursor: pointer;
+  color: #333;
+}
+
+.nav-item a.profile-pills:hover{
+  background-color:#dc301633;
+}
+
+.nav-item a.profile-pills.active:hover{
+  color:#fff;
+  background-color:#dc3016;
+}
+
+.nav-item a.profile-pills.active{
+  background-color:#dc3016;
+}
+
+.profile-save,.profile-save:hover{
+  background-color:#dc3016 !important;
+  border-color:#dc3016;
+}
