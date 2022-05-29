@@ -9,7 +9,8 @@ const MyProfile = (props) => {
         'about': 'About Me',
         'calib': 'My Calibrations',
         'academic': 'Academic Qualifications',
-        'exp': 'Professional Experiences'
+        'exp': 'Professional Experiences',
+        'services': 'Trainer Services'
     };
 
     const [tab, setTab] = useState('about');
@@ -37,6 +38,7 @@ const MyProfile = (props) => {
                         {tab==='calib' && <TrainerForms.CalibForm />}
                         {tab==='academic' && <TrainerForms.AcademicForm />}
                         {tab==='exp' && <TrainerForms.ExperienceForm />}
+                        {tab==='services' && <TrainerForms.ServiceForm />}
                     </Tab.Pane>
                 </Tab.Content>
                 </Col>

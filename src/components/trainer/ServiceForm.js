@@ -6,22 +6,22 @@ import { Editor } from "@tinymce/tinymce-react";
 import _ from 'lodash';
 
 
-const AboutForm = (props) => {
+const ServiceForm = (props) => {
 
-  const [myabout, setMyabout] = useState({});
+  const [myservices, setMyservices] = useState({});
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({success: false, message: ""});
   const {getMyData,setMyData} = useContext(TrainerContext);
 
   const onContentChange = (fld) => (value) => {
-    let c = {...myabout};
+    let c = {...myservices};
     c[fld] = value;
-    setMyabout(c);
+    setMyservices(c);
   }
 
   useEffect(() => {
-    getMyData('trainer/my-about')
-    .then(setMyabout)
+    getMyData('trainer/my-services')
+    .then(setMyservices)
     .catch(err => console.log(err));
   },[]);
   useEffect(window.scrollEffect,[]);
@@ -33,11 +33,11 @@ const AboutForm = (props) => {
     const frm = e.currentTarget;
     e.preventDefault();
     let frmdata = new FormData(frm);
-    frmdata.append('biography',_.get(myabout,'biography',''));
-    frmdata.append('certificate',_.get(myabout,'certificates',''));
-    frmdata.append('trainings',_.get(myabout,'trainings',''));
+    frmdata.append('service_offer',_.get(myservices,'service_offer',''));
+    frmdata.append('consultancy',_.get(myservices,'consultancy',''));
+    frmdata.append('coaching',_.get(myservices,'coaching',''));
     setSaving(true);
-    setMyData('trainer/my-about',frmdata)
+    setMyData('trainer/my-services',frmdata)
     .then(res => {
       setSaving(false);
       setResponse(res);
@@ -52,69 +52,51 @@ const AboutForm = (props) => {
   }
 
   return <Form onSubmit={onSave}>
-    <Form.Control type="hidden" name="id" defaultValue={_.get(myabout,'id','')} />
-    <Form.Control type="hidden" name="old_award_image" defaultValue={_.get(myabout,'award_image','')} />
-    <Form.Control type="hidden" name="old_profile_image" defaultValue={_.get(myabout,'profile_image','')} />
-    <h1>About Me</h1>
-    <Row>
-      <Col md={4} className="mt-3">
-        <Form.Label>First Name: </Form.Label>
-        <Form.Control type="text" name="firstname" placeholder="Enter your first name" defaultValue={_.get(myabout,'firstname','')} />
-      </Col>
-      <Col md={4} className="mt-3">
-        <Form.Label>Middle Name: </Form.Label>
-        <Form.Control type="text" name="middlename" placeholder="Enter your middle name" defaultValue={_.get(myabout,'middlename','')} />
-      </Col>
-      <Col md={4} className="mt-3">
-        <Form.Label>last Name: </Form.Label>
-        <Form.Control type="text" name="lastname" placeholder="Enter your last name" defaultValue={_.get(myabout,'lastname','')} />
-      </Col>
-    </Row>
+    <Form.Control type="hidden" name="id" defaultValue={_.get(myservices,'id','')} />
+    <Form.Control type="hidden" name="old_service_image" defaultValue={_.get(myservices,'service_image','')} />
+    <h1>Trainer Services</h1>
 
     <Row>  
       <Col md={3} className="mt-3">  
-        {photoUploader('profile_image','Upload Profile Pic')}
+        {photoUploader('service_image','Upload image here')}
       </Col>
       <Col md={9} className="mt-3">  
-      <Form.Label>Biography: </Form.Label>
+      <Form.Label>Trainer Service Details: </Form.Label>
       <Editor apiKey={process.env.TINYMCE_API_KEY}
-        value={_.get(myabout,'biography','')}
+        value={_.get(myservices,'service_offer','')}
         init={{
         height: 200,
         menubar: false,
         }}
-        onEditorChange={onContentChange('biography')}
+        onEditorChange={onContentChange('service_offer')}
         />
         </Col>
     </Row>
     
     <Row>  
-      <Col md={3} className="mt-3">  
-        {photoUploader('award_image','Upload Award Certifications')}
-      </Col>
-      <Col md={9} className="mt-3">  
-      <Form.Label>Describe your awards: </Form.Label>
+      <Col md={12} className="mt-3">  
+      <Form.Label>Describe your Consultancy: </Form.Label>
       <Editor apiKey={process.env.TINYMCE_API_KEY}
-        value={_.get(myabout,'certificates','')}
+        value={_.get(myservices,'consultancy','')}
         init={{
         height: 200,
         menubar: false,
         }}
-        onEditorChange={onContentChange('certificates')}
+        onEditorChange={onContentChange('consultancy')}
         />
         </Col>
     </Row>
 
     <Row>  
       <Col md={12} className="mt-3">  
-      <Form.Label>Trainings Conducted: </Form.Label>
+      <Form.Label>Describe your Coaching: </Form.Label>
       <Editor apiKey={process.env.TINYMCE_API_KEY}
-        value={_.get(myabout,'trainings','')}
+        value={_.get(myservices,'coaching','')}
         init={{
         height: 200,
         menubar: false,
         }}
-        onEditorChange={onContentChange('trainings')}
+        onEditorChange={onContentChange('coaching')}
         />
         </Col>
     </Row>
@@ -131,4 +113,4 @@ const AboutForm = (props) => {
 
 };
 
-export default AboutForm;
+export default ServiceForm;
