@@ -59,3 +59,10 @@
   background-color:#dc3016 !important;
   border-color:#dc3016;
 }
+
+.thumbnail{
+  max-width: 100%;
+  max-height: 200px;
+  border: 1px Solid #000;
+  padding: 20px 20px;
+}

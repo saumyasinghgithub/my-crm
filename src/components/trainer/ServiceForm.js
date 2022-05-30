@@ -47,7 +47,8 @@ const ServiceForm = (props) => {
   const photoUploader = (fld,title) => {
     return <>
       <Form.Label>{title}</Form.Label>
-      <Form.Control type="file" size="lg" name={fld} accept=".jpeg,.png,.jpg;" />
+      <Form.Control type="file" size="lg" name={fld+'_image'} accept=".jpeg,.png,.jpg;" />
+      <div className="text-center">{_.get(myservices,fld+'_image','')!='' && <img src={`${process.env.REACT_APP_API_URL}/uploads/${fld}/${myservices[fld+'_image']}`} className="thumbnail mt-3" />}</div>
     </>;
   }
 
@@ -58,7 +59,7 @@ const ServiceForm = (props) => {
 
     <Row>  
       <Col md={3} className="mt-3">  
-        {photoUploader('service_image','Upload image here')}
+        {photoUploader('service','Upload image here')}
       </Col>
       <Col md={9} className="mt-3">  
       <Form.Label>Trainer Service Details: </Form.Label>

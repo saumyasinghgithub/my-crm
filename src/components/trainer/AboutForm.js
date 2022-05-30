@@ -47,7 +47,8 @@ const AboutForm = (props) => {
   const photoUploader = (fld,title) => {
     return <>
       <Form.Label>{title}</Form.Label>
-      <Form.Control type="file" size="lg" name={fld} accept=".jpeg,.png,.jpg;" />
+      <Form.Control type="file" size="lg" name={fld+'_image'} accept=".jpeg,.png,.jpg;" />
+      <div className="text-center">{_.get(myabout,fld+'_image','')!='' && <img src={`${process.env.REACT_APP_API_URL}/uploads/${fld}/${myabout[fld+'_image']}`} className="thumbnail mt-3" />}</div>
     </>;
   }
 
@@ -73,7 +74,7 @@ const AboutForm = (props) => {
 
     <Row>  
       <Col md={3} className="mt-3">  
-        {photoUploader('profile_image','Upload Profile Pic')}
+        {photoUploader('profile','Upload Profile Pic')}
       </Col>
       <Col md={9} className="mt-3">  
       <Form.Label>Biography: </Form.Label>
@@ -90,7 +91,7 @@ const AboutForm = (props) => {
     
     <Row>  
       <Col md={3} className="mt-3">  
-        {photoUploader('award_image','Upload Award Certifications')}
+        {photoUploader('award','Upload Award Certifications')}
       </Col>
       <Col md={9} className="mt-3">  
       <Form.Label>Describe your awards: </Form.Label>
