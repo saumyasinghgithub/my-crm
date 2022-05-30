@@ -48,7 +48,7 @@ const ServiceForm = (props) => {
     return <>
       <Form.Label>{title}</Form.Label>
       <Form.Control type="file" size="lg" name={fld+'_image'} accept=".jpeg,.png,.jpg;" />
-      <div className="text-center">{_.get(myservices,fld+'_image','')!='' && <img src={`${process.env.REACT_APP_API_URL}/uploads/${fld}/${myservices[fld+'_image']}`} className="thumbnail mt-3" />}</div>
+      <div className="text-center">{!_.isEmpty(_.get(myservices,fld+'_image','')) && <img src={`${process.env.REACT_APP_API_URL}/uploads/${fld}/${myservices[fld+'_image']}`} className="thumbnail mt-3" />}</div>
     </>;
   }
 

@@ -48,7 +48,7 @@ const AboutForm = (props) => {
     return <>
       <Form.Label>{title}</Form.Label>
       <Form.Control type="file" size="lg" name={fld+'_image'} accept=".jpeg,.png,.jpg;" />
-      <div className="text-center">{_.get(myabout,fld+'_image','')!='' && <img src={`${process.env.REACT_APP_API_URL}/uploads/${fld}/${myabout[fld+'_image']}`} className="thumbnail mt-3" />}</div>
+      <div className="text-center">{!_.isEmpty(_.get(myabout,fld+'_image','')) && <img src={`${process.env.REACT_APP_API_URL}/uploads/${fld}/${myabout[fld+'_image']}`} className="thumbnail mt-3" />}</div>
     </>;
   }
 
@@ -79,7 +79,7 @@ const AboutForm = (props) => {
       <Col md={9} className="mt-3">  
       <Form.Label>Biography: </Form.Label>
       <Editor apiKey={process.env.TINYMCE_API_KEY}
-        value={_.get(myabout,'biography','')}
+        value={_.isEmpty(_.get(myabout,'biography','')) ? '' : myabout.biography}
         init={{
         height: 200,
         menubar: false,
