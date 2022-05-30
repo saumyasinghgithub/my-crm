@@ -47,11 +47,10 @@ const App = (props) => {
   const Provider = () => {
     return <UserProvider>
       <TrainerProvider>
-        <RoutedLayout />
+        <CourseProvider>
+          <RoutedLayout />
+        </CourseProvider>
       </TrainerProvider>
-      <CourseProvider>
-        <RoutedLayout />
-      </CourseProvider>
     </UserProvider>;
   }
 
