@@ -1,7 +1,6 @@
 import {useEffect, useContext, useState} from 'react';
 import {Form, Alert, Spinner, Row, Col, Button, Badge} from 'react-bootstrap';
 import UserContext from './../../contexts/UserContext';
-import TrainerContext from './../../contexts/TrainerContext';
 import { Editor } from "@tinymce/tinymce-react";
 import _ from 'lodash';
 
@@ -11,7 +10,7 @@ const AboutForm = (props) => {
   const [myabout, setMyabout] = useState({});
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({success: false, message: ""});
-  const {getMyData,setMyData} = useContext(TrainerContext);
+  const {getServerData,setServerData} = useContext(UserContext);
 
   const onContentChange = (fld) => (value) => {
     let c = {...myabout};
@@ -20,7 +19,7 @@ const AboutForm = (props) => {
   }
 
   useEffect(() => {
-    getMyData('trainer/my-about')
+    getServerData('trainer/my-about')
     .then(setMyabout)
     .catch(err => console.log(err));
   },[]);
@@ -37,7 +36,7 @@ const AboutForm = (props) => {
     frmdata.append('certificate',_.get(myabout,'certificates',''));
     frmdata.append('trainings',_.get(myabout,'trainings',''));
     setSaving(true);
-    setMyData('trainer/my-about',frmdata)
+    setServerData('trainer/my-about',frmdata)
     .then(res => {
       setSaving(false);
       setResponse(res);

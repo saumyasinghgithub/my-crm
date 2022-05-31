@@ -31,7 +31,7 @@ const HeaderTrainer = (props) => {
                 <div className="input-group">
                     <div className="input-group-btn search-panel" data-search="students">
                         <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            <span className="search_by">All</span> <span><img src="assets/images/arrow.png" alt="AD" /></span>
+                            <span className="search_by">All</span> <span><img src={`${process.env.PUBLIC_URL}/assets/images/arrow.png`} alt="AD" /></span>
                         </button>
                         <ul className="dropdown-menu" role="menu">
                             <li className="dropdown-item"><a data-search="industry">Industry</a></li>
@@ -44,18 +44,18 @@ const HeaderTrainer = (props) => {
                 </div> 
             </form>
         <ul className="navbar-nav">
-            <li className="nav-item"><a href="wish-list.php"><img className="img-fluid " src="assets/images/like-icon.png" alt="AD Like" /></a></li>
-            <li className="nav-item"><a href="shopping-cart.php"><img className="img-fluid shoppingIcon" src="assets/images/cart.png" alt="AD" /></a></li>
-            <li className="nav-item"><a href="massege.php"><img className="img-fluid " src="assets/images/massege.png" alt="AD" /></a></li>
-            <li className="nav-item"><a href="notification.php"><img className="img-fluid " src="assets/images/notification_icon.png" alt="AD" /></a></li>
+            <li className="nav-item"><a href="wish-list.php"><img className="img-fluid " src={`${process.env.PUBLIC_URL}/assets/images/like-icon.png`} alt="AD Like" /></a></li>
+            <li className="nav-item"><a href="shopping-cart.php"><img className="img-fluid shoppingIcon" src={`${process.env.PUBLIC_URL}/assets/images/cart.png`} alt="AD" /></a></li>
+            <li className="nav-item"><a href="massege.php"><img className="img-fluid " src={`${process.env.PUBLIC_URL}/assets/images/massege.png`} alt="AD" /></a></li>
+            <li className="nav-item"><a href="notification.php"><img className="img-fluid " src={`${process.env.PUBLIC_URL}/assets/images/notification_icon.png`} alt="AD" /></a></li>
             <li className="nav-item profile_toggle">
-                <img className="img-fluid" src="assets/images/userImg.png" alt="AD" />
+                <img className="img-fluid" src={`${process.env.PUBLIC_URL}/assets/images/userImg.png`} alt="AD" />
             </li>
         </ul>
     </div>
     <div className="profile_menu from-right">
         <div className="slide-in-content slide-in-contentteacher">
-            <div className="student_prof_cross"><img src="assets/images/student_profile_crossicon.png" alt="AD" /></div>
+            <div className="student_prof_cross"><img src={`${process.env.PUBLIC_URL}/assets/images/student_profile_crossicon.png`} alt="AD" /></div>
             <div className="row">
             <div className="col-sm-6">
                 <ul className="profile_menu_list">

@@ -1,7 +1,6 @@
 import {useEffect, useContext, useState} from 'react';
 import {Form, Alert, Spinner, Row, Col, Button} from 'react-bootstrap';
 import UserContext from './../../contexts/UserContext';
-import TrainerContext from './../../contexts/TrainerContext';
 import _ from 'lodash';
 
 
@@ -12,13 +11,12 @@ const CalibForm = (props) => {
   const [myc, setMyc] = useState([]);
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({success: false, message: ""});
-  const {getProfileAttributes} = useContext(UserContext);
-  const {getMyData,setMyData} = useContext(TrainerContext);
+  const {getServerData,setServerData} = useContext(UserContext);
 
   useEffect(() => {
-    getProfileAttributes()
+    getServerData('profile_attributes')
     .then(setPA)
-    .then(() => getMyData('trainer/my-calibs'))
+    .then(() => getServerData('trainer/my-calibs'))
     .then(setMyc)
     .catch(err => console.log(err));
   },[]);
@@ -32,7 +30,7 @@ const CalibForm = (props) => {
     e.preventDefault();
     let frmdata = new FormData(frm);
     setSaving(true);
-    setMyData('trainer/my-calibs',frmdata)
+    setServerData('trainer/my-calibs',frmdata)
     .then(res => {
       setSaving(false);
       setResponse(res);

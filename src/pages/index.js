@@ -5,5 +5,6 @@ import ADStudio from "./ADStudio";
 import ADTrainer from "./ADTrainer";
 import MyProfile from "./MyProfile";
 import MyCourse from "./MyCourse";
+import CourseDetails from "./CourseDetails";
 
-export {Login, About, Home, ADStudio, ADTrainer, MyProfile,MyCourse};
+export {Login, About, Home, ADStudio, ADTrainer, MyProfile,MyCourse, CourseDetails};

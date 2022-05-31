@@ -34,9 +34,10 @@ const UserProvider = (props) => {
     callback();
   }
 
-  const getProfileAttributes = () => {
+
+  const getServerData = (url) => {
     return new Promise((resolve,reject) => {
-      axios.get(Utils.apiUrl('profile_attributes'),Utils.apiHeaders())
+      axios.get(Utils.apiUrl(url),Utils.apiHeaders())
       .then(res => {   
         if(res.data.success){
           resolve(res.data.data);
@@ -47,8 +48,21 @@ const UserProvider = (props) => {
     });
   }
 
+  const setServerData = (url,data) => {
+    return new Promise((resolve,reject) => {
+      axios.put(Utils.apiUrl(url),data,Utils.apiHeaders())
+      .then(res => {   
+        if(res.data.success){
+          resolve(res.data);
+        }else{
+          reject(res.data.message);
+        }
+      });
+    });
+  }
+
   
-  return <UserContext.Provider value={{ userData, goLogin,logout, getProfileAttributes}}>
+  return <UserContext.Provider value={{ userData, goLogin,logout, getServerData, setServerData}}>
     {props.children}
   </UserContext.Provider>;
 

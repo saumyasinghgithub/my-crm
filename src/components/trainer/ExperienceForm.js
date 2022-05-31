@@ -1,7 +1,6 @@
 import {useEffect, useContext, useState} from 'react';
 import {Form, Alert, Spinner, Row, Col, Button} from 'react-bootstrap';
 import UserContext from '../../contexts/UserContext';
-import TrainerContext from '../../contexts/TrainerContext';
 import { Editor } from "@tinymce/tinymce-react";
 import _ from 'lodash';
 import Utils from './../../Utils';
@@ -14,7 +13,7 @@ const ExperienceForm = (props) => {
   const [expData, setExpData] = useState([]);
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({success: false, message: ""});
-  const {getMyData,setMyData} = useContext(TrainerContext);
+  const {getServerData,setServerData} = useContext(UserContext);
   const [content,setContent] = useState("");
   let curYear = new Date().getFullYear();
   const onContentChange = (e) => {
@@ -22,7 +21,7 @@ const ExperienceForm = (props) => {
   }
 
   useEffect(() => {
-    getMyData('trainer/my-exp')
+    getServerData('trainer/my-exp')
     .then(setExpData)
     .catch(err => console.log(err));
   },[]);
@@ -47,7 +46,7 @@ const ExperienceForm = (props) => {
     e.preventDefault();
     let frmdata = new FormData(frm);
     setSaving(true);
-    setMyData('trainer/my-exp',frmdata)
+    setServerData('trainer/my-exp',frmdata)
     .then(res => {
       setSaving(false);
       setResponse(res);

@@ -6,10 +6,10 @@ import UserContext from './../contexts/UserContext';
 const Home = (props) => {
 
 	const [pa,setPA] = useState([]);
-	const {getProfileAttributes} = useContext(UserContext);
+	const {getServerData} = useContext(UserContext);
 
 	useEffect(() => {
-		getProfileAttributes()
+		getServerData('profile_attributes')
 		.then(setPA)
 		.catch(err => console.log(err));
 	},[]);

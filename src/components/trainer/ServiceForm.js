@@ -1,7 +1,6 @@
 import {useEffect, useContext, useState} from 'react';
 import {Form, Alert, Spinner, Row, Col, Button, Badge} from 'react-bootstrap';
 import UserContext from './../../contexts/UserContext';
-import TrainerContext from './../../contexts/TrainerContext';
 import { Editor } from "@tinymce/tinymce-react";
 import _ from 'lodash';
 
@@ -11,7 +10,7 @@ const ServiceForm = (props) => {
   const [myservices, setMyservices] = useState({});
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({success: false, message: ""});
-  const {getMyData,setMyData} = useContext(TrainerContext);
+  const {getServerData,setServerData} = useContext(UserContext);
 
   const onContentChange = (fld) => (value) => {
     let c = {...myservices};
@@ -20,7 +19,7 @@ const ServiceForm = (props) => {
   }
 
   useEffect(() => {
-    getMyData('trainer/my-services')
+    getServerData('trainer/my-services')
     .then(setMyservices)
     .catch(err => console.log(err));
   },[]);
@@ -37,7 +36,7 @@ const ServiceForm = (props) => {
     frmdata.append('consultancy',_.get(myservices,'consultancy',''));
     frmdata.append('coaching',_.get(myservices,'coaching',''));
     setSaving(true);
-    setMyData('trainer/my-services',frmdata)
+    setServerData('trainer/my-services',frmdata)
     .then(res => {
       setSaving(false);
       setResponse(res);

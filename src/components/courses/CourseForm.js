@@ -1,6 +1,6 @@
 import {useEffect, useContext, useState} from 'react';
 import {Form, Alert, Spinner, Row, Col, Button} from 'react-bootstrap';
-import CourseContext from './../../contexts/CourseContext';
+import UserContext from './../../contexts/UserContext';
 import { Editor } from "@tinymce/tinymce-react";
 import _ from 'lodash';
 
@@ -10,7 +10,7 @@ const CourseForm = (props) => {
   const [mycourse, setMycourse] = useState({});
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({success: false, message: ""});
-  const {getMyData,setMyData} = useContext(CourseContext);
+  const {getServerData,setServerData} = useContext(UserContext);
 
   const onContentChange = (fld) => (value) => {
     let c = {...mycourse};
@@ -19,7 +19,7 @@ const CourseForm = (props) => {
   }
 
   useEffect(() => {
-    getMyData('trainer/my-course')
+    getServerData('trainer/my-course')
     .then(setMycourse)
     .catch(err => console.log(err));
   },[]);
@@ -36,7 +36,7 @@ const CourseForm = (props) => {
     frmdata.append('certificate',_.get(mycourse,'certificates',''));
     frmdata.append('trainings',_.get(mycourse,'trainings',''));
     setSaving(true);
-    setMyData('trainer/my-course',frmdata)
+    setServerData('trainer/my-course',frmdata)
     .then(res => {
       setSaving(false);
       setResponse(res);
