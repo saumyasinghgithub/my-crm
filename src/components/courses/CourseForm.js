@@ -52,32 +52,34 @@ const CourseForm = (props) => {
 
   return <Form onSubmit={onSave}>
     <Form.Control type="hidden" name="id" defaultValue={_.get(mycourse,'id','')} />
-    <Form.Control type="hidden" name="old_award_image" defaultValue={_.get(mycourse,'award_image','')} />
-    <Form.Control type="hidden" name="old_profile_image" defaultValue={_.get(mycourse,'profile_image','')} />
+    <Form.Control type="hidden" name="old_product_image" defaultValue={_.get(mycourse,'product_image','')} />
+    
     <h1>Course Create</h1>
     <Row>
-      <Col md={4} className="mt-3">
-        <Form.Label>First Name: </Form.Label>
-        <Form.Control type="text" name="firstname" placeholder="Enter your first name" defaultValue={_.get(mycourse,'firstname','')} />
+      <Col md={12} className="mt-3">
+        <Form.Label>Course Title: </Form.Label>
+        <Form.Control type="text" name="title" placeholder="Enter course title" defaultValue={_.get(mycourse,'title','')} />
       </Col>
-      <Col md={4} className="mt-3">
-        <Form.Label>Middle Name: </Form.Label>
-        <Form.Control type="text" name="middlename" placeholder="Enter your middle name" defaultValue={_.get(mycourse,'middlename','')} />
+    </Row>
+    <Row>
+      <Col md={4} className="mt-4">
+        <Form.Label>SKU: </Form.Label>
+        <Form.Control type="text" name="sku" placeholder="Enter course sku" defaultValue={_.get(mycourse,'sku','')} />
       </Col>
-      <Col md={4} className="mt-3">
-        <Form.Label>last Name: </Form.Label>
-        <Form.Control type="text" name="lastname" placeholder="Enter your last name" defaultValue={_.get(mycourse,'lastname','')} />
+      <Col md={8} className="mt-4">
+        <Form.Label>Course URL / Slug: </Form.Label>
+        <Form.Control type="text" name="slug" placeholder="Enter course slug" defaultValue={_.get(mycourse,'lastname','')} />
       </Col>
     </Row>
 
     <Row>  
       <Col md={3} className="mt-3">  
-        {photoUploader('profile_image','Upload Profile Pic')}
+        {photoUploader('product_image','Upload product image')}
       </Col>
       <Col md={9} className="mt-3">  
-      <Form.Label>Biography: </Form.Label>
+      <Form.Label>Short Description: </Form.Label>
       <Editor apiKey={process.env.TINYMCE_API_KEY}
-        value={_.get(mycourse,'biography','')}
+        value={_.get(mycourse,'short_description','')}
         init={{
         height: 200,
         menubar: false,
@@ -88,34 +90,58 @@ const CourseForm = (props) => {
     </Row>
     
     <Row>  
-      <Col md={3} className="mt-3">  
-        {photoUploader('award_image','Upload Award Certifications')}
-      </Col>
-      <Col md={9} className="mt-3">  
-      <Form.Label>Describe your awards: </Form.Label>
+      <Col md={12} className="mt-3">  
+      <Form.Label>Description: </Form.Label>
       <Editor apiKey={process.env.TINYMCE_API_KEY}
-        value={_.get(mycourse,'certificates','')}
+        value={_.get(mycourse,'description','')}
         init={{
         height: 200,
         menubar: false,
         }}
-        onEditorChange={onContentChange('certificates')}
+        onEditorChange={onContentChange('description')}
         />
         </Col>
     </Row>
-
     <Row>  
-      <Col md={12} className="mt-3">  
-      <Form.Label>Trainings Conducted: </Form.Label>
+      <Col md={6} className="mt-3">  
+      <Form.Label>Learn brief guide to student: </Form.Label>
       <Editor apiKey={process.env.TINYMCE_API_KEY}
-        value={_.get(mycourse,'trainings','')}
+        value={_.get(mycourse,'learn_brief','')}
         init={{
         height: 200,
         menubar: false,
         }}
-        onEditorChange={onContentChange('trainings')}
+        onEditorChange={onContentChange('learn_brief')}
         />
         </Col>
+        <Col md={6} className="mt-3">  
+      <Form.Label>Requirements for course access: </Form.Label>
+      <Editor apiKey={process.env.TINYMCE_API_KEY}
+        value={_.get(mycourse,'requirements','')}
+        init={{
+        height: 200,
+        menubar: false,
+        }}
+        onEditorChange={onContentChange('requirements')}
+        />
+        </Col>
+    </Row>
+    <Row> 
+      <Col md={6} className="mt-3">  
+        <Form.Label>Price: </Form.Label>
+        <Form.Control type="text" name="price" placeholder="Enter course price" defaultValue={_.get(mycourse,'price','')} />
+      </Col> 
+
+      <Col md={6} className="mt-3">  
+      <Form.Label>Stock Quantity: </Form.Label>
+      <Form.Control type="text" name="stock_qnty" placeholder="Enter stock quantity" defaultValue={_.get(mycourse,'stock_qnty','')} />
+      </Col>
+    </Row>
+    <Row>  
+      <Col md={12} className="mt-3">  
+      <Form.Label>Stock Quantity: </Form.Label>
+      <Form.Control type="text" name="stock_qnty" placeholder="Enter stock quantity" defaultValue={_.get(mycourse,'stock_qnty','')} />
+      </Col>
     </Row>
 
     <Row>

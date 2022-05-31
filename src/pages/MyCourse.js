@@ -32,7 +32,7 @@ const MyCourse = (props) => {
                 <Tab.Content>
                     <Tab.Pane eventKey={tab}>
                         {tab==='courses' && <CourseCom.CourseForm />}
-                        {tab==='calib' && <CourseCom.CourseForm />}
+                        {tab==='content' && <CourseCom.CourseForm />}
                     </Tab.Pane>
                 </Tab.Content>
                 </Col>
