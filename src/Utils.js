@@ -98,7 +98,9 @@ const Utils = {
   },
 
 
-  academicQualifications: ['10th Grade', '12th Grade', 'Graduation', 'Post-Graduation', 'Professional Degree', 'PhD']
+  academicQualifications: ['10th Grade', '12th Grade', 'Graduation', 'Post-Graduation', 'Professional Degree', 'PhD'],
+  courseLevel: ['Beginner', 'Intermediate', 'Proficient', 'Experienced', 'Advanced', 'Expert'],
+  country: ['India', 'United States of America (USA)', 'Germany', 'Japan', '	Indonesia', 'Switzerland','Sweden', 'United Kingdom', 'United Arab Emirates', 'Turkey', 'Vietnam', 'Australia']
 
 };
 

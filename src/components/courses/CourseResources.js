@@ -6,7 +6,7 @@ import _ from 'lodash';
 import Utils from './../../Utils';
 
 
-const CourseForm = (props) => {
+const CourseResources = (props) => {
 
   const [mycourse, setMycourse] = useState({});
   const [saving, setSaving] = useState(false);
@@ -63,71 +63,6 @@ const CourseForm = (props) => {
         <Form.Control type="text" name="name" placeholder="Enter course Title" defaultValue={_.get(mycourse,'name','')} />
       </Col>
     </Row>
-    <Row>
-      <Col md={4} className="mt-4">
-        <Form.Label>SKU: </Form.Label>
-        <Form.Control type="text" name="sku" placeholder="Enter course sku" defaultValue={_.get(mycourse,'sku','')} />
-      </Col>
-      <Col md={8} className="mt-4">
-        <Form.Label>Course URL / Slug: </Form.Label>
-        <Form.Control type="text" name="slug" placeholder="Enter course slug" defaultValue={_.get(mycourse,'slug','')} />
-      </Col>
-    </Row>
-
-    <Row>  
-      <Col md={3} className="mt-3">  
-        {photoUploader('course_image','Upload product image')}
-      </Col>
-      <Col md={9} className="mt-3">  
-      <Form.Label>Short Description: </Form.Label>
-      <Editor apiKey={process.env.TINYMCE_API_KEY}
-        value={_.get(mycourse,'short_description','')}
-        init={{
-        height: 200,
-        menubar: false,
-        }}
-        onEditorChange={onContentChange('short_description')}
-        />
-        </Col>
-    </Row>
-    
-    <Row>  
-      <Col md={12} className="mt-3">  
-      <Form.Label>Description: </Form.Label>
-      <Editor apiKey={process.env.TINYMCE_API_KEY}
-        value={_.get(mycourse,'description','')}
-        init={{
-        height: 200,
-        menubar: false,
-        }}
-        onEditorChange={onContentChange('description')}
-        />
-        </Col>
-    </Row>
-    <Row>  
-      <Col md={6} className="mt-3">  
-      <Form.Label>Learn brief guide to student: </Form.Label>
-      <Editor apiKey={process.env.TINYMCE_API_KEY}
-        value={_.get(mycourse,'learn_brief','')}
-        init={{
-        height: 200,
-        menubar: false,
-        }}
-        onEditorChange={onContentChange('learn_brief')}
-        />
-        </Col>
-        <Col md={6} className="mt-3">  
-      <Form.Label>Requirements for course access: </Form.Label>
-      <Editor apiKey={process.env.TINYMCE_API_KEY}
-        value={_.get(mycourse,'requirements','')}
-        init={{
-        height: 200,
-        menubar: false,
-        }}
-        onEditorChange={onContentChange('requirements')}
-        />
-        </Col>
-    </Row>
     <Row> 
       <Col md={6} className="mt-3">  
         <Form.Label>Price: </Form.Label>
@@ -176,4 +111,4 @@ const CourseForm = (props) => {
 
 };
 
-export default CourseForm;
+export default CourseResources;
