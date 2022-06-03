@@ -1,13 +1,12 @@
 import _ from 'lodash';
 import React,{useEffect, useContext, useState, Component} from 'react';
-import {Container, Tab, Nav, Row, Col} from 'react-bootstrap';
+import {Container, Tab, Nav, Row, Col,Button} from 'react-bootstrap';
 import CourseCom from '../components/courses';
+import DataTableGrid from '../components/DataTableGrid';
 import UserContext from './../contexts/UserContext';
-import DataTable from 'react-data-table-component';
+
 
 const MyCourse = (props) => {
-
-    const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
     const columns = [
         {
             name: '#ID',
@@ -77,15 +76,15 @@ const MyCourse = (props) => {
         
 
     ];
+    // Blatant "inspiration" from https://codepen.io/Jacqueline34/pen/pyVoWr
 
     useEffect(window.scrollEffect,[]);
   const renderDT = () => {
     return (<>
-    <DataTable
+    <DataTableGrid
             columns={columns}
             data={data}
-            expandableRows
-            expandableRowsComponent={ExpandedComponent}
+            
         />
     </>)
   };
