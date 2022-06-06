@@ -1,91 +1,45 @@
 import React,{useState,useEffect} from 'react';
 import _ from 'lodash';
-import {Container, Tab, Row, Col} from 'react-bootstrap';
-import CreactCourse from './CreactCourse';
+import {Container, Tab, Row, Col, Button} from 'react-bootstrap';
+import {CourseForm, CourseResources, CourseContents} from '../components/courses';
 import DataTableGrid from '../components/DataTableGrid';
 import axios from 'axios';
 import Utils from '../Utils';
 
 const MyCourse = (props) => {
+
+   
+    const [showmc, setShowmc] = useState({show: false, row: null, type: null});
+
     const [list,setList] = useState({loading: false, error: false, pageInfo: {}, data: []});
     const [showForm,setShowForm] = useState({id: false, mode: 0}); // 0=do not show, 1=add, 2=edit
 
-    const columns = [
-        {
-            name: '#ID',
-            selector: row => row.id,
-            sortable: true,
-        },
-        {
-            name: 'Course Title',
-            selector: row => row.title,
-            sortable: true,
-        },
-        {
-            name: 'SKU',
-            selector: row => row.sku,
-            sortable: true,
-        },
-        {
-            name: 'Price',
-            selector: row => row.price,
-            sortable: true,
-        },
-        {
-            name: 'Short Description',
-            selector: row => row.shortDesc,
-            sortable: true,
-        },
-        {
-            name: 'Description',
-            selector: row => row.desc,
-            sortable: true,
-        },
-        {
-            name: 'Requirements',
-            selector: row => row.req,
-            sortable: true,
-        },
-        {
-            name: 'Quantity',
-            selector: row => row.qnty,
-            sortable: true,
-        },
-    ];
-    const data = [
-        {
-            id: 1,
-            title: 'Demo Course',
-            year: '1984',
-            sku: 'demo1023',
-            price: '200',
-            shortDesc: 'Here is the short description of course',
-            desc: 'Here is the description of course',
-            req: 'Here is the course requiremnet',
-            qnty: '50'
 
-        },
-        {
-            id: 2,
-            title: 'Test Course ',
-            year: '1984',
-            sku: 'test1023',
-            price: '280',
-            shortDesc: 'Here is the short description of course',
-            desc: 'Here is the description of course',
-            req: 'Here is the course requiremnet',
-            qnty: '40'
-        },
-        
+    const listColumns = ['id','name','sku','price'];
 
-    ];
-    // Blatant "inspiration" from https://codepen.io/Jacqueline34/pen/pyVoWr
+    const columns = listColumns.map(v => ({
+        name: v.toUpperCase(),
+        selector: row => row[v],
+        sortable: true
+    }));
+
+    columns.push({
+        name: "Action",
+        cell: row => <>
+            <Button size='sm' variant="light" className="mr-1" onClick={() => setShowmc({show: true, row: row, type: 'resource'})}><i className="fas fa-suitcase" /></Button>
+            <Button size='sm' variant="light" className="mr-1" onClick={() => setShowmc({show: true, row: row, type: 'content'})}><i className="fa fa-book" /></Button>
+            <Button size='sm' variant="light" className="mr-1"><i className="fa fa-edit" /></Button>
+            <Button size='sm' variant="light" className="mr-1"><i className="fa fa-trash text-danger" /></Button>
+        </>,
+        sortable: false
+    });
+    
     const fetchList = () => {
         setList({...list, loading: true})
         axios.get(Utils.apiUrl('trainer/my-courses'),Utils.apiHeaders())
         .then(res => {
           if(res.data.success){
-            setList({...list, loading: false, error: false, pageInfo: res.data.pageInfo, data: res.data.data});
+            setList({...list, loading: false, error: false, pageInfo: res.data.pageInfo, data: res.data.data.map(v => _.pick(v,listColumns))});
           }else{
             setList({...list, loading: false, error: res.data.message, pageInfo: {}, data: []});
           }
@@ -93,15 +47,6 @@ const MyCourse = (props) => {
       };
     useEffect(window.scrollEffect,[]);
     useEffect(fetchList,[]);
-  const renderDT = () => {
-    return (<>
-    <DataTableGrid
-            columns={columns}
-            data={data}
-            
-        />
-    </>)
-  };
 
     return (<>
     <Container fluid className="h-100 p-0">
@@ -118,13 +63,14 @@ const MyCourse = (props) => {
         </div>
             <Row>
                 <Col sm={12}>
-                {renderDT()}
+                  <DataTableGrid columns={columns} data={list.data} />
                 </Col>
             </Row>
         </Tab.Container>
 
-        {showForm.mode > 0 && <CreactCourse mode={showForm.mode} id={showForm.id} onClose={() => setShowForm({...showForm, mode: 0})} />}
-        
+        {showForm.mode > 0 && <CourseForm type="modal" id={showForm.id} onClose={() => setShowForm({...showForm, mode: 0})} onSave={fetchList} />}
+        {showmc.show && showmc.type==='resource' && <CourseResources type="modal" id={showmc.row.id} name={showmc.row.name} onClose={() => setShowmc({...showmc, show: false})} />}
+        {showmc.show && showmc.type==='content' && <CourseContents type="modal" id={showmc.row.id} name={showmc.row.name} onClose={() => setShowmc({...showmc, show: false})} />}
     </div>
 </div>
 </Container>

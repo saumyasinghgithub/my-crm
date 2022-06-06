@@ -1,5 +1,5 @@
 import CourseForm from './CourseForm';
-import CourseContent from './CourseContent';
+import CourseContents from './CourseContents';
 import CourseResources from './CourseResources';
 
-export default {CourseForm,CourseContent,CourseResources};
+export {CourseForm,CourseContents,CourseResources};

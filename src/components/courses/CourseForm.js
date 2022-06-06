@@ -1,5 +1,5 @@
 import {useEffect, useContext, useState} from 'react';
-import {Form, Alert, Spinner, Row, Col, Button} from 'react-bootstrap';
+import {Form, Alert, Spinner, Row, Col, Button, Modal} from 'react-bootstrap';
 import UserContext from './../../contexts/UserContext';
 import { Editor } from "@tinymce/tinymce-react";
 import _ from 'lodash';
@@ -7,6 +7,8 @@ import Utils from './../../Utils';
 
 
 const CourseForm = (props) => {
+
+  const [mode, setMode] = useState('Add');
 
   const [mycourse, setMycourse] = useState({});
   const [saving, setSaving] = useState(false);
@@ -20,9 +22,12 @@ const CourseForm = (props) => {
   }
 
   useEffect(() => {
-    getServerData('trainer/my-courses')
-    .then(setMycourse)
-    .catch(err => console.log(err));
+    if(_.get(props,'id',false)){
+      getServerData('trainer/my-courses?id='+props.id)
+      .then(setMycourse)
+      .then(() => setMode('Update'))
+      .catch(err => console.log(err));
+    }
   },[]);
   useEffect(window.scrollEffect,[]);
 
@@ -42,6 +47,8 @@ const CourseForm = (props) => {
     .then(res => {
       setSaving(false);
       setResponse(res);
+      props.onSave();
+      props.onClose();
     })
   }
 
@@ -52,11 +59,10 @@ const CourseForm = (props) => {
     </>;
   }
 
-  return <Form onSubmit={onSave}>
+  const renderForm = () => <Form onSubmit={onSave}>
     <Form.Control type="hidden" name="id" defaultValue={_.get(mycourse,'id','')} />
     <Form.Control type="hidden" name="old_product_image" defaultValue={_.get(mycourse,'product_image','')} />
     
-    <h1>Course Create</h1>
     <Row>
       <Col md={12} className="mt-3">
         <Form.Label>Course Title: </Form.Label>
@@ -172,7 +178,23 @@ const CourseForm = (props) => {
       </Col>
     </Row>
   
-  </Form>
+  </Form>;
+
+  const renderModal = () => <Modal show={true} size="xl" onHide={_.get(props,"onClose","")}>
+    <Modal.Header closeButton>
+      <Modal.Title>{mode} Course</Modal.Title>
+    </Modal.Header>
+
+    <Modal.Body>
+      {renderForm()}
+    </Modal.Body>
+
+</Modal>
+
+  return <>
+    {props.type!=="modal" && renderForm()}
+    {props.type==="modal" && renderModal()}
+  </>;
 
 };
 

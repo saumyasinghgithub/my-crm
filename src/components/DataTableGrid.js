@@ -6,7 +6,6 @@ const DataTableGrid = (props) => {
     const data = props.data;
     const Export = ({ onExport }) => <Button onClick={e => onExport(e.target.value)}>Export</Button>;
     const actionsMemo = React.useMemo(() => <Export onExport={() => downloadCSV(data)} />, []);
-    const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
     
     function convertArrayOfObjectsToCSV(array) {
         let result;
@@ -49,8 +48,8 @@ const DataTableGrid = (props) => {
             link.click();
     }
 
-    return <DataTable {...props} expandableRows
-    expandableRowsComponent={ExpandedComponent}
+    return <DataTable {...props}
+    
     actions={actionsMemo} />
     
 }

@@ -1,11 +1,11 @@
 import {useEffect, useContext, useState} from 'react';
 import {Form, Alert, Spinner, Row, Col, Button} from 'react-bootstrap';
-import UserContext from './../../contexts/UserContext';
+import UserContext from '../../contexts/UserContext';
 import { Editor } from "@tinymce/tinymce-react";
 import _ from 'lodash';
 
 
-const CourseContent = (props) => {
+const CourseContents = (props) => {
 
   const [mycourse, setMycourse] = useState({});
   const [saving, setSaving] = useState(false);
@@ -115,4 +115,4 @@ const CourseContent = (props) => {
 
 };
 
-export default CourseContent;
+export default CourseContents;
