@@ -3328,3 +3328,13 @@ margin-left:-60px;}
 }
 
 /* *************************end css zigzag for timeline******************************* */
+
+.card-header span {
+    width: 50%;
+    text-align: right;
+}
+
+.card-header .card-title {
+    width: 50%;
+    display: inline-block;
+}

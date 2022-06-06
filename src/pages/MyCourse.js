@@ -1,12 +1,15 @@
+import React,{useState,useEffect} from 'react';
 import _ from 'lodash';
-import React,{useEffect, useContext, useState, Component} from 'react';
-import {Container, Tab, Nav, Row, Col,Button} from 'react-bootstrap';
-import CourseCom from '../components/courses';
+import {Container, Tab, Row, Col} from 'react-bootstrap';
+import CreactCourse from './CreactCourse';
 import DataTableGrid from '../components/DataTableGrid';
-import UserContext from './../contexts/UserContext';
-
+import axios from 'axios';
+import Utils from '../Utils';
 
 const MyCourse = (props) => {
+    const [list,setList] = useState({loading: false, error: false, pageInfo: {}, data: []});
+    const [showForm,setShowForm] = useState({id: false, mode: 0}); // 0=do not show, 1=add, 2=edit
+
     const columns = [
         {
             name: '#ID',
@@ -77,8 +80,19 @@ const MyCourse = (props) => {
 
     ];
     // Blatant "inspiration" from https://codepen.io/Jacqueline34/pen/pyVoWr
-
+    const fetchList = () => {
+        setList({...list, loading: true})
+        axios.get(Utils.apiUrl('trainer/my-courses'),Utils.apiHeaders())
+        .then(res => {
+          if(res.data.success){
+            setList({...list, loading: false, error: false, pageInfo: res.data.pageInfo, data: res.data.data});
+          }else{
+            setList({...list, loading: false, error: res.data.message, pageInfo: {}, data: []});
+          }
+        })
+      };
     useEffect(window.scrollEffect,[]);
+    useEffect(fetchList,[]);
   const renderDT = () => {
     return (<>
     <DataTableGrid
@@ -96,6 +110,12 @@ const MyCourse = (props) => {
         <h1>My Course </h1>
         
         <Tab.Container id="left-tabs-example">
+        <div className="card-header ui-sortable-handle" >
+            <h3 className="card-title">Course List #</h3>
+            <span className="btn float-right">
+                <button className="btn btn-success btn-sm" onClick={()=>setShowForm({mode: 1, id: false})}>Add Course <i className="fas fa-plus"></i></button>
+                </span>
+        </div>
             <Row>
                 <Col sm={12}>
                 {renderDT()}
@@ -103,7 +123,7 @@ const MyCourse = (props) => {
             </Row>
         </Tab.Container>
 
-
+        {showForm.mode > 0 && <CreactCourse mode={showForm.mode} id={showForm.id} onClose={() => setShowForm({...showForm, mode: 0})} />}
         
     </div>
 </div>

@@ -8,8 +8,6 @@ const DataTableGrid = (props) => {
     const actionsMemo = React.useMemo(() => <Export onExport={() => downloadCSV(data)} />, []);
     const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
     
-    
-
     function convertArrayOfObjectsToCSV(array) {
         let result;
 
@@ -54,8 +52,7 @@ const DataTableGrid = (props) => {
     return <DataTable {...props} expandableRows
     expandableRowsComponent={ExpandedComponent}
     actions={actionsMemo} />
-
-
+    
 }
 
 export default DataTableGrid;
