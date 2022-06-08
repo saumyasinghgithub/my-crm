@@ -3,6 +3,7 @@ import {Form, Alert, Spinner, Row, Col, Button, Modal} from 'react-bootstrap';
 import UserContext from './../../contexts/UserContext';
 import _ from 'lodash';
 import DataTableGrid from '../../components/DataTableGrid';
+import ContentForm from './ContentForm';
 import axios from 'axios';
 import Utils from './../../Utils';
 
@@ -15,7 +16,7 @@ const CourseResources = (props) => {
   const {getServerData,setServerData} = useContext(UserContext);
 
   const [list,setList] = useState({loading: false, error: false, pageInfo: {}, data: []});
-    
+  const [showForm,setShowForm] = useState({id: false, mode: 0}); // 0=do not show, 1=add, 2=edit  
   const listColumns = ['id','type','name','price'];
 
     const columns = listColumns.map(v => ({
@@ -66,44 +67,16 @@ const CourseResources = (props) => {
     .then(res => {
       setSaving(false);
       setResponse(res);
+      props.onSave();
+      props.onClose();
     })
   }
-  
-  const renderForm = () => <Form onSubmit={onSave}>
-    <Form.Control type="hidden" name="id" defaultValue={_.get(mycourse,'id','')} />
-  
-   <h1>Course Resources</h1>
-    <Row>
-      <Col md={12} className="mt-3">
-        <Form.Label>Course Title: </Form.Label>
-        <Form.Control type="text" name="name" placeholder="Enter course Title" defaultValue={_.get(mycourse,'name','')} />
-      </Col>
-    </Row>
-    <Row> 
-      <Col md={12} className="mt-3">  
-        <Form.Label>Price: </Form.Label>
-        <Form.Control type="text" name="price" placeholder="Enter course price" defaultValue={_.get(mycourse,'price','')} />
-      </Col>
-    </Row>
-    <Row>   
-      <Col md={12} className="mt-3">
-          <Form.Control as="select" name="type" defaultValue={_.get(setMycourse,`type`,'')}>
-            <option value=""> - Select Course Type - </option>
-            {Utils.courseType.map(v => <option key={v} value={v}>{v}</option>)}
-          </Form.Control>
-      </Col> 
-    </Row>
-
-    <Row>
-      <Col md={12} className="mt-3 text-right">
-        {saving && <>Saving.. <Spinner animation="border" /></>}
-        {!saving && response.message==="" && <Button type="submit" className="profile-save">Save</Button>}
-        {!saving && response.message!=="" && <Alert variant={response.success ? 'info' : 'danger'} className="p-3 mt-2 text-center">{response.message}</Alert>}
-      </Col>
-    </Row>
-  
-  </Form>;
-
+  const renderButton = () => <div className="card-header ui-sortable-handle" >
+      <h3 className="card-title">Course List #</h3>
+      <span className="btn float-right">
+      <button className="btn btn-success btn-sm" onClick={()=>setShowForm({mode: 1, id: false})}>Add Course <i className="fas fa-plus"></i></button>
+      </span>
+    </div>;
 
 return <Modal show={true} size="xl" onHide={_.get(props,"onClose","")}>
 <Modal.Header closeButton>
@@ -111,10 +84,14 @@ return <Modal show={true} size="xl" onHide={_.get(props,"onClose","")}>
 </Modal.Header>
 
 <Modal.Body>
+  {renderButton()}
   <DataTableGrid columns={columns} data={list.data} />
 </Modal.Body>
 
 </Modal>;
+
+{showForm.mode > 0 && <ContentForm type="modal" id={showForm.id} onClose={() => setShowForm({...showForm, mode: 0})} onSave={fetchList} />}
+
 
 };
 

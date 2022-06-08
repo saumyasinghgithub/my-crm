@@ -1,118 +1,71 @@
-import {useEffect, useContext, useState} from 'react';
-import {Form, Alert, Spinner, Row, Col, Button} from 'react-bootstrap';
-import UserContext from '../../contexts/UserContext';
-import { Editor } from "@tinymce/tinymce-react";
+import React,{useState,useEffect} from 'react';
+import {Button,Modal} from 'react-bootstrap';
 import _ from 'lodash';
+import DataTableGrid from '../DataTableGrid';
+import ContentForm from './ContentForm';
+import axios from 'axios';
+import Utils from '../../Utils';
 
 
 const CourseContents = (props) => {
 
-  const [mycourse, setMycourse] = useState({});
-  const [saving, setSaving] = useState(false);
-  const [response, setResponse] = useState({success: false, message: ""});
-  const {getServerData,setServerData} = useContext(UserContext);
+  const [showmc, setShowmc] = useState({show: false, row: null, type: null});
+  const [list,setList] = useState({loading: false, error: false, pageInfo: {}, data: []});
+  const [showForm,setShowForm] = useState({id: false, mode: 0}); // 0=do not show, 1=add, 2=edit
 
-  const onContentChange = (fld) => (value) => {
-    let c = {...mycourse};
-    c[fld] = value;
-    setMycourse(c);
-  }
+  const listColumns = ['id','title','description','embed_resource','duration','lecture','created_at'];
+  const columns = listColumns.map(v => ({
+    name: v.toUpperCase(),
+    selector: row => row[v],
+    sortable: true
+}));
 
-  useEffect(() => {
-    getServerData('trainer/course-content')
-    .then(setMycourse)
-    .catch(err => console.log(err));
-  },[]);
-  useEffect(window.scrollEffect,[]);
+columns.push({
+  name: "Action",
+  cell: row => <>
+      <Button size='sm' variant="light" className="mr-1"><i className="fa fa-edit" /></Button>
+      <Button size='sm' variant="light" className="mr-1"><i className="fa fa-trash text-danger" /></Button>
+  </>,
+  sortable: false
+});
 
-  useEffect(() => {window.setTimeout(() => setResponse({message: ""}), 5000)},[response]);
-  
-
-  const onSave = (e) => {
-    const frm = e.currentTarget;
-    e.preventDefault();
-    let frmdata = new FormData(frm);
-    frmdata.append('description',_.get(mycourse,'description',''));
-    frmdata.append('embed_resource',_.get(mycourse,'embed_resource',''));
-    setSaving(true);
-    setServerData('trainer/course-content ',frmdata)
+  const fetchList = () => {
+    setList({...list, loading: true})
+    axios.get(Utils.apiUrl('trainer/course-content/'+props.id),Utils.apiHeaders())
     .then(res => {
-      setSaving(false);
-      setResponse(res);
+      if(res.data.success){
+        console.log(res.data.data);
+        setList({...list, loading: false, error: false, pageInfo: res.data.pageInfo, data: res.data.data.map(v => _.pick(v,listColumns))});
+      }else{
+        setList({...list, loading: false, error: res.data.message, pageInfo: {}, data: []});
+      }
     })
-  }
+  };
+  useEffect(window.scrollEffect,[]);
+  useEffect(fetchList,[]);
+ 
 
-  const photoUploader = (fld,title) => {
-    return <>
-      <Form.Label>{title}</Form.Label>
-      <Form.Control type="file" size="lg" name={fld} accept=".mp4,.fly,.MP4;" />
-    </>;
-  }
-
-  return <Form onSubmit={onSave}>
-    <Form.Control type="hidden" name="course_id" defaultValue={_.get(mycourse,'id','')} />
-    <Form.Control type="hidden" name="old_video" defaultValue={_.get(mycourse,'video','')} />
+  const renderButton = () => <div className="card-header ui-sortable-handle" >
+      <h3 className="card-title">Course List #</h3>
+      <span className="btn float-right">
+      <button className="btn btn-success btn-sm" onClick={()=>setShowForm({mode: 1, id: false})}>Add Course Content <i className="fas fa-plus"></i></button>
+      </span>
+    </div>;
+   
+    return <Modal show={true} size="xl" onHide={_.get(props,"onClose","")}>
+    <Modal.Header closeButton>
+      <Modal.Title>Course Resources for {props.name}</Modal.Title>
+    </Modal.Header>
     
-    <h1>Course Create</h1>
-    <Row>
-      <Col md={12} className="mt-3">
-        <Form.Label>Course Title: </Form.Label>
-        <Form.Control type="text" name="title" placeholder="Enter course Title" defaultValue={_.get(mycourse,'title','')} />
-      </Col>
-    </Row>
-    <Row> 
-      <Col md={12} className="mt-3">  
-      <Form.Label>Description: </Form.Label>
-        <Editor apiKey={process.env.TINYMCE_API_KEY}
-          value={_.get(mycourse,'description','')}
-          init={{
-          height: 200,
-          menubar: false,
-          }}
-          onEditorChange={onContentChange('description')}
-          />
-      </Col> 
-     </Row> 
-     <Row>  
-      <Col md={3} className="mt-3">  
-        {photoUploader('video','Upload course lecture video')}
-      </Col>
-      <Col md={1} className="mt-3">  
-        <strong>OR</strong>
-      </Col>
-      <Col md={8} className="mt-3">  
-      <Form.Label>Embeded video: </Form.Label>
-        <Editor apiKey={process.env.TINYMCE_API_KEY}
-          value={_.get(mycourse,'embed_resource','')}
-          init={{
-          height: 200,
-          menubar: false,
-          }}
-          onEditorChange={onContentChange('embed_resource')}
-          />
-        </Col>
-    </Row>
+    <Modal.Body>
+      {renderButton()}
+      <DataTableGrid columns={columns} data={list.data} />
+    </Modal.Body>
+    {showForm.mode > 0 && <ContentForm type="modal" id={showForm.id} onClose={() => setShowForm({...showForm, mode: 0})} onSave={fetchList} />}
 
-    <Row>
-      <Col md={6} className="mt-3">
-        <Form.Label>Duration: </Form.Label>
-        <Form.Control type="text" name="duration" placeholder="Enter course duration" defaultValue={_.get(mycourse,'duration','')} />
-      </Col> 
-      <Col md={6} className="mt-3">
-        <Form.Label>lecture</Form.Label>
-        <Form.Control type="text" name="lecture" placeholder="Enter no. of lecture in course" defaultValue={_.get(mycourse,'lecture','')} />
-      </Col> 
-    </Row>
-    <Row>
-      <Col md={12} className="mt-3 text-right">
-        {saving && <>Saving.. <Spinner animation="border" /></>}
-        {!saving && response.message==="" && <Button type="submit" className="profile-save">Save</Button>}
-        {!saving && response.message!=="" && <Alert variant={response.success ? 'info' : 'danger'} className="p-3 mt-2 text-center">{response.message}</Alert>}
-      </Col>
-    </Row>
-  
-  </Form>
+    </Modal>;
 
+   
 };
 
 export default CourseContents;
