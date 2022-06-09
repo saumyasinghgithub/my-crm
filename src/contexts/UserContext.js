@@ -44,7 +44,7 @@ const UserProvider = (props) => {
         }else{
           reject(res.data.message);
         }
-      });
+      }).catch(reject);
     });
   }
 
@@ -57,7 +57,7 @@ const UserProvider = (props) => {
         }else{
           reject(res.data.message);
         }
-      });
+      }).catch(reject);
     });
   }
 

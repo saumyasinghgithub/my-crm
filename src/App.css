@@ -66,3 +66,10 @@
   border: 1px Solid #000;
   padding: 20px 20px;
 }
+
+.btn-search{
+  background-color: #dc3016 !important;
+  color: #fff !important;
+  font-size: 20px;
+  font-weight: bold;
+}

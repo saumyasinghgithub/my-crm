@@ -1,5 +1,5 @@
 import {LoginLayout, StaticPageLayout, DefaultLayout} from './layouts';
-import {Login, About, Home, ADStudio, ADTrainer,MyProfile,MyCourse, CourseDetails} from './pages';
+import {Login, About, Home, ADStudio, ADTrainer,MyProfile,MyCourse, CourseDetails, SearchResult} from './pages';
 
 const CustomRoutes = [  
   
@@ -51,6 +51,13 @@ const CustomRoutes = [
     'exact'     : true,
     'layout'    : StaticPageLayout, 
     'component' : CourseDetails
+  },
+  {
+    'path'      : '/search-results', 
+    'secure'    : false,    
+    'exact'     : true,
+    'layout'    : DefaultLayout, 
+    'component' : SearchResult
   },
   {
     'path'      : '/',

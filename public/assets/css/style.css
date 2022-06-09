@@ -554,8 +554,7 @@ ul.resultlist li a {
 .filterbox .form-group {position: relative;width: 500px;max-width: 100%;}
 
 .resultDisplay {
-    margin: 50px 0 100px;
-    display: none;
+    margin: 10px 0 50px;
     position: relative;
     padding-top: 70px;
 }
