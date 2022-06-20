@@ -1,20 +1,26 @@
 import {useEffect, useContext, useState} from 'react';
 import {Form, Alert, Spinner, Row, Col, Button, Modal} from 'react-bootstrap';
 import UserContext from './../../contexts/UserContext';
-import { Editor } from "@tinymce/tinymce-react";
 import _ from 'lodash';
 import Utils from './../../Utils';
 
+
 const ResourceForm = (props) => {
 
-    const [mode, setMode] = useState('Add');
+  const [mode, setMode] = useState('Add');
 
-    const [mycourse, setMycourse] = useState({});
-    const [saving, setSaving] = useState(false);
-    const [response, setResponse] = useState({success: false, message: ""});
-    const {getServerData,setServerData} = useContext(UserContext);
+  const [mycourse, setMycourse] = useState({});
+  const [saving, setSaving] = useState(false);
+  const [response, setResponse] = useState({success: false, message: ""});
+  const {getServerData,setServerData} = useContext(UserContext);
 
-    useEffect(() => {
+      useEffect(() => {
+        getServerData('trainer/course-resources')
+        .then(setMycourse)
+        .catch(err => console.log(err));
+      },[]);
+
+      useEffect(() => {
         if(_.get(props,'id',false)){
           getServerData('trainer/my-courses?id='+props.id)
           .then(setMycourse)
@@ -22,6 +28,7 @@ const ResourceForm = (props) => {
           .catch(err => console.log(err));
         }
       },[]);
+      
       useEffect(window.scrollEffect,[]);
     
       useEffect(() => {window.setTimeout(() => setResponse({message: ""}), 5000)},[response]);
@@ -31,7 +38,7 @@ const ResourceForm = (props) => {
         e.preventDefault();
         let frmdata = new FormData(frm);
         setSaving(true);
-        setServerData('trainer/my-courses ',frmdata)
+        setServerData('trainer/course-resources ',frmdata)
         .then(res => {
           setSaving(false);
           setResponse(res);
@@ -87,7 +94,7 @@ const renderModal = () => <Modal show={true} size="lg" onHide={_.get(props,"onCl
 
 </Modal>
 
-    return <>
+  return <>
     {props.type!=="modal" && renderForm()}
     {props.type==="modal" && renderModal()}
   </>;

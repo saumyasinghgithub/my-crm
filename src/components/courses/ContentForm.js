@@ -43,6 +43,8 @@ const ContentForm = (props) => {
         const frm = e.currentTarget;
         e.preventDefault();
         let frmdata = new FormData(frm);
+        frmdata.append('description',_.get(mycourse,'description',''));
+        frmdata.append('embed_resource',_.get(mycourse,'embed_resource',''));
         setSaving(true);
         setServerData('trainer/course-content ',frmdata)
         .then(res => {

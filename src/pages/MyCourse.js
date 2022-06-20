@@ -13,9 +13,8 @@ const MyCourse = (props) => {
 
     const [list,setList] = useState({loading: false, error: false, pageInfo: {}, data: []});
     const [showForm,setShowForm] = useState({id: false, mode: 0}); // 0=do not show, 1=add, 2=edit
-
-
-    const listColumns = ['id','name','sku','price'];
+    
+    const listColumns = ['id','name','sku','slug','price','short_description','description','learn_brief','requirements','stock_qnty','level','language','duration','lectures','created_at'];
 
     const columns = listColumns.map(v => ({
         name: v.toUpperCase(),
