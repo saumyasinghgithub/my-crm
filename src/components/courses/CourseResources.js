@@ -24,7 +24,7 @@ const CourseResources = (props) => {
 columns.push({
   name: "Action",
   cell: row => <>
-      <Button size='sm' variant="light" className="mr-1"><i className="fa fa-edit" /></Button>
+      <Button size='sm' variant="light" className="mr-1" onClick={() => setShowForm({id: row.id, mode: 2})}><i className="fa fa-edit" /></Button>
       <Button size='sm' variant="light" className="mr-1"><i className="fa fa-trash text-danger" /></Button>
   </>,
   sortable: false
@@ -32,7 +32,8 @@ columns.push({
 
   const fetchList = () => {
     setList({...list, loading: true})
-    axios.get(Utils.apiUrl('trainer/course-resources/'+props.id),Utils.apiHeaders())
+    let params = `fname=course_id&fvalue=${props.id}`;
+    axios.get(Utils.apiUrl(`trainer/course-resources?${params}`),Utils.apiHeaders())
     .then(res => {
       if(res.data.success){
         console.log(res.data.data);
@@ -61,7 +62,7 @@ columns.push({
       {renderButton()}
       <DataTableGrid columns={columns} data={list.data} />
     </Modal.Body>
-    {showForm.mode > 0 && <ResourceForm type="modal" id={showForm.id} onClose={() => setShowForm({...showForm, mode: 0})} onSave={fetchList} />}
+    {showForm.mode > 0 && <ResourceForm type="modal" id={showForm.id} course_id={props.id} onClose={() => setShowForm({...showForm, mode: 0})} onSave={fetchList} />}
 
     </Modal>;
 

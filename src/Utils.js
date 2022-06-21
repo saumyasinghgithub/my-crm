@@ -101,7 +101,7 @@ const Utils = {
   academicQualifications: ['10th Grade', '12th Grade', 'Graduation', 'Post-Graduation', 'Professional Degree', 'PhD'],
   courseLevel: ['Beginner', 'Intermediate', 'Proficient', 'Experienced', 'Advanced', 'Expert'],
   country: ['English', 'Spanish', 'German', 'French', '	Portuguese', 'Arabic','Hindi', 'Russian', 'Chinese', 'Dutch', 'Japanese', 'KOREAN'],
-  courseType: ['pdf', 'video', 'scorm', 'quiz', '	audio']
+  courseType: ['pdf', 'video', 'scorm', 'quiz', 'audio']
 
 };
 

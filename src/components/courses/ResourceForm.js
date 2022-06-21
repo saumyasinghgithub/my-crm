@@ -9,25 +9,20 @@ const ResourceForm = (props) => {
 
   const [mode, setMode] = useState('Add');
 
-  const [mycourse, setMycourse] = useState({});
+  const [cres, setCRes] = useState({});
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({success: false, message: ""});
   const {getServerData,setServerData} = useContext(UserContext);
 
-      useEffect(() => {
-        getServerData('trainer/course-resources')
-        .then(setMycourse)
-        .catch(err => console.log(err));
-      },[]);
-
-      useEffect(() => {
-        if(_.get(props,'id',false)){
-          getServerData('trainer/my-courses?id='+props.id)
-          .then(setMycourse)
-          .then(() => setMode('Update'))
-          .catch(err => console.log(err));
-        }
-      },[]);
+  useEffect(() => {
+    if(_.get(props,'id',false)){
+      let params = `fname=id&fvalue=${props.id}`;
+      getServerData('trainer/course-resources?'+params)
+      .then(data => setCRes(data[0]))
+      .then(() => setMode('Update'))
+      .catch(err => console.log(err));
+    }
+  },[]);
       
       useEffect(window.scrollEffect,[]);
     
@@ -49,26 +44,27 @@ const ResourceForm = (props) => {
 
 
     const renderForm = () => <Form onSubmit={onSave}>
-    <Form.Control type="hidden" name="id" defaultValue={_.get(mycourse,'id','')} />
+    <Form.Control type="hidden" name="id" value={_.get(cres,'id','')} />
+    <Form.Control type="hidden" name="course_id" value={props.course_id} />
   
    <h1>Course Resources</h1>
     <Row>
       <Col md={12} className="mt-3">
         <Form.Label>Course Title: </Form.Label>
-        <Form.Control type="text" name="name" placeholder="Enter course Title" defaultValue={_.get(mycourse,'name','')} />
+        <Form.Control type="text" name="name" placeholder="Enter course Title" defaultValue={_.get(cres,'name','')} />
       </Col>
     </Row>
     <Row> 
       <Col md={12} className="mt-3">  
         <Form.Label>Price: </Form.Label>
-        <Form.Control type="text" name="price" placeholder="Enter course price" defaultValue={_.get(mycourse,'price','')} />
+        <Form.Control type="text" name="price" placeholder="Enter course price" defaultValue={_.get(cres,'price','')} />
       </Col>
     </Row>
     <Row>   
       <Col md={12} className="mt-3">
-          <Form.Control as="select" name="type" defaultValue={_.get(setMycourse,`type`,'')}>
+          <Form.Control as="select" name="type">
             <option value=""> - Select Course Type - </option>
-            {Utils.courseType.map(v => <option key={v} value={v}>{v}</option>)}
+            {Utils.courseType.map(v => <option key={v} value={v} selected={cres.type===v}>{v}</option>)}
           </Form.Control>
       </Col> 
     </Row>
