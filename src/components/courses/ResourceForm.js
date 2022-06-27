@@ -14,15 +14,15 @@ const ResourceForm = (props) => {
   const [response, setResponse] = useState({success: false, message: ""});
   const {getServerData,setServerData} = useContext(UserContext);
 
-  useEffect(() => {
-    if(_.get(props,'id',false)){
-      let params = `fname=id&fvalue=${props.id}`;
-      getServerData('trainer/course-resources?'+params)
-      .then(data => setCRes(data[0]))
-      .then(() => setMode('Update'))
-      .catch(err => console.log(err));
-    }
-  },[]);
+      useEffect(() => {
+        if(_.get(props,'id',false)){
+          let params = `fname=id&fvalue=${props.id}`;
+          getServerData('trainer/course-resources?'+params)
+          .then(data => setCRes(data[0]))
+          .then(() => setMode('Update'))
+          .catch(err => console.log(err));
+        }
+      },[]);
       
       useEffect(window.scrollEffect,[]);
     

@@ -9,32 +9,27 @@ const ContentForm = (props) => {
 
     const [mode, setMode] = useState('Add');
 
-    const [mycourse, setMycourse] = useState({});
+    const [coursecont, setCourseCont] = useState({});
     const [saving, setSaving] = useState(false);
     const [response, setResponse] = useState({success: false, message: ""});
     const {getServerData,setServerData} = useContext(UserContext);
 
     const onContentChange = (fld) => (value) => {
-      let c = {...mycourse};
+      let c = {...coursecont};
       c[fld] = value;
-      setMycourse(c);
+      setCourseCont(c);
     }
   
-    useEffect(() => {
-      getServerData('trainer/course-content')
-      .then(setMycourse)
-      .catch(err => console.log(err));
-    },[]);
-
-
-    useEffect(() => {
+      useEffect(() => {
         if(_.get(props,'id',false)){
-          getServerData('trainer/my-courses?id='+props.id)
-          .then(setMycourse)
+          let params = `fname=id&fvalue=${props.id}`;
+          getServerData('trainer/course-content?'+params)
+          .then(data => setCourseCont(data[0]))
           .then(() => setMode('Update'))
           .catch(err => console.log(err));
         }
       },[]);
+
       useEffect(window.scrollEffect,[]);
     
       useEffect(() => {window.setTimeout(() => setResponse({message: ""}), 5000)},[response]);
@@ -43,8 +38,8 @@ const ContentForm = (props) => {
         const frm = e.currentTarget;
         e.preventDefault();
         let frmdata = new FormData(frm);
-        frmdata.append('description',_.get(mycourse,'description',''));
-        frmdata.append('embed_resource',_.get(mycourse,'embed_resource',''));
+        frmdata.append('description',_.get(coursecont,'description',''));
+        frmdata.append('embed_resource',_.get(coursecont,'embed_resource',''));
         setSaving(true);
         setServerData('trainer/course-content ',frmdata)
         .then(res => {
@@ -61,21 +56,22 @@ const ContentForm = (props) => {
         </>;
       }
     const renderForm = () => <Form onSubmit={onSave}>
-      <Form.Control type="hidden" name="course_id" defaultValue={_.get(mycourse,'id','')} />
-      <Form.Control type="hidden" name="old_video" defaultValue={_.get(mycourse,'video','')} />
+      <Form.Control type="hidden" name="course_id" defaultValue={_.get(coursecont,'id','')} />
+      <Form.Control type="hidden" name="old_video" defaultValue={_.get(coursecont,'video','')} />
+      <Form.Control type="hidden" name="course_id" value={props.course_id} />
       
       <h1>Course Create</h1>
       <Row>
         <Col md={12} className="mt-3">
           <Form.Label>Course Title: </Form.Label>
-          <Form.Control type="text" name="title" placeholder="Enter course Title" defaultValue={_.get(mycourse,'title','')} />
+          <Form.Control type="text" name="title" placeholder="Enter course Title" defaultValue={_.get(coursecont,'title','')} />
         </Col>
       </Row>
       <Row> 
         <Col md={12} className="mt-3">  
         <Form.Label>Description: </Form.Label>
           <Editor apiKey={process.env.TINYMCE_API_KEY}
-            value={_.get(mycourse,'description','')}
+            value={_.get(coursecont,'description','')}
             init={{
             height: 200,
             menubar: false,
@@ -94,7 +90,7 @@ const ContentForm = (props) => {
         <Col md={8} className="mt-3">  
         <Form.Label>Embeded video: </Form.Label>
           <Editor apiKey={process.env.TINYMCE_API_KEY}
-            value={_.get(mycourse,'embed_resource','')}
+            value={_.get(coursecont,'embed_resource','')}
             init={{
             height: 200,
             menubar: false,
@@ -107,11 +103,11 @@ const ContentForm = (props) => {
       <Row>
         <Col md={6} className="mt-3">
           <Form.Label>Duration: </Form.Label>
-          <Form.Control type="text" name="duration" placeholder="Enter course duration" defaultValue={_.get(mycourse,'duration','')} />
+          <Form.Control type="text" name="duration" placeholder="Enter course duration" defaultValue={_.get(coursecont,'duration','')} />
         </Col> 
         <Col md={6} className="mt-3">
           <Form.Label>lecture</Form.Label>
-          <Form.Control type="text" name="lecture" placeholder="Enter no. of lecture in course" defaultValue={_.get(mycourse,'lecture','')} />
+          <Form.Control type="text" name="lecture" placeholder="Enter no. of lecture in course" defaultValue={_.get(coursecont,'lecture','')} />
         </Col> 
       </Row>
       <Row>
