@@ -147,15 +147,15 @@ const CourseForm = (props) => {
     </Row>
     <Row>
       <Col md={6} className="mt-3">
-          <Form.Control as="select" name="level" defaultValue={_.get(setMycourse,`level`,'')}>
+          <Form.Control as="select" name="level" defaultValue={_.get(mycourse,`level`,'')}>
             <option value=""> - Select Level - </option>
-            {Utils.courseLevel.map(v => <option key={v} value={v}>{v}</option>)}
+            {Utils.courseLevel.map(v => <option key={v} selected={v==_.get(mycourse,`level`,'')} value={v}>{v}</option>)}
           </Form.Control>
       </Col> 
       <Col md={6} className="mt-3">
-          <Form.Control as="select" name="language" defaultValue={_.get(setMycourse,`language`,'')}>
+          <Form.Control as="select" name="language" defaultValue={_.get(mycourse,`language`,'')}>
             <option value=""> - Select Language - </option>
-            {Utils.country.map(v => <option key={v} value={v} >{v}</option>)}
+            {Utils.country.map(v => <option key={v} selected={v==_.get(mycourse,`language`,'')} value={v} >{v}</option>)}
           </Form.Control>
       </Col> 
     </Row>

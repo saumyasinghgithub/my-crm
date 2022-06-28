@@ -24,10 +24,20 @@ columns.push({
   name: "Action",
   cell: row => <>
       <Button size='sm' variant="light" className="mr-1" onClick={() => setShowForm({id: row.id, mode: 2})}><i className="fa fa-edit" /></Button>
-      <Button size='sm' variant="light" className="mr-1"><i className="fa fa-trash text-danger" /></Button>
+      <Button size='sm' variant="light" className="mr-1" onClick={deleteRecord(row.id)}><i className="fa fa-trash text-danger" /></Button>
   </>,
   sortable: false
 });
+
+const deleteRecord = (id)  => (e) => {
+  if(window.confirm("You are going to delete record, are you sure?")){
+    axios.delete(Utils.apiUrl(`trainer/course-content/${id}`),Utils.apiHeaders())
+    .then(res => {
+      fetchList();
+      window.alert(res.data.message);
+    })
+  }
+};
 
   const fetchList = () => {
     setList({...list, loading: true})
