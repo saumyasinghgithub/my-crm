@@ -73,3 +73,10 @@
   font-size: 20px;
   font-weight: bold;
 }
+
+.remove-award{
+  position: absolute;
+  right: 0px;
+  margin-top: -5px;
+  margin-right: -10px;
+}

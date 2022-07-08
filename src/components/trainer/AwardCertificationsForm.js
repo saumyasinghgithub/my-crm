@@ -8,7 +8,7 @@ import moment from 'moment';
 const AwardCertificationsForm = (props) => {
 
   const [count, setCount] = useState(4);
-  const [academicData, setAcademicData] = useState([]);
+  const [awardData, setAwardData] = useState([]);
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({success: false, message: ""});
   const {getServerData,setServerData} = useContext(UserContext);
@@ -19,14 +19,14 @@ const AwardCertificationsForm = (props) => {
   }
 
   useEffect(() => {
-    getServerData('trainer/my-academic')
-    .then(setAcademicData)
+    getServerData('trainer/my-awards')
+    .then(setAwardData)
     .catch(err => console.log(err));
   },[]);
 
   useEffect(() => {
-    setCount(_.max([4,academicData.length]));
-  }, [academicData]);
+    setCount(_.max([4,awardData.length]));
+  }, [awardData]);
 
   useEffect(window.scrollEffect,[]);
 
@@ -35,9 +35,9 @@ const AwardCertificationsForm = (props) => {
   useEffect(() => {window.setTimeout(() => setResponse({message: ""}), 5000)},[response]);
 
   const removeAData = (pos) => (e) => {
-    let newdata = [...academicData];
+    let newdata = [...awardData];
     newdata.splice(pos,1);
-    setAcademicData(newdata);
+    setAwardData(newdata);
   }
   
 
@@ -46,7 +46,7 @@ const AwardCertificationsForm = (props) => {
     e.preventDefault();
     let frmdata = new FormData(frm);
     setSaving(true);
-    setServerData('trainer/my-academic',frmdata)
+    setServerData('trainer/my-awards',frmdata)
     .then(res => {
       setSaving(false);
       setResponse(res);
@@ -56,36 +56,36 @@ const AwardCertificationsForm = (props) => {
   const renderAcademicFields = () => {
     let year = 0;
     return <>
-        {(new Array(count)).fill(1).map((v,k) => <Row key={k}>
-        <Col md={2} className="mt-3">
+        {(new Array(count)).fill(1).map((v,k) => <Row key={k} className="my-1" style={{"backgroundColor": k%2===0 ? '#ddf4f4' : '#f8f8f8'}}>
+        <Col md={3} className="mt-3">
           <Form.Control as="select" name="year">
-            <option value=""> - Select Passing year - </option>
+            <option value=""> - Select year - </option>
             {(new Array(50)).fill(1).map((v,k1) => {
               year = moment().year()-50+k1;
-              return <option key={k1} value={year} selected={_.get(academicData,`${k}.year`,'')===year}>{year}</option>;
+              return <option key={k1} value={year} selected={_.get(awardData,`${k}.year`,'')===year}>{year}</option>;
             })}
           </Form.Control>
         </Col>
-        <Col md={3} className="mt-3">
-          <Form.Label>Certification/Award Name: </Form.Label>
-          <Form.Control type="text" name="aname" placeholder="Enter Certification/Award Name" defaultValue={_.get(mycourse,'aname','')} />
+        <Col md={9} className="mt-3">
+          <Form.Control type="text" name="award" placeholder="Certification/Award Name" defaultValue={_.get(awardData,'award','')} />
         </Col>
-        <Col md={3} className="mt-3">
-          <Form.Label>Issuing of Organization : </Form.Label>
-          <Form.Control type="text" name="organisation" placeholder="Enter Issuing of Organization" defaultValue={_.get(mycourse,'organisation','')} />
+        
+        <Col md={6} className="mt-3">
+          <Form.Control type="text" name="organisation" placeholder="Enter Issuing Organization's Name" defaultValue={_.get(awardData,'organisation','')} />
         </Col>
-        <Col md={2} className="mt-1">
-          <Form.Label>Experiation Date : </Form.Label>
-          <Form.Control type="text" name="expyear" placeholder="Enter Experiation Years " defaultValue={_.get(mycourse,'expyear','')} />
+        <Col md={6} className="mt-3 mb-3">
+          <Form.Control type="text" name="url" placeholder="Enter Certificate URL " defaultValue={_.get(awardData,'url','')} />
         </Col>
-        <Col md={1} className="mt-3">{k > 3 && <i className="fa fa-minus-circle fa-2x text-danger" onClick={removeAData(k)} />}</Col>
+
+        {k > 3 && <i className="fa fa-minus-circle fa-2x text-danger remove-award" onClick={removeAData(k)} />}
+        
       </Row>)}
     </>;
   }
 
   return <Form onSubmit={onSave}>
     
-    <h1>Academic Qualification <i className="fa fa-plus-circle text-success" onClick={() => setCount(count+1)} /></h1>
+    <h1>Awards/Certifications <i className="fa fa-plus-circle text-success" onClick={() => setCount(count+1)} /></h1>
 
     {count > 0 && renderAcademicFields()}
     
