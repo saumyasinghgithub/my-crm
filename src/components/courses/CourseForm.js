@@ -55,7 +55,7 @@ const CourseForm = (props) => {
   const photoUploader = (fld,title) => {
     return <>
       <Form.Label>{title}</Form.Label>
-      <Form.Control type="file" size="lg" name={fld} accept=".jpeg,.png,.jpg;" />
+      <Form.Control type="file" size="lg" name={fld} accept=".jpeg,.png,.jpg,JPEG;" />
     </>;
   }
 
@@ -167,8 +167,11 @@ const CourseForm = (props) => {
       <Form.Control type="text" name="lectures" placeholder="Enter no. of lecture in course" defaultValue={_.get(mycourse,'lectures','')} />
       </Col> 
       <Col md={4} className="mt-3">
-      <Form.Control type="text" name="media" placeholder="Enter type" defaultValue={_.get(mycourse,'media','')} />
-      </Col> 
+      <Form.Control as="select" name="media">
+            <option value=""> - Select Course Type - </option>
+            {Utils.courseType.map(v => <option key={v} value={v} selected={mycourse.media===v}>{v}</option>)}
+      </Form.Control>
+       </Col> 
     </Row>
     <Row>
       <Col md={12} className="mt-3 text-right">

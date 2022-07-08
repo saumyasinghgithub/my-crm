@@ -13,11 +13,12 @@ const CourseContents = (props) => {
   const [list,setList] = useState({loading: false, error: false, pageInfo: {}, data: []});
   const [showForm,setShowForm] = useState({id: false, mode: 0}); // 0=do not show, 1=add, 2=edit
 
-  const listColumns = ['id','title','description','embed_resource','duration','lecture','created_at'];
+  const listColumns = ['id','title','embed_resource','duration','lecture','created_at'];
   const columns = listColumns.map(v => ({
     name: v.toUpperCase(),
     selector: row => row[v],
-    sortable: true
+    sortable: true,
+    maxWidth: 300
 }));
 
 columns.push({

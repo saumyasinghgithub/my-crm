@@ -7,6 +7,7 @@ const MyProfile = (props) => {
 
     const allTabs = {
         'about': 'About Me',
+        'awards': 'Award Certification',
         'calib': 'My Calibrations',
         'academic': 'Academic Qualifications',
         'exp': 'Professional Experiences',
@@ -35,6 +36,7 @@ const MyProfile = (props) => {
                 <Tab.Content>
                     <Tab.Pane eventKey={tab}>
                         {tab==='about' && <TrainerForms.AboutForm />}
+                        {tab==='awards' && <TrainerForms.AwardCertificationsForm />}
                         {tab==='calib' && <TrainerForms.CalibForm />}
                         {tab==='academic' && <TrainerForms.AcademicForm />}
                         {tab==='exp' && <TrainerForms.ExperienceForm />}

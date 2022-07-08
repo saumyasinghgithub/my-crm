@@ -1,27 +1,47 @@
-import React,{useEffect} from "react";
+import React,{useEffect, useState, useContext} from "react";
+
+import Utils from './../Utils';
+
+import UserContext from './../contexts/UserContext';
+import _ from "lodash";
 
 const HeaderTrainer = (props) => {
 
+    const [loggedIn,setLoggedIn] = useState(Utils.isLoggedIn());
+    const {logout} = useContext(UserContext);
+
+    const onLogout = (e) => {
+        e.preventDefault();
+        logout(() => {
+            window.location.href='/';
+        })
+        return false;
+    }
+
     const $ = window.$;
-        
+    
     useEffect(()=>{
 
-            $(".menu-toggle").on('click',function() {
-                $(".sidenav").addClass("width100");
-                $("body").addClass("menuopen");
-            });
-            $(".closemenu").on('click',function() {
-                $(".sidenav").removeClass("width100");
-                $("body").removeClass("menuopen")
-            });
+        $(".menu-toggle").on('click',function() {
+            $(".sidenav").addClass("width100");
+            $("body").addClass("menuopen");
+        });
+        $(".closemenu").on('click',function() {
+            $(".sidenav").removeClass("width100");
+            $("body").removeClass("menuopen")
+        });
 
+        if(loggedIn){
             $('.profile_toggle').on('click',function() {
                 $('.profile_menu').addClass('profile_width100');
             });
-               $('.student_prof_cross').on('click',function() {
-               $('.profile_menu').removeClass('profile_width100');
+            $('.student_prof_cross').on('click',function() {
+            $('.profile_menu').removeClass('profile_width100');
             });
-    },[]);
+        }
+
+},[]);
+
 
     return(<>
 <header className="header fixed-top whiteHeader">
@@ -53,7 +73,7 @@ const HeaderTrainer = (props) => {
             </li>
         </ul>
     </div>
-    <div className="profile_menu from-right">
+    {loggedIn && <div className="profile_menu from-right">
         <div className="slide-in-content slide-in-contentteacher">
             <div className="student_prof_cross"><img src={`${process.env.PUBLIC_URL}/assets/images/student_profile_crossicon.png`} alt="AD" /></div>
             <div className="row">
@@ -61,20 +81,23 @@ const HeaderTrainer = (props) => {
                 <ul className="profile_menu_list">
                     <li><a href={`${process.env.PUBLIC_URL}/my-profile`} className="active">My Profile</a></li>
                     <li><a href="sales.php">Sales</a></li>
+                    {Utils.isTrainer() && 
                     <li><a href="my-students.php">My Students</a></li>
-                    <li><a href="home-result.php">Ad Studio</a></li>
+                    }
+                    <li><a href={`${process.env.PUBLIC_URL}/my-course`}>My Course</a></li>
+                    <li><a href="/ad-studio">Ad Studio</a></li>
                     <li><a href="">Help for you</a></li>   
                 </ul>
             </div>
             <div className="col-sm-6">
                 <ul className="profile_menu_list">                                    
                     <li><a href="" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Switch to Student</a></li>
-                    <li><a href="index.php">Log Out</a></li>
+                    <li><a href="logout" onClick={onLogout}>Log Out</a></li>
                 </ul>
             </div>
             </div>
         </div>
-    </div>
+    </div>}
 </header>
     </>);
 };

@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
-import _ from 'lodash';
-import {Container, Tab, Row, Col, Button} from 'react-bootstrap';
+import _, { noConflict } from 'lodash';
+import {Container, Tab, Row, Col, Button, Badge} from 'react-bootstrap';
 import {CourseForm, CourseResources, CourseContents} from '../components/courses';
 import DataTableGrid from '../components/DataTableGrid';
 import axios from 'axios';
@@ -14,14 +14,28 @@ const MyCourse = (props) => {
     const [list,setList] = useState({loading: false, error: false, pageInfo: {}, data: []});
     const [showForm,setShowForm] = useState({id: false, mode: 0}); // 0=do not show, 1=add, 2=edit
     
-    const listColumns = ['id','name','sku','slug','price','short_description','description','learn_brief','requirements','stock_qnty','level','language','duration','lectures','created_at'];
+    const listColumns = ['level','language','id','name','sku','price','stock_qnty','duration','lectures','created_at'];
 
     const columns = listColumns.map(v => ({
+      
         name: v.toUpperCase(),
         selector: row => row[v],
-        sortable: true
+        format: row => {
+          if(v=='name'){
+            return <div>
+              {row[v]}<br />
+              <Badge>Level:</Badge>{row.level}<br />
+              <Badge>Language:</Badge>{row.language}<br />
+            </div>
+          }else{
+            return row[v];
+          }
+        },
+        sortable: true,
+        omit: ['level','language'].includes(v),
+        maxWidth: 300
     }));
-
+    
     columns.push({
         name: "Action",
         cell: row => <>
