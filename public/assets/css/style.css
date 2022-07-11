@@ -38,7 +38,7 @@ ul,li{
     list-style: none;
 }
 .home-wrapper{
-    background: url(../images/home-banner-bg.jpg) center no-repeat;
+    background: url(../images/home-banner-bg.png) center no-repeat;
     position: relative;
     min-height: 400px;
     background-size: cover;
