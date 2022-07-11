@@ -33,7 +33,6 @@ const AboutForm = (props) => {
     e.preventDefault();
     let frmdata = new FormData(frm);
     frmdata.append('biography',_.get(myabout,'biography',''));
-    frmdata.append('certificate',_.get(myabout,'certificates',''));
     frmdata.append('trainings',_.get(myabout,'trainings',''));
     setSaving(true);
     setServerData('trainer/my-about',frmdata)
@@ -46,7 +45,7 @@ const AboutForm = (props) => {
   const photoUploader = (fld,title) => {
     return <>
       <Form.Label>{title}</Form.Label>
-      <Form.Control type="file" size="lg" name={fld+'_image'} accept=".jpeg,.png,.jpg;" />
+      <Form.Control type="file" size="lg" name={fld+'_image'} accept=".jpeg,.png,.PNG,.jpg;" />
       <div className="text-center">{!_.isEmpty(_.get(myabout,fld+'_image','')) && <img src={`${process.env.REACT_APP_API_URL}/uploads/${fld}/${myabout[fld+'_image']}`} className="thumbnail mt-3" />}</div>
     </>;
   }
@@ -55,6 +54,7 @@ const AboutForm = (props) => {
     <Form.Control type="hidden" name="id" defaultValue={_.get(myabout,'id','')} />
     <Form.Control type="hidden" name="old_award_image" defaultValue={_.get(myabout,'award_image','')} />
     <Form.Control type="hidden" name="old_profile_image" defaultValue={_.get(myabout,'profile_image','')} />
+    <Form.Control type="hidden" name="old_base_image" defaultValue={_.get(myabout,'base_image','')} />
     <h1>About Me</h1>
     <Row>
       <Col md={4} className="mt-3">
@@ -72,10 +72,10 @@ const AboutForm = (props) => {
     </Row>
 
     <Row>  
-      <Col md={3} className="mt-3">  
-        {photoUploader('profile','Upload Profile Pic')}
+      <Col md={6} className="mt-3">  
+        {photoUploader('profile','Upload Large Profile Pic')}
       </Col>
-      <Col md={9} className="mt-3">  
+      <Col md={6} className="mt-3">  
       <Form.Label>Biography: </Form.Label>
       <Editor apiKey={process.env.TINYMCE_API_KEY}
         value={_.isEmpty(_.get(myabout,'biography','')) ? '' : myabout.biography}
@@ -89,19 +89,11 @@ const AboutForm = (props) => {
     </Row>
     
     <Row>  
-      <Col md={3} className="mt-3">  
+      <Col md={6} className="mt-3">  
         {photoUploader('award','Upload Award Certifications')}
       </Col>
-      <Col md={9} className="mt-3">  
-      <Form.Label>Describe your awards: </Form.Label>
-      <Editor apiKey={process.env.TINYMCE_API_KEY}
-        value={_.get(myabout,'certificates','')}
-        init={{
-        height: 200,
-        menubar: false,
-        }}
-        onEditorChange={onContentChange('certificates')}
-        />
+      <Col md={6} className="mt-3">  
+        {photoUploader('base','Upload Base Profile Pic')}
         </Col>
     </Row>
 

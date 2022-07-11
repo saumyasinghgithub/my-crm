@@ -67,14 +67,14 @@ const AwardCertificationsForm = (props) => {
           </Form.Control>
         </Col>
         <Col md={9} className="mt-3">
-          <Form.Control type="text" name="award" placeholder="Certification/Award Name" defaultValue={_.get(awardData,'award','')} />
+          <Form.Control type="text" name="award" placeholder="Certification/Award Name" defaultValue={_.get(awardData,`${k}.award`,'')} />
         </Col>
         
         <Col md={6} className="mt-3">
-          <Form.Control type="text" name="organisation" placeholder="Enter Issuing Organization's Name" defaultValue={_.get(awardData,'organisation','')} />
+          <Form.Control type="text" name="organisation" placeholder="Enter Issuing Organization's Name" defaultValue={_.get(awardData,`${k}.organisation`,'')} />
         </Col>
         <Col md={6} className="mt-3 mb-3">
-          <Form.Control type="text" name="url" placeholder="Enter Certificate URL " defaultValue={_.get(awardData,'url','')} />
+          <Form.Control type="text" name="url" placeholder="Enter Certificate URL " defaultValue={_.get(awardData,`${k}.url`,'')} />
         </Col>
 
         {k > 3 && <i className="fa fa-minus-circle fa-2x text-danger remove-award" onClick={removeAData(k)} />}
@@ -88,7 +88,7 @@ const AwardCertificationsForm = (props) => {
     <h1>Awards/Certifications <i className="fa fa-plus-circle text-success" onClick={() => setCount(count+1)} /></h1>
 
     {count > 0 && renderAcademicFields()}
-    
+    <Form.Control type="hidden" name="id" defaultValue={_.get(awardData,'id','')} />
     <Row>
       <Col md={12} className="text-right">
         {saving && <>Saving.. <Spinner animation="border" /></>}

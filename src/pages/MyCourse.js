@@ -17,7 +17,6 @@ const MyCourse = (props) => {
     const listColumns = ['level','language','id','name','sku','price','stock_qnty','duration','lectures','created_at'];
 
     const columns = listColumns.map(v => ({
-      
         name: v.toUpperCase(),
         selector: row => row[v],
         format: row => {

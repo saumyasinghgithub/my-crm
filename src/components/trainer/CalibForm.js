@@ -16,7 +16,7 @@ const CalibForm = (props) => {
   useEffect(() => {
     getServerData('profile_attributes')
     .then(setPA)
-    .then(() => getServerData('trainer/my-calibs'))
+    .then(() => getServerData('trainer/my-calibs?limit=999999'))
     .then(setMyc)
     .catch(err => console.log(err));
   },[]);
