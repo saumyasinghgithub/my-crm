@@ -1,5 +1,5 @@
 import {useEffect, useContext, useState} from 'react';
-import {Form, Alert, Spinner, Row, Col, Button, Badge} from 'react-bootstrap';
+import {Form, Alert, Spinner, Row, Col, Button} from 'react-bootstrap';
 import UserContext from './../../contexts/UserContext';
 import { Editor } from "@tinymce/tinymce-react";
 import _ from 'lodash';

@@ -84,11 +84,9 @@ const AwardCertificationsForm = (props) => {
   }
 
   return <Form onSubmit={onSave}>
-    
-    <h1>Awards/Certifications <i className="fa fa-plus-circle text-success" onClick={() => setCount(count+1)} /></h1>
-
-    {count > 0 && renderAcademicFields()}
     <Form.Control type="hidden" name="id" defaultValue={_.get(awardData,'id','')} />
+    <h1>Awards/Certifications <i className="fa fa-plus-circle text-success" onClick={() => setCount(count+1)} /></h1>
+    {count > 0 && renderAcademicFields()}
     <Row>
       <Col md={12} className="text-right">
         {saving && <>Saving.. <Spinner animation="border" /></>}

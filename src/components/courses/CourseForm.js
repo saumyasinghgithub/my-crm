@@ -23,7 +23,7 @@ const CourseForm = (props) => {
 
   useEffect(() => {
     if(_.get(props,'id',false)){
-      getServerData('trainer/my-courses?id='+props.id)
+      getServerData('trainer/my-courses?where[id]='+props.id)
       .then(setMycourse)
       .then(() => setMode('Update'))
       .catch(err => console.log(err));
