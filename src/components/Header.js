@@ -107,14 +107,15 @@ const Header = (props) => {
                             <li><a href="my-students.php">My Students</a></li>
                             }
                             <li><a href={`${process.env.PUBLIC_URL}/my-course`}>My Course</a></li>
-                            <li><a href="{`${process.env.PUBLIC_URL}/ad-studio`}">Ad Studio</a></li>
+                            <li><a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a></li>
                             <li><a href="">Help for you</a></li>   
                         </ul>
                     </div>
                     <div className="col-sm-6">
                         <ul className="profile_menu_list">
-
-                            <li><a href="/add-trainer-profile">My Profile</a></li>                              
+                        {loggedIn &&
+                            <li><a href={`${process.env.PUBLIC_URL}/view-profile`}>View My Profile</a></li>  
+                            }                            
                             <li><a href="" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Switch to Student</a></li>
                             <li><a href="logout" onClick={onLogout}>Log Out</a></li>
                         </ul>
