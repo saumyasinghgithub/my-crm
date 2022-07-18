@@ -1,5 +1,5 @@
 import {LoginLayout, StaticPageLayout, DefaultLayout} from './layouts';
-import {Login, About, Home, ADStudio, ADTrainer,MyProfile,MyCourse, CourseDetails, SearchResult, TeacherProfile} from './pages';
+import {Login, About, Home, ADStudio, ADTrainer,MyProfile,MyCourse, CourseDetails, SearchResult, TeacherProfile, TeacherService, TeacherKnowledge, TeacherLibrary} from './pages';
 
 const CustomRoutes = [  
   
@@ -44,6 +44,27 @@ const CustomRoutes = [
     'exact'     : true,
     'layout'    : StaticPageLayout, 
     'component' : TeacherProfile
+  },
+  {
+    'path'      : '/trainer-service', 
+    'secure'    : false,    
+    'exact'     : true,
+    'layout'    : StaticPageLayout, 
+    'component' : TeacherService
+  },
+  {
+    'path'      : '/trainer-knowledge', 
+    'secure'    : false,    
+    'exact'     : true,
+    'layout'    : StaticPageLayout, 
+    'component' : TeacherKnowledge
+  },
+  {
+    'path'      : '/trainer-library', 
+    'secure'    : false,    
+    'exact'     : true,
+    'layout'    : StaticPageLayout, 
+    'component' : TeacherLibrary
   },
   {
     'path'      : '/my-course', 

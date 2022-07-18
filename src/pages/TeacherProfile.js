@@ -9,13 +9,13 @@ const TeacherProfile = (props) => {
     <div className="profile-wrapper">
       <div className="container100">
           <div className="profiletabBox">
-              <ul className="profileTab slideInUp wow ">
-                  <li><a href="teacher-profile.php" className="active">01 About</a></li>
-                  <li><a href="services.php">02 Services</a></li>
-                  <li><a href="knowledge.php">03 Knowledge</a></li>
-                  <li><a href="/">04 Community</a></li>
-                  <li className="lineANimation"><a href="library.php">05 Library</a></li>
-              </ul>            
+            <ul className="profileTab slideInUp wow ">
+                <li><a href={`${process.env.PUBLIC_URL}/view-profile`} >01 About</a></li>
+                <li><a href={`${process.env.PUBLIC_URL}/trainer-service`}>02 Services</a></li>
+                <li><a href={`${process.env.PUBLIC_URL}/trainer-knowledge`}>03 Knowledge</a></li>
+                <li><a href="">04 Community</a></li>
+                <li className="lineANimation"><a href={`${process.env.PUBLIC_URL}/trainer-library`}trainer-library>05 Library</a></li>
+            </ul>          
           </div>       
       </div>
       <div className="container100">  

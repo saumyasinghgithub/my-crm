@@ -90,7 +90,10 @@ const HeaderTrainer = (props) => {
                 </ul>
             </div>
             <div className="col-sm-6">
-                <ul className="profile_menu_list">                                    
+                <ul className="profile_menu_list">  
+                {loggedIn &&
+                    <li><a href={`${process.env.PUBLIC_URL}/view-profile`}>View My Profile</a></li>  
+                 }                                   
                     <li><a href="" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Switch to Student</a></li>
                     <li><a href="logout" onClick={onLogout}>Log Out</a></li>
                 </ul>
