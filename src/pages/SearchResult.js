@@ -197,7 +197,7 @@ const renderResults = () => <div className="resultDisplay">
                       <div className="tab-text-box">
                           <img className="img-fluid progileImg" src="/assets/images/trainer1.png" />
                           <div className="bio-data-header">
-                              <h3><a href="teacher-profile.php">Sally Winter</a></h3>
+                              <h3><a href={`${process.env.PUBLIC_URL}/view-profile`}>Sally Winter</a></h3>
                               <div className="bioInfo">Industry <span>Academics</span></div>
                               <div className="bioInfo">Qulification <span>Master</span></div>
                               <div className="bioInfo">Year of Experience <span>5+ yrs</span></div>
@@ -280,18 +280,11 @@ const renderResults = () => <div className="resultDisplay">
                                         </li>
                                     </ul></a>
                                 </div>
-                                <div className="bioBodyInfolist"><a href="course-card.php">
-                                    <ul>
-                                        <li>Finance for the Real World - <br />
-                                                Corporate Finance 101 </li>
-                                        <li><img className="img-fluid iconImg" src="/assets/images/icon2.png" /></li>
-                                        <li>
-                                            <div className="circleBox">
-                                                <img className="img-fluid" src="/assets/images/edit-icon.png" />
-                                                <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                            </div>
-                                        </li>                                            
-                                    </ul></a>
+                                <div className="txtR">
+                                    <a href={`${process.env.PUBLIC_URL}/view-profile`} className="action tocart primary btn btnBlue"><span>View Profile</span></a>
+                                    <a href="" target="_blank" className="action tocart primary btn btnBlue"><span>View Courses</span></a>
+                                    <a href="#" data-post="" className="action tocart primary btn btnBlue" data-action="add-to-wishlist">
+                                            <span>Make Favourite</span></a>
                                 </div>
                           </div>
                       </div>
@@ -300,7 +293,7 @@ const renderResults = () => <div className="resultDisplay">
                             <div className="tab-text-box">
                                 <img className="img-fluid progileImg" src="/assets/images/trainer2.png" />
                                 <div className="bio-data-header">
-                                    <h3><a href="teacher-profile.php">Ben Jacobs</a></h3>
+                                    <h3><a href={`${process.env.PUBLIC_URL}/view-profile`}>Ben Jacobs</a></h3>
                                     <div className="bioInfo">Industry <span>Academics</span></div>
                                     <div className="bioInfo">Qulification <span>Master</span></div>
                                     <div className="bioInfo">Year of Experience <span>5+ yrs</span></div>
@@ -383,18 +376,11 @@ const renderResults = () => <div className="resultDisplay">
                                                 </li>
                                             </ul></a>
                                         </div>
-                                        <div className="bioBodyInfolist"><a href="course-card.php">
-                                            <ul>
-                                                <li>Finance for the Real World - <br />
-                                                        Corporate Finance 101 </li>
-                                                <li><img className="img-fluid iconImg" src="/assets/images/icon2.png" /></li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/edit-icon.png" />
-                                                        <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                                    </div>
-                                                </li>                                            
-                                            </ul></a>
+                                        <div className="txtR">
+                                        <a href={`${process.env.PUBLIC_URL}/view-profile`} className="action tocart primary btn btnBlue"><span>View Profile</span></a>
+                                        <a href="" target="_blank" className="action tocart primary btn btnBlue"><span>View Courses</span></a>
+                                        <a href="#" data-post="" className="action tocart primary btn btnBlue" data-action="add-to-wishlist">
+                                            <span>Make Favourite</span></a>
                                         </div>
                                 </div>
                             </div>
@@ -403,7 +389,7 @@ const renderResults = () => <div className="resultDisplay">
                         <div className="tab-text-box">
                                 <img className="img-fluid progileImg" src="/assets/images/trainer3.png" />
                                 <div className="bio-data-header">
-                                    <h3><a href="teacher-profile.php">Jon Hung</a></h3>
+                                    <h3><a href={`${process.env.PUBLIC_URL}/view-profile`}>Jon Hung</a></h3>
                                     <div className="bioInfo">Industry <span>Academics</span></div>
                                     <div className="bioInfo">Qulification <span>Master</span></div>
                                     <div className="bioInfo">Year of Experience <span>5+ yrs</span></div>
@@ -486,18 +472,11 @@ const renderResults = () => <div className="resultDisplay">
                                                 </li>
                                             </ul></a>
                                         </div>
-                                        <div className="bioBodyInfolist"><a href="course-card.php">
-                                            <ul>
-                                                <li>Finance for the Real World - <br />
-                                                        Corporate Finance 101 </li>
-                                                <li><img className="img-fluid iconImg" src="/assets/images/icon2.png" /></li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/edit-icon.png" />
-                                                        <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                                    </div>
-                                                </li>                                            
-                                            </ul></a>
+                                        <div className="txtR">
+                                        <a href={`${process.env.PUBLIC_URL}/view-profile`} className="action tocart primary btn btnBlue"><span>View Profile</span></a>
+                                        <a href="" target="_blank" className="action tocart primary btn btnBlue"><span>View Courses</span></a>
+                                        <a href="#" data-post="" className="action tocart primary btn btnBlue" data-action="add-to-wishlist">
+                                            <span>Make Favourite</span></a>
                                         </div>
                                 </div>
                             </div>
@@ -506,7 +485,7 @@ const renderResults = () => <div className="resultDisplay">
                             <div className="tab-text-box">
                                 <img className="img-fluid progileImg" src="/assets/images/trainer4.png" />
                                 <div className="bio-data-header">
-                                    <h3><a href="teacher-profile.php">Jose Alexandro</a></h3>
+                                    <h3><a href={`${process.env.PUBLIC_URL}/view-profile`}>Jose Alexandro</a></h3>
                                     <div className="bioInfo">Industry <span>Academics</span></div>
                                     <div className="bioInfo">Qulification <span>Master</span></div>
                                     <div className="bioInfo">Year of Experience <span>5+ yrs</span></div>
@@ -589,18 +568,11 @@ const renderResults = () => <div className="resultDisplay">
                                                 </li>
                                             </ul></a>
                                         </div>
-                                        <div className="bioBodyInfolist"><a href="course-card.php">
-                                            <ul>
-                                                <li>Finance for the Real World - <br />
-                                                        Corporate Finance 101 </li>
-                                                <li><img className="img-fluid iconImg" src="/assets/images/icon2.png" /></li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/edit-icon.png" />
-                                                        <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                                    </div>
-                                                </li>                                            
-                                            </ul></a>
+                                        <div className="txtR">
+                                        <a href={`${process.env.PUBLIC_URL}/view-profile`} className="action tocart primary btn btnBlue"><span>View Profile</span></a>
+                                        <a href="" target="_blank" className="action tocart primary btn btnBlue"><span>View Courses</span></a>
+                                        <a href="#" data-post="" className="action tocart primary btn btnBlue" data-action="add-to-wishlist">
+                                            <span>Make Favourite</span></a>
                                         </div>
                                 </div>
                             </div>
@@ -609,7 +581,7 @@ const renderResults = () => <div className="resultDisplay">
                         <div className="tab-text-box">
                             <img className="img-fluid progileImg" src="/assets/images/trainer5.png" />
                             <div className="bio-data-header">
-                                <h3><a href="teacher-profile.php">Claire Clark</a></h3>
+                                <h3><a href={`${process.env.PUBLIC_URL}/view-profile`}>Claire Clark</a></h3>
                                 <div className="bioInfo">Industry <span>Academics</span></div>
                                 <div className="bioInfo">Qulification <span>Master</span></div>
                                 <div className="bioInfo">Year of Experience <span>5+ yrs</span></div>
@@ -692,19 +664,12 @@ const renderResults = () => <div className="resultDisplay">
                                             </li>
                                         </ul></a>
                                     </div>
-                                    <div className="bioBodyInfolist"><a href="course-card.php">
-                                        <ul>
-                                            <li>Finance for the Real World - <br />
-                                                    Corporate Finance 101 </li>
-                                            <li><img className="img-fluid iconImg" src="/assets/images/icon2.png" /></li>
-                                            <li>
-                                                <div className="circleBox">
-                                                    <img className="img-fluid" src="/assets/images/edit-icon.png" />
-                                                    <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                                </div>
-                                            </li>                                            
-                                        </ul></a>
-                                    </div>
+                                    <div className="txtR">
+                                    <a href={`${process.env.PUBLIC_URL}/view-profile`} className="action tocart primary btn btnBlue"><span>View Profile</span></a>
+                                    <a href="" target="_blank" className="action tocart primary btn btnBlue"><span>View Courses</span></a>
+                                    <a href="#" data-post="" className="action tocart primary btn btnBlue" data-action="add-to-wishlist">
+                                        <span>Make Favourite</span></a>
+                                   </div>
                             </div>
                         </div>
                     </div>
