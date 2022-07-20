@@ -2,17 +2,27 @@ import React, {useContext, useEffect} from "react";
 
 import Utils from './../Utils';
 
+import _ from 'lodash';
+
 import UserContext from './../contexts/UserContext';
 
 const SearchResult = (props) => {
 
   const $ = window.$;
 
-  const {setServerData} = useContext(UserContext);
+  const {getServerData} = useContext(UserContext);
 
   useEffect(()=>{
     
-    setServerData('search-trainers',Utils.getUserData().calibs).then(console.log).catch(console.log);
+    let calibs = _.get(Utils.getUserData(),'calibs',[]);
+    let data = {};
+    _.each(calibs,(pval,pk) => {
+        if(pval!=''){
+            data[pk] = parseInt(pval);
+        }
+    })
+
+    getServerData('trainer/search?calibs='+JSON.stringify(data)).then(console.log).catch(console.log);
 
     $(".circleChart").circleChart({
       color: "#6ecff6",
