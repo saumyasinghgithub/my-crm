@@ -45,7 +45,7 @@ const HeaderTrainer = (props) => {
 
     return(<>
 <header className="header fixed-top whiteHeader">
-    <div className="container-fluid">
+    <div className="container">
         <a className="navbar-brand" href="/">AD</a>
         <form className="searchBOx" >
                 <div className="input-group">
@@ -64,9 +64,9 @@ const HeaderTrainer = (props) => {
                 </div> 
             </form>
         <ul className="navbar-nav">
-            <li className="nav-item"><a href="wish-list.php"><img className="img-fluid " src={`${process.env.PUBLIC_URL}/assets/images/like-icon.png`} alt="AD Like" /></a></li>
-            <li className="nav-item"><a href="shopping-cart.php"><img className="img-fluid shoppingIcon" src={`${process.env.PUBLIC_URL}/assets/images/cart.png`} alt="AD" /></a></li>
-            <li className="nav-item"><a href="massege.php"><img className="img-fluid " src={`${process.env.PUBLIC_URL}/assets/images/massege.png`} alt="AD" /></a></li>
+            {/* <li className="nav-item"><a href="wish-list.php"><img className="img-fluid " src={`${process.env.PUBLIC_URL}/assets/images/like-icon.png`} alt="AD Like" /></a></li> */}
+            {/* <li className="nav-item"><a href="shopping-cart.php"><img className="img-fluid shoppingIcon" src={`${process.env.PUBLIC_URL}/assets/images/cart.png`} alt="AD" /></a></li>
+            <li className="nav-item"><a href="massege.php"><img className="img-fluid " src={`${process.env.PUBLIC_URL}/assets/images/massege.png`} alt="AD" /></a></li> */}
             <li className="nav-item"><a href="notification.php"><img className="img-fluid " src={`${process.env.PUBLIC_URL}/assets/images/notification_icon.png`} alt="AD" /></a></li>
             <li className="nav-item profile_toggle">
                 <img className="img-fluid" src={`${process.env.PUBLIC_URL}/assets/images/userImg.png`} alt="AD" />

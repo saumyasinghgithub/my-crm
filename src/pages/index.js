@@ -12,6 +12,8 @@ import MyCourse from "./MyCourse";
 import CourseList from "./CourseList";
 import CourseDetails from "./CourseDetails";
 import SearchResult from "./SearchResult";
+import ADStudent from "./ADStudent";
+import ContactUs from "./ContactUs";
 
 
-export {Login, About, Home, ADStudio, ADTrainer, MyProfile, MyCourse, CourseDetails, SearchResult, TeacherProfile, TeacherService, TeacherKnowledge, TeacherLibrary, CourseList};
+export {Login, About, Home, ADStudio, ADTrainer, MyProfile, MyCourse, CourseDetails, SearchResult, TeacherProfile, TeacherService, TeacherKnowledge, TeacherLibrary, CourseList, ContactUs, ADStudent};

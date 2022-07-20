@@ -5,7 +5,7 @@ const Footer = (props) => {
     <footer className="footer footerFixed">
     <div className="container-fluid">
         <ul className="footerLeft">
-            <li>Copyright © 2019 AUTODIDACT</li>
+            <li>Copyright © 2022 AUTODIDACT</li>
             <li><a href="terms-condition.php">Terms</a></li>
             <li><a href="privacy-policy.php">Privacy Policy</a></li>
             <li><a href="cookie.php">Cookie Policy</a></li>

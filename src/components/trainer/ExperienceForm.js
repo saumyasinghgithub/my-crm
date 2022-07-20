@@ -63,14 +63,14 @@ const ExperienceForm = (props) => {
         <Col md={3} className="mt-3">
           <Form.Control type="text" name="location" placeholder='Enter your Company Location' defaultValue={_.get(expData,`${k}.location`,'')} />
         </Col>
-        <Col md={1} className="mt-3">{k > 3 && <i className="fa fa-minus-circle fa-2x text-danger" onClick={removeEData(k)} />}</Col>
+        <Col md={1} className="mt-3">{k > 3 && <i className="fa fa-minus-circle fa-lg text-danger mt-2 cursor-pointer" onClick={removeEData(k)} />}</Col>
       </Row>)}
     </>;
   }
 
   return <Form onSubmit={onSave}>
     
-    <h1>Experience Qualification <i className="fa fa-plus-circle text-success" onClick={() => setCount(count+1)} /></h1>
+    <h1>Experience Qualification <i className="fa fa-plus-circle text-success Adddetails" onClick={() => setCount(count+1)} /></h1>
 
     {count > 0 && renderExpFields()}
     

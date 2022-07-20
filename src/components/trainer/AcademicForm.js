@@ -73,14 +73,14 @@ const AcademicForm = (props) => {
             })}
           </Form.Control>
         </Col>
-        <Col md={1} className="mt-3">{k > 3 && <i className="fa fa-minus-circle fa-2x text-danger" onClick={removeAData(k)} />}</Col>
+        <Col md={1} className="mt-3">{k > 3 && <i className="fa fa-minus-circle fa-lg mt-2 text-danger cursor-pointer" onClick={removeAData(k)} />}</Col>
       </Row>)}
     </>;
   }
 
   return <Form onSubmit={onSave}>
     
-    <h1>Academic Qualification <i className="fa fa-plus-circle text-success" onClick={() => setCount(count+1)} /></h1>
+    <h1>Academic Qualification <i className="fa fa-plus-circle text-success Adddetails" onClick={() => setCount(count+1)} /></h1>
 
     {count > 0 && renderAcademicFields()}
     

@@ -5,19 +5,25 @@ const ADTrainer = (props) => {
     useEffect(window.scrollEffect,[]);
     
     return (<>
-    <Container fluid className="h-100 ">
+    <Container className="h-100 ">
     <div className="help-wrapper">
-   <div className="container">
+    <nav>
+                        <ol class="cd-breadcrumb">
+                            <li><a href="/">Home</a></li>
+                            <li class="current"><em>Help for Trainers</em></li>
+                        </ol>
+                    </nav>
+   <div className="">
       <img src="assets/images/Help_for_trainers.jpg" alt="" />
-      <div className="container AD-help">
+      <div className="AD-help">
          <div className="row">
             <div className="col-sm-12">
                <h1 className="headingtext slideInUp wow ">Help for trainers</h1>
-               <ol className="faq">
+               <ol className="faq pt-3">
                   <li>
                      <strong>What is the process to become an Autodidact Trainer?</strong>
                      <p>To become a qualified trainer on Autodidact you will have to go through the following steps:</p>
-                     <ol>
+                     <ol className='listdecimal'>
                         <li>Create an account on Autodidact as a trainer and wait for a verification mail.</li>
                         <li>The Autodidact team will verify your resume and other details.</li>
                         <li>If selected, you will be asked to create a demo lesson on any topic of your choice.</li>

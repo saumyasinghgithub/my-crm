@@ -77,7 +77,7 @@ const AwardCertificationsForm = (props) => {
           <Form.Control type="text" name="url" placeholder="Enter Certificate URL " defaultValue={_.get(awardData,`${k}.url`,'')} />
         </Col>
 
-        {k > 3 && <i className="fa fa-minus-circle fa-2x text-danger remove-award" onClick={removeAData(k)} />}
+        {k > 3 && <i className="fa fa-minus-circle fa-lg mt-2 cursor-pointer text-danger remove-award" onClick={removeAData(k)} />}
         
       </Row>)}
     </>;
@@ -85,7 +85,7 @@ const AwardCertificationsForm = (props) => {
 
   return <Form onSubmit={onSave}>
     <Form.Control type="hidden" name="id" defaultValue={_.get(awardData,'id','')} />
-    <h1>Awards/Certifications <i className="fa fa-plus-circle text-success" onClick={() => setCount(count+1)} /></h1>
+    <h1>Awards/Certifications <i className="fa fa-plus-circle text-success Adddetails" onClick={() => setCount(count+1)} /></h1>
     {count > 0 && renderAcademicFields()}
     <Row>
       <Col md={12} className="text-right">

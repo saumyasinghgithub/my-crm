@@ -55,13 +55,13 @@ const Header = (props) => {
                         we will help, support and find a way!</span></a></li>
                     <li><a href="/ad-studio">AD Studio <span>Lorem Ipsum is simply dummy text</span></a></li>
                     <li><a href="/ad-trainer">Help for Trainer <span>Lorem Ipsum is simply dummy text .</span></a></li>
-                    <li><a href="">Help for Student <span>Lorem Ipsum is simply dummy text .</span></a></li>
-                    <li><a href="">Contact <span>Lorem Ipsum is simply dummy text of.</span></a></li>
+                    <li><a href="/ad-student">Help for Student <span>Lorem Ipsum is simply dummy text .</span></a></li>
+                    <li><a href="/contact-us">Contact <span>Lorem Ipsum is simply dummy text of.</span></a></li>
                 </ul>
             </div>
         </div>
         <header className="header fixed-top">
-            <div className="container-fluid">
+            <div className="container">
                 <a className="navbar-brand" href="index.php">AD</a>
                 <form className="searchBOx searchBOxwhite" >
                     <div className="input-group">
