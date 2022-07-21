@@ -22,7 +22,7 @@ const SearchResult = (props) => {
         }
     })
 
-    getServerData('trainer/search?calibs='+JSON.stringify(data)).then(console.log).catch(console.log);
+    getServerData(`trainer/search?calibs=${JSON.stringify(data)}&paCalibs=${Utils.searchCalibs.join(',')}`).then(console.log).catch(console.log);
 
     $(".circleChart").circleChart({
       color: "#6ecff6",
