@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 
 import Utils from './../Utils';
 
@@ -7,6 +7,11 @@ import _ from 'lodash';
 import UserContext from './../contexts/UserContext';
 
 const SearchResult = (props) => {
+
+    const [viewTrainer, setViewTrainer] = useState({});
+
+    const [tData, setTData] = useState({pageInfo: {}, data: []});
+    const [filter, setFilter] = useState({start: 0, limit: 6, curpage: 1});
 
   const $ = window.$;
 
@@ -22,8 +27,11 @@ const SearchResult = (props) => {
         }
     })
 
-    getServerData(`trainer/search?calibs=${JSON.stringify(data)}&paCalibs=${Utils.searchCalibs.join(',')}`).then(console.log).catch(console.log);
+    getServerData(`trainer/search?calibs=${JSON.stringify(data)}&paCalibs=${Utils.searchCalibs.join(',')}&start=${filter.start}&limit=${filter.limit}`,true)
+    .then(setTData)
+    .catch(console.log);
 
+    
     $(".circleChart").circleChart({
       color: "#6ecff6",
       backgroundColor: "#fff",
@@ -31,6 +39,8 @@ const SearchResult = (props) => {
       size: 100,
   });
   },[]);
+  
+  useEffect(() => {setViewTrainer(_.get(tData,'data.0',{}))},[tData]);
 
   const renderResultAnalysis = () => <section className="home-result-wrapper">
     <ul className="resultlist">
@@ -68,6 +78,111 @@ const SearchResult = (props) => {
         </li>
     </ul>
   </section>;
+
+const showPageInfo = () => {
+    let tcounts = filter.start + filter.limit;
+    return <>{_.min([filter.start + filter.limit, tData.pageInfo.total])} of {_.get(tData,'pageInfo.total',0)} trainers</>
+}
+
+const showTrainerDetail = () => {
+    let trainer = viewTrainer;
+    return <div className="tab-pane active trainer1" id="tab_a">
+                      <div className="tab-text-box">
+                          <img className="img-fluid progileImg" src="/assets/images/trainer1.png" />
+                          <div className="bio-data-header">
+                              <h3><a href={`${process.env.PUBLIC_URL}/view-profile`}>{_.get(trainer,'firstname','')} {_.get(trainer,'lastname','')}</a></h3>
+                              <div className="bioInfo">Industry <span>{_.find(_.get(trainer,'calibs',[]),{"pa_id": 1}).pa_value.join(',')}</span></div>
+                              <div className="bioInfo">Qulification <span>Master</span></div>
+                              <div className="bioInfo">Year of Experience <span>5+ yrs</span></div>
+                              <div className="bioInfo">Country <span>USA</span></div>
+                          </div>
+                          <div className="bio-data-body">
+                                <div className="bioBodyInfolist"><a href="course-card.php">
+                                    <ul>
+                                        <li>Chief Financial Officer Leadership </li>
+                                        <li><img className="img-fluid iconImg" src="/assets/images/icon1.png" /></li>
+                                        <li>
+                                                <div className="circleBox">
+                                                    <img className="img-fluid" src="/assets/images/audio-icon.png" />
+                                                    <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
+                                                </div>
+                                            </li>
+                                        <li></li>
+                                    </ul></a>
+                                </div>
+                                <div className="bioBodyInfolist"><a href="course-card.php">
+                                    <ul>
+                                        <li>Personal Finance Masterclass - <br />
+                                                Easy Guide to Better Finances</li>
+                                        <li><img className="img-fluid iconImg" src="/assets/images/icon2.png" /></li>
+                                        <li>
+                                            <div className="circleBox">
+                                                <img className="img-fluid" src="/assets/images/edit-icon.png" />
+                                                <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div className="circleBox">
+                                                <img className="img-fluid" src="/assets/images/audio-icon.png" />
+                                                <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
+                                            </div>
+                                        </li>
+                                    </ul></a>
+                                </div>
+                                <div className="bioBodyInfolist"><a href="course-card.php">
+                                    <ul>
+                                        <li>Personal Financial Well-Being</li>
+                                        <li><img className="img-fluid iconImg"  src="/assets/images/icon3.png" /></li>
+                                        <li>
+                                            <div className="circleBox">
+                                                <img className="img-fluid" src="/assets/images/edit-icon.png" />
+                                                <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div className="circleBox">
+                                                <img className="img-fluid" src="/assets/images/audio-icon.png" />
+                                                <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div className="circleBox">
+                                                <img className="img-fluid" src="/assets/images/video.png" />
+                                                <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
+                                            </div>
+                                        </li>
+                                        <li className="dotmore"><span></span><span></span><span></span></li>
+                                    </ul></a>
+                                </div>
+                                <div className="bioBodyInfolist"><a href="course-card.php">
+                                    <ul>
+                                        <li>Advanced Financial Management <br />
+                                                for CA/CMA/CFA/ACCA/CS/MBA</li>
+                                        <li><img className="img-fluid iconImg" src="/assets/images/icon1.png" /></li>
+                                        <li>
+                                            <div className="circleBox">
+                                                <img className="img-fluid" src="/assets/images/doc-icon.png" />
+                                                <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div className="circleBox">
+                                                <img className="img-fluid" src="/assets/images/audio-icon.png" />
+                                                <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
+                                            </div>
+                                        </li>
+                                    </ul></a>
+                                </div>
+                                <div className="txtR">
+                                    <a href={`${process.env.PUBLIC_URL}/view-profile`} className="action tocart primary btn btnBlue"><span>View Profile</span></a>
+                                    <a href="" target="_blank" className="action tocart primary btn btnBlue"><span>View Courses</span></a>
+                                    <a href="#" data-post="" className="action tocart primary btn btnBlue" data-action="add-to-wishlist">
+                                            <span>Make Favourite</span></a>
+                                </div>
+                          </div>
+                      </div>
+                    </div>
+}
 
 const renderResults = () => <div className="resultDisplay">
     <div className="filterResultBox">
@@ -162,527 +277,18 @@ const renderResults = () => <div className="resultDisplay">
         <div className="flexWrapper">
             <div className="flexItem flex20">
                 <ul className="nav">
-                    <li className="active">
-                        <a href="#tab_a" data-toggle="pill">
-                            <img className="img-fluid" src="/assets/images/trainer1.png" />
-                            <span>Sally Winter</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#tab_b" data-toggle="pill">
-                            <img className="img-fluid" src="/assets/images/trainer2.png" />
-                            <span>Ben Jacobs</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#tab_c" data-toggle="pill">
-                            <img className="img-fluid" src="/assets/images/trainer3.png" />
-                            <span>Jon Hung</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#tab_d" data-toggle="pill">
-                            <img className="img-fluid" src="/assets/images/trainer4.png" />
-                            <span>Jose Alexandro</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#tab_e" data-toggle="pill">
-                            <img className="img-fluid" src="/assets/images/trainer5.png" />
-                            <span>Claire Clarkr</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#tab_a" data-toggle="pill">
-                            <img className="img-fluid" src="/assets/images/trainer6.png" />
-                            <span>Jerry Clarkr</span>
-                        </a>
-                    </li>
+                    {_.get(tData,'data',[]).map((trainer,idx) => <li key={idx} className={idx===0 ? 'active' : ''}>
+                        <span onClick={() => setViewTrainer(trainer)}>
+                            <img className="img-fluid" src={`${process.env.REACT_APP_API_URL}/uploads/base/${trainer.base_image}`} alt={_.get(trainer,'firstname','')} />
+                            <span>{_.get(trainer,'firstname','')} {_.get(trainer,'lastname','')}</span>
+                        </span>
+                    </li>)}
                 </ul>  
-                <div className="alltrainers"><a href="list-trainer.php">6 of 84 trainers <i className="far fa-eye"></i></a></div>                          
+                <div className="alltrainers"><a href="list-trainer.php">{showPageInfo()} <i className="far fa-eye"></i></a></div>                          
             </div>
             <div className="flexItem flex80">
                 <div className="tab-content">
-                    <div className="tab-pane active trainer1" id="tab_a">
-                      <div className="tab-text-box">
-                          <img className="img-fluid progileImg" src="/assets/images/trainer1.png" />
-                          <div className="bio-data-header">
-                              <h3><a href={`${process.env.PUBLIC_URL}/view-profile`}>Sally Winter</a></h3>
-                              <div className="bioInfo">Industry <span>Academics</span></div>
-                              <div className="bioInfo">Qulification <span>Master</span></div>
-                              <div className="bioInfo">Year of Experience <span>5+ yrs</span></div>
-                              <div className="bioInfo">Country <span>USA</span></div>
-                          </div>
-                          <div className="bio-data-body">
-                                <div className="bioBodyInfolist"><a href="course-card.php">
-                                    <ul>
-                                        <li>Chief Financial Officer Leadership </li>
-                                        <li><img className="img-fluid iconImg" src="/assets/images/icon1.png" /></li>
-                                        <li>
-                                                <div className="circleBox">
-                                                    <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                    <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                                </div>
-                                            </li>
-                                        <li></li>
-                                    </ul></a>
-                                </div>
-                                <div className="bioBodyInfolist"><a href="course-card.php">
-                                    <ul>
-                                        <li>Personal Finance Masterclass - <br />
-                                                Easy Guide to Better Finances</li>
-                                        <li><img className="img-fluid iconImg" src="/assets/images/icon2.png" /></li>
-                                        <li>
-                                            <div className="circleBox">
-                                                <img className="img-fluid" src="/assets/images/edit-icon.png" />
-                                                <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div className="circleBox">
-                                                <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                            </div>
-                                        </li>
-                                    </ul></a>
-                                </div>
-                                <div className="bioBodyInfolist"><a href="course-card.php">
-                                    <ul>
-                                        <li>Personal Financial Well-Being</li>
-                                        <li><img className="img-fluid iconImg"  src="/assets/images/icon3.png" /></li>
-                                        <li>
-                                            <div className="circleBox">
-                                                <img className="img-fluid" src="/assets/images/edit-icon.png" />
-                                                <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div className="circleBox">
-                                                <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div className="circleBox">
-                                                <img className="img-fluid" src="/assets/images/video.png" />
-                                                <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                            </div>
-                                        </li>
-                                        <li className="dotmore"><span></span><span></span><span></span></li>
-                                    </ul></a>
-                                </div>
-                                <div className="bioBodyInfolist"><a href="course-card.php">
-                                    <ul>
-                                        <li>Advanced Financial Management <br />
-                                                for CA/CMA/CFA/ACCA/CS/MBA</li>
-                                        <li><img className="img-fluid iconImg" src="/assets/images/icon1.png" /></li>
-                                        <li>
-                                            <div className="circleBox">
-                                                <img className="img-fluid" src="/assets/images/doc-icon.png" />
-                                                <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div className="circleBox">
-                                                <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                            </div>
-                                        </li>
-                                    </ul></a>
-                                </div>
-                                <div className="txtR">
-                                    <a href={`${process.env.PUBLIC_URL}/view-profile`} className="action tocart primary btn btnBlue"><span>View Profile</span></a>
-                                    <a href="" target="_blank" className="action tocart primary btn btnBlue"><span>View Courses</span></a>
-                                    <a href="#" data-post="" className="action tocart primary btn btnBlue" data-action="add-to-wishlist">
-                                            <span>Make Favourite</span></a>
-                                </div>
-                          </div>
-                      </div>
-                    </div>
-                    <div className="tab-pane trainer2" id="tab_b">
-                            <div className="tab-text-box">
-                                <img className="img-fluid progileImg" src="/assets/images/trainer2.png" />
-                                <div className="bio-data-header">
-                                    <h3><a href={`${process.env.PUBLIC_URL}/view-profile`}>Ben Jacobs</a></h3>
-                                    <div className="bioInfo">Industry <span>Academics</span></div>
-                                    <div className="bioInfo">Qulification <span>Master</span></div>
-                                    <div className="bioInfo">Year of Experience <span>5+ yrs</span></div>
-                                    <div className="bioInfo">Country <span>USA</span></div>
-                                </div>
-                                <div className="bio-data-body">
-                                        <div className="bioBodyInfolist"><a href="course-card.php">
-                                            <ul>
-                                                <li>Chief Financial Officer Leadership </li>
-                                                <li><img className="img-fluid iconImg" src="/assets/images/icon1.png" /></li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                        <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                                    </div>
-                                                </li>
-                                                <li></li>
-                                            </ul></a>
-                                        </div>
-                                        <div className="bioBodyInfolist"><a href="course-card.php">
-                                            <ul>
-                                                <li>Personal Finance Masterclass - <br />
-                                                        Easy Guide to Better Finances</li>
-                                                <li><img className="img-fluid iconImg" src="/assets/images/icon2.png" /></li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/edit-icon.png" />
-                                                        <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                        <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                                    </div>
-                                                </li>
-                                            </ul></a>
-                                        </div>
-                                        <div className="bioBodyInfolist"><a href="course-card.php">
-                                            <ul>
-                                                <li>Personal Financial Well-Being</li>
-                                                <li><img className="img-fluid iconImg" src="/assets/images/icon3.png" /></li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/edit-icon.png" />
-                                                        <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                        <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/video.png" />
-                                                        <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                                    </div>
-                                                </li>
-                                                <li className="dotmore"><span></span><span></span><span></span></li>
-                                            </ul></a>
-                                        </div>
-                                        <div className="bioBodyInfolist"><a href="course-card.php">
-                                            <ul>
-                                                <li>Advanced Financial Management <br />
-                                                        for CA/CMA/CFA/ACCA/CS/MBA</li>
-                                                <li><img className="img-fluid iconImg" src="/assets/images/icon1.png" /></li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/doc-icon.png" />
-                                                        <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                        <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                                    </div>
-                                                </li>
-                                            </ul></a>
-                                        </div>
-                                        <div className="txtR">
-                                        <a href={`${process.env.PUBLIC_URL}/view-profile`} className="action tocart primary btn btnBlue"><span>View Profile</span></a>
-                                        <a href="" target="_blank" className="action tocart primary btn btnBlue"><span>View Courses</span></a>
-                                        <a href="#" data-post="" className="action tocart primary btn btnBlue" data-action="add-to-wishlist">
-                                            <span>Make Favourite</span></a>
-                                        </div>
-                                </div>
-                            </div>
-                    </div>
-                    <div className="tab-pane trainer3" id="tab_c">
-                        <div className="tab-text-box">
-                                <img className="img-fluid progileImg" src="/assets/images/trainer3.png" />
-                                <div className="bio-data-header">
-                                    <h3><a href={`${process.env.PUBLIC_URL}/view-profile`}>Jon Hung</a></h3>
-                                    <div className="bioInfo">Industry <span>Academics</span></div>
-                                    <div className="bioInfo">Qulification <span>Master</span></div>
-                                    <div className="bioInfo">Year of Experience <span>5+ yrs</span></div>
-                                    <div className="bioInfo">Country <span>USA</span></div>
-                                </div>
-                                <div className="bio-data-body">
-                                        <div className="bioBodyInfolist"><a href="course-card.php">
-                                            <ul>
-                                                <li>Chief Financial Officer Leadership </li>
-                                                <li><img className="img-fluid iconImg" src="/assets/images/icon1.png" /></li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                        <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                                    </div>
-                                                </li>
-                                                <li></li>
-                                            </ul></a>
-                                        </div>
-                                        <div className="bioBodyInfolist"><a href="course-card.php">
-                                            <ul>
-                                                <li>Personal Finance Masterclass - <br />
-                                                        Easy Guide to Better Finances</li>
-                                                <li><img className="img-fluid iconImg" src="/assets/images/icon2.png" /></li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/edit-icon.png" />
-                                                        <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                        <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                                    </div>
-                                                </li>
-                                            </ul></a>
-                                        </div>
-                                        <div className="bioBodyInfolist"><a href="course-card.php">
-                                            <ul>
-                                                <li>Personal Financial Well-Being</li>
-                                                <li><img className="img-fluid iconImg" src="/assets/images/icon3.png" /></li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/edit-icon.png" />
-                                                        <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                        <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/video.png" />
-                                                        <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                                    </div>
-                                                </li>
-                                                <li className="dotmore"><span></span><span></span><span></span></li>
-                                            </ul></a>
-                                        </div>
-                                        <div className="bioBodyInfolist"><a href="course-card.php">
-                                            <ul>
-                                                <li>Advanced Financial Management <br />
-                                                        for CA/CMA/CFA/ACCA/CS/MBA</li>
-                                                <li><img className="img-fluid iconImg" src="/assets/images/icon1.png" /></li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/doc-icon.png" />
-                                                        <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                        <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                                    </div>
-                                                </li>
-                                            </ul></a>
-                                        </div>
-                                        <div className="txtR">
-                                        <a href={`${process.env.PUBLIC_URL}/view-profile`} className="action tocart primary btn btnBlue"><span>View Profile</span></a>
-                                        <a href="" target="_blank" className="action tocart primary btn btnBlue"><span>View Courses</span></a>
-                                        <a href="#" data-post="" className="action tocart primary btn btnBlue" data-action="add-to-wishlist">
-                                            <span>Make Favourite</span></a>
-                                        </div>
-                                </div>
-                            </div>
-                    </div>
-                    <div className="tab-pane trainer4" id="tab_d">
-                            <div className="tab-text-box">
-                                <img className="img-fluid progileImg" src="/assets/images/trainer4.png" />
-                                <div className="bio-data-header">
-                                    <h3><a href={`${process.env.PUBLIC_URL}/view-profile`}>Jose Alexandro</a></h3>
-                                    <div className="bioInfo">Industry <span>Academics</span></div>
-                                    <div className="bioInfo">Qulification <span>Master</span></div>
-                                    <div className="bioInfo">Year of Experience <span>5+ yrs</span></div>
-                                    <div className="bioInfo">Country <span>USA</span></div>
-                                </div>
-                                <div className="bio-data-body">
-                                        <div className="bioBodyInfolist"><a href="course-card.php">
-                                            <ul>
-                                                <li>Chief Financial Officer Leadership </li>
-                                                <li><img className="img-fluid iconImg" src="/assets/images/icon1.png" /></li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                        <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                                    </div>
-                                                </li>
-                                                <li></li>
-                                            </ul></a>
-                                        </div>
-                                        <div className="bioBodyInfolist"><a href="course-card.php">
-                                            <ul>
-                                                <li>Personal Finance Masterclass - <br />
-                                                        Easy Guide to Better Finances</li>
-                                                <li><img className="img-fluid iconImg" src="/assets/images/icon2.png" /></li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/edit-icon.png" />
-                                                        <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                        <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                                    </div>
-                                                </li>
-                                            </ul></a>
-                                        </div>
-                                        <div className="bioBodyInfolist"><a href="course-card.php">
-                                            <ul>
-                                                <li>Personal Financial Well-Being</li>
-                                                <li><img className="img-fluid iconImg" src="/assets/images/icon3.png" /></li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/edit-icon.png" />
-                                                        <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                        <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/video.png" />
-                                                        <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                                    </div>
-                                                </li>
-                                                <li className="dotmore"><span></span><span></span><span></span></li>
-                                            </ul></a>
-                                        </div>
-                                        <div className="bioBodyInfolist"><a href="course-card.php">
-                                            <ul>
-                                                <li>Advanced Financial Management <br />
-                                                        for CA/CMA/CFA/ACCA/CS/MBA</li>
-                                                <li><img className="img-fluid iconImg" src="/assets/images/icon1.png" /></li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/doc-icon.png" />
-                                                        <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="circleBox">
-                                                        <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                        <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                                    </div>
-                                                </li>
-                                            </ul></a>
-                                        </div>
-                                        <div className="txtR">
-                                        <a href={`${process.env.PUBLIC_URL}/view-profile`} className="action tocart primary btn btnBlue"><span>View Profile</span></a>
-                                        <a href="" target="_blank" className="action tocart primary btn btnBlue"><span>View Courses</span></a>
-                                        <a href="#" data-post="" className="action tocart primary btn btnBlue" data-action="add-to-wishlist">
-                                            <span>Make Favourite</span></a>
-                                        </div>
-                                </div>
-                            </div>
-                    </div>
-                    <div className="tab-pane trainer5" id="tab_e">
-                        <div className="tab-text-box">
-                            <img className="img-fluid progileImg" src="/assets/images/trainer5.png" />
-                            <div className="bio-data-header">
-                                <h3><a href={`${process.env.PUBLIC_URL}/view-profile`}>Claire Clark</a></h3>
-                                <div className="bioInfo">Industry <span>Academics</span></div>
-                                <div className="bioInfo">Qulification <span>Master</span></div>
-                                <div className="bioInfo">Year of Experience <span>5+ yrs</span></div>
-                                <div className="bioInfo">Country <span>USA</span></div>
-                            </div>
-                            <div className="bio-data-body">
-                                    <div className="bioBodyInfolist"><a href="course-card.php">
-                                        <ul>
-                                            <li>Chief Financial Officer Leadership </li>
-                                            <li><img className="img-fluid iconImg" src="/assets/images/icon1.png" /></li>
-                                            <li>
-                                                <div className="circleBox">
-                                                    <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                    <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                                </div>
-                                            </li>
-                                            <li></li>
-                                        </ul></a>
-                                    </div>
-                                    <div className="bioBodyInfolist"><a href="course-card.php">
-                                        <ul>
-                                            <li>Personal Finance Masterclass - <br />
-                                                    Easy Guide to Better Finances</li>
-                                            <li><img className="img-fluid iconImg" src="/assets/images/icon2.png" /></li>
-                                            <li>
-                                                <div className="circleBox">
-                                                    <img className="img-fluid" src="/assets/images/edit-icon.png" />
-                                                    <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div className="circleBox">
-                                                    <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                    <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                                </div>
-                                            </li>
-                                        </ul></a>
-                                    </div>
-                                    <div className="bioBodyInfolist"><a href="course-card.php">
-                                        <ul>
-                                            <li>Personal Financial Well-Being</li>
-                                            <li><img className="img-fluid iconImg" src="/assets/images/icon3.png" /></li>
-                                            <li>
-                                                <div className="circleBox">
-                                                    <img className="img-fluid" src="/assets/images/edit-icon.png" />
-                                                    <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div className="circleBox">
-                                                    <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                    <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div className="circleBox">
-                                                    <img className="img-fluid" src="/assets/images/video.png" />
-                                                    <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                                </div>
-                                            </li>
-                                            <li className="dotmore"><span></span><span></span><span></span></li>
-                                        </ul></a>
-                                    </div>
-                                    <div className="bioBodyInfolist"><a href="course-card.php">
-                                        <ul>
-                                            <li>Advanced Financial Management <br />
-                                                    for CA/CMA/CFA/ACCA/CS/MBA</li>
-                                            <li><img className="img-fluid iconImg" src="/assets/images/icon1.png" /></li>
-                                            <li>
-                                                <div className="circleBox">
-                                                    <img className="img-fluid" src="/assets/images/doc-icon.png" />
-                                                    <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div className="circleBox">
-                                                    <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                    <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                                </div>
-                                            </li>
-                                        </ul></a>
-                                    </div>
-                                    <div className="txtR">
-                                    <a href={`${process.env.PUBLIC_URL}/view-profile`} className="action tocart primary btn btnBlue"><span>View Profile</span></a>
-                                    <a href="" target="_blank" className="action tocart primary btn btnBlue"><span>View Courses</span></a>
-                                    <a href="#" data-post="" className="action tocart primary btn btnBlue" data-action="add-to-wishlist">
-                                        <span>Make Favourite</span></a>
-                                   </div>
-                            </div>
-                        </div>
-                    </div>
+                    {_.get(viewTrainer, 'user_id',0) > 0 && showTrainerDetail()}
                 </div>
                 <div className="alltrainers"><a href="list-course.php">all 10 courses <i className="far fa-eye"></i></a></div>
             </div>

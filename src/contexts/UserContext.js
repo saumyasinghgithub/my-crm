@@ -35,12 +35,12 @@ const UserProvider = (props) => {
   }
 
 
-  const getServerData = (url) => {
+  const getServerData = (url, pageInfo = false) => {
     return new Promise((resolve,reject) => {
       axios.get(Utils.apiUrl(url),Utils.apiHeaders())
       .then(res => {   
         if(res.data.success){
-          resolve(res.data.data);
+          resolve(pageInfo ? res.data : res.data.data);
         }else{
           reject(res.data.message);
         }
