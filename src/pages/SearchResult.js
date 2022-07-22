@@ -86,15 +86,18 @@ const showPageInfo = () => {
 
 const showTrainerDetail = () => {
     let trainer = viewTrainer;
-    return <div className="tab-pane active trainer1" id="tab_a">
+    var trainerBackgroudImg = process.env.REACT_APP_API_URLC + "/uploads/profile/" + trainer.profile_image;
+    console.log(trainerBackgroudImg);
+    return <div className="tab-pane active" style={{backgroundImage: `url(${process.env.REACT_APP_API_URL}/uploads/profile/${trainer.profile_image})` }} id="tab_a">
+                      
                       <div className="tab-text-box">
-                          <img className="img-fluid progileImg" src="/assets/images/trainer1.png" />
+                          <img className="img-fluid progileImg"src={`${process.env.REACT_APP_API_URL}/uploads/base/${trainer.base_image}`} alt={_.get(trainer,'firstname','')} />
                           <div className="bio-data-header">
                               <h3><a href={`${process.env.PUBLIC_URL}/view-profile`}>{_.get(trainer,'firstname','')} {_.get(trainer,'lastname','')}</a></h3>
                               <div className="bioInfo">Industry <span>{_.find(_.get(trainer,'calibs',[]),{"pa_id": 1}).pa_value.join(',')}</span></div>
-                              <div className="bioInfo">Qulification <span>Master</span></div>
-                              <div className="bioInfo">Year of Experience <span>5+ yrs</span></div>
-                              <div className="bioInfo">Country <span>USA</span></div>
+                              <div className="bioInfo">Qulification <span>{_.find(_.get(trainer,'calibs',[]),{"pa_id": 51}).pa_value.join(',')}</span></div>
+                              <div className="bioInfo">Year of Experience <span>{_.find(_.get(trainer,'calibs',[]),{"pa_id": 68}).pa_value.join(',')}</span></div>
+                              <div className="bioInfo">Country <span>{_.find(_.get(trainer,'calibs',[]),{"pa_id": 83}).pa_value.join(',')}</span></div>
                           </div>
                           <div className="bio-data-body">
                                 <div className="bioBodyInfolist"><a href="course-card.php">
