@@ -86,12 +86,11 @@ const showPageInfo = () => {
 
 const showTrainerDetail = () => {
     let trainer = viewTrainer;
-    var trainerBackgroudImg = process.env.REACT_APP_API_URLC + "/uploads/profile/" + trainer.profile_image;
-    console.log(trainerBackgroudImg);
-    return <div className="tab-pane active" style={{backgroundImage: `url(${process.env.REACT_APP_API_URL}/uploads/profile/${trainer.profile_image})` }} id="tab_a">
+    let trainerbg = `${process.env.REACT_APP_API_URL}/uploads/profile/${trainer.profile_image}`;
+    return <div className="tab-pane active trainerbg" style={{backgroundImage: `url("${trainerbg}")` }} id="tab_a">
                       
                       <div className="tab-text-box">
-                          <img className="img-fluid progileImg"src={`${process.env.REACT_APP_API_URL}/uploads/base/${trainer.base_image}`} alt={_.get(trainer,'firstname','')} />
+                          <img className="img-fluid progileImg" src={`${process.env.REACT_APP_API_URL}/uploads/base/${encodeURI(trainer.base_image)}`} alt={_.get(trainer,'firstname','')} />
                           <div className="bio-data-header">
                               <h3><a href={`${process.env.PUBLIC_URL}/view-profile`}>{_.get(trainer,'firstname','')} {_.get(trainer,'lastname','')}</a></h3>
                               <div className="bioInfo">Industry <span>{_.find(_.get(trainer,'calibs',[]),{"pa_id": 1}).pa_value.join(',')}</span></div>

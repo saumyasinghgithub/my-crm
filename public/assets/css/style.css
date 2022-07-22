@@ -512,9 +512,9 @@ ul.resultlist li a {
     padding-top: 100px;
 }
 
-.trainer1 {
+.trainerbg {
     background: url(../images/trainer1.jpg) no-repeat center;
-    background-size: 100% 100%;
+    background-size: cover !important;
 }
 
 .trainer2 {
