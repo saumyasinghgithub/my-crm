@@ -26,7 +26,7 @@ const CourseDetails = (props) => {
     <div className="cardWrapper">
         <div className="container">
             <nav className="breadcrumb-list" aria-label="breadcrumb">
-                <span className="backarrow"><a href="#"><img src="assets/images/back-arrow.png" alt="AD" />Back</a></span>
+                <span className="backarrow"><a href="#"><img src="/assets/images/back-arrow.png" alt="AD" />Back</a></span>
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item"><a href="#">Skillchoice Business</a></li>                  
                   <li className="breadcrumb-item"><a href="#">Finance </a></li>
@@ -37,7 +37,7 @@ const CourseDetails = (props) => {
                 <li>
                     <div className="circleBox wow zoomIn" >
                         <a data-toggle="tab" href="#PDF">
-                            <img className="img-fluid" src="assets/images/doc-icon.png" alt="AD" />
+                            <img className="img-fluid" src="/assets/images/doc-icon.png" alt="AD" />
                             <span className="usdheading">15 USD </span><span className="usdtext">PDF</span>
                         </a>
                     </div>
@@ -45,7 +45,7 @@ const CourseDetails = (props) => {
                 <li>
                     <div className="circleBox wow zoomIn">
                         <a data-toggle="tab" href="#Video">
-                            <img className="img-fluid" src="assets/images/video.png" alt="AD" />
+                            <img className="img-fluid" src="/assets/images/video.png" alt="AD" />
                             <span className="usdheading">28 USD</span><span className="usdtext">Video</span>
                         </a>
                     </div>
@@ -53,20 +53,20 @@ const CourseDetails = (props) => {
                 <li>
                     <div className="circleBox wow zoomIn">
                         <a data-toggle="tab" href="#Audio">
-                            <img className="img-fluid" src="assets/images/audio-icon.png" alt="AD" />
+                            <img className="img-fluid" src="/assets/images/audio-icon.png" alt="AD" />
                             <span className="usdheading">20 USD</span><span className="usdtext">Audio</span>
                         </a>
                     </div>
                 </li>
                 <li>
                     <div className="circleBox wow zoomIn">
-                        <img className="img-fluid" src="assets/images/edit-icon.png" alt="AD" />
+                        <img className="img-fluid" src="/assets/images/edit-icon.png" alt="AD" />
                         <span className="usdheading">10 USD</span><span className="usdtext">Quizz</span>
                     </div>
                 </li>
                 <li>
                     <div className="circleBox wow zoomIn">
-                        <img className="img-fluid" src="assets/images/scome.png" alt="AD" />
+                        <img className="img-fluid" src="/assets/images/scome.png" alt="AD" />
                         <span className="usdheading">25 USD</span><span className="usdtext">SCORM</span>
                     </div>
                 </li>
@@ -78,7 +78,7 @@ const CourseDetails = (props) => {
                             <div className="imgWrapper">
                                 <span className="new">New</span>
                                 <div className="circleBox">
-                                    <img className="img-fluid" src="assets/images/bundle.png" alt="AD" />
+                                    <img className="img-fluid" src="/assets/images/bundle.png" alt="AD" />
                                     <span className="usdheading active">98 USD</span><span className="usdtext active">Bundle</span>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@ const CourseDetails = (props) => {
                                 <div className="cardInfoBox">
                                     <span className="textBold">Created by</span> Ben Jacobs <span className="textBold">| Last updated</span> 3/2019<br />
                                     <span className="textBold">Language:</span> English | <span className="textBold">Also available:</span> French, Spanish <br />
-                                    <span className="textBold">Media:</span> PDF <img src="assets/images/pdf.png" alt="AD" />, Video <img src="assets/images/video1.png" alt="AD" />, Audio <img src="assets/images/audio1.png" alt="AD" />, Quiz <img src="assets/images/edit1.png" alt="AD" />, SCORM <img src="assets/images/scrom.png" alt="AD" /><br />        
+                                    <span className="textBold">Media:</span> PDF <img src="/assets/images/pdf.png" alt="AD" />, Video <img src="/assets/images/video1.png" alt="AD" />, Audio <img src="/assets/images/audio1.png" alt="AD" />, Quiz <img src="/assets/images/edit1.png" alt="AD" />, SCORM <img src="/assets/images/scrom.png" alt="AD" /><br />        
                                     <span className="textBold">Level:</span> Advanced <span className="textBold">| Duration:</span> 18h 30 min
                                 </div>
                                 <div className="cardInforating">
@@ -150,7 +150,7 @@ const CourseDetails = (props) => {
                             <div className="imgWrapper">
                                 <span className="new">New</span>
                                 <div className="circleBox">
-                                    <img className="img-fluid" src="assets/images/bundle.png" alt="AD" />
+                                    <img className="img-fluid" src="/assets/images/bundle.png" alt="AD" />
                                     <span className="usdheading active">98 USD</span><span className="usdtext active">Bundle</span>
                                 </div>
                             </div>
@@ -161,7 +161,7 @@ const CourseDetails = (props) => {
                                 <div className="cardInfoBox">
                                     <span className="textBold">Created by</span> Ben Jacobs <span className="textBold">| Last updated</span> 3/2019<br />
                                     <span className="textBold">Language:</span> English | <span className="textBold">Also available:</span> French, Spanish <br />
-                                    <span className="textBold">Media:</span> PDF <img src="assets/images/pdf.png" alt="AD" />, Video <img src="assets/images/video1.png" alt="AD" />, Audio <img src="assets/images/audio1.png" alt="AD" />, Quiz <img src="assets/images/edit1.png" alt="AD" />, SCORM <img src="assets/images/scrom.png" alt="AD" /><br />        
+                                    <span className="textBold">Media:</span> PDF <img src="/assets/images/pdf.png" alt="AD" />, Video <img src="/assets/images/video1.png" alt="AD" />, Audio <img src="/assets/images/audio1.png" alt="AD" />, Quiz <img src="/assets/images/edit1.png" alt="AD" />, SCORM <img src="/assets/images/scrom.png" alt="AD" /><br />        
                                     <span className="textBold">Level:</span> Advanced <span className="textBold">| Duration:</span> 18h 30 min
                                 </div>
                                 <div className="cardInforating">

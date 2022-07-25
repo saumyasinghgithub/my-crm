@@ -9,9 +9,8 @@ import UserContext from './../contexts/UserContext';
 const SearchResult = (props) => {
 
     const [viewTrainer, setViewTrainer] = useState({});
-
     const [tData, setTData] = useState({pageInfo: {}, data: []});
-    const [filter, setFilter] = useState({start: 0, limit: 6, curpage: 1});
+    const [filter, setFilter] = useState({start: 0, limit: 4, curpage: 1});
 
   const $ = window.$;
 
@@ -41,7 +40,7 @@ const SearchResult = (props) => {
   },[]);
   
   useEffect(() => {setViewTrainer(_.get(tData,'data.0',{}))},[tData]);
-
+console.log(tData)
   const renderResultAnalysis = () => <section className="home-result-wrapper">
     <ul className="resultlist">
         <li>
@@ -86,6 +85,17 @@ const showPageInfo = () => {
 
 const showTrainerDetail = () => {
     let trainer = viewTrainer;
+    //alert(_.get(tData, 'courses', []));
+   // {_.get(tData,'data',[]).map((trainer) => 
+  
+      //  trainer.courses.map((courses) => <span>{courses.total}</span>),
+      //  courses.courses.map(cdata => <span>{cdata.name}</span>)
+        
+
+//)}
+
+
+
     let trainerbg = `${process.env.REACT_APP_API_URL}/uploads/profile/${trainer.profile_image}`;
     return <div className="tab-pane active trainerbg" style={{backgroundImage: `url("${trainerbg}")` }} id="tab_a">
                       
@@ -156,7 +166,7 @@ const showTrainerDetail = () => {
                                         <li className="dotmore"><span></span><span></span><span></span></li>
                                     </ul></a>
                                 </div>
-                                <div className="bioBodyInfolist"><a href="course-card.php">
+                                <div className="bioBodyInfolist"><a href={`${process.env.PUBLIC_URL}/courses/Automobile-Engineering-Courses `}>
                                     <ul>
                                         <li>Advanced Financial Management <br />
                                                 for CA/CMA/CFA/ACCA/CS/MBA</li>
@@ -286,13 +296,13 @@ const renderResults = () => <div className="resultDisplay">
                         </span>
                     </li>)}
                 </ul>  
-                <div className="alltrainers"><a href="list-trainer.php">{showPageInfo()} <i className="far fa-eye"></i></a></div>                          
+                <div className="alltrainers">{showPageInfo()} <i className="far fa-eye"></i></div>                          
             </div>
             <div className="flexItem flex80">
                 <div className="tab-content">
                     {_.get(viewTrainer, 'user_id',0) > 0 && showTrainerDetail()}
                 </div>
-                <div className="alltrainers"><a href="list-course.php">all 10 courses <i className="far fa-eye"></i></a></div>
+                <div className="alltrainers"><a href={`${process.env.PUBLIC_URL}/course-list`}>all 10 courses <i className="far fa-eye"></i></a></div>
             </div>
         </div>
     </div>
