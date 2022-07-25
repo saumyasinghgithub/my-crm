@@ -98,11 +98,11 @@ const renderResource = (icon, type,resources) => {
 const renderCourseItem = (course) => {
 
     const res = {
-        'pdf': 'edit-icon.png',
-        'PPT': 'edit-icon.png',
+        'pdf': 'pdf.png',
+        'PPT': 'doc-icon.png',
         'audio': 'audio-icon.png',
         'video': 'video.png',
-        'scorm': 'edit-icon.png'
+        'scorm': 'scome.png'
     };
     return <div className="bioBodyInfolist">
         <a href={`${process.env.PUBLIC_URL}/courses/${course.slug}`}>
@@ -135,26 +135,6 @@ const showTrainerDetail = () => {
                 <div className="bio-data-body">
                    
                     {_.get(trainer,'courses.courses',[]).map(renderCourseItem)}
-                    
-                    <div className="bioBodyInfolist"><a href={`${process.env.PUBLIC_URL}/courses/Automobile-Engineering-Courses `}>
-                        <ul>
-                            <li>Advanced Financial Management <br />
-                                    for CA/CMA/CFA/ACCA/CS/MBA</li>
-                            <li><img className="img-fluid iconImg" src="/assets/images/icon1.png" /></li>
-                            <li>
-                                <div className="circleBox">
-                                    <img className="img-fluid" src="/assets/images/doc-icon.png" />
-                                    <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div className="circleBox">
-                                    <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                    <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                </div>
-                            </li>
-                        </ul></a>
-                    </div>
                     <div className="txtR">
                         <a href={`${process.env.PUBLIC_URL}/view-profile`} className="action tocart primary btn btnBlue"><span>View Profile</span></a>
                         <a href="" target="_blank" className="action tocart primary btn btnBlue"><span>View Courses</span></a>
