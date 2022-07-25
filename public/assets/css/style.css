@@ -1587,7 +1587,9 @@ label.filterSeach .fas {
 
 .iconImg {
     width: 60px;
+    height: 60px;
     margin-top: -25px;
+    border-radius: 100%;
 }
 
 ol.breadcrumb li:last-child {

@@ -83,117 +83,89 @@ const showPageInfo = () => {
     return <>{_.min([filter.start + filter.limit, tData.pageInfo.total])} of {_.get(tData,'pageInfo.total',0)} trainers</>
 }
 
+const renderResource = (icon, type,resources) => {
+    const res = _.filter(resources,{type: type});
+    return  <>
+        {res.length > 0 && <li>
+            <div className="circleBox">
+                <img className="img-fluid" src={`/assets/images/${icon}`} />
+                <span className="desktopview">{res[0].price} USD</span><span className="mobileview">{res[0].price}$</span>
+            </div>
+        </li>}
+    </>
+}
+
+const renderCourseItem = (course) => {
+
+    const res = {
+        'pdf': 'edit-icon.png',
+        'PPT': 'edit-icon.png',
+        'audio': 'audio-icon.png',
+        'video': 'video.png',
+        'scorm': 'edit-icon.png'
+    };
+    return <div className="bioBodyInfolist">
+        <a href={`${process.env.PUBLIC_URL}/courses/${course.slug}`}>
+            <ul>
+                <li>{course.name}</li>
+                <li><img className="img-fluid iconImg" src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`} /></li>
+                {_.map(res,(icon,type) => renderResource(icon,type,course.resources))}
+                {course.resources.length > 3 && <li className="dotmore"><span></span><span></span><span></span></li>}
+            </ul>
+        </a>
+    </div>;
+}
+
 const showTrainerDetail = () => {
     let trainer = viewTrainer;
-    //alert(_.get(tData, 'courses', []));
-   // {_.get(tData,'data',[]).map((trainer) => 
-  
-      //  trainer.courses.map((courses) => <span>{courses.total}</span>),
-      //  courses.courses.map(cdata => <span>{cdata.name}</span>)
-        
-
-//)}
-
-
 
     let trainerbg = `${process.env.REACT_APP_API_URL}/uploads/profile/${trainer.profile_image}`;
-    return <div className="tab-pane active trainerbg" style={{backgroundImage: `url("${trainerbg}")` }} id="tab_a">
+    return <div className="tab-content">
+        <div className="tab-pane active trainerbg" style={{backgroundImage: `url("${trainerbg}")` }} id="tab_a">
                       
-                      <div className="tab-text-box">
-                          <img className="img-fluid progileImg" src={`${process.env.REACT_APP_API_URL}/uploads/base/${encodeURI(trainer.base_image)}`} alt={_.get(trainer,'firstname','')} />
-                          <div className="bio-data-header">
-                              <h3><a href={`${process.env.PUBLIC_URL}/view-profile`}>{_.get(trainer,'firstname','')} {_.get(trainer,'lastname','')}</a></h3>
-                              <div className="bioInfo">Industry <span>{_.find(_.get(trainer,'calibs',[]),{"pa_id": 1}).pa_value.join(',')}</span></div>
-                              <div className="bioInfo">Qulification <span>{_.find(_.get(trainer,'calibs',[]),{"pa_id": 51}).pa_value.join(',')}</span></div>
-                              <div className="bioInfo">Year of Experience <span>{_.find(_.get(trainer,'calibs',[]),{"pa_id": 68}).pa_value.join(',')}</span></div>
-                              <div className="bioInfo">Country <span>{_.find(_.get(trainer,'calibs',[]),{"pa_id": 83}).pa_value.join(',')}</span></div>
-                          </div>
-                          <div className="bio-data-body">
-                                <div className="bioBodyInfolist"><a href="course-card.php">
-                                    <ul>
-                                        <li>Chief Financial Officer Leadership </li>
-                                        <li><img className="img-fluid iconImg" src="/assets/images/icon1.png" /></li>
-                                        <li>
-                                                <div className="circleBox">
-                                                    <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                    <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                                </div>
-                                            </li>
-                                        <li></li>
-                                    </ul></a>
+            <div className="tab-text-box">
+                <img className="img-fluid progileImg" src={`${process.env.REACT_APP_API_URL}/uploads/base/${encodeURI(trainer.base_image)}`} alt={_.get(trainer,'firstname','')} />
+                <div className="bio-data-header">
+                    <h3><a href={`${process.env.PUBLIC_URL}/view-profile`}>{_.get(trainer,'firstname','')} {_.get(trainer,'lastname','')}</a></h3>
+                    <div className="bioInfo">Industry <span>{_.find(_.get(trainer,'calibs',[]),{"pa_id": 1}).pa_value.join(',')}</span></div>
+                    <div className="bioInfo">Qulification <span>{_.find(_.get(trainer,'calibs',[]),{"pa_id": 51}).pa_value.join(',')}</span></div>
+                    <div className="bioInfo">Year of Experience <span>{_.find(_.get(trainer,'calibs',[]),{"pa_id": 68}).pa_value.join(',')}</span></div>
+                    <div className="bioInfo">Country <span>{_.find(_.get(trainer,'calibs',[]),{"pa_id": 83}).pa_value.join(',')}</span></div>
+                </div>
+                <div className="bio-data-body">
+                   
+                    {_.get(trainer,'courses.courses',[]).map(renderCourseItem)}
+                    
+                    <div className="bioBodyInfolist"><a href={`${process.env.PUBLIC_URL}/courses/Automobile-Engineering-Courses `}>
+                        <ul>
+                            <li>Advanced Financial Management <br />
+                                    for CA/CMA/CFA/ACCA/CS/MBA</li>
+                            <li><img className="img-fluid iconImg" src="/assets/images/icon1.png" /></li>
+                            <li>
+                                <div className="circleBox">
+                                    <img className="img-fluid" src="/assets/images/doc-icon.png" />
+                                    <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
                                 </div>
-                                <div className="bioBodyInfolist"><a href="course-card.php">
-                                    <ul>
-                                        <li>Personal Finance Masterclass - <br />
-                                                Easy Guide to Better Finances</li>
-                                        <li><img className="img-fluid iconImg" src="/assets/images/icon2.png" /></li>
-                                        <li>
-                                            <div className="circleBox">
-                                                <img className="img-fluid" src="/assets/images/edit-icon.png" />
-                                                <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div className="circleBox">
-                                                <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                            </div>
-                                        </li>
-                                    </ul></a>
+                            </li>
+                            <li>
+                                <div className="circleBox">
+                                    <img className="img-fluid" src="/assets/images/audio-icon.png" />
+                                    <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
                                 </div>
-                                <div className="bioBodyInfolist"><a href="course-card.php">
-                                    <ul>
-                                        <li>Personal Financial Well-Being</li>
-                                        <li><img className="img-fluid iconImg"  src="/assets/images/icon3.png" /></li>
-                                        <li>
-                                            <div className="circleBox">
-                                                <img className="img-fluid" src="/assets/images/edit-icon.png" />
-                                                <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div className="circleBox">
-                                                <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div className="circleBox">
-                                                <img className="img-fluid" src="/assets/images/video.png" />
-                                                <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                            </div>
-                                        </li>
-                                        <li className="dotmore"><span></span><span></span><span></span></li>
-                                    </ul></a>
-                                </div>
-                                <div className="bioBodyInfolist"><a href={`${process.env.PUBLIC_URL}/courses/Automobile-Engineering-Courses `}>
-                                    <ul>
-                                        <li>Advanced Financial Management <br />
-                                                for CA/CMA/CFA/ACCA/CS/MBA</li>
-                                        <li><img className="img-fluid iconImg" src="/assets/images/icon1.png" /></li>
-                                        <li>
-                                            <div className="circleBox">
-                                                <img className="img-fluid" src="/assets/images/doc-icon.png" />
-                                                <span className="desktopview">15 USD</span><span className="mobileview">15$</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div className="circleBox">
-                                                <img className="img-fluid" src="/assets/images/audio-icon.png" />
-                                                <span className="desktopview">20 USD</span><span className="mobileview">20$</span>
-                                            </div>
-                                        </li>
-                                    </ul></a>
-                                </div>
-                                <div className="txtR">
-                                    <a href={`${process.env.PUBLIC_URL}/view-profile`} className="action tocart primary btn btnBlue"><span>View Profile</span></a>
-                                    <a href="" target="_blank" className="action tocart primary btn btnBlue"><span>View Courses</span></a>
-                                    <a href="#" data-post="" className="action tocart primary btn btnBlue" data-action="add-to-wishlist">
-                                            <span>Make Favourite</span></a>
-                                </div>
-                          </div>
-                      </div>
+                            </li>
+                        </ul></a>
                     </div>
+                    <div className="txtR">
+                        <a href={`${process.env.PUBLIC_URL}/view-profile`} className="action tocart primary btn btnBlue"><span>View Profile</span></a>
+                        <a href="" target="_blank" className="action tocart primary btn btnBlue"><span>View Courses</span></a>
+                        <a href="#" data-post="" className="action tocart primary btn btnBlue" data-action="add-to-wishlist">
+                                <span>Make Favourite</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div className="alltrainers">Total {trainer.courses.total} courses <i className="far fa-eye"></i></div>
+    </div>
 }
 
 const renderResults = () => <div className="resultDisplay">
@@ -299,10 +271,7 @@ const renderResults = () => <div className="resultDisplay">
                 <div className="alltrainers">{showPageInfo()} <i className="far fa-eye"></i></div>                          
             </div>
             <div className="flexItem flex80">
-                <div className="tab-content">
-                    {_.get(viewTrainer, 'user_id',0) > 0 && showTrainerDetail()}
-                </div>
-                <div className="alltrainers"><a href={`${process.env.PUBLIC_URL}/course-list`}>all 10 courses <i className="far fa-eye"></i></a></div>
+                {_.get(viewTrainer, 'user_id',0) > 0 && showTrainerDetail()}
             </div>
         </div>
     </div>
