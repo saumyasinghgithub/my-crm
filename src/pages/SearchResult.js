@@ -127,10 +127,10 @@ const showTrainerDetail = () => {
                 <img className="img-fluid progileImg" src={`${process.env.REACT_APP_API_URL}/uploads/base/${encodeURI(trainer.base_image)}`} alt={_.get(trainer,'firstname','')} />
                 <div className="bio-data-header">
                     <h3><a href={`${process.env.PUBLIC_URL}/view-profile`}>{_.get(trainer,'firstname','')} {_.get(trainer,'lastname','')}</a></h3>
-                    <div className="bioInfo">Industry <span>{_.find(_.get(trainer,'calibs',[]),{"pa_id": 1}).pa_value.join(',')}</span></div>
-                    <div className="bioInfo">Qulification <span>{_.find(_.get(trainer,'calibs',[]),{"pa_id": 51}).pa_value.join(',')}</span></div>
-                    <div className="bioInfo">Year of Experience <span>{_.find(_.get(trainer,'calibs',[]),{"pa_id": 68}).pa_value.join(',')}</span></div>
-                    <div className="bioInfo">Country <span>{_.find(_.get(trainer,'calibs',[]),{"pa_id": 83}).pa_value.join(',')}</span></div>
+                    <div className="bioInfo">Industry <span>{_.map(_.filter(_.get(trainer,'calibs',[]),{"pa_id": 1}), c => c.pa_value).join(',')}</span></div>
+                    <div className="bioInfo">Qulification <span>{_.map(_.filter(_.get(trainer,'calibs',[]),{"pa_id": 51}), c => c.pa_value).join(',')}</span></div>
+                    <div className="bioInfo">Year of Experience <span>{_.map(_.filter(_.get(trainer,'calibs',[]),{"pa_id": 68}), c => c.pa_value).join(',')}</span></div>
+                    <div className="bioInfo">Country <span>{_.map(_.filter(_.get(trainer,'calibs',[]),{"pa_id": 83}), c => c.pa_value).join(',')}</span></div>
                 </div>
                 <div className="bio-data-body">
                    
