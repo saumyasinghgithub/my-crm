@@ -118,7 +118,8 @@ const renderCourseItem = (course) => {
 
 const showTrainerDetail = () => {
     let trainer = viewTrainer;
-
+    let trainerURL = process.env.REACT_APP_PUBLIC_URL.split("://");
+    trainerURL = trainerURL[0] + '://' + trainer.slug + '.' + trainerURL[1];
     let trainerbg = `${process.env.REACT_APP_API_URL}/uploads/profile/${trainer.profile_image}`;
     return <div className="tab-content">
         <div className="tab-pane active trainerbg" style={{backgroundImage: `url("${trainerbg}")` }} id="tab_a">
@@ -126,7 +127,7 @@ const showTrainerDetail = () => {
             <div className="tab-text-box">
                 <img className="img-fluid progileImg" src={`${process.env.REACT_APP_API_URL}/uploads/base/${encodeURI(trainer.base_image)}`} alt={_.get(trainer,'firstname','')} />
                 <div className="bio-data-header">
-                    <h3><a href={`${process.env.PUBLIC_URL}/view-profile`}>{_.get(trainer,'firstname','')} {_.get(trainer,'lastname','')}</a></h3>
+                    <h3><a href={trainerURL}>{_.get(trainer,'firstname','')} {_.get(trainer,'lastname','')}</a></h3>
                     <div className="bioInfo">Industry <span>{_.map(_.filter(_.get(trainer,'calibs',[]),{"pa_id": 1}), c => c.pa_value).join(',')}</span></div>
                     <div className="bioInfo">Qulification <span>{_.map(_.filter(_.get(trainer,'calibs',[]),{"pa_id": 51}), c => c.pa_value).join(',')}</span></div>
                     <div className="bioInfo">Year of Experience <span>{_.map(_.filter(_.get(trainer,'calibs',[]),{"pa_id": 68}), c => c.pa_value).join(',')}</span></div>
@@ -136,8 +137,8 @@ const showTrainerDetail = () => {
                    
                     {_.get(trainer,'courses.courses',[]).map(renderCourseItem)}
                     <div className="txtR">
-                        <a href={`${process.env.PUBLIC_URL}/view-profile`} className="action tocart primary btn btnBlue"><span>View Profile</span></a>
-                        <a href="" target="_blank" className="action tocart primary btn btnBlue"><span>View Courses</span></a>
+                        <a href={trainerURL} className="action tocart primary btn btnBlue"><span>View Profile</span></a>
+                        <a href={`${trainerURL}/courses`} target="_blank" className="action tocart primary btn btnBlue"><span>View Courses</span></a>
                         <a href="#" data-post="" className="action tocart primary btn btnBlue" data-action="add-to-wishlist">
                                 <span>Make Favourite</span></a>
                     </div>

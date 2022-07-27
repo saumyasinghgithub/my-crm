@@ -41,7 +41,7 @@ const CustomRoutes = [
     'component' : MyProfile
   },
   {
-    'path'      : '/view-profile', 
+    'path'      : '/trainers/:slug', 
     'secure'    : false,    
     'exact'     : true,
     'layout'    : StaticPageLayout, 
