@@ -70,6 +70,13 @@ const AboutForm = (props) => {
         <Form.Control type="text" name="lastname" placeholder="Enter your last name" defaultValue={_.get(myabout,'lastname','')} />
       </Col>
     </Row>
+    <Row>
+      <Col md={12} className="mt-3">
+        <Form.Label>Trainer Profile URL: </Form.Label>
+        <Form.Control type="text" name="slug" placeholder="Enter your slug" defaultValue={_.get(myabout,'slug','')} />
+      </Col>
+     
+    </Row>
 
     <Row>  
       <Col md={6} className="mt-3">  
