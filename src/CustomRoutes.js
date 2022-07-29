@@ -48,21 +48,21 @@ const CustomRoutes = [
     'component' : TeacherProfile
   },
   {
-    'path'      : '/trainer-service', 
+    'path'      : '/trainers/:slug/service', 
     'secure'    : false,    
     'exact'     : true,
     'layout'    : StaticPageLayout, 
     'component' : TeacherService
   },
   {
-    'path'      : '/trainer-knowledge', 
+    'path'      : '/trainers/:slug/knowledge', 
     'secure'    : false,    
     'exact'     : true,
     'layout'    : StaticPageLayout, 
     'component' : TeacherKnowledge
   },
   {
-    'path'      : '/trainer-library', 
+    'path'      : '/trainers/:slug/library', 
     'secure'    : false,    
     'exact'     : true,
     'layout'    : StaticPageLayout, 

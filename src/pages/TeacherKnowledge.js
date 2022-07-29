@@ -20,8 +20,8 @@ const TeacherKnowledge = (props) => {
         <div className="knowledgeWrapper container">
             <div className="knowledgHeading">                
                 <h1 className="headingtext slideInUp wow ">03 Knowledge<ul className="profile-socail-icon">
-                    <li><a href=""><img src="assets/images/share-icon.png" alt="ad eyes" /></a></li>
-                    <li><a href=""><img src="assets/images/link-icon.png" alt="ad eyes" /></a></li>
+                    <li><a href=""><img src="/assets/images/share-icon.png" alt="ad eyes" /></a></li>
+                    <li><a href=""><img src="/assets/images/link-icon.png" alt="ad eyes" /></a></li>
                 </ul></h1>
                 <div className="subHeading slideInUp wow ">Igenimu saeped qui volorest qui dia qui occus expeliqui nonse omnihic tem re, aut ut impossin rerectore</div>
             </div>
@@ -31,7 +31,7 @@ const TeacherKnowledge = (props) => {
                    <div className="col-sm-6 col-md-4">
                        <div className="knowledgeBox slideInUp wow ">
                            <div className="knowledgeImg">
-                                <img className="img-fluid" src="assets/images/knowledge_1.jpg" alt="ad blog" />
+                                <img className="img-fluid" src="/assets/images/knowledge_1.jpg" alt="ad blog" />
                            </div>
                            <div className="knowledgeTitle">
                             Personal Financial Well-Being Understanding Your Financial Life
@@ -41,14 +41,14 @@ const TeacherKnowledge = (props) => {
                            </div>
                            <div className="knowledgeFooter clearfix">
                                <div className="FText">Blog</div>
-                               <ul><li><a href=""><img src="assets/images/eyes.png" alt="ad eyes" /></a></li><li><a href=""><img src="assets/images/share-icon.png" alt="ad share" /></a></li></ul>
+                               <ul><li><a href=""><img src="/assets/images/eyes.png" alt="ad eyes" /></a></li><li><a href=""><img src="/assets/images/share-icon.png" alt="ad share" /></a></li></ul>
                            </div>
                        </div>
                    </div>
                    <div className="col-sm-6 col-md-4">
                         <div className="knowledgeBox slideInUp wow ">
                             <div className="knowledgeImg">
-                                <img className="img-fluid" src="assets/images/knowledge_2.jpg" alt="ad blog" />
+                                <img className="img-fluid" src="/assets/images/knowledge_2.jpg" alt="ad blog" />
                             </div>
                             <div className="knowledgeTitle">
                             Personal Financial Well-Being Understanding Your Financial Life
@@ -58,14 +58,14 @@ const TeacherKnowledge = (props) => {
                             </div>
                             <div className="knowledgeFooter clearfix">
                                 <div className="FText">Blog</div>
-                                <ul><li><a href=""><img src="assets/images/eyes.png" alt="ad eyes" /></a></li><li><a href=""><img src="assets/images/share-icon.png" alt="ad eyes" /></a></li></ul>
+                                <ul><li><a href=""><img src="/assets/images/eyes.png" alt="ad eyes" /></a></li><li><a href=""><img src="/assets/images/share-icon.png" alt="ad eyes" /></a></li></ul>
                             </div>
                         </div>
                     </div>
                     <div className="col-sm-6 col-md-4">
                         <div className="knowledgeBox slideInUp wow ">
                             <div className="knowledgeImg">
-                                    <img className="img-fluid" src="assets/images/knowledge_3.jpg" alt="ad blog"/>
+                                    <img className="img-fluid" src="/assets/images/knowledge_3.jpg" alt="ad blog"/>
                             </div>
                             <div className="knowledgeTitle">
                                 Personal Financial Well-Being Understanding Your Financial Life
@@ -75,14 +75,14 @@ const TeacherKnowledge = (props) => {
                             </div>
                             <div className="knowledgeFooter clearfix">
                                 <div className="FText">Video</div>
-                                <ul><li><a href=""><img src="assets/images/eyes.png" alt="ad eyes" /></a></li><li><a href=""><img src="assets/images/share-icon.png" alt="ad eyes" /></a></li></ul>
+                                <ul><li><a href=""><img src="/assets/images/eyes.png" alt="ad eyes" /></a></li><li><a href=""><img src="/assets/images/share-icon.png" alt="ad eyes" /></a></li></ul>
                             </div>
                         </div>
                     </div>
                     <div className="col-sm-6 col-md-4">
                         <div className="knowledgeBox slideInUp wow ">
                             <div className="knowledgeImg">
-                                <img className="img-fluid" src="assets/images/knowledge_4.jpg" alt="ad blog"/>
+                                <img className="img-fluid" src="/assets/images/knowledge_4.jpg" alt="ad blog"/>
                             </div>
                             <div className="knowledgeTitle">
                                 Personal Financial Well-Being Understanding Your Financial Life
@@ -92,14 +92,14 @@ const TeacherKnowledge = (props) => {
                             </div>
                             <div className="knowledgeFooter clearfix">
                                 <div className="FText">Book</div>
-                                <ul><li><a href=""><img src="assets/images/eyes.png" alt="ad eyes" /></a></li><li><a href=""><img src="assets/images/share-icon.png" alt="ad share" /></a></li></ul>
+                                <ul><li><a href=""><img src="/assets/images/eyes.png" alt="ad eyes" /></a></li><li><a href=""><img src="/assets/images/share-icon.png" alt="ad share" /></a></li></ul>
                             </div>
                         </div>
                     </div>
                     <div className="col-sm-6 col-md-4">
                         <div className="knowledgeBox slideInUp wow ">
                             <div className="knowledgeImg">
-                                    <img className="img-fluid" src="assests/images/knowledge_5.jpg" alt="ad blog"/>
+                                    <img className="img-fluid" src="/assets/images/knowledge_5.jpg" alt="ad blog"/>
                             </div>
                             <div className="knowledgeTitle">
                                 Personal Financial Well-Being Understanding Your Financial Life
@@ -109,7 +109,7 @@ const TeacherKnowledge = (props) => {
                             </div>
                             <div className="knowledgeFooter clearfix">
                                 <div className="FText">Book</div>
-                                <ul><li><a href=""><img src="assets/images/eyes.png" alt="ad eyes" /></a></li><li><a href=""><img src="assets/images/share-icon.png"  alt=""/></a></li></ul>
+                                <ul><li><a href=""><img src="/assets/images/eyes.png" alt="ad eyes" /></a></li><li><a href=""><img src="/assets/images/share-icon.png"  alt=""/></a></li></ul>
                             </div>
                         </div>
                     </div>

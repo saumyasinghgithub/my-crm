@@ -98,12 +98,12 @@ const TeacherProfile = (props) => {
                                 <div className="profileHeading teacherheading">
                                         <h1 className="headingtext wow zoomIn">{trainer.about.firstname} {trainer.about.lastname}</h1>
                                         <ul className="profile-socail-icon">
-                                            <li className='mr-2'><a href=""><img src="assets/images/share-icon.png" alt="icons" /></a></li>
-                                            <li><a href=""><img src="assets/images/link-icon.png" alt="icons" /></a></li>
+                                            <li className='mr-2'><a href=""><img src="/assets/images/share-icon.png" alt="icons" /></a></li>
+                                            <li><a href=""><img src="/assets/images/link-icon.png" alt="icons" /></a></li>
                                         </ul>
-                                        <div className="sendMsg">Send Message <img src="assets/images/send-icon.png" alt="icons" /></div>
+                                        <div className="sendMsg">Send Message <img src="/assets/images/send-icon.png" alt="icons" /></div>
                                     </div>
-                                    <img className="img-fluid imgTransfer pt-3" src="assets/images/umesh_1.jpeg" alt='profile' />
+                                    <img className="img-fluid imgTransfer pt-3" src={`${process.env.REACT_APP_API_URL}/uploads/profile/${encodeURI(trainer.about.profile_image)}`} alt='profile' />
                                 
                                 </div>
                             </div>
@@ -113,12 +113,7 @@ const TeacherProfile = (props) => {
                             <div className="aboutMe-pr0fle slideInUp wow ">
                                 <h1 className="headingtext mt-4">01 About me</h1>
                                 <div className="awardTextInner awardwithoutLine">
-                                    <div className="awadText">
-                                        <p>Omnis et atet labo. Nem quiamus, voloribus et omnihicatque volorpor accaeprat dolupta tibus, venimus
-                                            dolorroris dollandam et aut di ne quaspis ea debitatur aute. Vit fugias dus aut reratiis ent eos ape... </p>
-                                        <p className="italicText">“As ea perisque aut quibusamet as recto maximet ut ex excepere nobitatum consenes debis dolupta audit que volupta
-                                            sitintorro et, nosandit mos estrunt.”  </p>
-                                    </div>
+                                    <div className="awadText" dangerouslySetInnerHTML={{__html:trainer.about.biography}} ></div>
                                 </div>
                             </div>
 
@@ -129,40 +124,22 @@ const TeacherProfile = (props) => {
                                 </ul>
                                 <div className="tab-content pt-4">
                                     <div className="profileContent tab-pane active" id="academicContent">
-                                        <div className="input-flex-container">
+                                        <div className="input-flex-container" style={{maxWidth:(trainer.academics.length*125)+'px'}}>
                                             <div className="input">
                                             </div>
-                                            <div className="input">
-                                                <span data-year="2000" data-info="10th"></span>
-                                            </div>
-                                            <div className="input">
-                                                <span data-year="2002" data-info="12th"></span>
-                                            </div>
-                                            <div className="input">
-                                                <span data-year="2005" data-info="BCA"></span>
-                                            </div>
-                                            <div className="input">
-                                                <span data-year="2008" data-info="MCA"></span>
-                                            </div>
-                                            <div className="input">
-                                                <span data-year="2012" data-info="PHD"></span>
-                                            </div>
-                                            <div className="input">
-                                                <span data-year="Year Degree" data-info=""></span>
-                                            </div>
-                                            <div className="input">
-                                                <span data-year="Year Degree" data-info=""></span>
-                                            </div>
-                                            <div className="input">
-                                                <span data-year="Year Degree" data-info=""></span>
-                                            </div>
-                                            <div className="input">
-                                                <span data-year="Year Degree" data-info=""></span>
-                                            </div>
+                                            {trainer.academics.map(a=> <div className="input" key={a.id}>
+                                                <span data-year={a.year} data-info={a.qualification}></span>
+                                            </div> )}
                                         </div>
                                     </div>
                                     <div className="profileContent tab-pane fade" id="experienceContent">
-                                        <img className="img-fluid" src="assets/images/experience.png" alt='exp' />
+                                    <div className="input-flex-container" style={{maxWidth:(trainer.experiences.length*130)+'px'}}>
+                                            <div className="input">
+                                            </div>
+                                            {trainer.experiences.map(a=> <div className="input" key={a.id}>
+                                                <span data-year={a.company} data-info={a.location}></span>
+                                            </div> )}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -170,32 +147,16 @@ const TeacherProfile = (props) => {
                     </div>
                     <div className="awradwrapper">
                         <div className="container pt-5">
-                            <img className="img-fluid inline-photo show-on-scroll" src="assets/images/bannerProfile.jpg" alt="profile" />
+                            <img className="img-fluid inline-photo show-on-scroll" src={`${process.env.REACT_APP_API_URL}/uploads/award/${encodeURI(trainer.about.award_image)}`} alt="profile" />
                         </div>
                         <div className="container">
                             <div className="awardTextWrapper">
                                 <h1 className="headingtext slideInUp wow">Award <br /> Certifications </h1>
                                 <div className="awardTextInner">
-                                    <div className="awadText slideInUp wow ">
-                                        <span className="awardYear">Year</span>      <span className="boldText">Certification/Award Name</span> | Issuing of Organization | Date  and Experiation Date
-                                        Credential ID | Credential URL
-                                    </div>
-                                    <div className="awadText slideInUp wow ">
-                                        <span className="awardYear">Year</span>      <span className="boldText">Certification/Award Name</span> | Issuing of Organization | Date  and Experiation Date
-                                        Credential ID | Credential URL
-                                    </div>
-                                    <div className="awadText slideInUp wow ">
-                                        <span className="awardYear">Year</span>      <span className="boldText">Certification/Award Name</span> | Issuing of Organization | Date  and Experiation Date
-                                        Credential ID | Credential URL
-                                    </div>
-                                    <div className="awadText slideInUp wow ">
-                                        <span className="awardYear">Year</span>      <span className="boldText">Certification/Award Name</span> | Issuing of Organization | Date  and Experiation Date
-                                        Credential ID | Credential URL
-                                    </div>
-                                    <div className="awadText slideInUp wow ">
-                                        <span className="awardYear">Year</span>      <span className="boldText">Certification/Award Name</span> | Issuing of Organization | Date  and Experiation Date
-                                        Credential ID | Credential URL
-                                    </div>
+
+                                    {trainer.awards.map(a=><div className="awadText slideInUp wow ">
+                                        <span className="awardYear">{a.year}</span>      <span className="boldText">{a.award}</span> | {a.organisation} | {a.url}
+                                    </div>)}
                                 </div>
                             </div>
                         </div>
@@ -204,24 +165,7 @@ const TeacherProfile = (props) => {
                         <div className="container">
                             <div className="awardTextWrapper">
                                 <h1 className="headingtext slideInUp wow ">Trainings Conducted</h1>
-                                <div className="awardTextInner awardwithoutLine">
-                                    <div className="awadText slideInUp wow ">
-                                        <p className="boldText">Training Name       Duration    Start -/ End date       Location </p>
-                                        <p>Nis volut errovidem quam haris nisinve rempor ad modi volore nam nonsed molut velent, sequis ma in estintiatint velest adi od magnimi litaepr eicidus simodipis.</p>
-                                    </div>
-                                    <div className="awadText slideInUp wow ">
-                                        <p className="boldText">Training Name       Duration    Start -/ End date       Location </p>
-                                        <p>Nis volut errovidem quam haris nisinve rempor ad modi volore nam nonsed molut velent, sequis ma in estintiatint velest adi od magnimi litaepr eicidus simodipis.</p>
-                                    </div>
-                                    <div className="awadText slideInUp wow ">
-                                        <p className="boldText">Training Name       Duration    Start -/ End date       Location </p>
-                                        <p>Nis volut errovidem quam haris nisinve rempor ad modi volore nam nonsed molut velent, sequis ma in estintiatint velest adi od magnimi litaepr eicidus simodipis.</p>
-                                    </div>
-                                    <div className="awadText slideInUp wow ">
-                                        <p className="boldText">Training Name       Duration    Start -/ End date       Location </p>
-                                        <p>Nis volut errovidem quam haris nisinve rempor ad modi volore nam nonsed molut velent, sequis ma in estintiatint velest adi od magnimi litaepr eicidus simodipis.</p>
-                                    </div>
-                                </div>
+                                <div className="awardTextInner awardwithoutLine" dangerouslySetInnerHTML={{__html:trainer.about.trainings}}></div>
                             </div>
                         </div>
                     </div>

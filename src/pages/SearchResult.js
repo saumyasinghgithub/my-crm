@@ -118,8 +118,8 @@ const renderCourseItem = (course) => {
 
 const showTrainerDetail = () => {
     let trainer = viewTrainer;
-    let trainerURL = process.env.REACT_APP_PUBLIC_URL.split("://");
-    trainerURL = trainerURL[0] + '://' + trainer.slug + '.' + trainerURL[1];
+    let trainerURL = process.env.REACT_APP_PUBLIC_URL;
+
     let trainerbg = `${process.env.REACT_APP_API_URL}/uploads/profile/${trainer.profile_image}`;
     return <div className="tab-content">
         <div className="tab-pane active trainerbg" style={{backgroundImage: `url("${trainerbg}")` }} id="tab_a">
@@ -127,7 +127,7 @@ const showTrainerDetail = () => {
             <div className="tab-text-box">
                 <img className="img-fluid progileImg" src={`${process.env.REACT_APP_API_URL}/uploads/base/${encodeURI(trainer.base_image)}`} alt={_.get(trainer,'firstname','')} />
                 <div className="bio-data-header">
-                    <h3><a href={trainerURL}>{_.get(trainer,'firstname','')} {_.get(trainer,'lastname','')}</a></h3>
+                    <h3><a href={`${process.env.REACT_APP_PUBLIC_URL}/trainers/${trainer.slug}`} >{_.get(trainer,'firstname','')} {_.get(trainer,'lastname','')}</a></h3>
                     <div className="bioInfo">Industry <span>{_.map(_.filter(_.get(trainer,'calibs',[]),{"pa_id": 1}), c => c.pa_value).join(',')}</span></div>
                     <div className="bioInfo">Qulification <span>{_.map(_.filter(_.get(trainer,'calibs',[]),{"pa_id": 51}), c => c.pa_value).join(',')}</span></div>
                     <div className="bioInfo">Year of Experience <span>{_.map(_.filter(_.get(trainer,'calibs',[]),{"pa_id": 68}), c => c.pa_value).join(',')}</span></div>
