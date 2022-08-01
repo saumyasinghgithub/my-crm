@@ -54,19 +54,23 @@ const TeacherService = (props) => {
     {_.get(trainer,'success',false)!==false && <>
             <div className="profile-wrapper">
             <div className="container100">
+    <div className='row'>
+        <div className='col-lg-3 col-md-3 col-12 pt-3 pb-1'>
             <div className="profiletabBox">
-            <ul className="profileTab slideInUp wow">
-                <li><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/about`} >01 About</a></li>
-                <li><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/service`}>02 Services</a></li>
-                <li><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/knowledge`}>03 Knowledge</a></li>
-                <li><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/community`}>04 Community</a></li>
-                <li className="lineANimation"><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/library`}trainer-library>05 Library</a></li>
-            </ul>           
-            </div> 
-            <div className="serviceWrapper container">
-                <div className="profileHeading">
-                    <img className="img-fluid imgTransfer" src={`${process.env.REACT_APP_API_URL}/uploads/service/${encodeURI(trainer.services[0].service_image)}`} alt="service" />
-                </div>  
+                <ul className="profileTab slideInUp wow">
+                    <li><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/about`} >01 About</a></li>
+                    <li><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/service`}>02 Services</a></li>
+                    <li><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/knowledge`}>03 Knowledge</a></li>
+                    <li><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/community`}>04 Community</a></li>
+                    <li className="lineANimation"><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/library`}trainer-library>05 Library</a></li>
+                </ul>          
+            </div>
+        </div>
+            <div className='col-lg-9 col-md-9 col-12 pt-2 pb-1'>
+                <img className="img-fluid imgTransfer" src={`${process.env.REACT_APP_API_URL}/uploads/service/${encodeURI(trainer.services[0].service_image)}`} alt="service" />
+            </div>
+        </div>
+            <div className="serviceWrapper container"> 
                 <div className="serviceHeading">                
                     <h1 className="headingtext slideInUp wow ">02 What I offer <ul className="profile-socail-icon">
                         <li><a href=""><img src="/assets/images/share-icon.png" alt="service" /></a></li>

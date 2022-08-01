@@ -20,15 +20,15 @@ const TeacherLibrary = (props) => {
         <div className="libraryeWrapper container">
             <div className="libraryHeading">                
                 <h1 className="headingtext slideInUp wow ">05 Library<ul className="profile-socail-icon">
-                    <li><a href=""><img src="assets/images/share-icon.png" alt="AD" /></a></li>
-                    <li><a href=""><img src="assets/images/link-icon.png" alt="AD" /></a></li>
+                    <li><a href=""><img src="/assets/images/share-icon.png" alt="AD" /></a></li>
+                    <li><a href=""><img src="/assets/images/link-icon.png" alt="AD" /></a></li>
                 </ul></h1>
                 
                 <div className="subHeading slideInUp wow ">Igenimu saeped qui volorest qui dia qui occus expeliqui nonse omnihic tem re, aut ut impossin rerectore</div>
             </div>
             <nav className="navbar navbar-expand-md  filterMenu slideInUp wow ">
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                    <h4>Filter for course <img src="assets/images/arrow.png" className="img-fluid" alt="AD" /></h4>
+                    <h4>Filter for course <img src="/assets/images/arrow.png" className="img-fluid" alt="AD" /></h4>
                 </button>                       
                   
                     <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
@@ -113,7 +113,7 @@ const TeacherLibrary = (props) => {
 
             <div className="libraryBody">              
                 <div className="libraryInfobox slideInUp wow ">
-                    <div className="LImgBox"><span className="new">New</span><img className="img-fluid" src="assets/images/knowledge_1.jpg" alt="AD" /></div>
+                    <div className="LImgBox"><span className="new">New</span><img className="img-fluid" src="/assets/images/knowledge_1.jpg" alt="AD" /></div>
                     <div className="LTextBox">
                         <div className="libraryTitle">
                             Personal Financial Well-Being Understanding Your Financial Life
@@ -128,8 +128,8 @@ const TeacherLibrary = (props) => {
                         </div>
                         <div className="libraryStar">
                             <i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i>
-                            <img className="img-fluid LLike" src="assets/images/like-icon.png" alt="AD" />
-                            <img className="img-fluid lShare" src="assets/images/share-icon.png" alt="AD" />
+                            <img className="img-fluid LLike" src="/assets/images/like-icon.png" alt="AD" />
+                            <img className="img-fluid lShare" src="/assets/images/share-icon.png" alt="AD" />
                         </div>
                     </div>
                     <div className="LPriceInfoBox">
@@ -139,7 +139,7 @@ const TeacherLibrary = (props) => {
                     </div>
                 </div>
                 <div className="libraryInfobox slideInUp wow ">
-                    <div className="LImgBox"><img className="img-fluid" src="assets/images/knowledge_2.jpg" alt="AD" /></div>
+                    <div className="LImgBox"><img className="img-fluid" src="/assets/images/knowledge_2.jpg" alt="AD" /></div>
                     <div className="LTextBox">
                         <div className="libraryTitle">
                             Personal Financial Well-Being Understanding Your Financial Life
@@ -154,8 +154,8 @@ const TeacherLibrary = (props) => {
                         </div>
                         <div className="libraryStar">
                             <i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i>
-                            <img className="img-fluid LLike" src="assets/images/like-icon.png" alt="AD" />
-                            <img className="img-fluid lShare" src="assets/images/share-icon.png" alt="AD" />
+                            <img className="img-fluid LLike" src="/assets/images/like-icon.png" alt="AD" />
+                            <img className="img-fluid lShare" src="/assets/images/share-icon.png" alt="AD" />
                         </div>
                     </div>
                     <div className="LPriceInfoBox">
@@ -165,7 +165,7 @@ const TeacherLibrary = (props) => {
                     </div>
                 </div>
                 <div className="libraryInfobox slideInUp wow ">
-                    <div className="LImgBox"><span className="new">Bestseller</span><img className="img-fluid" src="assets/images/knowledge_3.jpg" alt="AD" /></div>
+                    <div className="LImgBox"><span className="new">Bestseller</span><img className="img-fluid" src="/assets/images/knowledge_3.jpg" alt="AD" /></div>
                     <div className="LTextBox">
                         <div className="libraryTitle">
                             Personal Financial Well-Being Understanding Your Financial Life
@@ -180,8 +180,8 @@ const TeacherLibrary = (props) => {
                         </div>
                         <div className="libraryStar">
                             <i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i>
-                            <img className="img-fluid LLike" src="assets/images/like-icon.png" alt="AD" />
-                            <img className="img-fluid lShare" src="assets/images/share-icon.png" alt="AD" />
+                            <img className="img-fluid LLike" src="/assets/images/like-icon.png" alt="AD" />
+                            <img className="img-fluid lShare" src="/assets/images/share-icon.png" alt="AD" />
                         </div>
                     </div>
                     <div className="LPriceInfoBox">
@@ -191,7 +191,7 @@ const TeacherLibrary = (props) => {
                     </div>
                 </div>
                 <div className="libraryInfobox slideInUp wow ">
-                    <div className="LImgBox"><span className="new">New</span><img className="img-fluid" src="assets/images/knowledge_4.jpg" alt="AD" /></div>
+                    <div className="LImgBox"><span className="new">New</span><img className="img-fluid" src="/assets/images/knowledge_4.jpg" alt="AD" /></div>
                     <div className="LTextBox">
                         <div className="libraryTitle">
                             Personal Financial Well-Being Understanding Your Financial Life
@@ -206,8 +206,8 @@ const TeacherLibrary = (props) => {
                         </div>
                         <div className="libraryStar">
                             <i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i>
-                            <img className="img-fluid LLike" src="assets/images/like-icon.png" alt="AD" />
-                            <img className="img-fluid lShare" src="assets/images/share-icon.png" alt="AD" />
+                            <img className="img-fluid LLike" src="/assets/images/like-icon.png" alt="AD" />
+                            <img className="img-fluid lShare" src="/assets/images/share-icon.png" alt="AD" />
                         </div>
                     </div>
                     <div className="LPriceInfoBox">
@@ -217,7 +217,7 @@ const TeacherLibrary = (props) => {
                     </div>
                 </div>
                 <div className="libraryInfobox slideInUp wow ">
-                    <div className="LImgBox"><span className="new">New</span><img className="img-fluid" src="assets/images/knowledge_5.jpg" alt="AD" /></div>
+                    <div className="LImgBox"><span className="new">New</span><img className="img-fluid" src="/assets/images/knowledge_5.jpg" alt="AD" /></div>
                     <div className="LTextBox">
                         <div className="libraryTitle">
                             Personal Financial Well-Being Understanding Your Financial Life
@@ -232,8 +232,8 @@ const TeacherLibrary = (props) => {
                         </div>
                         <div className="libraryStar">
                             <i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i>
-                            <img className="img-fluid LLike" src="assets/images/like-icon.png" alt="AD" />
-                            <img className="img-fluid lShare" src="assets/images/share-icon.png" alt="AD" />
+                            <img className="img-fluid LLike" src="/assets/images/like-icon.png" alt="AD" />
+                            <img className="img-fluid lShare" src="/assets/images/share-icon.png" alt="AD" />
                         </div>
                     </div>
                     <div className="LPriceInfoBox">

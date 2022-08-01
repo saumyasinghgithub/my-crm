@@ -7,7 +7,7 @@ import Utils from './../Utils';
 import _ from 'lodash';
 import UserContext from './../contexts/UserContext';
 
-const TeacherKnowledge = (props) => {
+const TeacherCommunity = (props) => {
     const { slug } = useParams();
 
     const [trainer, setTrainer] = useState({});
@@ -58,11 +58,11 @@ const TeacherKnowledge = (props) => {
         <div className='col-lg-3 col-md-3 col-12 pt-3 pb-1'>
         <div className="profiletabBox">
         <ul className="profileTab slideInUp wow">
-                <li><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/about`} >01 About</a></li>
-                <li><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/service`}>02 Services</a></li>
-                <li><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/knowledge`}>03 Knowledge</a></li>
-                <li><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/community`}>04 Community</a></li>
-                <li className="lineANimation"><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/library`}trainer-library>05 Library</a></li>
+            <li><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/about`} >01 About</a></li>
+            <li><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/service`}>02 Services</a></li>
+            <li><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/knowledge`}>03 Knowledge</a></li>
+            <li><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/community`}>04 Community</a></li>
+            <li className="lineANimation"><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/library`}trainer-library>05 Library</a></li>
         </ul>          
         </div>
         </div>
@@ -179,4 +179,4 @@ const TeacherKnowledge = (props) => {
 </>);
 };
 
-export default TeacherKnowledge;
+export default TeacherCommunity;

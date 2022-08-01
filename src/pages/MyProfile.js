@@ -12,7 +12,8 @@ const MyProfile = (props) => {
         'exp': 'Professional Experiences',
         'awards': 'Awards/Certifications',
         'services': 'Trainer Services',
-        'knowledge': 'Trainer Knowledge'
+        'knowledge': 'Trainer Knowledge',
+        'community': 'Trainer Community'
     };
 
     const [tab, setTab] = useState('about');
@@ -43,6 +44,7 @@ const MyProfile = (props) => {
                         {tab==='awards' && <TrainerForms.AwardCertificationsForm />}
                         {tab==='services' && <TrainerForms.ServiceForm />}
                         {tab==='knowledge' && <TrainerForms.KnowledgeForm />}
+                        {tab==='community' && <TrainerForms.CommunityForm />}
                     </Tab.Pane>
                 </Tab.Content>
                 </Col>
