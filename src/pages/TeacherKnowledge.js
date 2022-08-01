@@ -1,29 +1,78 @@
-import React,{useEffect} from 'react';
-import {Container} from 'react-bootstrap';
+import React, { useEffect, useState, useContext} from 'react';
+import { Container, Spinner, Alert } from 'react-bootstrap';
+import {useParams} from "react-router-dom";
+
+import Utils from './../Utils';
+
+import _ from 'lodash';
+import UserContext from './../contexts/UserContext';
 
 const TeacherKnowledge = (props) => {
-    useEffect(window.scrollEffect,[]);
+    const { slug } = useParams();
+
+    const [trainer, setTrainer] = useState({});
+
+    const [loading, setLoading] = useState(true);
+
+    const {getServerData} = useContext(UserContext);
+
+    useEffect(()=>{
+        getServerData(`trainer/profile/${slug}`,true)
+        .then(tData => {
+            setTrainer(tData);
+            setLoading(false);
+        })
+        .catch(msg=> {
+            setTrainer({success: false, message: msg});
+            setLoading(false);
+        });
+    },[]);
+
+    useEffect(window.scrollEffect, [trainer]);
 
     return (<>
     <Container fluid className="h-100 p-0">
+    {loading && <>
+                <div className="profile-wrapper">
+                    <div className='container'>
+                        <h1>Trainer</h1>
+                        <Alert variant="warning"><div className="m-5">Looking for trainer details <Spinner animation="border" size="sm" /></div></Alert>
+                    </div>
+                </div>
+            </>}
+
+            {!loading && <>
+                {_.get(trainer,'success',false)===false && <>
+                    <div className="profile-wrapper">
+                        <div className='container'>
+                            <h1>Trainer</h1>
+                            <Alert variant="danger"><div className="m-5">{trainer.message}</div></Alert>
+                        </div>
+                    </div>
+                </>}  
+
+    {_.get(trainer,'success',false)!==false && <>              
     <div className="profile-wrapper">
     <div className="container100">
         <div className="profiletabBox">
-            <ul className="profileTab slideInUp wow ">
-                <li><a href={`${process.env.PUBLIC_URL}/view-profile`} >01 About</a></li>
-                <li><a href={`${process.env.PUBLIC_URL}/trainer-service`}>02 Services</a></li>
-                <li><a href={`${process.env.PUBLIC_URL}/trainer-knowledge`}>03 Knowledge</a></li>
-                <li><a href="">04 Community</a></li>
-                <li className="lineANimation"><a href={`${process.env.PUBLIC_URL}/trainer-library`}trainer-library>05 Library</a></li>
-            </ul>         
+        <ul className="profileTab slideInUp wow">
+                <li><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/about`} >01 About</a></li>
+                <li><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/service`}>02 Services</a></li>
+                <li><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/knowledge`}>03 Knowledge</a></li>
+                <li><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/community`}>04 Community</a></li>
+                <li className="lineANimation"><a href={`${process.env.PUBLIC_URL}/trainers/${slug}/library`}trainer-library>05 Library</a></li>
+        </ul>          
         </div> 
-        <div className="knowledgeWrapper container">
-            <div className="knowledgHeading">                
+        <div className="serviceWrapper container">
+            <div className="profileHeading">
+                <img className="img-fluid imgTransfer" src={`${process.env.REACT_APP_API_URL}/uploads/knowledge/${encodeURI(trainer.knowledge[0].knowledge_image)}`} alt="service" />
+            </div>  
+            <div className="serviceHeading">                
                 <h1 className="headingtext slideInUp wow ">03 Knowledge<ul className="profile-socail-icon">
                     <li><a href=""><img src="/assets/images/share-icon.png" alt="ad eyes" /></a></li>
                     <li><a href=""><img src="/assets/images/link-icon.png" alt="ad eyes" /></a></li>
                 </ul></h1>
-                <div className="subHeading slideInUp wow ">Igenimu saeped qui volorest qui dia qui occus expeliqui nonse omnihic tem re, aut ut impossin rerectore</div>
+                <div className="subHeading slideInUp wow " dangerouslySetInnerHTML={{__html:trainer.knowledge[0].about_knowledge}}></div>
             </div>
             <div className="knowledgBody">
                <div className="freeResouces lineANimation slideInUp wow ">Free Resources</div>
@@ -119,6 +168,8 @@ const TeacherKnowledge = (props) => {
     </div>
 
 </div>
+</>}
+</>}
     </Container>
 </>);
 };
