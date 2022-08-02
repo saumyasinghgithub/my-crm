@@ -67,7 +67,7 @@ const TeacherCommunity = (props) => {
         </div>
         </div>
             <div className='col-lg-9 col-md-9 col-12 pt-2 pb-1'>
-            <img className="img-fluid imgTransfer" src={`${process.env.REACT_APP_API_URL}/uploads/knowledge/${encodeURI(trainer.knowledge[0].knowledge_image)}`} alt="service" />
+            <img className="img-fluid imgTransfer" src={`${process.env.REACT_APP_API_URL}/uploads/community/${encodeURI(trainer.community[0].community_image)}`} alt="service" />
             </div>
         </div>
 
@@ -77,7 +77,7 @@ const TeacherCommunity = (props) => {
                     <li><a href=""><img src="/assets/images/share-icon.png" alt="ad eyes" /></a></li>
                     <li><a href=""><img src="/assets/images/link-icon.png" alt="ad eyes" /></a></li>
                 </ul></h1>
-                <div className="subHeading slideInUp wow " dangerouslySetInnerHTML={{__html:trainer.knowledge[0].about_knowledge}}></div>
+                <div className="subHeading slideInUp wow " dangerouslySetInnerHTML={{__html:trainer.community[0].about_community}}></div>
             </div>
             <div className="knowledgBody">
                <div className="freeResouces lineANimation slideInUp wow ">Free Resources</div>

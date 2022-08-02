@@ -52,14 +52,14 @@ const KnowledgeForm = (props) => {
   return <Form onSubmit={onSave}>
     <Form.Control type="hidden" name="id" defaultValue={_.get(myknowledge,'id','')} />
     <Form.Control type="hidden" name="old_knowledge_image" defaultValue={_.get(myknowledge,'knowledge_image','')} />
-    <h1>Trainer Services</h1>
+    <h1>Trainer Knowledge</h1>
 
     <Row>  
       <Col md={3} className="mt-3">  
         {photoUploader('knowledge','Upload image here')}
       </Col>
       <Col md={9} className="mt-3">  
-      <Form.Label>Trainer Service Details: </Form.Label>
+      <Form.Label>Trainer knowledge Details: </Form.Label>
       <Editor apiKey={process.env.TINYMCE_API_KEY}
         value={_.get(myknowledge,'about_knowledge','')}
         init={{

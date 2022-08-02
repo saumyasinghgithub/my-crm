@@ -5,22 +5,22 @@ import { Editor } from "@tinymce/tinymce-react";
 import _ from 'lodash';
 
 
-const CommunityForm = (props) => {
+const LibraryForm = (props) => {
 
-  const [mycommunity, setmycommunity] = useState({});
+  const [mylibrary, setmylibrary] = useState({});
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({success: false, message: ""});
   const {getServerData,setServerData} = useContext(UserContext);
 
   const onContentChange = (fld) => (value) => {
-    let c = {...mycommunity};
+    let c = {...mylibrary};
     c[fld] = value;
-    setmycommunity(c);
+    setmylibrary(c);
   }
 
   useEffect(() => {
-    getServerData('trainer/my-community')
-    .then(setmycommunity)
+    getServerData('trainer/my-library')
+    .then(setmylibrary)
     .catch(err => console.log(err));
   },[]);
   useEffect(window.scrollEffect,[]);
@@ -32,9 +32,10 @@ const CommunityForm = (props) => {
     const frm = e.currentTarget;
     e.preventDefault();
     let frmdata = new FormData(frm);
-    frmdata.append('about_community',_.get(mycommunity,'about_community',''));
+    frmdata.append('about_library',_.get(mylibrary,'about_library',''));
+    console.log(frmdata);
     setSaving(true);
-    setServerData('trainer/my-community',frmdata)
+    setServerData('trainer/my-library',frmdata)
     .then(res => {
       setSaving(false);
       setResponse(res);
@@ -45,37 +46,32 @@ const CommunityForm = (props) => {
     return <>
       <Form.Label>{title}</Form.Label>
       <Form.Control type="file" size="lg" name={fld+'_image'} accept=".jpeg,.png,.jpg;" />
-      <div className="text-center">{!_.isEmpty(_.get(mycommunity,fld+'_image','')) && <img src={`${process.env.REACT_APP_API_URL}/uploads/${fld}/${mycommunity[fld+'_image']}`} className="thumbnail mt-3" />}</div>
+      <div className="text-center">{!_.isEmpty(_.get(mylibrary,fld+'_image','')) && <img src={`${process.env.REACT_APP_API_URL}/uploads/${fld}/${mylibrary[fld+'_image']}`} className="thumbnail mt-3" />}</div>
     </>;
   }
 
   return <Form onSubmit={onSave}>
-    <Form.Control type="hidden" name="id" defaultValue={_.get(mycommunity,'id','')} />
-    <Form.Control type="hidden" name="old_community_image" defaultValue={_.get(mycommunity,'community_image','')} />
-    <h1>Trainer Community</h1>
+    <Form.Control type="hidden" name="id" defaultValue={_.get(mylibrary,'id','')} />
+    <Form.Control type="hidden" name="old_library_image" defaultValue={_.get(mylibrary,'library_image','')} />
+    <h1>Library Details</h1>
 
     <Row>  
       <Col md={3} className="mt-3">  
-        {photoUploader('community','Upload image here')}
+        {photoUploader('library','Upload image here')}
       </Col>
       <Col md={9} className="mt-3">  
-      <Form.Label>Trainer Community Details: </Form.Label>
+      <Form.Label>Trainer Library Details: </Form.Label>
       <Editor apiKey={process.env.TINYMCE_API_KEY}
-        value={_.get(mycommunity,'about_community','')}
+        value={_.get(mylibrary,'about_library','')}
         init={{
         height: 200,
         menubar: false,
         }}
-        onEditorChange={onContentChange('about_community')}
+        onEditorChange={onContentChange('about_library')}
         />
         </Col>
     </Row>
-    <Row>  
-      <Col md={12} className="mt-3">  
-      <Form.Label>Youtube Channel ID: </Form.Label>
-        <Form.Control type="text" name="youtube_community" placeholder="Enter your youtube channel ID" defaultValue={_.get(mycommunity,'youtube_community','')} />
-      </Col>
-    </Row>
+    
     <Row>
       <Col md={12} className="mt-3 text-right">
         {saving && <>Saving.. <Spinner animation="border" /></>}
@@ -88,4 +84,4 @@ const CommunityForm = (props) => {
 
 };
 
-export default CommunityForm;
+export default LibraryForm;
