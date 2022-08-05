@@ -1,24 +1,31 @@
 import {useState,useEffect, useContext} from 'react';
-
 import UserContext from './../contexts/UserContext';
-
 import {useParams} from "react-router-dom";
 import _ from 'lodash';
 
 const CourseDetails = (props) => {
 
-  const [course, setCourse] = useState({});
-  const { slug } = useParams();
+    const { slug } = useParams();
 
-  const {getServerData} = useContext(UserContext);
+    const [course, setCourse] = useState({});
 
+    const [loading, setLoading] = useState(true);
 
+    const {getServerData} = useContext(UserContext);
 
+    useEffect(()=>{
+        getServerData(`course/${slug}`,true)
+        .then(cData => {
+            setCourse(cData);
+            setLoading(false);
+        })
+        .catch(msg=> {
+            setCourse({success: false, message: msg});
+            setLoading(false);
+        });
+    },[]);
 
-  useEffect(() => {
-    getServerData(`course/${slug}`)
-    .then(setCourse)
-  },[]);
+  useEffect(window.scrollEffect, [course]);
 
 
   return (<>
