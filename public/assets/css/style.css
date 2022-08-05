@@ -4329,3 +4329,16 @@ ul.profile-socail-icon {
 .form-control-lg {
     height: calc(1.5em + 1.4rem + 2px) !important;
 }
+
+.clickable{
+    cursor: pointer;
+}
+
+.clickable.selected{
+    background-color: #f3ac1b69 !important;
+}
+
+
+.clickable.disabled{
+    cursor: disabled;
+}

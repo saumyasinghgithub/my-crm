@@ -9,6 +9,7 @@ const CourseDetails = (props) => {
     const { slug } = useParams();
 
     const [course, setCourse] = useState({});
+    const [bp, setBp] = useState([]);
 
     const [loading, setLoading] = useState(true);
 
@@ -27,6 +28,38 @@ const CourseDetails = (props) => {
     },[]);
 
   useEffect(window.scrollEffect, [course]);
+
+  const showBundlePrice = () => {
+    let price = parseFloat(_.get(course,'course.price',0));
+    _.forEach(bp, (b => price += b.price));
+    return price;
+  };
+
+  const bundleProduct = (resource) => {
+    let tmp = [...bp];
+    if(_.findIndex(tmp,(b => b.id===resource.id)) > -1){
+       tmp = _.filter(tmp, (b => b.id!==resource.id)); 
+    }else{
+        tmp.push(resource);
+    }
+    setBp(tmp);
+  };
+
+  const renderResource = (resource) => {
+    const restype = {
+        'pdf': 'pdf.png',
+        'PPT': 'doc-icon.png',
+        'audio': 'audio-icon.png',
+        'video': 'video.png',
+        'scorm': 'scome.png'
+    };
+    return  <li>
+        <div className={`circleBox wow zoomIn clickable ${_.findIndex(bp,(b => b.id===resource.id)) > -1 ? 'selected': ''}`} onClick={() => bundleProduct(resource)}>
+            <img className="img-fluid" src={`/assets/images/${_.get(restype,resource.type,'pdf.png')}`} />
+            <span className="usdheading">{resource.price} USD</span><span className="usdtext">{resource.type}</span>
+        </div>
+    </li>
+}
 
 
   return (<>
@@ -60,43 +93,9 @@ const CourseDetails = (props) => {
                   <li className="breadcrumb-item active" aria-current="page">English</li>
                 </ol>
             </nav>
+
             <ul className="iconList nav nav-tabs">
-                <li>
-                    <div className="circleBox wow zoomIn" >
-                        <a data-toggle="tab" href="#PDF">
-                            <img className="img-fluid" src="/assets/images/doc-icon.png" alt="AD" />
-                            <span className="usdheading">15 USD </span><span className="usdtext">PDF</span>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div className="circleBox wow zoomIn">
-                        <a data-toggle="tab" href="#Video">
-                            <img className="img-fluid" src="/assets/images/video.png" alt="AD" />
-                            <span className="usdheading">28 USD</span><span className="usdtext">Video</span>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div className="circleBox wow zoomIn">
-                        <a data-toggle="tab" href="#Audio">
-                            <img className="img-fluid" src="/assets/images/audio-icon.png" alt="AD" />
-                            <span className="usdheading">20 USD</span><span className="usdtext">Audio</span>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div className="circleBox wow zoomIn">
-                        <img className="img-fluid" src="/assets/images/edit-icon.png" alt="AD" />
-                        <span className="usdheading">10 USD</span><span className="usdtext">Quizz</span>
-                    </div>
-                </li>
-                <li>
-                    <div className="circleBox wow zoomIn">
-                        <img className="img-fluid" src="/assets/images/scome.png" alt="AD" />
-                        <span className="usdheading">25 USD</span><span className="usdtext">SCORM</span>
-                    </div>
-                </li>
+                {_.map(course.resources,renderResource)}
             </ul>
             <div className="tab-content">
                 <div className="courseWrapper coursecard tab-pane active" id="PDF">
@@ -106,7 +105,7 @@ const CourseDetails = (props) => {
                                 <span className="new">New</span>
                                 <div className="circleBox">
                                     <img className="img-fluid" src="/assets/images/bundle.png" alt="AD" />
-                                    <span className="usdheading active">{course.course.price}</span><span className="usdtext active">Bundle</span>
+                                    <span className="usdheading active">{showBundlePrice()}</span><span className="usdtext active">Bundle</span>
                                 </div>
                             </div>
                             <div className="textBoxCard">
@@ -138,7 +137,7 @@ const CourseDetails = (props) => {
                                         </div>
                                         <div className="col-lg-6">
                                             <div className="coursePrice">
-                                                {course.course.price} USD
+                                                {showBundlePrice()} USD
                                                 <span>( Bundle Price )</span>
                                             </div>
                                         </div>
@@ -153,7 +152,7 @@ const CourseDetails = (props) => {
     </div>
     <div className="courseDesWrapper">
         <div className="container">
-            {course.coursecontent.map(c=> <div className="courseDesBox slideInUp wow" key={c.id}>
+            {course.contents.map(c=> <div className="courseDesBox slideInUp wow" key={c.id}>
              <div dangerouslySetInnerHTML={{__html:c.description}}></div>
                 <div className="table-responsive">
                     <table className="table table-borderless">
