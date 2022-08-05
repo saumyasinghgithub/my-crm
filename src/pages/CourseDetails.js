@@ -1,8 +1,9 @@
 import {useState,useEffect, useContext} from 'react';
 import UserContext from './../contexts/UserContext';
+import { Container, Spinner, Alert } from 'react-bootstrap';
 import {useParams} from "react-router-dom";
 import _ from 'lodash';
-
+import moment from 'moment';
 const CourseDetails = (props) => {
 
     const { slug } = useParams();
@@ -29,7 +30,26 @@ const CourseDetails = (props) => {
 
 
   return (<>
-    <h1 className="m-5">{_.get(course,'title',"Title should come here")}</h1>
+   <Container fluid className="h-100 p-0">
+   {loading && <>
+                <div className="profile-wrapper">
+                    <div className='container'>
+                        <h1>Course</h1>
+                        <Alert variant="warning"><div className="m-5">Looking for course details <Spinner animation="border" size="sm" /></div></Alert>
+                    </div>
+                </div>
+            </>}
+
+            {!loading && <>
+                {_.get(course,'success',false)===false && <>
+                    <div className="profile-wrapper">
+                        <div className='container'>
+                            <h1>Course</h1>
+                            <Alert variant="danger"><div className="m-5">{course.message}</div></Alert>
+                        </div>
+                    </div>
+                </>}
+    {_.get(course,'success',false)!==false && <>
     <div className="cardWrapper">
         <div className="container">
             <nav className="breadcrumb-list" aria-label="breadcrumb">
@@ -82,22 +102,20 @@ const CourseDetails = (props) => {
                 <div className="courseWrapper coursecard tab-pane active" id="PDF">
                     <div className="row">
                         <div className="col-md-6 wow slideInUp">
-                            <div className="imgWrapper">
+                            <div className="imgWrapper"  style={{backgroundImage: `url("${process.env.REACT_APP_API_URL}/uploads/courses/${course.course.course_image}")` }}>
                                 <span className="new">New</span>
                                 <div className="circleBox">
                                     <img className="img-fluid" src="/assets/images/bundle.png" alt="AD" />
-                                    <span className="usdheading active">98 USD</span><span className="usdtext active">Bundle</span>
+                                    <span className="usdheading active">{course.course.price}</span><span className="usdtext active">Bundle</span>
                                 </div>
                             </div>
                             <div className="textBoxCard">
-                                <p>Learn the basics of Finance! We will cover compounding 
-                                interest and many other topics
-                                </p>
+                                <div dangerouslySetInnerHTML={{__html:course.course.short_description}}></div>
                                 <div className="cardInfoBox">
-                                    <span className="textBold">Created by</span> Ben Jacobs <span className="textBold">| Last updated</span> 3/2019<br />
-                                    <span className="textBold">Language:</span> English | <span className="textBold">Also available:</span> French, Spanish <br />
+                                    <span className="textBold">Created by</span> Ben Jacobs <span className="textBold">| Last updated</span> {moment(course.course.created_at).format("DD/MM/YYYY")}<br />
+                                    <span className="textBold">Language:</span> {course.course.language} | <span className="textBold">Also available:</span> {course.course.language} <br />
                                     <span className="textBold">Media:</span> PDF <img src="/assets/images/pdf.png" alt="AD" />, Video <img src="/assets/images/video1.png" alt="AD" />, Audio <img src="/assets/images/audio1.png" alt="AD" />, Quiz <img src="/assets/images/edit1.png" alt="AD" />, SCORM <img src="/assets/images/scrom.png" alt="AD" /><br />        
-                                    <span className="textBold">Level:</span> Advanced <span className="textBold">| Duration:</span> 18h 30 min
+                                    <span className="textBold">Level:</span> {course.course.level} <span className="textBold">| Duration:</span> {course.course.duration} Hours.
                                 </div>
                                 <div className="cardInforating">
                                     <p><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i> (412)  5,5,410 students enrolled</p>
@@ -106,31 +124,10 @@ const CourseDetails = (props) => {
                         </div>
                         <div className="col-md-6 slideInUp wow">
                             <div className="courseOverview">
-                                <h3>Finance for the Real World - <br />
-                                        Corporate Finance 101</h3>
-                                <div className="courseinfo">
-                                    <h5>What you’ll learn</h5>
-                                    <ul>
-                                        <li>Understand the Time Value of Money </li>
-                                        <li>Understand and Calculate the Net Present Value, Internal
-                                                Rate of Return and Payback Period for Capital Budgeting</li>
-                                        <li>Calculate the Future Value and Present Value of cash flows Theory? </li>
-                                    </ul>
-                                </div>                            
-                                <div className="courseinfo">
-                                    <h5>Requirements</h5>
-                                    <ul>
-                                        <li>A Raspberry Pi 2 or 3, model B</li>
-                                        <li>A Windows, Mac or Linux computer</li>
-                                        <li>Understand the difference between fixed and variable interest rates</li>
-                                    </ul> 
-                                </div>
-                                <div className="courseinfo">
-                                    <h5>Description</h5>
-                                    <p className="addReadMore showlesscontent">Do you want to understand the basic finance terms like Compounding 
-                                        Interest, Time Value of Money, Net Present Value and Modern Portfolio 
-                                        Theory? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                </div>
+                                <h3>{course.course.name}</h3>
+                                <div className="courseinfo" dangerouslySetInnerHTML={{__html:course.course.learn_brief}}></div>                            
+                                <div className="courseinfo" dangerouslySetInnerHTML={{__html:course.course.requirements}}></div>
+                                <div className="courseinfo addReadMore showlesscontent" dangerouslySetInnerHTML={{__html:course.course.description}}></div>
                                 <div className="coursebtn">
                                     <div className="row">
                                         <div className="col-lg-6">
@@ -141,79 +138,7 @@ const CourseDetails = (props) => {
                                         </div>
                                         <div className="col-lg-6">
                                             <div className="coursePrice">
-                                                98 USD
-                                                <span>( Bundle Price )</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="courseWrapper coursecard tab-pane" id="Video">
-                    <div className="row">
-                        <div className="col-md-6 wow slideInUp">
-                            <div className="imgWrapper">
-                                <span className="new">New</span>
-                                <div className="circleBox">
-                                    <img className="img-fluid" src="/assets/images/bundle.png" alt="AD" />
-                                    <span className="usdheading active">98 USD</span><span className="usdtext active">Bundle</span>
-                                </div>
-                            </div>
-                            <div className="textBoxCard">
-                                <p>Learn the basics of Finance! We will cover compounding 
-                                interest and many other topics
-                                </p>
-                                <div className="cardInfoBox">
-                                    <span className="textBold">Created by</span> Ben Jacobs <span className="textBold">| Last updated</span> 3/2019<br />
-                                    <span className="textBold">Language:</span> English | <span className="textBold">Also available:</span> French, Spanish <br />
-                                    <span className="textBold">Media:</span> PDF <img src="/assets/images/pdf.png" alt="AD" />, Video <img src="/assets/images/video1.png" alt="AD" />, Audio <img src="/assets/images/audio1.png" alt="AD" />, Quiz <img src="/assets/images/edit1.png" alt="AD" />, SCORM <img src="/assets/images/scrom.png" alt="AD" /><br />        
-                                    <span className="textBold">Level:</span> Advanced <span className="textBold">| Duration:</span> 18h 30 min
-                                </div>
-                                <div className="cardInforating">
-                                    <p><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i> (412)  5,5,410 students enrolled</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-6 slideInUp wow">
-                            <div className="courseOverview">
-                                <h3>Finance for the Real World - <br />
-                                        Corporate Finance 101</h3>
-                                <div className="courseinfo">
-                                    <h5>What you’ll learn</h5>
-                                    <ul>
-                                        <li>Understand the Time Value of Money </li>
-                                        <li>Understand and Calculate the Net Present Value, Internal
-                                                Rate of Return and Payback Period for Capital Budgeting</li>
-                                        <li>Calculate the Future Value and Present Value of cash flows Theory? </li>
-                                    </ul>
-                                </div>                            
-                                <div className="courseinfo">
-                                    <h5>Requirements</h5>
-                                    <ul>
-                                        <li>A Raspberry Pi 2 or 3, model B</li>
-                                        <li>A Windows, Mac or Linux computer</li>
-                                        <li>Understand the difference between fixed and variable interest rates</li>
-                                    </ul> 
-                                </div>
-                                <div className="courseinfo">
-                                    <h5>Description</h5>
-                                    <p className="addReadMore showlesscontent">Do you want to understand the basic finance terms like Compounding 
-                                        Interest, Time Value of Money, Net Present Value and Modern Portfolio 
-                                        Theory? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                </div>
-                                <div className="coursebtn">
-                                    <div className="row">
-                                        <div className="col-lg-6">
-                                            <div className="addButns">
-                                                <a href="#loginModal"  data-toggle="modal" data-dismiss="modal" className="btn btnBlue">Enroll Now</a>
-                                                <a href="#loginModal"  data-toggle="modal" data-dismiss="modal" className="btn btnBorder">Add to Favourite</a>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-6">
-                                            <div className="coursePrice">
-                                                98 USD
+                                                {course.course.price} USD
                                                 <span>( Bundle Price )</span>
                                             </div>
                                         </div>
@@ -228,25 +153,8 @@ const CourseDetails = (props) => {
     </div>
     <div className="courseDesWrapper">
         <div className="container">
-            <div className="courseDesBox slideInUp wow">
-                <h3>Course Prerequisite</h3>
-                <p className="addReadMore showlesscontent">You will learn how to use Excel/Google Sheets to calculate the Net Present Value of capital projects.
-                        I am a Chartered Financial Analyst and I have included course material from the CFA Level 1 Exam to help you 
-                        understand what the test would be like.
-                    </p>
-            </div>
-            <div className="courseDesBox slideInUp wow">
-                <h3>Description</h3>
-                <p className="addReadMore showlesscontent">Do you want to understand the basic finance terms like Compounding Interest, Time Value of Money, Net Present Value and 
-                        Modern Portfolio Theory?</p>
-            </div>
-            <div className="courseDesBox slideInUp wow">
-                <h3>About Instuctor</h3>
-                <p className="addReadMore showlesscontent">Ben started nos estorerepe nossita tionseq uaepere rumquia spient dolorro mi, cum eatis desto eraeptatis eatis 
-                    ape litios accaest odigenis pa de laccuptat. </p>
-               
-            </div>
-            <div className="courseDesBox slideInUp wow">       
+            {course.coursecontent.map(c=> <div className="courseDesBox slideInUp wow" key={c.id}>
+             <div dangerouslySetInnerHTML={{__html:c.description}}></div>
                 <div className="table-responsive">
                     <table className="table table-borderless">
                         <thead>
@@ -273,10 +181,15 @@ const CourseDetails = (props) => {
                         </tbody>
                     </table>
                 </div>      
-            </div>
+            </div> )}
             
         </div>
     </div>
+    </>}
+
+</>}
+   </Container>
+
   </>);
 
 };
