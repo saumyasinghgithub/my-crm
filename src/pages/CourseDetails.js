@@ -111,7 +111,7 @@ const CourseDetails = (props) => {
                             <div className="textBoxCard">
                                 <div dangerouslySetInnerHTML={{__html:course.course.short_description}}></div>
                                 <div className="cardInfoBox">
-                                    <span className="textBold">Created by</span> Ben Jacobs <span className="textBold">| Last updated</span> {moment(course.course.created_at).format("DD/MM/YYYY")}<br />
+                                    <span className="textBold">Created by</span> {course.about[0].firstname} {course.about[0].lastname} <span className="textBold">| Last updated</span> {moment(course.course.created_at).format("DD/MM/YYYY")}<br />
                                     <span className="textBold">Language:</span> {course.course.language} | <span className="textBold">Also available:</span> {course.course.language} <br />
                                     <span className="textBold">Media:</span> PDF <img src="/assets/images/pdf.png" alt="AD" />, Video <img src="/assets/images/video1.png" alt="AD" />, Audio <img src="/assets/images/audio1.png" alt="AD" />, Quiz <img src="/assets/images/edit1.png" alt="AD" />, SCORM <img src="/assets/images/scrom.png" alt="AD" /><br />        
                                     <span className="textBold">Level:</span> {course.course.level} <span className="textBold">| Duration:</span> {course.course.duration} Hours.
