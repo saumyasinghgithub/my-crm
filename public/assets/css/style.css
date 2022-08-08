@@ -2583,8 +2583,7 @@ span.subText {
 
 .slide-in-content.slide-in-contentteacher .col-sm-6:last-child ul.profile_menu_list {
     position: absolute;
-    bottom: 0;
-    width: 100%;
+    width: 80%;
 }
 
 .CompleteStudy .studytype span {

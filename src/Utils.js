@@ -90,11 +90,12 @@ const Utils = {
 
   isStudent: () => {
     let userData = Utils.getUserData();
-    return _.get(userData, "role_id", false) === process.env.STUDENT_ROLE;
+    return parseInt(_.get(userData, "role_id", 0)) === parseInt(process.env.REACT_APP_STUDENT_ROLE);
   },
   isTrainer: () => {
     let userData = Utils.getUserData();
-    return _.get(userData, "role_id", false) === process.env.TRAINER_ROLE;
+    console.log(parseInt(_.get(userData, "role_id", 0)), process.env)
+    return parseInt(_.get(userData, "role_id", 0)) === parseInt(process.env.REACT_APP_TRAINER_ROLE);
   },
 
 

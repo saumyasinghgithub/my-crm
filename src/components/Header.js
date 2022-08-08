@@ -10,13 +10,21 @@ const Header = (props) => {
     const [loggedIn,setLoggedIn] = useState(Utils.isLoggedIn());
     const {logout} = useContext(UserContext);
 
+    const getSlug = () => {
+        let url = process.env.PUBLIC_URL + "/";
+        url += Utils.isTrainer() ? "trainers" : "students"; 
+        url += "/" + Utils.getUserData().slug;
+        console.log(Utils.getUserData())
+        return url;
+    };
+
     const onLogout = (e) => {
         e.preventDefault();
         logout(() => {
             window.location.href='/';
         })
         return false;
-    }
+    };
 
     const $ = window.$;
         
@@ -62,7 +70,7 @@ const Header = (props) => {
         </div>
         <header className="header fixed-top">
             <div className="container">
-                <a className="navbar-brand" href="index.php">AD</a>
+                <a className="navbar-brand" href={`${process.env.PUBLIC_URL}/`}>AD</a>
                 <form className="searchBOx searchBOxwhite" >
                     <div className="input-group">
                         <div className="input-group-btn search-panel" data-search="students">
@@ -113,8 +121,9 @@ const Header = (props) => {
                     </div>
                     <div className="col-sm-6">
                         <ul className="profile_menu_list">
+                        <li><a href={`${process.env.PUBLIC_URL}/`}>Account Information</a></li>
                         {loggedIn &&
-                            <li><a href={`${process.env.PUBLIC_URL}/view-profile`}>View My Profile</a></li>  
+                            <li><a href={getSlug()}>View My Profile</a></li>  
                             }                            
                             <li><a href="" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Switch to Student</a></li>
                             <li><a href="logout" onClick={onLogout}>Log Out</a></li>

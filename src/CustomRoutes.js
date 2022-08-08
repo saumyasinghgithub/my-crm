@@ -1,5 +1,5 @@
 import {LoginLayout, StaticPageLayout, DefaultLayout} from './layouts';
-import {Login, About, Home, ADStudio, ADTrainer,MyProfile,MyCourse, CourseDetails, SearchResult, TeacherProfile, TeacherService, TeacherKnowledge, TeacherCommunity, TeacherLibrary, CourseList, ContactUs, ADStudent} from './pages';
+import {Login, About, Home, ADStudio, ADTrainer,MyProfile,MyCourse, CourseDetails, SearchResult, TeacherLanding, ContactUs, ADStudent} from './pages';
 
 
 const CustomRoutes = [  
@@ -41,41 +41,6 @@ const CustomRoutes = [
     'component' : MyProfile
   },
   {
-    'path'      : '/trainers/:slug/about', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : StaticPageLayout, 
-    'component' : TeacherProfile
-  },
-  {
-    'path'      : '/trainers/:slug/service', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : StaticPageLayout, 
-    'component' : TeacherService
-  },
-  {
-    'path'      : '/trainers/:slug/knowledge', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : StaticPageLayout, 
-    'component' : TeacherKnowledge
-  },
-  {
-    'path'      : '/trainers/:slug/community', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : StaticPageLayout, 
-    'component' : TeacherCommunity
-  },
-  {
-    'path'      : '/trainers/:slug/library', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : StaticPageLayout, 
-    'component' : TeacherLibrary
-  },
-  {
     'path'      : '/my-course', 
     'secure'    : false,    
     'exact'     : true,
@@ -83,11 +48,18 @@ const CustomRoutes = [
     'component' : MyCourse
   },
   {
-    'path'      : '/course-list', 
+    'path'      : '/trainers/:slug', 
     'secure'    : false,    
     'exact'     : true,
     'layout'    : StaticPageLayout, 
-    'component' : CourseList
+    'component' : TeacherLanding
+  },
+  {
+    'path'      : '/trainers/:slug/:page', 
+    'secure'    : false,    
+    'exact'     : true,
+    'layout'    : StaticPageLayout, 
+    'component' : TeacherLanding
   },
   {
     'path'      : '/courses/:slug', 

@@ -9,7 +9,7 @@ import _ from 'lodash';
 
 import UserContext from './../contexts/UserContext';
 
-const TeacherProfile = (props) => {
+const TeacherAbout = (props) => {
     
     const { slug } = useParams();
 
@@ -176,4 +176,4 @@ const TeacherProfile = (props) => {
     </>);
 };
 
-export default TeacherProfile;
+export default TeacherAbout;

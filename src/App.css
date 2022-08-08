@@ -100,3 +100,7 @@
 .headingtext.courselist {
   margin-top: 0px;
 }
+.col-sm-6:last-child ul.profile_menu_list{
+  position: absolute;
+  width: 80%;
+}
