@@ -4,11 +4,7 @@ import Home from "./Home";
 import ADStudio from "./ADStudio";
 import ADTrainer from "./ADTrainer";
 import MyProfile from "./MyProfile";
-import TeacherProfile from "./TeacherProfile";
-import TeacherService from "./TeacherService";
-import TeacherKnowledge from "./TeacherKnowledge";
-import TeacherCommunity from "./TeacherCommunity";
-import TeacherLibrary from "./TeacherLibrary";
+import TeacherLanding from "./TeacherLanding";
 import MyCourse from "./MyCourse";
 import CourseList from "./CourseList";
 import CourseDetails from "./CourseDetails";
@@ -17,4 +13,4 @@ import ADStudent from "./ADStudent";
 import ContactUs from "./ContactUs";
 
 
-export {Login, About, Home, ADStudio, ADTrainer, MyProfile, MyCourse, CourseDetails, SearchResult, TeacherProfile, TeacherService, TeacherKnowledge, TeacherCommunity, TeacherLibrary, CourseList, ContactUs, ADStudent};
+export {Login, About, Home, ADStudio, ADTrainer, MyProfile, MyCourse, CourseDetails, SearchResult, TeacherLanding, CourseList, ContactUs, ADStudent};

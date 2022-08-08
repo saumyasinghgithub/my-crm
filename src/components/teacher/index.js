@@ -1,8 +1,15 @@
-import TeacherCommunity  from "./TeacherCommunity";
-import TeacherKnowledge  from "./TeacherKnowledge";
-import TeacherLibrary  from "./TeacherLibrary";
+import TeacherAbout from "./TeacherAbout";
 import TeacherProfile  from "./TeacherProfile";
 import TeacherService  from "./TeacherService";
-import TeacherAbout from "./TeacherAbout";
+import TeacherKnowledge from "./TeacherKnowledge";
+import TeacherCommunity  from "./TeacherCommunity";
+import TeacherLibrary  from "./TeacherLibrary";
 
-export default {TeacherCommunity, TeacherKnowledge, TeacherLibrary, TeacherProfile, TeacherService,TeacherAbout};
+export {
+  TeacherProfile,
+  TeacherAbout,
+  TeacherService,
+  TeacherKnowledge,
+  TeacherCommunity,
+  TeacherLibrary
+};

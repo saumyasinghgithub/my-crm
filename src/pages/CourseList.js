@@ -1,7 +1,31 @@
-import React,{useEffect} from 'react';
+import React,{useEffect,useState, useContext} from 'react';
 import {Container} from 'react-bootstrap';
 
+import UserContext from './../contexts/UserContext';
+
 const CourseList = (props) => {
+
+    const slug = props.trainerSlug;
+
+    const [trainer, setTrainer] = useState({});
+
+    const [loading, setLoading] = useState(true);
+
+    const {getServerData} = useContext(UserContext);
+
+    useEffect(()=>{
+            getServerData(`trainer/${slug}/courses`,true)
+            .then(tData => {
+                console.log(tData);
+                setTrainer(tData);
+                setLoading(false);
+            })
+            .catch(msg=> {
+                setTrainer({success: false, message: msg});
+                setLoading(false);
+            });
+        },[]);
+
     useEffect(window.scrollEffect,[]);
 
     return (<>
