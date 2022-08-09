@@ -137,8 +137,8 @@ const showTrainerDetail = () => {
                    
                     {_.get(trainer,'courses.courses',[]).map(renderCourseItem)}
                     <div className="txtR">
-                        <a href={`${process.env.REACT_APP_PUBLIC_URL}/trainers/${trainer.slug}/about`} className="action tocart primary btn btnBlue"><span>View Profile</span></a>
-                        <a href={`${trainerURL}/course-list`} target="_blank" className="action tocart primary btn btnBlue"><span>View Courses</span></a>
+                        <a href={`${process.env.REACT_APP_PUBLIC_URL}/trainers/${trainer.slug}`} className="action tocart primary btn btnBlue"><span>View Profile</span></a>
+                        <a href={`${process.env.REACT_APP_PUBLIC_URL}/trainers/${trainer.slug}/courses`} target="_blank" className="action tocart primary btn btnBlue"><span>View Courses</span></a>
                         <a href="#" data-post="" className="action tocart primary btn btnBlue" data-action="add-to-wishlist">
                                 <span>Make Favourite</span></a>
                     </div>

@@ -4,6 +4,7 @@ import { Container, Spinner, Alert } from 'react-bootstrap';
 import {useParams} from "react-router-dom";
 import _ from 'lodash';
 import moment from 'moment';
+import Utils from './../Utils';
 const CourseDetails = (props) => {
 
     const { slug } = useParams();
@@ -111,9 +112,13 @@ const CourseDetails = (props) => {
                             <div className="textBoxCard">
                                 <div dangerouslySetInnerHTML={{__html:course.course.short_description}}></div>
                                 <div className="cardInfoBox">
-                                    <span className="textBold">Created by</span> {course.about[0].firstname} {course.about[0].lastname} <span className="textBold">| Last updated</span> {moment(course.course.created_at).format("DD/MM/YYYY")}<br />
+                                    <span className="textBold">Created by</span> {course.about.firstname} {course.about.lastname} <span className="textBold">| Last updated</span> {moment(course.course.created_at).format("DD/MM/YYYY")}<br />
                                     <span className="textBold">Language:</span> {course.course.language} | <span className="textBold">Also available:</span> {course.course.language} <br />
-                                    <span className="textBold">Media:</span> PDF <img src="/assets/images/pdf.png" alt="AD" />, Video <img src="/assets/images/video1.png" alt="AD" />, Audio <img src="/assets/images/audio1.png" alt="AD" />, Quiz <img src="/assets/images/edit1.png" alt="AD" />, SCORM <img src="/assets/images/scrom.png" alt="AD" /><br />        
+                                    <span className="textBold">Media:</span> 
+                                    {Utils.mediaTypes.map(m => _.find(course.resources, {type: m[0]}) && <span className="px-2">
+                                        {m[1]} <img src={`/assets/images/${m[2]}`} alt="AD" width="15" />
+                                    </span>)}
+                                        <br />        
                                     <span className="textBold">Level:</span> {course.course.level} <span className="textBold">| Duration:</span> {course.course.duration} Hours.
                                 </div>
                                 <div className="cardInforating">

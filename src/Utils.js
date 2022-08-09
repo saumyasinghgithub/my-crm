@@ -98,6 +98,14 @@ const Utils = {
     return parseInt(_.get(userData, "role_id", 0)) === parseInt(process.env.REACT_APP_TRAINER_ROLE);
   },
 
+  mediaTypes: [
+    ['pdf', "PDF", "pdf.png"],
+    ['PPT', "PPT", "doc-icon.png"],
+    ['video', "Video", "video1.png"],
+    ['audio', "Audio", "audio1.png"],
+    ['quiz',"Quiz", "edit1.png"],
+    ['scorm', "SCORM", "scrom.png"]
+  ],
 
   academicQualifications: ['10th Grade', '12th Grade', 'Graduation', 'Post-Graduation', 'Professional Degree', 'PhD'],
   courseLevel: ['Beginner', 'Intermediate', 'Proficient', 'Experienced', 'Advanced', 'Expert'],
