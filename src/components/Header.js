@@ -109,7 +109,12 @@ const Header = (props) => {
                     <div className="row">
                     <div className="col-sm-6">
                         <ul className="profile_menu_list">
+                        {Utils.isTrainer() && 
                             <li><a href={`${process.env.PUBLIC_URL}/my-profile`} className="active">My Profile</a></li>
+                        }
+                        {Utils.isStudent() && 
+                            <li><a href={`${process.env.PUBLIC_URL}/student/my-profile/edit`} className="active">My Profile</a></li>
+                        }
                             <li><a href="sales.php">Sales</a></li>
                             {Utils.isTrainer() && 
                             <li><a href="my-students.php">My Students</a></li>
