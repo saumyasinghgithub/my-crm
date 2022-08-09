@@ -2569,8 +2569,8 @@ span.subText {
     left: 0;
 }
 
-.slide-in-content .col-sm-6:last-child ul.profile_menu_list li:nth-child(3) {
-    margin-top: 120px;
+.slide-in-content .col-sm-6:last-child ul.profile_menu_list li:nth-child(4) {
+    margin-top: 60px;
 }
 
 .slide-in-content.slide-in-contentteacher .col-sm-6:first-child ul.profile_menu_list li:nth-child(4) {

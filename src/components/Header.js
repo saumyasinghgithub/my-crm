@@ -114,7 +114,12 @@ const Header = (props) => {
                             {Utils.isTrainer() && 
                             <li><a href="my-students.php">My Students</a></li>
                             }
-                            <li><a href={`${process.env.PUBLIC_URL}/my-course`}>My Course</a></li>
+                            {Utils.isTrainer() && 
+                           <li><a href={`${process.env.PUBLIC_URL}/my-course`}>My Course</a></li>
+                            }
+                            {Utils.isStudent() &&
+                            <li><a href={`${process.env.PUBLIC_URL}`}>Prefered Courses</a></li>
+                            }
                             <li><a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a></li>
                             <li><a href="">Help for you</a></li>   
                         </ul>
@@ -124,7 +129,10 @@ const Header = (props) => {
                         <li><a href={`${process.env.PUBLIC_URL}/`}>Account Information</a></li>
                         {loggedIn &&
                             <li><a href={getSlug()}>View My Profile</a></li>  
-                            }                            
+                        }
+                        {Utils.isStudent() &&
+                            <li><a href={getSlug()}>Prefered Trainer</a></li>  
+                        }                        
                             <li><a href="" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Switch to Student</a></li>
                             <li><a href="logout" onClick={onLogout}>Log Out</a></li>
                         </ul>
