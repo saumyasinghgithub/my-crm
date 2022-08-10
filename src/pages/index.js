@@ -12,6 +12,7 @@ import SearchResult from "./SearchResult";
 import ADStudent from "./ADStudent";
 import ContactUs from "./ContactUs";
 import StudentProfile from "./StudentProfile"
+import MyCart from "./MyCart";
 
 
-export {Login, About, Home, ADStudio, ADTrainer, MyProfile, MyCourse, CourseDetails, SearchResult, TeacherLanding, CourseList, ContactUs, ADStudent,StudentProfile};
+export {Login, About, Home, ADStudio, ADTrainer, MyProfile, MyCourse, CourseDetails, SearchResult, TeacherLanding, CourseList, ContactUs, ADStudent,StudentProfile,MyCart};

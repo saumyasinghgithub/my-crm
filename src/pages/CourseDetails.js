@@ -46,6 +46,12 @@ const CourseDetails = (props) => {
     setBp(tmp);
   };
 
+  const cartData = (e) => {
+    e.preventDefault();
+    window.location.href = '/my-cart';
+
+}
+
   const renderResource = (resource) => {
     const restype = {
         'pdf': 'pdf.png',
@@ -136,7 +142,7 @@ const CourseDetails = (props) => {
                                     <div className="row">
                                         <div className="col-lg-6">
                                             <div className="addButns">
-                                                <a href="#loginModal"  data-toggle="modal" data-dismiss="modal" className="btn btnBlue">Enroll Now</a>
+                                                <a href="#loginModal" onClick={cartData}  data-toggle="modal" data-dismiss="modal" className="btn btnBlue">Enroll Now</a>
                                                 <a href="#loginModal"  data-toggle="modal" data-dismiss="modal" className="btn btnBorder">Add to Favourite</a>
                                             </div>
                                         </div>

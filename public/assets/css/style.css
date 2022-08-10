@@ -1360,7 +1360,7 @@ button.applyBtn.btn {
 }
 
 .cartRightBox {
-    margin: 0px 10px;
+    margin: 0px 10px 0 70px;
     height: 100%;
     box-shadow: 0px 4px 6px #ccc;
     padding: 20px 40px 20px 20px;
