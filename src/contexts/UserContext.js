@@ -48,9 +48,9 @@ const UserProvider = (props) => {
     });
   }
 
-  const setServerData = (url,data) => {
+  const setServerData = (url,data, method = 'put') => {
     return new Promise((resolve,reject) => {
-      axios.put(Utils.apiUrl(url),data,Utils.apiHeaders())
+      axios[method](Utils.apiUrl(url),data,Utils.apiHeaders())
       .then(res => {   
         if(res.data.success){
           resolve(res.data);

@@ -35,7 +35,7 @@ const LoginModal = (props) => {
             setLogining(false);
             setLoginResp({success: success, message: message});
             if(success){
-                window.setTimeout(() => {window.location.href='/';}, 2000);
+                window.setTimeout(() => {window.location.reload();}, 2000);
             }
         })
 
@@ -48,7 +48,7 @@ const LoginModal = (props) => {
         <div className="modal-content">
                 <div className="overlay"></div>
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                    <img className="img-fluid" src="assets/images/close-circle.png" />
+                    <img className="img-fluid" src="/assets/images/close-circle.png" />
                 </button>
                 {logining && <div className="alert alert-info p-5 m-5">
                     Trying to login...

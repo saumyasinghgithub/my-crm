@@ -13,8 +13,9 @@ const CourseDetails = (props) => {
     const [bp, setBp] = useState([]);
 
     const [loading, setLoading] = useState(true);
+    const [addingToCart, setAddingToCart] = useState(false);
 
-    const {getServerData} = useContext(UserContext);
+    const {getServerData, setServerData} = useContext(UserContext);
 
     useEffect(()=>{
         getServerData(`course/${slug}`,true)
@@ -46,10 +47,20 @@ const CourseDetails = (props) => {
     setBp(tmp);
   };
 
-  const cartData = (e) => {
+  const addToCart = (e) => {
     e.preventDefault();
-    window.location.href = '/my-cart';
+    let cartData = new FormData();
+    cartData.append("course_id", course.course.id);
+    cartData.append("course_resources", JSON.stringify(_.map(bp, b => _.pick(b,['type','name','price']))));
+    cartData.append("price", showBundlePrice());
+    cartData.append("is_bundle", parseInt(_.get(bp,'length',0)) > 0 ? 1 : 0);
+    
+    setAddingToCart(true);
 
+    setServerData(`cart`,cartData,'post')
+    .then(res => {
+        window.location.href = '/my-cart';
+    }).catch(err => console.error(err));
 }
 
   const renderResource = (resource) => {
@@ -71,7 +82,17 @@ const CourseDetails = (props) => {
 
   return (<>
    <Container fluid className="h-100 p-0">
-   {loading && <>
+
+            {addingToCart && <>
+                <div className="profile-wrapper">
+                    <div className='container'>
+                        <h1>Course</h1>
+                        <Alert variant="info"><div className="m-5">Adding course to cart <Spinner animation="border" size="sm" /></div></Alert>
+                    </div>
+                </div>
+            </>}
+
+            {loading && <>
                 <div className="profile-wrapper">
                     <div className='container'>
                         <h1>Course</h1>
@@ -80,7 +101,7 @@ const CourseDetails = (props) => {
                 </div>
             </>}
 
-            {!loading && <>
+            {!addingToCart && !loading && <>
                 {_.get(course,'success',false)===false && <>
                     <div className="profile-wrapper">
                         <div className='container'>
@@ -142,8 +163,13 @@ const CourseDetails = (props) => {
                                     <div className="row">
                                         <div className="col-lg-6">
                                             <div className="addButns">
-                                                <a href="#loginModal" onClick={cartData}  data-toggle="modal" data-dismiss="modal" className="btn btnBlue">Enroll Now</a>
-                                                <a href="#loginModal"  data-toggle="modal" data-dismiss="modal" className="btn btnBorder">Add to Favourite</a>
+                                                {!Utils.isLoggedIn() && <>
+                                                    <a href="#" data-toggle="modal" data-target="#loginModal" className="btn btnBlue">Login to Enroll</a>
+                                                </>}
+                                                {Utils.isLoggedIn() && <>
+                                                    <a href="#" onClick={addToCart}  className="btn btnBlue">Enroll Now</a>
+                                                    <a href="#" className="btn btnBorder">Add to Favourite</a>
+                                                </>}
                                             </div>
                                         </div>
                                         <div className="col-lg-6">

@@ -69,7 +69,7 @@ const JoinAsStudent = (props) => {
             <div className="modal-content">
                 <div className="overlay"></div>
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                    <img className="img-fluid" src="assets/images/close-circle.png" alt="AD closed" />
+                    <img className="img-fluid" src="/assets/images/close-circle.png" alt="AD closed" />
                 </button> 
                 <div className="modal-body p-4">
                     <div className="container">
@@ -77,13 +77,13 @@ const JoinAsStudent = (props) => {
                             <h3>Join in <span className='joinastrainer'> NOW TO CONNECT with </span> <br />the world's top branded trainers</h3>
                             <ul>
                                 <li>Sign Up with</li>
-                                <li><a href=""><img className="img-fluid" src="assets/images/fb.png" alt="AD on FB" /></a></li>
+                                <li><a href=""><img className="img-fluid" src="/assets/images/fb.png" alt="AD on FB" /></a></li>
                                 {/* <li>or</li> */}
-                                <li><a href=""><img className="img-fluid" src="assets/images/google-plus.png" alt="AD on google" /></a></li>
+                                <li><a href=""><img className="img-fluid" src="/assets/images/google-plus.png" alt="AD on google" /></a></li>
                                 {/* <li>or</li> */}
-                                <li><a href=""><img className="img-fluid" src="assets/images/linkedin.png" alt="AD on LinkedIn" /></a></li>
+                                <li><a href=""><img className="img-fluid" src="/assets/images/linkedin.png" alt="AD on LinkedIn" /></a></li>
                                 {/* <li>or</li> */}
-                                <li><a href=""><img className="img-fluid" src="assets/images/mail.png" alt="AD on Email" /></a></li>
+                                <li><a href=""><img className="img-fluid" src="/assets/images/mail.png" alt="AD on Email" /></a></li>
                             </ul>
                             <form ref={frmRef} method="post" className="needs-validation" noValidate onSubmit={submitForm}>
                                 { showMessage &&  
