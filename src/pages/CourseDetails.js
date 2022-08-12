@@ -59,7 +59,7 @@ const CourseDetails = (props) => {
 
     setServerData(`cart`,cartData,'post')
     .then(res => {
-        //window.location.href = '/my-cart';
+        window.location.href = '/my-cart';
     }).catch(err => console.error(err));
 }
 

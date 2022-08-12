@@ -2,12 +2,22 @@ import React,{useEffect,useState, useContext} from 'react';
 import {Container, Form, Button,Row, Col, Alert, Spinner} from 'react-bootstrap';
 import _ from 'lodash';
 import UserContext from './../contexts/UserContext';
-
+import axios from 'axios';
+import Utils from '../Utils';
 const MyCart = (props) => {
 
     const {getServerData} = useContext(UserContext);
 
     const [cart, setCart] = useState({loading: true});
+
+    const deleteRecord = (id)  => (e) => {
+        if(window.confirm("You are going to delete record, are you sure?")){
+          axios.delete(Utils.apiUrl(`cart/${id}`),Utils.apiHeaders())
+          .then(res => {
+            window.alert(res.data.message);
+          })
+        }
+      };
 
     useEffect(()=>{
         getServerData('cart')
@@ -76,10 +86,10 @@ const MyCart = (props) => {
                                             {showBundleResources(cData)}
                                         </Col>
                                         <Col md={2}>
-                                            <div className="LPriceInfoBox">
+                                            <div className="LPriceInfoBoxCart">
                                                 <i class="fa fa-heart"></i>
-                                                <i class="fa fa-trash pl-2 pr-2"></i>
-                                                <i class="fa fa-edit"></i>
+                                                <a here='' onClick={deleteRecord(cData.id)}><i class="fa fa-trash pl-2 pr-2"></i></a>
+                                                <a href={`${process.env.REACT_APP_PUBLIC_URL}/courses/${cData.slug}`}><i class="fa fa-edit"></i></a>
                                             </div>
                                         </Col>
                                     </Row>)}
