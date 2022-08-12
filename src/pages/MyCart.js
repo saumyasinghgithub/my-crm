@@ -15,9 +15,20 @@ const MyCart = (props) => {
           axios.delete(Utils.apiUrl(`cart/${id}`),Utils.apiHeaders())
           .then(res => {
             window.alert(res.data.message);
+            window.location.reload();
           })
         }
       };
+
+    const emptyCart = (e) => {
+    if(window.confirm("You are going to empty all items from the cart, are you sure?")){
+        axios.delete(Utils.apiUrl(`cart/empty`),Utils.apiHeaders())
+        .then(res => {
+            window.alert(res.data.message);
+            window.location.reload();
+        })
+    }
+    };
 
     useEffect(()=>{
         getServerData('cart')
@@ -98,11 +109,11 @@ const MyCart = (props) => {
 
                                     <Row className="add-space">
                                         <Col sm={5} className="text-left p-0">
-                                        <Button className="btn btn-sm btnBlue font-weight-normal" type="submit" >Continue Shopping</Button>
+                                        <a href="/search-results" className="btn btn-sm btnBlue font-weight-normal" >Continue Shopping</a>
                                         </Col>
                                         <Col sm={2}></Col>
                                         <Col sm={5}  className="text-right p-0">
-                                        <Button className="btn btn-sm btnBlue font-weight-normal btn btn-primary" type="submit" >Clear Cart</Button>
+                                        <Button className="btn btn-sm btnBlue font-weight-normal btn btn-primary" type="button" onClick={emptyCart} >Clear Cart</Button>
                                         </Col>
                                     </Row>
 

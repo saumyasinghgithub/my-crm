@@ -83,9 +83,9 @@ const showPageInfo = () => {
     return <>{_.min([filter.start + filter.limit, tData.pageInfo.total])} of {_.get(tData,'pageInfo.total',0)} trainers</>
 }
 
-const renderResource = (icon, type,resources) => {
+const renderResource = (icon, type,resources, cnt) => {
     const res = _.filter(resources,{type: type});
-    return  <>
+    return  cnt < 4 && <>
         {res.length > 0 && <li>
             <div className="circleBox">
                 <img className="img-fluid" src={`/assets/images/${icon}`} />
@@ -95,7 +95,7 @@ const renderResource = (icon, type,resources) => {
     </>
 }
 
-const renderCourseItem = (course) => {
+const renderResources = (resources) => {
 
     const res = {
         'pdf': 'pdf.png',
@@ -104,13 +104,31 @@ const renderCourseItem = (course) => {
         'video': 'video.png',
         'scorm': 'scome.png'
     };
+
+    let resIdx = 0; 
+
+    return <>
+    
+        {_.map(res,(icon,type) => {
+
+                resIdx += (_.findIndex(resources, {type: type}) > -1 ? 1 : 0);
+
+                return renderResource(icon,type,resources, resIdx);
+        })}
+
+        {resIdx > 3 && <li className="dotmore"><span></span><span></span><span></span></li>}
+    </>;
+};
+
+const renderCourseItem = (course) => {
+
+    
     return <div className="bioBodyInfolist">
         <a href={`${process.env.PUBLIC_URL}/courses/${course.slug}`}>
             <ul>
                 <li>{course.name}</li>
                 <li><img className="img-fluid iconImg" src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`} /></li>
-                {_.map(res,(icon,type) => renderResource(icon,type,course.resources))}
-                {course.resources.length > 3 && <li className="dotmore"><span></span><span></span><span></span></li>}
+                {renderResources(course.resources)}
             </ul>
         </a>
     </div>;
