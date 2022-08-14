@@ -94,7 +94,6 @@ const Utils = {
   },
   isTrainer: () => {
     let userData = Utils.getUserData();
-    console.log(parseInt(_.get(userData, "role_id", 0)), process.env)
     return parseInt(_.get(userData, "role_id", 0)) === parseInt(process.env.REACT_APP_TRAINER_ROLE);
   },
 
@@ -106,6 +105,35 @@ const Utils = {
     ['quiz',"Quiz", "edit1.png"],
     ['scorm', "SCORM", "scrom.png"]
   ],
+industies : [
+              "Agriculture",
+              "Information Technology",
+              "Mining, and Oil and Gas Extraction",
+              "Construction",
+              "Manufacturing",
+              "Wholesale Trade",
+              "Retail Trade",
+              "Transportation and Warehousing",
+              "Finance and Insurance",
+              "Professional, Scientific, and Technical Services",
+              "Educational Services",
+              "Health Care and Social Assistance",
+              "Arts, Entertainment, and Recreation",
+              "Accommodation and Food Services",
+              "Other Services (except Public Administration",
+              "Public Administration"
+            ],
+  countryList : ["Afghanistan","Albania","Argentina","Australia","Belgium","Belgium","Brazil","Canada","China",
+  "Cambodia","Colombia","Cuba","Denmark","France","Georgia","Germany","Greece","Hong Kong","Hungary","Iceland",
+  "Indonesia","India","Italy","Japan","Jordan","Kuwait","Libya","Mexico","Nigeria","Philippines","Russia","Singapore",
+  "South Africa","Spain","Taiwan","Tajikistan","Turkey","Ukraine","United Arab Emirates","United States of America (USA)",
+  "United Kingdom","Venezuela","Zimbabwe","Venezuela","Viet Nam","Zimbabwe" ],
+  interestedField : ["Architecture and engineering", "Arts", "culture and entertainment", "Business", "management and administration",
+  "Communications", "Education", "Science and technology", "Archeologist","Software engineer","Laboratory technician","Microbiologist",
+  "Physicist", "Journalist", "Copywriter", "Public relations specialist", "Meeting/event planner", "Social media manager", "Brand manager",
+  "Human resources manager", "Marketing assistant", "Accountants/Finance", "Secretary","Entrepreneur/small business owner", "Singer/songwriter",
+  "Music producer", "Art curator", "Animator/video game designer", "Filmmaker", "Graphic designer", "Fashion designer", "Photographer", "Anesthesiologist",
+  "Dental assistant", "Nurse", "Veterinarian", "Physical therapist", "Lawyer", "Lobbyist"],
 
   academicQualifications: ['10th Grade', '12th Grade', 'Graduation', 'Post-Graduation', 'Professional Degree', 'PhD'],
   courseLevel: ['Beginner', 'Intermediate', 'Proficient', 'Experienced', 'Advanced', 'Expert'],

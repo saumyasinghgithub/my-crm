@@ -2,6 +2,7 @@ import {useEffect, useContext, useState} from 'react';
 import {Form, Alert, Spinner, Row, Col, Button} from 'react-bootstrap';
 import UserContext from './../../contexts/UserContext';
 import { Editor } from "@tinymce/tinymce-react";
+import Utils from './../../Utils';
 import _ from 'lodash';
 
 
@@ -72,8 +73,41 @@ const AboutForm = (props) => {
         <Form.Label>Trainer Profile URL: </Form.Label>
         <Form.Control type="text" name="slug" placeholder="Enter your slug" defaultValue={_.get(myabout,'slug','')} />
       </Col>
-     
+    </Row>  
+    <Row>
+      <Col md={6} className="mt-3">
+        <Form.Label>Industry: </Form.Label>
+        <Form.Control as="select" name="industry">
+            <option value=""> - Select Qualification - </option>
+            {Utils.industies.map(v => <option key={v} value={v} selected={_.get(myabout,`${v}.industry`,'')===v}>{v}</option>)}
+          </Form.Control>
+      </Col> 
+      <Col md={6} className="mt-3">
+        <Form.Label>Qualification: </Form.Label>
+        <Form.Control as="select" name="qualification">
+            <option value=""> - Select Qualification - </option>
+            {Utils.academicQualifications.map(v => <option key={v} value={v} selected={_.get(myabout,`${v}.qualification`,'')===v}>{v}</option>)}
+          </Form.Control>
+      </Col> 
     </Row>
+
+    <Row>
+      <Col md={6} className="mt-3">
+        <Form.Label>Interested Field: </Form.Label>
+        <Form.Control as="select" name="interested_field">
+            <option value=""> - Select Qualification - </option>
+            {Utils.interestedField.map(v => <option key={v} value={v} selected={_.get(myabout,`${v}.interested_field`,'')===v}>{v}</option>)}
+          </Form.Control>
+      </Col> 
+      <Col md={6} className="mt-3">
+        <Form.Label>Country: </Form.Label>
+        <Form.Control as="select" name="country">
+            <option value=""> - Select Country - </option>
+            {Utils.countryList.map(v => <option key={v} value={v} selected={_.get(myabout,`${v}.country`,'')===v}>{v}</option>)}
+          </Form.Control>
+      </Col> 
+    </Row>
+    
 
     <Row>  
       <Col md={6} className="mt-3">  
@@ -97,7 +131,28 @@ const AboutForm = (props) => {
         />
         </Col>
     </Row>
-    
+
+    <Row>
+      <Col md={6} className="mt-3">
+        <Form.Label>LinkedIn Profile URL: </Form.Label>
+        <Form.Control type="text" name="linkedin" placeholder="Enter your LinkedIn Profile URL" defaultValue={_.get(myabout,'linkedin','')} />
+      </Col>
+      <Col md={6} className="mt-3">
+        <Form.Label>Facebook Profile URL: </Form.Label>
+        <Form.Control type="text" name="facebook" placeholder="Enter your Facebook Profile URL" defaultValue={_.get(myabout,'facebook','')} />
+      </Col>
+    </Row>
+    <Row>
+      <Col md={6} className="mt-3">
+        <Form.Label>Youtube Profile URL: </Form.Label>
+        <Form.Control type="text" name="youtube" placeholder="Enter your Youtube Profile URL" defaultValue={_.get(myabout,'youtube','')} />
+      </Col>
+      <Col md={6} className="mt-3">
+        <Form.Label>Twitter Profile URL: </Form.Label>
+        <Form.Control type="text" name="twitter" placeholder="Enter your Twitter Profile URL" defaultValue={_.get(myabout,'twitter','')} />
+      </Col>
+    </Row>
+
     <Row>
       <Col md={12} className="mt-3 text-right">
         {saving && <>Saving.. <Spinner animation="border" /></>}

@@ -12,9 +12,9 @@ const Header = (props) => {
 
     const getSlug = () => {
         let url = process.env.PUBLIC_URL + "/";
-        url += Utils.isTrainer() ? "trainers" : "students"; 
-        url += "/" + Utils.getUserData().slug;
-        console.log(Utils.getUserData())
+        url += Utils.isTrainer() ? "trainers" : "student/my-profile"; 
+        url += Utils.isStudent() ? "/": "/" + Utils.getUserData().slug;
+        //console.log(Utils.getUserData())
         return url;
     };
 

@@ -1,15 +1,64 @@
-import React,{useEffect} from 'react';
-import {Container} from 'react-bootstrap';
-import AboutForm from '../components/student/AboutForm';
+import React,{useEffect,useState, useContext} from 'react';
+import {Container, Row, Col, Spinner, Alert} from 'react-bootstrap';
+
+import UserContext from './../contexts/UserContext';
+import _ from 'lodash';
+import moment from 'moment';
+
 const StudentProfileView = (props) => {
+    const [data, setData] = useState({});
+
+    const [loading, setLoading] = useState(true);
+
+    const {getServerData} = useContext(UserContext);
+    useEffect(() => {
+        getServerData('student/my-about')
+        .then(sData => {
+            console.log(sData);
+            setData(sData);
+            setLoading(false);
+        })
+        .catch(msg=> {
+            setData({success: false, message: msg});
+            setLoading(false);
+        });
+      },[]);
 
 
     useEffect(window.scrollEffect,[]);
     
     return (<>
-    <Container fluid className="h-100 p-0">
+    <Container fluid className="h-100 p-5">
+            {loading && <>
+                <div className="profile-wrapper">
+                    <div className='container'>
+                        <h1>Student Profile</h1>
+                        <Alert variant="warning"><div className="m-5">Looking for Student Profile <Spinner animation="border" size="sm" /></div></Alert>
+                    </div>
+                </div>
+            </>}
+            {!loading && <>
+                {_.get(data,'success',true)===false && <>
+                    <div className="profile-wrapper">
+                        <div className='container'>
+                            <h1>Student Profile</h1>
+                            <Alert variant="danger"><div className="m-5">{data.message}</div></Alert>
+                        </div>
+                    </div>
+            </>}
+    {_.get(data,'success',false)!==false && <>                
     <div className="profile-wrapper profile-wrapperStudent">
     <div className="container">
+        <Row>
+            <Col md={12}>
+            <nav>
+                <ol className="cd-breadcrumb">
+                    <li><a href="/">Home</a></li>
+                    <li className="current"><em>{data.firstname} {data.lastname}</em></li>
+                    </ol>
+            </nav>
+            </Col>
+        </Row>
         <div className="row">
             <div className="col-md-5">
                 <div className="profileLeftBox slideInUp wow">
@@ -27,6 +76,7 @@ const StudentProfileView = (props) => {
                 </div>
             </div>
             <div className="col-md-7">
+                
                 <div className="profileRightBox clearfix slideInUp wow">
                     <img className="img-fluid myProfileImg imgTransfer"src="/assets/images/my-profile.png" />
                     
@@ -163,6 +213,8 @@ const StudentProfileView = (props) => {
         </div>
     </div>
     </div> 
+    </>}
+</>}
 </Container>
 </>);
 }; 
