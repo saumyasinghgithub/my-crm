@@ -137,8 +137,12 @@ const Header = (props) => {
                         }
                         {Utils.isStudent() &&
                             <li><a href={getSlug()}>Prefered Trainer</a></li>  
-                        }                        
-                            <li><a href="" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Switch to Student</a></li>
+                        } 
+
+                        {Utils.isTrainer() &&
+                            <li><a href={`${process.env.PUBLIC_URL}/my-blog`} >My Blog</a></li>
+                        }                       
+                            
                             <li><a href="logout" onClick={onLogout}>Log Out</a></li>
                         </ul>
                     </div>
