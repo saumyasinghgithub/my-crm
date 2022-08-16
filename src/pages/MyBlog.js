@@ -24,7 +24,7 @@ const MyBlog = (props) => {
             return row[v];
         },
         sortable: true,
-        width: 300
+        width: "200px"
         
     }));
     
