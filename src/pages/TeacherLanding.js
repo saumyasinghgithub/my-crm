@@ -4,6 +4,8 @@ import {useParams} from "react-router-dom";
 
 import CourseList from './CourseList';
 
+import BlogList from './BlogList';
+
 import {TeacherProfile} from './../components/teacher';
 
 import Utils from './../Utils';
@@ -19,6 +21,7 @@ const TeacherLanding = (props) => {
     
         {page==='courses' && <CourseList trainerSlug={slug} />}
         {page!=='courses' && <TeacherProfile trainerSlug={slug} page={_.isEmpty(page) ? "about" : page} />}
+        {page==='blogs' && <BlogList trainerSlug={slug} />}
     </Container>;
 };
 

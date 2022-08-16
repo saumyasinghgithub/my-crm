@@ -68,7 +68,7 @@ const TeacherProfile = (props) => {
                             
                             {page==='about' && <TeacherAbout {...params} data={trainer.about} academics={trainer.academics} experiences={trainer.experiences} awards={trainer.awards}  />}
                             {page==='service' && <TeacherService data={trainer.service} {...params}  />}
-                            {page==='knowledge' && <TeacherKnowledge data={trainer.knowledge} {...params} />}
+                            {page==='knowledge' && <TeacherKnowledge data={trainer.knowledge} blogs={trainer.blogs} {...params} />}
                             {page==='community' && <TeacherCommunity data={trainer.community} {...params} />}
                             {page==='library' && <TeacherLibrary data={trainer.about} {...params} />}
 

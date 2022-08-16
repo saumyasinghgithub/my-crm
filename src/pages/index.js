@@ -15,6 +15,7 @@ import StudentProfile from "./StudentProfile";
 import MyCart from "./MyCart";
 import StudentProfileView from "./StudentProfileView";
 import MyBlog from "./MyBlog";
+import BlogList from './BlogList';
 
 
-export {Login, About, Home, ADStudio, ADTrainer, MyProfile, MyCourse, CourseDetails, SearchResult, TeacherLanding, CourseList, ContactUs, ADStudent,StudentProfile,MyCart,StudentProfileView, MyBlog};
+export {Login, About, Home, ADStudio, ADTrainer, MyProfile, MyCourse, CourseDetails, SearchResult, TeacherLanding, CourseList, ContactUs, ADStudent,StudentProfile,MyCart,StudentProfileView, MyBlog, BlogList};

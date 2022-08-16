@@ -14,8 +14,7 @@ const StudentProfileView = (props) => {
     useEffect(() => {
         getServerData('student/my-about')
         .then(sData => {
-            console.log(sData);
-            setData(sData);
+            setData({success: true, data: sData});
             setLoading(false);
         })
         .catch(msg=> {

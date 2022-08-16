@@ -2,13 +2,35 @@ import React, { useEffect} from 'react';
 
 import _ from 'lodash';
 
+import Utils from './../../Utils';
+
 import TeacherNav from './TeacherNav';
 
 const TeacherKnowledge = (props) => {
     
     const data = props.data;
 
+    const blogs = props.blogs;
+
     useEffect(window.scrollEffect, []);
+
+    const renderBlog = (blog) => {
+        return <div className="col-sm-6 col-md-4" key={blog.id}>
+        <div className="knowledgeBox slideInUp wow ">
+            <div className="knowledgeImg">
+                 <img className="img-fluid" src={`${process.env.REACT_APP_API_URL}/uploads/blog/${blog.blog_image}`} alt="ad blog" />
+            </div>
+            <div className="knowledgeTitle">{blog.name}</div>
+            <div className="knowledgeBody">
+             Publish Date: {Utils.shortDate(blog.created_at)}
+            </div>
+            <div className="knowledgeFooter clearfix">
+                <div className="FText">Blog</div>
+                <ul><li><a href={`/trainers/${props.slug}/blogs/${blog.slug}`}><img src="/assets/images/eyes.png" alt="ad eyes" /></a></li><li><a href=""><img src="/assets/images/share-icon.png" alt="ad share" /></a></li></ul>
+            </div>
+        </div>
+    </div>;
+    }
 
     return (<>
     <div className='row'>
@@ -31,91 +53,9 @@ const TeacherKnowledge = (props) => {
             <div className="knowledgBody">
                <div className="freeResouces lineANimation slideInUp wow ">Free Resources</div>
                <div className="row">
-                   <div className="col-sm-6 col-md-4">
-                       <div className="knowledgeBox slideInUp wow ">
-                           <div className="knowledgeImg">
-                                <img className="img-fluid" src="/assets/images/knowledge_1.jpg" alt="ad blog" />
-                           </div>
-                           <div className="knowledgeTitle">
-                            Personal Financial Well-Being Understanding Your Financial Life
-                           </div>
-                           <div className="knowledgeBody">
-                            By Ben Jacobs | Publish Date
-                           </div>
-                           <div className="knowledgeFooter clearfix">
-                               <div className="FText">Blog</div>
-                               <ul><li><a href=""><img src="/assets/images/eyes.png" alt="ad eyes" /></a></li><li><a href=""><img src="/assets/images/share-icon.png" alt="ad share" /></a></li></ul>
-                           </div>
-                       </div>
-                   </div>
-                   <div className="col-sm-6 col-md-4">
-                        <div className="knowledgeBox slideInUp wow ">
-                            <div className="knowledgeImg">
-                                <img className="img-fluid" src="/assets/images/knowledge_2.jpg" alt="ad blog" />
-                            </div>
-                            <div className="knowledgeTitle">
-                            Personal Financial Well-Being Understanding Your Financial Life
-                            </div>
-                            <div className="knowledgeBody">
-                            By Ben Jacobs | Publish Date
-                            </div>
-                            <div className="knowledgeFooter clearfix">
-                                <div className="FText">Blog</div>
-                                <ul><li><a href=""><img src="/assets/images/eyes.png" alt="ad eyes" /></a></li><li><a href=""><img src="/assets/images/share-icon.png" alt="ad eyes" /></a></li></ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-6 col-md-4">
-                        <div className="knowledgeBox slideInUp wow ">
-                            <div className="knowledgeImg">
-                                    <img className="img-fluid" src="/assets/images/knowledge_3.jpg" alt="ad blog"/>
-                            </div>
-                            <div className="knowledgeTitle">
-                                Personal Financial Well-Being Understanding Your Financial Life
-                            </div>
-                            <div className="knowledgeBody">
-                                By Ben Jacobs | Publish Date
-                            </div>
-                            <div className="knowledgeFooter clearfix">
-                                <div className="FText">Video</div>
-                                <ul><li><a href=""><img src="/assets/images/eyes.png" alt="ad eyes" /></a></li><li><a href=""><img src="/assets/images/share-icon.png" alt="ad eyes" /></a></li></ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-6 col-md-4">
-                        <div className="knowledgeBox slideInUp wow ">
-                            <div className="knowledgeImg">
-                                <img className="img-fluid" src="/assets/images/knowledge_4.jpg" alt="ad blog"/>
-                            </div>
-                            <div className="knowledgeTitle">
-                                Personal Financial Well-Being Understanding Your Financial Life
-                            </div>
-                            <div className="knowledgeBody">
-                                By Ben Jacobs | Publish Date
-                            </div>
-                            <div className="knowledgeFooter clearfix">
-                                <div className="FText">Book</div>
-                                <ul><li><a href=""><img src="/assets/images/eyes.png" alt="ad eyes" /></a></li><li><a href=""><img src="/assets/images/share-icon.png" alt="ad share" /></a></li></ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-6 col-md-4">
-                        <div className="knowledgeBox slideInUp wow ">
-                            <div className="knowledgeImg">
-                                    <img className="img-fluid" src="/assets/images/knowledge_5.jpg" alt="ad blog"/>
-                            </div>
-                            <div className="knowledgeTitle">
-                                Personal Financial Well-Being Understanding Your Financial Life
-                            </div>
-                            <div className="knowledgeBody">
-                                By Ben Jacobs | Publish Date
-                            </div>
-                            <div className="knowledgeFooter clearfix">
-                                <div className="FText">Book</div>
-                                <ul><li><a href=""><img src="/assets/images/eyes.png" alt="ad eyes" /></a></li><li><a href=""><img src="/assets/images/share-icon.png"  alt=""/></a></li></ul>
-                            </div>
-                        </div>
-                    </div>
+                   
+                   {blogs.map(renderBlog)}
+                   
                </div>
             </div>
         </div>              

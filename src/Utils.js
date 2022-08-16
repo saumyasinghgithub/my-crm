@@ -3,6 +3,8 @@ import moment from 'moment';
 
 const Utils = {
 
+  shortDate: (dt) => moment(dt).format('MMM DD, YYYY'),
+
   dateTime: (dt) => moment(dt).format('DD-MM-YYYY HH:mm'),
   
   apiUrl: (path) => process.env.REACT_APP_API_URL+'/'+path,
