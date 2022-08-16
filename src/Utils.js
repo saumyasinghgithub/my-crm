@@ -107,7 +107,7 @@ const Utils = {
     ['quiz',"Quiz", "edit1.png"],
     ['scorm', "SCORM", "scrom.png"]
   ],
-industies : [
+industries : [
               "Agriculture",
               "Information Technology",
               "Mining, and Oil and Gas Extraction",

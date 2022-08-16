@@ -78,15 +78,15 @@ const AboutForm = (props) => {
       <Col md={6} className="mt-3">
         <Form.Label>Industry: </Form.Label>
         <Form.Control as="select" name="industry">
-            <option value=""> - Select Qualification - </option>
-            {Utils.industies.map(v => <option key={v} value={v} selected={_.get(myabout,`${v}.industry`,'')===v}>{v}</option>)}
+            <option value=""> - Select Industry - </option>
+            {Utils.industries.map(v => <option key={v} value={v} selected={_.get(myabout, 'industry','')===v}>{v}</option>)}
           </Form.Control>
       </Col> 
       <Col md={6} className="mt-3">
         <Form.Label>Qualification: </Form.Label>
         <Form.Control as="select" name="qualification">
             <option value=""> - Select Qualification - </option>
-            {Utils.academicQualifications.map(v => <option key={v} value={v} selected={_.get(myabout,`${v}.qualification`,'')===v}>{v}</option>)}
+            {Utils.academicQualifications.map(v => <option key={v} value={v} selected={_.get(myabout,`qualification`,'')===v}>{v}</option>)}
           </Form.Control>
       </Col> 
     </Row>
@@ -95,15 +95,15 @@ const AboutForm = (props) => {
       <Col md={6} className="mt-3">
         <Form.Label>Interested Field: </Form.Label>
         <Form.Control as="select" name="interested_field">
-            <option value=""> - Select Qualification - </option>
-            {Utils.interestedField.map(v => <option key={v} value={v} selected={_.get(myabout,`${v}.interested_field`,'')===v}>{v}</option>)}
+            <option value=""> - Select Interested Field - </option>
+            {Utils.interestedField.map(v => <option key={v} value={v} selected={_.get(myabout,`interested_field`,'')===v}>{v}</option>)}
           </Form.Control>
       </Col> 
       <Col md={6} className="mt-3">
         <Form.Label>Country: </Form.Label>
         <Form.Control as="select" name="country">
             <option value=""> - Select Country - </option>
-            {Utils.countryList.map(v => <option key={v} value={v} selected={_.get(myabout,`${v}.country`,'')===v}>{v}</option>)}
+            {Utils.countryList.map(v => <option key={v} value={v} selected={_.get(myabout,`country`,'')===v}>{v}</option>)}
           </Form.Control>
       </Col> 
     </Row>

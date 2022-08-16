@@ -20,7 +20,6 @@ const CourseList = (props) => {
     useEffect(()=>{
             getServerData(`trainer/${slug}/courses`,true)
             .then(tData => {
-                console.log(tData);
                 setData(tData);
                 setLoading(false);
             })

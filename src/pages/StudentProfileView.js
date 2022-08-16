@@ -13,8 +13,9 @@ const StudentProfileView = (props) => {
     const {getServerData} = useContext(UserContext);
     useEffect(() => {
         getServerData('student/my-about')
-        .then(sData => {
-            setData({success: true, data: sData});
+        .then(data => {
+            setData({success: true, data: data});
+            console.log(data.firstname);
             setLoading(false);
         })
         .catch(msg=> {
@@ -24,7 +25,7 @@ const StudentProfileView = (props) => {
       },[]);
 
 
-    useEffect(window.scrollEffect,[]);
+    useEffect(window.scrollEffect,[data]);
     
     return (<>
     <Container fluid className="h-100 p-5">
@@ -37,7 +38,7 @@ const StudentProfileView = (props) => {
                 </div>
             </>}
             {!loading && <>
-                {_.get(data,'success',true)===false && <>
+                {_.get(data,'success',false)===false && <>
                     <div className="profile-wrapper">
                         <div className='container'>
                             <h1>Student Profile</h1>
@@ -53,7 +54,7 @@ const StudentProfileView = (props) => {
             <nav>
                 <ol className="cd-breadcrumb">
                     <li><a href="/">Home</a></li>
-                    <li className="current"><em>{data.firstname} {data.lastname}</em></li>
+                    <li className="current"><em>{data.data.firstname} {data.data.lastname}</em></li>
                     </ol>
             </nav>
             </Col>
@@ -61,23 +62,29 @@ const StudentProfileView = (props) => {
         <div className="row">
             <div className="col-md-5">
                 <div className="profileLeftBox slideInUp wow">
-                    <p>Industry <span className="boldText">Academics</span><br />
-                        Qulification <span className="boldText">Master</span><br />
-                        Interested field <span className="boldText">Marketing/Finance</span><br />
-                        Country <span className="boldText">USA</span></p>
+                    <p>Industry <span className="boldText">{data.data.industry}</span><br />
+                        Qulification <span className="boldText">{data.data.qualification}</span><br />
+                        Interested field <span className="boldText">{data.data.interested_field}</span><br />
+                        Country <span className="boldText">{data.data.country}</span></p>
                     <div className="proTextTtile">
-                        <h1 className="headingtext">M. J. <br />
-                            Winter</h1>
+                        <h1 className="headingtext">{data.data.firstname} <br />
+                            {data.data.lastname}</h1>
                         <p>Joined 26/04/2018<br /> Courses 21</p>
-                        <p>Connect with M. J. on in</p>
-                        <p>Sent a Message <img src="/assets/images/send-icon.png" alt="AD" /></p>
+                        <p>Connect with {data.data.firstname} on </p>
+                        <div class="profileFollowList">
+                            <ul>
+                                <li><a href={data.data.facebook} target="_blank"><i className="fab fa-facebook-f"></i></a></li>
+                                <li><a href={data.data.linkedin} target="_blank"><i className="fab fa-linkedin-in"></i></a></li>
+                                <li><a href={data.data.twitter} target="_blank"><i className="fab fa-twitter"></i></a></li>
+                                <li><a href={data.data.youtube} target="_blank"><i className="fab fa-youtube"></i></a></li></ul>
+                        </div>
                     </div>    
                 </div>
             </div>
             <div className="col-md-7">
                 
                 <div className="profileRightBox clearfix slideInUp wow">
-                    <img className="img-fluid myProfileImg imgTransfer"src="/assets/images/my-profile.png" />
+                    <img className="img-fluid myProfileImg imgTransfer"src="/assets/images/my-profile.png" alt="AD" />
                     
                 </div>
             </div>
@@ -85,12 +92,10 @@ const StudentProfileView = (props) => {
 
             </div>
             <div className="col-sm-7 slideInUp wow">
-                <h1 className="headingtext">Experience </h1>
+                <h1 className="headingtext">About </h1>
                 <div className="awardTextInner awardwithoutLine">
                     <div className="awadText">
-                        <p>Omnis et atet labo. Nem quiamus, voloribus et omnihicatque volorpor accaeprat dolupta tibus, venimus 
-                                dolorroris dollandam et aut di ne quaspis ea debitatur aute. Vit fugias dus aut reratiis ent eos ap As ea perisque aut quibusamet as recto maximet ut ex excepere nobitatum consenes debis dolupta audit que volupta 
-                                sitintorro et, nosandit mos estrunt. </p>                        
+                        <div dangerouslySetInnerHTML={{__html: data.data.biography}}></div>                      
                     </div>
                 </div>
 
