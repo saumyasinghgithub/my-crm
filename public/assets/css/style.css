@@ -4341,3 +4341,6 @@ ul.profile-socail-icon {
 .clickable.disabled{
     cursor: disabled;
 }
+.successheading {text-align: center;padding: 30px 0;}
+.succpage {text-align: center;padding: 20px 0;}
+.succpage a {color: #ffffff; font-weight: bold;}

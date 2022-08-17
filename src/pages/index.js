@@ -16,6 +16,8 @@ import MyCart from "./MyCart";
 import StudentProfileView from "./StudentProfileView";
 import MyBlog from "./MyBlog";
 import BlogList from './BlogList';
+import Success from "./Success";
+import CookiePolicy from "./CookiePolicy";
 
 
-export {Login, About, Home, ADStudio, ADTrainer, MyProfile, MyCourse, CourseDetails, SearchResult, TeacherLanding, CourseList, ContactUs, ADStudent,StudentProfile,MyCart,StudentProfileView, MyBlog, BlogList};
+export {Login, About, Home, ADStudio, ADTrainer, MyProfile, MyCourse, CourseDetails, SearchResult, TeacherLanding, CourseList, ContactUs, ADStudent,StudentProfile,MyCart,StudentProfileView, MyBlog, BlogList, Success, CookiePolicy};

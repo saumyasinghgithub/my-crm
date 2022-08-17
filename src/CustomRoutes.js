@@ -1,5 +1,5 @@
 import {LoginLayout, StaticPageLayout, DefaultLayout} from './layouts';
-import {Login, About, Home, ADStudio, ADTrainer,MyProfile,MyCourse, CourseDetails, SearchResult, TeacherLanding, ContactUs, ADStudent, StudentProfile, MyCart, StudentProfileView, MyBlog} from './pages';
+import {Login, About, Home, ADStudio, ADTrainer,MyProfile,MyCourse, CourseDetails, SearchResult, TeacherLanding, ContactUs, ADStudent, StudentProfile, MyCart, StudentProfileView, MyBlog, Success} from './pages';
 
 
 const CustomRoutes = [  
@@ -98,6 +98,13 @@ const CustomRoutes = [
     'component' : ADStudent
   },
   {
+    'path'      : '/success', 
+    'secure'    : false,    
+    'exact'     : true,
+    'layout'    : StaticPageLayout, 
+    'component' : Success
+  },
+  {
     'path'      : '/my-cart', 
     'secure'    : false,    
     'exact'     : true,
@@ -120,6 +127,13 @@ const CustomRoutes = [
   },
   {
     'path'      : '/contact-us', 
+    'secure'    : false,    
+    'exact'     : true,
+    'layout'    : StaticPageLayout, 
+    'component' : ContactUs
+  },
+  {
+    'path'      : '/cookie-plicy', 
     'secure'    : false,    
     'exact'     : true,
     'layout'    : StaticPageLayout, 
