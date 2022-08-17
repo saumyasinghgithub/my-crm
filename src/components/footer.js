@@ -6,7 +6,7 @@ const Footer = (props) => {
     <div className="container-fluid">
         <ul className="footerLeft">
             <li>Copyright © 2022 AUTODIDACT</li>
-            <li><a href="terms-condition.php">Terms</a></li>
+            <li><a href={`${process.env.PUBLIC_URL}/term-conditions`}>Terms</a></li>
             <li><a href={`${process.env.PUBLIC_URL}/privacy-policy`}>Privacy Policy</a></li>
             <li><a href={`${process.env.PUBLIC_URL}/cookie-policy`}>Cookie Policy</a></li>
         </ul>
