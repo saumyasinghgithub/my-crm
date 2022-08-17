@@ -99,6 +99,20 @@ const Utils = {
     return parseInt(_.get(userData, "role_id", 0)) === parseInt(process.env.REACT_APP_TRAINER_ROLE);
   },
 
+  loadJS: (src, failedmsg) => {
+    return new Promise((resolve,reject) => {
+        const script = document.createElement("script");
+        script.src = src;
+        script.onload = () => {
+            resolve(true);
+        };
+        script.onerror = () => {
+            reject(failedmsg);
+        };
+        document.body.appendChild(script);
+    });
+  },
+
   mediaTypes: [
     ['pdf', "PDF", "pdf.png"],
     ['PPT', "PPT", "doc-icon.png"],
