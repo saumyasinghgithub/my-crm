@@ -18,6 +18,7 @@ import MyBlog from "./MyBlog";
 import BlogList from './BlogList';
 import Success from "./Success";
 import CookiePolicy from "./CookiePolicy";
+import PrivacyPolicy from "./PrivacyPolicy";
 
 
-export {Login, About, Home, ADStudio, ADTrainer, MyProfile, MyCourse, CourseDetails, SearchResult, TeacherLanding, CourseList, ContactUs, ADStudent,StudentProfile,MyCart,StudentProfileView, MyBlog, BlogList, Success, CookiePolicy};
+export {Login, About, Home, ADStudio, ADTrainer, MyProfile, MyCourse, CourseDetails, SearchResult, TeacherLanding, CourseList, ContactUs, ADStudent,StudentProfile,MyCart,StudentProfileView, MyBlog, BlogList, Success, CookiePolicy, PrivacyPolicy};

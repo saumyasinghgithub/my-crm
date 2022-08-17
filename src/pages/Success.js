@@ -7,12 +7,12 @@ const Success = (props) => {
     return (<>
     <Container className="h-100 ">
     <div className="help-wrapper">
-    <nav>
-                        <ol class="cd-breadcrumb">
-                            <li><a href="/">Home</a></li>
-                            <li class="current"><em>Success</em></li>
-                        </ol>
-                    </nav>
+      <nav>
+            <ol class="cd-breadcrumb">
+               <li><a href="/">Home</a></li>
+               <li class="current"><em>Success</em></li>
+            </ol>
+      </nav>
    <div className="">
       <img src="assets/images/success-page.jpg" alt="" />
       <div className="AD-help">

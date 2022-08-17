@@ -7,8 +7,8 @@ const Footer = (props) => {
         <ul className="footerLeft">
             <li>Copyright © 2022 AUTODIDACT</li>
             <li><a href="terms-condition.php">Terms</a></li>
-            <li><a href="privacy-policy.php">Privacy Policy</a></li>
-            <li><a href="cookie.php">Cookie Policy</a></li>
+            <li><a href={`${process.env.PUBLIC_URL}/privacy-policy`}>Privacy Policy</a></li>
+            <li><a href={`${process.env.PUBLIC_URL}/cookie-policy`}>Cookie Policy</a></li>
         </ul>
         <ul className="footerRight">
             <li><a href=""><img src="assets/images/reddit.png"/></a></li>
