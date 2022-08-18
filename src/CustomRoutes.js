@@ -1,5 +1,5 @@
 import {LoginLayout, StaticPageLayout, DefaultLayout} from './layouts';
-import {Login, About, Home, ADStudio, ADTrainer,MyProfile,MyCourse, CourseDetails, SearchResult, TeacherLanding, ContactUs, ADStudent, StudentProfile, MyCart, StudentProfileView, MyBlog, Success, CookiePolicy, PrivacyPolicy, TermConditions, MyOrder} from './pages';
+import {Login, About, Home, ADStudio, ADTrainer,MyProfile,MyCourse, CourseDetails, SearchResult, TeacherLanding, ContactUs, ADStudent, StudentProfile, MyCart, StudentProfileView, MyBlog, Success, CookiePolicy, PrivacyPolicy, TermConditions, MyOrder, MySales} from './pages';
 
 
 const CustomRoutes = [  
@@ -124,6 +124,13 @@ const CustomRoutes = [
     'exact'     : true,
     'layout'    : StaticPageLayout, 
     'component' : MyOrder
+  },
+  {
+    'path'      : '/my-sales', 
+    'secure'    : true,    
+    'exact'     : true,
+    'layout'    : StaticPageLayout, 
+    'component' : MySales
   },
   {
     'path'      : '/student/my-profile/edit', 

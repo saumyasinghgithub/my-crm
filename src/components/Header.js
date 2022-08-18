@@ -122,17 +122,17 @@ const Header = (props) => {
                             <li><a href={`${process.env.PUBLIC_URL}/my-sales`}>My Sales</a></li>
                         }
                             
-                            {Utils.isTrainer() && 
+                        {Utils.isTrainer() && 
                             <li><a href="my-students.php">My Students</a></li>
-                            }
-                            {Utils.isTrainer() && 
+                        }
+                        {Utils.isTrainer() && 
                            <li><a href={`${process.env.PUBLIC_URL}/my-course`}>My Course</a></li>
-                            }
-                            {Utils.isStudent() &&
+                        }
+                        {Utils.isStudent() &&
                             <li><a href={`${process.env.PUBLIC_URL}`}>Prefered Courses</a></li>
-                            }
-                            <li><a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a></li>
-                            <li><a href="">Help for you</a></li>   
+                        }
+                        <li><a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a></li>
+                        <li><a href="">Help for you</a></li>   
                         </ul>
                     </div>
                     <div className="col-sm-6">
