@@ -40,6 +40,7 @@ const MyCart = (props) => {
         }).catch(err => {
             setCart({...cart, data: [], message: err.message, loading: false});
         });
+
     },[]);
 
     useEffect(window.scrollEffect,[cart]);
@@ -80,6 +81,7 @@ const MyCart = (props) => {
           'prefill': {
             'name': `${udata.firstname} ${udata.middlename} ${udata.lastname}`,
             'email': udata.email,
+            'contact': '+919868256219'
           },
           image: `${process.env.PUBLIC_URL}/logo192.png`,      
           theme: {
@@ -87,17 +89,15 @@ const MyCart = (props) => {
           },
           handler: (res1) => {
             axios.post(Utils.apiUrl("cart/orderSuccess"), {
-              ...orderData,
-              orderCreationId: orderData.order_id,
+              ..._.omit(orderData,['key','order_id']),
               razorpayPaymentId: res1.razorpay_payment_id,
               razorpayOrderId: res1.razorpay_order_id,
               razorpaySignature: res1.razorpay_signature,
-            },Utils.apiHeaders())
+        },Utils.apiHeaders({"Content-Type":"application/json"}))
             .then(res2 => {
+                console.log(res2.data);
               if(res2.data.success){
-                window.setTimeout(() => {              
-                  window.location.reload();
-                },2000);
+                window.location.href='/payment/success/'+res2.data.id;
               }else{
                 throw(res2.data.message);
               }

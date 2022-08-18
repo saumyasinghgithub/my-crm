@@ -1,5 +1,5 @@
 import {LoginLayout, StaticPageLayout, DefaultLayout} from './layouts';
-import {Login, About, Home, ADStudio, ADTrainer,MyProfile,MyCourse, CourseDetails, SearchResult, TeacherLanding, ContactUs, ADStudent, StudentProfile, MyCart, StudentProfileView, MyBlog, Success, CookiePolicy, PrivacyPolicy, TermConditions, MyOrder, MySales} from './pages';
+import {Login, About, Home, ADStudio, ADTrainer,MyProfile,MyCourse, CourseDetails, SearchResult, TeacherLanding, ContactUs, ADStudent, StudentProfile, MyCart, StudentProfileView, MyBlog, PaymentSuccess, CookiePolicy, PrivacyPolicy, TermConditions, MyOrder, MySales} from './pages';
 
 
 const CustomRoutes = [  
@@ -98,11 +98,11 @@ const CustomRoutes = [
     'component' : ADStudent
   },
   {
-    'path'      : '/success', 
+    'path'      : '/payment/success/:id', 
     'secure'    : false,    
     'exact'     : true,
     'layout'    : StaticPageLayout, 
-    'component' : Success
+    'component' : PaymentSuccess
   },
   {
     'path'      : '/my-cart', 

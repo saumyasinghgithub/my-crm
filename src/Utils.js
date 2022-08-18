@@ -9,7 +9,7 @@ const Utils = {
   
   apiUrl: (path) => process.env.REACT_APP_API_URL+'/'+path,
 
-  apiHeaders: (extraparams = null) => {
+  apiHeaders: (extraHeaders = null) => {
     let headers = {
       "headers": {        
         "x-api-key": "$2a$08$66e6e.5m5kDsdU/O7guw/ej8ETNuSfe9k5W1AME4V/Lno6PjvMbay",
@@ -17,7 +17,8 @@ const Utils = {
         "Access-Control-Allow-Origin": "*",        
         "Access-Control-Allow-Methods": "PUT,GET,POST,DELETE,OPTIONS,PATCH",        
         'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token, token, access-control-allow-origin',
-        'Accept': 'application/json, text/plain, */*'
+        'Accept': 'application/json, text/plain, */*',
+        ...extraHeaders
       }
     };
 
@@ -26,9 +27,6 @@ const Utils = {
       headers['headers']['token']=uData.token;
     }
 
-    if(extraparams){
-      headers = { ...headers, ...extraparams}; 
-    }
     return headers;
   },
 

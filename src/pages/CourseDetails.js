@@ -51,7 +51,7 @@ const CourseDetails = (props) => {
     e.preventDefault();
     let cartData = new FormData();
     cartData.append("course_id", course.course.id);
-    cartData.append("course_resources", JSON.stringify(_.map(bp, b => _.pick(b,['type','name','price']))));
+    cartData.append("course_resources", JSON.stringify(_.map(bp, b => _.pick(b,['id','type','name','price']))));
     cartData.append("price", showBundlePrice());
     cartData.append("is_bundle", parseInt(_.get(bp,'length',0)) > 0 ? 1 : 0);
     

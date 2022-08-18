@@ -88,7 +88,7 @@ const Header = (props) => {
                     </div> 
                 </form>
                 <ul className="navbar-nav">
-                    <li className="nav-item"><a href="shopping-cart.php"><img className="img-fluid shoppingIcon" src="assets/images/cart-white.png" alt="autodidact"/></a></li>
+                    <li className="nav-item"><a href="/my-cart"><img className="img-fluid shoppingIcon" src="assets/images/cart-white.png" alt="autodidact"/></a></li>
                     {!loggedIn && <li className="nav-item" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">
                         Log in
                     </li>}
