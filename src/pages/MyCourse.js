@@ -38,10 +38,10 @@ const MyCourse = (props) => {
     columns.push({
         name: "Action",
         cell: row => <>
-            <Button size='sm' variant="light" className="mr-1" onClick={() => setShowmc({show: true, row: row, type: 'resource'})}><i className="fas fa-suitcase" /></Button>
-            <Button size='sm' variant="light" className="mr-1" onClick={() => setShowmc({show: true, row: row, type: 'content'})}><i className="fa fa-book" /></Button>
-            <Button size='sm' variant="light" className="mr-1" onClick={()=>setShowForm({mode: 2, id: row.id})}><i className="fa fa-edit" /></Button>
-            <Button size='sm' variant="light" className="mr-1" onClick={deleteRecord(row.id)}><i className="fa fa-trash text-danger" /></Button>
+            <Button size='sm' variant="light" className="mr-1" onClick={() => setShowmc({show: true, row: row, type: 'resource'})} data-toggle="tooltip" title="Course Resources"><i className="fas fa-suitcase" /></Button>
+            <Button size='sm' variant="light" className="mr-1" onClick={() => setShowmc({show: true, row: row, type: 'content'})} data-toggle="tooltip" title="Course Content"><i className="fa fa-book" /></Button>
+            <Button size='sm' variant="light" className="mr-1" onClick={()=>setShowForm({mode: 2, id: row.id})} data-toggle="tooltip" title="Edit Course"><i className="fa fa-edit" /></Button>
+            <Button size='sm' variant="light" className="mr-1" onClick={deleteRecord(row.id)} data-toggle="tooltip" title="Delete Course"><i className="fa fa-trash text-danger" /></Button>
         </>,
         sortable: false
     });
@@ -67,6 +67,15 @@ const MyCourse = (props) => {
           }
         })
       };
+      const $ = window.$;
+        
+      useEffect(()=>{
+        $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip();
+        });
+
+      },[]);
+
     useEffect(window.scrollEffect,[]);
     useEffect(fetchList,[]);
 
