@@ -10,9 +10,9 @@ const About = (props) => {
 
                 <div className="container">
                     <nav>
-                        <ol class="cd-breadcrumb">
+                        <ol className="cd-breadcrumb">
                             <li><a href="/">Home</a></li>
-                            <li class="current"><em>About Us</em></li>
+                            <li className="current"><em>About Us</em></li>
                         </ol>
                     </nav>
                     <div className="headingBold text-center text-uppercase">About us</div>

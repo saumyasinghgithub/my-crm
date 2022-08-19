@@ -88,15 +88,15 @@ const Home = (props) => {
 
                         <div className="text-right">
                             <button type='reset' className="search-trainer me-2">
-                                <span class="transition"></span>
-                                <span class="gradient"></span>
-                                <span class="label">Clear</span>
+                                <span className="transition"></span>
+                                <span className="gradient"></span>
+                                <span className="label">Clear</span>
                             </button>
 
                             <button type='submit' className="search-trainer">
-                                <span class="transition"></span>
-                                <span class="gradient"></span>
-                                <span class="label">Search</span>
+                                <span className="transition"></span>
+                                <span className="gradient"></span>
+                                <span className="label">Search</span>
                             </button>
                         </div>
                     </form>

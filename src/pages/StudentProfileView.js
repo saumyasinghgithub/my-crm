@@ -71,7 +71,7 @@ const StudentProfileView = (props) => {
                             {data.data.lastname}</h1>
                         <p>Joined 26/04/2018<br /> Courses 21</p>
                         <p>Connect with {data.data.firstname} on </p>
-                        <div class="profileFollowList">
+                        <div className="profileFollowList">
                             <ul>
                                 <li><a href={data.data.facebook} target="_blank"><i className="fab fa-facebook-f"></i></a></li>
                                 <li><a href={data.data.linkedin} target="_blank"><i className="fab fa-linkedin-in"></i></a></li>

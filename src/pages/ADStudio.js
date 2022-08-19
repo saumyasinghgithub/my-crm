@@ -8,9 +8,9 @@ const ADStudio = (props) => {
     <Container className="h-100 ">
     <div className="help-wrapper">
     <nav>
-                        <ol class="cd-breadcrumb">
+                        <ol className="cd-breadcrumb">
                             <li><a href="/">Home</a></li>
-                            <li class="current"><em>AD studio</em></li>
+                            <li className="current"><em>AD studio</em></li>
                         </ol>
                     </nav>
    <div className="AD-studio">

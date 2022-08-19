@@ -121,7 +121,7 @@ const MyCart = (props) => {
     const showBundleResources = (cData) => {
         let cres = JSON.parse(cData.course_resources);
         return <>
-            {cData.is_bundle && <div class="libraryAuthorInfo">
+            {cData.is_bundle && <div className="libraryAuthorInfo">
                 {cres.map(cres => <div key={cres.id}>
                     1 x {cres.name} | {cres.type.toUpperCase()} | <b>$ {parseFloat(cres.price).toFixed(2)}</b>
                 </div>)}
@@ -182,7 +182,7 @@ const MyCart = (props) => {
                                             </Col>
                                             <Col md={7}>
                                                 <div className="CartTextBox p-0">
-                                                    <div class="libraryTitle">{cData.name}</div>
+                                                    <div className="libraryTitle">{cData.name}</div>
                                                     
                                                     <span>Course Price: <b>$ {parseFloat(cData.baseprice).toFixed(2)}</b></span>
                                                 </div>
@@ -190,9 +190,9 @@ const MyCart = (props) => {
                                             </Col>
                                             <Col md={2}>
                                                 <div className="LPriceInfoBoxCart">
-                                                    <i class="fa fa-heart"></i>
-                                                    <a here='' onClick={deleteRecord(cData.id)}><i class="fa fa-trash pl-2 pr-2"></i></a>
-                                                    <a href={`${process.env.REACT_APP_PUBLIC_URL}/courses/${cData.slug}`}><i class="fa fa-edit"></i></a>
+                                                    <i className="fa fa-heart"></i>
+                                                    <a here='' onClick={deleteRecord(cData.id)}><i className="fa fa-trash pl-2 pr-2"></i></a>
+                                                    <a href={`${process.env.REACT_APP_PUBLIC_URL}/courses/${cData.slug}`}><i className="fa fa-edit"></i></a>
                                                 </div>
                                             </Col>
                                         </Row>)}
