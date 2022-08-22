@@ -97,7 +97,7 @@ const MyCart = (props) => {
             .then(res2 => {
                 console.log(res2.data);
               if(res2.data.success){
-                window.location.href='/payment/success/'+res2.data.id;
+                //window.location.href='/payment/success/'+res2.data.id;
               }else{
                 throw(res2.data.message);
               }

@@ -1,8 +1,14 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useContext, useState} from "react";
 import { Container } from "react-bootstrap";
+import {useParams} from "react-router-dom";
 import DataTable from 'react-data-table-component';
+import UserContext from './../contexts/UserContext';
 
 const MyOrder = (props) => {
+    const [setOrderData] = useState({});
+    const { id } = useParams();
+    const [setLoading] = useState(true);
+    const {getServerData} = useContext(UserContext);
     const columns = [
         {
             name: 'ID',
@@ -52,6 +58,18 @@ const MyOrder = (props) => {
             date: '17-08-2022',
         },
     ]
+
+    useEffect(()=>{
+        getServerData(`student/my-order`,true)
+        .then(res => {
+            setOrderData(res);
+            setLoading(false);
+        })
+        .catch(msg=> {
+            setOrderData({success: false, message: msg});
+            setLoading(false);
+        });
+    },[]);
 
     useEffect(window.scrollEffect,[]);
 
