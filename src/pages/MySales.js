@@ -1,6 +1,7 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState, useContext} from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import DataTable from 'react-data-table-component';
+import UserContext  from './../contexts/UserContext';
 
 const MySales = (props) => {
     const columns = [
@@ -53,6 +54,19 @@ const MySales = (props) => {
         },
     ]
 
+    const [stats, setStats] = useState({success: false, stats: []});
+
+    const {getServerData} = useContext(UserContext);
+
+
+    const loadStats = () => {
+        getServerData('trainer/my-sales-stats', true)
+        .then(setStats)
+    };
+
+    useEffect(loadStats, []);
+
+
     useEffect(window.scrollEffect,[]);
 
     return (<>
@@ -60,11 +74,11 @@ const MySales = (props) => {
         <div className="profile-wrapper">
             <div className="container100">
             <h1>My Sales</h1>
-            <div className="row">
+            {stats.success === true && <div className="row">
                 <div className="col-lg-3 col-6">
                     <div className="small-box bg-info">
                     <div className="inner">
-                    <h3>$ 150</h3>
+                    <h3>$ {stats.stats[0]}</h3>
                     <p>Total Sales</p>
                     </div>
                     <div className="icon">
@@ -77,7 +91,7 @@ const MySales = (props) => {
                 <div className="col-lg-3 col-6">
                     <div className="small-box bg-success">
                     <div className="inner">
-                    <h3>53<sup className="supTag">%</sup></h3>
+                    <h3>{parseFloat(stats.stats[1]).toFixed(1)}<sup className="supTag">%</sup></h3>
                     <p>My Course Ratio</p>
                     </div>
                     <div className="icon">
@@ -90,7 +104,7 @@ const MySales = (props) => {
                 <div className="col-lg-3 col-6">
                     <div className="small-box bg-warning">
                     <div className="inner">
-                    <h3>44</h3>
+                    <h3>{stats.stats[2]}</h3>
                     <p>My Students</p>
                     </div>
                     <div className="icon">
@@ -103,7 +117,7 @@ const MySales = (props) => {
                 <div className="col-lg-3 col-6">
                     <div className="small-box bg-danger">
                     <div className="inner">
-                    <h3>65</h3>
+                    <h3>{stats.stats[3]}</h3>
                     <p>Total Order Items</p>
                     </div>
                     <div className="icon">
@@ -113,7 +127,7 @@ const MySales = (props) => {
                     </div>
                 </div>
                 
-            </div>
+            </div>}
             <Row>
                 <Col md={12}></Col>
             </Row>
