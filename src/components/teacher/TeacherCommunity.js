@@ -2,8 +2,6 @@ import React, { useEffect} from 'react';
 
 import TeacherNav from './TeacherNav';
 
-import _ from 'lodash';
-
 const TeacherCommunity = (props) => {
 
     const data = props.data;

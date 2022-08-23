@@ -10,9 +10,9 @@ const PrivacyPolicy = (props) => {
  
     <div className="container">
     <nav>
-            <ol class="cd-breadcrumb">
+            <ol className="cd-breadcrumb">
                <li><a href="/">Home</a></li>
-               <li class="current"><em>Privacy Policy</em></li>
+               <li className="current"><em>Privacy Policy</em></li>
             </ol>
       </nav>   
         <div className="AD-studio">
