@@ -43,7 +43,7 @@ const CourseForm = (props) => {
     frmdata.append('learn_brief',_.get(mycourse,'learn_brief',''));
     frmdata.append('requirements',_.get(mycourse,'requirements',''));
     setSaving(true);
-    setServerData('trainer/my-courses ',frmdata)
+    setServerData('trainer/my-courses',frmdata)
     .then(res => {
       setSaving(false);
       setResponse(res);
@@ -61,6 +61,7 @@ const CourseForm = (props) => {
 
   const renderForm = () => <Form onSubmit={onSave}>
     <Form.Control type="hidden" name="id" defaultValue={_.get(mycourse,'id','')} />
+    <Form.Control type="hidden" name="mid" defaultValue={_.get(mycourse,'moodle_id','')} />
     <Form.Control type="hidden" name="old_product_image" defaultValue={_.get(mycourse,'product_image','')} />
     
     <Row>
