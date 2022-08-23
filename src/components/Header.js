@@ -124,7 +124,7 @@ const Header = (props) => {
                         }
                             
                         {Utils.isTrainer() && 
-                            <li><a href="my-students.php">My Students</a></li>
+                            <li><a href={`${process.env.PUBLIC_URL}/my-student`}>My Students</a></li>
                         }
                         {Utils.isTrainer() && 
                            <li><a href={`${process.env.PUBLIC_URL}/my-course`}>My Course</a></li>

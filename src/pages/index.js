@@ -22,5 +22,6 @@ import PrivacyPolicy from "./PrivacyPolicy";
 import TermConditions from "./TermConditions";
 import MyOrder from "./MyOrder";
 import MySales from "./MySales";
+import MyStudent from "./MyStudent";
 
-export {Login, About, Home, ADStudio, ADTrainer, MyProfile, MyCourse, CourseDetails, SearchResult, TeacherLanding, CourseList, ContactUs, ADStudent,StudentProfile,MyCart,StudentProfileView, MyBlog, BlogList, PaymentSuccess, CookiePolicy, PrivacyPolicy,TermConditions, MyOrder, MySales};
+export {Login, About, Home, ADStudio, ADTrainer, MyProfile, MyCourse, CourseDetails, SearchResult, TeacherLanding, CourseList, ContactUs, ADStudent,StudentProfile,MyCart,StudentProfileView, MyBlog, BlogList, PaymentSuccess, CookiePolicy, PrivacyPolicy,TermConditions, MyOrder, MySales, MyStudent};
