@@ -38,17 +38,18 @@ const TeacherKnowledge = (props) => {
             <TeacherNav slug={props.slug} page={props.page} onPageChange={props.onPageChange} />
         </div>
             <div className='col-lg-9 col-md-9 col-12 pt-2 pb-1'>
-            <img className="img-fluid imgTransfer" src={`${process.env.REACT_APP_API_URL}/uploads/knowledge/${encodeURI(data.knowledge_image)}`} alt="service" />
+            <img className="img-fluid imgTransfer w-100" src={`${process.env.REACT_APP_API_URL}/uploads/knowledge/${encodeURI(data[0].knowledge_image)}`} alt="knowledge" />
             </div>
         </div>
 
         <div className="serviceWrapper container"> 
-            <div className="serviceHeading">                
-                <h1 className="headingtext slideInUp wow ">03 Knowledge<ul className="profile-socail-icon">
-                    <li><a href=""><img src="/assets/images/share-icon.png" alt="ad eyes" /></a></li>
+            <div className="serviceHeading w-100">                
+                <h1 className="headingtext slideInUp wow w-100">03 Knowledge</h1>
+                <ul className="profile-socail-icon serviceicon">
+                    <li className='mr-2'><a href=""><img src="/assets/images/share-icon.png" alt="ad eyes" /></a></li>
                     <li><a href=""><img src="/assets/images/link-icon.png" alt="ad eyes" /></a></li>
-                </ul></h1>
-                <div className="subHeading slideInUp wow " dangerouslySetInnerHTML={{__html:data.about_knowledge}}></div>
+                </ul>
+                <div className="subHeading slideInUp wow " dangerouslySetInnerHTML={{__html:data[0].about_knowledge}}></div>
             </div>
             <div className="knowledgBody">
                <div className="freeResouces lineANimation slideInUp wow ">Free Resources</div>

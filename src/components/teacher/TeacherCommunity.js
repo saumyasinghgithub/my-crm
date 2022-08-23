@@ -22,10 +22,11 @@ const TeacherCommunity = (props) => {
 
         <div className="serviceWrapper container"> 
             <div className="serviceHeading">                
-                <h1 className="headingtext slideInUp wow ">03 Knowledge<ul className="profile-socail-icon">
-                    <li><a href=""><img src="/assets/images/share-icon.png" alt="ad eyes" /></a></li>
+                <h1 className="headingtext slideInUp wow ">04 Community</h1>
+                <ul className="profile-socail-icon serviceicon">
+                    <li className='mr-2'><a href=""><img src="/assets/images/share-icon.png" alt="ad eyes" /></a></li>
                     <li><a href=""><img src="/assets/images/link-icon.png" alt="ad eyes" /></a></li>
-                </ul></h1>
+                </ul>
                 <div className="subHeading slideInUp wow " dangerouslySetInnerHTML={{__html:data[0].about_community}}></div>
             </div>
             <div className="knowledgBody">

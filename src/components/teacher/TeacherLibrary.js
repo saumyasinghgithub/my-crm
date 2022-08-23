@@ -21,12 +21,12 @@ const TeacherLibrary = (props) => {
             </div>
         </div>
         <div className="serviceWrapper container">
-            <div className="serviceHeading">                
-                <h1 className="headingtext slideInUp wow ">05 Library<ul className="profile-socail-icon">
-                    <li><a href=""><img src="/assets/images/share-icon.png" alt="AD" /></a></li>
+            <div className="serviceHeading w-100">                
+                <h1 className="headingtext slideInUp wow w-100">05 Library</h1>
+                <ul className="profile-socail-icon serviceicon">
+                    <li className='mr-2'><a href=""><img src="/assets/images/share-icon.png" alt="AD" /></a></li>
                     <li><a href=""><img src="/assets/images/link-icon.png" alt="AD" /></a></li>
-                </ul></h1>
-                
+                </ul>
                 <div className="subHeading slideInUp wow " dangerouslySetInnerHTML={{__html:data.about_library}}></div>
             </div>
             <nav className="navbar navbar-expand-md  filterMenu slideInUp wow ">
@@ -34,7 +34,7 @@ const TeacherLibrary = (props) => {
                     <h4>Filter for course <img src="/assets/images/arrow.png" className="img-fluid" alt="AD" /></h4>
                 </button>                       
                   
-                    <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
+                    {/* <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
                       <ul className="navbar-nav">
                         <li className="nav-item dropdown dmenu">
                             <a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -111,7 +111,7 @@ const TeacherLibrary = (props) => {
                             </div>
                         </li>
                       </ul>
-                    </div>
+                    </div> */}
                   </nav>
 
             <div className="libraryBody">              

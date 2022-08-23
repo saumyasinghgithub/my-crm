@@ -10,7 +10,7 @@ const SearchResult = (props) => {
 
     const [viewTrainer, setViewTrainer] = useState({});
     const [tData, setTData] = useState({pageInfo: {}, data: []});
-    const [filter, setFilter] = useState({start: 0, limit: 4, curpage: 1});
+    const [filter, setFilter] = useState({start: 0, limit: 8, curpage: 1});
 
   const $ = window.$;
 
@@ -248,7 +248,7 @@ const renderResults = () => <div className="resultDisplay">
         </div>
     </div>
     <div id="resultDisplay"> 
-        <div className="filterbox">
+        {/* <div className="filterbox">
             <form>
                 <div className="form-group">
                     <label className="filterSeach"><img src="/assets/images/filter-icon.png" /> Filter for courses</label>
@@ -256,10 +256,11 @@ const renderResults = () => <div className="resultDisplay">
                     
                 </div>
             </form>
-        </div>
+        </div> */}
+        <h3 className="pb-5">Your Search Results </h3>
         <div className="flexWrapper">
             <div className="flexItem flex20">
-                <ul className="nav">
+                <ul className="nav datascroll">
                     {_.get(tData,'data',[]).map((trainer,idx) => <li key={idx} className={idx===0 ? 'active' : ''}>
                         <span onClick={() => setViewTrainer(trainer)}>
                             <img className="img-fluid" src={`${process.env.REACT_APP_API_URL}/uploads/base/${trainer.base_image}`} alt={_.get(trainer,'firstname','')} />
@@ -267,7 +268,7 @@ const renderResults = () => <div className="resultDisplay">
                         </span>
                     </li>)}
                 </ul>  
-                <div className="alltrainers">{showPageInfo()} <i className="far fa-eye"></i></div>                          
+                <div className="alltrainers alltrainerresult">{showPageInfo()} <i className="far fa-eye"></i></div>                          
             </div>
             <div className="flexItem flex80">
                 {_.get(viewTrainer, 'user_id',0) > 0 && showTrainerDetail()}

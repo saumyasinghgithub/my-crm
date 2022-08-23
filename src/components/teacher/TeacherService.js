@@ -19,16 +19,18 @@ const TeacherService = (props) => {
                 
             </div>
             <div className='col-lg-9 col-md-9 col-12 pt-2 pb-1'>
-                <img className="img-fluid imgTransfer" src={`${process.env.REACT_APP_API_URL}/uploads/service/${encodeURI(data.service_image)}`} alt="service" />
+                <img className="img-fluid imgTransfer w-100" src={`${process.env.REACT_APP_API_URL}/uploads/service/${encodeURI(data.service_image)}`} alt="service" />
             </div>
         </div>
         <div className="serviceWrapper container"> 
-            <div className="serviceHeading">                
-                <h1 className="headingtext slideInUp wow ">02 What I offer <ul className="profile-socail-icon">
-                    <li><a href=""><img src="/assets/images/share-icon.png" alt="service" /></a></li>
+            <div className="serviceHeading w-100">                
+                <h1 className="headingtext slideInUp wow ">02 What I offer </h1>
+                <ul className="profile-socail-icon serviceicon">
+                    <li className='mr-2'><a href=""><img src="/assets/images/share-icon.png" alt="service" /></a></li>
                     <li><a href=""><img src="/assets/images/link-icon.png" alt="service" /></a></li>
-                </ul></h1>
+                </ul>
             </div>
+
             <div className="serviceBody">
                 <div className="awardTextInner awardwithoutLine">
                     <div className="awadText slideInUp wow " dangerouslySetInnerHTML={{__html:data.service_offer}}></div>

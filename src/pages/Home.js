@@ -87,7 +87,7 @@ const Home = (props) => {
                         </div>
 
                         <div className="text-right">
-                            <button type='reset' className="search-trainer me-2">
+                            <button type='reset' className="search-trainer me-2 mr-2">
                                 <span className="transition"></span>
                                 <span className="gradient"></span>
                                 <span className="label">Clear</span>
