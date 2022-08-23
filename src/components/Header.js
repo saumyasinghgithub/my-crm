@@ -132,7 +132,7 @@ const Header = (props) => {
                         {Utils.isStudent() &&
                             <li><a href={`${process.env.PUBLIC_URL}`}>Prefered Courses</a></li>
                         }
-                        <li><a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a></li>
+
                         <li><a href="">Help for you</a></li>   
                         </ul>
                     </div>
@@ -149,7 +149,7 @@ const Header = (props) => {
                         {Utils.isTrainer() &&
                             <li><a href={`${process.env.PUBLIC_URL}/my-blog`} >My Blog</a></li>
                         }                       
-                            
+                                                    <li><a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a></li>
                             <li><a href="logout" onClick={onLogout}>Log Out</a></li>
                         </ul>
                     </div>

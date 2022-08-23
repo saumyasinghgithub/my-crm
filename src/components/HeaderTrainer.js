@@ -56,7 +56,7 @@ const HeaderTrainer = (props) => {
            <div className="sidenav">
             <div className="sidebarInner">
                 <div className="overlay"></div>
-                <img className="img-fluid closemenu" src="assets/images/close-circle.png" />
+                <img className="img-fluid closemenu" src="/assets/images/close-circle.png" />
                 <form className="searchBOx mobileView" >
                 <input className="form-control" type="text" placeholder="How can I help you ?" />
                 </form>
@@ -91,23 +91,23 @@ const HeaderTrainer = (props) => {
                 </div> 
         </form>
         <ul className="navbar-nav">
-                    <li className="nav-item"><a href="/my-cart"><img className="img-fluid shoppingIcon" src="assets/images/cart-white.png" alt="autodidact"/></a></li>
+                    <li className="nav-item"><a href="/my-cart"><img className="img-fluid shoppingIcon" src="/assets/images/cart.png" alt="autodidact"/></a></li>
                     {!loggedIn && <li className="nav-item" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">
                         Log in
                     </li>}
                     
                     {loggedIn && <li className="nav-item profile_toggle">
-                        <img className="img-fluid" src="assets/images/userImg.png" alt="AD" />
+                        <img className="img-fluid" src="/assets/images/userImg.png" alt="AD" />
                     </li>}
 
                     <li className="nav-item ">
-                        <img className="img-fluid menu-toggle" src="assets/images/toggle.png" alt="toggle-img" />
+                        <img className="img-fluid menu-toggle" src="/assets/images/toggle-black.png" alt="toggle-img" />
                     </li>
         </ul>
     </div>
     {loggedIn && <div className="profile_menu from-right">
                 <div className="slide-in-content slide-in-contentteacher">
-                    <div className="student_prof_cross"><img src="assets/images/student_profile_crossicon.png" alt="AD" /></div>
+                    <div className="student_prof_cross"><img src="/assets/images/student_profile_crossicon.png" alt="AD" /></div>
                     <div className="row">
                     <div className="col-sm-6">
                         <ul className="profile_menu_list">
@@ -133,7 +133,7 @@ const HeaderTrainer = (props) => {
                         {Utils.isStudent() &&
                             <li><a href={`${process.env.PUBLIC_URL}`}>Prefered Courses</a></li>
                         }
-                        <li><a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a></li>
+                       
                         <li><a href="">Help for you</a></li>   
                         </ul>
                     </div>
@@ -150,7 +150,7 @@ const HeaderTrainer = (props) => {
                         {Utils.isTrainer() &&
                             <li><a href={`${process.env.PUBLIC_URL}/my-blog`} >My Blog</a></li>
                         }                       
-                            
+                             <li><a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a></li>
                             <li><a href="logout" onClick={onLogout}>Log Out</a></li>
                         </ul>
                     </div>
