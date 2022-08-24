@@ -146,7 +146,7 @@ const TeacherLibrary = (props) => {
                     <div className="text-center">
                         <div className="boldAmount">30 USD</div>
                         <div className="bundlePrice">( Bundle Price )</div>
-                        <button className="btn btnBlue" >Add to Cart </button>
+                        <button className="btn addtocart mt-3" >Add to Cart </button>
                     </div>
                                         </div>
                                         </div>

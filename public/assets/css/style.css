@@ -500,19 +500,23 @@ ul.resultlist li a {
 .datascroll::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
-.alltrainerresult{
+
+.alltrainerresult {
     bottom: 4px !important;
 }
+
 .flexWrapper .nav img {
     display: block;
     margin: 0px auto;
     width: 70px;
 }
+
 .flexWrapper .nav li.active img {
     border-color: #0f79aa !important;
     border: 4px solid;
     border-radius: 50px;
 }
+
 .flexWrapper .nav li.active span {
     font-weight: 700;
     color: #0f79aa !important;
@@ -1807,11 +1811,13 @@ ul.profile-socail-icon {
     right: 0;
     top: 20px;
 }
-.serviceicon{
+
+.serviceicon {
     position: absolute !important;
-    right: 0 !important; 
+    right: 0 !important;
     top: 105px !important;
 }
+
 ul.profile-socail-icon li {
     display: inline-block;
 }
@@ -4361,6 +4367,7 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
     .profileTabQu .nav li a:before {
         top: 6px !important;
     }
+
     .serviceicon {
         position: absolute !important;
         right: 0 !important;
@@ -4497,20 +4504,60 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
 .bg-danger, .bg-danger>a {
     color: #fff !important;
 }
-.brdrrdus{
+
+.brdrrdus {
     border-radius: 5px;
 }
-.librarydata .d-flex{
+
+.librarydata .d-flex {
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     padding: 15px;
     border-radius: 5px;
 }
-.libimg, .libamt{
+
+.libimg, .libamt {
     padding: 0;
 }
-.libcontent .libraryTitle{
+
+.libcontent .libraryTitle {
     padding-top: 25px;
 }
+
+.libamt .boldAmount {
+    padding-top: 20px;
+}
+
+.libcontent .libraryStar {
+    padding-top: 10px;
+}
+
+.libamt .addtocart {
+    padding: 1em 1em;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+    color: #fff;
+    background-color: #0f79aa;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+.libamt .addtocart:hover {
+    background-color: #23c483;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+}
+
+.libamt .addtocart:active {
+    transform: translateY(-1px);
+}
+
 .btn-close {
     position: absolute;
     right: 32px;
@@ -4520,11 +4567,13 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
     border: 0px;
     background: transparent;
     opacity: 0.5;
-  }
-  .btn-close:hover {
+}
+
+.btn-close:hover {
     opacity: 1;
-  }
-  .btn-close:before, .btn-close:after {
+}
+
+.btn-close:before, .btn-close:after {
     position: absolute;
     right: 0px;
     content: ' ';
@@ -4532,10 +4581,12 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
     top: 0px;
     width: 2px;
     background-color: #333;
-  }
-  .btn-close:before {
+}
+
+.btn-close:before {
     transform: rotate(45deg);
-  }
-  .btn-close:after {
+}
+
+.btn-close:after {
     transform: rotate(-45deg);
-  }
+}
