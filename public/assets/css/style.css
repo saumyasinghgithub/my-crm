@@ -4590,3 +4590,13 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
 .btn-close:after {
     transform: rotate(-45deg);
 }
+
+.AD-blog h1 {
+    margin-bottom: 0px;
+    margin-top: 30px;
+  
+  }
+
+  .blogdescription{
+    margin-top: 20px;
+  }

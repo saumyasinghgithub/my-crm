@@ -23,5 +23,6 @@ import TermConditions from "./TermConditions";
 import MyOrder from "./MyOrder";
 import MySales from "./MySales";
 import MyStudent from "./MyStudent";
+import BlogDetails from "./BlogDetails";
 
-export {Login, About, Home, ADStudio, ADTrainer, MyProfile, MyCourse, CourseDetails, SearchResult, TeacherLanding, CourseList, ContactUs, ADStudent,StudentProfile,MyCart,StudentProfileView, MyBlog, BlogList, PaymentSuccess, CookiePolicy, PrivacyPolicy,TermConditions, MyOrder, MySales, MyStudent};
+export {Login, About, Home, ADStudio, ADTrainer, MyProfile, MyCourse, CourseDetails, SearchResult, TeacherLanding, CourseList, ContactUs, ADStudent,StudentProfile,MyCart,StudentProfileView, MyBlog, BlogList, PaymentSuccess, CookiePolicy, PrivacyPolicy,TermConditions, MyOrder, MySales, MyStudent, BlogDetails};
