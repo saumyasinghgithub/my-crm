@@ -35,11 +35,33 @@ const LoginModal = (props) => {
             setLogining(false);
             setLoginResp({success: success, message: message});
             if(success){
-                window.setTimeout(() => {window.location.reload();}, 2000);
+                loginToMoodle(data).then(() => window.location.reload());
             }
         })
-
         return false;
+    }
+
+    const loginToMoodle = ({email,pass}) => {
+        var settings = {
+            'cache': false,
+            'dataType': "jsonp",
+            "async": true,
+            "crossDomain": true,
+            "url": `${process.env.REACT_APP_MOODLE_URL}/login/index.php`,
+            "method": "POST",
+            "data": {
+                username: email,
+                password: pass
+            },
+            "headers": {
+                "accept": "application/json",
+                "Access-Control-Allow-Origin":"*"
+            }
+        };
+
+        return new Promise((resolve,reject) => {
+            $.ajax(settings).done(resolve);
+        });
     }
 
     return(<>
@@ -70,7 +92,7 @@ const LoginModal = (props) => {
                             <input className="form-control" name="pass" placeholder="Password" type="password" />
                         </div>
                         <button type="submit" className="btn btnSubmit">Log In</button>                        
-                    </form>
+                    </form>                    
                     <p>Forgot password ? <a href="">Click here!</a></p>
                     <p>By signing up, you agree to our Terms of Use and Privacy Policy.</p>
                     <ul>
