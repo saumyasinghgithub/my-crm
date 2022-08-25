@@ -58,9 +58,10 @@ const LoginModal = (props) => {
                 "Access-Control-Allow-Origin":"*"
             }
         };
-
+        console.log(settings);
         return new Promise((resolve,reject) => {
             $.ajax(settings).done(resolve);
+            console.log(resolve);
         });
     }
 

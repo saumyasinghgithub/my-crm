@@ -1177,11 +1177,11 @@ p {
 }
 
 .coursePrice {
-    font-size: 56px;
+    font-size: 40px;
     font-weight: bold;
     color: #4f5052;
     position: relative;
-    top: -20px;
+    top: -10px;
     padding-bottom: 26px;
 }
 
