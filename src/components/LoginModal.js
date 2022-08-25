@@ -1,4 +1,4 @@
-import React,{useEffect, useState, useContext} from "react";
+import React,{useEffect, useState, useContext, useRef} from "react";
 import UserContext from './../contexts/UserContext'; 
 
 const LoginModal = (props) => {
@@ -6,6 +6,8 @@ const LoginModal = (props) => {
     const [loginResp, setLoginResp] = useState({success:false, message: ''});
     const [logining, setLogining] = useState(false);
     const {goLogin} = useContext(UserContext);
+
+    const moodleFrm = useRef(); 
 
     const $ = window.$;
         
@@ -42,26 +44,19 @@ const LoginModal = (props) => {
     }
 
     const loginToMoodle = ({email,pass}) => {
-        var settings = {
-            'cache': false,
-            'dataType': "jsonp",
-            "async": true,
-            "crossDomain": true,
-            "url": `${process.env.REACT_APP_MOODLE_URL}/login/index.php`,
-            "method": "POST",
-            "data": {
-                username: email,
-                password: pass
-            },
-            "headers": {
-                "accept": "application/json",
-                "Access-Control-Allow-Origin":"*"
-            }
-        };
-        console.log(settings);
+
         return new Promise((resolve,reject) => {
-            $.ajax(settings).done(resolve);
-            console.log(resolve);
+            var frm = moodleFrm.current;
+            frm.username.value = email;
+            frm.password.value = pass;
+            var options = "left=200000,top=0,width=0,height=0,visible=none";
+            var wopen = window.open('','_moodlewin',options);
+            frm.setAttribute('target','_moodlewin');
+            frm.submit();
+            window.setTimeout(() => {
+                wopen.close();
+                resolve();
+            },1000);
         });
     }
 
@@ -73,6 +68,10 @@ const LoginModal = (props) => {
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                     <img className="img-fluid" src="/assets/images/close-circle.png" />
                 </button>
+                <form ref={moodleFrm} method="post" action={`${process.env.REACT_APP_MOODLE_URL}/login/index.php`}>
+                    <input type="hidden" name="username" />
+                    <input type="hidden" name="password" />
+                </form>
                 {logining && <div className="alert alert-info p-5 m-5">
                     Trying to login...
                     <div className="progress">
@@ -93,7 +92,8 @@ const LoginModal = (props) => {
                             <input className="form-control" name="pass" placeholder="Password" type="password" />
                         </div>
                         <button type="submit" className="btn btnSubmit">Log In</button>                        
-                    </form>                    
+                    </form>
+                                        
                     <p>Forgot password ? <a href="">Click here!</a></p>
                     <p>By signing up, you agree to our Terms of Use and Privacy Policy.</p>
                     <ul>
