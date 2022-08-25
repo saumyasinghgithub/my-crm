@@ -18,7 +18,6 @@ const JoinAsStudent = (props) => {
         
        const frm = frmRef.current;
        e.preventDefault();
-       console.log(frm.checkValidity());
        frm.classList.add('was-validated');
        if (frm.checkValidity() === false) {
         return false;
@@ -56,18 +55,18 @@ const JoinAsStudent = (props) => {
             minUppercase: 1, minNumbers: 1, minSymbols: 1
           })) {
             frm.password.setCustomValidity("Passwords Don't Match");
-            $(frm.password).nextSibling().html("Please use Upper case, lower case");
+            $(frm.password).next().html("Please use Upper case, lower case");
         }
         else{
             frm.password.setCustomValidity("");
-            $(frm.password).nextSibling().html('');
+            $(frm.password).next().html('');
         }
          if(frm.password.value != frm.conf_password.value) {
             frm.conf_password.setCustomValidity("Passwords Don't Match");
-            $(frm.conf_password).nextSibling().html("Passwords Don't Match!!!");
+            $(frm.conf_password).next().html("Passwords Don't Match!!!");
         } else {
             frm.conf_password.setCustomValidity("");
-            $(frm.conf_password).nextSibling().html('');
+            $(frm.conf_password).next().html('');
         }
     };   
     useEffect(()=>{

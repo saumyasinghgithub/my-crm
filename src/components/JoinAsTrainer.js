@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Utils from './../Utils';
 import axios from 'axios';
 import _ from 'lodash';
+import validator from 'validator';
 
 const JoinAsTrainer = (props) => {
 
@@ -48,12 +49,25 @@ const JoinAsTrainer = (props) => {
 
     const validatePassword = () => {
         const frm = frmRef.current;
-        if (frm.password.value != frm.conf_password.value) {
-            frm.conf_password.setCustomValidity("Passwords Don't Match");
-        } else {
-            frm.conf_password.setCustomValidity('');
+        if (!validator.isStrongPassword(frm.password.value, {
+            minLength: 8, minLowercase: 1,
+            minUppercase: 1, minNumbers: 1, minSymbols: 1
+          })) {
+            frm.password.setCustomValidity("Passwords Don't Match");
+            $(frm.password).next().html("Please use Upper case, lower case");
         }
-    };
+        else{
+            frm.password.setCustomValidity("");
+            $(frm.password).next().html('');
+        }
+         if(frm.password.value != frm.conf_password.value) {
+            frm.conf_password.setCustomValidity("Passwords Don't Match");
+            $(frm.conf_password).next().html("Passwords Don't Match!!!");
+        } else {
+            frm.conf_password.setCustomValidity("");
+            $(frm.conf_password).next().html('');
+        }
+    }; 
 
     useEffect(() => {
         $('.modal').on('show.bs.modal', function (e) {
@@ -139,7 +153,8 @@ const JoinAsTrainer = (props) => {
                                                 <div className="invalid-feedback">Email cannot be empty!</div>
                                             </div>
                                             <div className="form-group">
-                                                <input className="form-control" name="password" onChange={validatePassword} placeholder="Password" type="password" required />
+                                                <input className="form-control" name="password" onKeyUp={validatePassword} placeholder="Password" type="password" required />
+                                                <div className="invalid-feedback">Invalid Password</div>
                                             </div>
                                             <div className="form-group">
                                                 <input className="form-control" name="conf_password" onKeyUp={validatePassword} placeholder="Re-enter Password" type="password" />
