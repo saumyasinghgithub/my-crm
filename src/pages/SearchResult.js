@@ -44,7 +44,7 @@ console.log(tData)
   const renderResultAnalysis = () => <section className="home-result-wrapper">
     <ul className="resultlist">
         <li>
-            <div className="circleChart" id="1" data-value="77" data-text="77%"></div>
+            <div className="circleChart" id="1" data-value="17" data-text="17%"></div>
             <span>Trainers</span>
         </li>
         <li>

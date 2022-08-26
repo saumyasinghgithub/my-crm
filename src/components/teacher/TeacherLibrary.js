@@ -4,11 +4,44 @@ import TeacherNav from './TeacherNav';
 
 import _ from 'lodash';
 
+import Utils from './../../Utils';
+
 const TeacherLibrary = (props) => {
 
     const data = props.data;
-
+    const courses = props.courses;
+    
     useEffect(window.scrollEffect, []);
+
+    const renderCourses = (course) => {
+        return <div className="libraryInfobox slideInUp wow ">
+        <div className="LImgBox"><span className="new">New</span><img className="img-fluid" src="/assets/images/knowledge_1.jpg" alt="AD" /></div>
+        <div className="LTextBox">
+            <div className="libraryTitle">
+                Personal Financial Well-Being Understanding Your Financial Life
+            </div>
+            <div className="libraryBody">
+                Managing your finances is one of the most important things you can
+                do in your life. It is the difference between living a life your handed or
+                living the life you choose!
+            </div>
+            <div className="libraryAuthorInfo">
+                By Ben Jacobs | 6/2019 | Level: Advanced | Duration: 23h 45min
+            </div>
+            <div className="libraryStar">
+                <i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i>
+                <img className="img-fluid LLike" src="/assets/images/like-icon.png" alt="AD" />
+                <img className="img-fluid lShare" src="/assets/images/share-icon.png" alt="AD" />
+            </div>
+        </div>
+        <div className="LPriceInfoBox">
+            <div className="boldAmount">30 USD</div>
+            <div className="bundlePrice">( Bundle Price )</div>
+            <button className="btn btnBlue" >Add to Cart </button>
+        </div>
+    </div>;
+    }
+
 
     return (<>
         <div className='row'>
@@ -116,175 +149,11 @@ const TeacherLibrary = (props) => {
 
 
 
-            <div className='container'>
-                <div className='row slideInUp wow pt-2 pb-2 librarydata'>
-                    <div className='d-flex'>
-                    <div className='col-lg-3 col-md-3 col-12 pt-2 pb-2 libimg'>
-                        <div className=""><span className="new">New</span><img className="img-fluid w-100 brdrrdus" src="/assets/images/knowledge_1.jpg" alt="AD" /></div>
-                    </div>
-                    <div className='col-lg-7 col-md-7 col-12 pt-2 pb-2 libcontent'>
-                    <div className="">
-                        <div className="libraryTitle">
-                            Personal Financial Well-Being Understanding Your Financial Life
-                        </div>
-                        <div className="libraryBody">
-                            Managing your finances is one of the most important things you can
-                            do in your life. It is the difference between living a life your handed or
-                            living the life you choose!
-                        </div>
-                        <div className="libraryAuthorInfo">
-                            By Ben Jacobs | 6/2019 | Level: Advanced | Duration: 23h 45min
-                        </div>
-                        <div className="libraryStar">
-                            <i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i>
-                            <img className="img-fluid LLike" src="/assets/images/like-icon.png" alt="AD" />
-                            <img className="img-fluid lShare" src="/assets/images/share-icon.png" alt="AD" />
-                        </div>
-                    </div>                  
-                      </div>
-                      <div className='col-lg-2 col-md-2 col-12 pt-2 pb-2 libamt'>
-                    <div className="text-center">
-                        <div className="boldAmount">30 USD</div>
-                        <div className="bundlePrice">( Bundle Price )</div>
-                        <button className="btn addtocart mt-3" >Add to Cart </button>
-                    </div>
-                                        </div>
-                                        </div>
-                </div>
 
-            </div>
 
             <div className="libraryBody">
-                <div className="libraryInfobox slideInUp wow ">
-                    <div className="LImgBox"><span className="new">New</span><img className="img-fluid" src="/assets/images/knowledge_1.jpg" alt="AD" /></div>
-                    <div className="LTextBox">
-                        <div className="libraryTitle">
-                            Personal Financial Well-Being Understanding Your Financial Life
-                        </div>
-                        <div className="libraryBody">
-                            Managing your finances is one of the most important things you can
-                            do in your life. It is the difference between living a life your handed or
-                            living the life you choose!
-                        </div>
-                        <div className="libraryAuthorInfo">
-                            By Ben Jacobs | 6/2019 | Level: Advanced | Duration: 23h 45min
-                        </div>
-                        <div className="libraryStar">
-                            <i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i>
-                            <img className="img-fluid LLike" src="/assets/images/like-icon.png" alt="AD" />
-                            <img className="img-fluid lShare" src="/assets/images/share-icon.png" alt="AD" />
-                        </div>
-                    </div>
-                    <div className="LPriceInfoBox">
-                        <div className="boldAmount">30 USD</div>
-                        <div className="bundlePrice">( Bundle Price )</div>
-                        <button className="btn btnBlue" >Add to Cart </button>
-                    </div>
-                </div>
-                <div className="libraryInfobox slideInUp wow ">
-                    <div className="LImgBox"><img className="img-fluid" src="/assets/images/knowledge_2.jpg" alt="AD" /></div>
-                    <div className="LTextBox">
-                        <div className="libraryTitle">
-                            Personal Financial Well-Being Understanding Your Financial Life
-                        </div>
-                        <div className="libraryBody">
-                            Managing your finances is one of the most important things you can
-                            do in your life. It is the difference between living a life your handed or
-                            living the life you choose!
-                        </div>
-                        <div className="libraryAuthorInfo">
-                            By Ben Jacobs | 6/2019 | Level: Advanced | Duration: 23h 45min
-                        </div>
-                        <div className="libraryStar">
-                            <i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i>
-                            <img className="img-fluid LLike" src="/assets/images/like-icon.png" alt="AD" />
-                            <img className="img-fluid lShare" src="/assets/images/share-icon.png" alt="AD" />
-                        </div>
-                    </div>
-                    <div className="LPriceInfoBox">
-                        <div className="boldAmount">30 USD</div>
-                        <div className="bundlePrice">( Bundle Price )</div>
-                        <button className="btn btnBlue" >Add to Cart </button>
-                    </div>
-                </div>
-                <div className="libraryInfobox slideInUp wow ">
-                    <div className="LImgBox"><span className="new">Bestseller</span><img className="img-fluid" src="/assets/images/knowledge_3.jpg" alt="AD" /></div>
-                    <div className="LTextBox">
-                        <div className="libraryTitle">
-                            Personal Financial Well-Being Understanding Your Financial Life
-                        </div>
-                        <div className="libraryBody">
-                            Managing your finances is one of the most important things you can
-                            do in your life. It is the difference between living a life your handed or
-                            living the life you choose!
-                        </div>
-                        <div className="libraryAuthorInfo">
-                            By Ben Jacobs | 6/2019 | Level: Advanced | Duration: 23h 45min
-                        </div>
-                        <div className="libraryStar">
-                            <i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i>
-                            <img className="img-fluid LLike" src="/assets/images/like-icon.png" alt="AD" />
-                            <img className="img-fluid lShare" src="/assets/images/share-icon.png" alt="AD" />
-                        </div>
-                    </div>
-                    <div className="LPriceInfoBox">
-                        <div className="boldAmount">30 USD</div>
-                        <div className="bundlePrice">( Bundle Price )</div>
-                        <button className="btn btnBlue" >Add to Cart </button>
-                    </div>
-                </div>
-                <div className="libraryInfobox slideInUp wow ">
-                    <div className="LImgBox"><span className="new">New</span><img className="img-fluid" src="/assets/images/knowledge_4.jpg" alt="AD" /></div>
-                    <div className="LTextBox">
-                        <div className="libraryTitle">
-                            Personal Financial Well-Being Understanding Your Financial Life
-                        </div>
-                        <div className="libraryBody">
-                            Managing your finances is one of the most important things you can
-                            do in your life. It is the difference between living a life your handed or
-                            living the life you choose!
-                        </div>
-                        <div className="libraryAuthorInfo">
-                            By Ben Jacobs | 6/2019 | Level: Advanced | Duration: 23h 45min
-                        </div>
-                        <div className="libraryStar">
-                            <i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i>
-                            <img className="img-fluid LLike" src="/assets/images/like-icon.png" alt="AD" />
-                            <img className="img-fluid lShare" src="/assets/images/share-icon.png" alt="AD" />
-                        </div>
-                    </div>
-                    <div className="LPriceInfoBox">
-                        <div className="boldAmount">30 USD</div>
-                        <div className="bundlePrice">( Bundle Price )</div>
-                        <button className="btn btnBlue" >Add to Cart </button>
-                    </div>
-                </div>
-                <div className="libraryInfobox slideInUp wow ">
-                    <div className="LImgBox"><span className="new">New</span><img className="img-fluid" src="/assets/images/knowledge_5.jpg" alt="AD" /></div>
-                    <div className="LTextBox">
-                        <div className="libraryTitle">
-                            Personal Financial Well-Being Understanding Your Financial Life
-                        </div>
-                        <div className="libraryBody">
-                            Managing your finances is one of the most important things you can
-                            do in your life. It is the difference between living a life your handed or
-                            living the life you choose!
-                        </div>
-                        <div className="libraryAuthorInfo">
-                            By Ben Jacobs | 6/2019 | Level: Advanced | Duration: 23h 45min
-                        </div>
-                        <div className="libraryStar">
-                            <i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i>
-                            <img className="img-fluid LLike" src="/assets/images/like-icon.png" alt="AD" />
-                            <img className="img-fluid lShare" src="/assets/images/share-icon.png" alt="AD" />
-                        </div>
-                    </div>
-                    <div className="LPriceInfoBox">
-                        <div className="boldAmount">30 USD</div>
-                        <div className="bundlePrice">( Bundle Price )</div>
-                        <button className="btn btnBlue" >Add to Cart </button>
-                    </div>
-                </div>
+            {courses.map(renderCourses)}
+
             </div>
         </div>
 
