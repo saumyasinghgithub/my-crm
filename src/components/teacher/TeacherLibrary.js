@@ -15,18 +15,14 @@ const TeacherLibrary = (props) => {
 
     const renderCourses = (course) => {
         return <div className="libraryInfobox slideInUp wow ">
-        <div className="LImgBox"><span className="new">New</span><img className="img-fluid" src="/assets/images/knowledge_1.jpg" alt="AD" /></div>
+        <div className="LImgBox"><span className="new">New</span><img className="img-fluid" src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`} alt="AD" /></div>
         <div className="LTextBox">
             <div className="libraryTitle">
-                Personal Financial Well-Being Understanding Your Financial Life
+            {course.name}
             </div>
-            <div className="libraryBody">
-                Managing your finances is one of the most important things you can
-                do in your life. It is the difference between living a life your handed or
-                living the life you choose!
-            </div>
+            <div className="libraryBody" dangerouslySetInnerHTML={{__html:course.short_description}}></div>
             <div className="libraryAuthorInfo">
-                By Ben Jacobs | 6/2019 | Level: Advanced | Duration: 23h 45min
+                Date: 6/2019 | Level: {course.level} | Duration: {course.duration}
             </div>
             <div className="libraryStar">
                 <i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i>
@@ -34,10 +30,10 @@ const TeacherLibrary = (props) => {
                 <img className="img-fluid lShare" src="/assets/images/share-icon.png" alt="AD" />
             </div>
         </div>
-        <div className="LPriceInfoBox">
-            <div className="boldAmount">30 USD</div>
-            <div className="bundlePrice">( Bundle Price )</div>
-            <button className="btn btnBlue" >Add to Cart </button>
+        <div className="LPriceInfoBox libraryCourses">
+            <div className="boldAmount">{course.price} USD</div>
+            <div className="bundlePrice">(Base Price )</div>
+            <a href={`/courses/${course.slug}`} className="btn btnBlue" >View Course </a>
         </div>
     </div>;
     }
@@ -66,85 +62,6 @@ const TeacherLibrary = (props) => {
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                     <h4>Filter for course <img src="/assets/images/arrow.png" className="img-fluid" alt="AD" /></h4>
                 </button>
-
-                {/* <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
-                      <ul className="navbar-nav">
-                        <li className="nav-item dropdown dmenu">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            Industry
-                            </a>
-                            <div className="dropdown-menu sm-menu">
-                            <a className="dropdown-item" href="#">Link 1</a>
-                            <a className="dropdown-item" href="#">Link 2</a>
-                            <a className="dropdown-item" href="#">Link 3</a>
-                            </div>
-                        </li>
-                        <li className="nav-item dropdown dmenu">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            Functional Areas
-                            </a>
-                            <div className="dropdown-menu sm-menu">
-                            <a className="dropdown-item" href="#">Link 1</a>
-                            <a className="dropdown-item" href="#">Link 2</a>
-                            </div>
-                        </li>
-                        <li className="nav-item dropdown dmenu">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            Topic
-                            </a>
-                            <div className="dropdown-menu sm-menu">
-                            <a className="dropdown-item" href="#">Link 1</a>
-                            <a className="dropdown-item" href="#">Link 2</a>
-                            </div>
-                        </li>
-                        <li className="nav-item dropdown dmenu">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            Laguage
-                            </a>
-                            <div className="dropdown-menu sm-menu">
-                            <a className="dropdown-item" href="#">Link 1</a>
-                            <a className="dropdown-item" href="#">Link 2</a>
-                            <a className="dropdown-item" href="#">Link 3</a>
-                            </div>
-                        </li>
-                        <li className="nav-item dropdown dmenu">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            Media
-                            </a>
-                            <div className="dropdown-menu sm-menu">
-                            <a className="dropdown-item" href="#">Link 1</a>
-                            <a className="dropdown-item" href="#">Link 2</a>
-                            </div>
-                        </li>
-                        <li className="nav-item dropdown dmenu">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            Level
-                            </a>
-                            <div className="dropdown-menu sm-menu">
-                            <a className="dropdown-item" href="#">Link 1</a>
-                            <a className="dropdown-item" href="#">Link 2</a>
-                            </div>
-                        </li>
-                        <li className="nav-item dropdown dmenu">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            Price
-                            </a>
-                            <div className="dropdown-menu sm-menu">
-                            <a className="dropdown-item" href="#">Link 1</a>
-                            <a className="dropdown-item" href="#">Link 2</a>
-                            </div>
-                        </li>                        
-                        <li className="nav-item dropdown dmenu">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            Duration
-                            </a>
-                            <div className="dropdown-menu sm-menu">
-                            <a className="dropdown-item" href="#">Link 1</a>
-                            <a className="dropdown-item" href="#">Link 2</a>
-                            </div>
-                        </li>
-                      </ul>
-                    </div> */}
             </nav>
 
 
