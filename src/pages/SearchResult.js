@@ -9,7 +9,7 @@ import UserContext from './../contexts/UserContext';
 const SearchResult = (props) => {
 
     const [viewTrainer, setViewTrainer] = useState({});
-    const [tData, setTData] = useState({pageInfo: {}, data: []});
+    const [tData, setTData] = useState({pageInfo: {}, data: [], stats: {}});
     const [filter, setFilter] = useState({start: 0, limit: 8, curpage: 1});
 
   const $ = window.$;
@@ -30,53 +30,68 @@ const SearchResult = (props) => {
     .then(setTData)
     .catch(console.log);
 
-    
-    $(".circleChart").circleChart({
-      color: "#6ecff6",
-      backgroundColor: "#fff",
-      background: true,
-      size: 100,
-  });
   },[]);
   
-  useEffect(() => {setViewTrainer(_.get(tData,'data.0',{}))},[tData]);
-console.log(tData)
-  const renderResultAnalysis = () => <section className="home-result-wrapper">
-    <ul className="resultlist">
-        <li>
-            <div className="circleChart" id="1" data-value="17" data-text="17%"></div>
-            <span>Trainers</span>
-        </li>
-        <li>
-            <div className="canvas-wrap">
-                <div className="circleChart" id="2" data-value="77" data-text="77%"></div>
-                <span id="procent2" classs="procent"></span>
-            </div>
-            <span>Courses</span>
-        </li>
-        <li>
-            <div className="canvas-wrap">
-                <div className="circleChart" id="3" data-value="77" data-text="77%"></div>
-                <span id="procent3" classs="procent"></span>
-            </div>
-            <span>Book</span>
-        </li>
-        <li>
-            <div className="canvas-wrap">
-                <div className="circleChart" id="4" data-value="77" data-text="77%"></div>
-                <span id="procent4" classs="procent"></span>
-            </div>
-            <span>Audio</span>
-        </li>
-        <li>
-            <div className="canvas-wrap">
-                <div className="circleChart" id="5" data-value="77" data-text="77%"></div>
-                <span id="procent5" classs="procent"></span>
-            </div>
-            <span>Quizz</span>
-        </li>
-    </ul>
-  </section>;
+  
+  useEffect(() => {
+    $(".circleChart").circleChart({
+        color: "#6ecff6",
+        backgroundColor: "#fff",
+        background: true,
+        size: 100,
+    });
+    setViewTrainer(_.get(tData,'data.0',{}));
+},[tData]);
+
+  const renderResultAnalysis = () => {
+    const ratios = {
+        trainers: parseInt(_.get(tData,'stats.trainers',0)) / parseInt(_.get(tData,'stats.allTrainers',0)),
+        courses: parseInt(_.get(tData,'stats.courses',0)) / parseInt(_.get(tData,'stats.allCourses',0)),
+        books: parseInt(_.get(tData,'stats.books',0)) / parseInt(_.get(tData,'stats.allBooks',0)),
+        videos: parseInt(_.get(tData,'stats.videos',0)) / parseInt(_.get(tData,'stats.allVideos',0)),
+        audios: parseInt(_.get(tData,'stats.audios',0)) / parseInt(_.get(tData,'stats.allAudios',0))
+    };
+    _.each(ratios, (r,k) => ratios[k] = Math.round(r*100));
+
+    return <>
+        {_.isNaN(ratios.trainers)===false && <section className="home-result-wrapper">
+            <ul className="resultlist">
+                <li>
+                    <div className="circleChart" id="1" data-value={ratios.trainers} data-text={ratios.trainers + '%'}></div>
+                    <span>Trainers</span>
+                </li>
+                <li>
+                    <div className="canvas-wrap">
+                        <div className="circleChart" id="2" data-value={ratios.courses} data-text={ratios.courses + '%'}></div>
+                        <span id="procent2" classs="procent"></span>
+                    </div>
+                    <span>Courses</span>
+                </li>
+                <li>
+                    <div className="canvas-wrap">
+                        <div className="circleChart" id="3" data-value={ratios.books} data-text={ratios.books + '%'}></div>
+                        <span id="procent3" classs="procent"></span>
+                    </div>
+                    <span>Books</span>
+                </li>
+                <li>
+                    <div className="canvas-wrap">
+                        <div className="circleChart" id="4" data-value={ratios.audios} data-text={ratios.audios + '%'}></div>
+                        <span id="procent4" classs="procent"></span>
+                    </div>
+                    <span>Audios</span>
+                </li>
+                <li>
+                    <div className="canvas-wrap">
+                        <div className="circleChart" id="5" data-value={ratios.videos} data-text={ratios.videos + '%'}></div>
+                        <span id="procent5" classs="procent"></span>
+                    </div>
+                    <span>Videos</span>
+                </li>
+            </ul>
+        </section>}
+    </>;
+  }
 
 const showPageInfo = () => {
     let tcounts = filter.start + filter.limit;
@@ -168,7 +183,7 @@ const showTrainerDetail = () => {
 }
 
 const renderResults = () => <div className="resultDisplay">
-    <div className="filterResultBox">
+    {/*<div className="filterResultBox">
         <img src="/assets/images/cross.png" className="img-fluid filterCloseBtn" />
         <div className="container">
             <div className="row">
@@ -246,7 +261,7 @@ const renderResults = () => <div className="resultDisplay">
                 </div>      
             </div>
         </div>
-    </div>
+</div>*/}
     <div id="resultDisplay"> 
         {/* <div className="filterbox">
             <form>
