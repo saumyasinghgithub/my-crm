@@ -1,7 +1,46 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useRef,useState } from 'react';
 import { Container } from 'react-bootstrap';
+import validator from 'validator';
+import Utils from './../Utils';
+import axios from 'axios';
+import _ from 'lodash';
 
 const ContactUs = (props) => {
+    const frmRef = useRef('ContactForm');
+ 
+    const [showMessage,setShowMessage] = useState(false);
+    const $ = window.$;
+    const [error,setError] = useState(false);
+
+    const submitForm = (e) => {
+        
+        const frm = frmRef.current;
+        e.preventDefault();
+        frm.classList.add('was-validated');
+        if (frm.checkValidity() === false) {
+         return false;
+       }
+        setError(false);
+        setShowMessage(false);
+        let frmdata = new FormData(frm);
+        console.log("Form Data" + frm.name);
+        axios.post(Utils.apiUrl(`contact/add`),frmdata,Utils.apiHeaders())     
+        .then(res => {
+            //console.log(res);
+           if(res.data.success){
+              setShowMessage(true);
+           }else{
+              throw(res.data);
+           }
+           
+        }).catch(err  => {
+            setError(err.message)
+            //console.log(err);
+        }
+            ) 
+    
+      };  
+
     useEffect(window.scrollEffect, []);
 
     return (<>
@@ -18,7 +57,17 @@ const ContactUs = (props) => {
                     <h1 className="slideInUp wow animated pt-4 pb-4 mb-0">Contact us</h1>
                     <p className="slideInUp wow animated pb-4">Reach out to us, if you have questions, requests or simply want to talk, <a href='mailto:dropamessage@ad.com'>dropamessage@ad.com</a></p>
                 </div>
-                <form className="form contact" action="http://demo.knowledgesynonyms.com/adnew/index.php/default/contact/index/post/" id="contact-form" method="post" data-hasrequired="* Required Fields" novalidate="novalidate">
+                <form ref={frmRef} className="form contact" id="contact-form" method="post" novalidate onSubmit={submitForm}>
+                    { showMessage &&  
+                        <div className='alert alert-info p-3'>                    
+                            <strong>Record saved successfully!</strong>
+                        </div>
+                    }
+                    { error !== false && 
+                        <div className='alert alert-danger p-3'>
+                            <strong>{error}</strong>
+                        </div>
+                    }
                     <fieldset className="fieldset">
                         <div className="row">
                             <div className="col-sm-6">
@@ -29,28 +78,24 @@ const ContactUs = (props) => {
                                 </div>
                                 <div className="field telephone">
                                     <div className="control">
-                                        <input name="telephone" id="telephone" placeholder="Phone Number" title="Phone Number" className="input-text" type="number"></input>
+                                        <input name="phone" id="telephone" placeholder="Phone Number" title="Phone Number" className="input-text" type="number"></input>
                                     </div>
                                 </div>
                                 <div className="field email required">
                                     <div className="control">
                                         <input name="email" id="email" placeholder="Email" title="Email"  className="input-text" type="email" data-validate="{required:true, 'validate-email':true}" aria-required="true"></input>
                                     </div>
-                                </div>
-                                <div className="field 	address required">
-                                    <div className="control">
-                                    </div>
+                                    <div className="invalid-feedback">Enter your valid email address!</div>
                                 </div>
                             </div>
                             <div className="col-sm-6">
                                 <div className="field comment required">
                                     <div className="control">
-                                        <textarea placeholder="What’s on your mind?" name="comment" id="comment" title="What’s on your mind?" className="input-text" cols="5" rows="3" data-validate="{required:true}" aria-required="true" spellcheck="false"></textarea>
+                                        <textarea placeholder="What’s on your mind?" name="message" id="message" title="What’s on your mind?" className="input-text" cols="5" rows="3" data-validate="{required:true}" aria-required="true" spellcheck="false"></textarea>
                                     </div>
                                 </div>
                                 <div className="actions-toolbar">
                                     <div className="primary">
-                                        <input type="hidden" name="hideit" id="hideit" value=""></input>
                                         <button type="submit" title="Submit" className="action submit submitbtn">
                                             Submit
                                         </button>

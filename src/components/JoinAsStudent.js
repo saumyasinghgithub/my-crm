@@ -25,7 +25,7 @@ const JoinAsStudent = (props) => {
        setError(false);
        setShowMessage(false);
        let frmdata = new FormData(frm);
-  
+        console.log(frm);
        if(_.get(frm,'password.value',false)){
           if(frm.password.value!==frm.conf_password.value){
             setError("Password verification failed, please verify your password correctly!");
