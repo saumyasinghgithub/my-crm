@@ -26,7 +26,7 @@ const ContactUs = (props) => {
         console.log("Form Data" + frm.name);
         axios.post(Utils.apiUrl(`contact/add`),frmdata,Utils.apiHeaders())     
         .then(res => {
-            //console.log(res);
+            console.log(res);
            if(res.data.success){
               setShowMessage(true);
            }else{
