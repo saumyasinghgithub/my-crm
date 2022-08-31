@@ -43,6 +43,10 @@ const SearchResult = (props) => {
     setViewTrainer(_.get(tData,'data.0',{}));
 },[tData]);
 
+  const markFav = (e) => (trainer_id) => {
+    e.preventDefault();
+  };
+
   const renderResultAnalysis = () => {
     const ratios = {
         trainers: parseInt(_.get(tData,'stats.trainers',0)) / parseInt(_.get(tData,'stats.allTrainers',0)),
@@ -172,8 +176,10 @@ const showTrainerDetail = () => {
                     <div className="txtR">
                         <a href={`${process.env.REACT_APP_PUBLIC_URL}/trainers/${trainer.slug}`} className="action tocart primary btn btnBlue"><span>View Profile</span></a>
                         <a href={`${process.env.REACT_APP_PUBLIC_URL}/trainers/${trainer.slug}/courses`} target="_blank" className="action tocart primary btn btnBlue"><span>View Courses</span></a>
-                        <a href="#" data-post="" className="action tocart primary btn btnBlue" data-action="add-to-wishlist">
-                                <span>Make Favourite</span></a>
+                        {Utils.isLoggedIn() && <a href="#" className="action tocart primary btn btnBlue" onClick={markFav(trainer.user_id)}>
+                            {!tData.favTrainers.includes(trainer.user_id) && <span>Mark Favourite</span>}
+                            {tData.favTrainers.includes(trainer.user_id) && <span>Remove Favourite</span>}
+                        </a>}
                     </div>
                 </div>
             </div>
