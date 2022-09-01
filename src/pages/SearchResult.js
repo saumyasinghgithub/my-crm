@@ -14,7 +14,7 @@ const SearchResult = (props) => {
 
   const $ = window.$;
 
-  const {getServerData} = useContext(UserContext);
+  const {getServerData, setServerData} = useContext(UserContext);
 
   useEffect(()=>{
     
@@ -40,11 +40,25 @@ const SearchResult = (props) => {
         background: true,
         size: 100,
     });
-    setViewTrainer(_.get(tData,'data.0',{}));
+    if(parseInt(_.get(viewTrainer,'user_id',0)) === 0){
+        setViewTrainer(_.get(tData,'data.0',{}));
+    }
 },[tData]);
 
-  const markFav = (e) => (trainer_id) => {
+  const markFav = (trainer_id) => (e) => {
     e.preventDefault();
+    $(e.target).fadeOut();
+    const data = {
+        trainer_id: trainer_id, 
+        fav: tData.favTrainers.includes(trainer_id) ? 0 : 1
+    };
+    setServerData('user/markfav',`trainer_id=${data.trainer_id}&fav=${data.fav}`,'post')
+    .then(() => setTData({
+        ...tData,
+        favTrainers: data.fav ? 
+            _.concat(tData.favTrainers,trainer_id) : 
+            _.filter(tData.favTrainers,tid => tid!=trainer_id)
+    })).then(() => $(e.target).show())
   };
 
   const renderResultAnalysis = () => {
@@ -282,7 +296,7 @@ const renderResults = () => <div className="resultDisplay">
         <div className="flexWrapper">
             <div className="flexItem flex20">
                 <ul className="nav datascroll">
-                    {_.get(tData,'data',[]).map((trainer,idx) => <li key={idx} className={idx===0 ? 'active' : ''}>
+                    {_.get(tData,'data',[]).map((trainer,idx) => <li key={idx} className={trainer.user_id===viewTrainer.user_id ? 'active' : ''}>
                         <span onClick={() => setViewTrainer(trainer)}>
                             <img className="img-fluid" src={`${process.env.REACT_APP_API_URL}/uploads/base/${trainer.base_image}`} alt={_.get(trainer,'firstname','')} />
                             <span>{_.get(trainer,'firstname','')} {_.get(trainer,'lastname','')}</span>
