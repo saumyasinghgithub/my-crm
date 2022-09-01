@@ -24,7 +24,15 @@ const UserProvider = (props) => {
     .catch(err => {
       callback(false, err.message);
     });
-  }
+  };
+
+  const goForgotPassword = (email,callback) => {    
+    axios.post(Utils.apiUrl('user/forgotpass'),`email=${email}`,Utils.apiHeaders())
+    .then(res => callback(res.data))
+    .catch(err => {
+      callback({success:false, message: err.message});
+    });
+  };
 
   
   const logout = (callback) => {
@@ -32,7 +40,7 @@ const UserProvider = (props) => {
     Utils.setUserData(false); 
        
     callback();
-  }
+  };
 
 
   const getServerData = (url, pageInfo = false) => {
@@ -46,7 +54,7 @@ const UserProvider = (props) => {
         }
       }).catch(reject);
     });
-  }
+  };
 
   const setServerData = (url,data, method = 'put') => {
     return new Promise((resolve,reject) => {
@@ -59,10 +67,10 @@ const UserProvider = (props) => {
         }
       }).catch(reject);
     });
-  }
+  };
 
   
-  return <UserContext.Provider value={{ userData, goLogin,logout, getServerData, setServerData}}>
+  return <UserContext.Provider value={{ userData, goLogin, goForgotPassword, logout, getServerData, setServerData}}>
     {props.children}
   </UserContext.Provider>;
 
