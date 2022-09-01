@@ -4603,3 +4603,7 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
 .libraryCourses {
     width: 300px !important;
 }
+.forgotPassword input {
+    padding: 2% 2%;
+    margin-bottom: 10px;
+}

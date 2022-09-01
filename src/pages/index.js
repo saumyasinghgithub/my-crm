@@ -24,5 +24,6 @@ import MyOrder from "./MyOrder";
 import MySales from "./MySales";
 import MyStudent from "./MyStudent";
 import BlogDetails from "./BlogDetails";
+import ForgetPassword from "./ForgetPassword";
 
-export {Login, About, Home, ADStudio, ADTrainer, MyProfile, MyCourse, CourseDetails, SearchResult, TeacherLanding, CourseList, ContactUs, ADStudent,StudentProfile,MyCart,StudentProfileView, MyBlog, BlogList, PaymentSuccess, CookiePolicy, PrivacyPolicy,TermConditions, MyOrder, MySales, MyStudent, BlogDetails};
+export {Login, About, Home, ADStudio, ADTrainer, MyProfile, MyCourse, CourseDetails, SearchResult, TeacherLanding, CourseList, ContactUs, ADStudent,StudentProfile,MyCart,StudentProfileView, MyBlog, BlogList, PaymentSuccess, CookiePolicy, PrivacyPolicy,TermConditions, MyOrder, MySales, MyStudent, BlogDetails, ForgetPassword};

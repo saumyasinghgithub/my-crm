@@ -1,5 +1,5 @@
 import {LoginLayout, StaticPageLayout, DefaultLayout} from './layouts';
-import {Login, About, Home, ADStudio, ADTrainer,MyProfile,MyCourse, CourseDetails, SearchResult, TeacherLanding, ContactUs, ADStudent, StudentProfile, MyCart, StudentProfileView, MyBlog, PaymentSuccess, CookiePolicy, PrivacyPolicy, TermConditions, MyOrder, MySales, MyStudent, BlogDetails} from './pages';
+import {Login, About, Home, ADStudio, ADTrainer,MyProfile,MyCourse, CourseDetails, SearchResult, TeacherLanding, ContactUs, ADStudent, StudentProfile, MyCart, StudentProfileView, MyBlog, PaymentSuccess, CookiePolicy, PrivacyPolicy, TermConditions, MyOrder, MySales, MyStudent, BlogDetails, ForgetPassword} from './pages';
 
 
 const CustomRoutes = [  
@@ -173,6 +173,13 @@ const CustomRoutes = [
     'exact'     : true,
     'layout'    : StaticPageLayout, 
     'component' : PrivacyPolicy
+  },
+  {
+    'path'      : '/resetpass', 
+    'secure'    : false,    
+    'exact'     : true,
+    'layout'    : StaticPageLayout, 
+    'component' : ForgetPassword
   },
   {
     'path'      : '/term-conditions', 
