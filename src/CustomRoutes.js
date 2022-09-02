@@ -175,7 +175,7 @@ const CustomRoutes = [
     'component' : PrivacyPolicy
   },
   {
-    'path'      : '/resetpass', 
+    'path'      : '/resetpass/:token', 
     'secure'    : false,    
     'exact'     : true,
     'layout'    : StaticPageLayout, 

@@ -8,14 +8,12 @@ import validator from 'validator';
 
 const ForgetPassword = (props) => {
     const frmRef = useRef('ResetPassForm');
-    const { t } = useParams();
+    const { token } = useParams();
     const [showMessage,setShowMessage] = useState(false);
     const $ = window.$;
     const [error,setError] = useState(false);
 
     const submitForm = (e) => {
-        let tvalue = _.get(props,"t.0",false);
-        console.log(tvalue);
         const frm = frmRef.current;
         e.preventDefault();
         frm.classList.add('was-validated');
@@ -25,6 +23,7 @@ const ForgetPassword = (props) => {
         setError(false);
         setShowMessage(false);
         let frmdata = new FormData(frm);
+        frmdata.append('token', token);
         if(_.get(frm,'password.value',false)){
             if(frm.password.value!==frm.conf_password.value){
               setError("Password verification failed, please verify your password correctly!");
@@ -76,7 +75,7 @@ const ForgetPassword = (props) => {
             <div className="help-wrapper">
                 <nav>
                     <ol className="cd-breadcrumb">
-                        <li><a href="/">Home {t}</a></li>
+                        <li><a href="/">Home</a></li>
                         <li className="current"><em>Reset Password</em></li>
                     </ol>
                 </nav>
@@ -99,20 +98,22 @@ const ForgetPassword = (props) => {
                     <fieldset className="fieldset">
                         <div className="row">
                             <div className="col-sm-8">
-                                <div className="field name required">
-                                    <div className="control">
-                                        <input className="input-text form-control" name="password" onKeyUp={validatePassword}  placeholder="Password" type="password" required />
-                                        <div className="invalid-feedback">Invalid Password</div>
-                                    </div>
+                            <div className="field name required">
+                                <div className="control">
+                                    <input className="input-text form-control" name="password" onKeyUp={validatePassword}  placeholder="Password" type="password" required />
+                                    <div className="invalid-feedback">Invalid Password</div>
                                 </div>
-                                <div className="field telephone">
-                                    <div className="control">
-                                        <input className="input-text form-control" name="conf_password" onKeyUp={validatePassword} placeholder="Re-enter Password" type="password" required />
-                                        <div className="invalid-feedback">Passwords Don't Match</div>
-                                    </div>
+                            </div>
+                            <div className="field telephone">
+                                <div className="control">
+                                    <input className="input-text form-control" name="conf_password" onKeyUp={validatePassword} placeholder="Re-enter Password" type="password" required />
+                                    <div className="invalid-feedback">Passwords Don't Match</div>
                                 </div>
-                                </div>
-                                <div className="col-sm-4">
+                            </div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm-8 text-right">
                                 <div className="actions-toolbar">
                                     <div className="primary">
                                         <button type="submit" title="Submit" className="action submit submitbtn">
@@ -120,9 +121,7 @@ const ForgetPassword = (props) => {
                                         </button>
                                     </div>
                                 </div>
-
                             </div>
-                       
                         </div>
                     </fieldset>
 
