@@ -53,7 +53,7 @@ const HeaderTrainer = (props) => {
 
 
     return(<>
-           <div className="sidenav">
+        <div className="sidenav">
             <div className="sidebarInner">
                 <div className="overlay"></div>
                 <img className="img-fluid closemenu" src="/assets/images/close-circle.png" />
@@ -63,10 +63,10 @@ const HeaderTrainer = (props) => {
                 <ul className="navList">
                     <li><a href="/about">About us <span>Any queries? Problems with upload? No matter what the issue is, 
                         we will help, support and find a way!</span></a></li>
-                    <li><a href="/ad-studio">AD Studio <span>Lorem Ipsum is simply dummy text</span></a></li>
-                    <li><a href="/ad-trainer">Help for Trainer <span>Lorem Ipsum is simply dummy text .</span></a></li>
-                    <li><a href="/ad-student">Help for Student <span>Lorem Ipsum is simply dummy text .</span></a></li>
-                    <li><a href="/contact-us">Contact <span>Lorem Ipsum is simply dummy text of.</span></a></li>
+                    <li><a href="/ad-studio">AD Studio <span>World best learning plaform.</span></a></li>
+                    <li><a href="/ad-trainer">Help for Trainer <span>Get to know us, get to work with us.</span></a></li>
+                    <li><a href="/ad-student">Help for Student <span>Start with a plan and finish with results.</span></a></li>
+                    <li><a href="/contact-us">Contact <span>Get to know us, get to work with us.</span></a></li>
                 </ul>
             </div>
         </div>
@@ -139,7 +139,7 @@ const HeaderTrainer = (props) => {
                     </div>
                     <div className="col-sm-6">
                         <ul className="profile_menu_list">
-                        <li><a href={`${process.env.PUBLIC_URL}/`}>Account Information</a></li>
+                        <li><a href={`http://demo.knowledgesynonyms.com/moodle/my/`} target='_blank'>Enrolled Courses</a></li>
                         {loggedIn &&
                             <li><a href={getSlug()}>View My Profile</a></li>  
                         }

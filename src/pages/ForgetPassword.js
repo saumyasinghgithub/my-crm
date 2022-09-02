@@ -14,7 +14,7 @@ const ForgetPassword = (props) => {
     const [error,setError] = useState(false);
 
     const submitForm = (e) => {
-        let tvalue = _.get(props,"t",false);
+        let tvalue = _.get(props,"t.0",false);
         console.log(tvalue);
         const frm = frmRef.current;
         e.preventDefault();
