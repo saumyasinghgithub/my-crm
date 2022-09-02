@@ -17,6 +17,8 @@ const CourseDetails = (props) => {
 
     const {getServerData, setServerData} = useContext(UserContext);
 
+    const $ = window.$;
+
     useEffect(()=>{
         getServerData(`course/${slug}`,true)
         .then(cData => {
@@ -77,7 +79,18 @@ const CourseDetails = (props) => {
             <span className="usdheading">{resource.price} USD</span><span className="usdtext">{resource.type}</span>
         </div>
     </li>
-}
+  };
+
+  const markFav = (course_id,fav) => (e) => {
+    e.preventDefault();
+    //$(e.target).fadeOut();
+    setServerData('course/markfav',`course_id=${course_id}&fav=${fav}`,'post')
+    .then(() => setCourse({
+        ...course,
+        isFav: !course.isFav
+    }))
+    //.then(() => $(e.target).show())
+  };
 
 
   return (<>
@@ -168,7 +181,11 @@ const CourseDetails = (props) => {
                                                 </>}
                                                 {Utils.isLoggedIn() && <>
                                                     <a href="#" onClick={addToCart}  className="btn btnBlue">Enroll Now</a>
-                                                    <a href="#" className="btn btnBorder">Add to Favourite</a>
+
+                                                    <a href="#" className="btn btnBorder" onClick={markFav(course.course.id,course.isFav ? 0 : 1)}>
+                                                        {course.isFav===false && <span>Mark Favourite <i className="far fa-heart ml-2" /></span>}
+                                                        {course.isFav===true && <span>Remove Favourite <i className="fas fa-heart ml-2 text-danger" /></span>}
+                                                    </a>
                                                 </>}
                                             </div>
                                         </div>

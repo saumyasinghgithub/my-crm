@@ -25,5 +25,10 @@ import MySales from "./MySales";
 import MyStudent from "./MyStudent";
 import BlogDetails from "./BlogDetails";
 import ResetPassword from "./ResetPassword";
+import PreferredTrainers from "./PreferredTrainers";
+import PreferredCourses from "./PreferredCourses";
 
-export {Login, About, Home, ADStudio, ADTrainer, MyProfile, MyCourse, CourseDetails, SearchResult, TeacherLanding, CourseList, ContactUs, ADStudent,StudentProfile,MyCart,StudentProfileView, MyBlog, BlogList, PaymentSuccess, CookiePolicy, PrivacyPolicy,TermConditions, MyOrder, MySales, MyStudent, BlogDetails, ResetPassword};
+export default {Login, About, Home, ADStudio, ADTrainer, MyProfile, MyCourse, CourseDetails, 
+  SearchResult, TeacherLanding, CourseList, ContactUs, ADStudent,StudentProfile,MyCart,
+  StudentProfileView, MyBlog, BlogList, PaymentSuccess, CookiePolicy, PrivacyPolicy,
+  TermConditions, MyOrder, MySales, MyStudent, BlogDetails, ResetPassword, PreferredTrainers, PreferredCourses};

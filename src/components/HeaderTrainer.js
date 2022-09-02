@@ -130,10 +130,10 @@ const HeaderTrainer = (props) => {
                         {Utils.isTrainer() && 
                            <li><a href={`${process.env.PUBLIC_URL}/my-course`}>My Course</a></li>
                         }
-                        {Utils.isStudent() &&
-                            <li><a href={`${process.env.PUBLIC_URL}`}>Prefered Courses</a></li>
+                        {loggedIn &&
+                            <li><a href={`${process.env.PUBLIC_URL}/preferred-courses`}>Preferred Courses</a></li>
                         }
-                       
+                        
                         <li><a href="">Help for you</a></li>   
                         </ul>
                     </div>
@@ -143,8 +143,8 @@ const HeaderTrainer = (props) => {
                         {loggedIn &&
                             <li><a href={getSlug()}>View My Profile</a></li>  
                         }
-                        {Utils.isStudent() &&
-                            <li><a href={getSlug()}>Prefered Trainer</a></li>  
+                        {loggedIn &&
+                            <li><a href={`${process.env.PUBLIC_URL}/preferred-trainers`}>Preferred Trainer</a></li>  
                         } 
 
                         {Utils.isTrainer() &&
