@@ -6,7 +6,7 @@ import axios from 'axios';
 import _ from 'lodash';
 import validator from 'validator';
 
-const ForgetPassword = (props) => {
+const ResetPassword = (props) => {
     const frmRef = useRef('ResetPassForm');
     const { token } = useParams();
     const [showMessage,setShowMessage] = useState(false);
@@ -14,6 +14,7 @@ const ForgetPassword = (props) => {
     const [error,setError] = useState(false);
 
     const submitForm = (e) => {
+
         const frm = frmRef.current;
         e.preventDefault();
         frm.classList.add('was-validated');
@@ -23,14 +24,13 @@ const ForgetPassword = (props) => {
         setError(false);
         setShowMessage(false);
         let frmdata = new FormData(frm);
-        frmdata.append('token', token);
         if(_.get(frm,'password.value',false)){
             if(frm.password.value!==frm.conf_password.value){
               setError("Password verification failed, please verify your password correctly!");
               return false;
             }
          }
-        axios.post(Utils.apiUrl(`user/forgotpass`),frmdata,Utils.apiHeaders())     
+        axios.post(Utils.apiUrl(`user/resetpass`),frmdata,Utils.apiHeaders({token: token}))     
         .then(res => {
            if(res.data.success){
               setShowMessage(true);
@@ -59,7 +59,7 @@ const ForgetPassword = (props) => {
             frm.password.setCustomValidity("");
             $(frm.password).next().html('');
         }
-         if(frm.password.value != frm.conf_password.value) {
+         if(frm.password.value !== frm.conf_password.value) {
             frm.conf_password.setCustomValidity("Passwords Don't Match");
             $(frm.conf_password).next().html("Passwords Don't Match!!!");
         } else {
@@ -69,6 +69,11 @@ const ForgetPassword = (props) => {
     };  
 
     useEffect(window.scrollEffect, []);
+
+    const openLoginModal = (e) => {
+        e.preventDefault();
+        $('#loginModal').modal('show');
+    };
 
     return (<>
         <Container className="h-100 ">
@@ -87,7 +92,7 @@ const ForgetPassword = (props) => {
                 <form ref={frmRef} className="form forgotPassword needs-validation" id="contact-form" method="post" noValidate onSubmit={submitForm}>
                     { showMessage &&  
                         <div className='alert alert-info p-3'>                    
-                            <strong>Your password reset successfully!</strong>
+                            <strong>Your password has been updated successfully! Please <a href="#" onClick={openLoginModal}>login again</a> with new password.</strong>
                         </div>
                     }
                     { error !== false && 
@@ -131,4 +136,4 @@ const ForgetPassword = (props) => {
     </>);
 };
 
-export default ForgetPassword;
+export default ResetPassword;

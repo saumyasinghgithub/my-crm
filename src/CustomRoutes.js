@@ -1,6 +1,6 @@
 import {LoginLayout, StaticPageLayout, DefaultLayout} from './layouts';
-import {Login, About, Home, ADStudio, ADTrainer,MyProfile,MyCourse, CourseDetails, SearchResult, TeacherLanding, ContactUs, ADStudent, StudentProfile, MyCart, StudentProfileView, MyBlog, PaymentSuccess, CookiePolicy, PrivacyPolicy, TermConditions, MyOrder, MySales, MyStudent, BlogDetails, ForgetPassword} from './pages';
-
+import {Login, About, Home, ADStudio, ADTrainer,MyProfile,MyCourse, CourseDetails, SearchResult, TeacherLanding, ContactUs, ADStudent, StudentProfile, MyCart, StudentProfileView, MyBlog, PaymentSuccess, CookiePolicy, PrivacyPolicy, TermConditions, MyOrder, MySales, MyStudent, BlogDetails, ResetPassword} from './pages';
+import Utils from './Utils';
 
 const CustomRoutes = [  
   
@@ -178,8 +178,8 @@ const CustomRoutes = [
     'path'      : '/resetpass/:token', 
     'secure'    : false,    
     'exact'     : true,
-    'layout'    : StaticPageLayout, 
-    'component' : ForgetPassword
+    'layout'    : Utils.isLoggedIn() ? DefaultLayout: StaticPageLayout, 
+    'component' : Utils.isLoggedIn() ? Home : ResetPassword
   },
   {
     'path'      : '/term-conditions', 

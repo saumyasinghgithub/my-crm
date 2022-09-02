@@ -70,7 +70,7 @@ const Home = (props) => {
                         <li className='jointrainer ml-2'><a href="#signUpStudent" data-toggle="modal" data-dismiss="modal">Join as a Student</a></li>
                     </ul>
                     <div className="whyAD">
-                        <img className="img-fluid" src="assets/images/why_ad.png" alt="Autodidact" />
+                        <img className="img-fluid" src="/assets/images/why_ad.png" alt="Autodidact" />
                     </div>
                 </div>
             </div>
