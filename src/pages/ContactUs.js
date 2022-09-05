@@ -55,7 +55,7 @@ const ContactUs = (props) => {
                     <h1 className="slideInUp wow animated pt-4 pb-4 mb-0">Contact us</h1>
                     <p className="slideInUp wow animated pb-4">Reach out to us, if you have questions, requests or simply want to talk, <a href='mailto:dropamessage@ad.com'>dropamessage@ad.com</a></p>
                 </div>
-                <form ref={frmRef} className="form contact needs-validation" id="contact-form" method="post" noValidate onSubmit={submitForm}>
+                <form ref={frmRef} className="form contact alertdesign needs-validation" id="contact-form" method="post" noValidate onSubmit={submitForm}>
                     { showMessage &&  
                         <div className='alert alert-info p-3'>                    
                             <strong>Record saved successfully!</strong>

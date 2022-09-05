@@ -74,7 +74,7 @@ const HeaderTrainer = (props) => {
 <header className="header fixed-top whiteHeader">
     <div className="container">
         <a className="navbar-brand" href="/">AD</a>
-        <form className="searchBOx" >
+        {/* <form className="searchBOx" >
                 <div className="input-group">
                     <div className="input-group-btn search-panel" data-search="students">
                         <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -89,7 +89,7 @@ const HeaderTrainer = (props) => {
                     </div>   
                    <input className="form-control" type="text" name="x" placeholder="How can I help you ?" />              
                 </div> 
-        </form>
+        </form> */}
         <ul className="navbar-nav">
                     <li className="nav-item"><a href="/my-cart"><img className="img-fluid shoppingIcon" src="/assets/images/cart.png" alt="autodidact"/></a></li>
                     {!loggedIn && <li className="nav-item" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">

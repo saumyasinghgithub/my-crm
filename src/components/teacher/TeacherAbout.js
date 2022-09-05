@@ -56,7 +56,7 @@ const TeacherAbout = (props) => {
             </div>
         </div>
 
-        <div className="profileTabQu slideInUp wow ">
+        <div className="profileTabQu slideInUp wow pb-5">
             <ul className="nav">
                 <li className="nav-item"><a className="nav-link active" data-toggle="tab" href="#academicContent">Academic Qualification</a></li>
                 <li className="nav-item"><a className="nav-link" data-toggle="tab" href="#experienceContent">Experiences</a></li>
@@ -83,7 +83,7 @@ const TeacherAbout = (props) => {
             </div>
         </div>
                     
-        <div className="awradwrapper">
+        <div className="awradwrapper mt-3">
             <div className="container pt-5">
                 <img className="img-fluid inline-photo show-on-scroll" src={`${process.env.REACT_APP_API_URL}/uploads/award/${encodeURI(data.award_image)}`} alt="profile" />
             </div>

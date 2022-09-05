@@ -72,7 +72,7 @@ const MySales = (props) => {
     return (<>
         <Container fluid className="h-100 p-0">
         <div className="profile-wrapper">
-            <div className="container100">
+            <div className="container mysale">
             <h1>My Sales</h1>
             {stats.success === true && <div className="row">
                 <div className="col-lg-3 col-6">

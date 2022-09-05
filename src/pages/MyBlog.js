@@ -65,7 +65,7 @@ const MyBlog = (props) => {
     return (<>
     <Container fluid className="h-100 p-0">
     <div className="profile-wrapper">
-    <div className="container100">
+    <div className="container mysale myblog">
         <h1>My Blogs </h1>
         
         <Tab.Container id="left-tabs-example">
