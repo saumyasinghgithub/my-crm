@@ -118,7 +118,7 @@ const HeaderTrainer = (props) => {
                             <li><a href={`${process.env.PUBLIC_URL}/student/my-profile/edit`} className="active">My Profile</a></li>
                         }
                         {Utils.isStudent() &&
-                           <li><a href={`${process.env.PUBLIC_URL}/my-order/${udata.id}`}>My Order</a></li> 
+                           <li><a href={`${process.env.PUBLIC_URL}/my-order`}>My Order</a></li> 
                         }
                         {Utils.isTrainer() &&
                             <li><a href={`${process.env.PUBLIC_URL}/my-sales`}>My Sales</a></li>

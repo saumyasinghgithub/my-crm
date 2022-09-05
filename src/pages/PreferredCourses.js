@@ -1,16 +1,18 @@
 import React, {useEffect, useContext, useState} from "react";
 import { Container, Card, Pagination, Row, Col } from "react-bootstrap";
 import UserContext from './../contexts/UserContext';
+import Utils from './../Utils';
 import _ from 'lodash';
 
 const PreferredCourses = (props) => {
-    const [favs,setFavs] = useState({loading: true, start: 0, limit: 12});
+    const [favs,setFavs] = useState({loading: true, data: []});
+    const [filters,setFilters] = useState({start: 0, limit: 6});
     const {getServerData, setServerData} = useContext(UserContext);
     
     const $ = window.$;
 
     const fetchFavorites = ()=>{
-        getServerData(`my-preferred-courses?start=${favs.start}&limit=${favs.limit}`,true)
+        getServerData(`my-preferred-courses?start=${filters.start}&limit=${filters.limit}`,true)
         .then(res => {
             setFavs({...favs, ...res, loading: false});
         })
@@ -19,7 +21,13 @@ const PreferredCourses = (props) => {
         });
     };
 
+    const gotoPage = (page) => (e) => {
+        const start = (page-1) * filters.limit;
+        setFilters({...filters, start: start});
+    };
+
     useEffect(fetchFavorites,[]);
+    useEffect(fetchFavorites,[filters]);
 
     useEffect(window.scrollEffect,[]);
 
@@ -29,27 +37,30 @@ const PreferredCourses = (props) => {
     };
 
     const renderMyFavs = () => {
-        return <Row>
-        {favs.data.map(rec => <Col className="col-6 py-1"><Card className="courseWrapper coursecard my-2 h-100">
-            <Card.Body>
-              <Row>
-                <Col className="col-6">
-                  <div className="imgWrapper" style={{backgroundImage: `url("${process.env.REACT_APP_API_URL}/uploads/courses/${rec.course_image}")` }}></div>
-                  <Row>
-                      <Col className="col-4 text-left"><button className="btn text-danger" onClick={removeFav(rec.id)}>Remove</button></Col>
-                      <Col className="col-8 text-right"><a href={`${process.env.PUBLIC_URL}/courses/${rec.slug}`} className="btn btnBlue">View Details</a></Col>
-                  </Row>
-                </Col>
-                <Col className="col-6">
-                <h3>{rec.name}</h3>
-                <div dangerouslySetInnerHTML={{__html:rec.short_description}}></div>
-                <span className="textBold">Level:</span> {rec.level} <span className="textBold">| Duration:</span> {rec.duration} Hours.
-                
-                </Col>
-              </Row>
-            </Card.Body>
-        </Card></Col>)}
-        </Row>;
+        return <>
+            <Row>
+            {favs.data.map(rec => <Col className="col-6 py-1"><Card className="courseWrapper coursecard my-2 h-100">
+                <Card.Body>
+                <Row>
+                    <Col className="col-6">
+                    <div className="imgWrapper" style={{backgroundImage: `url("${process.env.REACT_APP_API_URL}/uploads/courses/${rec.course_image}")` }}></div>
+                    <Row>
+                        <Col className="col-4 text-left"><button className="btn text-danger" onClick={removeFav(rec.id)}>Remove</button></Col>
+                        <Col className="col-8 text-right"><a href={`${process.env.PUBLIC_URL}/courses/${rec.slug}`} className="btn btnBlue">View Details</a></Col>
+                    </Row>
+                    </Col>
+                    <Col className="col-6">
+                    <h3>{rec.name}</h3>
+                    <div dangerouslySetInnerHTML={{__html:rec.short_description}}></div>
+                    <span className="textBold">Level:</span> {rec.level} <span className="textBold">| Duration:</span> {rec.duration} Hours.
+                    
+                    </Col>
+                </Row>
+                </Card.Body>
+            </Card></Col>)}
+            </Row>
+            {favs.pageInfo.total > filters.limit && Utils.showPagination({...favs.pageInfo, ..._.pick(filters,['start','limit'])}, gotoPage)}
+        </>;
     };
 
     return (<>

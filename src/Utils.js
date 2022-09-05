@@ -111,6 +111,20 @@ const Utils = {
     });
   },
 
+  showPagination: (pageInfo, gotoPage) => {
+    const curpage = Math.ceil(pageInfo.start/pageInfo.limit) + 1;
+    const totpage = Math.ceil(pageInfo.total/pageInfo.limit);
+    
+    return <div className="my-2 float-right">
+      <ul className="pagination pagination-sm">
+        {curpage > 1 && <li className="page-item"><a className="page-link" href="#" onClick={gotoPage(curpage-1)}>Previous</a></li>}
+        {curpage <= 1 && <li className="page-item disabled"><a className="page-link">Previous</a></li>}
+        {(new Array(totpage)).fill(0).map((v,p) => <li key={p} className={`page-item ${curpage === p+1 ? 'active' : ''}`}><a className="page-link" href="#" onClick={gotoPage(p+1)}>{p+1}</a></li>)}
+        {curpage < totpage && <li className="page-item"><a className="page-link" href="#" onClick={gotoPage(curpage+1)}>Next</a></li>}
+        {curpage >= totpage && <li className="page-item disabled"><a className="page-link" href="#">Next</a></li>}
+      </ul></div>;
+  },
+
   mediaTypes: [
     ['pdf', "PDF", "pdf.png"],
     ['PPT', "PPT", "doc-icon.png"],
