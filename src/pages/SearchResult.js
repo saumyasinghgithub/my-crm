@@ -12,10 +12,9 @@ const SearchResult = (props) => {
     const [tData, setTData] = useState({loading: true, pageInfo: {}, data: [], stats: {}});
     const [filters, setFilters] = useState({start: 0, limit: 6});    
     const [loadStats, setLoadStats] = useState(true);
+    const [isScrollTriggered, setIsScrollTriggered] = useState(false);
 
   const $ = window.$;
-
-  let isScrollTriggered = false;
 
   const {getServerData, setServerData} = useContext(UserContext);
 
@@ -44,7 +43,7 @@ const SearchResult = (props) => {
         
         setTData(tmp);
 
-        isScrollTriggered = false;
+        setIsScrollTriggered(false);
         
     })
     .catch(console.log);
@@ -69,7 +68,7 @@ const SearchResult = (props) => {
   const handleScroll = (e) => {    
     const bottom = Number((e.target.scrollHeight - e.target.scrollTop).toFixed(0)) - e.target.clientHeight < 100;
     if(isScrollTriggered===false && bottom && (filters.start + filters.limit) < tData.pageInfo.total){
-        isScrollTriggered= true;//== this should avoid triggering load repeatative
+        setIsScrollTriggered(true);//== this should avoid triggering load repeatative
         setFilters({...filters, start: filters.start + filters.limit});        
     }
   };
