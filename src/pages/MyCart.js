@@ -94,10 +94,9 @@ const MyCart = (props) => {
               razorpayOrderId: res1.razorpay_order_id,
               razorpaySignature: res1.razorpay_signature,
         },Utils.apiHeaders({"Content-Type":"application/json"}))
-            .then(res2 => {
-                console.log(res2.data);
+            .then(res2 => {                
               if(res2.data.success){
-                //window.location.href='/payment/success/'+res2.data.id;
+                window.location.href='/payment/success/'+res2.data.id;
               }else{
                 throw(res2.data.message);
               }

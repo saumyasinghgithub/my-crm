@@ -32,6 +32,14 @@ const Success = (props) => {
       return _.get(odump, ename, odump);
    };
 
+   const showCourses = () => {
+      const dump = JSON.parse(orderData.data.dump);
+      const details = dump.description.split(" AND ");
+      return <ul>
+         {details.map(d => <li><b>{d.split('||')[0]}</b> - ({d.split('||').splice(1).join(',')})</li>)}                    
+      </ul>;
+   }
+
     useEffect(() => setuData(Utils.getUserData()), []);
     useEffect(fetchOrderInfo,[]);
     useEffect(window.scrollEffect,[loading]);
@@ -75,8 +83,9 @@ const Success = (props) => {
                     <strong>Thank you for purchaged the course. </strong>
                   </p> 
                   <p>Your Order References No. :  <strong>{getOrderDump('razorpayOrderId')}</strong></p>
+                  <hr />
                   <p>
-                    Course(s) bought by you :  <strong>{getOrderDump('description')}</strong>
+                    <h4>Course(s) bought by you :</h4>  {showCourses()}
                   </p> 
 
                      <ol className="faq pt-3">
@@ -90,8 +99,8 @@ const Success = (props) => {
             </div>
          </div>
          <div className="row">
-            <div className="col-sm-6"><strong><a href={`${process.env.PUBLIC_URL}/search-results`} className="btn btn-primary">Continue Order...</a></strong></div>
-            <div className="col-sm-6"><strong><a href={process.env.PUBLIC_URL} className="btn btn-success"> View My Orders</a></strong></div>
+            <div className="col-sm-6 text-right"><strong><a href={`${process.env.PUBLIC_URL}/search-results`} className="btn btn-primary">Continue Order...</a></strong></div>
+            <div className="col-sm-6 text-left"><strong><a href={`${process.env.PUBLIC_URL}/my-order`} className="btn btn-success"> View My Orders</a></strong></div>
          </div>
       </div>
    </div>
