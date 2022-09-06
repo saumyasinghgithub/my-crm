@@ -9,14 +9,17 @@ import UserContext from './../contexts/UserContext';
 const SearchResult = (props) => {
 
     const [viewTrainer, setViewTrainer] = useState({});
-    const [tData, setTData] = useState({pageInfo: {}, data: [], stats: {}});
-    const [filter, setFilter] = useState({start: 0, limit: 8, curpage: 1});
+    const [tData, setTData] = useState({loading: true, pageInfo: {}, data: [], stats: {}});
+    const [filters, setFilters] = useState({start: 0, limit: 6});    
+    const [loadStats, setLoadStats] = useState(true);
 
   const $ = window.$;
 
+  let isScrollTriggered = false;
+
   const {getServerData, setServerData} = useContext(UserContext);
 
-  useEffect(()=>{
+  const fetchSearchResults = ()=>{
     
     let calibs = _.get(Utils.getUserData(),'calibs',[]);
     let data = {};
@@ -26,12 +29,30 @@ const SearchResult = (props) => {
         }
     })
 
-    getServerData(`trainer/search?calibs=${JSON.stringify(data)}&paCalibs=${Utils.searchCalibs.join(',')}&start=${filter.start}&limit=${filter.limit}`,true)
-    .then(setTData)
+    setTData({...tData, loading: true});
+
+    getServerData(`trainer/search?calibs=${JSON.stringify(data)}&paCalibs=${Utils.searchCalibs.join(',')}&start=${filters.start}&limit=${filters.limit}&loadStats=${loadStats ? 1 : 0}`,true)
+    .then(res => {
+        let tmp = {...tData, loading: false, success: res.success, pageInfo: res.pageInfo};
+        if(_.get(res,'stats',false)){
+            tmp.stats = res.stats;
+            setLoadStats(false);
+        }
+
+        tmp.data = _.concat(tmp.data,res.data);
+        tmp.favTrainers = _.concat(tmp.favTrainers,res.favTrainers);
+        
+        setTData(tmp);
+
+        isScrollTriggered = false;
+        
+    })
     .catch(console.log);
 
-  },[]);
+  };
   
+  
+  useEffect(fetchSearchResults,[filters]); 
   
   useEffect(() => {
     $(".circleChart").circleChart({
@@ -44,6 +65,14 @@ const SearchResult = (props) => {
         setViewTrainer(_.get(tData,'data.0',{}));
     }
 },[tData]);
+
+  const handleScroll = (e) => {    
+    const bottom = Number((e.target.scrollHeight - e.target.scrollTop).toFixed(0)) - e.target.clientHeight < 100;
+    if(isScrollTriggered===false && bottom && (filters.start + filters.limit) < tData.pageInfo.total){
+        isScrollTriggered= true;//== this should avoid triggering load repeatative
+        setFilters({...filters, start: filters.start + filters.limit});        
+    }
+  };
 
   const markFav = (trainer_id) => (e) => {
     e.preventDefault();
@@ -72,7 +101,7 @@ const SearchResult = (props) => {
     _.each(ratios, (r,k) => ratios[k] = Math.round(r*100));
 
     return <>
-        {_.isNaN(ratios.trainers)===false && <section className="home-result-wrapper">
+        {_.isNaN(ratios.trainers)===false && <>
             <ul className="resultlist">
                 <li>
                     <div className="circleChart" id="1" data-value={ratios.trainers} data-text={ratios.trainers + '%'}></div>
@@ -107,13 +136,13 @@ const SearchResult = (props) => {
                     <span>Videos</span>
                 </li>
             </ul>
-        </section>}
+        </>}
     </>;
   }
 
 const showPageInfo = () => {
-    let tcounts = filter.start + filter.limit;
-    return <>{_.min([filter.start + filter.limit, tData.pageInfo.total])} of {_.get(tData,'pageInfo.total',0)} trainers</>
+    let tcounts = filters.start + filters.limit;
+    return <>{tData.data.length} of {_.get(tData,'pageInfo.total',0)} trainers</>
 }
 
 const renderResource = (icon, type,resources, cnt) => {
@@ -295,14 +324,14 @@ const renderResults = () => <div className="resultDisplay">
         <h3 className="pb-5">Your Search Results </h3>
         <div className="flexWrapper">
             <div className="flexItem flex20">
-                <ul className="nav datascroll">
+                {<ul className="nav datascroll" onScroll={handleScroll}>
                     {_.get(tData,'data',[]).map((trainer,idx) => <li key={idx} className={trainer.user_id===viewTrainer.user_id ? 'active' : ''}>
                         <span onClick={() => setViewTrainer(trainer)}>
                             <img className="img-fluid" src={`${process.env.REACT_APP_API_URL}/uploads/base/${trainer.base_image}`} alt={_.get(trainer,'firstname','')} />
                             <span>{_.get(trainer,'firstname','')} {_.get(trainer,'lastname','')}</span>
                         </span>
                     </li>)}
-                </ul>  
+                </ul>}
                 <div className="alltrainers alltrainerresult">{showPageInfo()} <i className="far fa-eye"></i></div>                          
             </div>
             <div className="flexItem flex80">
@@ -314,8 +343,8 @@ const renderResults = () => <div className="resultDisplay">
 
 
   return <>
-  {renderResultAnalysis()}
-  {renderResults()}
+    <section className="home-result-wrapper">{renderResultAnalysis()}</section>
+    {renderResults()}
   </>;
 }
 
