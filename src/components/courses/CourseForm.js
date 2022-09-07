@@ -38,6 +38,7 @@ const CourseForm = (props) => {
     const frm = e.currentTarget;
     e.preventDefault();
     let frmdata = new FormData(frm);
+    frmdata.append('old_courses_image',_.get(mycourse,'course_image',''));
     frmdata.append('short_description',_.get(mycourse,'short_description',''));
     frmdata.append('description',_.get(mycourse,'description',''));
     frmdata.append('learn_brief',_.get(mycourse,'learn_brief',''));
@@ -56,6 +57,7 @@ const CourseForm = (props) => {
     return <>
       <Form.Label>{title}</Form.Label>
       <Form.Control type="file" size="lg" name={fld} accept=".jpeg,.png,.jpg,JPEG;" />
+      {_.get(mycourse,'course_image','') !== '' && <img className="thumbnail mt-3" src={`${process.env.REACT_APP_API_URL}/uploads/courses/${mycourse.course_image}`} />}
     </>;
   }
 

@@ -78,7 +78,7 @@ const LoginModal = (props) => {
             window.setTimeout(() => {
                 wopen.close();
                 resolve();
-            },1000);
+            },2000);
         });
     };
 
