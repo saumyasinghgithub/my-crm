@@ -23,6 +23,7 @@ const CourseDetails = (props) => {
         getServerData(`course/${slug}`,true)
         .then(cData => {
             setCourse(cData);
+            setBp(cData.resources);
             setLoading(false);
         })
         .catch(msg=> {
@@ -34,7 +35,7 @@ const CourseDetails = (props) => {
   useEffect(window.scrollEffect, [course]);
 
   const showBundlePrice = () => {
-    let price = parseFloat(_.get(course,'course.price',0));
+    let price = 0;
     _.forEach(bp, (b => price += b.price));
     return price;
   };
@@ -76,7 +77,7 @@ const CourseDetails = (props) => {
     return  <li>
         <div className={`circleBox wow zoomIn clickable ${_.findIndex(bp,(b => b.id===resource.id)) > -1 ? 'selected': ''}`} onClick={() => bundleProduct(resource)}>
             <img className="img-fluid" src={`/assets/images/${_.get(restype,resource.type,'pdf.png')}`} />
-            <span className="usdheading">{resource.price} USD</span><span className="usdtext">{resource.type}</span>
+            <span className="usdheading">USD {resource.price}</span><span className="usdtext">{resource.type}</span>
         </div>
     </li>
   };
@@ -146,7 +147,7 @@ const CourseDetails = (props) => {
                                 <span className="new">New</span>
                                 <div className="circleBox">
                                     <img className="img-fluid" src="/assets/images/bundle.png" alt="AD" />
-                                    <span className="usdheading active">{showBundlePrice()}</span><span className="usdtext active">Bundle</span>
+                                    <span className="usdheading active">USD {showBundlePrice()}</span>
                                 </div>
                             </div>
                             <div className="textBoxCard">
@@ -180,8 +181,7 @@ const CourseDetails = (props) => {
                                                     <a href="#" data-toggle="modal" data-target="#loginModal" className="btn btnBlue">Login to Enroll</a>
                                                 </>}
                                                 {Utils.isLoggedIn() && <>
-                                                    <a href="#" onClick={addToCart}  className="btn btnBlue">Enroll Now</a>
-
+                                                    {_.get(bp,'length',0) > 0 && <a href="#" onClick={addToCart}  className="btn btnBlue">Enroll Now</a>}
                                                     <a href="#" className="btn btnBorder" onClick={markFav(course.course.id,course.isFav ? 0 : 1)}>
                                                         {course.isFav===false && <span>Mark Favourite <i className="far fa-heart ml-2" /></span>}
                                                         {course.isFav===true && <span>Remove Favourite <i className="fas fa-heart ml-2 text-danger" /></span>}
@@ -190,10 +190,9 @@ const CourseDetails = (props) => {
                                             </div>
                                         </div>
                                         <div className="col-lg-6">
-                                            <div className="coursePrice">
-                                                {showBundlePrice()} USD
-                                                <span>( Bundle Price )</span>
-                                            </div>
+                                            {_.get(bp,'length',0) > 0 && <div className="coursePrice">
+                                                USD {showBundlePrice()}                                                
+                                            </div>}
                                         </div>
                                     </div>
                                 </div>

@@ -55,7 +55,7 @@ const CourseList = (props) => {
             </div>
         </div>
         <div className="LPriceInfoBox">
-            <div className="boldAmount">{course.price} USD</div>
+            <div className="boldAmount">USD {_.sum(_.map(course.resources,r => r.price)).toFixed(2)}</div>
             <div className="bundlePrice">( Bundle Price )</div>
             <a href={`${process.env.REACT_APP_PUBLIC_URL}/courses/${course.slug}`} className="btn btnBlue" >View Course </a>
         </div>

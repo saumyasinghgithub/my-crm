@@ -137,44 +137,35 @@ const CourseForm = (props) => {
         />
         </Col>
     </Row>
-    <Row> 
-      <Col md={6} className="mt-3">  
-        <Form.Label>Price: </Form.Label>
-        <Form.Control type="text" name="price" placeholder="Enter course price" defaultValue={_.get(mycourse,'price','')} />
+    <Row>
+      <Col md={4} className="mt-3">
+        <Form.Label>Course Level: </Form.Label>
+        <Form.Control as="select" name="level" defaultValue={_.get(mycourse,`level`,'')}>
+          <option value=""> - Select Level - </option>
+          {Utils.courseLevel.map(v => <option key={v} selected={v==_.get(mycourse,`level`,'')} value={v}>{v}</option>)}
+        </Form.Control>
       </Col> 
-
-      <Col md={6} className="mt-3">  
-      <Form.Label>Stock Quantity: </Form.Label>
-      <Form.Control type="text" name="stock_qnty" placeholder="Enter stock quantity" defaultValue={_.get(mycourse,'stock_qnty','')} />
+      <Col md={4} className="mt-3">
+        <Form.Label>Course language: </Form.Label>
+        <Form.Control as="select" name="language" defaultValue={_.get(mycourse,`language`,'')}>
+          <option value=""> - Select Language - </option>
+          {Utils.country.map(v => <option key={v} selected={v==_.get(mycourse,`language`,'')} value={v} >{v}</option>)}
+        </Form.Control>
+      </Col> 
+    </Row>
+    <Row>
+      <Col md={4} className="mt-3">  
+        <Form.Label>Stock Quantity: </Form.Label>
+        <Form.Control type="number" name="stock_qnty" placeholder="Enter stock quantity" defaultValue={_.get(mycourse,'stock_qnty','')} />
       </Col>
-    </Row>
-    <Row>
-      <Col md={6} className="mt-3">
-          <Form.Control as="select" name="level" defaultValue={_.get(mycourse,`level`,'')}>
-            <option value=""> - Select Level - </option>
-            {Utils.courseLevel.map(v => <option key={v} selected={v==_.get(mycourse,`level`,'')} value={v}>{v}</option>)}
-          </Form.Control>
-      </Col> 
-      <Col md={6} className="mt-3">
-          <Form.Control as="select" name="language" defaultValue={_.get(mycourse,`language`,'')}>
-            <option value=""> - Select Language - </option>
-            {Utils.country.map(v => <option key={v} selected={v==_.get(mycourse,`language`,'')} value={v} >{v}</option>)}
-          </Form.Control>
-      </Col> 
-    </Row>
-    <Row>
       <Col md={4} className="mt-3">
-      <Form.Control type="text" name="duration" placeholder="Enter course duration" defaultValue={_.get(mycourse,'duration','')} />
+        <Form.Label>Course Duration (In Hours): </Form.Label>
+        <Form.Control type="number" name="duration" placeholder="Enter course duration" defaultValue={_.get(mycourse,'duration','')} />
       </Col> 
       <Col md={4} className="mt-3">
-      <Form.Control type="text" name="lectures" placeholder="Enter no. of lecture in course" defaultValue={_.get(mycourse,'lectures','')} />
-      </Col> 
-      <Col md={4} className="mt-3">
-      <Form.Control as="select" name="media">
-            <option value=""> - Select Course Type - </option>
-            {Utils.courseType.map(v => <option key={v} value={v} selected={mycourse.media===v}>{v}</option>)}
-      </Form.Control>
-       </Col> 
+        <Form.Label>Number of Lectures: </Form.Label>
+        <Form.Control type="number" name="lectures" placeholder="Enter no. of lecture in course" defaultValue={_.get(mycourse,'lectures','')} />
+      </Col>       
     </Row>
     <Row>
       <Col md={12} className="mt-3 text-right">

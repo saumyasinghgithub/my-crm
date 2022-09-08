@@ -31,8 +31,7 @@ const TeacherLibrary = (props) => {
             </div>
         </div>
         <div className="LPriceInfoBox libraryCourses">
-            <div className="boldAmount">{course.price} USD</div>
-            <div className="bundlePrice">(Base Price )</div>
+            
             <a href={`/courses/${course.slug}`} className="btn btnBlue" >View Course </a>
         </div>
     </div>;

@@ -183,7 +183,7 @@ const MyCart = (props) => {
                                                 <div className="CartTextBox p-0">
                                                     <div className="libraryTitle">{cData.name}</div>
                                                     
-                                                    <span>Course Price: <b>$ {parseFloat(cData.baseprice).toFixed(2)}</b></span>
+                                                    <span>Course Price: <b>$ {parseFloat(cData.price).toFixed(2)}</b></span>
                                                 </div>
                                                 {showBundleResources(cData)}
                                             </Col>
