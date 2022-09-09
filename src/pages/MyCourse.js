@@ -82,7 +82,7 @@ const MyCourse = (props) => {
     return (<>
     <Container fluid className="h-100 p-0">
     <div className="profile-wrapper">
-    <div className="container100">
+    <div className="container my-course mysale">
         <h1>My Course </h1>
         
         <Tab.Container id="left-tabs-example">
