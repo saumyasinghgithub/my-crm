@@ -79,7 +79,8 @@ const Header = (props) => {
                     
                     {loggedIn && <li className="nav-item profile_toggle">                        
                     {_.get(udata,'base_image','')!=='' && 
-                        <img src={`${process.env.REACT_APP_API_URL}/uploads/base/${_.get(udata,'base_image','')}`} className="img-fluid" title={`Logged in as ${udata.firstname} ${udata.lastname}`} />}
+                    
+                        <img src={`${process.env.REACT_APP_API_URL}/uploads/${ Utils.isTrainer() ?  "base" : "student/base"}/${_.get(udata,'base_image','')}`} className="img-fluid" title={`Logged in as ${udata.firstname} ${udata.lastname}`} />}
                     </li>}
 
                     <li className="nav-item ">
