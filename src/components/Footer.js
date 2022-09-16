@@ -31,7 +31,7 @@ const Footer = (props) => {
                 </ul>
                 <ul className="footerRight">
                 {list.data.map(record => <li>
-                    <a href={`${record.link}`}><i className={`${record.class}`}></i></a>           
+                    <a href={`${record.link}`} target="blank"><i className={`${record.class}`}></i></a>           
                 </li>)}
                 </ul>
             </div>
