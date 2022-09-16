@@ -99,8 +99,9 @@ const Success = (props) => {
             </div>
          </div>
          <div className="row">
-            <div className="col-sm-6 text-right"><strong><a href={`${process.env.PUBLIC_URL}/search-results`} className="btn btn-primary">Continue Order...</a></strong></div>
-            <div className="col-sm-6 text-left"><strong><a href={`${process.env.PUBLIC_URL}/my-order`} className="btn btn-success"> View My Orders</a></strong></div>
+            <div className="col-sm-4 text-right"><strong><a href={`${process.env.PUBLIC_URL}/search-results`} className="btn btn-primary">Continue Order...</a></strong></div>
+            <div className="col-sm-4 text-left"><strong><a href={`${process.env.PUBLIC_URL}/my-order`} className="btn btn-success"> View My Orders</a></strong></div>
+            <div className="col-sm-4 text-left"><strong><a href={`${process.env.REACT_APP_MOODLE_URL}/my/`} className="btn btn-warning"> Enroll Course</a></strong></div>
          </div>
       </div>
    </div>
