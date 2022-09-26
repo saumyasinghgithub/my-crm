@@ -6,6 +6,7 @@ import Utils from "../Utils";
 import _ from "lodash";
 
 const MySales = (props) => {
+    const [data, setData] = useState([]);
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [filters, setFilters] = useState({ where: { startDate: startDate, endDate: endDate }, limit: 15, start: 0 });
@@ -14,7 +15,7 @@ const MySales = (props) => {
         {
             name: 'ID',
             selector: row => row.id,
-            sortable: true,
+            sortable: false,
         },
         {
             name: 'ORDER ID',
@@ -28,35 +29,34 @@ const MySales = (props) => {
         },
         {
             name: 'ORDER DATE',
-            selector: row => row.date,
+            selector: row => row.created_at,
             sortable: true,
-        }
-    ];
-    const data = [
-        {
-            id: 1,
-            orderId: 'AD-00001',
-            amount: '400 USD',
-            date: '17-08-2022',
         }
     ];
 
     const fetchList = () => {
         const uData = Utils.getUserData();
         const userid = uData.id;
-        console.log(userid);
         let params = `?limit=${filters.limit}&start=${filters.start}&user_id=` + userid + `&`;
         params += _.map(filters.where, (v, k) => `where[${k}]=${v}`).join('&');
         axios.get(Utils.apiUrl('sales/mysaleslist' + params), Utils.apiHeaders()).then(res => {
             if (res.data.success) {
-
+                setData(res.data.data);
+                console.log(res.data.data);
+                return res.data.data;
             } else {
 
             }
         });
     }
+    useEffect(fetchList,[]);
+    const handleStartDate = (e) => {
+        setStartDate(e.target.value);
+    };
 
-    useEffect(fetchList, [filters]);
+    const handleEndDate = (e) => {
+        setEndDate(e.target.value);
+    };
 
     return (<>
         <Container fluid className="h-100 p-0">
@@ -113,10 +113,35 @@ const MySales = (props) => {
                             </div>
                         </div>
                     </div>
+                    <div className="col-md-12">
+                        <div className="col-md-3" style={{ float: "left" }}>
+                            <div className="form-group">
+                                <label>Start Date:</label>
+                                <div className="input-group input-group-sm">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text"><i className="far fa-calendar-alt"></i></span>
+                                    </div>
+                                    <input type="date" className="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" inputmode="numeric" name="startDate" onChange={handleStartDate} value={startDate} />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-3" style={{ float: "left" }}>
+                            <div className="form-group">
+                                <label>End Date</label>
+                                <div className="input-group input-group-sm">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text"><i className="far fa-calendar-alt"></i></span>
+                                    </div>
+                                    <input type="date" className="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" inputmode="numeric" name="endDate" onChange={handleEndDate} value={endDate} />
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                     <Row>
                         <Col md={12}></Col>
                     </Row>
-                    <DataTable columns={columns} data={fetchList()}>
+                    <DataTable columns={columns} data={data}>
 
                     </DataTable>
                 </div>
