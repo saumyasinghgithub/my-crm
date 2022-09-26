@@ -1,13 +1,18 @@
-import React,{useState,useEffect} from "react";
-import { Container,Row,Col } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import DataTable from "react-data-table-component";
 import axios from "axios";
 import Utils from "../Utils";
+import _ from "lodash";
 
 const MySales = (props) => {
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
+    const [filters, setFilters] = useState({ where: { startDate: startDate, endDate: endDate }, limit: 15, start: 0 });
+
     const columns = [
         {
-            name:'ID',
+            name: 'ID',
             selector: row => row.id,
             sortable: true,
         },
@@ -35,15 +40,24 @@ const MySales = (props) => {
             date: '17-08-2022',
         }
     ];
+
     const fetchList = () => {
-        axios.get(Utils.apiUrl('sales/list'),Utils.apiHeaders()).then(res => {
-            if(res.data.success){
+        const uData = Utils.getUserData();
+        const userid = uData.id;
+        console.log(userid);
+        let params = `?limit=${filters.limit}&start=${filters.start}&user_id=` + userid + `&`;
+        params += _.map(filters.where, (v, k) => `where[${k}]=${v}`).join('&');
+        axios.get(Utils.apiUrl('sales/mysaleslist' + params), Utils.apiHeaders()).then(res => {
+            if (res.data.success) {
 
             } else {
 
             }
         });
     }
+
+    useEffect(fetchList, [filters]);
+
     return (<>
         <Container fluid className="h-100 p-0">
             <div className="profile-wrapper">
@@ -102,7 +116,7 @@ const MySales = (props) => {
                     <Row>
                         <Col md={12}></Col>
                     </Row>
-                    <DataTable columns={columns} data={data}>
+                    <DataTable columns={columns} data={fetchList()}>
 
                     </DataTable>
                 </div>
