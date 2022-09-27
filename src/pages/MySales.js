@@ -6,20 +6,34 @@ import Utils from "../Utils";
 import _ from "lodash";
 
 const MySales = (props) => {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState({ loading: true, error: false, pageInfo: {}, data: [] });
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [filters, setFilters] = useState({ where: { startDate: startDate, endDate: endDate }, limit: 15, start: 0 });
+    const [searchcustomer, setSearchCustomer] = useState("");
+    const [searchorder, setSearchOrder] = useState("");
 
     const columns = [
         {
-            name: 'ID',
-            selector: row => row.id,
-            sortable: false,
+            name: 'ORDER ID',
+            selector: row => {
+                const dump = JSON.parse(row.dump);
+                return <span class="badge bg-success">{dump.razorpayOrderId}</span>;
+            },
+            sortable: true,
         },
         {
-            name: 'ORDER ID',
-            selector: row => row.orderId,
+            name: 'CUSTOMER EMAIL',
+            selector: row => row.email,
+            sortable: true,
+        },
+        {
+            name: 'ORDER ITEMS',
+            selector: row => {
+                const dump = JSON.parse(row.dump);
+                const details = dump.description.split(" AND ");
+                return details.map(d => <li><b>{d.split('||')[0]}</b> - <span class="badge bg-warning">({d.split('||').splice(1).join(',')})</span></li>);
+            },
             sortable: true,
         },
         {
@@ -33,31 +47,49 @@ const MySales = (props) => {
             sortable: true,
         }
     ];
-
     const fetchList = () => {
+        setData({ ...data, loading: true });
+        console.log(startDate);
         const uData = Utils.getUserData();
         const userid = uData.id;
         let params = `?limit=${filters.limit}&start=${filters.start}&user_id=` + userid + `&`;
         params += _.map(filters.where, (v, k) => `where[${k}]=${v}`).join('&');
-        axios.get(Utils.apiUrl('sales/mysaleslist' + params), Utils.apiHeaders()).then(res => {
+        axios.get(Utils.apiUrl('sales/list' + params), Utils.apiHeaders()).then(res => {
             if (res.data.success) {
-                setData(res.data.data);
-                console.log(res.data.data);
-                return res.data.data;
+                const min = Date.parse(startDate);
+                const max = Date.parse(endDate);
+                let salesData = res.data.data;
+                if ((startDate != null) && (endDate != null)) {
+                    const filterSales = salesData.filter((d) => {
+                        return d.timestampvalue * 1000 >= min && d.timestampvalue * 1000 <= max
+                    });
+                    setData({ ...data, loading: false, error: false, pageInfo: res.data.pageInfo, data: filterSales });
+                } else if (searchcustomer != null) {
+                    const filterCustomers = salesData.filter((cus) => {
+                        return cus.email.toLowerCase().includes(searchcustomer.toLowerCase())
+                    });
+                    setData({ ...data, loading: false, error: false, pageInfo: res.data.pageInfo, data: filterCustomers });
+                } else {
+                    setData({ ...data, loading: false, error: false, pageInfo: res.data.pageInfo, data: res.data.data });
+                }
             } else {
 
             }
         });
     }
-    useEffect(fetchList,[]);
+    useEffect(fetchList, [filters, startDate, endDate, searchcustomer]);
     const handleStartDate = (e) => {
         setStartDate(e.target.value);
     };
-
     const handleEndDate = (e) => {
         setEndDate(e.target.value);
     };
-
+    const handleSearchCustomer = (e) => {
+        setSearchCustomer(e.target.value);
+    };
+    const handleSearchOrder = (e) => {
+        setSearchOrder(e.target.value);
+    };
     return (<>
         <Container fluid className="h-100 p-0">
             <div className="profile-wrapper">
@@ -113,7 +145,32 @@ const MySales = (props) => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-12">
+                    <div className="row">
+                        <div className="col-md-3" style={{ float: "left",marginTop: "0.75%" }}>
+                        <div className="form-group">
+                        <label></label>
+                            <div className="input-group input-group-sm">
+                                <div className="input-group-prepend">
+
+                                </div>
+                                <input type="text" value={searchorder} onChange={handleSearchOrder} placeholder='Enter Order Id' className="form-control" />
+                                <div className="input-group-append">
+                                    <div className="input-group-text"><i className="fas fa-ambulance"></i></div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div className="col-md-3" style={{ float: "left", marginTop: "0.75%" }}>
+                            <div className="form-group">
+                                <label></label>
+                                <div className="input-group input-group-sm">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text"><i className="fas fa-envelope"></i></span>
+                                    </div>
+                                    <input type="email" value={searchcustomer} onChange={handleSearchCustomer} className="form-control" placeholder='Enter Your Email Address' />
+                                </div>
+                            </div>
+                        </div>
                         <div className="col-md-3" style={{ float: "left" }}>
                             <div className="form-group">
                                 <label>Start Date:</label>
@@ -141,7 +198,7 @@ const MySales = (props) => {
                     <Row>
                         <Col md={12}></Col>
                     </Row>
-                    <DataTable columns={columns} data={data}>
+                    <DataTable columns={columns} data={data.data}>
 
                     </DataTable>
                 </div>

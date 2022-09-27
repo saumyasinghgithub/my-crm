@@ -9,7 +9,6 @@ const Footer = (props) => {
         setList({ ...list, loading: true })
         axios.get(Utils.apiUrl('sociallink/list'), Utils.apiHeaders())
             .then(res => {
-                console.log(res);
                 if (res.data.success) {
                     setList({ ...list, loading: false, error: false, pageInfo: res.data.pageInfo, data: res.data.data });
                 } else {
