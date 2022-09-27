@@ -49,7 +49,6 @@ const MySales = (props) => {
     ];
     const fetchList = () => {
         setData({ ...data, loading: true });
-        console.log(startDate);
         const uData = Utils.getUserData();
         const userid = uData.id;
         let params = `?limit=${filters.limit}&start=${filters.start}&user_id=` + userid + `&`;
