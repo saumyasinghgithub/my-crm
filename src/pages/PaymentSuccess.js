@@ -11,7 +11,7 @@ const Success = (props) => {
    const [orderData, setOrderData] = useState({});
    const [udata, setuData] = useState({});
    const [loading, setLoading] = useState(true);
-   const {getServerData} = useContext(UserContext);
+   const {getServerData, loginToMoodle} = useContext(UserContext);
 
    const fetchOrderInfo = () => {
       
@@ -101,7 +101,7 @@ const Success = (props) => {
          <div className="row">
             <div className="col-sm-4 text-right"><strong><a href={`${process.env.PUBLIC_URL}/search-results`} className="btn btn-primary">Continue Order...</a></strong></div>
             <div className="col-sm-4 text-left"><strong><a href={`${process.env.PUBLIC_URL}/my-order`} className="btn btn-success"> View My Orders</a></strong></div>
-            <div className="col-sm-4 text-left"><strong><a href={`${process.env.REACT_APP_MOODLE_URL}/my/`} className="btn btn-warning"> Enroll Course</a></strong></div>
+            <div className="col-sm-4 text-left"><strong><button className="btn btn-warning" onClick={() => loginToMoodle(document.forms.moodleLoginForm)}> Enroll Course</button></strong></div>
          </div>
       </div>
    </div>

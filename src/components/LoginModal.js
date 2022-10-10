@@ -59,7 +59,8 @@ const LoginModal = (props) => {
             setLogining(false);
             setLoginResp({success: success, message: message});
             if(success){
-                loginToMoodle(data).then(() => window.location.reload());
+                //loginToMoodle(data).then(() => window.location.reload());
+                window.location.reload();
             }
         })
         return false;

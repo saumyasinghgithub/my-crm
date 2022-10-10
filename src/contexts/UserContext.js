@@ -15,8 +15,10 @@ const UserProvider = (props) => {
   const goLogin = ({email, pass},callback) => {    
     axios.post(Utils.apiUrl('user/login'),`&user=${email}&pass=${pass}`,Utils.apiHeaders()).then(res => {      
       if(res.data.success){        
-        setUserData(res.data.userData);        
-        Utils.setUserData(res.data);            
+        let mdata = {_mdata: [email,pass]};
+        setUserData({...res.data.userData,...mdata});
+        Utils.setUserData(res.data);
+        Utils.addToUserData(mdata);
       }
       return res;
     })
@@ -24,6 +26,12 @@ const UserProvider = (props) => {
     .catch(err => {
       callback(false, err.message);
     });
+  };
+
+  const loginToMoodle = (frm) => {    
+    frm.username.value = userData._mdata[0];
+    frm.password.value = userData._mdata[1];
+    frm.submit();   
   };
 
   const goForgotPassword = (email,callback) => {    
@@ -70,7 +78,7 @@ const UserProvider = (props) => {
   };
 
   
-  return <UserContext.Provider value={{ userData, goLogin, goForgotPassword, logout, getServerData, setServerData}}>
+  return <UserContext.Provider value={{ userData, goLogin, goForgotPassword, logout, getServerData, setServerData, loginToMoodle}}>
     {props.children}
   </UserContext.Provider>;
 

@@ -11,7 +11,7 @@ const UserMenu = (props) => {
   const [loggedIn,setLoggedIn] = useState(Utils.isLoggedIn());
   const udata = Utils.getUserData();
 
-  const {logout} = useContext(UserContext);
+  const {logout, loginToMoodle} = useContext(UserContext);
 
   const getSlug = () => {
     let url = process.env.PUBLIC_URL + "/";
@@ -28,7 +28,6 @@ const UserMenu = (props) => {
       })
       return false;
   };
-
 
   return <div className="slide-in-content slide-in-contentteacher">
     <div className="student_prof_cross"><img src="/assets/images/student_profile_crossicon.png" alt="AD" /></div>
@@ -63,14 +62,16 @@ const UserMenu = (props) => {
             </ul>
         </div>
         <div className="col-sm-6">
-            <ul className="profile_menu_list">
-            <li><a href={`http://demo.knowledgesynonyms.com/moodle/my/`} target='_blank'>Enrolled Courses</a></li>
-            {loggedIn &&
+            <ul className="profile_menu_list">            
+            {loggedIn && <>
+                <form name="moodleLoginForm" method="post" action={`${process.env.REACT_APP_MOODLE_URL}/login/index.php`}>
+                    <input type="hidden" name="username" />
+                    <input type="hidden" name="password" />
+                </form>
+                <li><a href="#" onClick={(e) => {e.preventDefault();loginToMoodle(document.forms.moodleLoginForm);}}>Enrolled Courses</a></li>
                 <li><a href={getSlug()}>View My Profile</a></li>  
-            }
-            {loggedIn &&
                 <li><a href={`${process.env.PUBLIC_URL}/preferred-trainers`}>Preferred Trainer</a></li>  
-            } 
+            </>} 
 
             {Utils.isTrainer() &&
                 <li><a href={`${process.env.PUBLIC_URL}/my-blog`} >My Blog</a></li>
