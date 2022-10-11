@@ -68,7 +68,7 @@ const UserMenu = (props) => {
                     <input type="hidden" name="username" />
                     <input type="hidden" name="password" />
                 </form>
-                <li><a href="#" onClick={(e) => {e.preventDefault();loginToMoodle(document.forms.moodleLoginForm);}}>Enrolled Courses</a></li>
+                <li><a href="#" onClick={(e) => {e.preventDefault();loginToMoodle(document.forms.moodleLoginForm);}} >Enrolled Courses</a></li>
                 <li><a href={getSlug()}>View My Profile</a></li>  
                 <li><a href={`${process.env.PUBLIC_URL}/preferred-trainers`}>Preferred Trainer</a></li>  
             </>} 

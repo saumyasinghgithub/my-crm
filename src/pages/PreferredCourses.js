@@ -41,21 +41,20 @@ const PreferredCourses = (props) => {
             <Row>
             {favs.data.map(rec => <Col className="col-6 py-1"><Card className="courseWrapper coursecard my-2 h-100">
                 <Card.Body>
-                <Row>
+                    <Row>
                     <Col className="col-6">
                     <div className="imgWrapper" style={{backgroundImage: `url("${process.env.REACT_APP_API_URL}/uploads/courses/${rec.course_image}")` }}></div>
-                    <Row>
-                        <Col className="col-4 text-left"><button className="btn text-danger" onClick={removeFav(rec.id)}>Remove</button></Col>
-                        <Col className="col-8 text-right"><a href={`${process.env.PUBLIC_URL}/courses/${rec.slug}`} className="btn btnBlue">View Details</a></Col>
-                    </Row>
                     </Col>
                     <Col className="col-6">
                     <h3>{rec.name}</h3>
                     <div dangerouslySetInnerHTML={{__html:rec.short_description}}></div>
                     <span className="textBold">Level:</span> {rec.level} <span className="textBold">| Duration:</span> {rec.duration} Hours.
-                    
                     </Col>
-                </Row>
+                    </Row>
+                    <Row>
+                        <Col className="col-4 text-left"><button className="btn text-danger" onClick={removeFav(rec.id)}>Remove</button></Col>
+                        <Col className="col-8 text-right"><a href={`${process.env.PUBLIC_URL}/courses/${rec.slug}`} className="btn btnBlue preferdCourseBtn">View Details</a></Col>
+                    </Row>
                 </Card.Body>
             </Card></Col>)}
             </Row>
