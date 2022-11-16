@@ -44,7 +44,7 @@ const CourseDetails = (props) => {
         ratingData.append('rating',rated);
         setServerData(`course/setRating`,ratingData,'post')
         .then(res => {
-            setRating(course.rating);
+            setRating(res.success ? res.rating : course.rating);
         })
         .catch(msg=> {
             setRating(course.rating);
