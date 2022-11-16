@@ -52,3 +52,4 @@ autodidact/
 .env
 build/asset-manifest.json
 build/
+package-lock.json
