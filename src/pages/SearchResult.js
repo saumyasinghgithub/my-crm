@@ -1,10 +1,8 @@
 import React, {useContext, useEffect, useState} from "react";
-
 import Utils from './../Utils';
-
 import _ from 'lodash';
-
 import UserContext from './../contexts/UserContext';
+import StarRatings from 'react-star-ratings';
 
 const SearchResult = (props) => {
 
@@ -13,6 +11,7 @@ const SearchResult = (props) => {
     const [filters, setFilters] = useState({start: 0, limit: 6});    
     const [loadStats, setLoadStats] = useState(true);
     const [isScrollTriggered, setIsScrollTriggered] = useState(false);
+    const [rating, setRating] = useState({rating:0, ratings: 0});
 
   const $ = window.$;
 
@@ -211,6 +210,18 @@ const showTrainerDetail = () => {
                     <div className="bioInfo">Qulification <span>{_.map(_.filter(_.get(trainer,'calibs',[]),{"pa_id": 51}), c => c.pa_value).join(',')}</span></div>
                     <div className="bioInfo">Year of Experience <span>{_.map(_.filter(_.get(trainer,'calibs',[]),{"pa_id": 68}), c => c.pa_value).join(',')}</span></div>
                     <div className="bioInfo">Country <span>{_.map(_.filter(_.get(trainer,'calibs',[]),{"pa_id": 83}), c => c.pa_value).join(',')}</span></div>
+                </div>
+                <div className="profileRating"> 
+                    <p>Rating and Revivew</p>
+                    <StarRatings
+                        rating={rating.rating}
+                        starEmptyColor="#f9998a"
+                        starRatedColor="#dc3016"
+                        starHoverColor="#dc3016"
+                        starDimension="20px"
+                        starSpacing="2px"
+                        changeRating="3"
+                    />
                 </div>
                 <div className="bio-data-body">
                    

@@ -140,3 +140,11 @@
 .preferdCourseBtn {
   width: 50% !important;
 }
+
+.profileRating{
+    width: 300px;
+    float: right;
+    margin-top: -80px;
+    text-align: right;
+    padding-right: 30px;
+}
