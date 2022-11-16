@@ -5,6 +5,8 @@ import {useParams} from "react-router-dom";
 import _ from 'lodash';
 import moment from 'moment';
 import Utils from './../Utils';
+import StarRatings from 'react-star-ratings';
+
 const CourseDetails = (props) => {
 
     const { slug } = useParams();
@@ -14,6 +16,7 @@ const CourseDetails = (props) => {
 
     const [loading, setLoading] = useState(true);
     const [addingToCart, setAddingToCart] = useState(false);
+    const [rating, setRating] = useState({rating:0, ratings: 0});
 
     const {getServerData, setServerData} = useContext(UserContext);
 
@@ -24,6 +27,7 @@ const CourseDetails = (props) => {
         .then(cData => {
             setCourse(cData);
             setBp(cData.resources);
+            setRating(cData.rating);
             setLoading(false);
         })
         .catch(msg=> {
@@ -31,6 +35,22 @@ const CourseDetails = (props) => {
             setLoading(false);
         });
     },[]);
+
+
+    const setCourseRating = (rated) => {
+        let ratingData = new FormData();
+        setRating({...rating, rating: (rating.rating+rated)/(rating.ratings+1), ratings: rating.ratings+1});
+        ratingData.append('course_id',course.course.id);
+        ratingData.append('rating',rated);
+        setServerData(`course/setRating`,ratingData,'post')
+        .then(res => {
+            setRating(course.rating);
+        })
+        .catch(msg=> {
+            setRating(course.rating);
+            // do nothing
+        });
+    };
 
   useEffect(window.scrollEffect, [course]);
 
@@ -162,8 +182,17 @@ const CourseDetails = (props) => {
                                         <br />        
                                     <span className="textBold">Level:</span> {course.course.level} <span className="textBold">| Duration:</span> {course.course.duration} Hours.
                                 </div>
-                                <div className="cardInforating">
-                                    <p><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i> (412)  5,5,410 students enrolled</p>
+                                <div className="d-flex">
+                                <StarRatings
+                                    rating={rating.rating}
+                                    starEmptyColor="#dddddd"
+                                    starRatedColor="#f3ac1b"
+                                    starHoverColor="#bfa700"
+                                    starDimension="20px"
+                                    starSpacing="2px"
+                                    changeRating={setCourseRating}
+                                />
+                                <div className="mx-2 my-1">({rating.ratings})  5,5,410 students enrolled</div>
                                 </div>
                             </div>
                         </div>
