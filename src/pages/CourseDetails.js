@@ -15,8 +15,9 @@ const CourseDetails = (props) => {
     const [bp, setBp] = useState([]);
 
     const [loading, setLoading] = useState(true);
+    const [starLoading, setStarLoading] = useState(false);
     const [addingToCart, setAddingToCart] = useState(false);
-    const [rating, setRating] = useState({rating:0, ratings: 0});
+    const [rating, setRating] = useState({rating:0, ratings: 0, enrollments: 0});
 
     const {getServerData, setServerData} = useContext(UserContext);
 
@@ -38,15 +39,17 @@ const CourseDetails = (props) => {
 
 
     const setCourseRating = (rated) => {
+        setStarLoading(true);
         let ratingData = new FormData();
-        setRating({...rating, rating: (rating.rating+rated)/(rating.ratings+1), ratings: rating.ratings+1});
         ratingData.append('course_id',course.course.id);
         ratingData.append('rating',rated);
         setServerData(`course/setRating`,ratingData,'post')
         .then(res => {
+            setStarLoading(false);
             setRating(res.success ? res.rating : course.rating);
         })
         .catch(msg=> {
+            setStarLoading(false);
             setRating(course.rating);
             // do nothing
         });
@@ -182,18 +185,18 @@ const CourseDetails = (props) => {
                                         <br />        
                                     <span className="textBold">Level:</span> {course.course.level} <span className="textBold">| Duration:</span> {course.course.duration} Hours.
                                 </div>
-                                <div className="d-flex">
-                                <StarRatings
-                                    rating={rating.rating}
-                                    starEmptyColor="#dddddd"
-                                    starRatedColor="#f3ac1b"
-                                    starHoverColor="#bfa700"
-                                    starDimension="20px"
-                                    starSpacing="2px"
-                                    changeRating={setCourseRating}
-                                />
-                                <div className="mx-2 my-1">({rating.ratings})  5,5,410 students enrolled</div>
-                                </div>
+                                {!starLoading && <div className="d-flex">
+                                    <StarRatings
+                                        rating={rating.rating}
+                                        starEmptyColor="#dddddd"
+                                        starRatedColor="#f3ac1b"
+                                        starHoverColor="#bfa700"
+                                        starDimension="20px"
+                                        starSpacing="2px"
+                                        changeRating={setCourseRating}
+                                    />
+                                    <div className="mx-2 my-1">({rating.ratings})  {rating.enrollments} students enrolled</div>
+                                </div>}
                             </div>
                         </div>
                         <div className="col-md-6 slideInUp wow">
