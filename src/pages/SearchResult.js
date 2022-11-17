@@ -11,7 +11,7 @@ const SearchResult = (props) => {
     const [filters, setFilters] = useState({start: 0, limit: 6});    
     const [loadStats, setLoadStats] = useState(true);
     const [isScrollTriggered, setIsScrollTriggered] = useState(false);
-    const [rating, setRating] = useState({rating:0, ratings: 0});
+    
 
   const $ = window.$;
 
@@ -87,22 +87,7 @@ const SearchResult = (props) => {
     })).then(() => $(e.target).show())
   };
 
-  const setTrainerRating = (rated) => {
-    setStarLoading(true);
-    let ratingData = new FormData();
-    ratingData.append('trainer_id',trainer.user_id);
-    ratingData.append('rating',rated);
-    setServerData(`trainer/setRating`,ratingData,'post')
-    .then(res => {
-        setStarLoading(false);
-        setRating(res.success ? res.rating : trainer.rating);
-    })
-    .catch(msg=> {
-        setStarLoading(false);
-        setRating(course.rating);
-        // do nothing
-    });
-};
+  
   const renderResultAnalysis = () => {
     const ratios = {
         trainers: parseInt(_.get(tData,'stats.trainers',0)) / parseInt(_.get(tData,'stats.allTrainers',0)),
@@ -222,20 +207,19 @@ const showTrainerDetail = () => {
                 <div className="bio-data-header">
                     <h3><a href={`${process.env.REACT_APP_PUBLIC_URL}/trainers/${trainer.slug}/about`} >{_.get(trainer,'firstname','')} {_.get(trainer,'lastname','')}</a></h3>
                     <div className="bioInfo">Industry <span>{_.map(_.filter(_.get(trainer,'calibs',[]),{"pa_id": 1}), c => c.pa_value).join(',')}</span></div>
-                    <div className="bioInfo">Qulification <span>{_.map(_.filter(_.get(trainer,'calibs',[]),{"pa_id": 51}), c => c.pa_value).join(',')}</span></div>
+                    <div className="bioInfo">Qualification <span>{_.map(_.filter(_.get(trainer,'calibs',[]),{"pa_id": 51}), c => c.pa_value).join(',')}</span></div>
                     <div className="bioInfo">Year of Experience <span>{_.map(_.filter(_.get(trainer,'calibs',[]),{"pa_id": 68}), c => c.pa_value).join(',')}</span></div>
                     <div className="bioInfo">Country <span>{_.map(_.filter(_.get(trainer,'calibs',[]),{"pa_id": 83}), c => c.pa_value).join(',')}</span></div>
                 </div>
                 <div className="profileRating"> 
-                    <p>Rating and Revivew</p>
+                    <p>Rating and Review</p>
                     <StarRatings
-                        rating={rating.rating}
+                        rating={trainer.rating.rating}
                         starEmptyColor="#f9998a"
                         starRatedColor="#dc3016"
                         starHoverColor="#dc3016"
                         starDimension="20px"
                         starSpacing="2px"
-                        changeRating={setTrainerRating}
                     />
                 </div>
                 <div className="bio-data-body">
