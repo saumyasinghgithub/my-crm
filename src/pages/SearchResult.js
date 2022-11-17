@@ -49,7 +49,6 @@ const SearchResult = (props) => {
 
   };
   
-  
   useEffect(fetchSearchResults,[filters]); 
   
   useEffect(() => {
@@ -88,6 +87,22 @@ const SearchResult = (props) => {
     })).then(() => $(e.target).show())
   };
 
+  const setTrainerRating = (rated) => {
+    setStarLoading(true);
+    let ratingData = new FormData();
+    ratingData.append('trainer_id',trainer.user_id);
+    ratingData.append('rating',rated);
+    setServerData(`trainer/setRating`,ratingData,'post')
+    .then(res => {
+        setStarLoading(false);
+        setRating(res.success ? res.rating : trainer.rating);
+    })
+    .catch(msg=> {
+        setStarLoading(false);
+        setRating(course.rating);
+        // do nothing
+    });
+};
   const renderResultAnalysis = () => {
     const ratios = {
         trainers: parseInt(_.get(tData,'stats.trainers',0)) / parseInt(_.get(tData,'stats.allTrainers',0)),
@@ -220,7 +235,7 @@ const showTrainerDetail = () => {
                         starHoverColor="#dc3016"
                         starDimension="20px"
                         starSpacing="2px"
-                        changeRating="3"
+                        changeRating={setTrainerRating}
                     />
                 </div>
                 <div className="bio-data-body">
