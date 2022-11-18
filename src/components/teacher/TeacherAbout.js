@@ -1,13 +1,28 @@
-import React, { useEffect} from 'react';
-
+import React, { useEffect, useState } from 'react';
+import Utils from '../../Utils';
 import TeacherNav from './TeacherNav';
-
+import StarRatings from 'react-star-ratings';
 import _ from 'lodash';
 
 const TeacherAbout = (props) => {
     
     const data = props.data;
-    
+    const { slug } = useParams();
+    const [loading, setLoading] = useState(true);
+    const [rating, setRating] = useState({rating:0, ratings: 0});
+
+    useEffect(()=>{
+        getServerData(`trainer/${slug}`,true)
+        .then(data => {
+            setRating(data.rating);
+            setLoading(false);
+        })
+        .catch(msg=> {
+            setCourse({success: false, message: msg});
+            setLoading(false);
+        });
+    },[]);
+
     useEffect(window.scrollEffect, []);
 
     return (<>       
@@ -18,6 +33,19 @@ const TeacherAbout = (props) => {
                 
                 <div className="slideInUp wow ">
                     <div className="teacherdetails">
+                        <div className="profileDetailRating">
+                            <p>Rating</p>
+                        <StarRatings
+                            rating={rating.rating}
+                            starEmptyColor="#dddddd"
+                            starRatedColor="#f3ac1b"
+                            starHoverColor="#bfa700"
+                            starDimension="20px"
+                            starSpacing="2px"
+                            //changeRating={setCourseRating}
+                        />
+                        </div>
+
                         <p>Joined 26/04/2018<br />
                             Students 145<br />
                             Courses 21</p>
