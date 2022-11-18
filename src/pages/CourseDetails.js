@@ -193,7 +193,7 @@ const CourseDetails = (props) => {
                                         starHoverColor="#bfa700"
                                         starDimension="20px"
                                         starSpacing="2px"
-                                        changeRating={setCourseRating}
+                                        changeRating={Utils.isLoggedIn() ? setCourseRating : false}
                                     />
                                     <div className="mx-2 my-1">({rating.ratings})  {rating.enrollments} students enrolled</div>
                                 </div>}

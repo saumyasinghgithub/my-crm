@@ -1,29 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Utils from '../../Utils';
 import TeacherNav from './TeacherNav';
 import StarRatings from 'react-star-ratings';
 import _ from 'lodash';
+import UserContext from './../../contexts/UserContext';
+import {useParams} from "react-router-dom";
 
 const TeacherAbout = (props) => {
     
     const data = props.data;
     const { slug } = useParams();
     const [loading, setLoading] = useState(true);
-    const [rating, setRating] = useState({rating:0, ratings: 0});
-
-    useEffect(()=>{
-        getServerData(`trainer/${slug}`,true)
-        .then(data => {
-            setRating(data.rating);
-            setLoading(false);
-        })
-        .catch(msg=> {
-            setCourse({success: false, message: msg});
-            setLoading(false);
-        });
-    },[]);
+    const [starLoading, setStarLoading] = useState(false);
+    const [rating, setRating] = useState(props.rating);
+    const {getServerData,setServerData} = useContext(UserContext);
 
     useEffect(window.scrollEffect, []);
+
+    const setTrainerRating = (rated) => {
+        setStarLoading(true);
+        let ratingData = new FormData();
+        ratingData.append('trainer_id',data.user_id);
+        ratingData.append('rating',rated);
+        setServerData(`trainer/setRating`,ratingData,'post')
+        .then(res => {
+            console.log(res);
+            setStarLoading(false);
+            setRating(res.success ? res.rating : props.rating);
+        })
+        .catch(msg=> {
+            setStarLoading(false);
+            setRating(props.rating);
+            // do nothing
+        });
+    };
 
     return (<>       
         <div className='row'>
@@ -34,21 +44,24 @@ const TeacherAbout = (props) => {
                 <div className="slideInUp wow ">
                     <div className="teacherdetails">
                         <div className="profileDetailRating">
-                            <p>Rating</p>
-                        <StarRatings
-                            rating={rating.rating}
-                            starEmptyColor="#dddddd"
-                            starRatedColor="#f3ac1b"
-                            starHoverColor="#bfa700"
-                            starDimension="20px"
-                            starSpacing="2px"
-                            //changeRating={setCourseRating}
-                        />
+                           
+                        {!starLoading && <div>
+                            <StarRatings
+                                rating={rating.rating}
+                                starEmptyColor="#dddddd"
+                                starRatedColor="#f3ac1b"
+                                starHoverColor="#bfa700"
+                                starDimension="20px"
+                                starSpacing="2px"
+                                changeRating={Utils.isLoggedIn() ? setTrainerRating : false}
+                            />
+                            <div className="mx-2 my-1">{rating.ratings} ratings</div>
+                        </div>}
                         </div>
 
-                        <p>Joined 26/04/2018<br />
-                            Students 145<br />
-                            Courses 21</p>
+                        <p>Joined {Utils.shortDate(data.created_at)}<br />
+                            Students {props.total.students}<br />
+                            Courses {props.total.courses}</p>
                         <div className="profileFollowList">
                             <h5>Follow Ben on</h5>
                             <ul>
