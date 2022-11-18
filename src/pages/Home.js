@@ -10,7 +10,7 @@ const Home = (props) => {
 
     const [pa, setPA] = useState([]);
     const calibs = _.get(Utils.getUserData(),'calibs',[]);
-   
+    const [loggedIn,setLoggedIn] = useState(Utils.isLoggedIn());
     const { getServerData } = useContext(UserContext);
 
     useEffect(() => {
@@ -65,10 +65,10 @@ const Home = (props) => {
                     YOUR PROFESSIONAL CAREER
                 </div>
                 <div className="container bannerBottomtext clearfix">
-                    <ul>
+                    {!loggedIn && <ul>
                         <li className='jointrainer'><a href="#signUpTrainer" data-toggle="modal" data-dismiss="modal" >Join as a Trainer</a></li>
                         <li className='jointrainer ml-2'><a href="#signUpStudent" data-toggle="modal" data-dismiss="modal">Join as a Student</a></li>
-                    </ul>
+                    </ul> }
                     <div className="whyAD">
                         <img className="img-fluid" src="/assets/images/why_ad.png" alt="Autodidact" />
                     </div>
