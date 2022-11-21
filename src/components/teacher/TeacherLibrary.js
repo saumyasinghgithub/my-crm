@@ -6,6 +6,7 @@ import _ from 'lodash';
 
 import Utils from './../../Utils';
 import { Row, Container } from 'react-bootstrap';
+import StarRatings from 'react-star-ratings';
 
 const TeacherLibrary = (props) => {
 
@@ -28,11 +29,14 @@ const TeacherLibrary = (props) => {
             <div className="libraryAuthorInfo">
                 Date: 6/2019 | Level: {course.level} | Duration: {course.duration}
             </div>
-            <div className="libraryStar mt-2">
-                <i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i>
-                <img className="img-fluid LLike" src="/assets/images/like-icon.png" alt="AD" />
-                <img className="img-fluid lShare" src="/assets/images/share-icon.png" alt="AD" />
-            </div>
+            <StarRatings
+                rating={course.rating.rating}
+                starEmptyColor="#dddddd"
+                starRatedColor="#f3ac1b"
+                starHoverColor="#bfa700"
+                starDimension="20px"
+                starSpacing="2px"
+            />
         </div>
                 </div> 
             <div className='col-md-2 col-12 d-flex align-items-center'>

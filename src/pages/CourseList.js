@@ -6,6 +6,7 @@ import UserContext from './../contexts/UserContext';
 import Utils from './../Utils';
 import _ from 'lodash';
 import moment from 'moment';
+import StarRatings from 'react-star-ratings';
 
 const CourseList = (props) => {
 
@@ -46,11 +47,14 @@ const CourseList = (props) => {
                         <div className="libraryAuthorInfo">
                             By {data.trainer.firstname} {data.trainer.lastname} | {moment(course.created_at).format("M/YYYY")} | Level: {course.level} | Duration: {course.duration} Hours
                         </div>
-                        <div className="libraryStar mt-2">
-                            <i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i>
-                            <img className="img-fluid LLike" src="/assets/images/like-icon.png" alt="AD" />
-                            <img className="img-fluid lShare" src="/assets/images/share-icon.png" alt="AD" />
-                        </div>
+                        <StarRatings
+                            rating={course.rating.rating}
+                            starEmptyColor="#dddddd"
+                            starRatedColor="#f3ac1b"
+                            starHoverColor="#bfa700"
+                            starDimension="20px"
+                            starSpacing="2px"
+                        />
                         <div className="librarybuttonList">
                             <ul>
                                 {course.resources.map(cr => <li key={cr.id}><img src={`/assets/images/${_.find(Utils.mediaTypes, m => m[0] == cr.type)[2]}`} alt="AD" height="15" /> {cr.price} USD</li>)}
