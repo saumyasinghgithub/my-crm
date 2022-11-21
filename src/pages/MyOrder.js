@@ -42,7 +42,7 @@ const MyOrder = (props) => {
         return <div className="table-responsive">
             <table className="table table-striped">
                 <thead>
-                    <tr>
+                    <tr className="myordertr">
                         <th>Sl.</th>
                         <th>Order Id</th>
                         <th>Order Items</th>

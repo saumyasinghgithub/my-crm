@@ -70,7 +70,7 @@ const MyBlog = (props) => {
         
         <Tab.Container id="left-tabs-example">
         <div className="card-header ui-sortable-handle" >
-            <h3 className="card-title">Course List #</h3>
+            <h3 className="card-title">Blog List #</h3>
             <span className="btn float-right">
                 <button className="btn btn-success btn-sm" onClick={()=>setShowForm({mode: 1, id: false})}>Add Blog <i className="fas fa-plus"></i></button>
                 </span>

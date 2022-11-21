@@ -41,7 +41,7 @@ const PreferredTrainers = (props) => {
         return <>
             <Row>
                 {favs.data.map(rec => <Col xs={6} sm={4} lg={4} md={4} xl={4} key={rec.id}>
-                    <Card className="m-2">
+                    <Card className="m-2 preferredtrainercard">
                         <Card.Body>
                             <img className="img-fluid p-2" src={`${process.env.REACT_APP_API_URL}/uploads/base/${rec.base_image}`} alt={_.get(rec,'firstname','')} />
                             <h3 className="text-center p-2">{_.get(rec,'firstname','')} {_.get(rec,'lastname','')}</h3>

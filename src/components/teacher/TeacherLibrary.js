@@ -5,6 +5,7 @@ import TeacherNav from './TeacherNav';
 import _ from 'lodash';
 
 import Utils from './../../Utils';
+import { Row, Container } from 'react-bootstrap';
 
 const TeacherLibrary = (props) => {
 
@@ -14,8 +15,33 @@ const TeacherLibrary = (props) => {
     useEffect(window.scrollEffect, []);
 
     const renderCourses = (course) => {
-        return <div className="libraryInfobox slideInUp wow ">
-        <div className="LImgBox"><span className="new">New</span><img className="img-fluid" src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`} alt="AD" /></div>
+        return <Container> <Row className='my-5'> <div className="libraryInfobox slideInUp wow ">
+            <div className='col-md-3 col-12'>
+            <div className=""><span className="new">New</span><img className="img-fluid rounded" src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`} alt="AD" /></div>
+</div> 
+            <div className='col-md-7 col-12'>
+            <div className="">
+            <div className="libraryTitle">
+            {course.name}
+            </div>
+            <div className="libraryBody" dangerouslySetInnerHTML={{__html:course.short_description}}></div>
+            <div className="libraryAuthorInfo">
+                Date: 6/2019 | Level: {course.level} | Duration: {course.duration}
+            </div>
+            <div className="libraryStar mt-2">
+                <i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i>
+                <img className="img-fluid LLike" src="/assets/images/like-icon.png" alt="AD" />
+                <img className="img-fluid lShare" src="/assets/images/share-icon.png" alt="AD" />
+            </div>
+        </div>
+                </div> 
+            <div className='col-md-2 col-12 d-flex align-items-center'>
+            <div className="">
+            <a href={`/courses/${course.slug}`} className="btn btnBlue" >View Course </a>
+        </div>
+                </div> 
+
+        {/* <div className="LImgBox"><span className="new">New</span><img className="img-fluid" src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`} alt="AD" /></div>
         <div className="LTextBox">
             <div className="libraryTitle">
             {course.name}
@@ -33,8 +59,9 @@ const TeacherLibrary = (props) => {
         <div className="LPriceInfoBox libraryCourses">
             
             <a href={`/courses/${course.slug}`} className="btn btnBlue" >View Course </a>
-        </div>
-    </div>;
+        </div> */}
+    </div>
+    </Row> </Container>;
     }
 
 

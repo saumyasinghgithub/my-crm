@@ -85,7 +85,7 @@ const TeacherAbout = (props) => {
                     </ul>
                     <div className="sendMsg">Send Message <img src="/assets/images/send-icon.png" alt="icons" /></div>
                 </div>
-                <img className="img-fluid imgTransfer pt-3" src={`${process.env.REACT_APP_API_URL}/uploads/profile/${encodeURI(data.profile_image)}`} alt='profile' />
+                <img className="img-fluid imgTransfer pt-3 W-100" src={`${process.env.REACT_APP_API_URL}/uploads/profile/${encodeURI(data.profile_image)}`} alt='profile' />
             
             </div>
         </div>

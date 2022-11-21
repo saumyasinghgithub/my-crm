@@ -83,7 +83,7 @@ const MyCourse = (props) => {
     <Container fluid className="h-100 p-0">
     <div className="profile-wrapper">
     <div className="container my-course mysale">
-        <h1>My Course </h1>
+        <h1>My Courses </h1>
         
         <Tab.Container id="left-tabs-example">
         <div className="card-header ui-sortable-handle" >
