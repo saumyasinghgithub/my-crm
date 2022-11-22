@@ -4398,9 +4398,11 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
     }
 
     .sendMsg {
-        bottom: -8px;
+        bottom: 0px;
     }
-
+    .social_share_icons {
+        margin-right: 115px !important;
+    }
     .headingtext {
         font-size: 45px !important;
     }
@@ -4410,11 +4412,18 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
     ul.profile-socail-icon {
         margin-top: 40px;
     }
-
+    .profileHeading ul.profile-socail-icon {
+        margin-top: 31px;
+    }
     .sendMsg {
         margin-top: 70px !important;
+        position: absolute !important;
+    float: right !important;
+    margin-bottom: 30px;
     }
-
+    .social_share_icons {
+        margin-right: 0px !important;
+    }
     .profileTabQu .nav {
         margin-bottom: 0px !important;
     }
@@ -4813,4 +4822,11 @@ min-width:150px;
 }
 .libraryInfobox .rounded{
     width:100%;
+}
+
+.social_share_icons{
+    margin-right:125px;
+}
+.at-share-tbx-element .at-share-btn{
+    margin:0 6px 1px 0 !important;
 }
