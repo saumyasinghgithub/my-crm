@@ -4515,7 +4515,7 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
         margin-right: 115px !important;
     }
     .headingtext {
-        font-size: 45px !important;
+        font-size: 35px !important;
     }
     .bio-data-body {
         padding: 15px 0 25px 0 !important;
@@ -4536,6 +4536,10 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
         text-align:center !important;
         padding:15px 0 0px 0 !important;
     }
+    .headingtext {
+        font-size: 23px !important;
+        margin-top: 10px !important;
+    }
 }
 
 @media (max-width: 767px) {
@@ -4544,12 +4548,13 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
     }
     .profileHeading ul.profile-socail-icon {
         margin-top: 31px;
+        display: contents;
     }
     .sendMsg {
         margin-top: 70px !important;
         position: absolute !important;
     float: right !important;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
     }
     .social_share_icons {
         margin-right: 0px !important;
@@ -4963,18 +4968,16 @@ min-width:150px;
 .libraryInfobox .rounded{
     width:100%;
 }
-<<<<<<< Updated upstream
 
 .social_share_icons{
     margin-right:125px;
 }
 .at-share-tbx-element .at-share-btn{
     margin:0 6px 1px 0 !important;
-=======
+}
 .cardWrapper{
     padding-top:100px;
 }
 .bQdYbR{
     min-width:170px !important;
->>>>>>> Stashed changes
 }
