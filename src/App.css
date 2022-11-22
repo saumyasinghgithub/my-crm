@@ -137,9 +137,9 @@
   height:30px;
 }
 /* prefered course btn*/
-.preferdCourseBtn {
-  width: 50% !important;
-}
+/* .preferdCourseBtn {
+  width: 50% ;
+} */
 
 .profileRating{
     width: 300px;

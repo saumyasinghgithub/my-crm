@@ -38,8 +38,9 @@ const PreferredCourses = (props) => {
 
     const renderMyFavs = () => {
         return <>
+        <Container>
             <Row>
-            {favs.data.map(rec => <Col className="col-6 py-1"><Card className="courseWrapper coursecard my-2 h-100">
+            {favs.data.map(rec => <Col className="col-lg-4 col-md-6 col-12 py-1"><Card className="courseWrapper coursecard my-2 h-100">
                 <Card.Body>
                     <Row>
                     <Col className="col-12">
@@ -59,13 +60,14 @@ const PreferredCourses = (props) => {
             </Card></Col>)}
             </Row>
             {favs.pageInfo.total > filters.limit && Utils.showPagination({...favs.pageInfo, ..._.pick(filters,['start','limit'])}, gotoPage)}
+            </Container>
         </>;
     };
 
     return (<>
-        <Container fluid className="h-100 p-0">
+        <Container className="h-100 p-0">
             <div className="profile-wrapper">
-                <div className="container100">
+                <div className="container">
                 <h1>My Preferred Courses</h1>
                 
                     {favs.loading===true && <div className="alert alert-warning m-5 p-5">

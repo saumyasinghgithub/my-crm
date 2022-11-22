@@ -30,6 +30,7 @@ body {
     margin: 0px;
     font-family: 'segoe UI';
     font-size: 14px;
+    overflow-x:hidden;
 }
 
 body.menuopen {
@@ -1433,7 +1434,7 @@ button.applyBtn.btn {
 }
 
 .cartRightBox {
-    margin: 0px 10px 0 70px;
+    margin: 50px 0px 0 20px;
     height: 100%;
     box-shadow: 0px 4px 6px #ccc;
     padding: 20px 40px 20px 20px;
@@ -2372,7 +2373,7 @@ span.awardYear {
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 7px;
-    margin-top: -6px;
+    margin-top: 0px;
     position: relative;
 }
 
@@ -3855,6 +3856,9 @@ h2.subheading {
     .comming-TBanner h1 {
         margin: 5px 0px;
     }
+    .txtR {
+        text-align: center !important;
+    }
 
 }
 
@@ -4020,7 +4024,14 @@ div.drum-wrapper, div.drum-wrapper .inner {
         margin: 0px auto;
     }
 }
-
+@media (max-width: 768px){
+.bioBodyInfolist ul li:first-child {
+    text-align: center;
+    width: 100% !important;
+    margin-bottom: 10px;
+    font-size: 15px !important;
+}
+}
 @media (max-width: 767px) {
     .home-wrapper {
         min-height: 335px !important;
@@ -4034,8 +4045,92 @@ div.drum-wrapper, div.drum-wrapper .inner {
     .header.fixed-top {
         padding: 10px !important;
     }
+    .flexWrapper .nav li {
+        padding: 10px 25px !important;
+        display: table-cell !important;
+        /* overflow: scroll !important; */
+    }
+    .flexWrapper .nav li span {
+        font-size: 15px;
+        width: 80px !important;
+    }
+    .home-result-wrapper {
+        min-height: 400px !important;
+    }
+    .profileRating .star-ratings{
+        display: block !important;
+    }
+    .profileRating{
+        width: 100% !important;
+        margin-top:20px !important;
+        float: none !important;
+        padding-right:0px !important;
+    }
+    .profileRating p{
+        margin-bottom:5px;
+    }
+    .bioBodyInfolist ul {
+        text-align: center !important;
+    }
+    .tab-text-box .txtR{
+        text-align: center !important;
+        padding-bottom: 80px;
+    }
+    .bio-data-body .txtR .btn.btnBlue:first-child{
+        margin-left:5px !important;
+    }
+    .flex80 .alltrainers {
+        bottom: 70px !important;
+    }
+    .LPriceInfoBoxCart{
+        margin-top:20px;
+        text-align:left !important;
+    }
+    .boldAmount{
+        margin-top:15px;
+    }
+    .cardWrapper {
+        padding-top: 75px !important;
+    }
+    ul.iconList {
+        margin-top: 30px;
+        margin-bottom:70px !important;
+        padding-bottom: 10px;
+    }
+    .awardscertification{
+        font-size:1.5rem;
+    }
+    .btn.btnBlue.preferdCourseBtn {
+        font-size:13px;
+    }
+    span.backarrow {
+         font-size: 18px;
+    }
+    .student_prof_cross img {
+        width: 16px;
+        margin-right: 8px;
+    }
+    .my-course .rdt_TableCol:nth-child(8),.my-course .rdt_TableCell:nth-child(8){
+        max-width: 120px !important;
+        min-width: 119px !important;
+    }
+    .profileFollowList ul li {
+        padding-right: 6px !important;
+    }
 }
-
+@media (max-width: 480px){
+.flexWrapper .nav li span {
+    display: block !important;
+}
+}
+@media(min-width:219px) and (max-width:331px) {
+    .home-result-wrapper {
+        min-height: 530px !important;
+    }
+    .btn.btnBlue.preferdCourseBtn {
+        font-size: 11px;
+    }
+}
 .search-trainer {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     font-size: 17px;
@@ -4373,6 +4468,22 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
     .teacherdetails {
         margin-top: 25%
     }
+    /* .bio-data-body{
+        text-align:center !important;
+        padding:15px 0 0px 0 !important;
+    } */
+    .bioBodyInfolist {
+        margin-bottom: 0px !important;
+    }
+    .alltrainers {
+    bottom: 10px !important;
+    }
+    .txtR {
+        text-align: center !important;
+    }
+    .rdt_TableCell .badge{
+        font-size: 70%;
+    }
 }
 
 @media (max-width:500px) {
@@ -4405,6 +4516,25 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
     }
     .headingtext {
         font-size: 45px !important;
+    }
+    .bio-data-body {
+        padding: 15px 0 25px 0 !important;
+    }
+    .btn.btnBlue.preferdCourseBtn {
+        margin-top: 5px;
+    }
+    .my-course .rdt_TableCol:nth-child(8),.my-course .rdt_TableCell:nth-child(8){
+        max-width: 120px !important;
+        min-width: 119px !important;
+    }
+}
+.btn.btnBlue.preferdCourseBtn {
+    width:67% !important;
+}
+@media (max-width:768px){
+    .bio-data-body{
+        text-align:center !important;
+        padding:15px 0 0px 0 !important;
     }
 }
 
@@ -4454,6 +4584,12 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
 @media (max-width: 377px) {
     .sendMsg {
         margin-top: 0px !important;
+    }
+}
+@media(min-width:219px) and (max-width:380px) {
+    .profileTabQu .nav li {
+        font-size: 12px !important;
+        margin-right: 6px !important;
     }
 }
 
@@ -4743,15 +4879,15 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
 }
 .my-course .rdt_TableCol:nth-child(4),.my-course .rdt_TableCell:nth-child(4){
     max-width: 80px !important;
-    min-width: 75px !important;
+    min-width: 79px !important;
 }
 .my-course .rdt_TableCol:nth-child(5),.my-course .rdt_TableCell:nth-child(5){
-    max-width: 121px !important;
-    min-width: 120px !important;
+    max-width: 123px !important;
+    min-width: 122px !important;
 }
 .my-course .rdt_TableCol:nth-child(6),.my-course .rdt_TableCell:nth-child(6){
     max-width: 110px !important;
-    min-width: 105px !important;
+    min-width: 108px !important;
 }
 .my-course .rdt_TableCol:nth-child(7),.my-course .rdt_TableCell:nth-child(7){
     max-width: 15px !important;
@@ -4795,9 +4931,13 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
     background-color: #0f79aa !important;
     border-color: #0f79aa !important;
 }
+.LPriceInfoBoxCart{
+    text-align:center;
+}
 .LPriceInfoBoxCart .fa-trash{
     cursor:pointer;
 }   
+
 
 .mysale .rdt_TableCol:first-child,.mysale .rdt_TableCell:first-child{
 max-width:160px;
@@ -4823,10 +4963,18 @@ min-width:150px;
 .libraryInfobox .rounded{
     width:100%;
 }
+<<<<<<< Updated upstream
 
 .social_share_icons{
     margin-right:125px;
 }
 .at-share-tbx-element .at-share-btn{
     margin:0 6px 1px 0 !important;
+=======
+.cardWrapper{
+    padding-top:100px;
+}
+.bQdYbR{
+    min-width:170px !important;
+>>>>>>> Stashed changes
 }
