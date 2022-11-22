@@ -16,6 +16,14 @@ const TeacherAbout = (props) => {
     const {getServerData,setServerData} = useContext(UserContext);
 
     useEffect(window.scrollEffect, []);
+    let addthis = false;
+    useEffect(() => {
+        if(addthis) return;
+        addthis = true;
+        let script = document.createElement('script');
+        script.src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-637c3fedb27a530a";
+        document.body.append(script);
+    }, []);
 
     const setTrainerRating = (rated) => {
         setStarLoading(true);
@@ -80,10 +88,11 @@ const TeacherAbout = (props) => {
             <div className="profileHeading teacherheading">
                     <h1 className="headingtext wow zoomIn">{data.firstname} {data.lastname}</h1>
                     <ul className="profile-socail-icon">
-                        <li className='mr-2'><a href=""><img src="/assets/images/share-icon.png" alt="icons" /></a></li>
-                        <li><a href=""><img src="/assets/images/link-icon.png" alt="icons" /></a></li>
+                    <li className='mr-2'><div className="sendMsg">Send Message <img src="/assets/images/send-icon.png" alt="icons" /></div></li>
+                        <li className='mr-2'><div className="addthis_inline_share_toolbox"></div></li>
+                        
                     </ul>
-                    <div className="sendMsg">Send Message <img src="/assets/images/send-icon.png" alt="icons" /></div>
+                    
                 </div>
                 <img className="img-fluid imgTransfer pt-3 W-100" src={`${process.env.REACT_APP_API_URL}/uploads/profile/${encodeURI(data.profile_image)}`} alt='profile' />
             
@@ -148,7 +157,8 @@ const TeacherAbout = (props) => {
                 </div>
             </div>
         </div>
-               
+        
+       
     </>);
 };
 
