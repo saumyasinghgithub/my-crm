@@ -7,7 +7,7 @@ import UserContext from './../../contexts/UserContext';
 import {useParams} from "react-router-dom";
 
 const TeacherAbout = (props) => {
-    
+    const socialPlatforms = ['facebook','instagram','linkedin','pinterest','twitter','youtube'];
     const data = props.data;
     const { slug } = useParams();
     const [loading, setLoading] = useState(true);
@@ -73,12 +73,7 @@ const TeacherAbout = (props) => {
                         <div className="profileFollowList">
                             <h5>Follow Ben on</h5>
                             <ul>
-                                <li><a target="_blank"><i className="fab fa-facebook-f"></i></a></li>
-                                <li><a target="_blank"><i className="fab fa-instagram"></i></a></li>
-                                <li><a href="" target="_blank"><i className="fab fa-linkedin-in"></i></a></li>
-                                <li><a href="" target="_blank"><i className="fab fa-pinterest-p"></i></a></li>
-                                <li><a href="" target="_blank"><i className="fab fa-twitter"></i></a></li>
-                                <li><a href="" target="_blank"><i className="fab fa-youtube"></i></a></li>
+                                {socialPlatforms.map(sp => !_.isEmpty(_.get(props,`social.${sp}`,'')) && <li><a target="_blank" href={props.social[sp]}><i className={`fab fa-${sp}`}></i></a></li>)}
                             </ul>
                         </div>
                     </div>
@@ -88,8 +83,8 @@ const TeacherAbout = (props) => {
             <div className="profileHeading teacherheading">
                     <h1 className="headingtext wow zoomIn">{data.firstname} {data.lastname}</h1>
                     <ul className="profile-socail-icon">
-                    <li className='mr-2'><div className="sendMsg">Send Message <img src="/assets/images/send-icon.png" alt="icons" /></div></li>
-                        <li className='social_share_icons'><div className="addthis_inline_share_toolbox"></div></li>
+                        <li className='mr-2'><div className="sendMsg">Send Message <img src="/assets/images/send-icon.png" alt="icons" /></div></li>
+                        <li className='mr-2'><div className="addthis_inline_share_toolbox"></div></li>
                     </ul>
                     
                 </div>

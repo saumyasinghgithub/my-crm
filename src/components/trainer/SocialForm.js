@@ -6,9 +6,10 @@ import _ from 'lodash';
 
 
 const SocialForm = (props) => {
+  const socialPlatforms = ['facebook','instagram','linkedin','pinterest','twitter','youtube'];
 
   const [count, setCount] = useState(4);
-  const [socialData, setSocialData] = useState([]);
+  const [socialData, setSocialData] = useState({});
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({success: false, message: ""});
   const {getServerData,setServerData} = useContext(UserContext);
@@ -35,54 +36,31 @@ const SocialForm = (props) => {
     setServerData('trainer/my-social',frmdata)
     .then(res => {
       setSaving(false);
-      setResponse(res);
+      setSocialData(res);
     })
   }
 
 
-  return <Form onSubmit={onSave}>
+  return <>
+    <h1>Social Platform</h1>
+    <Form onSubmit={onSave}>
+      
+      <Row>
+        {socialPlatforms.map(fld => <Col key={fld} md={6} className="mt-3">
+            <Form.Label><i class={`fab fa-2x fa-${fld} mr-2`}></i>{fld.toUpperCase()} URL: </Form.Label>
+            <Form.Control type="text" name={fld} placeholder={`Enter ${fld} page url`} defaultValue={_.get(socialData,fld,'')} />
+        </Col>)}
+      </Row>
+      
+      <Row>
+        <Col md={12} className="m-3 text-right">
+          {saving && <>Saving.. <Spinner animation="border" /></>}
+          {!saving && response.message==="" && <Button type="submit" className="profile-save">Save</Button>}
+          {!saving && response.message!=="" && <Alert variant={response.success ? 'info' : 'danger'} className="p-3 mt-2 text-center">{response.message}</Alert>}
+        </Col>
+      </Row>
     
-    <Row>
-        <Col md={6} className="mt-3">
-            <Form.Label>Facebook URL: </Form.Label>
-            <Form.Control type="text" name="fburl" placeholder="Enter facebook page url" defaultValue={_.get(socialData,'fburl','')} />
-        </Col>
-        <Col md={6} className="mt-3">
-            <Form.Label>Instagram URL: </Form.Label>
-            <Form.Control type="text" name="instaburl" placeholder="Enter Instagram page url" defaultValue={_.get(socialData,'instaburl','')} />
-        </Col>
-    </Row>  
-    <Row>  
-        <Col md={6} className="mt-3">
-            <Form.Label>LinkedIn URL: </Form.Label>
-            <Form.Control type="text" name="linurl" placeholder="Enter LinkedIn page url" defaultValue={_.get(socialData,'linurl','')} />
-        </Col>
-        <Col md={6} className="mt-3">
-            <Form.Label>Pinterest URL: </Form.Label>
-            <Form.Control type="text" name="pinurl" placeholder="Enter pinterest page url" defaultValue={_.get(socialData,'pinurl','')} />
-        </Col>
-    </Row>
-    <Row>
-        <Col md={6} className="mt-3">
-            <Form.Label>Twitter URL: </Form.Label>
-            <Form.Control type="text" name="twurl" placeholder="Enter twitter page url" defaultValue={_.get(socialData,'twurl','')} />
-        </Col>
-        <Col md={6} className="mt-3">
-            <Form.Label>Youtube URL: </Form.Label>
-            <Form.Control type="text" name="uturl" placeholder="Enter youtube page url" defaultValue={_.get(socialData,'uturl','')} />
-        </Col>
-    </Row>
-    
-    <Row>
-      <Col md={12} className="m-3 text-right">
-        {saving && <>Saving.. <Spinner animation="border" /></>}
-        {!saving && response.message==="" && <Button type="submit" className="profile-save">Save</Button>}
-        {!saving && response.message!=="" && <Alert variant={response.success ? 'info' : 'danger'} className="p-3 mt-2 text-center">{response.message}</Alert>}
-      </Col>
-    </Row>
-  
-  </Form>
-
-};
+    </Form>
+  </>};
 
 export default SocialForm;
