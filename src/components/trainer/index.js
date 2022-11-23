@@ -7,5 +7,6 @@ import AwardCertificationsForm from './AwardCertificationsForm';
 import KnowledgeForm from './KnowledgeForm';
 import CommunityForm from './CommunityForm';
 import LibraryForm from './LibraryForm';
+import SocialForm from './SocialForm';
 
-export default {CalibForm, AboutForm, AcademicForm, ExperienceForm, ServiceForm, AwardCertificationsForm, KnowledgeForm, CommunityForm, LibraryForm};
+export default {CalibForm, AboutForm, AcademicForm, ExperienceForm, ServiceForm, AwardCertificationsForm, KnowledgeForm, CommunityForm, LibraryForm, SocialForm};
