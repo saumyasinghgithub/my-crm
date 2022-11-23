@@ -488,6 +488,7 @@ ul.resultlist li a {
 
 .datascroll::-webkit-scrollbar {
     width: 7px;
+    height:7px;
 }
 
 .datascroll::-webkit-scrollbar-track {
@@ -3224,6 +3225,8 @@ h3.myStudenttitle {
 
 .profile_toggle img {
     width: 37px;
+    border-radius: 50px;
+    height: 37px;
 }
 
 .doneText a {
@@ -3691,7 +3694,7 @@ h2.subheading {
     }
 
 } */
-@media(min-width:319px) and (max-width:321px) {
+@media(min-width:219px) and (max-width:380px) {
     .bannerBottomtext ul li {
         font-size: 9px !important;
     }
@@ -4116,6 +4119,10 @@ div.drum-wrapper, div.drum-wrapper .inner {
     }
     .profileFollowList ul li {
         padding-right: 6px !important;
+    }
+    ul.navbar-nav img {
+        width: 22px !important;
+        height: 22px !important;
     }
 }
 @media (max-width: 480px){
@@ -4557,7 +4564,7 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
     margin-bottom: 0px;
     }
     .social_share_icons {
-        margin-right: 0px !important;
+        /* margin-right: 0px !important; */
     }
     .profileTabQu .nav {
         margin-bottom: 0px !important;

@@ -90,7 +90,6 @@ const TeacherAbout = (props) => {
                     <ul className="profile-socail-icon">
                     <li className='mr-2'><div className="sendMsg">Send Message <img src="/assets/images/send-icon.png" alt="icons" /></div></li>
                         <li className='social_share_icons'><div className="addthis_inline_share_toolbox"></div></li>
-                        
                     </ul>
                     
                 </div>

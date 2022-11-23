@@ -23,19 +23,19 @@ const MyProfile = (props) => {
     return (<>
     <Container fluid className="h-100 p-0">
     <div className="profile-wrapper">
-    <div className="container100">
+    <div className="container">
         <h1>My Profile </h1>
         
         <Tab.Container id="left-tabs-example" defaultActiveKey={tab}>
             <Row>
-                <Col sm={3}>
+                <Col md={3}>
                 <Nav variant="pills" className="flex-column">
                     {_.map(allTabs, (v,k) => <Nav.Item key={k}>
                         <Nav.Link eventKey={k} onClick={() => setTab(k)} className="profile-pills">{v}</Nav.Link>
                     </Nav.Item>)}
                 </Nav>
                 </Col>
-                <Col sm={9}>
+                <Col md={9}>
                 <Tab.Content>
                     <Tab.Pane eventKey={tab}>
                         {tab==='about' && <TrainerForms.AboutForm />}
