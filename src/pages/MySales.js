@@ -95,11 +95,11 @@ const MySales = (props) => {
                 <div className="container mysale">
                     <h1>My Sales</h1>
                     <div className="row">
-                        <div className="col-lg-3 col-6">
+                        <div className="col-lg-4 col-6">
                             <div className="small-box bg-info">
                                 <div className="inner">
                                     <h3>$ 100</h3>
-                                    <p>Total Sales</p>
+                                    <p>Total Students</p>
                                 </div>
                                 <div className="icon">
                                     <i className="ion ion-bag"></i>
@@ -107,11 +107,11 @@ const MySales = (props) => {
                                 <a href="#" className="small-box-footer">More info <i className="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
-                        <div className="col-lg-3 col-6">
+                        <div className="col-lg-4 col-6">
                             <div className="small-box bg-success">
                                 <div className="inner">
                                     <h3>100<sup className="supTag">%</sup></h3>
-                                    <p>My Course Ratio</p>
+                                    <p>Favourite Students</p>
                                 </div>
                                 <div className="icon">
                                     <i className="ion ion-stats-bars"></i>
@@ -119,26 +119,14 @@ const MySales = (props) => {
                                 <a href="#" className="small-box-footer">More info <i className="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
-                        <div className="col-lg-3 col-6">
+                        <div className="col-lg-4 col-6">
                             <div className="small-box bg-warning">
                                 <div className="inner">
                                     <h3>100</h3>
-                                    <p>My Students</p>
+                                    <p>Ratings</p>
                                 </div>
                                 <div className="icon">
                                     <i className="ion ion-person-add"></i>
-                                </div>
-                                <a href="#" className="small-box-footer">More info <i className="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <div className="col-lg-3 col-6">
-                            <div className="small-box bg-danger">
-                                <div className="inner">
-                                    <h3>100</h3>
-                                    <p>Total Order Items</p>
-                                </div>
-                                <div className="icon">
-                                    <i className="ion ion-pie-graph"></i>
                                 </div>
                                 <a href="#" className="small-box-footer">More info <i className="fas fa-arrow-circle-right"></i></a>
                             </div>
