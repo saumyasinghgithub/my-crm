@@ -57,14 +57,14 @@ ul, li {
 }
 
 a.navbar-brand {
-    font-size: 21px;
+    font-size: 30px;
     color: #fff;
     float: left;
 }
 
 ul.navbar-nav li {
     display: inline-block;
-    padding: 5px 10px;
+    padding: 10px 10px;
     color: #fff;
     cursor: pointer;
 }
@@ -2647,6 +2647,7 @@ thead.table_header_line {
     top: 15px;
     right: 15px;
     cursor: pointer;
+    z-index: 99;
 }
 
 img.awardIocn {
@@ -3698,6 +3699,9 @@ h2.subheading {
     .bannerBottomtext ul li {
         font-size: 9px !important;
     }
+    .mysale .card-header {
+        padding: 0.75rem 0.25rem;
+    }
 }
 
 @media (max-width: 767px) {
@@ -4557,6 +4561,9 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
         margin-top: 31px;
         display: contents;
     }
+    .headingtext {
+        width: 100%;
+    }
     .sendMsg {
         margin-top: 70px !important;
         position: absolute !important;
@@ -4565,6 +4572,7 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
     }
     .social_share_icons {
         /* margin-right: 0px !important; */
+        display: block !important;
     }
     .profileTabQu .nav {
         margin-bottom: 0px !important;
@@ -4590,6 +4598,13 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
         right: 0 !important;
         top: 38px !important;
         margin-top: 0px !important;
+    }
+    .ViewCourseBtn{
+        margin-top:10px;
+    }
+    .profile-wrapper.profile-wrapperStudent {
+        padding-top: 70px !important;
+
     }
 }
 
@@ -4927,6 +4942,9 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
 @media (min-width: 768px) and (max-width: 1024px){
 .libraryInfobox .btn.btnBlue {
     font-size: 11px;
+}
+.txtR {
+    text-align: center !important;
 }
 }
 .btn-primary {

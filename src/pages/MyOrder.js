@@ -78,7 +78,7 @@ const MyOrder = (props) => {
     return (<>
         <Container fluid className="h-100 p-0">
         <div className="profile-wrapper">
-            <div className="container100">
+            <div className="container">
                 <h1>My Orders</h1>
                 {data.loading===true && <div className="alert alert-warning m-5 p-5">
                     Fetching your ordered items..

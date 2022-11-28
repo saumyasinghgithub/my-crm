@@ -40,7 +40,7 @@ const TeacherLibrary = (props) => {
         </div>
                 </div> 
             <div className='col-md-2 col-12 d-flex align-items-center'>
-            <div className="">
+            <div className="ViewCourseBtn">
             <a href={`/courses/${course.slug}`} className="btn btnBlue" >View Course </a>
         </div>
                 </div> 
