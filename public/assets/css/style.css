@@ -2410,6 +2410,9 @@ span.awardYear {
     background: #0f79aa;
     color:#fff;
 }
+.librarybuttonList ul li a:hover{
+    color:#fff !important;
+}
 .librarybuttonList ul li:hover img{
     filter: invert(1) brightness(5);
 }
@@ -5039,4 +5042,8 @@ min-width:150px;
     .navbar-nav{
         margin-top:2px;
     }
+}
+.CourseTabledesign .CourseRow{
+    background: #0f79aa;
+    color: #fff;
 }

@@ -240,9 +240,9 @@ const CourseDetails = (props) => {
             {course.contents.map(c=> <div className="courseDesBox slideInUp wow" key={c.id}>
              <div dangerouslySetInnerHTML={{__html:c.description}}></div>
                 <div className="table-responsive">
-                    <table className="table table-borderless">
+                    <table className="table table-borderless CourseTabledesign">
                         <thead>
-                            <tr>
+                            <tr className='CourseRow'>
                                 <th>Course content</th>
                                 <th>Expand all</th>
                                 <th>22 lectures</th>
