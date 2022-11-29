@@ -32,7 +32,7 @@ const UserMenu = (props) => {
   return <div className="slide-in-content slide-in-contentteacher">
     <div className="student_prof_cross"><img src="/assets/images/student_profile_crossicon.png" alt="AD" /></div>
     <div className="row">
-        <div className="col-12"><h4>Hello {udata.firstname} {udata.lastname}!</h4></div>
+        <div className="col-12"><h4 className="lineANimation">Hello {udata.firstname} {udata.lastname}!</h4></div>
         <div className="col-sm-6">
             <ul className="profile_menu_list">
             {Utils.isTrainer() && 

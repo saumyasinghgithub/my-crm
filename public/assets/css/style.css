@@ -57,7 +57,7 @@ ul, li {
 }
 
 a.navbar-brand {
-    font-size: 30px;
+    font-size: 25px;
     color: #fff;
     float: left;
 }
@@ -511,6 +511,8 @@ ul.resultlist li a {
     display: block;
     margin: 0px auto;
     width: 70px;
+    height: 70px;
+    border-radius: 50%;
 }
 
 .flexWrapper .nav li.active img {
@@ -617,6 +619,8 @@ ul.resultlist li a {
     position: absolute;
     top: 10px;
     width: 120px;
+    height: 120px;
+    border-radius: 50%;
 }
 
 .bio-data-header {
@@ -1161,6 +1165,9 @@ p {
 }
 .preferredtrainercard{
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.preferredtrainercard  img{
+    border-radius:50%;
 }
 .courseOverview h3 {
     font-size: 30px;
@@ -1838,7 +1845,7 @@ label.filterSeach img {
 .profiletabBox {
     position: relative;
     padding-bottom: 40px;
-    min-height: 250px;
+    min-height: 190px;
 }
 
 .profiletabBox ul.profileTab li a {
@@ -1961,7 +1968,7 @@ ul.profile-socail-icon li img {
 }
 
 .profileFollowList {
-    margin-top: 40px;
+    margin-top: 20px;
     width: 100%;
     position: relative;
 }
@@ -2384,8 +2391,9 @@ span.awardYear {
 
 .librarybuttonList ul li {
     display: inline-block;
-    /* padding: 12px 15px; */
-    padding: 0 !important;
+    padding: 5px !important;
+    border-radius:5px;
+    /* padding: 0 !important; */
     margin-right:1.5rem !important;
 }
 
@@ -2399,7 +2407,11 @@ span.awardYear {
 }
 
 .librarybuttonList ul li:hover {
-    background: #dddada;
+    background: #0f79aa;
+    color:#fff;
+}
+.librarybuttonList ul li:hover img{
+    filter: invert(1) brightness(5);
 }
 
 .libraryStar .far {
@@ -2788,6 +2800,7 @@ button.navbar-toggler h4 {
 
 .addMore {
     margin-top: 20px;
+    display: none;
 }
 
 .proTextTtile {
@@ -4128,6 +4141,12 @@ div.drum-wrapper, div.drum-wrapper .inner {
         width: 22px !important;
         height: 22px !important;
     }
+    .slide-in-content {
+        height: 100vh !important;
+    }
+    .profile_menu{
+        top:0;
+    }
 }
 @media (max-width: 480px){
 .flexWrapper .nav li span {
@@ -4281,6 +4300,9 @@ footer.footer ul li a {
 .cd-breadcrumb lii {
     display: inline-block;
     margin: 0.5em 0;
+}
+.cd-breadcrumb li{
+    display:flex !important;
 }
 
 .cd-breadcrumb li::after {
@@ -4691,7 +4713,7 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
 }
 
 .small-box p {
-    font-size: 1rem;
+    font-size: 0.9rem;
     margin-top: 0;
     margin-bottom: 1rem;
     color: #fff;
@@ -5005,4 +5027,16 @@ min-width:150px;
 }
 .bQdYbR{
     min-width:170px !important;
+}
+.slide-in-contentteacher .lineANimation:after{
+    margin-top:10px;
+    height:2px;
+}
+@media (max-width: 575px) {
+    .slide-in-contentteacher .lineANimation{
+        margin-bottom:30px;
+    }
+    .navbar-nav{
+        margin-top:2px;
+    }
 }

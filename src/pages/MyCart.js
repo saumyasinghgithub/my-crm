@@ -167,7 +167,7 @@ const MyCart = (props) => {
 
                 {!cart.loading && <>
                     <div className="profile-wrapper">
-                        <div className="container100">
+                        <div className="container">
                             <h1>My Cart</h1>
                             <Row>
                                 <Col md={7} className="mt-3">
