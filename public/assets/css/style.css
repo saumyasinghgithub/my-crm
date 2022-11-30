@@ -4155,13 +4155,19 @@ div.drum-wrapper, div.drum-wrapper .inner {
 .flexWrapper .nav li span {
     display: block !important;
 }
+.flexWrapper .nav li img {
+    width: 56px;
+    height: 56px;
+}
 }
 @media(min-width:219px) and (max-width:331px) {
-    .home-result-wrapper {
-        min-height: 530px !important;
-    }
     .btn.btnBlue.preferdCourseBtn {
         font-size: 11px;
+    }
+}
+@media(min-width:219px) and (max-width:381px) {
+    .home-result-wrapper {
+        min-height: 530px !important;
     }
 }
 .search-trainer {
@@ -5046,4 +5052,7 @@ min-width:150px;
 .CourseTabledesign .CourseRow{
     background: #0f79aa;
     color: #fff;
+}
+.hideicon .fa-plus{
+    display:none;
 }

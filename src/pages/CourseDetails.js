@@ -166,7 +166,7 @@ const CourseDetails = (props) => {
                 <div className="courseWrapper coursecard tab-pane active" id="PDF">
                     <div className="row">
                         <div className="col-md-6 wow slideInUp">
-                            <div className="imgWrapper"  style={{backgroundImage: `url("${process.env.REACT_APP_API_URL}/uploads/courses/${course.course.course_image}")` }}>
+                            <div className="imgWrapper rounded"  style={{backgroundImage: `url("${process.env.REACT_APP_API_URL}/uploads/courses/${course.course.course_image}")` }}>
                                 <span className="new">New</span>
                                 <div className="circleBox">
                                     <img className="img-fluid" src="/assets/images/bundle.png" alt="AD" />
@@ -250,13 +250,13 @@ const CourseDetails = (props) => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr className='hideicon'>
                                 <td><i className="fas fa-plus"></i> Welcome</td>
                                 <td></td>
                                 <td>1 lecture</td>
                                 <td>01:21</td>
                             </tr>
-                            <tr>
+                            <tr className='hideicon'>
                                 <td><i className="fas fa-plus"></i> Interest Rates and LIBOR</td>
                                 <td></td>
                                 <td>5 lectures	</td>
