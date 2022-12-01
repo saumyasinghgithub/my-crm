@@ -259,9 +259,12 @@ const MyCart = (props) => {
             <div className='container'>
                 <h1>Cart Page</h1>
                 <div className="cartWithoutLogin">
-                    <div>Please login to view cart Items.<div/>
+                    <div className='mt-3'>Please login to view cart Items.<div/>
                         <div className="nav-item" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">
-                        Log in
+                       {/* <span className='btnSubmit'> Log in</span> */}
+                       <div className='w-25'>
+                       <button type="submit" class="btn btnSubmit">Log In</button>
+                       </div>
                         </div>
                 </div>
                 </div>

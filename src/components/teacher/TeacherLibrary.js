@@ -82,10 +82,10 @@ const TeacherLibrary = (props) => {
         <div className="serviceWrapper container">
             <div className="serviceHeading w-100">
                 <h1 className="headingtext slideInUp wow w-100">05 Library</h1>
-                <ul className="profile-socail-icon serviceicon">
+                {/* <ul className="profile-socail-icon serviceicon">
                     <li className='mr-2'><a href=""><img src="/assets/images/share-icon.png" alt="AD" /></a></li>
                     <li><a href=""><img src="/assets/images/link-icon.png" alt="AD" /></a></li>
-                </ul>
+                </ul> */}
                 <div className="subHeading slideInUp wow " dangerouslySetInnerHTML={{ __html: data.about_library }}></div>
             </div>
             <nav className="navbar navbar-expand-md  filterMenu slideInUp wow ">

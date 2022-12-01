@@ -21,10 +21,10 @@ const TeacherCommunity = (props) => {
         <div className="serviceWrapper container"> 
             <div className="serviceHeading">                
                 <h1 className="headingtext slideInUp wow ">04 Community</h1>
-                <ul className="profile-socail-icon serviceicon">
+                {/* <ul className="profile-socail-icon serviceicon">
                     <li className='mr-2'><a href=""><img src="/assets/images/share-icon.png" alt="ad eyes" /></a></li>
                     <li><a href=""><img src="/assets/images/link-icon.png" alt="ad eyes" /></a></li>
-                </ul>
+                </ul> */}
                 <div className="subHeading slideInUp wow " dangerouslySetInnerHTML={{__html:data[0].about_community}}></div>
             </div>
             <div className="knowledgBody">
@@ -43,7 +43,7 @@ const TeacherCommunity = (props) => {
                            </div>
                            <div className="knowledgeFooter clearfix">
                                <div className="FText">Blog</div>
-                               <ul><li><a href=""><img src="/assets/images/eyes.png" alt="ad eyes" /></a></li><li><a href=""><img src="/assets/images/share-icon.png" alt="ad share" /></a></li></ul>
+                               <ul><li><a href=""><img src="/assets/images/eyes.png" alt="ad eyes" /></a></li><li className='ml-2'><a href=""><img src="/assets/images/share-icon.png" alt="ad share" /></a></li></ul>
                            </div>
                        </div>
                    </div>
@@ -60,7 +60,7 @@ const TeacherCommunity = (props) => {
                             </div>
                             <div className="knowledgeFooter clearfix">
                                 <div className="FText">Blog</div>
-                                <ul><li><a href=""><img src="/assets/images/eyes.png" alt="ad eyes" /></a></li><li><a href=""><img src="/assets/images/share-icon.png" alt="ad eyes" /></a></li></ul>
+                                <ul><li><a href=""><img src="/assets/images/eyes.png" alt="ad eyes" /></a></li><li className='ml-2'><a href=""><img src="/assets/images/share-icon.png" alt="ad eyes" /></a></li></ul>
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@ const TeacherCommunity = (props) => {
                             </div>
                             <div className="knowledgeFooter clearfix">
                                 <div className="FText">Video</div>
-                                <ul><li><a href=""><img src="/assets/images/eyes.png" alt="ad eyes" /></a></li><li><a href=""><img src="/assets/images/share-icon.png" alt="ad eyes" /></a></li></ul>
+                                <ul><li><a href=""><img src="/assets/images/eyes.png" alt="ad eyes" /></a></li><li className='ml-2'><a href=""><img src="/assets/images/share-icon.png" alt="ad eyes" /></a></li></ul>
                             </div>
                         </div>
                     </div>
@@ -94,7 +94,7 @@ const TeacherCommunity = (props) => {
                             </div>
                             <div className="knowledgeFooter clearfix">
                                 <div className="FText">Book</div>
-                                <ul><li><a href=""><img src="/assets/images/eyes.png" alt="ad eyes" /></a></li><li><a href=""><img src="/assets/images/share-icon.png" alt="ad share" /></a></li></ul>
+                                <ul><li><a href=""><img src="/assets/images/eyes.png" alt="ad eyes" /></a></li><li className='ml-2'><a href=""><img src="/assets/images/share-icon.png" alt="ad share" /></a></li></ul>
                             </div>
                         </div>
                     </div>
@@ -111,7 +111,7 @@ const TeacherCommunity = (props) => {
                             </div>
                             <div className="knowledgeFooter clearfix">
                                 <div className="FText">Book</div>
-                                <ul><li><a href=""><img src="/assets/images/eyes.png" alt="ad eyes" /></a></li><li><a href=""><img src="/assets/images/share-icon.png"  alt=""/></a></li></ul>
+                                <ul><li><a href=""><img src="/assets/images/eyes.png" alt="ad eyes" /></a></li><li className='ml-2'><a href=""><img src="/assets/images/share-icon.png"  alt=""/></a></li></ul>
                             </div>
                         </div>
                     </div>
