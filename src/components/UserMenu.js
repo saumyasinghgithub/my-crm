@@ -57,8 +57,12 @@ const UserMenu = (props) => {
             {loggedIn &&
                 <li><a href={`${process.env.PUBLIC_URL}/preferred-courses`}>Preferred Courses</a></li>
             }
-
-            <li><a href="">Help for you</a></li>   
+            {Utils.isStudent() &&
+                <li><a href={`${process.env.PUBLIC_URL}/ad-student`}>Help for you</a></li> 
+            }
+            {Utils.isTrainer() &&
+                <li><a href={`${process.env.PUBLIC_URL}/ad-trainer`}>Help for you</a></li> 
+            }     
             </ul>
         </div>
         <div className="col-sm-6">
@@ -76,7 +80,7 @@ const UserMenu = (props) => {
             {Utils.isTrainer() &&
                 <li><a href={`${process.env.PUBLIC_URL}/my-blog`} >My Blog</a></li>
             }                       
-                                        <li><a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a></li>
+                <li><a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a></li>
                 <li><a href="logout" onClick={onLogout}>Log Out</a></li>
             </ul>
         </div>
