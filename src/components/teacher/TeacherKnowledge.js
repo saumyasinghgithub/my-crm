@@ -6,14 +6,6 @@ import Utils from './../../Utils';
 
 import TeacherNav from './TeacherNav';
 
-import('https://kit.fontawesome.com/12642bc27d.js');
-// import('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
-
-// const menuToggle = document.querySelector('.menuToggle');
-// menuToggle.onclick = function () {
-//     menuToggle.classList.toggle('active');
-// }
-
 
 const TeacherKnowledge = (props) => {
 
@@ -58,10 +50,10 @@ const TeacherKnowledge = (props) => {
                             </div> */}
 
 <div class="social-share-icon">
-		<a href="javascript:;" class="a1"><i class="fa fa-facebook"></i></a>
-		<a href="javascript:;" class="a2"><i class="fa fa-twitter"></i></a>
-		<a href="javascript:;" class="a3"><i class="fa fa-google-plus"></i></a>
-        <a href="javascript:;" class="a3"><i class="fa fa-instagram"></i></a>
+		<a href="javascript:;" class="a1"><i class="fab fa-facebook"></i></a>
+		<a href="javascript:;" class="a2"><i class="fab fa-twitter"></i></a>
+		<a href="javascript:;" class="a3"><i class="fab fa-google-plus"></i></a>
+        <a href="javascript:;" class="a3"><i class="fab fa-instagram"></i></a>
 		<a class="a"><i class="fa fa-share-alt"></i></a>
 	</div>
                         </li>
