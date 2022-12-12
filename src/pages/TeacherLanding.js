@@ -13,7 +13,20 @@ import Utils from './../Utils';
 import _ from 'lodash';
 
 const TeacherLanding = (props) => {
-    const { slug, page } = useParams();
+    //const { slug, page } = useParams();
+
+    const {page} = useParams();
+    
+    const slug = Utils.subdomain();
+
+    console.log("This is slug",slug);
+
+    useEffect(() => {
+        if(!Utils.hasSubdomain()){
+            window.location.href = process.env.REACT_APP_PUBLIC_URL;
+            return false;
+        }
+    },[]);
 
     useEffect(window.scrollEffect, []);
 

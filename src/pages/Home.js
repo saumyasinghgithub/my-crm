@@ -6,7 +6,13 @@ import UserContext from './../contexts/UserContext';
 
 import Utils from './../Utils';
 
+import TeacherLanding from './TeacherLanding';
+
 const Home = (props) => {
+
+    const hasSubdomain = Utils.hasSubdomain();
+
+    console.log("Subdomain check", Utils.subdomain());
 
     const [pa, setPA] = useState([]);
     const calibs = _.get(Utils.getUserData(),'calibs',[]);
@@ -14,12 +20,19 @@ const Home = (props) => {
     const { getServerData } = useContext(UserContext);
 
     useEffect(() => {
-        getServerData('profile_attributes')
+        if(!hasSubdomain){
+            getServerData('profile_attributes')
             .then(setPA)
             .catch(err => console.log(err));
+        }
     }, []);
 
-    useEffect(window.drumEffect, [pa]);
+    useEffect(() => {
+        if(!hasSubdomain){
+            window.drumEffect();
+        }
+    }, [pa]);
+    
 
     const searchTrainers = (e) => {
         const frm = e.currentTarget;
@@ -57,57 +70,60 @@ const Home = (props) => {
     };
 
     return (<>
-        <section className="home-wrapper">
-            <div className="container">
-                <div className="bannerText">
-                    WORLD'S TOP BRANDED CORPORATE
-                    TRAINERS TO TRANSFORM
-                    YOUR PROFESSIONAL CAREER
-                </div>
-                <div className="container bannerBottomtext clearfix">
-                    {!loggedIn && <ul>
-                        <li className='jointrainer'><a href="#signUpTrainer" data-toggle="modal" data-dismiss="modal" >Join as a Trainer</a></li>
-                        <li className='jointrainer ml-2'><a href="#signUpStudent" data-toggle="modal" data-dismiss="modal">Join as a Student</a></li>
-                    </ul> }
-                    <div className="whyAD">
-                        <img className="img-fluid" src="/assets/images/why_ad.png" alt="Autodidact" />
+
+        {hasSubdomain && <TeacherLanding />}
+        {!hasSubdomain && <>
+            <section className="home-wrapper">
+                <div className="container">
+                    <div className="bannerText">
+                        WORLD'S TOP BRANDED CORPORATE
+                        TRAINERS TO TRANSFORM
+                        YOUR PROFESSIONAL CAREER
+                    </div>
+                    <div className="container bannerBottomtext clearfix">
+                        {!loggedIn && <ul>
+                            <li className='jointrainer'><a href="#signUpTrainer" data-toggle="modal" data-dismiss="modal" >Join as a Trainer</a></li>
+                            <li className='jointrainer ml-2'><a href="#signUpStudent" data-toggle="modal" data-dismiss="modal">Join as a Student</a></li>
+                        </ul> }
+                        <div className="whyAD">
+                            <img className="img-fluid" src="/assets/images/why_ad.png" alt="Autodidact" />
+                        </div>
                     </div>
                 </div>
+
+            </section>
+            <div className="findBox">
+                <div className="container">
+                    <h2>Find the <span className='findboxmid'>ONE</span> for you!</h2>
+                    {_.get(pa, 'length', 0) === 0 && <div className="progress-bar bg-warning text-dark progress-bar-striped progress-bar-animated">Loading Profile Attributes</div>}
+                    {_.get(pa, 'length', 0) > 0 && <div className="mySlides fade">
+                        <form onSubmit={searchTrainers} onReset={resetSearchTrainers}>
+                            <div className="row">
+                                {renderPA()}
+                            </div>
+
+                            <div className="text-right">
+                                <button type='reset' className="search-trainer me-2 mr-2 my-5">
+                                    <span className="transition"></span>
+                                    <span className="gradient"></span>
+                                    <span className="label">Clear</span>
+                                </button>
+
+                                <button type='submit' className="search-trainer my-5">
+                                    <span className="transition"></span>
+                                    <span className="gradient"></span>
+                                    <span className="label">Search</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>}
+
+
+
+                </div>
+
             </div>
-
-        </section>
-        <div className="findBox">
-            <div className="container">
-                <h2>Find the <span className='findboxmid'>ONE</span> for you!</h2>
-                {_.get(pa, 'length', 0) === 0 && <div className="progress-bar bg-warning text-dark progress-bar-striped progress-bar-animated">Loading Profile Attributes</div>}
-                {_.get(pa, 'length', 0) > 0 && <div className="mySlides fade">
-                    <form onSubmit={searchTrainers} onReset={resetSearchTrainers}>
-                        <div className="row">
-                            {renderPA()}
-                        </div>
-
-                        <div className="text-right">
-                            <button type='reset' className="search-trainer me-2 mr-2 my-5">
-                                <span className="transition"></span>
-                                <span className="gradient"></span>
-                                <span className="label">Clear</span>
-                            </button>
-
-                            <button type='submit' className="search-trainer my-5">
-                                <span className="transition"></span>
-                                <span className="gradient"></span>
-                                <span className="label">Search</span>
-                            </button>
-                        </div>
-                    </form>
-                </div>}
-
-
-
-            </div>
-
-        </div>
-
+        </>}
 
     </>);
 };

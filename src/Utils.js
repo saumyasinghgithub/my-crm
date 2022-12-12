@@ -9,6 +9,27 @@ const Utils = {
   
   apiUrl: (path) => process.env.REACT_APP_API_URL+'/'+path,
 
+  subdomain: () => window.location.host.replace('.'+process.env.REACT_APP_HOST,''),
+
+  hasSubdomain: () => window.location.host !== Utils.subdomain(),
+
+  getTrainerURL: (path = '', slug = false) => {
+    let url = process.env.REACT_APP_PUBLIC_URL;
+
+    if(!slug){
+      slug = Utils.subdomain();
+    }
+
+    url = url.split('://',2);
+
+    url = url[0] + '://' + slug + '.' + url[1];
+    
+    if(path!='' || path!='/'){
+      url += '/' + path; 
+    }
+    return url;
+  }, 
+
   apiHeaders: (extraHeaders = null) => {
     let headers = {
       "headers": {        

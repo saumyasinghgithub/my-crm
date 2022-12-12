@@ -181,10 +181,10 @@ const renderResources = (resources) => {
 };
 
 const renderCourseItem = (course) => {
-
+    let trainer = viewTrainer;
     
     return <div className="bioBodyInfolist">
-        <a href={`${process.env.PUBLIC_URL}/courses/${course.slug}`}>
+        <a href={Utils.getTrainerURL(`courses/${course.slug}`,trainer.slug)}>
             <ul>
                 <li>{course.name}</li>
                 <li><img className="img-fluid iconImg" src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`} /></li>
@@ -196,8 +196,7 @@ const renderCourseItem = (course) => {
 
 const showTrainerDetail = () => {
     let trainer = viewTrainer;
-    let trainerURL = process.env.REACT_APP_PUBLIC_URL;
-
+    
     let trainerbg = `${process.env.REACT_APP_API_URL}/uploads/profile/${trainer.profile_image}`;
     return <div className="tab-content">
         <div className="tab-pane active trainerbg" style={{backgroundImage: `url("${trainerbg}")` }} id="tab_a">
@@ -205,7 +204,7 @@ const showTrainerDetail = () => {
             <div className="tab-text-box">
                 <img className="img-fluid progileImg" src={`${process.env.REACT_APP_API_URL}/uploads/base/${encodeURI(trainer.base_image)}`} alt={_.get(trainer,'firstname','')} />
                 <div className="bio-data-header">
-                    <h3><a href={`${process.env.REACT_APP_PUBLIC_URL}/trainers/${trainer.slug}/about`} >{_.get(trainer,'firstname','')} {_.get(trainer,'lastname','')}</a></h3>
+                    <h3><a href={Utils.getTrainerURL('about',trainer.slug)} >{_.get(trainer,'firstname','')} {_.get(trainer,'lastname','')}</a></h3>
                     <div className="bioInfo">Industry <span>{_.map(_.filter(_.get(trainer,'calibs',[]),{"pa_id": 1}), c => c.pa_value).join(',')}</span></div>
                     <div className="bioInfo">Qualification <span>{_.map(_.filter(_.get(trainer,'calibs',[]),{"pa_id": 51}), c => c.pa_value).join(',')}</span></div>
                     <div className="bioInfo">Year of Experience <span>{_.map(_.filter(_.get(trainer,'calibs',[]),{"pa_id": 68}), c => c.pa_value).join(',')}</span></div>
@@ -226,8 +225,8 @@ const showTrainerDetail = () => {
                    
                     {_.get(trainer,'courses.courses',[]).map(renderCourseItem)}
                     <div className="txtR">
-                        <a href={`${process.env.REACT_APP_PUBLIC_URL}/trainers/${trainer.slug}`} className="action tocart primary btn btnBlue"><span>View Profile</span></a>
-                        <a href={`${process.env.REACT_APP_PUBLIC_URL}/trainers/${trainer.slug}/courses`} target="_blank" className="action tocart primary btn btnBlue"><span>View Courses</span></a>
+                        <a href={Utils.getTrainerURL('',trainer.slug)} className="action tocart primary btn btnBlue"><span>View Profile</span></a>
+                        <a href={Utils.getTrainerURL('courses',trainer.slug)} target="_blank" className="action tocart primary btn btnBlue"><span>View Courses</span></a>
                         {Utils.isLoggedIn() && <a href="#" className="action tocart primary btn btnBlue" onClick={markFav(trainer.user_id)}>
                             {!tData.favTrainers.includes(trainer.user_id) && <span>Mark Favourite</span>}
                             {tData.favTrainers.includes(trainer.user_id) && <span>Remove Favourite</span>}

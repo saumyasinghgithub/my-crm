@@ -14,10 +14,10 @@ const UserMenu = (props) => {
   const {logout, loginToMoodle} = useContext(UserContext);
 
   const getSlug = () => {
-    let url = process.env.PUBLIC_URL + "/";
-    url += Utils.isTrainer() ? "trainers" : "student/my-profile"; 
-    url += Utils.isStudent() ? "/": "/" + Utils.getUserData().slug;
-    //console.log(Utils.getUserData())
+    let url = process.env.REACT_APP_PUBLIC_URL + "/student/my-profile"; 
+    if(Utils.isTrainer()){
+        url = Utils.getTrainerURL('',Utils.getUserData().slug);
+    }
     return url;
   };
 

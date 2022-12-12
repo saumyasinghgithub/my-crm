@@ -12,7 +12,7 @@ const CustomRoutes = [
     'component' : Page.Login
   },
   {
-    'path'      : '/about', 
+    'path'      : '/about-us', 
     'secure'    : false,    
     'exact'     : true,
     'layout'    : Layout.StaticPageLayout, 
@@ -193,6 +193,13 @@ const CustomRoutes = [
     'exact'     : true,
     'layout'    : Layout.StaticPageLayout, 
     'component' : Page.PreferredCourses
+  },
+  {
+    'path'      : '/:page',
+    'secure'    : false,
+    'exact'     : true, 
+    'layout'    : Layout.DefaultLayout,
+    'component' : Page.Home
   },
   {
     'path'      : '/',
