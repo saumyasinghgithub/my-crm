@@ -57,7 +57,7 @@ const HeaderTrainer = (props) => {
 
 <header className="header fixed-top whiteHeader">
     <div className="container">
-        <a className="navbar-brand" href="/">AD</a>
+        <a className="navbar-brand" href={`${process.env.REACT_APP_PUBLIC_URL}/`}>AD</a>
         {/* <form className="searchBOx" >
                 <div className="input-group">
                     <div className="input-group-btn search-panel" data-search="students">
