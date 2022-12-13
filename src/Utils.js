@@ -11,7 +11,11 @@ const Utils = {
 
   subdomain: () => window.location.host.replace('.'+process.env.REACT_APP_HOST,''),
 
-  hasSubdomain: () => window.location.host !== Utils.subdomain(),
+  hasSubdomain: () => {
+    const reservedSubDomains = _.get(process.env,'REACT_APP_RESERVED_SD','').split(',');
+    const sd = Utils.subdomain();
+    return window.location.host !== sd && !reservedSubDomains.includes(sd);
+  },
 
   getTrainerURL: (path = '', slug = false) => {
     let url = process.env.REACT_APP_PUBLIC_URL;
