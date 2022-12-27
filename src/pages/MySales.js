@@ -1,18 +1,40 @@
-import React, {useEffect, useState, useContext} from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import DataTable from 'react-data-table-component';
+import DataTable from "react-data-table-component";
 import UserContext  from './../contexts/UserContext';
+import axios from "axios";
+import Utils from "../Utils";
+import _ from "lodash";
 
 const MySales = (props) => {
+    const [data, setData] = useState({ loading: true, error: false, pageInfo: {}, data: [] });
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
+    const [filters, setFilters] = useState({ where: { startDate: startDate, endDate: endDate }, limit: 15, start: 0 });
+    const [searchcustomer, setSearchCustomer] = useState("");
+    const [searchorder, setSearchOrder] = useState("");
+
     const columns = [
         {
-            name: 'ID',
-            selector: row => row.id,
+            name: 'ORDER ID',
+            selector: row => {
+                const dump = JSON.parse(row.dump);
+                return <span class="badge bg-success">{dump.razorpayOrderId}</span>;
+            },
             sortable: true,
         },
         {
-            name: 'ORDER ID',
-            selector: row => row.orderId,
+            name: 'CUSTOMER EMAIL',
+            selector: row => row.email,
+            sortable: true,
+        },
+        {
+            name: 'ORDER ITEMS',
+            selector: row => {
+                const dump = JSON.parse(row.dump);
+                const details = dump.description.split(" AND ");
+                return details.map(d => <li><b>{d.split('||')[0]}</b> - <span class="badge bg-warning">({d.split('||').splice(1).join(',')})</span></li>);
+            },
             sortable: true,
         },
         {
@@ -22,38 +44,55 @@ const MySales = (props) => {
         },
         {
             name: 'ORDER DATE',
-            selector: row => row.date,
+            selector: row => row.created_at,
             sortable: true,
         }
     ];
-    
-    const data = [
-        {
-            id: 1,
-            orderId: 'AD-00001',
-            amount: '400 USD',
-            date: '17-08-2022',
-        },
-        {
-            id: 2,
-            orderId: 'AD-00002',
-            amount: '300 USD',
-            date: '17-08-2022',
-        },
-        {
-            id: 3,
-            orderId: 'AD-00003',
-            amount: '500 USD',
-            date: '17-08-2022',
-        },
-        {
-            id: 4,
-            orderId: 'AD-00004',
-            amount: '860 USD',
-            date: '17-08-2022',
-        },
-    ]
+    const fetchList = () => {
+        setData({ ...data, loading: true });
+        const uData = Utils.getUserData();
+        const userid = uData.id;
+        let params = `?limit=${filters.limit}&start=${filters.start}&user_id=` + userid + `&`;
+        params += _.map(filters.where, (v, k) => `where[${k}]=${v}`).join('&');
+        axios.get(Utils.apiUrl('sales/list' + params), Utils.apiHeaders()).then(res => {
+            if (res.data.success) {
+                const min = Date.parse(startDate);
+                const max = Date.parse(endDate);
+                let salesData = res.data.data;
+                if ((startDate != null) && (endDate != null)) {
+                    const filterSales = salesData.filter((d) => {
+                        return d.timestampvalue * 1000 >= min && d.timestampvalue * 1000 <= max
+                    });
+                    setData({ ...data, loading: false, error: false, pageInfo: res.data.pageInfo, data: filterSales });
+                } else if (searchcustomer != null) {
+                    const filterCustomers = salesData.filter((cus) => {
+                        return cus.email.toLowerCase().includes(searchcustomer.toLowerCase())
+                    });
+                    setData({ ...data, loading: false, error: false, pageInfo: res.data.pageInfo, data: filterCustomers });
+                } else {
+                    setData({ ...data, loading: false, error: false, pageInfo: res.data.pageInfo, data: res.data.data });
+                }
+            } else {
 
+            }
+        });
+    }
+    useEffect(fetchList, [filters, startDate, endDate, searchcustomer]);
+    const handleStartDate = (e) => {
+        setStartDate(e.target.value);
+    };
+    const handleEndDate = (e) => {
+        setEndDate(e.target.value);
+    };
+    const handleSearchCustomer = (e) => {
+        setSearchCustomer(e.target.value);
+    };
+    const handleSearchOrder = (e) => {
+        setSearchOrder(e.target.value);
+    };
+    /** 
+     * Stats Dynamic data display
+     */
     const [stats, setStats] = useState({success: false, stats: []});
 
     const {getServerData} = useContext(UserContext);
@@ -68,13 +107,12 @@ const MySales = (props) => {
 
 
     useEffect(window.scrollEffect,[]);
-
     return (<>
         <Container fluid className="h-100 p-0">
-        <div className="profile-wrapper">
-            <div className="container100">
-            <h1>My Sales</h1>
-            {stats.success === true && <div className="row">
+            <div className="profile-wrapper">
+                <div className="container mysale">
+                    <h1>My Sales</h1>
+                    {stats.success === true && <div className="row">
                 <div className="col-lg-3 col-6">
                     <div className="small-box bg-info">
                     <div className="inner">
@@ -128,17 +166,67 @@ const MySales = (props) => {
                 </div>
                 
             </div>}
-            <Row>
-                <Col md={12}></Col>
-            </Row>
-            <DataTable
-                columns={columns}
-                data={data}
-            />
+                    <div className="row">
+                        <div className="col-md-3" style={{ float: "left",marginTop: "0.75%" }}>
+                        <div className="form-group">
+                        <label></label>
+                            <div className="input-group input-group-sm">
+                                <div className="input-group-prepend">
+
+                                </div>
+                                <input type="text" value={searchorder} onChange={handleSearchOrder} placeholder='Enter Order Id' className="form-control" />
+                                <div className="input-group-append">
+                                    <div className="input-group-text"><i className="fas fa-ambulance"></i></div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div className="col-md-3" style={{ float: "left", marginTop: "0.75%" }}>
+                            <div className="form-group">
+                                <label></label>
+                                <div className="input-group input-group-sm">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text"><i className="fas fa-envelope"></i></span>
+                                    </div>
+                                    <input type="email" value={searchcustomer} onChange={handleSearchCustomer} className="form-control" placeholder='Enter Your Email Address' />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-3" style={{ float: "left" }}>
+                            <div className="form-group">
+                                <label>Start Date:</label>
+                                <div className="input-group input-group-sm">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text"><i className="far fa-calendar-alt"></i></span>
+                                    </div>
+                                    <input type="date" className="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" inputmode="numeric" name="startDate" onChange={handleStartDate} value={startDate} />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-3" style={{ float: "left" }}>
+                            <div className="form-group">
+                                <label>End Date</label>
+                                <div className="input-group input-group-sm">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text"><i className="far fa-calendar-alt"></i></span>
+                                    </div>
+                                    <input type="date" className="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" inputmode="numeric" name="endDate" onChange={handleEndDate} value={endDate} />
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <Row>
+                        <Col md={12}>
+                        <DataTable columns={columns} data={data.data} />
+                        </Col>
+                    </Row>
+
+                </div>
             </div>
-        </div>    
         </Container>
-    </>);
-};
+    </>
+    );
+}
 
 export default MySales;
