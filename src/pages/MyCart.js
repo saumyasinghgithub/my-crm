@@ -263,7 +263,7 @@ const MyCart = (props) => {
                         <div className="nav-item" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">
                        {/* <span className='btnSubmit'> Log in</span> */}
                        <div className='w-25'>
-                       <button type="submit" class="btn btnSubmit">Log In</button>
+                       <button type="submit" className="btn btnSubmit">Log In</button>
                        </div>
                         </div>
                 </div>

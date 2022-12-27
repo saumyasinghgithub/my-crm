@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Utils from './../Utils';
 import axios from 'axios';
 
-const Footer = (props) => {
+const Footer = () => {
     const [list, setList] = useState({ loading: false, error: false, pageInfo: {}, data: [] });
 
     const fetchList = () => {
@@ -29,7 +29,7 @@ const Footer = (props) => {
                     <li><a href={`${process.env.REACT_APP_PUBLIC_URL}/cookie-policy`}>Cookie Policy</a></li>
                 </ul>
                 <ul className="footerRight">
-                {list.data.map(record => <li>
+                {list.data.map((record, idx) => <li key={idx}>
                     <a href={`${record.link}`} target="blank"><i className={`${record.class}`}></i></a>           
                 </li>)}
                 </ul>

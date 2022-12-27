@@ -47,7 +47,7 @@ const SocialForm = (props) => {
       
       <Row>
         {socialPlatforms.map(fld => <Col key={fld} md={6} className="mt-3">
-            <Form.Label><i class={`fab fa-2x fa-${fld} mr-2`}></i>{fld.toUpperCase()} URL: </Form.Label>
+            <Form.Label><i className={`fab fa-2x fa-${fld} mr-2`}></i>{fld.toUpperCase()} URL: </Form.Label>
             <Form.Control type="text" name={fld} placeholder={`Enter ${fld} page url`} defaultValue={_.get(socialData,fld,'')} />
         </Col>)}
       </Row>

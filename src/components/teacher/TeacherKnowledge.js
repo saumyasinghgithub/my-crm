@@ -49,12 +49,12 @@ const TeacherKnowledge = (props) => {
                                 </div>
                             </div> */}
 
-<div class="social-share-icon">
-		<a href="javascript:;" class="a1"><i class="fab fa-facebook"></i></a>
-		<a href="javascript:;" class="a2"><i class="fab fa-twitter"></i></a>
-		<a href="javascript:;" class="a3"><i class="fab fa-google-plus"></i></a>
-        <a href="javascript:;" class="a3"><i class="fab fa-instagram"></i></a>
-		<a class="a"><i class="fa fa-share-alt"></i></a>
+<div className="social-share-icon">
+		<a href="javascript:;" className="a1"><i className="fab fa-facebook"></i></a>
+		<a href="javascript:;" className="a2"><i className="fab fa-twitter"></i></a>
+		<a href="javascript:;" className="a3"><i className="fab fa-google-plus"></i></a>
+        <a href="javascript:;" className="a3"><i className="fab fa-instagram"></i></a>
+		<a className="a"><i className="fa fa-share-alt"></i></a>
 	</div>
                         </li>
                     </ul>
