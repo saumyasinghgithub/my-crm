@@ -49,9 +49,6 @@ const UserMenu = (props) => {
             }
                 
             {Utils.isTrainer() && 
-                <li><a href={`${process.env.PUBLIC_URL}/my-student`}>My Students</a></li>
-            }
-            {Utils.isTrainer() && 
             <li><a href={`${process.env.PUBLIC_URL}/my-course`}>My Course</a></li>
             }
             {loggedIn &&

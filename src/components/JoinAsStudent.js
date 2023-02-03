@@ -90,16 +90,16 @@ const JoinAsStudent = (props) => {
                     <div className="container">
                         <div className="loginWrapper signupWrapper">
                             <h3>Join in <span className='joinastrainer'> NOW TO CONNECT with </span> <br />the world's top branded trainers</h3>
-                            <ul>
+                           {/* <ul>
                                 <li>Sign Up with</li>
                                 <li><a href=""><img className="img-fluid" src="/assets/images/fb.png" alt="AD on FB" /></a></li>
-                                {/* <li>or</li> */}
+                                
                                 <li><a href=""><img className="img-fluid" src="/assets/images/google-plus.png" alt="AD on google" /></a></li>
-                                {/* <li>or</li> */}
+                                
                                 <li><a href=""><img className="img-fluid" src="/assets/images/linkedin.png" alt="AD on LinkedIn" /></a></li>
-                                {/* <li>or</li> */}
+                                
                                 <li><a href=""><img className="img-fluid" src="/assets/images/mail.png" alt="AD on Email" /></a></li>
-                            </ul>
+                            </ul>*/}
                             <form ref={frmRef} method="post" className="needs-validation" noValidate onSubmit={submitForm}>
                                 { showMessage &&  
                                         <div className='alert alert-info p-3'>
