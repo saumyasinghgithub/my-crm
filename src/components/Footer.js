@@ -38,12 +38,11 @@ const Footer = () => {
 
   const sendLocalStorage = () => {
     if (hasSubdomain) {
-      var win = document.getElementById("mainDomainIframe").contentWindow;
-      //win.postMessage(Utils.getUserData(), "*");
       window.onmessage = function (e) {
         if (e.origin !== process.env.REACT_APP_PUBLIC_URL) {
           return;
         }
+        //window.alert(e.data);
         if (e.data === "false" && Utils.isLoggedIn()) {
           Utils.removeSession();
           window.location.reload();
@@ -53,13 +52,24 @@ const Footer = () => {
           window.location.reload();
         }
       };
+    } else {
+      window.onmessage = function (e) {
+        if (e.data === "false" && Utils.isLoggedIn()) {
+          Utils.removeSession();
+        }
+      };
     }
   };
 
   const syncLocalStorage = () => {
+    var win = window;
     if (!hasSubdomain) {
-      window.parent.postMessage(JSON.stringify(Utils.getUserData()), "*");
+      win = window.parent;
     }
+    win.postMessage(
+      Utils.isLoggedIn() ? JSON.stringify(Utils.getUserData()) : "false",
+      "*"
+    );
   };
 
   useEffect(fetchList, []);
