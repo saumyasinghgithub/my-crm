@@ -122,7 +122,7 @@ const MySales = (props) => {
                     <div className="icon">
                     <i className="ion ion-bag"></i>
                     </div>
-                    {/* <a href="#" className="small-box-footer">More info <i className="fas fa-arrow-circle-right"></i></a> */}
+                    <a href="#" className="small-box-footer">More info <i className="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
 
@@ -135,7 +135,7 @@ const MySales = (props) => {
                     <div className="icon">
                     <i className="ion ion-stats-bars"></i>
                     </div>
-                    {/* <a href="#" className="small-box-footer">More info <i className="fas fa-arrow-circle-right"></i></a> */}
+                    <a href="#" className="small-box-footer">More info <i className="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
 
@@ -148,7 +148,7 @@ const MySales = (props) => {
                     <div className="icon">
                     <i className="ion ion-person-add"></i>
                     </div>
-                    {/* <a href="#" className="small-box-footer">More info <i className="fas fa-arrow-circle-right"></i></a> */}
+                    <a href="#" className="small-box-footer">More info <i className="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
 
@@ -161,13 +161,13 @@ const MySales = (props) => {
                     <div className="icon">
                     <i className="ion ion-pie-graph"></i>
                     </div>
-                    {/* <a href="#" className="small-box-footer">More info <i className="fas fa-arrow-circle-right"></i></a> */}
+                    <a href="#" className="small-box-footer">More info <i className="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 
             </div>}
                     <div className="row">
-                        {/* <div className="col-md-3" style={{ float: "left",marginTop: "0.75%" }}>
+                        <div className="col-md-3" style={{ float: "left",marginTop: "0.75%" }}>
                         <div className="form-group">
                         <label></label>
                             <div className="input-group input-group-sm">
@@ -180,12 +180,10 @@ const MySales = (props) => {
                                 </div>
                             </div>
                             </div>
-                        </div> */}
-                        <div className="col-md-4" style={{ float: "left",
-                        //  marginTop: "0.75%" 
-                         }}>
+                        </div>
+                        <div className="col-md-3" style={{ float: "left", marginTop: "0.75%" }}>
                             <div className="form-group">
-                                <label>Enter Email Id:</label>
+                                <label></label>
                                 <div className="input-group input-group-sm">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text"><i className="fas fa-envelope"></i></span>
@@ -194,7 +192,7 @@ const MySales = (props) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-4" style={{ float: "left" }}>
+                        <div className="col-md-3" style={{ float: "left" }}>
                             <div className="form-group">
                                 <label>Start Date:</label>
                                 <div className="input-group input-group-sm">
@@ -205,7 +203,7 @@ const MySales = (props) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-4" style={{ float: "left" }}>
+                        <div className="col-md-3" style={{ float: "left" }}>
                             <div className="form-group">
                                 <label>End Date</label>
                                 <div className="input-group input-group-sm">

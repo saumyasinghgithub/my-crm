@@ -38,7 +38,7 @@ const TeacherService = (props) => {
                         </div>
                         <div className="col-sm-10" >
                         <div dangerouslySetInnerHTML={{__html:data.consultancy}}></div>    
-                        {/* <div className="dropMsg lineANimation" data-toggle="modal" data-target="#dropMsgModal">Drop a message!</div> */}
+                        <div className="dropMsg lineANimation" data-toggle="modal" data-target="#dropMsgModal">Drop a message!</div>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@ const TeacherService = (props) => {
                         </div>
                         <div className="col-sm-10">
                         <div dangerouslySetInnerHTML={{__html:data.coaching}}></div> 
-                            {/* <div className="dropMsg lineANimation" data-toggle="modal" data-target="#dropMsgModal">Drop a message!</div> */}
+                            <div className="dropMsg lineANimation" data-toggle="modal" data-target="#dropMsgModal">Drop a message!</div>
                         </div>
                     </div>
                 </div>
