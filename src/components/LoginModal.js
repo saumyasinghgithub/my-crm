@@ -32,6 +32,10 @@ const LoginModal = (props) => {
         "modal-dialog  zoomOut modal-full  animated"
       );
     });
+
+    if (window.location.href.endsWith("/login") && !Utils.isLoggedIn()) {
+      $("#loginModal").modal("show");
+    }
   }, []);
 
   const onFPass = (e) => {

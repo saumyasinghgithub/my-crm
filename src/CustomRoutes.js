@@ -7,8 +7,8 @@ const CustomRoutes = [
     path: "/login",
     secure: false,
     exact: true,
-    layout: Layout.LoginLayout,
-    component: Page.Login,
+    layout: Layout.DefaultLayout,
+    component: Page.Home,
   },
   {
     path: "/about-us",
