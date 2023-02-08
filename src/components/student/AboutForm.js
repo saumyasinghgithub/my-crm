@@ -113,7 +113,7 @@ const AboutForm = (props) => {
       <Col md={6} className="mt-3">  
         {photoUploader('profile','Upload Large Profile Pic')}
       </Col>
-      <Col>{photoUploader('base','Upload Base Profile Pic')}</Col>
+      <Col className="mt-3">{photoUploader('base','Upload Base Profile Pic')}</Col>
       </Row>
       <Row>
       <Col md={12} className="mt-3">  

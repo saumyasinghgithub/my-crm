@@ -35,6 +35,8 @@ const Utils = {
     if (path != "" || path != "/") {
       url += "/" + path;
     }
+
+    console.log(url);
     return url;
   },
 

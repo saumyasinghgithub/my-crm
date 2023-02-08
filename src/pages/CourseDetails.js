@@ -151,11 +151,10 @@ const CourseDetails = (props) => {
     <div className="cardWrapper">
         <div className="container">
             <nav className="breadcrumb-list" aria-label="breadcrumb">
-                <span className="backarrow"><a href={`${process.env.PUBLIC_URL}/search-results`}><img src="/assets/images/back-arrow.png" alt="AD" />Back</a></span>
+                <span className="backarrow"><a href={`${process.env.PUBLIC_URL}/search-results`}><img src="/assets/images/back-arrow.png" alt="AD" />Back to search</a></span>
                 <ol className="breadcrumb">
-                  <li className="breadcrumb-item"><a href="#">Skillchoice Business</a></li>                  
-                  <li className="breadcrumb-item"><a href="#">Finance </a></li>
-                  <li className="breadcrumb-item active" aria-current="page">English</li>
+                  <li className="breadcrumb-item active">{course.course.name}</li>                  
+
                 </ol>
             </nav>
 

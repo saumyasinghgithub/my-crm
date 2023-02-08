@@ -17,6 +17,7 @@ const UserMenu = (props) => {
     if (Utils.isTrainer()) {
       url = Utils.getTrainerURL("", Utils.getUserData().slug);
     }
+    console.log(url);
     return url;
   };
 
