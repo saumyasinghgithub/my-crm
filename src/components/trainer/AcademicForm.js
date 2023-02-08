@@ -49,7 +49,8 @@ const AcademicForm = (props) => {
 
   const saveAData = (pos, attr) => (e) => {
     let newdata = [...academicData];
-    newdata[pos][attr] = e.currentTarget.value;
+    newdata[pos][attr] =
+      attr === "year" ? parseInt(e.currentTarget.value) : e.currentTarget.value;
     setAcademicData(newdata);
   };
 
