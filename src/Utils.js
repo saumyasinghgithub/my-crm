@@ -217,6 +217,7 @@ const Utils = {
     ["audio", "Audio", "audio1.png"],
     ["quiz", "Quiz", "edit1.png"],
     ["scorm", "SCORM", "scrom.png"],
+    ["webinar", "Webinar", "webinar.png"],
   ],
   industries: [
     "Agriculture",
@@ -356,7 +357,7 @@ const Utils = {
     "Japanese",
     "KOREAN",
   ],
-  courseType: ["pdf", "video", "scorm", "quiz", "audio", "PPT"],
+  courseType: ["pdf", "video", "scorm", "quiz", "audio", "PPT", "webinar"],
   searchCalibs: [1, 51, 68, 83],
 };
 
