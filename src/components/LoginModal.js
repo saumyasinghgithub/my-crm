@@ -79,7 +79,12 @@ const LoginModal = (props) => {
           var win = document.getElementById("mainDomainIframe").contentWindow;
           win.postMessage(Utils.setUserData(), "*");
         }
-        window.location.reload();
+        var userData = Utils.getUserData();
+        var subDomain = Utils.subdomain();
+        var trainerSlug = userData.slug;
+        var path = "http://"+trainerSlug+"."+subDomain;
+        console.log(path);
+        window.location.replace(path);
       }
     });
     return false;
