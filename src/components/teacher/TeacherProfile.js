@@ -60,9 +60,9 @@ const TeacherProfile = (props) => {
                     <div className="profile-wrapper">
                         <div className='container'>
                             <nav>
-                                <ol class="cd-breadcrumb">
+                                <ol className="cd-breadcrumb">
                                     <li><a href="/">Home</a></li>
-                                    <li class="current"><em>{trainer.about.firstname} {trainer.about.lastname}</em></li>
+                                    <li className="current"><em>{trainer.about.firstname} {trainer.about.lastname}</em></li>
                                 </ol>
                             </nav>
                             

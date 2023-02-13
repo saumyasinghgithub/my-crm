@@ -1,213 +1,226 @@
-import Layout from './layouts';
-import Page from './pages';
-import Utils from './Utils';
+import Layout from "./layouts";
+import Page from "./pages";
+import Utils from "./Utils";
 
-const CustomRoutes = [  
-  
+const CustomRoutes = [
   {
-    'path'      : '/login', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : Layout.LoginLayout, 
-    'component' : Page.Login
+    path: "/login",
+    secure: false,
+    exact: true,
+    layout: Layout.DefaultLayout,
+    component: Page.Home,
   },
   {
-    'path'      : '/about', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.About
+    path: "/about-us",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.About,
   },
   {
-    'path'      : '/ad-studio', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.ADStudio
+    path: "/ad-studio",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.ADStudio,
   },
   {
-    'path'      : '/ad-trainer', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.ADTrainer
+    path: "/ad-trainer",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.ADTrainer,
   },
 
   {
-    'path'      : '/my-profile', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.MyProfile
+    path: "/my-profile",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.MyProfile,
   },
   {
-    'path'      : '/my-course', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.MyCourse
+    path: "/my-course",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.MyCourse,
   },
   {
-    'path'      : '/my-student', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.MyStudent
+    path: "/my-student",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.MyStudent,
   },
   {
-    'path'      : '/my-blog', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.MyBlog
+    path: "/my-blog",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.MyBlog,
   },
   {
-    'path'      : '/trainers/:slug', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.TeacherLanding
+    path: "/trainers/:slug",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.TeacherLanding,
   },
   {
-    'path'      : '/trainers/:slug/:page', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.TeacherLanding
+    path: "/trainers/:slug/:page",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.TeacherLanding,
   },
   {
-    'path'      : '/trainers/:slug/:blogs/:slug', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.BlogDetails
+    path: "/trainers/:slug/:blogs/:slug",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.BlogDetails,
   },
   {
-    'path'      : '/courses/:slug', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.CourseDetails
+    path: "/courses/:slug",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.CourseDetails,
   },
   {
-    'path'      : '/search-results', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : Layout.DefaultLayout, 
-    'component' : Page.SearchResult
-  },
-   {
-    'path'      : '/ad-student', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.ADStudent
+    path: "/search-results",
+    secure: false,
+    exact: true,
+    layout: Layout.DefaultLayout,
+    component: Page.SearchResult,
   },
   {
-    'path'      : '/payment/success/:id', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.PaymentSuccess
+    path: "/ad-student",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.ADStudent,
   },
   {
-    'path'      : '/my-cart', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.MyCart
+    path: "/payment/success/:id",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.PaymentSuccess,
   },
   {
-    'path'      : '/student/my-profile', 
-    'secure'    : true,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.StudentProfileView
+    path: "/my-cart",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.MyCart,
   },
   {
-    'path'      : '/my-order', 
-    'secure'    : true,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.MyOrder
+    path: "/student/my-profile",
+    secure: true,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.StudentProfileView,
   },
   {
-    'path'      : '/my-sales', 
-    'secure'    : true,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.MySales
+    path: "/my-order",
+    secure: true,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.MyOrder,
   },
   {
-    'path'      : '/student/my-profile/edit', 
-    'secure'    : true,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.StudentProfile
+    path: "/my-sales",
+    secure: true,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.MySales,
   },
   {
-    'path'      : '/contact-us', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.ContactUs
+    path: "/student/my-profile/edit",
+    secure: true,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.StudentProfile,
   },
   {
-    'path'      : '/cookie-policy', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.CookiePolicy
+    path: "/contact-us",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.ContactUs,
   },
   {
-    'path'      : '/privacy-policy', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.PrivacyPolicy
+    path: "/cookie-policy",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.CookiePolicy,
   },
   {
-    'path'      : '/resetpass/:token', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : Utils.isLoggedIn() ? Layout.DefaultLayout: Layout.StaticPageLayout, 
-    'component' : Utils.isLoggedIn() ? Page.Home : Page.ResetPassword
+    path: "/privacy-policy",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.PrivacyPolicy,
   },
   {
-    'path'      : '/term-conditions', 
-    'secure'    : false,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.TermConditions
+    path: "/resetpass/:token",
+    secure: false,
+    exact: true,
+    layout: Utils.isLoggedIn() ? Layout.DefaultLayout : Layout.StaticPageLayout,
+    component: Utils.isLoggedIn() ? Page.Home : Page.ResetPassword,
   },
   {
-    'path'      : '/preferred-trainers', 
-    'secure'    : true,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.PreferredTrainers
+    path: "/term-conditions",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.TermConditions,
   },
   {
-    'path'      : '/preferred-courses', 
-    'secure'    : true,    
-    'exact'     : true,
-    'layout'    : Layout.StaticPageLayout, 
-    'component' : Page.PreferredCourses
+    path: "/preferred-trainers",
+    secure: true,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.PreferredTrainers,
   },
   {
-    'path'      : '/',
-    'secure'    : false,
-    'exact'     : true, 
-    'layout'    : Layout.DefaultLayout,
-    'component' : Page.Home
+    path: "/preferred-courses",
+    secure: true,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.PreferredCourses,
   },
   {
-    'path'      : '*',
-    'secure'    : false,
-    'exact'     : true, 
-    'layout'    : Layout.DefaultLayout,
-    'component' : Page.Home
-  }
+    path: "/readls",
+    secure: false,
+    exact: true,
+    layout: Layout.DefaultLayout,
+    component: Page.ReadLocalStorage,
+  },
+  {
+    path: "/:page",
+    secure: false,
+    exact: true,
+    layout: Layout.DefaultLayout,
+    component: Page.Home,
+  },
+  {
+    path: "/",
+    secure: false,
+    exact: true,
+    layout: Layout.DefaultLayout,
+    component: Page.Home,
+  },
+  {
+    path: "*",
+    secure: false,
+    exact: true,
+    layout: Layout.DefaultLayout,
+    component: Page.Home,
+  },
 ];
 
 export default CustomRoutes;

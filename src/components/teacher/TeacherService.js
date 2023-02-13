@@ -25,10 +25,6 @@ const TeacherService = (props) => {
         <div className="serviceWrapper container"> 
             <div className="serviceHeading w-100">                
                 <h1 className="headingtext slideInUp wow ">02 What I offer </h1>
-                <ul className="profile-socail-icon serviceicon">
-                    <li className='mr-2'><a href=""><img src="/assets/images/share-icon.png" alt="service" /></a></li>
-                    <li><a href=""><img src="/assets/images/link-icon.png" alt="service" /></a></li>
-                </ul>
             </div>
 
             <div className="serviceBody">
@@ -42,7 +38,7 @@ const TeacherService = (props) => {
                         </div>
                         <div className="col-sm-10" >
                         <div dangerouslySetInnerHTML={{__html:data.consultancy}}></div>    
-                        <div className="dropMsg lineANimation" data-toggle="modal" data-target="#dropMsgModal">Drop a message!</div>
+                        {/* <div className="dropMsg lineANimation" data-toggle="modal" data-target="#dropMsgModal">Drop a message!</div> */}
                         </div>
                     </div>
                 </div>
@@ -53,7 +49,7 @@ const TeacherService = (props) => {
                         </div>
                         <div className="col-sm-10">
                         <div dangerouslySetInnerHTML={{__html:data.coaching}}></div> 
-                            <div className="dropMsg lineANimation" data-toggle="modal" data-target="#dropMsgModal">Drop a message!</div>
+                            {/* <div className="dropMsg lineANimation" data-toggle="modal" data-target="#dropMsgModal">Drop a message!</div> */}
                         </div>
                     </div>
                 </div>

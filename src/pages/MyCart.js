@@ -8,7 +8,7 @@ import Utils from '../Utils';
 const MyCart = (props) => {
 
     const { getServerData } = useContext(UserContext);
-
+    const [loggedIn,setLoggedIn] = useState(Utils.isLoggedIn());
     const [cart, setCart] = useState({ loading: true });
 
     const [processing, setProcessing] = useState(false);
@@ -142,7 +142,7 @@ const MyCart = (props) => {
 
     return (<>
         <Container fluid className="h-100 p-0">
-
+           {loggedIn && <> 
             {processing !== false && <>
                 <div className="profile-wrapper">
                     <div className='container'>
@@ -151,7 +151,7 @@ const MyCart = (props) => {
                     </div>
                 </div>
             </>}
-
+            
             {processing === false && <>
 
                 {cart.loading && <>
@@ -167,7 +167,7 @@ const MyCart = (props) => {
 
                 {!cart.loading && <>
                     <div className="profile-wrapper">
-                        <div className="container100">
+                        <div className="container">
                             <h1>My Cart</h1>
                             <Row>
                                 <Col md={7} className="mt-3">
@@ -253,7 +253,24 @@ const MyCart = (props) => {
                 </>}
 
             </>}
+        </>}
 
+        {!loggedIn && <> <div className="profile-wrapper">
+            <div className='container'>
+                <h1>Cart Page</h1>
+                <div className="cartWithoutLogin">
+                    <div className='mt-3'>Please login to view cart Items.<div/>
+                        <div className="nav-item" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">
+                       {/* <span className='btnSubmit'> Log in</span> */}
+                       <div className='w-25'>
+                       <button type="submit" className="btn btnSubmit">Log In</button>
+                       </div>
+                        </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        </>}
         </Container>
     </>);
 };

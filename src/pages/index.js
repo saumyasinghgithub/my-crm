@@ -15,7 +15,7 @@ import StudentProfile from "./StudentProfile";
 import MyCart from "./MyCart";
 import StudentProfileView from "./StudentProfileView";
 import MyBlog from "./MyBlog";
-import BlogList from './BlogList';
+import BlogList from "./BlogList";
 import PaymentSuccess from "./PaymentSuccess";
 import CookiePolicy from "./CookiePolicy";
 import PrivacyPolicy from "./PrivacyPolicy";
@@ -27,8 +27,37 @@ import BlogDetails from "./BlogDetails";
 import ResetPassword from "./ResetPassword";
 import PreferredTrainers from "./PreferredTrainers";
 import PreferredCourses from "./PreferredCourses";
+import ReadLocalStorage from "./ReadLocalStorage";
 
-export default {Login, About, Home, ADStudio, ADTrainer, MyProfile, MyCourse, CourseDetails, 
-  SearchResult, TeacherLanding, CourseList, ContactUs, ADStudent,StudentProfile,MyCart,
-  StudentProfileView, MyBlog, BlogList, PaymentSuccess, CookiePolicy, PrivacyPolicy,
-  TermConditions, MyOrder, MySales, MyStudent, BlogDetails, ResetPassword, PreferredTrainers, PreferredCourses};
+export default {
+  Login,
+  About,
+  Home,
+  ADStudio,
+  ADTrainer,
+  MyProfile,
+  MyCourse,
+  CourseDetails,
+  SearchResult,
+  TeacherLanding,
+  CourseList,
+  ContactUs,
+  ADStudent,
+  StudentProfile,
+  MyCart,
+  StudentProfileView,
+  MyBlog,
+  BlogList,
+  PaymentSuccess,
+  CookiePolicy,
+  PrivacyPolicy,
+  TermConditions,
+  MyOrder,
+  MySales,
+  MyStudent,
+  BlogDetails,
+  ResetPassword,
+  PreferredTrainers,
+  PreferredCourses,
+  ReadLocalStorage,
+};

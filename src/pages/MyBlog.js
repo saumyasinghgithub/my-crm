@@ -31,7 +31,7 @@ const MyBlog = (props) => {
     columns.push({
         name: "Action",
         cell: row => <>
-            <Button size='sm' variant="light" className="mr-1" onClick={()=>setShowForm({mode: 2, id: row.id})}><i className="fa fa-eye" /></Button>
+            {/* <Button size='sm' variant="light" className="mr-1" onClick={()=>setShowForm({mode: 2, slug: row.slug})}><i className="fa fa-eye" /></Button> */}
             <Button size='sm' variant="light" className="mr-1" onClick={()=>setShowForm({mode: 2, id: row.id})}><i className="fa fa-edit" /></Button>
             <Button size='sm' variant="light" className="mr-1" onClick={deleteRecord(row.id)}><i className="fa fa-trash text-danger" /></Button>
         </>,

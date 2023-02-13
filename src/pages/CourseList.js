@@ -67,7 +67,7 @@ const CourseList = (props) => {
                     <div className="text-center">
                         <div className="boldAmount">USD {_.sum(_.map(course.resources, r => r.price)).toFixed(2)}</div>
                         <div className="bundlePrice">( Bundle Price )</div>
-                        <a href={`${process.env.REACT_APP_PUBLIC_URL}/courses/${course.slug}`} className="btn btnBlue mt-2" >View Course </a>
+                        <a href={Utils.getTrainerURL(`courses/${course.slug}`,slug)} className="btn btnBlue mt-2" >View Course </a>
                     </div>
                 </div>
 

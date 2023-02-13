@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import Utils from '../../Utils';
 
 const TeacherNav = (props) => {
 
@@ -20,7 +21,7 @@ const TeacherNav = (props) => {
   return <div className="profiletabBox">
     <ul className="profileTab slideInUp wow">
       {Object.keys(navs).map(k => <li key={k} className={props.page===k ? "lineANimation" : ""}>
-          <a href={`${process.env.PUBLIC_URL}/trainers/${props.slug}/${k}`} onClick={setPageName(k)}>{navs[k]}</a>
+          <a href={Utils.getTrainerURL(k)} onClick={setPageName(k)}>{navs[k]}</a>
       </li>)}
     </ul>
   </div>;
