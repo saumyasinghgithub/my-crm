@@ -47,7 +47,7 @@ const UserMenu = (props) => {
           <ul className="profile_menu_list">
             {Utils.isTrainer() && (
               <li>
-                <a href={`${process.env.PUBLIC_URL}/my-profile`}>My Profile</a>
+                <a href={`${process.env.PUBLIC_URL}/my-profile`}>Edit Profile</a>
               </li>
             )}
             {Utils.isStudent() && (
@@ -120,7 +120,7 @@ const UserMenu = (props) => {
                   </a>
                 </li>
                 <li>
-                  <a href={getSlug()}>View My Profile</a>
+                  <a href={getSlug()}>My Profile</a>
                 </li>
                 <li>
                   <a href={`${process.env.PUBLIC_URL}/preferred-trainers`}>
