@@ -7,7 +7,6 @@ import Utils from "./../../Utils";
 import moment from "moment";
 
 const ExperienceForm = (props) => {
-  const [count, setCount] = useState(4);
   const [expData, setExpData] = useState([]);
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({ success: false, message: "" });
@@ -20,13 +19,15 @@ const ExperienceForm = (props) => {
 
   useEffect(() => {
     getServerData("trainer/my-exp")
-      .then(setExpData)
+      .then((data) => {
+        while (data.length < 4) {
+          data = [...data, { company: "", location: "" }];
+        }
+
+        setExpData(data);
+      })
       .catch((err) => console.log(err));
   }, []);
-
-  useEffect(() => {
-    setCount(_.max([4, expData.length]));
-  }, [expData]);
 
   useEffect(window.scrollEffect, []);
 
@@ -47,7 +48,7 @@ const ExperienceForm = (props) => {
 
   const saveEData = (pos, attr) => (e) => {
     let newdata = [...expData];
-    newdata[pos][attr] = e.currentTarget.value;
+    _.set(newdata, `${pos}${attr}`, e.currentTarget.value);
     setExpData(newdata);
   };
 
@@ -66,14 +67,14 @@ const ExperienceForm = (props) => {
     let year = 0;
     return (
       <>
-        {new Array(count).fill(1).map((v, k) => (
+        {expData.map((v, k) => (
           <Row key={k}>
             <Col md={8} className="mt-3">
               <Form.Control
                 type="text"
                 name="company"
                 placeholder="Enter your Company Name"
-                value={_.get(expData, `${k}.company`, "")}
+                defaultValue={_.get(expData, `${k}.company`, "")}
                 onChange={saveEData(k, "company")}
               />
             </Col>
@@ -82,7 +83,7 @@ const ExperienceForm = (props) => {
                 type="text"
                 name="location"
                 placeholder="Enter your Company Location"
-                value={_.get(expData, `${k}.location`, "")}
+                defaultValue={_.get(expData, `${k}.location`, "")}
                 onChange={saveEData(k, "location")}
               />
             </Col>
@@ -110,7 +111,7 @@ const ExperienceForm = (props) => {
         />
       </h1>
 
-      {count > 0 && renderExpFields()}
+      {renderExpFields()}
 
       <Row>
         <Col md={12} className="text-right">

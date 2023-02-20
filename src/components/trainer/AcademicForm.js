@@ -7,7 +7,6 @@ import Utils from "./../../Utils";
 import moment from "moment";
 
 const AcademicForm = (props) => {
-  const [count, setCount] = useState(4);
   const [academicData, setAcademicData] = useState([]);
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({ success: false, message: "" });
@@ -20,15 +19,14 @@ const AcademicForm = (props) => {
 
   useEffect(() => {
     getServerData("trainer/my-academic")
-      .then(setAcademicData)
+      .then((data) => {
+        while (data.length < 4) {
+          data = [...data, { profession: "", year: "" }];
+        }
+        setAcademicData(data);
+      })
       .catch((err) => console.log(err));
   }, []);
-
-  useEffect(() => {
-    setCount(_.max([4, academicData.length]));
-  }, [academicData]);
-
-  useEffect(window.scrollEffect, []);
 
   useEffect(window.scrollEffect, []);
 
@@ -69,7 +67,7 @@ const AcademicForm = (props) => {
     let year = 0;
     return (
       <>
-        {new Array(count).fill(1).map((v, k) => (
+        {academicData.map((v, k) => (
           <Row key={k}>
             <Col md={8} className="mt-3">
               <Form.Control
@@ -136,7 +134,7 @@ const AcademicForm = (props) => {
         />
       </h1>
 
-      {count > 0 && renderAcademicFields()}
+      {renderAcademicFields()}
 
       <Row>
         <Col md={12} className="text-right">
