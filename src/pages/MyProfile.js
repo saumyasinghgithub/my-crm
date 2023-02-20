@@ -11,7 +11,7 @@ const MyProfile = (props) => {
         '#academic': 'Academic Qualifications',
         '#exp': 'Professional Experiences',
         '#awards': 'Awards/Certifications',
-        '#services': 'Trainer Services',
+        '#service': 'Trainer Services',
         '#knowledge': 'Trainer Knowledge',
         '#community': 'Trainer Community',
         '#library': 'Trainer Library',
@@ -56,7 +56,7 @@ const MyProfile = (props) => {
                                         {tab === '#academic' && <TrainerForms.AcademicForm />}
                                         {tab === '#exp' && <TrainerForms.ExperienceForm />}
                                         {tab === '#awards' && <TrainerForms.AwardCertificationsForm />}
-                                        {tab === '#services' && <TrainerForms.ServiceForm />}
+                                        {tab === '#service' && <TrainerForms.ServiceForm />}
                                         {tab === '#knowledge' && <TrainerForms.KnowledgeForm />}
                                         {tab === '#community' && <TrainerForms.CommunityForm />}
                                         {tab === '#library' && <TrainerForms.LibraryForm />}

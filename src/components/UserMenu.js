@@ -47,7 +47,7 @@ const UserMenu = (props) => {
           <ul className="profile_menu_list">
             {Utils.isTrainer() && (
               <li>
-                <a href={`${process.env.PUBLIC_URL}/my-profile`}>Edit Profile</a>
+                <a href={`${process.env.PUBLIC_URL}/my-profile#about`}>Edit Profile</a>
               </li>
             )}
             {Utils.isStudent() && (

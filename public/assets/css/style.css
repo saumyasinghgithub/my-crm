@@ -1842,15 +1842,15 @@ label.filterSeach img {
     padding: 50px 0 100px;
     margin-top: 50px;
 }
-.editLink {
-    font-size: 13px;
-}
+
 .profiletabBox {
     position: relative;
     padding-bottom: 40px;
     min-height: 190px;
 }
-
+.editLink{
+    font-size: 13px;
+}
 .profiletabBox ul.profileTab li a {
     color: #939393;
     text-decoration: none;
@@ -2185,9 +2185,9 @@ span.awardYear {
 .awardwithoutLine .awadText {
     padding-left: 0;
 }
-
 .lineANimation {
     display: inline-block !important;
+    width:100%;
 }
 
 .lineANimation:after {
