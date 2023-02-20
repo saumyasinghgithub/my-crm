@@ -52,30 +52,37 @@ const CalibForm = (props) => {
       //alert(items);
       items.map((newItem) => {
         //alert(newItem.title); //prints agriculture, IT , mining
-        let newItems = newItem.children;   
+        let newItems = newItem.children;
         let dataarray = _.filter(newItems, rec => Number(rec.parent_id) === selectedValue);
         //alert('grandChildren'+JSON.stringify(dataarray));
         if (dataarray.length > 0) {
           setDataarray(dataarray);
-        }        
+        }
       })
     });
   };
-  
+
   const renderPA = () => {
-    return pa.map(p => <Col md={6} key={p.title} className="mt-3">
-      <Form.Label>{p.title}</Form.Label>
-      <Form.Control as="select" multiple name={`calib[${p.id}][]`} onChange={handleOptionChange}>
-        {_.get(p, 'children.length', 0) > 0 && p.children.map(pc => <option key={pc.id} value={pc.id} selected={isMyc(p.id, pc.id)}>{pc.title}</option>)}
-      </Form.Control> 
-      <ul> 
-      {dataarray.map(arrayvalues =>
-        <li>
-          {arrayvalues.title}
-        </li>   
-        )}   
-      </ul>       
-    </Col>
+    const SubIndustryText = 'Sub Industry';
+    return pa.map(p =>
+      <Col md={p.id === 1 ? 12 : 6} key={p.title} className="mt-3">
+        <Form.Label>{p.title}</Form.Label>
+        <Form.Control as="select" multiple name={`calib[${p.id}][]`} id={p.id} onChange={handleOptionChange}>
+          {_.get(p, 'children.length', 0) > 0 && p.children.map(pc => <option key={pc.id} value={pc.id} selected={isMyc(p.id, pc.id)}>{pc.title}</option>)}
+        </Form.Control>
+        {p.id === 1 ? (
+          <div>
+            <Form.Label>{SubIndustryText}</Form.Label>
+            <Form.Control as="select" name={`calib[${p.id}][]`}>
+              {dataarray.map(arrayvalues =>
+                <option key={arrayvalues.id} value={arrayvalues.id} selected={isMyc(p.id, arrayvalues.id)}>{arrayvalues.title}</option>
+              )}
+            </Form.Control>
+          </div>
+        ) : (
+          <p></p>
+        )}
+      </Col>
     )
   };
 

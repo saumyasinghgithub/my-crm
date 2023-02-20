@@ -1842,7 +1842,9 @@ label.filterSeach img {
     padding: 50px 0 100px;
     margin-top: 50px;
 }
-
+.editLink {
+    font-size: 13px;
+}
 .profiletabBox {
     position: relative;
     padding-bottom: 40px;
