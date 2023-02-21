@@ -28,6 +28,7 @@ import ResetPassword from "./ResetPassword";
 import PreferredTrainers from "./PreferredTrainers";
 import PreferredCourses from "./PreferredCourses";
 import ReadLocalStorage from "./ReadLocalStorage";
+import ChangePassword from "./ChangePassword";
 
 export default {
   Login,
@@ -60,4 +61,5 @@ export default {
   PreferredTrainers,
   PreferredCourses,
   ReadLocalStorage,
+  ChangePassword,
 };
