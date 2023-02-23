@@ -56,7 +56,7 @@ const TeacherAbout = (props) => {
 
     return (<>
         <div className='row'>
-            <div className='col-lg-3 col-md-3 col-12 pt-3 pb-1'>
+            {/* <div className='col-lg-3 col-md-3 col-12 pt-3 pb-1'>
 
                 <TeacherNav slug={props.slug} page={props.page} onPageChange={props.onPageChange} />
 
@@ -89,10 +89,36 @@ const TeacherAbout = (props) => {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className='col-lg-9 col-md-9 col-12 pt-2 pb-1'>
+            </div> */}
+            <div className='col-lg-12 col-md-12 col-12 pt-2 pb-1'>
                 <div className="profileHeading teacherheading">
-                    <h1 className="headingtext wow zoomIn">{data.firstname} {data.lastname}</h1>
+                    {/* <h1 className="headingtext wow zoomIn">{data.firstname} {data.lastname}</h1> */}
+                    <h1 className="headingtext">{data.firstname} {data.lastname}</h1>
+                        <div className="profileDetailRating">
+
+                            {!starLoading && <div>
+                                <StarRatings
+                                    rating={rating.rating}
+                                    starEmptyColor="#dddddd"
+                                    starRatedColor="#f3ac1b"
+                                    starHoverColor="#bfa700"
+                                    starDimension="20px"
+                                    starSpacing="2px"
+                                    changeRating={Utils.isLoggedIn() ? setTrainerRating : false}
+                                />
+                                <div className="mx-2 my-1">{rating.ratings} ratings</div>
+                            </div>}
+                        </div>
+
+                        <p className='joindetails mt-4'>Joined {Utils.shortDate(data.created_at)} &nbsp;&nbsp;&nbsp;&nbsp;
+                            Students {props.total.students} &nbsp;&nbsp;&nbsp;&nbsp;
+                            Courses {props.total.courses}</p>
+                            <div className="profileFollowList">
+                            <h5>Follow Ben on</h5>
+                            <ul>
+                                {socialPlatforms.map(sp => !_.isEmpty(_.get(props,`social.${sp}`,'')) && <li><a target="_blank" href={props.social[sp]}><i className={`fab fa-${sp}`}></i></a></li>)}
+                            </ul>
+                        </div>
                     <ul className="profile-socail-icon">
                         <li><div>
                             <InlineShareButtons config={{
@@ -118,7 +144,7 @@ const TeacherAbout = (props) => {
                                 username: trainerUsername // (only for twitter sharing)
                             }} />
                         </div></li>
-                        <li className='mr-2'><div className="addthis_inline_share_toolbox"></div></li>
+                        {/* <li className='mr-2'><div className="addthis_inline_share_toolbox"></div></li> */}
                     </ul>
 
                 </div>

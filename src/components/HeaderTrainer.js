@@ -4,6 +4,7 @@ import Utils from './../Utils';
 
 import _ from "lodash";
 import UserMenu from './UserMenu';
+import TeacherNav from "./teacher/TeacherNav";
 
 const HeaderTrainer = (props) => {
 
@@ -90,6 +91,18 @@ const HeaderTrainer = (props) => {
                     </li>
         </ul>
     </div>
+    {/* New Header */}
+{Utils.isTrainer() && (
+    <nav className="navbar navbar-expand-lg navbar-light trainernewheader pt-0 pb-0">
+  <button className="navbar-toggler tooglebuttonheader" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span className="navbar-toggler-icon"></span>
+  </button>
+  <div className="collapse navbar-collapse justify-content-center" id="navbarTogglerDemo01">
+     <TeacherNav slug={props.slug} page={props.page} onPageChange={props.onPageChange} />
+  </div>
+</nav>
+)}
+{/* New Header */}
     {loggedIn && <div className="profile_menu from-right">
                 <UserMenu />
             </div>}

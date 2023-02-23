@@ -93,7 +93,7 @@ const AboutForm = (props) => {
 
     <Row>  
       <Col md={6} className="mt-3">  
-        {photoUploader('profile','Upload Large Profile Pic')}
+        {photoUploader('profile','Upload Large Profile Pic (Image dimension should be 360cm x 260cm)')}
       </Col>
       <Col md={6} className="mt-3">  
       <Form.Label>Biography: </Form.Label>
@@ -113,10 +113,10 @@ const AboutForm = (props) => {
     
     <Row>  
       <Col md={6} className="mt-3">  
-        {photoUploader('award','Upload Award Certifications')}
+        {photoUploader('award','Upload Award Certifications (Image dimension should be 1900cm x 900cm)')}
       </Col>
       <Col md={6} className="mt-3">  
-        {photoUploader('base','Upload Base Profile Pic')}
+        {photoUploader('base','Upload Base Profile Pic (Image dimension should be 100cm x 100cm)')}
         </Col>
     </Row>
 

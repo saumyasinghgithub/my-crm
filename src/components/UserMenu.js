@@ -73,16 +73,16 @@ const UserMenu = (props) => {
                 <a href={`${process.env.PUBLIC_URL}/my-course`}>My Course</a>
               </li>
             )}
-            {loggedIn && (
+            { Utils.isStudent() && loggedIn && (
               <li>
                 <a href={`${process.env.PUBLIC_URL}/preferred-courses`}>
                   Preferred Courses
                 </a>
               </li>
             )}
-            <li>
+            {/* <li>
               <a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a>
-            </li>
+            </li> */}
             {Utils.isStudent() && (
               <li>
                 <a href={`${process.env.PUBLIC_URL}/ad-student`}>
@@ -97,6 +97,9 @@ const UserMenu = (props) => {
                 </a>
               </li>
             )}
+            <li>
+              <a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a>
+            </li>
           </ul>
         </div>
         <div className="col-sm-6">

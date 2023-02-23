@@ -58,7 +58,7 @@ const ServiceForm = (props) => {
 
     <Row>  
       <Col md={3} className="mt-3">  
-        {photoUploader('service','Upload image here')}
+        {photoUploader('service','Upload image here (Image dimension should be 691cm x 494cm)')}
       </Col>
       <Col md={9} className="mt-3">  
       <Form.Label>Trainer Service Details: </Form.Label>

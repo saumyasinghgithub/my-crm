@@ -75,13 +75,13 @@ const BlogForm = (props) => {
         <Form.Control type="text" name="slug" placeholder="Enter blog slug/url" defaultValue={_.get(myblog,'slug','')} />
       </Col>
       <Col md={6} className="mt-3">  
-        {photoUploader('banner','Upload blog Banner image')}
+        {photoUploader('banner','Upload blog Banner image (Image dimension should be 1000cm x 323cm)')}
       </Col>
     </Row>
 
     <Row>  
       <Col md={3} className="mt-3">  
-        {photoUploader('blog','Upload blog thumbnail image')}
+        {photoUploader('blog','Upload blog thumbnail image (Image dimension should be 1000cm x 667cm)')}
       </Col>
       <Col md={9} className="mt-3">  
       <Form.Label>Short Description: </Form.Label>

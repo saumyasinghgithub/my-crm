@@ -113,7 +113,7 @@ const MySales = (props) => {
                 <div className="container mysale">
                     <h1>My Sales</h1>
                     {stats.success === true && <div className="row">
-                <div className="col-lg-3 col-6">
+                <div className="col-lg-4 col-6">
                     <div className="small-box bg-info">
                     <div className="inner">
                     <h3>$ {stats.stats[0]}</h3>
@@ -126,7 +126,7 @@ const MySales = (props) => {
                     </div>
                 </div>
 
-                <div className="col-lg-3 col-6">
+                {/* <div className="col-lg-3 col-6">
                     <div className="small-box bg-success">
                     <div className="inner">
                     <h3>{parseFloat(stats.stats[1]).toFixed(1)}<sup className="supTag">%</sup></h3>
@@ -135,11 +135,10 @@ const MySales = (props) => {
                     <div className="icon">
                     <i className="ion ion-stats-bars"></i>
                     </div>
-                    {/* <a href="#" className="small-box-footer">More info <i className="fas fa-arrow-circle-right"></i></a> */}
                     </div>
-                </div>
+                </div> */}
 
-                <div className="col-lg-3 col-6">
+                <div className="col-lg-4 col-6">
                     <div className="small-box bg-warning">
                     <div className="inner">
                     <h3>{stats.stats[2]}</h3>
@@ -152,7 +151,7 @@ const MySales = (props) => {
                     </div>
                 </div>
 
-                <div className="col-lg-3 col-6">
+                <div className="col-lg-4 col-6">
                     <div className="small-box bg-danger">
                     <div className="inner">
                     <h3>{stats.stats[3]}</h3>

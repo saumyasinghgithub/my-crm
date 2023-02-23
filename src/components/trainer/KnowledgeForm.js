@@ -56,7 +56,7 @@ const KnowledgeForm = (props) => {
 
     <Row>  
       <Col md={3} className="mt-3">  
-        {photoUploader('knowledge','Upload image here')}
+        {photoUploader('knowledge','Upload image here (Image dimension should be 691cm x 494cm)')}
       </Col>
       <Col md={9} className="mt-3">  
       <Form.Label>Trainer knowledge Details: </Form.Label>

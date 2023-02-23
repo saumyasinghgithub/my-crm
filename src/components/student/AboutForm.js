@@ -111,9 +111,9 @@ const AboutForm = (props) => {
 
     <Row>  
       <Col md={6} className="mt-3">  
-        {photoUploader('profile','Upload Large Profile Pic')}
+        {photoUploader('profile','Upload Large Profile Pic (Image dimension should be 360cm x 260cm)')}
       </Col>
-      <Col className="mt-3">{photoUploader('base','Upload Base Profile Pic')}</Col>
+      <Col className="mt-3">{photoUploader('base','Upload Base Profile Pic (Image dimension should be 100cm x 100cm)')}</Col>
       </Row>
       <Row>
       <Col md={12} className="mt-3">  

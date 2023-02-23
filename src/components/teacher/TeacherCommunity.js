@@ -46,10 +46,10 @@ const TeacherCommunity = (props) => {
 
     return (<>
     <div className='row'>
-        <div className='col-lg-3 col-md-3 col-12 pt-3 pb-1'>
+        {/* <div className='col-lg-3 col-md-3 col-12 pt-3 pb-1'>
             <TeacherNav slug={props.slug} page={props.page} onPageChange={props.onPageChange} />    
-        </div>
-            <div className='col-lg-9 col-md-9 col-12 pt-2 pb-1'>
+        </div> */}
+            <div className='col-lg-12 col-md-12 col-12 pt-2 pb-1'>
                 <img className="img-fluid imgTransfer" src={`${process.env.REACT_APP_API_URL}/uploads/community/${encodeURI(data.community_image)}`} alt="service" />
             </div>
         </div>
