@@ -5280,3 +5280,13 @@ min-width:150px;
 .breadcrumb-item.active {
     color: #0f79aa;
 }
+.floating-subscription-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+  }
+  

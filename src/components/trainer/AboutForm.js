@@ -4,6 +4,16 @@ import UserContext from './../../contexts/UserContext';
 import { Editor } from "@tinymce/tinymce-react";
 import _ from 'lodash';
 
+function Preview({ formData }) {
+  return (
+    <div>
+      <h2>Preview</h2>
+      <p>Name: {formData.name}</p>
+      <p>Email: {formData.email}</p>
+      <p>Message: {formData.message}</p>
+    </div>
+  );
+}
 
 const AboutForm = (props) => {
 
@@ -11,6 +21,7 @@ const AboutForm = (props) => {
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({success: false, message: ""});
   const {getServerData,setServerData} = useContext(UserContext);
+  const [showPreview, setShowPreview] = useState(false);
 
   const onContentChange = (fld) => (value) => {
     let c = {...myabout};
@@ -27,6 +38,7 @@ const AboutForm = (props) => {
 
   useEffect(() => {window.setTimeout(() => setResponse({message: ""}), 5000)},[response]);
   
+  
 
   const onSave = (e) => {
     const frm = e.currentTarget;
@@ -34,6 +46,7 @@ const AboutForm = (props) => {
     let frmdata = new FormData(frm);
     frmdata.append('biography',_.get(myabout,'biography',''));
     frmdata.append('trainings',_.get(myabout,'trainings',''));
+    alert(JSON.stringify(frmdata));
     setSaving(true);
     setServerData('trainer/my-about',frmdata)
     .then(res => {

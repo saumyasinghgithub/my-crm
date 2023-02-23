@@ -14,7 +14,7 @@ const TeacherAbout = (props) => {
     const [loading, setLoading] = useState(true);
     const [starLoading, setStarLoading] = useState(false);
     const [rating, setRating] = useState(props.rating);
-    const { getServerData, setServerData } = useContext(UserContext);
+    const { getServerData, setServerData } = useContext(UserContext);    
 
     useEffect(window.scrollEffect, []);
     let addthis = false;
@@ -49,9 +49,11 @@ const TeacherAbout = (props) => {
     //const testUrl = 'https://www.npmjs.com/search?q=sharethis';
     const networks = ['facebook', 'twitter', 'linkedin'];
     const trainerImage = Utils.getUserData().base_image;
-    const trainerFullName = Utils.getUserData().firstname+' '+Utils.getUserData().middlename+' '+Utils.getUserData().lastname;
+    const trainerFullName = Utils.getUserData().firstname + ' ' + Utils.getUserData().middlename + ' ' + Utils.getUserData().lastname;
     const trainerUsername = Utils.getUserData().firstname;
-    const trainerIntro =  Utils.getUserData().intro;
+    const trainerIntro = Utils.getUserData().intro;
+
+
     return (<>
         <div className='row'>
             <div className='col-lg-3 col-md-3 col-12 pt-3 pb-1'>
@@ -183,8 +185,6 @@ const TeacherAbout = (props) => {
                 </div>
             </div>
         </div>
-
-
     </>);
 };
 
