@@ -1,69 +1,61 @@
-import {useEffect, useContext, useState} from 'react';
-import {Form, Alert, Spinner, Row, Col, Button} from 'react-bootstrap';
+import { useEffect, useContext, useState } from 'react';
+import { Form, Alert, Spinner, Row, Col, Button } from 'react-bootstrap';
 import UserContext from './../../contexts/UserContext';
 import { Editor } from "@tinymce/tinymce-react";
 import _ from 'lodash';
-
-function Preview({ formData }) {
-  return (
-    <div>
-      <h2>Preview</h2>
-      <p>Name: {formData.name}</p>
-      <p>Email: {formData.email}</p>
-      <p>Message: {formData.message}</p>
-    </div>
-  );
-}
+import {Modal} from 'reactstrap';
 
 const AboutForm = (props) => {
 
   const [myabout, setMyabout] = useState({});
   const [saving, setSaving] = useState(false);
-  const [response, setResponse] = useState({success: false, message: ""});
-  const {getServerData,setServerData} = useContext(UserContext);
+  const [response, setResponse] = useState({ success: false, message: "" });
+  const { getServerData, setServerData } = useContext(UserContext);
   const [showPreview, setShowPreview] = useState(false);
 
   const onContentChange = (fld) => (value) => {
-    let c = {...myabout};
+    let c = { ...myabout };
     c[fld] = value;
     setMyabout(c);
   }
 
   useEffect(() => {
     getServerData('trainer/my-about')
-    .then(setMyabout)
-    .catch(err => console.log(err));
-  },[]);
-  useEffect(window.scrollEffect,[]);
+      .then(setMyabout)
+      .catch(err => console.log(err));
+  }, []);
+  useEffect(window.scrollEffect, []);
 
-  useEffect(() => {window.setTimeout(() => setResponse({message: ""}), 5000)},[response]);
-  
-  
+  useEffect(() => { window.setTimeout(() => setResponse({ message: "" }), 5000) }, [response]);
+
+
 
   const onSave = (e) => {
     const frm = e.currentTarget;
     e.preventDefault();
+    setShowPreview(true);
     let frmdata = new FormData(frm);
-    frmdata.append('biography',_.get(myabout,'biography',''));
-    frmdata.append('trainings',_.get(myabout,'trainings',''));
+    frmdata.append('biography', _.get(myabout, 'biography', ''));
+    frmdata.append('trainings', _.get(myabout, 'trainings', ''));
     alert(JSON.stringify(frmdata));
     setSaving(true);
-    setServerData('trainer/my-about',frmdata)
-    .then(res => {
-      setSaving(false);
-      setResponse(res);
-    })
+    setServerData('trainer/my-about', frmdata)
+      .then(res => {
+        setSaving(false);
+        setResponse(res);
+      })
   }
 
-  const photoUploader = (fld,title) => {
+  const photoUploader = (fld, title) => {
     return <>
       <Form.Label>{title}</Form.Label>
-      <Form.Control type="file" size="lg" name={fld+'_image'} accept=".jpeg,.png,.PNG,.jpg;" />
-      <div className="text-center">{!_.isEmpty(_.get(myabout,fld+'_image','')) && <img src={`${process.env.REACT_APP_API_URL}/uploads/${fld}/${myabout[fld+'_image']}`} className="thumbnail mt-3" />}</div>
+      <Form.Control type="file" size="lg" name={fld + '_image'} accept=".jpeg,.png,.PNG,.jpg;" />
+      <div className="text-center">{!_.isEmpty(_.get(myabout, fld + '_image', '')) && <img src={`${process.env.REACT_APP_API_URL}/uploads/${fld}/${myabout[fld + '_image']}`} className="thumbnail mt-3" />}</div>
     </>;
   }
 
-  return <Form onSubmit={onSave}>
+  return (<>
+  <Form onSubmit={onSave}>
     <Form.Control type="hidden" name="id" defaultValue={_.get(myabout,'id','')} />
     <Form.Control type="hidden" name="old_award_image" defaultValue={_.get(myabout,'award_image','')} />
     <Form.Control type="hidden" name="old_profile_image" defaultValue={_.get(myabout,'profile_image','')} />
@@ -143,6 +135,15 @@ const AboutForm = (props) => {
     </Row>
   
   </Form>
+
+    <Modal isOpen={showPreview}>
+      <h2>Form Preview:</h2>
+      <p>Name: </p>
+      <p>Email: </p>
+      <p>Message: </p>
+    </Modal>
+  </>
+  );
 
 };
 

@@ -2216,7 +2216,6 @@ span.awardYear {
 
 .lineANimation {
     display: inline-block !important;
-    width: 100%;
 }
 
 .lineANimation:after {
