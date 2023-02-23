@@ -173,6 +173,13 @@ const CustomRoutes = [
     component: Utils.isLoggedIn() ? Page.Home : Page.ResetPassword,
   },
   {
+    path: "/chgpwd",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.ChangePassword,
+  },
+  {
     path: "/term-conditions",
     secure: false,
     exact: true,

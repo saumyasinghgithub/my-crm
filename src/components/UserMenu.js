@@ -80,6 +80,9 @@ const UserMenu = (props) => {
                 </a>
               </li>
             )}
+            <li>
+              <a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a>
+            </li>
             {Utils.isStudent() && (
               <li>
                 <a href={`${process.env.PUBLIC_URL}/ad-student`}>
@@ -135,9 +138,11 @@ const UserMenu = (props) => {
                 <a href={`${process.env.PUBLIC_URL}/my-blog`}>My Blog</a>
               </li>
             )}
+
             <li>
-              <a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a>
+              <a href={`${process.env.PUBLIC_URL}/chgpwd`}>Change Password</a>
             </li>
+
             <li>
               <a href="logout" onClick={onLogout}>
                 Log Out

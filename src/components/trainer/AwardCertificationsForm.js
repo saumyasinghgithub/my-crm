@@ -5,7 +5,6 @@ import _ from "lodash";
 import moment from "moment";
 
 const AwardCertificationsForm = (props) => {
-  const [count, setCount] = useState(4);
   const [awardData, setAwardData] = useState([]);
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({ success: false, message: "" });
@@ -18,15 +17,15 @@ const AwardCertificationsForm = (props) => {
 
   useEffect(() => {
     getServerData("trainer/my-awards")
-      .then(setAwardData)
+      .then((data) => {
+        while (data.length < 4) {
+          data = [...data, { year: "", award: "" }];
+        }
+
+        setAwardData(data);
+      })
       .catch((err) => console.log(err));
   }, []);
-
-  useEffect(() => {
-    setCount(_.max([4, awardData.length]));
-  }, [awardData]);
-
-  useEffect(window.scrollEffect, []);
 
   useEffect(window.scrollEffect, []);
 
@@ -47,8 +46,11 @@ const AwardCertificationsForm = (props) => {
 
   const saveAData = (pos, attr) => (e) => {
     let newdata = [...awardData];
-    newdata[pos][attr] =
-      attr === "year" ? parseInt(e.currentTarget.value) : e.currentTarget.value;
+    _.set(
+      newdata,
+      `${pos}${attr}`,
+      attr === "year" ? parseInt(e.currentTarget.value) : e.currentTarget.value
+    );
     setAwardData(newdata);
   };
 
@@ -67,7 +69,7 @@ const AwardCertificationsForm = (props) => {
     let year = 0;
     return (
       <>
-        {new Array(count).fill(1).map((v, k) => (
+        {awardData.map((v, k) => (
           <Row
             key={k}
             className="my-1"
@@ -99,7 +101,7 @@ const AwardCertificationsForm = (props) => {
                 type="text"
                 name="award"
                 placeholder="Certification/Award Name"
-                value={_.get(awardData, `${k}.award`, "")}
+                defaultValue={_.get(awardData, `${k}.award`, "")}
                 onChange={saveAData(k, "award")}
               />
             </Col>
@@ -109,7 +111,7 @@ const AwardCertificationsForm = (props) => {
                 type="text"
                 name="organisation"
                 placeholder="Enter Issuing Organization's Name"
-                value={_.get(awardData, `${k}.organisation`, "")}
+                defaultValue={_.get(awardData, `${k}.organisation`, "")}
                 onChange={saveAData(k, "organisation")}
               />
             </Col>
@@ -118,7 +120,7 @@ const AwardCertificationsForm = (props) => {
                 type="text"
                 name="url"
                 placeholder="Enter Certificate URL "
-                value={_.get(awardData, `${k}.url`, "")}
+                defaultValue={_.get(awardData, `${k}.url`, "")}
                 onChange={saveAData(k, "url")}
               />
             </Col>
@@ -149,7 +151,7 @@ const AwardCertificationsForm = (props) => {
           onClick={addAData}
         />
       </h1>
-      {count > 0 && renderAcademicFields()}
+      {renderAcademicFields()}
       <Row>
         <Col md={12} className="text-right">
           {saving && (
