@@ -1,7 +1,7 @@
-import React, { useRef,useState}  from "react";
+import React, { useRef, useState } from "react";
 import Utils from '../../Utils';
 import axios from "axios";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup} from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup } from 'reactstrap';
 import { useParams } from "react-router-dom";
 
 const TeacherSubscribe = (props) => {
@@ -10,6 +10,7 @@ const TeacherSubscribe = (props) => {
     const toggle = () => setModal(!modal);
     const frmRef = useRef('SubscribeForm');
     const { token } = useParams();
+    const [message, setMessage] = useState('');
 
     const trainerSlug = Utils.getUserData().slug;
     const trainerUrl = Utils.getTrainerURL("", trainerSlug);
@@ -20,25 +21,30 @@ const TeacherSubscribe = (props) => {
         event.preventDefault();
         let frmdata = new FormData(frm);
         console.log(`Email: ${email}, trainerUrl: ${trainerUrl}`);
-        
-        axios.post(Utils.apiUrl(`trainer/subscribe`),frmdata,Utils.apiHeaders({token: token}))     
-        .then(res => {
-           if(res.data.success){
-           }else{
-              throw(res.data);
-           }           
-        }).catch(err  => {
-            console.log(err);
-        }); 
+
+        let params = `?email=${email}&trainerUrl=${trainerUrl}`;
+        axios.get(Utils.apiUrl('trainer/subscribers' + params), Utils.apiHeaders()).then(res => {
+            if (res.data.length > 0) {
+                setMessage("You have already subscribed for this trainer");
+            } else {
+                axios.post(Utils.apiUrl(`trainer/subscribe`), frmdata, Utils.apiHeaders({ token: token }))
+                    .then(res => {
+                        setMessage("Thank You for subscribing with us !");
+                    }).catch(err => {
+                        console.log(err);
+                    });
+            }
+        });
     };
 
-    return ( <div>
+    return (<div>
         <Modal isOpen={modal} toggle={toggle}>
             <ModalHeader toggle={toggle}>Subscription</ModalHeader>
             <ModalBody>
                 <p>Subscribe to our newsletter and be the first to know about new courses, special offers, and events! from {trainerFullName}</p>
                 <p>To sign up, simply enter your email address below and click "Subscribe".</p>
                 <p>By subscribing, you agree to receive occasional marketing emails from us. We promise not to spam you, and you can unsubscribe at any time.</p>
+                <p><b>{message}</b></p>
                 <form ref={frmRef} onSubmit={handleSubmit} method="post">
                     <FormGroup>
                         <input type="hidden" name="trainerUrl" value={trainerUrl} />
