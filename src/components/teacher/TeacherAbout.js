@@ -56,7 +56,7 @@ const TeacherAbout = (props) => {
 
 
     return (<>
-        <div className='row'>
+        <div className='container'>
             {/* <div className='col-lg-3 col-md-3 col-12 pt-3 pb-1'>
 
                 <TeacherNav slug={props.slug} page={props.page} onPageChange={props.onPageChange} />
@@ -92,7 +92,7 @@ const TeacherAbout = (props) => {
                 </div>
             </div> */}
             {Utils.isTrainer() && loggedIn &&  (
-                <div className='container editTrainerdetails'>
+                <div className='editTrainerdetails'>
                     <div className='row'>
                         <div className='col-12 text-right'>
                             <a className=' bg-primary p-2 text-white rounded' href='/my-profile#about'>Edit <i className='fas fa-edit text-white'></i></a>
@@ -100,6 +100,7 @@ const TeacherAbout = (props) => {
                     </div>
                 </div>
             )}
+            <div className='row'>
             <div className='col-lg-12 col-md-12 col-12 pt-2 pb-1'>
                 <div className="profileHeading teacherheading">
                     {/* <h1 className="headingtext wow zoomIn">{data.firstname} {data.lastname}</h1> */}
@@ -161,16 +162,17 @@ const TeacherAbout = (props) => {
                 <img className="img-fluid imgTransfer pt-3 W-100" src={`${process.env.REACT_APP_API_URL}/uploads/profile/${encodeURI(data.profile_image)}`} alt='profile' />
 
             </div>
+            </div>
         </div>
 
-        <div className="aboutMe-pr0fle slideInUp wow ">
+        <div className="container aboutMe-pr0fle ">
             <h1 className="headingtext mt-4">01 About me</h1>
             <div className="awardTextInner awardwithoutLine">
                 <div className="awadText" dangerouslySetInnerHTML={{ __html: data.biography }} ></div>
             </div>
         </div>
 
-        <div className="profileTabQu slideInUp wow pb-5">
+        <div className="container profileTabQu pb-5">
             <ul className="nav">
                 <li className="nav-item"><a className="nav-link active" data-toggle="tab" href="#academicContent">Academic Qualification</a></li>
                 <li className="nav-item"><a className="nav-link" data-toggle="tab" href="#experienceContent">Experiences</a></li>

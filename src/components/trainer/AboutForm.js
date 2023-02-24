@@ -137,7 +137,7 @@ const AboutForm = (props) => {
       </Row>
     </Form>
     <Modal className="modalClass" isOpen={showPreview} toggle={toggle} width="100%">
-      <ModalHeader toggle={toggle}>Preview</ModalHeader>
+      <ModalHeader toggle={toggle} className='traineraboutmodalheader'>Preview</ModalHeader>
       {_.get(trainer, 'success', false) !== false && <>
         <TeacherAbout data={trainer.about} rating={trainer.rating} social={trainer.social} total={trainer.total} academics={trainer.academics} experiences={trainer.experiences} awards={trainer.awards} trainings={trainer.trainings} />
       </>}

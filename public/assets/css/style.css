@@ -5649,3 +5649,6 @@ button:not(:disabled) {
     width: 100% !important;
 }
 }
+.traineraboutmodalheader{
+    margin-bottom: 15px;
+}
