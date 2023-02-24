@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import moment from 'moment';
 import TeacherNav from './TeacherNav';
+import Utils from './../../Utils';
 
 const TeacherCommunity = (props) => {
 
@@ -46,6 +47,15 @@ const TeacherCommunity = (props) => {
 
     return (<>
     <div className='row'>
+    {Utils.isTrainer() && (
+                <div className='container mb-3 editTrainerdetails'>
+                    <div className='row'>
+                        <div className='col-12 text-right'>
+                            <a className='p-2 text-white rounded' href='/my-profile#community'>Edit <i className='fas fa-edit text-white'></i></a>
+                        </div>
+                    </div>
+                </div>
+            )}
         {/* <div className='col-lg-3 col-md-3 col-12 pt-3 pb-1'>
             <TeacherNav slug={props.slug} page={props.page} onPageChange={props.onPageChange} />    
         </div> */}

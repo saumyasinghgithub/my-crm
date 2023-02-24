@@ -65,6 +65,15 @@ const TeacherKnowledge = (props) => {
 
 
     return (<>
+     {Utils.isTrainer() && (
+                <div className='container mb-3 editTrainerdetails'>
+                    <div className='row'>
+                        <div className='col-12 text-right'>
+                            <a className=' bg-primary p-2 text-white rounded' href='/my-profile#knowledge'>Edit <i className='fas fa-edit text-white'></i></a>
+                        </div>
+                    </div>
+                </div>
+            )}
         <div className='row'>
             {/* <div className='col-lg-3 col-md-3 col-12 pt-3 pb-1'>
                 <TeacherNav slug={props.slug} page={props.page} onPageChange={props.onPageChange} />

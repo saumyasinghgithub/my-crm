@@ -1890,7 +1890,7 @@ label.filterSeach img {
 
 .profileHeading.teacherheading .headingtext {
     margin-top: 0;
-    width: 55%;
+    width: 58%;
 }
 
 .profileHeading {
@@ -1931,7 +1931,7 @@ ul.profile-socail-icon li img {
 
 .headingtext {
     margin-top: 80px;
-    font-size: 40px;
+    font-size: 33px;
     font-weight: bold;
     line-height: 63px;
     font-family: 'Segoe UI Semibold';
@@ -4697,7 +4697,7 @@ div.drum-wrapper figure {
     }
 
     .headingtext {
-        font-size: 35px !important;
+        font-size: 33px !important;
         width: 60% !important;
     }
 
@@ -5612,13 +5612,13 @@ button:not(:disabled) {
     }
 
     .headingtext {
-        font-size: 22px !important;
+        font-size: 16px !important;
         margin-top: 10px !important;
-        width: 51% !important;
+        width: 40% !important;
     }
 
     .profileDetailRating {
-        width: 46%;
+        width: 35%;
     }
 
     .joindetails {
@@ -5637,4 +5637,15 @@ button:not(:disabled) {
 }
 .modalClass.modal-dialog {
     max-width: 90%; 
+}
+.editTrainerdetails a{
+    background-color: #0f79aa !important;
+}
+
+@media (max-width:767px) {
+.headingtext {
+    font-size: 40px !important;
+    line-height: 32px;
+    width: 100% !important;
+}
 }

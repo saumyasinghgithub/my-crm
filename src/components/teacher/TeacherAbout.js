@@ -14,7 +14,8 @@ const TeacherAbout = (props) => {
     const [loading, setLoading] = useState(true);
     const [starLoading, setStarLoading] = useState(false);
     const [rating, setRating] = useState(props.rating);
-    const { getServerData, setServerData } = useContext(UserContext);    
+    const { getServerData, setServerData } = useContext(UserContext);
+    const [loggedIn, setLoggedIn] = useState(Utils.isLoggedIn());
 
     //useEffect(window.scrollEffect, []);
     /*let addthis = false;
@@ -90,35 +91,44 @@ const TeacherAbout = (props) => {
                     </div>
                 </div>
             </div> */}
+            {Utils.isTrainer() && loggedIn &&  (
+                <div className='container editTrainerdetails'>
+                    <div className='row'>
+                        <div className='col-12 text-right'>
+                            <a className=' bg-primary p-2 text-white rounded' href='/my-profile#about'>Edit <i className='fas fa-edit text-white'></i></a>
+                        </div>
+                    </div>
+                </div>
+            )}
             <div className='col-lg-12 col-md-12 col-12 pt-2 pb-1'>
                 <div className="profileHeading teacherheading">
                     {/* <h1 className="headingtext wow zoomIn">{data.firstname} {data.lastname}</h1> */}
                     <h1 className="headingtext">{data.firstname} {data.lastname}</h1>
-                        <div className="profileDetailRating">
+                    <div className="profileDetailRating">
 
-                            {!starLoading && <div>
-                                <StarRatings
-                                    rating={rating.rating}
-                                    starEmptyColor="#dddddd"
-                                    starRatedColor="#f3ac1b"
-                                    starHoverColor="#bfa700"
-                                    starDimension="20px"
-                                    starSpacing="2px"
-                                    changeRating={Utils.isLoggedIn() ? setTrainerRating : false}
-                                />
-                                <div className="mx-2 my-1">{rating.ratings} ratings</div>
-                            </div>}
-                        </div>
+                        {!starLoading && <div>
+                            <StarRatings
+                                rating={rating.rating}
+                                starEmptyColor="#dddddd"
+                                starRatedColor="#f3ac1b"
+                                starHoverColor="#bfa700"
+                                starDimension="20px"
+                                starSpacing="2px"
+                                changeRating={Utils.isLoggedIn() ? setTrainerRating : false}
+                            />
+                            <div className="mx-2 my-1">{rating.ratings} ratings</div>
+                        </div>}
+                    </div>
 
-                        <p className='joindetails mt-4'>Joined {Utils.shortDate(data.created_at)} &nbsp;&nbsp;&nbsp;&nbsp;
-                            Students {props.total.students} &nbsp;&nbsp;&nbsp;&nbsp;
-                            Courses {props.total.courses}</p>
-                            <div className="profileFollowList">
-                            <h5>Follow Ben on</h5>
-                            <ul>
-                                {socialPlatforms.map(sp => !_.isEmpty(_.get(props,`social.${sp}`,'')) && <li><a target="_blank" href={props.social[sp]}><i className={`fab fa-${sp}`}></i></a></li>)}
-                            </ul>
-                        </div>
+                    <p className='joindetails mt-4'>Joined {Utils.shortDate(data.created_at)} &nbsp;&nbsp;&nbsp;&nbsp;
+                        Students {props.total.students} &nbsp;&nbsp;&nbsp;&nbsp;
+                        Courses {props.total.courses}</p>
+                    <div className="profileFollowList">
+                        <h5>Follow Ben on</h5>
+                        <ul>
+                            {socialPlatforms.map(sp => !_.isEmpty(_.get(props, `social.${sp}`, '')) && <li><a target="_blank" href={props.social[sp]}><i className={`fab fa-${sp}`}></i></a></li>)}
+                        </ul>
+                    </div>
                     <ul className="profile-socail-icon">
                         <li><div>
                             <InlineShareButtons config={{

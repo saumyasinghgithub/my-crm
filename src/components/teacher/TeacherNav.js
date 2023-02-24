@@ -17,12 +17,13 @@ const TeacherNav = (props) => {
     return false;
   }
 
-  const trainerUrl = Utils.getTrainerURL();
-  const checkLogin = Utils.isLoggedIn();
+  // const trainerUrl = Utils.getTrainerURL();
+  // const checkLogin = Utils.isLoggedIn();
   return <ul className="navbar-nav mt-2 mt-lg-0">
       {Object.keys(navs).map(k => <li key={k} className={`nav-item ${props.page===k ? "active" : ""}`}>
         <div className="navLinksEdit"><div className="editTag"><a className="nav-link" href={Utils.getTrainerURL(k)} onClick={setPageName(k)}>{navs[k]}</a></div>
-          {checkLogin && <div className="editLink"><a href={trainerUrl+'my-profile#'+k}>Edit</a></div>} </div>                    
+          {/* {checkLogin && <div className="editLink"><a href={trainerUrl+'my-profile#'+k}>Edit</a></div>}  */}
+          </div>                    
       </li>)}
     </ul>;
 

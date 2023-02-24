@@ -2,6 +2,7 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import {Header, HeaderTrainer, Footer, LoginModal, JoinAsStudent, JoinAsTrainer} from './../components';
 import Utils from "../Utils";
+import HeaderStudent from "./../components/student/HeaderStudent";
 
 
 const DefaultLayout = ({ children }) => {
