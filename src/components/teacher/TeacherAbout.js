@@ -16,15 +16,15 @@ const TeacherAbout = (props) => {
     const [rating, setRating] = useState(props.rating);
     const { getServerData, setServerData } = useContext(UserContext);    
 
-    useEffect(window.scrollEffect, []);
-    let addthis = false;
+    //useEffect(window.scrollEffect, []);
+    /*let addthis = false;
     useEffect(() => {
         if (addthis) return;
         addthis = true;
         let script = document.createElement('script');
         script.src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-637c3fedb27a530a";
         document.body.append(script);
-    }, []);
+    }, []);*/
 
     const setTrainerRating = (rated) => {
         setStarLoading(true);
