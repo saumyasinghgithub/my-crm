@@ -230,15 +230,15 @@ const MyCart = (props) => {
                                         <Col sm={4} className="text-right"><b>$ {cartTotalPrice()}</b></Col>
                                     </Row>
                                     <Form>
-                                        {/*<Row className="cbox-space mx-0">
-                                    
-                                    <Col sm={7} className="text-left p-0 pr-1">
-                                        <Form.Control className="py-0 coupon" type="text" name="coupon" placeholder="Coupon Code" />
-                                    </Col>
-                                    <Col sm={5} className="text-right p-0">
-                                        <Button className="btn btn-sm btnBlue font-weight-normal" type="submit" >Apply Discount</Button>
-                                    </Col>                        
-                            </Row>*/}
+                                        <Row className="cbox-space mx-0">
+
+                                            <Col sm={7} className="text-left p-0 pr-1">
+                                                <Form.Control className="py-0 coupon" type="text" name="coupon" placeholder="Coupon Code" />
+                                            </Col>
+                                            <Col sm={5} className="text-right p-0">
+                                                <Button className="btn btn-sm btnBlue font-weight-normal" type="submit" >Apply Discount</Button>
+                                            </Col>
+                                        </Row>
                                     </Form>
                                     <Row>
                                         <Col sm={12}>
