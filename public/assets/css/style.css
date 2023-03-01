@@ -5652,3 +5652,9 @@ button:not(:disabled) {
 .traineraboutmodalheader{
     margin-bottom: 15px;
 }
+.landingSlider{
+    margin: auto;
+}
+.landingPageRow{
+    background-color: #EDECEB;
+}

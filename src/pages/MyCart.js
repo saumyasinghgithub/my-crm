@@ -57,6 +57,10 @@ const MyCart = (props) => {
             });
     };
 
+    const applyDiscount = (e) => {
+        e.preventDefault();
+    }
+
 
     const generateOrder = () => {
         return new Promise((resolve, reject) => {
@@ -132,11 +136,11 @@ const MyCart = (props) => {
         return parseFloat(_.reduce(cart.data, (result, cd) => result + cd.price, 0)).toFixed(2);
     };
 
-    /*const cartDiscount = () => {
+    const cartDiscount = () => {
         return _.reduce(cart.data, (result,cd) => result + parseFloat(cd.discount),0);
     };
 
-    const cartTotalPrice = () => {
+    /*const cartTotalPrice = () => {
         return cartSubTotalPrice() - cartDiscount();
     };*/
 
@@ -221,25 +225,22 @@ const MyCart = (props) => {
                                             $ {parseFloat(cData.price).toFixed(2)}
                                         </Col>
                                     </Row>)}
-                                    {/*<Row className="cbox-space mx-0">
-                                    <Col sm={8}><span>Coupon Discount</span></Col>
-                                    <Col sm={4} className="text-right"><span>${cartDiscount()}</span></Col>
-                                </Row>*/}
+                                    <Row className="cbox-space mx-0">
+                                        <Col sm={8}><span>Coupon Discount</span></Col>
+                                        <Col sm={4} className="text-right"><span>${cartDiscount()}</span></Col>
+                                    </Row>
                                     <Row className="cbox-space mx-0">
                                         <Col sm={8}><span>Total</span></Col>
                                         <Col sm={4} className="text-right"><b>$ {cartTotalPrice()}</b></Col>
                                     </Row>
-                                    <Form>
-                                        <Row className="cbox-space mx-0">
-
-                                            <Col sm={7} className="text-left p-0 pr-1">
-                                                <Form.Control className="py-0 coupon" type="text" name="coupon" placeholder="Coupon Code" />
-                                            </Col>
-                                            <Col sm={5} className="text-right p-0">
-                                                <Button className="btn btn-sm btnBlue font-weight-normal" type="submit" >Apply Discount</Button>
-                                            </Col>
-                                        </Row>
-                                    </Form>
+                                    <Row className="cbox-space mx-0">
+                                        <Col sm={7} className="text-left p-0 pr-1">
+                                            <Form.Control className="py-0 coupon" type="text" name="coupon" placeholder="Coupon Code" />
+                                        </Col>
+                                        <Col sm={5} className="text-right p-0">
+                                            <Button className="btn btn-sm btnBlue font-weight-normal" type="button" onClick={applyDiscount}>Apply Discount</Button>
+                                        </Col>
+                                    </Row>
                                     <Row>
                                         <Col sm={12}>
                                             <Button className="btn btn-sm btnBlue font-weight-normal" type="button" onClick={checkout} >Proceed to pay</Button>

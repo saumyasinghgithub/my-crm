@@ -47,6 +47,13 @@ const CustomRoutes = [
     component: Page.MyCourse,
   },
   {
+    path: "/landing-page",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.LandingPage,
+  },
+  {
     path: "/my-student",
     secure: false,
     exact: true,
