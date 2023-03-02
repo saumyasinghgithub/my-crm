@@ -5658,3 +5658,49 @@ button:not(:disabled) {
 .landingPageRow{
     background-color: #EDECEB;
 }
+.landingFloatVideo{
+    float: left;
+    padding:4%;
+}
+.landingVideo{
+    background-color:white;
+}
+.landingAlign{
+    text-align: center;
+}
+.LandingSubscribe{
+    background-color: #D6D6D2;;
+    color: rgb(17,63,135);
+    padding-left: 6%;
+    padding-right: 6%;
+    padding-top: 1.5%;
+    min-height: 350px;
+}
+.landingpageInput{
+    width:50%;
+}
+.landingForm{
+    padding-left: 26%;
+}
+.landingSubBlock{
+    background-color: white;
+    padding-top: 5%;
+    min-height: 280px;
+}
+.landingBlog{
+    margin: auto;
+    background-color: white;
+}
+.moreBlogsLink{
+    margin-left: 41%;
+}
+.landingFloatText{
+    float: left;
+    padding: 4%;
+}
+.joinnowBtn{
+    border-radius: 5px;
+    background: #113F87;
+    color: white;
+    padding: 12px;
+}

@@ -11,6 +11,7 @@ const TeacherSubscribe = (props) => {
     const frmRef = useRef('SubscribeForm');
     const { token } = useParams();
     const [message, setMessage] = useState('');
+    const inLine = props.type;
 
     const trainerSlug = Utils.getUserData().slug;
     const trainerUrl = Utils.getTrainerURL("", trainerSlug);
@@ -38,24 +39,42 @@ const TeacherSubscribe = (props) => {
     };
 
     return (<div>
-        <Modal isOpen={modal} toggle={toggle}>
-            <ModalHeader toggle={toggle}>Subscription</ModalHeader>
-            <ModalBody>
-                <p>Subscribe to our newsletter and be the first to know about new courses, special offers, and events! from {trainerFullName}</p>
-                <p>To sign up, simply enter your email address below and click "Subscribe".</p>
-                <p>By subscribing, you agree to receive occasional marketing emails from us. We promise not to spam you, and you can unsubscribe at any time.</p>
-                <p><b>{message}</b></p>
-                <form ref={frmRef} onSubmit={handleSubmit} method="post">
-                    <FormGroup>
+        {inLine ? (
+            <div className="landingSubBlock">
+                <h3 className="landingAlign">Subscribe to Our Rescue RN™ Newsletter</h3>                
+                <form ref={frmRef} onSubmit={handleSubmit} method="post" className="landingForm">
+                    <FormGroup >
+                        <label>Email*</label>
                         <input type="hidden" name="trainerUrl" value={trainerUrl} />
-                        <input placeholder="Please enter your email here for subscription" type="email" className="input-text form-control" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <input placeholder="Please enter your email here for subscription" type="email" className="input-text form-control landingpageInput" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <p><b>{message}</b></p>
+                    </FormGroup>
+                    <FormGroup>
+                    <Button color="secondary" type="submit" onClick={handleSubmit}>Subscribe</Button>{' '}
                     </FormGroup>
                 </form>
-            </ModalBody>
-            <ModalFooter>
-                <Button color="secondary" type="submit" onClick={handleSubmit}>Subscribe</Button>{' '}
-            </ModalFooter>
-        </Modal>
+            </div>
+        ) : (
+            <Modal isOpen={modal} toggle={toggle}>
+                <ModalHeader toggle={toggle}>Subscription</ModalHeader>
+                <ModalBody>
+                    <p>Subscribe to our newsletter and be the first to know about new courses, special offers, and events! from {trainerFullName}</p>
+                    <p>To sign up, simply enter your email address below and click "Subscribe".</p>
+                    <p>By subscribing, you agree to receive occasional marketing emails from us. We promise not to spam you, and you can unsubscribe at any time.</p>
+                    <p><b>{message}</b></p>
+                    <form ref={frmRef} onSubmit={handleSubmit} method="post">
+                        <FormGroup>
+                            <input type="hidden" name="trainerUrl" value={trainerUrl} />
+                            <input placeholder="Please enter your email here for subscription" type="email" className="input-text form-control" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        </FormGroup>
+                    </form>
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="secondary" type="submit" onClick={handleSubmit}>Subscribe</Button>{' '}
+                </ModalFooter>
+            </Modal>
+        )}
+
     </div>);
 }
 

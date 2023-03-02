@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import {
     MDBCarousel,
     MDBCarouselItem,
 } from 'mdb-react-ui-kit';
+import ReactPlayer from 'react-player/lazy'
+import { TeacherSubscribe } from '../components/teacher';
+import { LandingBlog } from '../components/landing';
+import Utils from './../Utils';
+import UserContext from './../contexts/UserContext';
+import _ from 'lodash';
 
 const LandingPage = (props) => {
+    const slug = Utils.subdomain();
+    const [trainer, setTrainer] = useState({});
+    const { getServerData } = useContext(UserContext);
+    const src = "https://www.rescuern.com/";
+    useEffect(() => {
+        getServerData(`trainer/profile/${slug}`, true)
+            .then(tData => {
+                setTrainer(tData);
+            })
+            .catch(msg => {
+                setTrainer({ success: false, message: msg });
+            });
+    }, []);
     return (<>
         <Container fluid>
             <Row className="landingPageRow">
@@ -42,9 +61,48 @@ const LandingPage = (props) => {
                         </MDBCarouselItem>
                     </MDBCarousel>
                 </Col>
-                <Col md={10}>
-                    <Col></Col>
-                    <Col></Col>
+                <Col md={10} className="landingSlider landingVideo">
+                    <Col md={7} className="landingFloatVideo">
+                        <iframe
+                            width="560"
+                            height="315"
+                            src={src}
+                            title="Youtube Player"
+                            frameborder="0"
+                            allowFullScreen
+                        />
+                    </Col>
+                    <Col md={5} className="landingFloatText">
+                        <div>
+                            <h2>
+                                <span>Objectives:</span>
+                            </h2>
+                            <ul>
+                                <li>
+                                    To analyze and disseminate
+                                    Code Blue
+                                    data to improve resuscitation efforts, quality, and outcomes, reducing hospital mortality.                                    
+                                </li>
+                                <li>
+                                    Make recommendations regarding improvements of code blue processes centered on Evidence-Based Practice.
+                                </li>
+                                <li>
+                                    Continually provide education and training associated with the standards of care in high-quality resuscitative efforts                                    
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <a className="joinnowBtn" href="/contact-us">Join Now</a>
+                        </div>
+                    </Col>
+                </Col>
+                <Col md={10} className="landingBlog">
+                    {_.get(trainer, 'success', false) !== false && <>
+                        <LandingBlog blogs={trainer.blogs} />
+                    </>}
+                </Col>
+                <Col md={10} className="landingSlider LandingSubscribe">
+                    <TeacherSubscribe type="inLine" />
                 </Col>
             </Row>
         </Container>
