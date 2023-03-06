@@ -131,6 +131,13 @@ const CustomRoutes = [
     component: Page.MyOrder,
   },
   {
+    path: "/my-corporate-groups",
+    secure: true,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.MyCorporateGroup,
+  },
+  {
     path: "/my-sales",
     secure: true,
     exact: true,

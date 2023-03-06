@@ -29,6 +29,7 @@ import PreferredTrainers from "./PreferredTrainers";
 import PreferredCourses from "./PreferredCourses";
 import ReadLocalStorage from "./ReadLocalStorage";
 import ChangePassword from "./ChangePassword";
+import MyCorporateGroup from "./MyCorporateGroup";
 
 export default {
   Login,
@@ -62,4 +63,5 @@ export default {
   PreferredCourses,
   ReadLocalStorage,
   ChangePassword,
+  MyCorporateGroup,
 };
