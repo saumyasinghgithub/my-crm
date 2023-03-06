@@ -8,5 +8,7 @@ import KnowledgeForm from './KnowledgeForm';
 import CommunityForm from './CommunityForm';
 import LibraryForm from './LibraryForm';
 import SocialForm from './SocialForm';
+import SliderForm from './SliderForm';
+import EventsForm from './EventsForm';
 
-export default {CalibForm, AboutForm, AcademicForm, ExperienceForm, ServiceForm, AwardCertificationsForm, KnowledgeForm, CommunityForm, LibraryForm, SocialForm};
+export default {CalibForm, AboutForm, AcademicForm, ExperienceForm, ServiceForm, AwardCertificationsForm, KnowledgeForm, CommunityForm, LibraryForm, SocialForm,SliderForm,EventsForm};
