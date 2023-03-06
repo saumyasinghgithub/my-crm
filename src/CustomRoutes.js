@@ -47,11 +47,12 @@ const CustomRoutes = [
     component: Page.MyCourse,
   },
   {
-    path: "/landing-page",
+    path: "/professional-profile",
     secure: false,
     exact: true,
     layout: Layout.StaticPageLayout,
-    component: Page.LandingPage,
+    //component: Page.LandingPage,
+    component: Page.TeacherLanding
   },
   {
     path: "/my-student",
@@ -72,7 +73,8 @@ const CustomRoutes = [
     secure: false,
     exact: true,
     layout: Layout.StaticPageLayout,
-    component: Page.TeacherLanding,
+    /*component: Page.TeacherLanding,*/
+    component: Page.LandingPage,
   },
   {
     path: "/trainers/:slug/:page",

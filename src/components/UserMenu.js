@@ -69,7 +69,7 @@ const UserMenu = (props) => {
             )}
             {Utils.isTrainer() && (
               <li>
-                <a href={`${process.env.PUBLIC_URL}/landing-page`}>Landing page</a>
+                <a href={getSlug()}>My Profile</a>
               </li>
             )}
             {Utils.isTrainer() && (
@@ -130,7 +130,7 @@ const UserMenu = (props) => {
                   </a>
                 </li>
                 <li>
-                  <a href={getSlug()}>My Profile</a>
+                  <a href={getSlug()+'professional-profile'}>Professional Profile</a>
                 </li>
                 <li>
                   <a href={`${process.env.PUBLIC_URL}/preferred-trainers`}>

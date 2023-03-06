@@ -38,7 +38,7 @@ const LandingBlog = (props) => {
             {slicedItems.map(renderBlog)}            
         </div>
         <div className="moreBlogsLink">
-            <h5><a href="/knowledge">Click Here Read More Blogs</a></h5>
+            <p><a href="/knowledge">Click Here Read More Blogs</a></p>
         </div>        
     </>);
 

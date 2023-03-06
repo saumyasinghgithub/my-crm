@@ -3,6 +3,7 @@ import Utils from '../../Utils';
 import axios from "axios";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup } from 'reactstrap';
 import { useParams } from "react-router-dom";
+import { Col } from 'react-bootstrap';
 
 const TeacherSubscribe = (props) => {
     const [modal, setModal] = useState(true);
@@ -41,18 +42,20 @@ const TeacherSubscribe = (props) => {
     return (<div>
         {inLine ? (
             <div className="landingSubBlock">
-                <h3 className="landingAlign">Subscribe to Our Rescue RN™ Newsletter</h3>                
-                <form ref={frmRef} onSubmit={handleSubmit} method="post" className="landingForm">
-                    <FormGroup >
-                        <label>Email*</label>
-                        <input type="hidden" name="trainerUrl" value={trainerUrl} />
-                        <input placeholder="Please enter your email here for subscription" type="email" className="input-text form-control landingpageInput" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                        <p><b>{message}</b></p>
-                    </FormGroup>
-                    <FormGroup>
-                    <Button color="secondary" type="submit" onClick={handleSubmit}>Subscribe</Button>{' '}
-                    </FormGroup>
-                </form>
+                <h3 className="landingAlign">Subscribe to Our Rescue RN™ Newsletter</h3>
+                <Col md={8} className="subsCol">
+                    <form ref={frmRef} onSubmit={handleSubmit} method="post">
+                        <Col md={8} className="formItems">
+                            <label>Email*</label>
+                            <input type="hidden" name="trainerUrl" value={trainerUrl} />
+                            <input placeholder="Please enter your email here for subscription" type="email" className="input-text form-control landingpageInput" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <p><b>{message}</b></p>
+                        </Col>
+                        <Col md={8} className="formBtn">
+                            <Button className="btnSubmitSubs" color="secondary" type="submit" onClick={handleSubmit}>Submit</Button>{' '}
+                        </Col>                        
+                    </form>
+                </Col>
             </div>
         ) : (
             <Modal isOpen={modal} toggle={toggle}>

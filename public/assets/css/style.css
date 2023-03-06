@@ -5667,6 +5667,11 @@ button:not(:disabled) {
 }
 .landingAlign{
     text-align: center;
+    font-size: 40px;
+    font-family: questrial,sans-serif;
+    font-style: normal;
+    letter-spacing: normal;
+    font-weight: 400;
 }
 .LandingSubscribe{
     background-color: #D6D6D2;;
@@ -5677,10 +5682,7 @@ button:not(:disabled) {
     min-height: 350px;
 }
 .landingpageInput{
-    width:50%;
-}
-.landingForm{
-    padding-left: 26%;
+    
 }
 .landingSubBlock{
     background-color: white;
@@ -5692,7 +5694,8 @@ button:not(:disabled) {
     background-color: white;
 }
 .moreBlogsLink{
-    margin-left: 41%;
+    text-align: center;
+    font-weight: 600;
 }
 .landingFloatText{
     float: left;
@@ -5704,3 +5707,160 @@ button:not(:disabled) {
     color: white;
     padding: 12px;
 }
+.landingEvents{
+    background-image: url('../images/account_img.jpg');
+}
+.landingEventsHeading{
+    margin: auto;
+    background-color: white;
+    text-decoration: underline;
+    color:#113F87;
+    padding-top: 4%;
+    padding-bottom: 3%;
+}
+.landingEventsDiv{
+    text-align: center;
+}
+.landingEventsHeadingLft{
+    float: left;
+}
+.landingEventsHeadingRht{
+    float: left;
+}
+.landingEventsSection{
+    background-image: url('../images/landingpage/events.png');
+    margin: auto;
+    color: white;
+    filter: grayscale(0.2);
+}
+.kickoffDate{
+    color:#F9FF0E;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 4%;
+    font-size: large;
+}
+.eventHeading{
+    text-align: center;
+}
+.eventTime{
+    text-align: center;
+}
+.eventDescription{
+    text-align: center;
+    font: normal normal normal 18px/1.4em proxima-n-w01-reg;
+    line-height: 1.5 !important;
+    margin-top: calc(0px + -0.25em);
+    margin-bottom: calc(0px + -0.25em);
+    margin-bottom: 25px;
+    font-family: Arial,Helvetica,sans-serif;
+}
+.eventRegisBtn{
+    background: #113F87;
+    color: white;
+    padding: 12px;
+    min-width: 195px;
+    min-height: 50px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    font: normal normal normal 18px/1.4em proxima-n-w01-reg;
+    margin-left: 41%;
+    text-decoration: none;
+}
+.eventRegisBtn:hover{
+    background: #113F87;
+    color: white;
+    text-decoration: none;
+    padding: 12px;
+    min-width: 195px;
+    min-height: 50px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    font: normal normal normal 18px/1.4em proxima-n-w01-reg;
+    margin-left: 41%;
+}
+.eventRegisBtn a{
+    color: white;
+}
+.eventRegisBtn a:hover {
+    text-decoration: none;
+    color: white;
+}
+.socialLinksEvents{
+    text-align: center;
+}
+.fontawesomeCustomClass{
+    padding: 23px;
+    font-size: 21px;
+}
+.socialLinksEvents a {
+    color: white;
+}
+.objectiveImg{
+    background-image: url('./../images/landingpage/objective.png');
+    width: 84px;
+    height: 84px;
+    object-fit: cover;
+    display: block;
+    float: left;
+}
+.floatLeftSpan{
+    float: left;
+}
+ul.ulDesign li{
+    list-style: disc;
+}
+.objHeading{
+    line-height: 3.2;
+}
+.sliderh4{
+
+}
+.slider1Div{
+    position: relative;
+    margin: 90px 0px 32px 0;
+    left: 128px;
+    grid-area: 1 / 1 / 2 / 2;
+    justify-self: start;
+    align-self: start;
+    width: 657px;
+    height: auto;
+}
+.carousel.slide.carousel-fade{
+    margin-top: 69px;
+}
+.objectiveLi{
+    padding-top: 31%;
+}
+.jnNwBtnDiv{
+    padding-top: 9%;
+}
+.jnNwBtnDiv a:hover{
+    color: white;
+    text-decoration: none;
+}
+.subsCol{
+    margin: auto;
+}
+.formItems{
+    margin: auto;
+}
+.formBtn{
+    text-align: center;
+    margin: auto;
+}
+.btnSubmitSubs{
+    background-color: #113F87;
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+
+
+
