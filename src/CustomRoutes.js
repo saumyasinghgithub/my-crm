@@ -138,6 +138,13 @@ const CustomRoutes = [
     component: Page.MyCorporateGroup,
   },
   {
+    path: "/my-corporate-groups/:cgid",
+    secure: true,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.CorporateGroupDetail,
+  },
+  {
     path: "/my-sales",
     secure: true,
     exact: true,

@@ -41,7 +41,14 @@ const MyCorporateGroup = (props) => {
     name: "Action",
     cell: (row) => (
       <>
-        {/* <Button size='sm' variant="light" className="mr-1" onClick={()=>setShowForm({mode: 2, slug: row.slug})}><i className="fa fa-eye" /></Button> */}
+        <Button
+          size="sm"
+          variant="light"
+          className="mr-1"
+          href={`/my-corporate-groups/${row.id}`}
+        >
+          <i className="fa fa-eye" />
+        </Button>
         <Button
           size="sm"
           variant="light"
@@ -70,7 +77,7 @@ const MyCorporateGroup = (props) => {
       </>
     ),
     sortable: false,
-    maxWidth: "130px !important",
+    maxWidth: "180px !important",
   });
 
   const deleteRecord = (id) => (e) => {
