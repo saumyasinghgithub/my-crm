@@ -4707,7 +4707,7 @@ div.drum-wrapper div.container, div.drum-wrapper figure {
     cursor: pointer;
 }
 
-.clickable.selected {
+.circleBox.selected {
     background-color: #f3ac1b69 !important;
 }
 

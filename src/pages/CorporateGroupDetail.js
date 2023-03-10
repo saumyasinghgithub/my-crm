@@ -63,7 +63,9 @@ const CorporateGroupDetail = () => {
               onChange={(e) => setMycourse(e.currentTarget.value)}
               defaultValue={mycourse}
             >
-              <option value=""> - </option>
+              <option value="" disabled>
+                Choose a course to enroll students below
+              </option>
               {_.get(cGroup, "data.mycourses", []).map((course) => (
                 <option key={course.id} value={course.id}>
                   {course.name} ({course.sku})
@@ -80,11 +82,12 @@ const CorporateGroupDetail = () => {
               pagination
             />
 
-            {mycourse !== "" && selected.length > 0 && (
-              <button className="btn btn-lg btn-outline-info">
-                Assign Course to selected students
-              </button>
-            )}
+            <button
+              className="btn btn-lg btn-secondary"
+              disabled={mycourse === "" || selected.length === 0}
+            >
+              Assign Course to selected students
+            </button>
           </div>
         </div>
       </Container>

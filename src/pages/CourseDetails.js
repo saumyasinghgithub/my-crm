@@ -109,10 +109,10 @@ const CourseDetails = (props) => {
     return (
       <li>
         <div
-          className={`circleBox wow zoomIn clickable ${
+          className={`circleBox wow zoomIn ${
             _.findIndex(bp, (b) => b.id === resource.id) > -1 ? "selected" : ""
           }`}
-          onClick={() => bundleProduct(resource)}
+          /*onClick={() => bundleProduct(resource)}*/
         >
           <img
             className="img-fluid"
