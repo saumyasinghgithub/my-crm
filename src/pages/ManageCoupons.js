@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import _, { noConflict } from 'lodash';
 import { Container, Tab, Row, Col, Button, Badge } from 'react-bootstrap';
-import { CourseForm, CourseResources, CourseContents } from '../components/courses';
+import {CouponForm} from '../components/coupon';
 import DataTableGrid from '../components/DataTableGrid';
 import axios from 'axios';
 import Utils from '../Utils';
 
-const MyCourse = (props) => {
+const ManageCoupons = (props) => {
     const [showForm, setShowForm] = useState({ id: false, mode: 0 }); // 0=do not show, 1=add, 2=edit
     const listColumns = ['id','coupon_code', 'discount', 'discription', 'expiry_date'];
     const [list, setList] = useState({ loading: false, error: false, pageInfo: {}, data: [] });
@@ -68,10 +68,11 @@ const MyCourse = (props) => {
                             </Col>
                         </Row>
                     </Tab.Container>
+                    {showForm.mode > 0 && <CouponForm type="modal" id={showForm.id} onClose={() => setShowForm({...showForm, mode: 0})} onSave={fetchList} />}
                 </div>
             </div>
         </Container>
     </>);
 };
 
-export default MyCourse;
+export default ManageCoupons;
