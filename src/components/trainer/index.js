@@ -10,5 +10,6 @@ import LibraryForm from './LibraryForm';
 import SocialForm from './SocialForm';
 import SliderForm from './SliderForm';
 import EventsForm from './EventsForm';
+import LandingpageForm from './LandingpageForm';
 
-export default {CalibForm, AboutForm, AcademicForm, ExperienceForm, ServiceForm, AwardCertificationsForm, KnowledgeForm, CommunityForm, LibraryForm, SocialForm,SliderForm,EventsForm};
+export default {CalibForm, AboutForm, AcademicForm, ExperienceForm, ServiceForm, AwardCertificationsForm, KnowledgeForm, CommunityForm, LibraryForm, SocialForm,SliderForm,EventsForm,LandingpageForm};

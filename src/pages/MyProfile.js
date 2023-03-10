@@ -17,7 +17,8 @@ const MyProfile = (props) => {
         '#library': 'Trainer Library',
         '#social': 'Social Platform',
         '#slider': 'Image Slider',
-        '#events': 'Manage Events'
+        '#events': 'Manage Events',
+        '#landingpage': 'Landing Page Settings'
     };
 
     const [tab, setTab] = useState('#about');
@@ -65,6 +66,7 @@ const MyProfile = (props) => {
                                         {tab === '#social' && <TrainerForms.SocialForm />}
                                         {tab === '#slider' && <TrainerForms.SliderForm />}
                                         {tab === '#events' && <TrainerForms.EventsForm />}
+                                        {tab === '#landingpage' && <TrainerForms.LandingpageForm />}
                                     </Tab.Pane>
                                 </Tab.Content>
                             </Col>

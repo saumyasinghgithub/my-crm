@@ -12,7 +12,7 @@ const DefaultLayout = ({ children }) => {
   console.log('location',location);
   return <Container fluid className="h-100 p-0">
     {!hasSubdomain && <Header />}
-    {hasSubdomain && location.pathname !== '/' && <HeaderTrainer />}
+    {hasSubdomain && location.pathname !== '/readls' && <HeaderTrainer />}
     {children}
     <LoginModal />
     <JoinAsStudent />
