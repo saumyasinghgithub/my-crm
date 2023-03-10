@@ -30,6 +30,7 @@ import PreferredCourses from "./PreferredCourses";
 import ReadLocalStorage from "./ReadLocalStorage";
 import ChangePassword from "./ChangePassword";
 import LandingPage from "./LandingPage";
+import ManageCoupons from "./ManageCoupons";
 
 export default {
   Login,
@@ -64,4 +65,5 @@ export default {
   ReadLocalStorage,
   ChangePassword,
   LandingPage,
+  ManageCoupons,
 };

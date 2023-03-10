@@ -77,6 +77,11 @@ const UserMenu = (props) => {
                 <a href={`${process.env.PUBLIC_URL}/my-course`}>My Course</a>
               </li>
             )}
+            {Utils.isTrainer() && (
+              <li>
+                <a href={`${process.env.PUBLIC_URL}/manage-coupons`}>Manage Coupons</a>
+              </li>
+            )}
             {Utils.isStudent() && loggedIn && (
               <li>
                 <a href={`${process.env.PUBLIC_URL}/preferred-courses`}>

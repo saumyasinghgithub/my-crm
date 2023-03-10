@@ -5104,13 +5104,13 @@ div.drum-wrapper figure {
 
 .my-course .rdt_TableCol:nth-child(3),
 .my-course .rdt_TableCell:nth-child(3) {
-    max-width: 90px !important;
+   /* max-width: 90px !important;*/
     min-width: 85px !important;
 }
 
 .my-course .rdt_TableCol:nth-child(4),
 .my-course .rdt_TableCell:nth-child(4) {
-    max-width: 80px !important;
+    /*max-width: 80px !important;*/
     min-width: 79px !important;
 }
 
@@ -5860,7 +5860,6 @@ ul.ulDesign li{
     padding-left: 32px;
     padding-right: 32px;
 }
-
-
-
-
+.coupon-table {
+    width: 100%;
+}

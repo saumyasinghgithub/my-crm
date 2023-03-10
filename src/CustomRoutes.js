@@ -47,6 +47,13 @@ const CustomRoutes = [
     component: Page.MyCourse,
   },
   {
+    path: "/manage-coupons",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.ManageCoupons,
+  },
+  {
     path: "/professional-profile",
     secure: false,
     exact: true,
