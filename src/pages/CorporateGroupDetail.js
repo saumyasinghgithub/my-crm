@@ -13,7 +13,6 @@ const CorporateGroupDetail = () => {
   const { cgid } = useParams();
 
   const listColumns = {
-    id: { minWidth: "70px", maxWidth: "70px" },
     name: { sortable: true },
   };
 
@@ -23,7 +22,7 @@ const CorporateGroupDetail = () => {
     ...style,
   }));
 
-  const handleRowSelected = ({ selectedRows }) => {
+  const handleAssignStudents = ({ selectedRows }) => {
     setSelected(selectedRows);
   };
 
@@ -49,6 +48,11 @@ const CorporateGroupDetail = () => {
   };
   useEffect(fetchDetail, []);
 
+  const submitGroupAssignment = (e) => {
+    const params = `cgid=${cGroup.data.cg.id}&courseid=${mycourse}&userids=${_.map(selected, (s) => s.id).join(",")}`;
+    setServerData("corporate/assign", params, "post").then(console.log);
+  };
+
   return (
     <>
       <Container fluid className="h-100 p-0">
@@ -58,11 +62,7 @@ const CorporateGroupDetail = () => {
             <Form.Label>
               <h3>My Courses:</h3>
             </Form.Label>
-            <Form.Control
-              as="select"
-              onChange={(e) => setMycourse(e.currentTarget.value)}
-              defaultValue={mycourse}
-            >
+            <Form.Control as="select" onChange={(e) => setMycourse(e.currentTarget.value)} defaultValue={mycourse}>
               <option value="" disabled>
                 Choose a course to enroll students below
               </option>
@@ -78,16 +78,21 @@ const CorporateGroupDetail = () => {
               columns={columns}
               data={_.get(cGroup, "data.students", [])}
               selectableRows
-              onSelectedRowsChange={handleRowSelected}
+              onSelectedRowsChange={handleAssignStudents}
               pagination
             />
 
-            <button
-              className="btn btn-lg btn-secondary"
-              disabled={mycourse === "" || selected.length === 0}
-            >
-              Assign Course to selected students
-            </button>
+            <div className="alert-warning p-2 px-4 mt-3 text-left ml-0">
+              <h4>Assigning students to the course will:</h4>
+              <ol>
+                <li>Enroll student to the selected Course.</li>
+                <li>Create a Course Group in course itself, if already not created.</li>
+                <li>Add the student to this Course Group.</li>
+              </ol>
+              <button className="btn btn-lg btn-secondary" onClick={submitGroupAssignment} disabled={mycourse === "" || selected.length === 0}>
+                Assign Course to selected students
+              </button>
+            </div>
           </div>
         </div>
       </Container>
