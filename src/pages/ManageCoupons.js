@@ -8,7 +8,7 @@ import Utils from '../Utils';
 
 const ManageCoupons = (props) => {
     const [showForm, setShowForm] = useState({ id: false, mode: 0 }); // 0=do not show, 1=add, 2=edit
-    const listColumns = ['id','coupon_code', 'discount', 'discription', 'expiry_date'];
+    const listColumns = ['id','coupon_code', 'usage_limit', 'item_id', 'expiry_date'];
     const [list, setList] = useState({ loading: false, error: false, pageInfo: {}, data: [] });
 
     const fetchList = () => {
