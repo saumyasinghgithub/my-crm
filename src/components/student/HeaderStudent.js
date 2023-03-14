@@ -1,12 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
-
-import Utils from './../Utils';
-
+import Utils from "../../Utils";
 import _ from "lodash";
-import UserMenu from './UserMenu';
-import TeacherNav from "./teacher/TeacherNav";
+import UserMenu from "../UserMenu";
 
-const HeaderTrainer = (props) => {
+
+const HeaderStudent = (props) => {
 
     const [loggedIn, setLoggedIn] = useState(Utils.isLoggedIn());
 
@@ -59,22 +57,7 @@ const HeaderTrainer = (props) => {
         <header className="header fixed-top whiteHeader">
             <div className="container">
                 <a className="navbar-brand" href={`${process.env.REACT_APP_PUBLIC_URL}/`}>AD</a>
-                {/* <form className="searchBOx" >
-                <div className="input-group">
-                    <div className="input-group-btn search-panel" data-search="students">
-                        <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            <span className="search_by">All</span> <span><img src={`${process.env.PUBLIC_URL}/assets/images/arrow.png`} alt="AD" /></span>
-                        </button>
-                        <ul className="dropdown-menu" role="menu">
-                            <li className="dropdown-item"><a data-search="industry">Industry</a></li>
-                            <li className="dropdown-item"><a data-search="industry1">Industry 1</a></li>
-                            <li className="dropdown-item"><a data-search="industry2">Industry 2</a></li>
-                            <li className="dropdown-item"><a data-search="industry3">Industry 3</a></li>
-                        </ul>
-                    </div>   
-                   <input className="form-control" type="text" name="x" placeholder="How can I help you ?" />              
-                </div> 
-        </form> */}
+               
                 <ul className="navbar-nav">
                     <li className="nav-item"><a href="/my-cart"><img className="img-fluid shoppingIcon" src="/assets/images/cart.png" alt="autodidact" /></a></li>
                     {!loggedIn && <li className="nav-item" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">
@@ -91,18 +74,7 @@ const HeaderTrainer = (props) => {
                     </li>
                 </ul>
             </div>
-            {/* New Header */}
-
-                <nav className="navbar navbar-expand-lg navbar-light trainernewheader pt-0 pb-0">
-                    <button className="navbar-toggler tooglebuttonheader" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse justify-content-center" id="navbarTogglerDemo01">
-                        <TeacherNav slug={props.slug} page={props.page} onPageChange={props.onPageChange} />
-                    </div>
-                </nav>
-
-            {/* New Header */}
+            
             {loggedIn && <div className="profile_menu from-right">
                 <UserMenu />
             </div>}
@@ -110,4 +82,4 @@ const HeaderTrainer = (props) => {
     </>);
 };
 
-export default HeaderTrainer;
+export default HeaderStudent;

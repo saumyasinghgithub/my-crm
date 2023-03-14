@@ -83,7 +83,7 @@ const Footer = () => {
       <footer className="footer footerFixed">
         <div className="container-fluid">
           <ul className="footerLeft">
-            <li>Copyright © 2022 AUTODIDACT</li>
+            <li>Copyright © {(new Date().getFullYear())} KSTVERSE</li>
             <li>
               <a href={`${process.env.REACT_APP_PUBLIC_URL}/term-conditions`}>
                 Terms

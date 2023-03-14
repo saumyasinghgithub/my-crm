@@ -31,6 +31,8 @@ import ReadLocalStorage from "./ReadLocalStorage";
 import ChangePassword from "./ChangePassword";
 import MyCorporateGroup from "./MyCorporateGroup";
 import CorporateGroupDetail from "./CorporateGroupDetail";
+import LandingPage from "./LandingPage";
+import ManageCoupons from "./ManageCoupons";
 
 export default {
   Login,
@@ -66,4 +68,6 @@ export default {
   ChangePassword,
   MyCorporateGroup,
   CorporateGroupDetail,
+  LandingPage,
+  ManageCoupons,
 };

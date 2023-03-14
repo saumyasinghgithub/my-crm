@@ -47,7 +47,7 @@ const UserMenu = (props) => {
           <ul className="profile_menu_list">
             {Utils.isTrainer() && (
               <li>
-                <a href={`${process.env.PUBLIC_URL}/my-profile`}>My Profile</a>
+                <a href={`${process.env.PUBLIC_URL}/my-profile#about`}>Edit Profile</a>
               </li>
             )}
             {Utils.isStudent() && (
@@ -74,22 +74,31 @@ const UserMenu = (props) => {
                 </li>
               </>
             )}
-
+            {Utils.isTrainer() && (
+              <li>
+                <a href={getSlug()}>My Profile</a>
+              </li>
+            )}
             {Utils.isTrainer() && (
               <li>
                 <a href={`${process.env.PUBLIC_URL}/my-course`}>My Course</a>
               </li>
             )}
-            {loggedIn && (
+            {Utils.isTrainer() && (
+              <li>
+                <a href={`${process.env.PUBLIC_URL}/manage-coupons`}>Manage Coupons</a>
+              </li>
+            )}
+            {Utils.isStudent() && loggedIn && (
               <li>
                 <a href={`${process.env.PUBLIC_URL}/preferred-courses`}>
                   Preferred Courses
                 </a>
               </li>
             )}
-            <li>
+            {/* <li>
               <a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a>
-            </li>
+            </li> */}
             {Utils.isStudent() && (
               <li>
                 <a href={`${process.env.PUBLIC_URL}/ad-student`}>
@@ -104,6 +113,9 @@ const UserMenu = (props) => {
                 </a>
               </li>
             )}
+            <li>
+              <a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a>
+            </li>
           </ul>
         </div>
         <div className="col-sm-6">
@@ -130,7 +142,7 @@ const UserMenu = (props) => {
                   </a>
                 </li>
                 <li>
-                  <a href={getSlug()}>View My Profile</a>
+                  <a href={getSlug()+'professional-profile'}>Professional Profile</a>
                 </li>
                 <li>
                   <a href={`${process.env.PUBLIC_URL}/preferred-trainers`}>

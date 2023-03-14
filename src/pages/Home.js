@@ -6,7 +6,8 @@ import UserContext from './../contexts/UserContext';
 
 import Utils from './../Utils';
 
-import TeacherLanding from './TeacherLanding';
+//import TeacherLanding from './TeacherLanding';
+import LandingPage from './LandingPage';
 
 const Home = (props) => {
 
@@ -71,7 +72,7 @@ const Home = (props) => {
 
     return (<>
 
-        {hasSubdomain && <TeacherLanding />}
+        {hasSubdomain && <LandingPage />}
         {!hasSubdomain && <>
             <section className="home-wrapper">
                 <div className="container">
