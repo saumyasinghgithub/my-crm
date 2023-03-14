@@ -3,10 +3,13 @@ import { Form, Alert, Spinner, Row, Col, Button } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
 import { Editor } from "@tinymce/tinymce-react";
 import _ from 'lodash';
+import UserContext from "../../contexts/UserContext";
 const EventsForm = (props) => {
     const [eventData, setEventData] = useState([]);
     const [saving, setSaving] = useState(false);
     const [response, setResponse] = useState({ success: false, message: "" });
+    const { getServerData, setServerData } = useContext(UserContext);
+    const [lastinsertid, setLastinsertid] = useState();
     const addAData = (e) => {
         let newdata = [...eventData, { year: "", award: "" }];
         setEventData(newdata);
@@ -83,13 +86,27 @@ const EventsForm = (props) => {
             </>
         );
     }
+    const onSave = (e) => {
+        const frm = e.currentTarget;
+        e.preventDefault();
+        let frmdata = new FormData(frm);
+        setSaving(true);
+        setServerData("trainer/eventsadd", frmdata).then((res) => {
+            setSaving(false);
+            setResponse(res);
+            setLastinsertid(res.insertId);
+        });
+    };
     return (
         <>
+            <Form onSubmit={onSave}>
             <h1>Manage Events<i
                 className="fa fa-plus-circle text-success Adddetails"
                 onClick={addAData}
             /></h1>
             {renderEventsFields()}
+            </Form>
+            
         </>
     );
 }
