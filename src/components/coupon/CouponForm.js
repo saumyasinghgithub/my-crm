@@ -56,6 +56,7 @@ const CouponForm = (props) => {
             <Col md={6} className="mt-3">
                 <Form.Label>Coupon Code: </Form.Label>
                 <Form.Control type="text" name="coupon_code" placeholder="Enter coupon code" />
+                <p>* Mandatory Field</p>
             </Col>
             <Col md={6} className="mt-3">
                 <Form.Label>Usage Limit: </Form.Label>
@@ -86,10 +87,12 @@ const CouponForm = (props) => {
                     <option value="1">Total cart percentage</option>
                     <option value="2">Total cart value</option>
                 </Form.Control>
+                <p>* Mandatory Field</p>
             </Col>
             <Col md={6} className="mt-3">
-                <Form.Label>Set Value</Form.Label>
+                <Form.Label>Set Value :</Form.Label>
                 <Form.Control type="text" name="discount_value" placeholder="Enter discount value." required/>
+                <p>* Mandatory Field</p>
             </Col>
         </Row>
         <Row>

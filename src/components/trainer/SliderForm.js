@@ -4,6 +4,7 @@ import { Form, Alert, Spinner, Row, Col, Button } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
 import UserContext from "../../contexts/UserContext";
 import Utils from './../../Utils';
+import axios from 'axios';
 const SliderForm = (props) => {
     const [sliderData, setSliderData] = useState([]);
     const { getServerData, setServerData } = useContext(UserContext);
@@ -13,19 +14,17 @@ const SliderForm = (props) => {
 
     const trainerDetails = Utils.getUserData();
 
-    useEffect(() => {
+    const fetchSlider = () => {
         getServerData("trainer/sliders")
             .then((data) => {
                 console.log('fetching data'+data);
-                while (data.length < 4) {
-                    data = [...data, { profession: "", year: "" }];
-                }
-                //setAcademicData(data);
+                setSliderData(data);
             })
             .catch((err) => console.log(err));
-    }, []);
+    };
     
       useEffect(window.scrollEffect, []);
+      useEffect(fetchSlider,[]);
     
       useEffect(() => {
         window.setTimeout(() => setResponse({ message: "" }), 5000);
@@ -34,29 +33,26 @@ const SliderForm = (props) => {
     const photoUploader = (fld, title) => {
         return <>
             <Form.Label>{title}</Form.Label>
-            <Form.Control type="file" size="lg" name={fld + '_image'} accept=".jpeg,.png,.PNG,.jpg;" />
-            <div className="text-center">{!_.isEmpty(_.get(sliderData, fld + '_image', '')) && <img src={`${process.env.REACT_APP_API_URL}/uploads/${fld + '_image'}/${sliderData[fld]}`} className="thumbnail mt-3" />}</div>
+            <Form.Control type="file" size="lg" name={fld + '_image'} accept=".jpeg,.png,.PNG,.jpg;" required/>
+            <div className="text-center">{!_.isEmpty(_.get(sliderData, fld + '_image', '')) && <img src={`${process.env.REACT_APP_API_URL}/uploads/slider/${sliderData[fld].slider_image}`} className="thumbnail mt-3" />}</div>
         </>;
     }
 
     const addAData = (e) => {
-        let newdata = [...sliderData, { year: "", award: "" }];
+        let newdata = [...sliderData, { slider_image: "", slider_text: "",cta_link:""}];
         setSliderData(newdata);
     };
-    const removeAData = (pos) => (e) => {
-        let newdata = [...sliderData];
-        newdata.splice(pos, 1);
-        setSliderData(newdata);
-    };
-    const saveAData = (pos, attr) => (e) => {
-        let newdata = [...sliderData];
-        _.set(
-            newdata,
-            `${pos}${attr}`,
-            attr === "year" ? parseInt(e.currentTarget.value) : e.currentTarget.value
-        );
-        setSliderData(newdata);
-    };
+    const removeAData = (pos,pos2)  => (e) => {
+        if(pos2){
+            if(window.confirm("You are going to delete record, are you sure?")){
+                axios.delete(Utils.apiUrl(`trainer/delslider/${pos}`),Utils.apiHeaders())
+                .then(res => {
+                  fetchSlider();
+                  window.alert(res.data.message);
+                })
+              }
+        }        
+      };
     const renderSliderFields = () => {
         return (
             <>
@@ -70,7 +66,7 @@ const SliderForm = (props) => {
                                 <Accordion.Body>
                                     <Row>
                                         <Col md={12} className="mt-3 mb-3">
-                                            {photoUploader('slider', 'Upload Large Slider Image (Image dimension should be 360cm x 260cm)')}
+                                            {photoUploader(`${k}`, 'Upload Large Slider Image (Image dimension should be 360cm x 260cm)')}
                                         </Col>
                                     </Row>
                                     <Row>
@@ -79,8 +75,7 @@ const SliderForm = (props) => {
                                                 type="text"
                                                 name="slider_text"
                                                 placeholder="Slider Text"
-                                                defaultValue={_.get(sliderData, `${k}.award`, "")}
-                                                onChange={saveAData(k, "award")}
+                                                defaultValue={_.get(sliderData, `${k}.slider_text`, "")}
                                             />
                                         </Col>
                                     </Row>
@@ -90,8 +85,7 @@ const SliderForm = (props) => {
                                                 type="text"
                                                 name="cta_link"
                                                 placeholder="Call to action button link."
-                                                defaultValue={_.get(sliderData, `${k}.award`, "")}
-                                                onChange={saveAData(k, "award")}
+                                                defaultValue={_.get(sliderData, `${k}.cta_link`, "")}
                                             />
                                         </Col>
                                     </Row>
@@ -106,7 +100,7 @@ const SliderForm = (props) => {
                             </Accordion.Item>
                             <i
                                 className="fa fa-minus-circle fa-lg mt-2 cursor-pointer text-danger remove-award"
-                                onClick={removeAData(k)}
+                                onClick={removeAData((_.get(sliderData, `${k}.id`, "")),(`${sliderData[k].slider_image}`))}
                             />
                         </Row>
                     </Accordion>
