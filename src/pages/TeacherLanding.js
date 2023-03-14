@@ -1,41 +1,42 @@
-import React, { useEffect, useState, useContext} from 'react';
-import { Container, Spinner, Alert } from 'react-bootstrap';
-import {useParams} from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { Container, Spinner, Alert } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 
-import CourseList from './CourseList';
+import CourseList from "./CourseList";
 
-import BlogList from './BlogList';
+import BlogList from "./BlogList";
 
-import {TeacherProfile} from './../components/teacher';
+import { TeacherProfile } from "./../components/teacher";
 
-import Utils from './../Utils';
+import Utils from "./../Utils";
 
-import _ from 'lodash';
+import _ from "lodash";
 
 const TeacherLanding = (props) => {
-    //const { slug, page } = useParams();
+  //const { slug, page } = useParams();
 
-    const {page} = useParams();
-    
-    const slug = Utils.subdomain();
+  const { page } = useParams();
 
-    console.log("This is slug",slug);
+  const slug = Utils.subdomain();
 
-    useEffect(() => {
-        if(!Utils.hasSubdomain()){
-            window.location.href = process.env.REACT_APP_PUBLIC_URL;
-            return false;
-        }
-    },[]);
+  console.log("This is slug", slug);
 
-    useEffect(window.scrollEffect, []);
+  useEffect(() => {
+    if (!Utils.hasSubdomain()) {
+      window.location.href = process.env.REACT_APP_PUBLIC_URL;
+      return false;
+    }
+  }, []);
 
-    return <Container fluid className="h-100 p-0">
-    
-        {page==='courses' && <CourseList trainerSlug={slug} />}
-        {page!=='courses' && <TeacherProfile trainerSlug={slug} page={_.isEmpty(page) ? "about" : page} />}
-        {page==='blogs' && <BlogList trainerSlug={slug} />}
-    </Container>;
+  useEffect(window.scrollEffect, []);
+
+  return (
+    <Container fluid className="h-100 p-0">
+      {page === "courses" && <CourseList trainerSlug={slug} />}
+      {page !== "courses" && <TeacherProfile trainerSlug={slug} page={_.isEmpty(page) ? "about" : page} />}
+      {page === "blogs" && <BlogList trainerSlug={slug} />}
+    </Container>
+  );
 };
 
 export default TeacherLanding;
