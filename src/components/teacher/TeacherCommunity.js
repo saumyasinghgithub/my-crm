@@ -51,7 +51,7 @@ const TeacherCommunity = (props) => {
   return (
     <>
       <div className="row">
-        {Utils.isTrainer() && (
+        {Utils.isTrainer() && Utils.getUserData().id === data.user_id && (
           <div className="container mb-3 editTrainerdetails">
             <div className="row">
               <div className="col-12 text-right">
