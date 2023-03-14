@@ -40,6 +40,13 @@ const CustomRoutes = [
     component: Page.MyProfile,
   },
   {
+    path: "/my-profile/*",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.MyProfile,
+  },
+  {
     path: "/my-course",
     secure: false,
     exact: true,
@@ -53,14 +60,7 @@ const CustomRoutes = [
     layout: Layout.StaticPageLayout,
     component: Page.ManageCoupons,
   },
-  {
-    path: "/professional-profile",
-    secure: false,
-    exact: true,
-    layout: Layout.StaticPageLayout,
-    //component: Page.LandingPage,
-    component: Page.TeacherLanding
-  },
+
   {
     path: "/my-student",
     secure: false,
@@ -76,18 +76,18 @@ const CustomRoutes = [
     component: Page.MyBlog,
   },
   {
-    path: "/trainers/:slug",
+    path: "professional-profile/:page",
     secure: false,
     exact: true,
     layout: Layout.StaticPageLayout,
-    /*component: Page.TeacherLanding,*/
-    component: Page.LandingPage,
+    component: Page.TeacherLanding,
   },
   {
-    path: "/trainers/:slug/:page",
+    path: "/professional-profile",
     secure: false,
     exact: true,
     layout: Layout.StaticPageLayout,
+    //component: Page.LandingPage,
     component: Page.TeacherLanding,
   },
   {
@@ -96,6 +96,14 @@ const CustomRoutes = [
     exact: true,
     layout: Layout.StaticPageLayout,
     component: Page.BlogDetails,
+  },
+  {
+    path: "/trainers/:slug",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    /*component: Page.TeacherLanding,*/
+    component: Page.LandingPage,
   },
   {
     path: "/courses/:slug",
@@ -145,6 +153,20 @@ const CustomRoutes = [
     exact: true,
     layout: Layout.StaticPageLayout,
     component: Page.MyOrder,
+  },
+  {
+    path: "/my-corporate-groups",
+    secure: true,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.MyCorporateGroup,
+  },
+  {
+    path: "/my-corporate-groups/:cgid",
+    secure: true,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.CorporateGroupDetail,
   },
   {
     path: "/my-sales",

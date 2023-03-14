@@ -1,32 +1,46 @@
-import React, {useState} from 'react';
-import Utils from '../../Utils';
+import React, { useState } from "react";
+import Utils from "../../Utils";
+import { useLocation } from "react-router-dom";
+import _ from "lodash";
 
 const TeacherNav = (props) => {
-
   const navs = {
-    about       :'About',
-    service     :'Services',
-    knowledge   :'Knowledge',
-    community   :'Community',
-    library     :'Library'
+    service: "Services",
+    knowledge: "Knowledge",
+    community: "Community",
+    library: "Library",
   };
+
+  const { pathname } = useLocation();
 
   const setPageName = (pname) => (e) => {
     props.onPageChange(pname);
     e.preventDefault();
     return false;
-  }
+  };
+
+  const menuItem = (label, path) => (
+    <li key={path} className={`nav-item ${path.indexOf(props.page) > -1 ? "active" : ""}`}>
+      <div className="navLinksEdit">
+        <div className="editTag">
+          <a className="nav-link" href={`/${path}`}>
+            {label}
+          </a>
+        </div>
+        {/* {checkLogin && <div className="editLink"><a href={trainerUrl+'my-profile#'+k}>Edit</a></div>}  */}
+      </div>
+    </li>
+  );
 
   // const trainerUrl = Utils.getTrainerURL();
   // const checkLogin = Utils.isLoggedIn();
-  return <ul className="navbar-nav mt-2 mt-lg-0">
-      {Object.keys(navs).map(k => <li key={k} className={`nav-item ${props.page===k ? "active" : ""}`}>
-        <div className="navLinksEdit"><div className="editTag"><a className="nav-link" href={Utils.getTrainerURL(k)} onClick={setPageName(k)}>{navs[k]}</a></div>
-          {/* {checkLogin && <div className="editLink"><a href={trainerUrl+'my-profile#'+k}>Edit</a></div>}  */}
-          </div>                    
-      </li>)}
-    </ul>;
-
+  return (
+    <ul className="navbar-nav mt-2 mt-lg-0">
+      {pathname.indexOf("/professional-profile") > -1 && menuItem("Profile", "")}
+      {pathname.indexOf("/professional-profile") === -1 && menuItem("Professional Profile", "professional-profile/about")}
+      {_.map(navs, (label, k) => menuItem(label, `professional-profile/${k}`))}
+    </ul>
+  );
 };
 
 export default TeacherNav;

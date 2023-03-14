@@ -63,9 +63,16 @@ const UserMenu = (props) => {
               </li>
             )}
             {Utils.isTrainer() && (
-              <li>
-                <a href={`${process.env.PUBLIC_URL}/my-sales`}>My Sales</a>
-              </li>
+              <>
+                <li>
+                  <a href={`${process.env.PUBLIC_URL}/my-corporate-groups`}>
+                    My Corporate Groups
+                  </a>
+                </li>
+                <li>
+                  <a href={`${process.env.PUBLIC_URL}/my-sales`}>My Sales</a>
+                </li>
+              </>
             )}
             {Utils.isTrainer() && (
               <li>

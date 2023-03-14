@@ -30,7 +30,7 @@ body {
     margin: 0px;
     font-family: 'segoe UI';
     font-size: 14px;
-    overflow-x: hidden;
+    overflow-x:hidden;
 }
 
 body.menuopen {
@@ -41,8 +41,7 @@ body.menuopen {
     padding: 0px 30px;
 }
 
-ul,
-li {
+ul, li {
     padding: 0;
     margin: 0px;
     list-style: none;
@@ -4816,7 +4815,7 @@ div.drum-wrapper figure {
     cursor: pointer;
 }
 
-.clickable.selected {
+.circleBox.selected {
     background-color: #f3ac1b69 !important;
 }
 
@@ -5191,11 +5190,10 @@ div.drum-wrapper figure {
     cursor: pointer;
 }
 
-
-.mysale .rdt_TableCol:first-child,
-.mysale .rdt_TableCell:first-child {
-    max-width: 160px;
-    min-width: 150px;
+/*
+.mysale .rdt_TableCol:first-child,.mysale .rdt_TableCell:first-child{
+max-width:160px;
+min-width:150px;
 }
 
 .mysale .rdt_TableCol:nth-child(2),
@@ -5210,7 +5208,7 @@ div.drum-wrapper figure {
     min-width: 300px;
     padding: 10px 16px;
 
-}
+}*/
 
 .dtqzBx div:first-child {
     white-space: break-spaces !important;

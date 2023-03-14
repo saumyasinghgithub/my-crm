@@ -29,6 +29,8 @@ import PreferredTrainers from "./PreferredTrainers";
 import PreferredCourses from "./PreferredCourses";
 import ReadLocalStorage from "./ReadLocalStorage";
 import ChangePassword from "./ChangePassword";
+import MyCorporateGroup from "./MyCorporateGroup";
+import CorporateGroupDetail from "./CorporateGroupDetail";
 import LandingPage from "./LandingPage";
 import ManageCoupons from "./ManageCoupons";
 
@@ -64,6 +66,8 @@ export default {
   PreferredCourses,
   ReadLocalStorage,
   ChangePassword,
+  MyCorporateGroup,
+  CorporateGroupDetail,
   LandingPage,
   ManageCoupons,
 };

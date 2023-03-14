@@ -8,15 +8,10 @@ const Utils = {
 
   apiUrl: (path) => process.env.REACT_APP_API_URL + "/" + path,
 
-  subdomain: () =>
-    window.location.host.replace("." + process.env.REACT_APP_HOST, ""),
+  subdomain: () => window.location.host.replace("." + process.env.REACT_APP_HOST, ""),
 
   hasSubdomain: () => {
-    const reservedSubDomains = _.get(
-      process.env,
-      "REACT_APP_RESERVED_SD",
-      ""
-    ).split(",");
+    const reservedSubDomains = _.get(process.env, "REACT_APP_RESERVED_SD", "").split(",");
     const sd = Utils.subdomain();
     return window.location.host !== sd && !reservedSubDomains.includes(sd);
   },
@@ -36,20 +31,17 @@ const Utils = {
       url += "/" + path;
     }
 
-    console.log(url);
     return url;
   },
 
   apiHeaders: (extraHeaders = null) => {
     let headers = {
       headers: {
-        "x-api-key":
-          "$2a$08$66e6e.5m5kDsdU/O7guw/ej8ETNuSfe9k5W1AME4V/Lno6PjvMbay",
+        "x-api-key": "$2a$08$66e6e.5m5kDsdU/O7guw/ej8ETNuSfe9k5W1AME4V/Lno6PjvMbay",
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "PUT,GET,POST,DELETE,OPTIONS,PATCH",
-        "Access-Control-Allow-Headers":
-          "Origin, Content-Type, X-Auth-Token, token, access-control-allow-origin",
+        "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token, token, access-control-allow-origin",
         Accept: "application/json, text/plain, */*",
         ...extraHeaders,
       },
@@ -73,16 +65,11 @@ const Utils = {
     // console.log(dt, "session data")
     dt.token = false;
     // const backup = localStorage.getItem(process.env.REACT_APP_APPNAME + '-userData');
-    localStorage.setItem(
-      process.env.REACT_APP_APPNAME + "-userData",
-      JSON.stringify(dt)
-    );
+    localStorage.setItem(process.env.REACT_APP_APPNAME + "-userData", JSON.stringify(dt));
   },
 
   getUserData: () => {
-    let userData = localStorage.getItem(
-      process.env.REACT_APP_APPNAME + "-userData"
-    );
+    let userData = localStorage.getItem(process.env.REACT_APP_APPNAME + "-userData");
     if (userData) {
       return JSON.parse(userData);
     } else {
@@ -104,20 +91,14 @@ const Utils = {
       uData["token"] = _.get(data, "token", false);
       uData[`stepData${userData.id}`] = userData[`stepData${userData.id}`];
       userData = { ...userData, ...uData };
-      localStorage.setItem(
-        process.env.REACT_APP_APPNAME + "-userData",
-        JSON.stringify(userData)
-      );
+      localStorage.setItem(process.env.REACT_APP_APPNAME + "-userData", JSON.stringify(userData));
     }
   },
 
   saveUserData: (data, otherData) => {
     if (_.get(data, "token", false)) {
       data[`otherData${data.id}`] = otherData;
-      localStorage.setItem(
-        process.env.REACT_APP_APPNAME + "-userData",
-        JSON.stringify(data)
-      );
+      localStorage.setItem(process.env.REACT_APP_APPNAME + "-userData", JSON.stringify(data));
     }
   },
 
@@ -127,25 +108,16 @@ const Utils = {
       userData = {};
     }
     userData = { ...userData, ...data };
-    localStorage.setItem(
-      process.env.REACT_APP_APPNAME + "-userData",
-      JSON.stringify(userData)
-    );
+    localStorage.setItem(process.env.REACT_APP_APPNAME + "-userData", JSON.stringify(userData));
   },
 
   isStudent: () => {
     let userData = Utils.getUserData();
-    return (
-      parseInt(_.get(userData, "role_id", 0)) ===
-      parseInt(process.env.REACT_APP_STUDENT_ROLE)
-    );
+    return parseInt(_.get(userData, "role_id", 0)) === parseInt(process.env.REACT_APP_STUDENT_ROLE);
   },
   isTrainer: () => {
     let userData = Utils.getUserData();
-    return (
-      parseInt(_.get(userData, "role_id", 0)) ===
-      parseInt(process.env.REACT_APP_TRAINER_ROLE)
-    );
+    return parseInt(_.get(userData, "role_id", 0)) === parseInt(process.env.REACT_APP_TRAINER_ROLE);
   },
 
   loadJS: (src, failedmsg) => {
@@ -182,10 +154,7 @@ const Utils = {
             </li>
           )}
           {new Array(totpage).fill(0).map((v, p) => (
-            <li
-              key={p}
-              className={`page-item ${curpage === p + 1 ? "active" : ""}`}
-            >
+            <li key={p} className={`page-item ${curpage === p + 1 ? "active" : ""}`}>
               <a className="page-link" href="#" onClick={gotoPage(p + 1)}>
                 {p + 1}
               </a>
@@ -327,36 +296,9 @@ const Utils = {
     "Lobbyist",
   ],
 
-  academicQualifications: [
-    "10th Grade",
-    "12th Grade",
-    "Graduation",
-    "Post-Graduation",
-    "Professional Degree",
-    "PhD",
-  ],
-  courseLevel: [
-    "Beginner",
-    "Intermediate",
-    "Proficient",
-    "Experienced",
-    "Advanced",
-    "Expert",
-  ],
-  country: [
-    "English",
-    "Spanish",
-    "German",
-    "French",
-    "	Portuguese",
-    "Arabic",
-    "Hindi",
-    "Russian",
-    "Chinese",
-    "Dutch",
-    "Japanese",
-    "KOREAN",
-  ],
+  academicQualifications: ["10th Grade", "12th Grade", "Graduation", "Post-Graduation", "Professional Degree", "PhD"],
+  courseLevel: ["Beginner", "Intermediate", "Proficient", "Experienced", "Advanced", "Expert"],
+  country: ["English", "Spanish", "German", "French", "	Portuguese", "Arabic", "Hindi", "Russian", "Chinese", "Dutch", "Japanese", "KOREAN"],
   courseType: ["pdf", "video", "scorm", "quiz", "audio", "PPT", "webinar"],
   searchCalibs: [1, 51, 68, 83],
 };
