@@ -54,7 +54,7 @@ const Header = (props) => {
         </div>
         <header className="header fixed-top">
             <div className="container">
-                <a className="navbar-brand" href={`${process.env.REACT_APP_PUBLIC_URL}/`}>AD</a>
+                <a className="navbar-brand" href={`${process.env.REACT_APP_PUBLIC_URL}/`}>KSTVERSE</a>
                 {/* <form className="searchBOx searchBOxwhite" >
                     <div className="input-group">
                         <div className="input-group-btn search-panel" data-search="students">
