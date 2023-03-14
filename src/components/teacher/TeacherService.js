@@ -3,6 +3,7 @@ import React, { useEffect} from 'react';
 import _ from 'lodash';
 
 import TeacherNav from './TeacherNav';
+import Utils from '../../Utils';
 
 
 const TeacherService = (props) => {
@@ -12,13 +13,22 @@ const TeacherService = (props) => {
     useEffect(window.scrollEffect, []);
 
     return (<>
+     {Utils.isTrainer() && (
+                <div className='container mb-3 editTrainerdetails'>
+                    <div className='row'>
+                        <div className='col-12 text-right'>
+                            <a className=' bg-primary p-2 text-white rounded' href='/my-profile#service'>Edit <i className='fas fa-edit text-white'></i></a>
+                        </div>
+                    </div>
+                </div>
+            )}
         <div className='row'>
-            <div className='col-lg-3 col-md-3 col-12 pt-3 pb-1'>
+            {/* <div className='col-lg-3 col-md-3 col-12 pt-3 pb-1'>
                 
                 <TeacherNav slug={props.slug} page={props.page} onPageChange={props.onPageChange} />
                 
-            </div>
-            <div className='col-lg-9 col-md-9 col-12 pt-2 pb-1'>
+            </div> */}
+            <div className='col-lg-12 col-md-12 col-12 pt-2 pb-1'>
                 <img className="img-fluid imgTransfer w-100" src={`${process.env.REACT_APP_API_URL}/uploads/service/${encodeURI(data.service_image)}`} alt="service" />
             </div>
         </div>

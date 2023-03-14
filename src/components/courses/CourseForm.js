@@ -85,7 +85,7 @@ const CourseForm = (props) => {
 
     <Row>  
       <Col md={3} className="mt-3">  
-        {photoUploader('course_image','Upload product image')}
+        {photoUploader('course_image','Upload product image (Image dimension should be 1000cm x 667cm)')}
       </Col>
       <Col md={9} className="mt-3">  
       <Form.Label>Short Description: </Form.Label>

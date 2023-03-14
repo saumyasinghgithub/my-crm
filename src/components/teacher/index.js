@@ -4,6 +4,7 @@ import TeacherService  from "./TeacherService";
 import TeacherKnowledge from "./TeacherKnowledge";
 import TeacherCommunity  from "./TeacherCommunity";
 import TeacherLibrary  from "./TeacherLibrary";
+import TeacherSubscribe from "./TeacherSubscribe";
 
 export {
   TeacherProfile,
@@ -11,5 +12,6 @@ export {
   TeacherService,
   TeacherKnowledge,
   TeacherCommunity,
-  TeacherLibrary
+  TeacherLibrary,
+  TeacherSubscribe
 };

@@ -3,6 +3,7 @@ import { Form, Alert, Spinner, Row, Col, Button } from "react-bootstrap";
 import UserContext from "../../contexts/UserContext";
 import _ from "lodash";
 import moment from "moment";
+import Accordion from 'react-bootstrap/Accordion';
 
 const AwardCertificationsForm = (props) => {
   const [awardData, setAwardData] = useState([]);
@@ -70,11 +71,14 @@ const AwardCertificationsForm = (props) => {
     return (
       <>
         {awardData.map((v, k) => (
-          <Row
-            key={k}
-            className="my-1"
-            style={{ backgroundColor: k % 2 === 0 ? "#ddf4f4" : "#f8f8f8" }}
-          >
+           <Accordion defaultActiveKey={[0]} alwaysOpen>
+          <Row>
+          <Accordion.Item eventKey={k} 
+              className="my-1"
+              style={{ backgroundColor: k % 2 === 0 ? "#ddf4f4" : "#f8f8f8" }}>
+                <Accordion.Header className="mb-0"><strong>Awards/Certification {k+1} </strong></Accordion.Header>
+                <Accordion.Body>
+                  <Row>
             <Col md={3} className="mt-3">
               <Form.Control
                 as="select"
@@ -124,7 +128,9 @@ const AwardCertificationsForm = (props) => {
                 onChange={saveAData(k, "url")}
               />
             </Col>
-
+            </Row>
+                </Accordion.Body>
+              </Accordion.Item>
             {k > 3 && (
               <i
                 className="fa fa-minus-circle fa-lg mt-2 cursor-pointer text-danger remove-award"
@@ -132,6 +138,7 @@ const AwardCertificationsForm = (props) => {
               />
             )}
           </Row>
+          </Accordion>
         ))}
       </>
     );

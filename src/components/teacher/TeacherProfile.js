@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext} from 'react';
 import { Container, Spinner, Alert } from 'react-bootstrap';
 
-import {TeacherAbout, TeacherService, TeacherKnowledge, TeacherCommunity, TeacherLibrary}  from './index';
+import {TeacherSubscribe, TeacherAbout, TeacherService, TeacherKnowledge, TeacherCommunity, TeacherLibrary}  from './index';
 
 import _ from 'lodash';
 
@@ -65,7 +65,7 @@ const TeacherProfile = (props) => {
                                     <li className="current"><em>{trainer.about.firstname} {trainer.about.lastname}</em></li>
                                 </ol>
                             </nav>
-                            
+                            <TeacherSubscribe {...params} />
                             {page==='about' && <TeacherAbout {...params} data={trainer.about} rating={trainer.rating} social={trainer.social} total={trainer.total} academics={trainer.academics} experiences={trainer.experiences} awards={trainer.awards}  />}
                             {page==='service' && <TeacherService data={trainer.service} {...params}  />}
                             {page==='knowledge' && <TeacherKnowledge data={trainer.knowledge} blogs={trainer.blogs} {...params} />}
