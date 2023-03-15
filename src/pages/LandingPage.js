@@ -20,8 +20,9 @@ const LandingPage = (props) => {
     "https://static.wixstatic.com/media/dacb90_f7f587e79fd14896a3f30e5a475c1e99~mv2.png/v1/fill/w_648,h_366,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/dacb90_f7f587e79fd14896a3f30e5a475c1e99~mv2.png";
   const video = "https://youtu.be/IPzGKaY4-yw";
   useEffect(() => {
-    getServerData(`trainer/profile/${slug}`, true)
+    getServerData(`trainer/landing/${slug}`, true)
       .then((tData) => {
+        console.log(tData);
         setTrainer(tData);
       })
       .catch((msg) => {
@@ -33,42 +34,31 @@ const LandingPage = (props) => {
       <Container fluid>
         <Row className="landingPageRow">
           <Col md={11} className="landingSlider">
-            <MDBCarousel showIndicators fade>
-              <MDBCarouselItem
-                className="w-100 d-block"
-                itemId={1}
-                src="https://static.wixstatic.com/media/dacb90_d45f28ce338d496e83fdb93e3fe39ee0~mv2.png/v1/fill/w_1236,h_450,al_c,q_90,enc_auto/dacb90_d45f28ce338d496e83fdb93e3fe39ee0~mv2.png"
-                alt="..."
-              >
-                <div className="slider1Div">
-                  <h4 className="sliderh4">"We cannot continue to teach advanced skills when we have not mastered the basics"</h4>
-                  <h4>
-                    <span>— Dr. Susan Davis</span>
-                  </h4>
-                  <a href="/">Click Here to Know More About Me</a>
-                </div>
-              </MDBCarouselItem>
-
-              <MDBCarouselItem
-                className="w-100 d-block"
-                itemId={2}
-                src="https://static.wixstatic.com/media/dacb90_356db284fe4f431ea674d35a1a710fb9~mv2.png/v1/fill/w_1236,h_450,al_c,q_90,enc_auto/dacb90_356db284fe4f431ea674d35a1a710fb9~mv2.png"
-                alt="..."
-              >
-                <h5>Second slide label</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </MDBCarouselItem>
-
-              <MDBCarouselItem
-                className="w-100 d-block"
-                itemId={3}
-                src="https://static.wixstatic.com/media/dacb90_4ea52b1eae274e2fa231025c9ba8345a~mv2.png/v1/fill/w_1236,h_450,al_c,q_90,enc_auto/dacb90_4ea52b1eae274e2fa231025c9ba8345a~mv2.png"
-                alt="..."
-              >
-                <h5>Third slide label</h5>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-              </MDBCarouselItem>
-            </MDBCarousel>
+            {_.get(trainer, "slides", []).length > 0 && (
+              <MDBCarousel showIndicators fade>
+                {_.get(trainer, "slides", []).map((slide, idx) => (
+                  <MDBCarouselItem
+                    className="w-100 d-block"
+                    key={idx}
+                    itemId={idx + 1}
+                    src={process.env.REACT_APP_API_URL + "/uploads/slider/" + slide.slider_image}
+                    alt="..."
+                  >
+                    <div className="slider1Div">
+                      {!_.isEmpty(slide.slider_text) && (
+                        <>
+                          <h4 className="sliderh4">"{slide.slider_text}"</h4>
+                          <h4>
+                            <span> — {[trainer.about.firstname, trainer.about.lastname].join(" ")}</span>
+                          </h4>
+                        </>
+                      )}
+                      {!_.isEmpty(slide.cta_link) && <a href={slide.cta_link}>Click Here to Know More About Me</a>}
+                    </div>
+                  </MDBCarouselItem>
+                ))}
+              </MDBCarousel>
+            )}
           </Col>
           <Col md={10} className="landingSlider landingVideo">
             <Col md={7} className="landingFloatVideo">
