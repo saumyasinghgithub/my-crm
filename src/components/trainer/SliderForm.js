@@ -17,8 +17,8 @@ const SliderForm = (props) => {
     getServerData("trainer/sliders")
       .then((data) => {
         console.log("fetching data" + data);
-        while (data.length < 1) {
-          data = [...data, { slider_image: "", slider_text: "", cta_link: "" }];
+        while (data.length < 2) {
+          data = [...data, { id: 0, slider_image: "", slider_text: "", cta_link: "" }];
         }
         console.log(data);
         setSliderData(data);
@@ -47,7 +47,7 @@ const SliderForm = (props) => {
   };
 
   const addAData = (e) => {
-    let newdata = [...sliderData, { slider_image: "", slider_text: "", cta_link: "" }];
+    let newdata = [...sliderData, { id: 0, slider_image: "", slider_text: "", cta_link: "" }];
     setSliderData(newdata);
   };
   const removeAData = (pos) => (e) => {
@@ -96,7 +96,7 @@ const SliderForm = (props) => {
                   </Row>
                 </Accordion.Body>
               </Accordion.Item>
-              {k > 0 && <i className="fa fa-minus-circle fa-lg mt-2 cursor-pointer text-danger remove-award" onClick={removeAData(k)} />}
+              {k > 1 && <i className="fa fa-minus-circle fa-lg mt-2 cursor-pointer text-danger remove-award" onClick={removeAData(k)} />}
             </Row>
           </Accordion>
         ))}
