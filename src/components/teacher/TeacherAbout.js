@@ -130,7 +130,7 @@ const TeacherAbout = (props) => {
                 {props.total.courses}
               </p>
               <div className="profileFollowList">
-                <h5>Follow Ben on</h5>
+                <h5>Follow {data.firstname}</h5>
                 <ul>
                   {socialPlatforms.map(
                     (sp) =>

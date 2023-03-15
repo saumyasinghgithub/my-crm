@@ -69,7 +69,7 @@ const AcademicForm = (props) => {
       <>
         {academicData.map((v, k) => (
           <Row key={k}>
-            <Col md={8} className="mt-3">
+            {/* <Col md={8} className="mt-3">
               <Form.Control
                 as="select"
                 name="qualification"
@@ -88,6 +88,9 @@ const AcademicForm = (props) => {
                   </option>
                 ))}
               </Form.Control>
+                  </Col>*/}
+            <Col md={7} className="mt-3">
+              <Form.Control type="text" name="qualification" placeholder="Enter qualification" defaultValue={_.get(academicData,`${k}.qualification`, "")} /> 
             </Col>
             <Col md={3} className="mt-3">
               <Form.Control

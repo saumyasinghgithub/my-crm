@@ -43,20 +43,22 @@ const TeacherService = (props) => {
         </div>
 
         <div className="serviceBody">
-          <div className="awardTextInner awardwithoutLine">
+        <div className="awardTextInner awardwithoutLine">
             <div className="awadText slideInUp wow " dangerouslySetInnerHTML={{ __html: data.service_offer }}></div>
-          </div>
-          <div className="servicesTextBox slideInUp wow ">
+        </div>
+        {data.consultancy ? (
+            <div className="servicesTextBox slideInUp wow ">
             <div className="row">
               <div className="col-sm-2">
-                <div className="Sheading">Consultancy</div>
+                <div className="Sheading">Merchandise</div>
               </div>
               <div className="col-sm-10">
                 <div dangerouslySetInnerHTML={{ __html: data.consultancy }}></div>
-                {/* <div className="dropMsg lineANimation" data-toggle="modal" data-target="#dropMsgModal">Drop a message!</div> */}
               </div>
             </div>
           </div>
+          ):(<p></p>)}
+          {data.coaching ? (
           <div className="servicesTextBox slideInUp wow ">
             <div className="row">
               <div className="col-sm-2">
@@ -64,10 +66,10 @@ const TeacherService = (props) => {
               </div>
               <div className="col-sm-10">
                 <div dangerouslySetInnerHTML={{ __html: data.coaching }}></div>
-                {/* <div className="dropMsg lineANimation" data-toggle="modal" data-target="#dropMsgModal">Drop a message!</div> */}
               </div>
             </div>
           </div>
+          ) : (<p></p>)}
         </div>
       </div>
     </>
