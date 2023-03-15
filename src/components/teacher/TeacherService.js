@@ -50,7 +50,7 @@ const TeacherService = (props) => {
             <div className="servicesTextBox slideInUp wow ">
             <div className="row">
               <div className="col-sm-2">
-                <div className="Sheading">Consultancy</div>
+                <div className="Sheading">Merchandise</div>
               </div>
               <div className="col-sm-10">
                 <div dangerouslySetInnerHTML={{ __html: data.consultancy }}></div>
