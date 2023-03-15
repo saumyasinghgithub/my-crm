@@ -130,7 +130,7 @@ const TeacherAbout = (props) => {
                 {props.total.courses}
               </p>
               <div className="profileFollowList">
-                <h5>Follow Ben on</h5>
+                <h5>Follow {data.firstname}</h5>
                 <ul>
                   {socialPlatforms.map(
                     (sp) =>
@@ -207,23 +207,29 @@ const TeacherAbout = (props) => {
         </ul>
         <div className="tab-content pt-4">
           <div className="profileContent tab-pane active" id="academicContent">
-            <div className="input-flex-container" style={{ maxWidth: props.academics.length * 125 + "px" }}>
-              <div className="input"></div>
-              {props.academics.map((a) => (
-                <div className="input" key={a.id}>
-                  <span data-year={a.year} data-info={a.qualification}></span>
+            <div className="container">
+              <div className="awardTextWrapper">
+                <div className="awardTextInner">
+                  {props.academics.map((a) => (
+                    <div className="awadText">
+                      <span className="awardYear">{a.year}</span> <span>{a.qualification}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
           <div className="profileContent tab-pane fade" id="experienceContent">
-            <div className="input-flex-container" style={{ maxWidth: props.experiences.length * 130 + "px" }}>
-              <div className="input"></div>
-              {props.experiences.map((a) => (
-                <div className="input" key={a.id}>
-                  <span data-year={a.company} data-info={a.location}></span>
+            <div className="container">
+              <div className="awardTextWrapper">
+                <div className="awardTextInner">
+                  {props.experiences.map((a) => (
+                    <div className="awadText">
+                      <span className="awardYear">{a.company}</span> <span>{a.location}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>
@@ -245,8 +251,7 @@ const TeacherAbout = (props) => {
             <div className="awardTextInner">
               {props.awards.map((a) => (
                 <div className="awadText slideInUp wow ">
-                  <span className="awardYear">{a.year}</span> <span className="boldText">{a.award}</span> | {a.organisation} | {a.url}
-                </div>
+                  <span className="awardYear">{a.year}</span> <span className="boldText">{a.award}</span> | <a href="a.url">{a.organisation}</a>                </div>
               ))}
             </div>
           </div>
