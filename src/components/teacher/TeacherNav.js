@@ -5,6 +5,7 @@ import _ from "lodash";
 
 const TeacherNav = (props) => {
   const navs = {
+    about: "About",
     service: "Services",
     knowledge: "Knowledge",
     community: "Community",
@@ -34,10 +35,12 @@ const TeacherNav = (props) => {
 
   // const trainerUrl = Utils.getTrainerURL();
   // const checkLogin = Utils.isLoggedIn();
+  /* {pathname.indexOf("/professional-profile") > -1 && menuItem("Profile", "")}
+      {pathname.indexOf("/professional-profile") === -1 && menuItem("Professional Profile", "professional-profile/about")} */
   return (
-    <ul className="navbar-nav mt-2 mt-lg-0">
-      {pathname.indexOf("/professional-profile") > -1 && menuItem("Profile", "")}
-      {pathname.indexOf("/professional-profile") === -1 && menuItem("Professional Profile", "professional-profile/about")}
+    <ul className="navbar-nav mt-2 mt-lg-0">      
+      {pathname.indexOf("/professional-profile") > -1 && menuItem("Home", "")}
+      {pathname.indexOf("/professional-profile") === -1 && menuItem("Home", "")}
       {_.map(navs, (label, k) => menuItem(label, `professional-profile/${k}`))}
     </ul>
   );

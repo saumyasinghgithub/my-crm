@@ -33,6 +33,7 @@ const TeacherProfile = (props) => {
   }, []);
 
   useEffect(window.scrollEffect, [trainer]);
+  console.log('trainerdata'+trainer.awards);
 
   return (
     <Container fluid className="h-100 p-0">
