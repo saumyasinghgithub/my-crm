@@ -15,9 +15,6 @@ const LandingPage = (props) => {
   const slug = Utils.subdomain();
   const [trainer, setTrainer] = useState({});
   const { getServerData } = useContext(UserContext);
-  const src = "https://rajesh-singh-1.autodidact.app/";
-  // const poster =
-  //   "https://static.wixstatic.com/media/dacb90_f7f587e79fd14896a3f30e5a475c1e99~mv2.png/v1/fill/w_648,h_366,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/dacb90_f7f587e79fd14896a3f30e5a475c1e99~mv2.png";
   const video = "https://youtu.be/IPzGKaY4-yw";
   useEffect(() => {
     getServerData(`trainer/landing/${slug}`, true)
