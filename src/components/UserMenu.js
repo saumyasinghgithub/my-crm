@@ -106,16 +106,16 @@ const UserMenu = (props) => {
                 </a>
               </li>
             )}
-            {Utils.isTrainer() && (
+            {/*Utils.isTrainer() && (
               <li>
                 <a href={`${process.env.PUBLIC_URL}/ad-trainer`}>
                   Help for you
                 </a>
               </li>
-            )}
-            <li>
+            )*/}
+            {/*<li>
               <a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a>
-            </li>
+            </li>*/}
           </ul>
         </div>
         <div className="col-sm-6">
