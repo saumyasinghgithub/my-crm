@@ -17,9 +17,9 @@ const PrivacyPolicy = (props) => {
       </nav>   
         <div className="AD-studio">
             <h1 className="headingtext slideInUp wow ">Privacy Policy</h1>
-            <p className="slideInUp wow">At Autodidact, we believe that a user’s information must be protected. This is why we understand the importance of ensuring that you understand how we treat the information you provide us on our site.</p>
+            <p className="slideInUp wow">At Tverse, we believe that a user’s information must be protected. This is why we understand the importance of ensuring that you understand how we treat the information you provide us on our site.</p>
             <h4 className="slideInUp wow">About Our Privacy Policy</h4>   
-            <p className="slideInUp wow">Autodidact gathers data, processes and utilizes it purely for business purposes, and makes sure that it is kept confidential. This Policy is intended toward the following customers/users of our website:</p>
+            <p className="slideInUp wow">Tverse gathers data, processes and utilizes it purely for business purposes, and makes sure that it is kept confidential. This Policy is intended toward the following customers/users of our website:</p>
 
             <p className="slideInUp wow">Customers who contact us via our “Contact Us” form or other forms on the website.</p>
                 
@@ -33,7 +33,7 @@ const PrivacyPolicy = (props) => {
 				
 				<p className="slideInUp wow">Troubleshoot problems; determine consumer interest in our services; help promote safe matching; notify you about products, services, offers, and updates; identify and protect us against fraud, errors, and other criminal activity; customize your experience. We may also compare and evaluate your business information for accuracy, errors, or omissions.</p>
 				
-				<p className="slideInUp wow">We make use of website navigation data in combination with the business information you provide to get aggregated information about how users navigate on the Autodidact website which helps us control and improve your experience when you visit us.</p>
+				<p className="slideInUp wow">We make use of website navigation data in combination with the business information you provide to get aggregated information about how users navigate on the Tverse website which helps us control and improve your experience when you visit us.</p>
 				
 				<p className="slideInUp wow">The IP address is tracked when you make use of our website. This is done to monitor areas in our website that you navigate through or where you sign-up for our services. The address is also recorded to improve our advertising and website layout and for statistical purposes. In particular, the IP address is used for the following objectives:</p>
 				
@@ -45,7 +45,7 @@ const PrivacyPolicy = (props) => {
 
 				<p className="slideInUp wow">The information we request from you on our website is solely for managing our services and enhancing the user experience.</p>
 				<h4 className="slideInUp wow">Information Protection</h4>
-            <p className="slideInUp wow">Autodidact offers you a high level of security to safeguard your information against theft, loss and unauthorized use, access, and modification. We employ administrative, reasonable, logical, and managerial measures that ensure that:</p>
+            <p className="slideInUp wow">Tverse offers you a high level of security to safeguard your information against theft, loss and unauthorized use, access, and modification. We employ administrative, reasonable, logical, and managerial measures that ensure that:</p>
 				<p className="slideInUp wow">All our agents, independent contractors, and employees accept the non-disclosure agreements that maintain explicit confidentiality protections. Any individual violating such security and/or privacy policies is liable for possible termination and criminal and/or civil prosecution.</p>
             <p className="slideInUp wow">Optimum data accuracy is maintained and any unauthorized access is avoided by implementing specific technologies that protect and ensure that your data is only available to the recipient you have granted access to.</p>
             <p className="slideInUp wow">We rely on your consent with regard to your data. You may withdraw your consent at any point by contacting us at marcom@knowledgesynonyms. You will also have the right to review, rectify, and access your personal data. If you wish to correct your information, such as your name, email address, or any other preferences, you are permitted to ask us for a copy of your information.</p>

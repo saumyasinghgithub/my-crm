@@ -17,13 +17,13 @@ const CookiePolicy = (props) => {
       </nav>   
         <div className="AD-studio">
             <h1 className="headingtext slideInUp wow ">Cookie Policy</h1>
-            <p className="slideInUp wow"><strong>AutoDidact</strong> is committed to protecting and respecting your privacy and wants you to know exactly how we handle the information we receive via our website and through our online services.</p>
+            <p className="slideInUp wow"><strong>Tverse</strong> is committed to protecting and respecting your privacy and wants you to know exactly how we handle the information we receive via our website and through our online services.</p>
                
-            <p className="slideInUp wow">This policy sets out the basis of how the personal data you provide us or we collect from you, through our website www.autodidact.com, will be processed. Please read the following carefully to understand our views and practices with respect to the information you provide us.</p>
+            <p className="slideInUp wow">This policy sets out the basis of how the personal data you provide us or we collect from you, through our website www.kstverse.com, will be processed. Please read the following carefully to understand our views and practices with respect to the information you provide us.</p>
 
             <p className="slideInUp wow">Our site uses cookies to distinguish you from other visitors to provide you with a better experience and to help us improve user experience. By continuing to browse our sites, you are agreeing to our use of cookies as stated below.</p>
                 
-            <p className="slideInUp wow"><strong>Autodidact-AD </strong> ("us", "we", or "our") uses cookies on www.autodidact.com. By using the Service, you consent to the use of cookies. We use cookies for the following purposes: to enable certain functions of the Service, to provide analytics, to store your preferences, to enable advertisements delivery, including behavioural advertising.</p>
+            <p className="slideInUp wow"><strong>Tverse </strong> ("us", "we", or "our") uses cookies on www.kstverse.com. By using the Service, you consent to the use of cookies. We use cookies for the following purposes: to enable certain functions of the Service, to provide analytics, to store your preferences, to enable advertisements delivery, including behavioural advertising.</p>
 				
 				<p className="slideInUp wow">We use both session and persistent cookies on the Service. There are other different types of cookies that we use to run our Services:</p>
 				

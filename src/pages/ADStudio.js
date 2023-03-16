@@ -10,15 +10,15 @@ const ADStudio = (props) => {
     <nav>
                         <ol className="cd-breadcrumb">
                             <li><a href="/">Home</a></li>
-                            <li className="current"><em>AD studio</em></li>
+                            <li className="current"><em>Tverse studio</em></li>
                         </ol>
                     </nav>
    <div className="AD-studio">
       <div className="row">
          <div className="col-sm-12">
-            <h1 className="headingtext slideInUp wow ">Our AD studio</h1>
+            <h1 className="headingtext slideInUp wow ">Our Tverse studio</h1>
             <p>Autodidact is a Global virtual marketplace dedicated towards bringing the best training minds under one roof so that they can be found by their potential audience.</p>
-            <p>AD gives allows trainers to create their digital presence for free. This gives them the opportunity to utilize their skills and experiences to create and distribute a unique digital learning asset catalogue and services portfolio.</p>
+            <p>Tverse gives allows trainers to create their digital presence for free. This gives them the opportunity to utilize their skills and experiences to create and distribute a unique digital learning asset catalogue and services portfolio.</p>
             <p>It is the world’s first global trainers and instructors listing done with elaborated and scientific rating and filtration engine. This helps corporates and executives look for trainers who meet their specific consulting and training needs.</p>
             <img src="assets/images/studio1.jpg" alt="" />
          </div>
@@ -47,7 +47,7 @@ const ADStudio = (props) => {
             <h2 className="headingtext slideInUp wow ">How does it help the trainer?</h2>
             <ul>
                <li>Create a free Digital Presence in a Global Virtual Market Place (Membership only by invitation or after successful screening and validation of the Trainers background by the Autodidact expert panel).</li>
-               <li>The more popular the trainer amongst corporates, executives and students, the more the chances of an increase in the training, consulting and coaching assignments he/she receives. (Top profile trainers will be displayed in AD’s Hall of Fame club, giving them free access to our content design and SCORM conversion services).</li>
+               <li>The more popular the trainer amongst corporates, executives and students, the more the chances of an increase in the training, consulting and coaching assignments he/she receives. (Top profile trainers will be displayed in Tverse’s Hall of Fame club, giving them free access to our content design and SCORM conversion services).</li>
             </ul>
          </div>
       </div>
@@ -57,12 +57,12 @@ const ADStudio = (props) => {
             <h2 className="headingtext slideInUp wow ">Your digital learning asset catalogue:</h2>
             <ul>
                <li>Its free Fluidic and responsive web presence helps you create Dynamic Trainings and Asset Catalogue in multiple languages in modes like ILT, Online Learning, Audio Podcast, Video, Performance tools etc.</li>
-               <li>AD is the World’s first free training platform that allows you to upload SCORM /xAPI complaint learning objects with complete student performance insights.</li>
+               <li>Tverse is the World’s first free training platform that allows you to upload SCORM /xAPI complaint learning objects with complete student performance insights.</li>
                <li>Use API to integrate your LMS/HRMS with the client organizations. (API integration service will be performed at an extra cost).</li>
                <li>Enhance your library using the SCORM Publishing / packaging and Content design and development engines.</li>
-               <li>Access AD’s Learning Management to be able to brand the learning assets and course library that you created under your own organization.</li>
+               <li>Access Tverse’s Learning Management to be able to brand the learning assets and course library that you created under your own organization.</li>
                <li>Your asset catalogue is integrated with a secure payment gateway to cater to the worldwide training market.</li>
-               <li>Use AD’s intelligent sales insights to understand and plan the sales trends and new learning objects and courses that are high in demand.</li>
+               <li>Use Tverse’s intelligent sales insights to understand and plan the sales trends and new learning objects and courses that are high in demand.</li>
                <li>You can resell or invite organizations executives to use these trainings. This enhances the overall proposition of any engagement with corporations. They can be used as extra forms of assets in a structured environment.</li>
             </ul>
             <h2 className="headingtext slideInUp wow ">Other bonuses:</h2>
