@@ -74,11 +74,11 @@ const UserMenu = (props) => {
                 </li>
               </>
             )}
-            {Utils.isTrainer() && (
+            {/*Utils.isTrainer() && (
               <li>
                 <a href={getSlug()}>My Profile</a>
               </li>
-            )}
+            )*/}
             {Utils.isTrainer() && (
               <li>
                 <a href={`${process.env.PUBLIC_URL}/my-course`}>My Course</a>
@@ -141,9 +141,9 @@ const UserMenu = (props) => {
                     Enrolled Courses
                   </a>
                 </li>
-                <li>
+                {/*<li>
                   <a href={getSlug()+'professional-profile'}>Professional Profile</a>
-                </li>
+                  </li>*/}
                 <li>
                   <a href={`${process.env.PUBLIC_URL}/preferred-trainers`}>
                     Preferred Trainer
