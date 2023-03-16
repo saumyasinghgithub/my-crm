@@ -194,7 +194,7 @@ const CourseDetails = (props) => {
               <>
                 <div className="cardWrapper">
                   <div className="container">
-                    <nav className="breadcrumb-list" aria-label="breadcrumb">
+                    {/*<nav className="breadcrumb-list" aria-label="breadcrumb">
                       <span className="backarrow">
                         <a href={`${process.env.PUBLIC_URL}/search-results`}>
                           <img src="/assets/images/back-arrow.png" alt="AD" />
@@ -206,7 +206,7 @@ const CourseDetails = (props) => {
                           {course.course.name}
                         </li>
                       </ol>
-                    </nav>
+            </nav>*/}
 
                     <ul className="iconList nav nav-tabs">
                       {_.map(course.resources, renderResource)}
