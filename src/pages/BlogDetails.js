@@ -51,12 +51,12 @@ const BlogDetails = (props) => {
    </>}
 {_.get(data,'success',false)!==false && <>
 <div className="help-wrapper">
-<nav>
+{/*<nav>
    <ol className="cd-breadcrumb">
       <li><a href="/">Home</a></li>
       <li className="current"><em>{data.name}</em></li>
    </ol>
-</nav>
+</nav>*/}
 
 <div className="">
    <img className="img-fluid" src={`${process.env.REACT_APP_API_URL}/uploads/banner/${data.banner_image}`} alt="AD" />

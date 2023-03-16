@@ -92,7 +92,7 @@ const ChangePassword = (props) => {
     <>
       <Container className="h-100 ">
         <div className="help-wrapper">
-          <nav>
+          {/*<nav>
             <ol className="cd-breadcrumb">
               <li>
                 <a href="/">Home</a>
@@ -101,7 +101,7 @@ const ChangePassword = (props) => {
                 <em>Change Password</em>
               </li>
             </ol>
-          </nav>
+  </nav>*/}
           <div className="">
             <h1 className="slideInUp wow animated pt-4 pb-4 mb-0">
               Change your account password

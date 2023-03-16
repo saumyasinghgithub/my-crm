@@ -9,12 +9,12 @@ const CookiePolicy = (props) => {
    <div className="help-wrapper"> 
  
     <div className="container">
-    <nav>
+    {/*<nav>
             <ol className="cd-breadcrumb">
                <li><a href="/">Home</a></li>
                <li className="current"><em>Cookie Policy</em></li>
             </ol>
-      </nav>   
+    </nav>*/}
         <div className="AD-studio">
             <h1 className="headingtext slideInUp wow ">Cookie Policy</h1>
             <p className="slideInUp wow"><strong>Tverse</strong> is committed to protecting and respecting your privacy and wants you to know exactly how we handle the information we receive via our website and through our online services.</p>

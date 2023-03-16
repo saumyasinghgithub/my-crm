@@ -9,12 +9,12 @@ const PrivacyPolicy = (props) => {
    <div className="help-wrapper"> 
  
     <div className="container">
-    <nav>
+    {/*<nav>
             <ol className="cd-breadcrumb">
                <li><a href="/">Home</a></li>
                <li className="current"><em>Privacy Policy</em></li>
             </ol>
-      </nav>   
+    </nav>*/}
         <div className="AD-studio">
             <h1 className="headingtext slideInUp wow ">Privacy Policy</h1>
             <p className="slideInUp wow">At Tverse, we believe that a user’s information must be protected. This is why we understand the importance of ensuring that you understand how we treat the information you provide us on our site.</p>

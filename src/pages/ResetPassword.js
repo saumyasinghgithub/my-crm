@@ -87,7 +87,7 @@ const ResetPassword = (props) => {
     <>
       <Container className="h-100 ">
         <div className="help-wrapper">
-          <nav>
+          {/*<nav>
             <ol className="cd-breadcrumb">
               <li>
                 <a href="/">Home</a>
@@ -96,7 +96,7 @@ const ResetPassword = (props) => {
                 <em>Reset Password</em>
               </li>
             </ol>
-          </nav>
+  </nav>*/}
           <div className="">
             <img src="assets/images/contact.jpg" className="img-fluid" alt="" />
             <h1 className="slideInUp wow animated pt-4 pb-4 mb-0">

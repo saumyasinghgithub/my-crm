@@ -64,7 +64,7 @@ const StudentProfileView = (props) => {
                   <div className="container">
                     <Row>
                       <Col md={12}>
-                        <nav>
+                        {/*<nav>
                           <ol className="cd-breadcrumb">
                             <li>
                               <a href="/">Home</a>
@@ -75,7 +75,7 @@ const StudentProfileView = (props) => {
                               </em>
                             </li>
                           </ol>
-                        </nav>
+            </nav>*/}
                       </Col>
                     </Row>
                     <div className="row">

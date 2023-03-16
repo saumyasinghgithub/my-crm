@@ -9,12 +9,12 @@ const About = (props) => {
             <div className="profile-wrapper">
 
                 <div className="container">
-                    <nav>
+                    {/*<nav>
                         <ol className="cd-breadcrumb">
                             <li><a href="/">Home</a></li>
                             <li className="current"><em>About Us</em></li>
                         </ol>
-                    </nav>
+    </nav>*/}
                     <div className="headingBold text-center text-uppercase">About us</div>
 
                     <div className='pt-5'>

@@ -7,12 +7,12 @@ const ADTrainer = (props) => {
     return (<>
     <Container className="h-100 ">
     <div className="help-wrapper">
-    <nav>
+    {/*<nav>
                         <ol className="cd-breadcrumb">
                             <li><a href="/">Home</a></li>
                             <li className="current"><em>Help for Trainers</em></li>
                         </ol>
-                    </nav>
+    </nav>*/}
    <div className="">
       <img src="assets/images/Help_for_trainers.jpg" alt="" />
       <div className="AD-help">

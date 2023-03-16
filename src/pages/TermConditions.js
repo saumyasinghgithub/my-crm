@@ -9,12 +9,12 @@ const TermConditions = (props) => {
    <div className="help-wrapper"> 
  
     <div className="container">
-    <nav>
+    {/*<nav>
             <ol className="cd-breadcrumb">
                <li><a href="/">Home</a></li>
                <li className="current"><em>Terms Of Service</em></li>
             </ol>
-      </nav>   
+    </nav>*/} 
         <div className="AD-studio">
             <h1 className="headingtext slideInUp wow ">Terms Of Service</h1>
             <p className="slideInUp wow">The information found on this website has been provided by Autodidact. By accessing this website, you accept these terms and conditions in full. Accordingly, if you disagree with these terms and conditions or any part of these terms and conditions, you must not use or download content on this website.</p>
