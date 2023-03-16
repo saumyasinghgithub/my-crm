@@ -46,10 +46,10 @@ const HeaderTrainer = (props) => {
                     <input className="form-control" type="text" placeholder="How can I help you ?" />
                 </form>
                 <ul className="navList">
-                    <li><a href={`${process.env.REACT_APP_PUBLIC_URL}/about-us`}>About us <span>Any queries? Problems with upload? No matter what the issue is,
+                   {/* <li><a href={`${process.env.REACT_APP_PUBLIC_URL}/about-us`}>About us <span>Any queries? Problems with upload? No matter what the issue is,
                         we will help, support and find a way!</span></a></li>
                     <li><a href={`${process.env.REACT_APP_PUBLIC_URL}/ad-studio`}>Tverse Studio <span>World best learning plaform.</span></a></li>
-                    <li><a href={`${process.env.REACT_APP_PUBLIC_URL}/ad-trainer`}>Help for Trainer <span>Get to know us, get to work with us.</span></a></li>
+                    <li><a href={`${process.env.REACT_APP_PUBLIC_URL}/ad-trainer`}>Help for Trainer <span>Get to know us, get to work with us.</span></a></li>*/}
                     <li><a href={`${process.env.REACT_APP_PUBLIC_URL}/ad-student`}>Help for Student <span>Start with a plan and finish with results.</span></a></li>
                     <li><a href={`${process.env.REACT_APP_PUBLIC_URL}/contact-us`}>Contact <span>Get to know us, get to work with us.</span></a></li>
                 </ul>
