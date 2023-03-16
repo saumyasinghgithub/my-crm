@@ -71,7 +71,7 @@ const TeacherProfile = (props) => {
             <>
               <div className="profile-wrapper">
                 <div className="container">
-                  <nav>
+                  {/*<nav>
                     <ol className="cd-breadcrumb">
                       <li>
                         <a href="/">Home</a>
@@ -82,7 +82,7 @@ const TeacherProfile = (props) => {
                         </em>
                       </li>
                     </ol>
-                  </nav>
+          </nav>*/}
                   {page === "about" && (
                     <>
                       <TeacherSubscribe {...params} />
