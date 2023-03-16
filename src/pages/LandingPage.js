@@ -16,8 +16,8 @@ const LandingPage = (props) => {
   const [trainer, setTrainer] = useState({});
   const { getServerData } = useContext(UserContext);
   const src = "https://rajesh-singh-1.autodidact.app/";
-  const poster =
-    "https://static.wixstatic.com/media/dacb90_f7f587e79fd14896a3f30e5a475c1e99~mv2.png/v1/fill/w_648,h_366,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/dacb90_f7f587e79fd14896a3f30e5a475c1e99~mv2.png";
+  // const poster =
+  //   "https://static.wixstatic.com/media/dacb90_f7f587e79fd14896a3f30e5a475c1e99~mv2.png/v1/fill/w_648,h_366,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/dacb90_f7f587e79fd14896a3f30e5a475c1e99~mv2.png";
   const video = "https://youtu.be/IPzGKaY4-yw";
   useEffect(() => {
     getServerData(`trainer/landing/${slug}`, true)
@@ -93,10 +93,26 @@ const LandingPage = (props) => {
           <Container>
             <Col md={12} className="landingSlider landingVideo">
               <h3 class="landingHeading">Join <span>Community</span></h3>
-              <div class="landingFloatVideo">
-                <video src={video} controls poster={poster} width="100%" height="100%"></video>
+              <div className="serviceBody">
+                <div className="awardTextInner awardwithoutLine">
+                  <div className="awadText">
+                    <ul className="">
+                      <li>To analyze and disseminate Code Blue data to improve resuscitation efforts, quality, and outcomes, reducing hospital mortality. </li>
+                      <li className="pt-3 pb-3">Make recommendations regarding improvements of code blue processes centered on Evidence-Based Practice. </li>
+                      <li>Continually provide education and training associated with the standards of care in high-quality resuscitative efforts </li>
+                    </ul>
+                    <div class="landingFloatVideo">
+                      <video src={video} controls poster='assets/images/join.png' width="100%" height="100%"></video>
+                    </div>
+                    <div class="joinNowBtn text-left mt-5"><button> <a href="/contact-us">
+                      Join Now
+                    </a></button></div>
+                  </div>
+                </div>
               </div>
-              <div class="landingSlider landingObjectives">
+
+
+              {/* <div class="landingSlider landingObjectives">
                 <h3 class="landingHeading"><span>Objectives</span></h3>
                 <div class="landingObjBox">
                   <div class="row">
@@ -104,7 +120,7 @@ const LandingPage = (props) => {
                       <div class="ObjBoxImg"><img src='assets/images/objective.png' className="img-fluid" alt="" /></div>
                     </div>
                     <div class="col-md-8">
-                      <ul class="objectText">
+                      <ul className="objectText landinglist">
                         <li>To analyze and disseminate Code Blue data to improve resuscitation efforts, quality, and outcomes, reducing hospital mortality.</li>
                         <li>Make recommendations regarding improvements of code blue processes centered on Evidence-Based Practice.</li>
                         <li>Continually provide education and training associated with the standards of care in high-quality resuscitative efforts</li>
@@ -115,7 +131,7 @@ const LandingPage = (props) => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </Col>
           </Container>
 
@@ -125,11 +141,18 @@ const LandingPage = (props) => {
           <Container>
             <Col md={12} className="landingBlog">
               <h3 class="landingHeading"><span>Blogs</span></h3>
-              {_.get(trainer, "success", false) !== false && (
-                <>
-                  <LandingBlog blogs={trainer.blogs} />
-                </>
-              )}
+              <div className="serviceBody">
+                <div className="awardTextInner awardwithoutLine">
+                  <div className="awadText">
+                    {_.get(trainer, "success", false) !== false && (
+                      <>
+                        <LandingBlog blogs={trainer.blogs} />
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
+
             </Col>
           </Container>
           {/* BLOG */}
@@ -140,22 +163,29 @@ const LandingPage = (props) => {
             <Col md={12} className="">
               <div class="landingSlider landingUpEvent">
                 <h3 class="landingHeading">UPCOMING <span>EVENTS</span></h3>
-                <div class="landingUpEventBox">
-                  <div class="row">
-                    <div class="col-sm-5">
-                      <div class="UpEventImg"><img class="img-fluid" src="assets/images/upcomingevent.png" alt="" /></div>
-                    </div>
-                    <div class="col-sm-7">
-                      <div class="UpEventText">
-                        <h3>KICKSTART MY HEART</h3>
-                        <h4>Virtual Event - A Podcast Series</h4>
-                        <div>Apr 01, 7:00 AM</div>
-                        <div>Do you strut into a code blue with confidence, knowing you're going to nail it, no matter what? Or do you stumble in with unease and anxiety, feeling unprepared and overwhelmed? Let's face it, code blue events can leave you feeling like you've been hit by a bus, and that's not a good look on anyone.<br /> <br />Can you make it?</div>
-                        <div class="joinNowBtn"><button>Register Now</button></div>
+                <div className="serviceBody">
+                  <div className="awardTextInner awardwithoutLine">
+                    <div className="awadText">
+                      <div class="landingUpEventBox">
+                        <div class="row">
+                          <div class="col-sm-5">
+                            <div class="UpEventImg"><img class="img-fluid" src="assets/images/upcomingevent.png" alt="" /></div>
+                          </div>
+                          <div class="col-sm-7">
+                            <div class="UpEventText">
+                              <h3>KICKSTART MY HEART</h3>
+                              <h4>Virtual Event - A Podcast Series</h4>
+                              <div>Apr 01, 7:00 AM</div>
+                              <div>Do you strut into a code blue with confidence, knowing you're going to nail it, no matter what? Or do you stumble in with unease and anxiety, feeling unprepared and overwhelmed? Let's face it, code blue events can leave you feeling like you've been hit by a bus, and that's not a good look on anyone.<br /> <br />Can you make it?</div>
+                              <div class="joinNowBtn"><button>Register Now</button></div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
+
               </div>
             </Col>
           </Container>
