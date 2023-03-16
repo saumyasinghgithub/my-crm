@@ -11,7 +11,7 @@ const LandingBlog = (props) => {
                 <div className="blogImg"><img class="img-fluid" src={`${process.env.REACT_APP_API_URL}/uploads/blog/${blog.blog_image}`} alt='Blog' /></div>
                 <div className="blogText">
                     <h3>{blog.name}</h3>
-                    <div className="blogInnerT" dangerouslySetInnerHTML={{ __html: blog.short_description }}></div>
+                    <div className="blogInnerT blogdesc" dangerouslySetInnerHTML={{ __html: blog.short_description }}></div>
                     <div className="blogInnerT">
                         <a href={`/trainers/${props.slug}/blogs/${blog.slug}`}>read more...</a>
                     </div>

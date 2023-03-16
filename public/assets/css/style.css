@@ -6103,15 +6103,14 @@ ul.ulDesign li {
 
     .landingBlogBox,
     .landingObjBox,
-    .landingFloatVideo,
-    {
-    margin-top: 40px;
-}
+    .landingFloatVideo {
+        margin-top: 40px;
+    }
 
-.landingSlider {
-    padding-top: 80px;
-    padding-bottom: 80px;
-}
+    .landingSlider {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
 }
 
 @media only screen and (max-width: 1024px) {
@@ -6202,4 +6201,10 @@ ul.ulDesign li {
 
 .landinglist li::marker {
     color: #37528B;
+}
+
+.blogdesc {
+    height: 60px;
+    line-height: 20px;
+    overflow: hidden;
 }
