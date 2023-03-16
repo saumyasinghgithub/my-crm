@@ -11,11 +11,10 @@ const LandingBlog = (props) => {
                 <div className="blogImg"><img class="img-fluid" src={`${process.env.REACT_APP_API_URL}/uploads/blog/${blog.blog_image}`} alt='Blog' /></div>
                 <div className="blogText">
                     <h3>{blog.name}</h3>
-                    <div className='blogInnerT'>LEE COUNTY, Fla.</div>
-                    <div className="blogInnerT">Lee Health, a healthcare provider in Lee County, Florida, has opened a new simulation lab to provide nurses and certified nursing assistants with an innovative training experience <a href="/#">read more...</a></div>
-                    {/* <div className="blogInnerT" dangerouslySetInnerHTML={{ __html: blog.short_description }} >
+                    <div className="blogInnerT" dangerouslySetInnerHTML={{ __html: blog.short_description}}></div>
+                    <div className="blogInnerT">
                         <a href={`/trainers/${props.slug}/blogs/${blog.slug}`}>read more...</a>
-                    </div> */}
+                    </div>
                 </div>
             </div>
             {/* <div className="knowledgeBox slideInUp wow ">
@@ -50,7 +49,7 @@ const LandingBlog = (props) => {
             {slicedItems.map(renderBlog)}
         </div>
         <div className="moreBlogsLink">
-            <div class="joinNowBtn mt-4"><button><a href="/knowledge">Read More Blogs</a></button></div>
+            <div class="joinNowBtn mt-4"><button><a href="/professional-profile/codeprep">Read More Blogs</a></button></div>
             {/* <p><a href="/knowledge">Click Here Read More Blogs</a></p> */}
         </div>
     </>);
