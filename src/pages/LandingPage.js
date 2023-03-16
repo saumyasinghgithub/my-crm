@@ -33,7 +33,7 @@ const LandingPage = (props) => {
     <>
       <Container fluid>
         <Row className="landingPageRow">
-          <Col md={11} className="landingSlider">
+          <div className="landingSlider">
             {_.get(trainer, "slides", []).length > 0 && (
               <MDBCarousel showIndicators fade>
                 {_.get(trainer, "slides", []).map((slide, idx) => (
@@ -47,20 +47,22 @@ const LandingPage = (props) => {
                     <div className="slider1Div">
                       {!_.isEmpty(slide.slider_text) && (
                         <>
-                          <h4 className="sliderh4">"{slide.slider_text}"</h4>
+                          {/* <h4 className="sliderh4">"{slide.slider_text}"</h4>
                           <h4>
                             <span> — {[trainer.about.firstname, trainer.about.lastname].join(" ")}</span>
-                          </h4>
+                          </h4> */}
                         </>
                       )}
-                      {!_.isEmpty(slide.cta_link) && <a href={slide.cta_link}>Click Here to Know More About Me</a>}
+                      {/* {!_.isEmpty(slide.cta_link) && <a href={slide.cta_link}>Click Here to Know More About Me</a>} */}
                     </div>
                   </MDBCarouselItem>
                 ))}
               </MDBCarousel>
             )}
-          </Col>
-          <Col md={10} className="landingSlider landingVideo">
+          </div>
+
+          {/* Join Community */}
+          {/* <Col md={10} className="landingSlider landingVideo">
             <Col md={7} className="landingFloatVideo">
               <video src={video} controls poster={poster} width="100%" height="360"></video>
             </Col>
@@ -86,23 +88,79 @@ const LandingPage = (props) => {
                 </a>
               </Col>
             </Col>
-          </Col>
-          <Col md={10} className="landingBlog">
-            {_.get(trainer, "success", false) !== false && (
-              <>
-                <LandingBlog blogs={trainer.blogs} />
-              </>
-            )}
-          </Col>
-          <Col md={10} className="landingEventsHeading">
-            <div className="landingEventsDiv">
-              <h4>
-                OUR UPCOMING EVENTS &nbsp;&nbsp;
-                <FontAwesomeIcon icon={faCalendarAlt} />
-              </h4>
-            </div>
-          </Col>
-          <Col md={10} className="landingEventsSection">
+          </Col> */}
+
+          <Container>
+            <Col md={12} className="landingSlider landingVideo">
+              <h3 class="landingHeading">Join <span>Community</span></h3>
+              <div class="landingFloatVideo">
+                <video src={video} controls poster={poster} width="100%" height="100%"></video>
+              </div>
+              <div class="landingSlider landingObjectives">
+                <h3 class="landingHeading"><span>Objectives</span></h3>
+                <div class="landingObjBox">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="ObjBoxImg"><img src='assets/images/objective.png' className="img-fluid" alt="" /></div>
+                    </div>
+                    <div class="col-md-8">
+                      <ul class="objectText">
+                        <li>To analyze and disseminate Code Blue data to improve resuscitation efforts, quality, and outcomes, reducing hospital mortality.</li>
+                        <li>Make recommendations regarding improvements of code blue processes centered on Evidence-Based Practice.</li>
+                        <li>Continually provide education and training associated with the standards of care in high-quality resuscitative efforts</li>
+                      </ul>
+                      <div class="joinNowBtn"><button> <a href="/contact-us">
+                        Join Now
+                      </a></button></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Col>
+          </Container>
+
+          {/* END Join Community */}
+
+          {/* BLOG */}
+          <Container>
+            <Col md={12} className="landingBlog">
+              <h3 class="landingHeading"><span>Blogs</span></h3>
+              {_.get(trainer, "success", false) !== false && (
+                <>
+                  <LandingBlog blogs={trainer.blogs} />
+                </>
+              )}
+            </Col>
+          </Container>
+          {/* BLOG */}
+
+
+          {/* upcoming event */}
+          <Container>
+            <Col md={12} className="">
+              <div class="landingSlider landingUpEvent">
+                <h3 class="landingHeading">UPCOMING <span>EVENTS</span></h3>
+                <div class="landingUpEventBox">
+                  <div class="row">
+                    <div class="col-sm-5">
+                      <div class="UpEventImg"><img class="img-fluid" src="assets/images/upcomingevent.png" alt="" /></div>
+                    </div>
+                    <div class="col-sm-7">
+                      <div class="UpEventText">
+                        <h3>KICKSTART MY HEART</h3>
+                        <h4>Virtual Event - A Podcast Series</h4>
+                        <div>Apr 01, 7:00 AM</div>
+                        <div>Do you strut into a code blue with confidence, knowing you're going to nail it, no matter what? Or do you stumble in with unease and anxiety, feeling unprepared and overwhelmed? Let's face it, code blue events can leave you feeling like you've been hit by a bus, and that's not a good look on anyone.<br /> <br />Can you make it?</div>
+                        <div class="joinNowBtn"><button>Register Now</button></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Col>
+          </Container>
+
+          {/* <Col md={10} className="landingEventsSection">
             <p className="kickoffDate">29 DAYS TO THE EVENT</p>
             <h3 className="eventHeading">KickStart My Heart</h3>
             <p className="eventTime">Apr 01, 7:00 AM | Virtual Event - A Podcast Series</p>
@@ -126,9 +184,11 @@ const LandingPage = (props) => {
                 <FontAwesomeIcon icon={faLinkedin} className="fontawesomeCustomClass" />
               </a>
             </div>
-          </Col>
-          <Col md={10} className="landingEvents"></Col>
-          <Col md={10} className="landingSlider LandingSubscribe">
+          </Col> */}
+          {/* upcoming event */}
+
+          {/* <Col md={10} className="landingEvents"></Col> */}
+          <Col md={12} className="landingSlider LandingSubscribe">
             <TeacherSubscribe type="inLine" />
           </Col>
         </Row>

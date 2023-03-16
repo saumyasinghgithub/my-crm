@@ -41,21 +41,42 @@ const TeacherSubscribe = (props) => {
 
     return (<div>
         {inLine ? (
-            <div className="landingSubBlock">
-                <h3 className="landingAlign">Subscribe to Our Rescue RN™ Newsletter</h3>
-                <Col md={8} className="subsCol">
-                    <form ref={frmRef} onSubmit={handleSubmit} method="post">
-                        <Col md={8} className="formItems">
-                            <label>Email*</label>
-                            <input type="hidden" name="trainerUrl" value={trainerUrl} />
-                            <input placeholder="Please enter your email here for subscription" type="email" className="input-text form-control landingpageInput" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                            <p><b>{message}</b></p>
-                        </Col>
-                        <Col md={8} className="formBtn">
-                            <Button className="btnSubmitSubs" color="secondary" type="submit" onClick={handleSubmit}>Submit</Button>{' '}
-                        </Col>                        
-                    </form>
-                </Col>
+            // <div className="landingSubBlock">
+            //     <h3 className="landingAlign">Subscribe to Our Rescue RN™ Newsletter</h3>
+            //     <Col md={8} className="subsCol">
+            //         <form ref={frmRef} onSubmit={handleSubmit} method="post">
+            //             <Col md={8} className="formItems">
+            //                 <label>Email*</label>
+            //                 <input type="hidden" name="trainerUrl" value={trainerUrl} />
+            //                 <input placeholder="Please enter your email here for subscription" type="email" className="input-text form-control landingpageInput" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            //                 <p><b>{message}</b></p>
+            //             </Col>
+            //             <Col md={8} className="formBtn">
+            //                 <Button className="btnSubmitSubs" color="secondary" type="submit" onClick={handleSubmit}>Submit</Button>{' '}
+            //             </Col>                        
+            //         </form>
+            //     </Col>
+            // </div>
+            <div class="landingUpEvent">
+                <div class="landingSubsBox">
+                    <div class="SubsTextBox">
+                        <div class="subText">Subscribe to Our Rescue RN™ Newsletter</div>
+                        <div class="SubsInputBox">
+                            <form ref={frmRef} onSubmit={handleSubmit} method="post">
+                                <div className="row justify-content-center">
+                                    <div className="col-md-5 col-md-offset-3">
+                                        <input type="hidden" name="trainerUrl" value={trainerUrl} required />
+                                        <input placeholder="Please enter your email here for subscription" type="email" className="input-text form-control landingpageInput p-4" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                        <p><b>{message}</b></p>
+                                    </div>
+                                    <div className="col-md-2 col-md-offset-2">
+                                        <div class="SubscribeBtn"> <Button className="btnSubmitSubs" color="secondary" type="submit" onClick={handleSubmit}>SUBSCRIBE</Button>{' '}</div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         ) : (
             <Modal isOpen={modal} toggle={toggle}>
@@ -76,9 +97,10 @@ const TeacherSubscribe = (props) => {
                     <Button color="secondary" type="submit" onClick={handleSubmit}>Subscribe</Button>{' '}
                 </ModalFooter>
             </Modal>
-        )}
+        )
+        }
 
-    </div>);
+    </div >);
 }
 
 export default TeacherSubscribe;
