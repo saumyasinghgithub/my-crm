@@ -6,7 +6,7 @@ const LandingBlog = (props) => {
     const slug = Utils.subdomain();
     const blogs = props.blogs;
     const renderBlog = (blog) => {
-        return <div className="col-sm-6 col-md-4 blogboxLine p-4" key={blog.id}>
+        return <div className="col-sm-6 col-md-4 blogboxLine pt-0 pl-4 pr-4 pb-4" key={blog.id}>
             <div className="blogbox">
                 <div className="blogImg"><img class="img-fluid" src={`${process.env.REACT_APP_API_URL}/uploads/blog/${blog.blog_image}`} alt='Blog' /></div>
                 <div className="blogText">

@@ -43,32 +43,32 @@ const TeacherService = (props) => {
         </div>
 
         <div className="serviceBody">
-        <div className="awardTextInner awardwithoutLine">
+          <div className="awardTextInner awardwithoutLine ServiceAwardText">
             <div className="awadText slideInUp wow " dangerouslySetInnerHTML={{ __html: data.service_offer }}></div>
-        </div>
-        {data.consultancy ? (
+          </div>
+          {data.consultancy ? (
             <div className="servicesTextBox slideInUp wow ">
-            <div className="row">
-              <div className="col-sm-2">
-                <div className="Sheading">Merchandise</div>
-              </div>
-              <div className="col-sm-10">
-                <div dangerouslySetInnerHTML={{ __html: data.consultancy }}></div>
+              <div className="row">
+                <div className="col-sm-2">
+                  <div className="Sheading">Merchandise</div>
+                </div>
+                <div className="col-sm-10">
+                  <div dangerouslySetInnerHTML={{ __html: data.consultancy }}></div>
+                </div>
               </div>
             </div>
-          </div>
-          ):(<p></p>)}
+          ) : (<p></p>)}
           {data.coaching ? (
-          <div className="servicesTextBox slideInUp wow ">
-            <div className="row">
-              <div className="col-sm-2">
-                <div className="Sheading">Coaching </div>
-              </div>
-              <div className="col-sm-10">
-                <div dangerouslySetInnerHTML={{ __html: data.coaching }}></div>
+            <div className="servicesTextBox slideInUp wow ">
+              <div className="row">
+                <div className="col-sm-2">
+                  <div className="Sheading">Coaching </div>
+                </div>
+                <div className="col-sm-10">
+                  <div dangerouslySetInnerHTML={{ __html: data.coaching }}></div>
+                </div>
               </div>
             </div>
-          </div>
           ) : (<p></p>)}
         </div>
       </div>

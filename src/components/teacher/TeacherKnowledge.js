@@ -16,22 +16,23 @@ const TeacherKnowledge = (props) => {
   const renderBlog = (blog) => {
     return (
       <div className="col-sm-6 col-md-4" key={blog.id}>
-        <div className="knowledgeBox slideInUp wow ">
-          <div className="knowledgeImg">
-            <img className="img-fluid" src={`${process.env.REACT_APP_API_URL}/uploads/blog/${blog.blog_image}`} alt="ad blog" />
-          </div>
-          <div className="knowledgeTitle">{blog.name}</div>
-          <div className="knowledgeBody">Publish Date: {Utils.shortDate(blog.created_at)}</div>
-          <div className="knowledgeFooter clearfix">
-            <div className="FText">Blog</div>
-            <ul>
-              <li>
-                <a href={`/trainers/${props.slug}/blogs/${blog.slug}`}>
-                  <img src="/assets/images/eyes.png" alt="ad eyes" />
-                </a>
-              </li>
-              <li>
-                {/* <div className="navigation">
+        <a href={`/trainers/${props.slug}/blogs/${blog.slug}`}>
+          <div className="knowledgeBox slideInUp wow ">
+            <div className="knowledgeImg">
+              <img className="img-fluid" src={`${process.env.REACT_APP_API_URL}/uploads/blog/${blog.blog_image}`} alt="ad blog" />
+            </div>
+            <div className="knowledgeTitle">{blog.name}</div>
+            <div className="knowledgeBody">Publish Date: {Utils.shortDate(blog.created_at)}</div>
+            <div className="knowledgeFooter clearfix">
+              <div className="FText">Blog</div>
+              <ul>
+                <li>
+                  <a href={`/trainers/${props.slug}/blogs/${blog.slug}`}>
+                    <img src="/assets/images/eyes.png" alt="ad eyes" />
+                  </a>
+                </li>
+                <li>
+                  {/* <div className="navigation">
                                 <div className="menuToggle"></div>
                                 <div className="menu">
                                     <ul>
@@ -51,7 +52,7 @@ const TeacherKnowledge = (props) => {
                                 </div>
                             </div> */}
 
-                <div className="social-share-icon">
+                  {/* <div className="social-share-icon">
                   <a href="javascript:;" className="a1">
                     <i className="fab fa-facebook"></i>
                   </a>
@@ -67,11 +68,12 @@ const TeacherKnowledge = (props) => {
                   <a className="a">
                     <i className="fa fa-share-alt"></i>
                   </a>
-                </div>
-              </li>
-            </ul>
+                </div> */}
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
     );
   };

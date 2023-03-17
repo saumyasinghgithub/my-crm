@@ -211,8 +211,8 @@ const TeacherAbout = (props) => {
               <div className="awardTextWrapper">
                 <div className="awardTextInner">
                   {props.academics.map((a) => (
-                    <div className="awadText">
-                      <span className="awardYear">{a.year}</span> <span>{a.qualification}</span>
+                    <div className="AboutawadText">
+                      <span className="AboutawardYear">{a.year}</span> <span>{a.qualification}</span>
                     </div>
                   ))}
                 </div>
@@ -224,8 +224,8 @@ const TeacherAbout = (props) => {
               <div className="awardTextWrapper">
                 <div className="awardTextInner">
                   {props.experiences.map((a) => (
-                    <div className="awadText">
-                      <span className="awardYear">{a.company}</span> <span>{a.location}</span>
+                    <div className="AboutawadText">
+                      <span className="AboutawardYear">{a.company}</span> <span>{a.location}</span>
                     </div>
                   ))}
                 </div>

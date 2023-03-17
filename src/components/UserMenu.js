@@ -81,7 +81,8 @@ const UserMenu = (props) => {
             )}
             {Utils.isTrainer() && (
               <li>
-                <a href={`${process.env.PUBLIC_URL}/my-course`}>My Course</a>
+                <a href={`${process.env.PUBLIC_URL}/my-course`}>Manage Library
+                </a>
               </li>
             )}
             {Utils.isTrainer() && (
@@ -138,7 +139,7 @@ const UserMenu = (props) => {
                       loginToMoodle(document.forms.moodleLoginForm);
                     }}
                   >
-                    Enrolled Courses
+                    Manage LMS
                   </a>
                 </li>
                 {/*<li>
@@ -154,7 +155,8 @@ const UserMenu = (props) => {
 
             {Utils.isTrainer() && (
               <li>
-                <a href={`${process.env.PUBLIC_URL}/my-blog`}>My Blog</a>
+                <a href={`${process.env.PUBLIC_URL}/my-blog`}>Manage Blogs
+                </a>
               </li>
             )}
 
