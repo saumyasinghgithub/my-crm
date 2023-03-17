@@ -33,6 +33,7 @@ import MyCorporateGroup from "./MyCorporateGroup";
 import CorporateGroupDetail from "./CorporateGroupDetail";
 import LandingPage from "./LandingPage";
 import ManageCoupons from "./ManageCoupons";
+import LoginPage from "./LoginPage"
 
 export default {
   Login,
@@ -70,4 +71,5 @@ export default {
   CorporateGroupDetail,
   LandingPage,
   ManageCoupons,
+  LoginPage,
 };

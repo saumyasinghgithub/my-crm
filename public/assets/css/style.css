@@ -6208,3 +6208,9 @@ ul.ulDesign li {
     line-height: 20px;
     overflow: hidden;
 }
+.LoginPage{
+    max-width: inherit;
+}
+.loginWraps {
+    padding: inherit;
+}

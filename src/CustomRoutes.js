@@ -3,12 +3,19 @@ import Page from "./pages";
 import Utils from "./Utils";
 
 const CustomRoutes = [
-  {
+ /* {
     path: "/login",
     secure: false,
     exact: true,
     layout: Layout.DefaultLayout,
     component: Page.Home,
+  },*/
+  {
+    path: "/login",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.LoginPage,
   },
   {
     path: "/about-us",

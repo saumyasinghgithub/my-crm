@@ -5,7 +5,7 @@ import {HeaderTrainer,Footer,LoginModal, JoinAsStudent, JoinAsTrainer} from './.
 const StaticPageLayout = ({ children }) => (
   <Container fluid className="h-100 p-0">
     <HeaderTrainer />
-    <LoginModal />
+    {/* <LoginModal /> */}
     <JoinAsStudent />
     <JoinAsTrainer />
             {children}
