@@ -60,8 +60,11 @@ const HeaderStudent = (props) => {
                
                 <ul className="navbar-nav">
                     <li className="nav-item"><a href="/my-cart"><img className="img-fluid shoppingIcon" src="/assets/images/cart.png" alt="autodidact" /></a></li>
-                    {!loggedIn && <li className="nav-item" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">
+                    {/*!loggedIn && <li className="nav-item" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">
                         Log in
+    </li>*/}
+    {!loggedIn && <li className="nav-item">
+                        <a href={`${process.env.REACT_APP_PUBLIC_URL}/login`}>Log in</a>
                     </li>}
 
                     {loggedIn && <li className="nav-item profile_toggle">

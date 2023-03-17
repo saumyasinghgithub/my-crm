@@ -74,11 +74,11 @@ const UserMenu = (props) => {
                 </li>
               </>
             )}
-            {Utils.isTrainer() && (
+            {/*Utils.isTrainer() && (
               <li>
                 <a href={getSlug()}>My Profile</a>
               </li>
-            )}
+            )*/}
             {Utils.isTrainer() && (
               <li>
                 <a href={`${process.env.PUBLIC_URL}/my-course`}>Manage Library
