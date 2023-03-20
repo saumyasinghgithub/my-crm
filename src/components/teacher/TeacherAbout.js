@@ -251,7 +251,7 @@ const TeacherAbout = (props) => {
             <div className="awardTextInner">
               {props.awards.map((a) => (
                 <div className="awadText slideInUp wow ">
-                  <span className="awardYear">{a.year}</span> <span className="boldText">{a.award}</span> | <a href="a.url">{a.organisation}</a>                </div>
+                  <span className="awardYear">{a.year}</span> <span className="boldText">{a.award}</span> | <a href={a.url}>{a.organisation}</a>                </div>
               ))}
             </div>
           </div>
