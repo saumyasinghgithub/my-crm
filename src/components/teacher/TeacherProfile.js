@@ -6,6 +6,7 @@ import { TeacherSubscribe, TeacherAbout, TeacherService, TeacherKnowledge, Teach
 import _ from "lodash";
 
 import UserContext from "./../../contexts/UserContext";
+import Loader from "../Loader";
 
 const TeacherProfile = (props) => {
   const slug = props.trainerSlug;
@@ -39,16 +40,7 @@ const TeacherProfile = (props) => {
     <Container fluid className="h-100 p-0">
       {loading && (
         <>
-          <div className="profile-wrapper">
-            <div className="container">
-              <h1>Trainer</h1>
-              <Alert variant="warning">
-                <div className="m-5">
-                  Looking for trainer details <Spinner animation="border" size="sm" />
-                </div>
-              </Alert>
-            </div>
-          </div>
+          <Loader />
         </>
       )}
 

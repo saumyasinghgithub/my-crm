@@ -10,26 +10,37 @@ import _ from "lodash";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faTwitter, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { Loader } from "../components";
 
 const LandingPage = (props) => {
   const slug = Utils.subdomain();
   const [trainer, setTrainer] = useState({});
   const { getServerData } = useContext(UserContext);
+  const [loading, setLoading] = useState(true);
   const video = "https://youtu.be/IPzGKaY4-yw";
   useEffect(() => {
     getServerData(`trainer/landing/${slug}`, true)
       .then((tData) => {
         console.log(tData);
         setTrainer(tData);
+        setLoading(false);
       })
       .catch((msg) => {
         setTrainer({ success: false, message: msg });
+        setLoading(false);
       });
   }, []);
   return (
     <>
 
       <Container>
+        {loading && (
+          <>
+            <Loader />
+          </>
+        )}
+      {!loading && (
+        <>
         <Row className="landingPageRow">
           <div className="landingSlider">
             {_.get(trainer, "slides", []).length > 0 && (
@@ -59,6 +70,8 @@ const LandingPage = (props) => {
             )}
           </div>
         </Row>
+        </>
+      )}
       </Container>
       {/* Join Community */}
       {/* <Col md={10} className="landingSlider landingVideo">
@@ -88,7 +101,8 @@ const LandingPage = (props) => {
               </Col>
             </Col>
           </Col> */}
-
+      {!loading && (
+        <>
       <Container>
         <Col md={12} className="landingSlider landingVideo">
           <h3 class="landingHeading">Join <span>Community</span></h3>
@@ -134,10 +148,14 @@ const LandingPage = (props) => {
               </div> */}
         </Col>
       </Container>
+      </>
+      )}
 
       {/* END Join Community */}
 
       {/* BLOG */}
+      {!loading && (
+        <>
       <Container>
         <Col md={12} className="landingBlog">
           <h3 class="landingHeading"><span>Blogs</span></h3>
@@ -155,10 +173,14 @@ const LandingPage = (props) => {
 
         </Col>
       </Container>
+      </>
+      )}
       {/* BLOG */}
 
 
       {/* upcoming event */}
+      {!loading && (
+        <>
       <Container>
         <Col md={12} className="">
           <div class="landingSlider landingUpEvent">
@@ -189,6 +211,8 @@ const LandingPage = (props) => {
           </div>
         </Col>
       </Container>
+      </>
+      )}
 
       {/* <Col md={10} className="landingEventsSection">
             <p className="kickoffDate">29 DAYS TO THE EVENT</p>
@@ -218,9 +242,13 @@ const LandingPage = (props) => {
       {/* upcoming event */}
 
       {/* <Col md={10} className="landingEvents"></Col> */}
+      {!loading && (
+        <>
       <Col md={12} className="landingSlider LandingSubscribe">
         <TeacherSubscribe type="inLine" />
       </Col>
+      </>
+      )}
 
     </>
   );
