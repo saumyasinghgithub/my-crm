@@ -99,7 +99,7 @@ const AcademicForm = (props) => {
                 onChange={saveAData(k, "year")}
               >
                 <option value=""> - Select Passing year - </option>
-                {new Array(50).fill(1).map((v, k1) => {
+                {new Array(51).fill(1).map((v, k1) => {
                   year = moment().year() - 50 + k1;
                   return (
                     <option
