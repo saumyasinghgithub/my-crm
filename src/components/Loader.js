@@ -9,7 +9,7 @@ const Loader = (props) => {
                         height="80"
                         width="80"
                         radius={1}
-                        color="#4fa94d"
+                        color="#0f79aa"
                         ariaLabel="puff-loading"
                         wrapperStyle={{}}
                         wrapperClass=""

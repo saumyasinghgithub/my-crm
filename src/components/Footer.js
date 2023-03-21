@@ -101,13 +101,13 @@ const Footer = () => {
             </li>
           </ul>
           <ul className="footerRight">
-            {list.data.map((record, idx) => (
+            {/*list.data.map((record, idx) => (
               <li key={idx}>
                 <a href={`${record.link}`} target="blank">
                   <i className={`${record.class}`}></i>
                 </a>
               </li>
-            ))}
+            ))*/}
           </ul>
         </div>
         {hasSubdomain && (
