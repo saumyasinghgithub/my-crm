@@ -39,7 +39,7 @@ const TeacherService = (props) => {
       </div>
       <div className="serviceWrapper container">
         <div className="serviceHeading w-100">
-          <h1 className="headingtext slideInUp wow ">02 What I offer </h1>
+          <h1 className="headingtext slideInUp wow ">What I offer </h1>
         </div>
 
         <div className="serviceBody">

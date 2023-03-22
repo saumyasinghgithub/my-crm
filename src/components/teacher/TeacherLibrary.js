@@ -105,7 +105,7 @@ const TeacherLibrary = (props) => {
       </div>
       <div className="serviceWrapper container">
         <div className="serviceHeading w-100">
-          <h1 className="headingtext slideInUp wow w-100">05 Library</h1>
+          <h1 className="headingtext slideInUp wow w-100">Courses</h1>
           {/* <ul className="profile-socail-icon serviceicon">
                     <li className='mr-2'><a href=""><img src="/assets/images/share-icon.png" alt="AD" /></a></li>
                     <li><a href=""><img src="/assets/images/link-icon.png" alt="AD" /></a></li>

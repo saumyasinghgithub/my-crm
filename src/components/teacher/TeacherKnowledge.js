@@ -106,17 +106,17 @@ const TeacherKnowledge = (props) => {
 
       <div className="serviceWrapper container">
         <div className="serviceHeading w-100">
-          <h1 className="headingtext slideInUp wow w-100">03 Knowledge</h1>
+          <h1 className="headingtext slideInUp wow w-100">CodePRep</h1>
           {/* <ul className="profile-socail-icon serviceicon">
                     <li className='mr-2'><a href=""><img src="/assets/images/share-icon.png" alt="ad eyes" /></a></li>
                     <li><a href=""><img src="/assets/images/link-icon.png" alt="ad eyes" /></a></li>
                 </ul> */}
           <div className="subHeading slideInUp wow " dangerouslySetInnerHTML={{ __html: _.get(data, "0.about_knowledge", "") }}></div>
         </div>
-        <div className="knowledgBody">
+        {/*<div className="knowledgBody">
           <div className="freeResouces lineANimation slideInUp wow ">Free Resources</div>
           <div className="row">{blogs.map(renderBlog)}</div>
-        </div>
+              </div>*/}
       </div>
     </>
   );

@@ -17,27 +17,27 @@ const TeacherBlogs = (props) => {
     const blogItem = (blog) => {
         return (
             <div className="col-sm-6 col-md-4" key={blog.id}>
-        <a href={`/trainers/${props.slug}/blogs/${blog.slug}`}>
-          <div className="knowledgeBox slideInUp wow ">
-            <div className="knowledgeImg">
-              <img className="img-fluid" src={`${process.env.REACT_APP_API_URL}/uploads/blog/${blog.blog_image}`} alt="ad blog" />
+                <a href={`/trainers/${props.slug}/blogs/${blog.slug}`}>
+                    <div className="knowledgeBox slideInUp wow ">
+                        <div className="knowledgeImg">
+                            <img className="img-fluid" src={`${process.env.REACT_APP_API_URL}/uploads/blog/${blog.blog_image}`} alt="ad blog" />
+                        </div>
+                        <div className="knowledgeTitle">{blog.name}</div>
+                        <div className="knowledgeBody">Publish Date: {Utils.shortDate(blog.created_at)}</div>
+                        <div className="knowledgeFooter clearfix">
+                            <div className="FText">Blog</div>
+                            <ul>
+                                <li>
+                                    <a href={`/trainers/${props.slug}/blogs/${blog.slug}`}>
+                                        <img src="/assets/images/eyes.png" alt="ad eyes" />
+                                    </a>
+                                </li>
+                                <li></li>
+                            </ul>
+                        </div>
+                    </div>
+                </a>
             </div>
-            <div className="knowledgeTitle">{blog.name}</div>
-            <div className="knowledgeBody">Publish Date: {Utils.shortDate(blog.created_at)}</div>
-            <div className="knowledgeFooter clearfix">
-              <div className="FText">Blog</div>
-              <ul>
-                <li>
-                  <a href={`/trainers/${props.slug}/blogs/${blog.slug}`}>
-                    <img src="/assets/images/eyes.png" alt="ad eyes" />
-                  </a>
-                </li>
-                <li></li>
-              </ul>
-            </div>
-          </div>
-        </a>
-      </div>
         );
     };
     return (

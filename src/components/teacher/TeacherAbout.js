@@ -186,7 +186,7 @@ const TeacherAbout = (props) => {
       </div>
 
       <div className="container aboutMe-pr0fle ">
-        <h1 className="headingtext mt-4">01 About me</h1>
+        <h1 className="headingtext mt-4">About me</h1>
         <div className="awardTextInner awardwithoutLine">
           <div className="awadText" dangerouslySetInnerHTML={{ __html: data.biography }}></div>
         </div>
