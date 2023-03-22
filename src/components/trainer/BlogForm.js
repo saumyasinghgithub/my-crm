@@ -49,6 +49,15 @@ const BlogForm = (props) => {
         <Form.Control type="hidden" name="id" defaultValue={_.get(myblog, 'id', '')} />
         <Form.Control type="hidden" name="old_blog_image" defaultValue={_.get(myblog, 'blog_image', '')} />
         <h1>Trainer Blogs Page</h1>
+        <div className="container mb-3 editTrainerdetails">
+          <div className="row">
+            <div className="col-12 text-right">
+              <a className=" bg-primary p-2 text-white rounded" href="/my-blog">
+              View List Of Blogs <i className="fa fa-eye"></i>
+              </a>
+            </div>
+          </div>
+        </div>
         <Row>
             <Col md={3} className="mt-3">
                 {photoUploader('blog', 'Upload image here (Image dimension should be 691cm x 494cm)')}

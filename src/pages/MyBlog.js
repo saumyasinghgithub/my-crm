@@ -67,6 +67,15 @@ const MyBlog = (props) => {
     <div className="profile-wrapper">
     <div className="container mysale myblog">
         <h1>My Blogs </h1>
+        <div className="container mb-3 editTrainerdetails">
+          <div className="row">
+            <div className="col-12 text-right">
+              <a className=" bg-primary p-2 text-white rounded" href="/my-profile#blogs">
+              Edit Blog Landing Page <i className="fas fa-edit text-white"></i>
+              </a>
+            </div>
+          </div>
+        </div>
         
         <Tab.Container id="left-tabs-example">
         <div className="card-header ui-sortable-handle" >

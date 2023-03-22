@@ -34,7 +34,7 @@ const TeacherLanding = (props) => {
     <Container fluid className="h-100 p-0">
       {page === "courses" && <CourseList trainerSlug={slug} />}
       {page !== "courses" && <TeacherProfile trainerSlug={slug} page={_.isEmpty(page) ? "about" : page} />}
-      {page === "blogs" && <BlogList trainerSlug={slug} />}
+      {/*page === "blogs" && <BlogList trainerSlug={slug} />*/}
     </Container>
   );
 };
