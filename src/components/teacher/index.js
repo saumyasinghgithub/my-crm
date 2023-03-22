@@ -1,20 +1,20 @@
 import TeacherAbout from "./TeacherAbout";
-import TeacherProfile  from "./TeacherProfile";
+import TeacherBlogs from "./TeacherBlogs";
+import TeacherCommunity  from "./TeacherCommunity";
+import TeacherProfile from "./TeacherProfile";
 import TeacherService  from "./TeacherService";
 import TeacherKnowledge from "./TeacherKnowledge";
-import TeacherCommunity  from "./TeacherCommunity";
 import TeacherLibrary  from "./TeacherLibrary";
 import TeacherSubscribe from "./TeacherSubscribe";
-import TeacherBlogs from "./TeacherBlogs";
 
 
 export {
-  TeacherProfile,
   TeacherAbout,
-  TeacherService,
-  TeacherKnowledge,
+  TeacherBlogs,
   TeacherCommunity,
-  TeacherLibrary,
-  TeacherSubscribe,
-  TeacherBlogs
+  TeacherProfile,
+  TeacherService,
+  TeacherKnowledge,  
+  TeacherLibrary,  
+  TeacherSubscribe
 };
