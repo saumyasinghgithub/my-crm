@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Container, Spinner, Alert } from "react-bootstrap";
 
-import { TeacherSubscribe, TeacherAbout, TeacherService, TeacherKnowledge, TeacherCommunity, TeacherLibrary } from "./index";
+import { TeacherSubscribe, TeacherAbout, TeacherService, TeacherKnowledge, TeacherCommunity, TeacherLibrary,TeacherBlogs } from "./index";
 
 import _ from "lodash";
 
@@ -92,7 +92,8 @@ const TeacherProfile = (props) => {
                   )}
                   {page === "service" && <TeacherService data={trainer.service} {...params} />}
                   {page === "codeprep" && <TeacherKnowledge data={trainer.knowledge} blogs={trainer.blogs} {...params} />}
-                  {page === "community" && <TeacherCommunity data={trainer.community} {...params} />}
+                  {/*page === "community" && <TeacherCommunity data={trainer.community} {...params} />*/}
+                  {page === "blogs" && <TeacherBlogs data={trainer.community} {...params} />}
                   {page === "library" && <TeacherLibrary data={trainer.library} courses={trainer.courses} {...params} />}
                 </div>
               </div>

@@ -12,9 +12,10 @@ const MyProfile = (props) => {
         '#exp': 'Professional Experiences',
         '#awards': 'Awards/Certifications',
         '#service': 'Trainer Services',
-        '#knowledge': 'Trainer Knowledge',
-        '#community': 'Trainer Community',
-        '#library': 'Trainer Library',
+        '#codeprep': 'Trainer CodePRep',
+        //'#community': 'Trainer Community',
+        '#library': 'Trainer Courses',
+        '#blogs': 'Trainer Blogs',
         '#social': 'Social Platform',
         '#slider': 'Image Slider',
         '#events': 'Manage Events',
@@ -60,9 +61,10 @@ const MyProfile = (props) => {
                                         {tab === '#exp' && <TrainerForms.ExperienceForm />}
                                         {tab === '#awards' && <TrainerForms.AwardCertificationsForm />}
                                         {tab === '#service' && <TrainerForms.ServiceForm />}
-                                        {tab === '#knowledge' && <TrainerForms.KnowledgeForm />}
-                                        {tab === '#community' && <TrainerForms.CommunityForm />}
+                                        {tab === '#codeprep' && <TrainerForms.KnowledgeForm />}
+                                        {/*tab === '#community' && <TrainerForms.CommunityForm />*/}
                                         {tab === '#library' && <TrainerForms.LibraryForm />}
+                                        {tab === '#blogs' && <TrainerForms.BlogForm />}
                                         {tab === '#social' && <TrainerForms.SocialForm />}
                                         {tab === '#slider' && <TrainerForms.SliderForm />}
                                         {tab === '#events' && <TrainerForms.EventsForm />}

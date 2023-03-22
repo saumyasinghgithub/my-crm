@@ -8,7 +8,8 @@ const TeacherNav = (props) => {
     about: "About",
     service: "Services",
     codeprep: "CodePRep",
-    community: "Community",
+    //community: "Community",
+    blogs: "Blogs",
     library: "Courses",
   };
 

@@ -53,14 +53,14 @@ const LibraryForm = (props) => {
   return <Form onSubmit={onSave}>
     <Form.Control type="hidden" name="id" defaultValue={_.get(mylibrary,'id','')} />
     <Form.Control type="hidden" name="old_library_image" defaultValue={_.get(mylibrary,'library_image','')} />
-    <h1>Library Details</h1>
+    <h1>Course Details</h1>
 
     <Row>  
       <Col md={3} className="mt-3">  
         {photoUploader('library','Upload image here (Image dimension should be 691cm x 494cm)')}
       </Col>
       <Col md={9} className="mt-3">  
-      <Form.Label>Trainer Library Details: </Form.Label>
+      <Form.Label>Trainer Course Details: </Form.Label>
       <Editor apiKey={process.env.TINYMCE_API_KEY}
         value={_.get(mylibrary,'about_library','')}
         init={{

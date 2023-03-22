@@ -5,6 +5,7 @@ import TeacherKnowledge from "./TeacherKnowledge";
 import TeacherCommunity  from "./TeacherCommunity";
 import TeacherLibrary  from "./TeacherLibrary";
 import TeacherSubscribe from "./TeacherSubscribe";
+import TeacherBlogs from "./TeacherBlogs";
 
 
 export {
@@ -14,5 +15,6 @@ export {
   TeacherKnowledge,
   TeacherCommunity,
   TeacherLibrary,
-  TeacherSubscribe
+  TeacherSubscribe,
+  TeacherBlogs
 };
