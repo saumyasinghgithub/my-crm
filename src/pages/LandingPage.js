@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
 import { TeacherSubscribe } from "../components/teacher";
-import { LandingBlog } from "../components/landing";
+import { LandingBlog, RegisterForm } from "../components/landing";
 import Utils from "./../Utils";
 import UserContext from "./../contexts/UserContext";
 import _ from "lodash";
@@ -18,9 +18,11 @@ import { Loader } from "../components";
 const LandingPage = (props) => {
   const slug = Utils.subdomain();
   const [trainer, setTrainer] = useState({});
-  const { getServerData } = useContext(UserContext);
+  const { getServerData, setServerData} = useContext(UserContext);
   const [loading, setLoading] = useState(true);
   const video = "https://youtu.be/IPzGKaY4-yw";
+  const [saving, setSaving] = useState(false);
+  const [response, setResponse] = useState({ success: false, message: "" });
 
   const [show, setShow] = useState(false);
 
@@ -44,6 +46,7 @@ const LandingPage = (props) => {
         setLoading(false);
       });
   }, []);
+  
   return (
     <>
 
@@ -280,23 +283,26 @@ const LandingPage = (props) => {
                 <div className="landingSlider landingUpEvent">
                   {/* <h3 className="landingHeading">UPCOMING <span>EVENTS</span></h3> */}
                   <div className="landingUpEventBox">
-                    <div className="row">
-                      <div className="col-lg-5 col-md-12">
-                        <div className="UpEventImg"><img className="img-fluid w-100" src="assets/images/upcomingevent.png" alt="" /></div>
-                      </div>
-                      <div className="col-lg-7 col-md-12">
-                        <div className="UpEventText">
-                          <h3>KICKSTART MY HEART</h3>
-                          <h4>Virtual Event - A Podcast Series</h4>
-                          <div>Apr 01, 7:00 AM</div>
-                          <div>Do you strut into a code blue with confidence, knowing you're going to nail it, no matter what? Or do you stumble in with unease and anxiety, feeling unprepared and overwhelmed? Let's face it, code blue events can leave you feeling like you've been hit by a bus, and that's not a good look on anyone.<br /> <br />Can you make it?</div>
-                          <div className="HomeRegister mt-4"><button onClick={RegisterShow}>
-                            Register Now
-                          </button></div>
-                        </div>
-                      </div>
-                    </div>
+                    {_.get(trainer, "events", []).length > 0 && (
+                      <div className="row">
+                        {_.get(trainer, "events", []).map((event, idx) => (
+                          <>
+                            <div className="col-lg-5 col-md-12">
+                              <div className="UpEventImg"><img className="img-fluid w-100" src={`${process.env.REACT_APP_API_URL}/uploads/event/${event.event_img}`} alt="" /></div>
+                            </div>
+                            <div className="col-lg-7 col-md-12">
+                              <div className="UpEventText">
+                                <p dangerouslySetInnerHTML={{__html: event.event_short_desc }}></p>                              
+                                <div className="HomeRegister mt-4"><button onClick={RegisterShow}>
+                                  Register Now
+                                </button></div>
+                              </div>
+                            </div>
+                          </>
+                        ))}
 
+                      </div>
+                    )}
                   </div>
 
                 </div>
@@ -450,35 +456,12 @@ const LandingPage = (props) => {
       {/* JOIN COMMUNITY FORM */}
 
       {/* Register FORM */}
-      <Modal size="lg" show={RegiShow} onHide={RegisterClose} className="JoinNowModal">
-        <Modal.Header className="justify-content-center" closeButton>
-          <Modal.Title>
-            <div className="UpEventText text-center">
-              <h3>KICKSTART MY HEART</h3>
-              <h4>Virtual Event - A Podcast Series</h4>
-            </div>
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="mt-3">Please complete the form to register for the event.
-          <br></br>
-          <Form>
-            <Form.Group className="mt-3 mb-2">
-              <Form.Control type="name" placeholder="Enter Name" required />
-            </Form.Group>
-
-            <Form.Group className="mb-2">
-              <Form.Control type="email" placeholder="Enter Email" required />
-            </Form.Group>
-            <div className="HomeRegister JoinButtonModal">
-              <Button type="submit" className="mt-5 w-100 text-left">
-                Register
-              </Button>
-            </div>
-          </Form>
-        </Modal.Body>
-      </Modal>
+      {_.get(trainer, "events", []).length > 0 && (
+        <Modal size="lg" show={RegiShow} onHide={RegisterClose} className="JoinNowModal">
+          <RegisterForm />
+        </Modal>        
+      )}
       {/* Register FORM */}
-
     </>
   );
 };

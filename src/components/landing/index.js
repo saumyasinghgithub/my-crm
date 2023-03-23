@@ -1,3 +1,4 @@
 import LandingBlog from './LandingBlog';
+import RegisterForm from './RegisterForm';
 
-export {LandingBlog,};
+export {LandingBlog,RegisterForm};
