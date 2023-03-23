@@ -105,7 +105,7 @@ const TeacherAbout = (props) => {
           <div className="col-lg-12 col-md-12 col-12 pt-2 pb-1">
             <div className="profileHeading teacherheading">
               {/* <h1 className="headingtext wow zoomIn">{data.firstname} {data.lastname}</h1> */}
-              <h1 className="headingtext">
+              <h1 className="headingtext d-flex align-center">
                 {data.firstname} {data.lastname}
               </h1>
               <div className="profileDetailRating">
@@ -125,7 +125,7 @@ const TeacherAbout = (props) => {
                 )}
               </div>
 
-              <p className="joindetails mt-4">
+              <p className="joindetails mt-3">
                 Joined {Utils.shortDate(data.created_at)} &nbsp;&nbsp;&nbsp;&nbsp; Students {props.total.students} &nbsp;&nbsp;&nbsp;&nbsp; Courses{" "}
                 {props.total.courses}
               </p>

@@ -18,6 +18,7 @@ const LandingPage = (props) => {
   const { getServerData } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
   const video = "https://youtu.be/IPzGKaY4-yw";
+
   useEffect(() => {
     getServerData(`trainer/landing/${slug}`, true)
       .then((tData) => {
@@ -39,39 +40,45 @@ const LandingPage = (props) => {
             <Loader />
           </>
         )}
-      {!loading && (
-        <>
-        <Row className="landingPageRow">
-          <div className="landingSlider">
-            {_.get(trainer, "slides", []).length > 0 && (
-              <MDBCarousel showIndicators fade>
-                {_.get(trainer, "slides", []).map((slide, idx) => (
-                  <MDBCarouselItem
-                    className="w-100 d-block"
-                    key={idx}
-                    itemId={idx + 1}
-                    src={process.env.REACT_APP_API_URL + "/uploads/slider/" + slide.slider_image}
-                    alt="..."
-                  >
-                    <div className="slider1Div">
-                      {!_.isEmpty(slide.slider_text) && (
-                        <>
-                          {/* <h4 className="sliderh4">"{slide.slider_text}"</h4>
+        {!loading && (
+          <>
+            <Row className="landingPageRow">
+              <div className="landingSlider">
+                {_.get(trainer, "slides", []).length > 0 && (
+                  <MDBCarousel showIndicators fade>
+                    {_.get(trainer, "slides", []).map((slide, idx) => (
+                      <>
+                        <a href={slide.cta_link}>
+                          <MDBCarouselItem
+                            className="w-100 d-block"
+                            key={idx}
+                            itemId={idx + 1}
+                            src={process.env.REACT_APP_API_URL + "/uploads/slider/" + slide.slider_image}
+                            alt="..."
+                          >
+
+
+                            <div className="slider1Div">
+                              {!_.isEmpty(slide.slider_text) && (
+                                <>
+                                  {/* <h4 className="sliderh4">"{slide.slider_text}"</h4>
                           <h4>
                             <span> — {[trainer.about.firstname, trainer.about.lastname].join(" ")}</span>
                           </h4> */}
-                        </>
-                      )}
-                      {/* {!_.isEmpty(slide.cta_link) && <a href={slide.cta_link}>Click Here to Know More About Me</a>} */}
-                    </div>
-                  </MDBCarouselItem>
-                ))}
-              </MDBCarousel>
-            )}
-          </div>
-        </Row>
-        </>
-      )}
+                                </>
+                              )}
+                              {/* {!_.isEmpty(slide.cta_link) && <a href={slide.cta_link}>Click Here to Know More About Me</a>} */}
+                            </div>
+                          </MDBCarouselItem>
+                        </a>
+                      </>
+                    ))}
+                  </MDBCarousel>
+                )}
+              </div>
+            </Row>
+          </>
+        )}
       </Container>
       {/* Join Community */}
       {/* <Col md={10} className="landingSlider landingVideo">
@@ -103,116 +110,233 @@ const LandingPage = (props) => {
           </Col> */}
       {!loading && (
         <>
-      <Container>
-        <Col md={12} className="landingSlider landingVideo">
-          <h3 class="landingHeading">Join <span>Community</span></h3>
-          <div className="serviceBody">
-            <div className="awardTextInner awardwithoutLine">
-              <div className="awadText">
-                <h3 class="landingsubHeading">Objectives</h3>
-                <ul className="mt-5 pt-2">
-                  <li>To analyze and disseminate Code Blue data to improve resuscitation efforts, quality, and outcomes, reducing hospital mortality. </li>
-                  <li className="pt-3 pb-3">Make recommendations regarding improvements of code blue processes centered on Evidence-Based Practice. </li>
-                  <li>Continually provide education and training associated with the standards of care in high-quality resuscitative efforts </li>
-                </ul>
-                <div class="landingFloatVideo">
-                  <video src={video} controls poster='assets/images/join.png' width="100%" height="100%"></video>
-                </div>
-                <div class="joinNowBtn text-left mt-5"><button> <a href="/contact-us">
-                  Join Now
-                </a></button></div>
-              </div>
-            </div>
-          </div>
+          <section className="HomeMainCourses">
+            <Container>
+              <Row>
+                <Col md={12} className="landingSlider landingVideo">
+
+                  <Row>
+                    <Col lg={6} md={12} >
+                      <img src="assets/images/ourcourse1.png" className="img-fluid w-100" alt="" />
+                    </Col>
+                    <Col lg={6} md={12} className="d-flex align-center">
+                      <div className="MainOurCourses">
+                        <h3 className="landingHeading">Our Courses</h3>
+                        <p className="mt-4" >
+                          My mission is to empower and equip nurses with the necessary knowledge and skills to respond confidently to cardiac arrest situations and save the lives of their patients. Drawing on years of experience working in life-saving situations with resuscitation teams, I recognize the importance of maintaining courage, confidence, and competence in such high-pressure situations.
+                        </p>
+                      </div>
+                    </Col>
+                  </Row>
+                  <Container>
+                    <Row className="mt-5 justify-content-center">
+                      <h3 className="landingHeading mb-5">Be Prepared for an Emergency: Learn CPR. Save a life.</h3>
+                      <Col lg={4} md={6} className="pt-3 d-flex">
+                        <div className="p-4 homecourses">
+                          <div className="">
+                            <span className="new">New</span>
+                            <img className="img-fluid rounded" src="assets/images/ourcourse1.png" alt="Tverse" />
+                          </div>
+                          <div className="">
+                            <div className="libraryTitle HomeCourseTitle text-center pt-5 pb-3">Codeprep</div>
+                            <div className="libraryBody homecoursedescription text-center pt-3 pb-5 ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</div>
+                          </div>
+                          <div className="HomeExploreCourse mt-4 mb-3 text-center"><button> <a href="/professional-profile/library" target="_blank" >
+                            Explore Courses
+                          </a></button></div>
+                        </div>
+                      </Col>
 
 
-          {/* <div class="landingSlider landingObjectives">
-                <h3 class="landingHeading"><span>Objectives</span></h3>
-                <div class="landingObjBox">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="ObjBoxImg"><img src='assets/images/objective.png' className="img-fluid" alt="" /></div>
+                      {/* <Col md={4} className="pt-3 d-flex">
+                      <div className="p-4 homecourses">
+                        <div className="">
+                          <span className="new">New</span>
+                          <img className="img-fluid rounded" src="assets/images/ourcourse1.png" alt="Tverse" />
+                        </div>
+                        <div className="">
+                          <div className="libraryTitle HomeCourseTitle text-center pt-5 pb-3">10 Tips for a Healthy Heart</div>
+                          <div className="libraryBody homecoursedescription text-center pt-3 pb-5 ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</div>
+                        </div>
+                        <div className="HomeExploreCourse mt-4 mb-3 text-center"><button> <a href="/professional-profile/library" target="_blank" >
+                          Explore Courses
+                        </a></button></div>
+                      </div>
+                    </Col>
+
+                    <Col md={4} className="pt-3 d-flex">
+                      <div className="p-4 homecourses">
+                        <div className="">
+                          <span className="new">New</span>
+                          <img className="img-fluid rounded" src="assets/images/ourcourse1.png" alt="Tverse" />
+                        </div>
+                        <div className="">
+                          <div className="libraryTitle HomeCourseTitle text-center pt-5 pb-3">Lee Health's Simulation Lab:</div>
+                          <div className="libraryBody homecoursedescription text-center pt-3 pb-5 ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</div>
+                        </div>
+                        <div className="HomeExploreCourse mt-4 mb-3 text-center"><button> <a href="/professional-profile/library" target="_blank" >
+                          Explore Courses
+                        </a></button></div>
+                      </div>
+                    </Col> */}
+                    </Row>
+                  </Container>
+                  {/* <h3 className="landingHeading">Join <span>Community</span></h3>
+              <div className="serviceBody">
+                <div className="awardTextInner awardwithoutLine">
+                  <div className="awadText">
+                    <h3 className="landingsubHeading">Objectives</h3>
+                    <ul className="mt-5 pt-2">
+                      <li>To analyze and disseminate Code Blue data to improve resuscitation efforts, quality, and outcomes, reducing hospital mortality. </li>
+                      <li className="pt-3 pb-3">Make recommendations regarding improvements of code blue processes centered on Evidence-Based Practice. </li>
+                      <li>Continually provide education and training associated with the standards of care in high-quality resuscitative efforts </li>
+                    </ul>
+                    <div className="landingFloatVideo">
+                      <video src={video} controls poster='assets/images/join.png' width="100%" height="100%"></video>
                     </div>
-                    <div class="col-md-8">
+                    <div className="joinNowBtn text-left mt-5"><button> <a href="/contact-us">
+                      Join Now
+                    </a></button></div>
+                  </div>
+                </div>
+              </div> */}
+
+
+                  {/* <div className="landingSlider landingObjectives">
+                <h3 className="landingHeading"><span>Objectives</span></h3>
+                <div className="landingObjBox">
+                  <div className="row">
+                    <div className="col-md-4">
+                      <div className="ObjBoxImg"><img src='assets/images/objective.png' className="img-fluid" alt="" /></div>
+                    </div>
+                    <div className="col-md-8">
                       <ul className="objectText landinglist">
                         <li>To analyze and disseminate Code Blue data to improve resuscitation efforts, quality, and outcomes, reducing hospital mortality.</li>
                         <li>Make recommendations regarding improvements of code blue processes centered on Evidence-Based Practice.</li>
                         <li>Continually provide education and training associated with the standards of care in high-quality resuscitative efforts</li>
                       </ul>
-                      <div class="joinNowBtn"><button> <a href="/contact-us">
+                      <div className="joinNowBtn"><button> <a href="/contact-us">
                         Join Now
                       </a></button></div>
                     </div>
                   </div>
                 </div>
               </div> */}
-        </Col>
-      </Container>
-      </>
+                </Col>
+              </Row>
+            </Container>
+          </section>
+        </>
       )}
 
       {/* END Join Community */}
 
       {/* BLOG */}
-      {!loading && (
-        <>
-      <Container>
-        <Col md={12} className="landingBlog">
-          <h3 class="landingHeading"><span>Blogs</span></h3>
-          <div className="serviceBody">
-            <div className="awardTextInner awardwithoutLine">
-              <div className="awadText">
-                {_.get(trainer, "success", false) !== false && (
-                  <>
-                    <LandingBlog blogs={trainer.blogs} />
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
+      {/* {
+        !loading && (
+          <>
+            <Container>
+              <Col md={12} className="landingBlog">
+                <h3 className="landingHeading"><span>Blogs</span></h3>
+                <div className="serviceBody">
+                  <div className="awardTextInner awardwithoutLine">
+                    <div className="awadText">
+                      {_.get(trainer, "success", false) !== false && (
+                        <>
+                          <LandingBlog blogs={trainer.blogs} />
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
 
-        </Col>
-      </Container>
-      </>
-      )}
+              </Col>
+            </Container>
+          </>
+        )
+      } */}
       {/* BLOG */}
 
 
       {/* upcoming event */}
-      {!loading && (
-        <>
-      <Container>
-        <Col md={12} className="">
-          <div class="landingSlider landingUpEvent">
-            <h3 class="landingHeading">UPCOMING <span>EVENTS</span></h3>
-            <div className="serviceBody">
-              <div className="awardTextInner awardwithoutLine">
-                <div className="awadText">
-                  <div class="landingUpEventBox">
-                    <div class="row">
-                      <div class="col-sm-5">
-                        <div class="UpEventImg"><img class="img-fluid" src="assets/images/upcomingevent.png" alt="" /></div>
+      {
+        !loading && (
+          <>
+            <Container>
+              <Col md={12} className="">
+                <div className="landingSlider landingUpEvent">
+                  {/* <h3 className="landingHeading">UPCOMING <span>EVENTS</span></h3> */}
+                  <div className="landingUpEventBox">
+                    <div className="row">
+                      <div className="col-lg-5 col-md-12">
+                        <div className="UpEventImg"><img className="img-fluid w-100" src="assets/images/upcomingevent.png" alt="" /></div>
                       </div>
-                      <div class="col-sm-7">
-                        <div class="UpEventText">
+                      <div className="col-lg-7 col-md-12">
+                        <div className="UpEventText">
                           <h3>KICKSTART MY HEART</h3>
                           <h4>Virtual Event - A Podcast Series</h4>
                           <div>Apr 01, 7:00 AM</div>
                           <div>Do you strut into a code blue with confidence, knowing you're going to nail it, no matter what? Or do you stumble in with unease and anxiety, feeling unprepared and overwhelmed? Let's face it, code blue events can leave you feeling like you've been hit by a bus, and that's not a good look on anyone.<br /> <br />Can you make it?</div>
-                          <div class="joinNowBtn"><button>Register Now</button></div>
+                          <div className="HomeRegister mt-4"><button> <a href="/contact-us" target="_blank" >
+                            Register Now
+                          </a></button></div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-          </div>
-        </Col>
-      </Container>
-      </>
-      )}
+                  </div>
+
+                </div>
+              </Col>
+            </Container>
+          </>
+        )
+      }
+
+
+      {/* NEED TRAINER */}
+
+      {
+        !loading && (
+          <>
+            <section className="HomeTraining">
+              <Container>
+                <Col md={12} className="">
+                  <div className="landingSlider landingUpEvent">
+                    {/* <h3 className="landingHeading">UPCOMING <span>EVENTS</span></h3> */}
+                    <div className="landingUpEventBox">
+                      <div className="row">
+                        <div className="col-lg-7 col-md-12">
+                        </div>
+                        <div className="col-lg-5 col-md-12">
+                          <div className="">
+                            <h3 className="landingHeading mb-5">Join Community</h3>
+                            <p className="mb-4 homeobjective">Objectives</p>
+                            <ul className="ulDesign">
+                              <li>
+                                To analyze and disseminate Code Blue data to improve resuscitation efforts, quality, and outcomes, reducing hospital mortality.
+                              </li>
+                              <li className="mt-4 mb-4">Make recommendations regarding improvements of code blue processes centered on Evidence-Based Practice.</li>
+                              <li>Continually provide education and training associated with the standards of care in high-quality resuscitative efforts</li>
+                            </ul>
+
+
+                            <div className="HomeRegister HomeJoinNow mt-5"><button className="text-right w-100 mt-3"> <a href="/contact-us" target="_blank" >
+                              Join Now
+                            </a></button></div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </Col>
+              </Container>
+            </section>
+          </>
+        )
+      }
 
       {/* <Col md={10} className="landingEventsSection">
             <p className="kickoffDate">29 DAYS TO THE EVENT</p>
@@ -242,13 +366,51 @@ const LandingPage = (props) => {
       {/* upcoming event */}
 
       {/* <Col md={10} className="landingEvents"></Col> */}
-      {!loading && (
-        <>
-      <Col md={12} className="landingSlider LandingSubscribe">
-        <TeacherSubscribe type="inLine" />
-      </Col>
-      </>
-      )}
+      {/* {
+        !loading && (
+          <>
+            <Col md={12} className="landingSlider LandingSubscribe">
+              <TeacherSubscribe type="inLine" />
+            </Col>
+          </>
+        )
+      } */}
+      {/* {
+        !loading && (
+          <>
+            <hr />
+          </>
+        )
+      } */}
+
+      {
+        !loading && (
+          <>
+            <Container>
+              <Col md={12} className="footerdesign">
+
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="Footermail text-center">
+                      {/* <p className="mb-4">Rescue RN™ • CodePRep</p>
+                      <p>Inquires:</p>
+                      <p ><a href="mailto:susan@rescuern.com">susan@rescuern.com</a></p>
+
+                      <p className="mb-4">+1(863) 445-0911</p> */}
+
+                      {/* <p className="text-left">Subscribe to Our Rescue RN™ Newsletter</p>
+                      <TeacherSubscribe type="inLine" /> */}
+                    </div>
+                  </div>
+                  {/* <div className="col-md-6 mt-2 mb-2">
+                    <img src="../assets/images/footer.jpg" className="img-fluid w-100" alt="" />
+                  </div> */}
+                </div>
+              </Col>
+            </Container>
+          </>
+        )
+      }
 
     </>
   );

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Utils from "./../Utils";
 import axios from "axios";
+import { TeacherSubscribe } from "../components/teacher";
 
 const Footer = () => {
   const hasSubdomain = Utils.hasSubdomain();
@@ -81,26 +82,34 @@ const Footer = () => {
   return (
     <>
       <footer className="footer footerFixed">
-        <div className="container-fluid">
-          <ul className="footerLeft">
-            <li>Copyright © {(new Date().getFullYear())} TVERSE</li>
-            <li>
-              <a href={`${process.env.REACT_APP_PUBLIC_URL}/term-conditions`}>
-                Terms
-              </a>
-            </li>
-            <li>
+        <div className="container">
+
+          <ul className="footerLeft text-uppercase">
+            <li className="footerline"> © {(new Date().getFullYear())} by Dr. Susan Davis, Rescue RN™    </li>
+            <li className="footerline ml-2">
               <a href={`${process.env.REACT_APP_PUBLIC_URL}/privacy-policy`}>
                 Privacy Policy
               </a>
             </li>
-            <li>
+            <li className="footerline ml-2">
+              <a href={`${process.env.REACT_APP_PUBLIC_URL}/term-conditions`}>
+                Terms of use
+              </a>
+            </li>
+
+            {/* <li>
               <a href={`${process.env.REACT_APP_PUBLIC_URL}/cookie-policy`}>
                 Cookie Policy
               </a>
-            </li>
+            </li> */}
           </ul>
           <ul className="footerRight">
+            <ul>
+              <li><a href="https://www.instagram.com/codeprepcprcoach/"> <i className="fab fa-instagram"></i></a></li>
+              <li><a href="https://www.facebook.com/susan.davis.733076"> <i className="fab fa-facebook"></i></a></li>
+              <li><a href="https://www.linkedin.com/in/susan-b-davis-dnp-msn-rn-pmd-5bb403173/?original_referer="> <i className="fab fa-linkedin"></i></a></li>
+              <li><a href="https://www.youtube.com/channel/UClcIAZFQp_SWizNeaZqMj8A"> <i className="fab fa-youtube"></i></a></li>
+            </ul>
             {/*list.data.map((record, idx) => (
               <li key={idx}>
                 <a href={`${record.link}`} target="blank">

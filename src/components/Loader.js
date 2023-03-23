@@ -6,13 +6,13 @@ const Loader = (props) => {
             <div className="container">
                 <div className="m-5">
                     <Puff
-                        height="80"
-                        width="80"
+                        height="100"
+                        width="100"
                         radius={1}
                         color="#0f79aa"
                         ariaLabel="puff-loading"
                         wrapperStyle={{}}
-                        wrapperClass=""
+                        wrapperClass="SiteLoader"
                         visible={true}
                     />
                 </div>
