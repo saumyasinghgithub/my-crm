@@ -20,7 +20,7 @@ const EventsForm = (props) => {
       .then((data) => {
         console.log("fetching data" + data);
         while (data.length < 2) {
-          data = [...data, { id: 0, event_img: "", event_short_desc: "", featured: 0 }];
+          data = [...data, { id: 0, event_img: "", event_short_desc: "", featured: 0, participants: 0 }];
         }
         setEventData(data);
         setFeatured(eventData.findIndex((v) => v.featured));
@@ -49,7 +49,7 @@ const EventsForm = (props) => {
   };
 
   const addAData = (e) => {
-    let newdata = [...eventData, { id: 0, event_img: "", event_short_desc: "", featured: 0 }];
+    let newdata = [...eventData, { id: 0, event_img: "", event_short_desc: "", featured: 0, participants: 0 }];
     setEventData(newdata);
   };
   const removeAData = (pos) => (e) => {
@@ -78,6 +78,8 @@ const EventsForm = (props) => {
     });
   };
 
+  const exportParticipants = (type, id = "") => {};
+
   const renderEventFields = () => {
     return (
       <>
@@ -87,6 +89,11 @@ const EventsForm = (props) => {
               <Accordion.Item eventKey={k} className="my-1 hide" style={{ backgroundColor: k % 2 === 0 ? "#ddf4f4" : "#f8f8f8" }}>
                 <Accordion.Header className="mb-0">
                   <strong>Event {k + 1} </strong>
+                  {v.participants > 0 && (
+                    <button className="btn btn-sm btn-info ml-2 p-1" onClick={exportParticipants("event", v.id)}>
+                      Export Participants ({v.participants}) <span className="fa fa-file-excel"></span>
+                    </button>
+                  )}
                 </Accordion.Header>
                 <Accordion.Body>
                   <Row>
