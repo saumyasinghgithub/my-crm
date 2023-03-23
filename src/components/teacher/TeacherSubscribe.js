@@ -64,12 +64,12 @@ const TeacherSubscribe = (props) => {
                     <div class="SubsInputBox">
                         <form ref={frmRef} onSubmit={handleSubmit} method="post">
                             <div className="row">
-                                <div className="col-md-5 col-md-offset-3">
+                                <div className="col-md-5 col-md-offset-3 contactSubs">
                                     <input type="hidden" name="trainerUrl" value={trainerUrl} />
                                     <input placeholder="Please enter your email here for subscription" type="email" className="input-text form-control landingpageInput p-3" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                                     <p className="mt-4 text-left subsmessage">{message}</p>
                                 </div>
-                                <div className="col-md-2 col-md-offset-2">
+                                <div className="col-md-2 col-md-offset-2 contactSubs">
                                     <div class="HomeRegister SubmitHomeSubscribe"> <Button className="" color="secondary" type="submit" onClick={handleSubmit}>SUBSCRIBE</Button>{' '}</div>
                                 </div>
                             </div>

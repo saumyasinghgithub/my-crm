@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 
 import { TeacherSubscribe } from "../components/teacher";
 import { LandingBlog } from "../components/landing";
@@ -18,6 +21,16 @@ const LandingPage = (props) => {
   const { getServerData } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
   const video = "https://youtu.be/IPzGKaY4-yw";
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const [RegiShow, setRegiShow] = useState(false);
+
+  const RegisterClose = () => setRegiShow(false);
+  const RegisterShow = () => setRegiShow(true);
 
   useEffect(() => {
     getServerData(`trainer/landing/${slug}`, true)
@@ -277,9 +290,9 @@ const LandingPage = (props) => {
                           <h4>Virtual Event - A Podcast Series</h4>
                           <div>Apr 01, 7:00 AM</div>
                           <div>Do you strut into a code blue with confidence, knowing you're going to nail it, no matter what? Or do you stumble in with unease and anxiety, feeling unprepared and overwhelmed? Let's face it, code blue events can leave you feeling like you've been hit by a bus, and that's not a good look on anyone.<br /> <br />Can you make it?</div>
-                          <div className="HomeRegister mt-4"><button> <a href="/contact-us" target="_blank" >
+                          <div className="HomeRegister mt-4"><button onClick={RegisterShow}>
                             Register Now
-                          </a></button></div>
+                          </button></div>
                         </div>
                       </div>
                     </div>
@@ -299,9 +312,9 @@ const LandingPage = (props) => {
       {
         !loading && (
           <>
-            <section className="HomeTraining">
+            <section className="">
               <Container>
-                <Col md={12} className="">
+                <Col md={12} className="HomeTraining">
                   <div className="landingSlider landingUpEvent">
                     {/* <h3 className="landingHeading">UPCOMING <span>EVENTS</span></h3> */}
                     <div className="landingUpEventBox">
@@ -321,9 +334,8 @@ const LandingPage = (props) => {
                             </ul>
 
 
-                            <div className="HomeRegister HomeJoinNow mt-5"><button className="text-right w-100 mt-3"> <a href="/contact-us" target="_blank" >
-                              Join Now
-                            </a></button></div>
+                            <div className="HomeRegister HomeJoinNow mt-5"><button className="text-left w-100 mt-3" variant="primary" onClick={handleShow}>   Join Now
+                            </button></div>
                           </div>
                         </div>
                       </div>
@@ -398,8 +410,8 @@ const LandingPage = (props) => {
 
                       <p className="mb-4">+1(863) 445-0911</p> */}
 
-                      {/* <p className="text-left">Subscribe to Our Rescue RN™ Newsletter</p>
-                      <TeacherSubscribe type="inLine" /> */}
+                      <p className="text-left">Subscribe to Our Rescue RN™ Newsletter</p>
+                      <TeacherSubscribe type="inLine" />
                     </div>
                   </div>
                   {/* <div className="col-md-6 mt-2 mb-2">
@@ -411,6 +423,61 @@ const LandingPage = (props) => {
           </>
         )
       }
+
+      {/* JOIN COMMUNITY FORM */}
+      <Modal size="lg" show={show} onHide={handleClose} className="JoinNowModal">
+        <Modal.Header className="justify-content-center" closeButton>
+          <Modal.Title> <h3 className="landingHeading">Join Community</h3></Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="mt-3">Be a part of our community and gain access to exclusive content, events, and opportunities to connect with other members.
+          <br></br>
+          <Form>
+            <Form.Group className="mt-3 mb-2">
+              <Form.Control type="name" placeholder="Enter Name" required />
+            </Form.Group>
+
+            <Form.Group className="mb-2">
+              <Form.Control type="email" placeholder="Enter Email" required />
+            </Form.Group>
+            <div className="HomeRegister JoinButtonModal">
+              <Button type="submit" className="mt-5 w-100 text-left">
+                Join
+              </Button>
+            </div>
+          </Form>
+        </Modal.Body>
+      </Modal>
+      {/* JOIN COMMUNITY FORM */}
+
+      {/* Register FORM */}
+      <Modal size="lg" show={RegiShow} onHide={RegisterClose} className="JoinNowModal">
+        <Modal.Header className="justify-content-center" closeButton>
+          <Modal.Title>
+            <div className="UpEventText text-center">
+              <h3>KICKSTART MY HEART</h3>
+              <h4>Virtual Event - A Podcast Series</h4>
+            </div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="mt-3">Please complete the form to register for the event.
+          <br></br>
+          <Form>
+            <Form.Group className="mt-3 mb-2">
+              <Form.Control type="name" placeholder="Enter Name" required />
+            </Form.Group>
+
+            <Form.Group className="mb-2">
+              <Form.Control type="email" placeholder="Enter Email" required />
+            </Form.Group>
+            <div className="HomeRegister JoinButtonModal">
+              <Button type="submit" className="mt-5 w-100 text-left">
+                Register
+              </Button>
+            </div>
+          </Form>
+        </Modal.Body>
+      </Modal>
+      {/* Register FORM */}
 
     </>
   );
