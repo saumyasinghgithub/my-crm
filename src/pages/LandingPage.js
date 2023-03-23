@@ -1,9 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button, Modal, Form, Alert } from "react-bootstrap";
 import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
 
 import { TeacherSubscribe } from "../components/teacher";
 import { LandingBlog, RegisterForm } from "../components/landing";
@@ -18,7 +15,7 @@ import { Loader } from "../components";
 const LandingPage = (props) => {
   const slug = Utils.subdomain();
   const [trainer, setTrainer] = useState({});
-  const { getServerData, setServerData} = useContext(UserContext);
+  const { getServerData, setServerData } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
   const video = "https://youtu.be/IPzGKaY4-yw";
   const [saving, setSaving] = useState(false);
@@ -46,10 +43,9 @@ const LandingPage = (props) => {
         setLoading(false);
       });
   }, []);
-  
+
   return (
     <>
-
       <Container>
         {loading && (
           <>
@@ -72,8 +68,6 @@ const LandingPage = (props) => {
                             src={process.env.REACT_APP_API_URL + "/uploads/slider/" + slide.slider_image}
                             alt="..."
                           >
-
-
                             <div className="slider1Div">
                               {!_.isEmpty(slide.slider_text) && (
                                 <>
@@ -130,16 +124,18 @@ const LandingPage = (props) => {
             <Container>
               <Row>
                 <Col md={12} className="landingSlider landingVideo">
-
                   <Row>
-                    <Col lg={6} md={12} >
+                    <Col lg={6} md={12}>
                       <img src="assets/images/ourcourse1.png" className="img-fluid w-100" alt="" />
                     </Col>
                     <Col lg={6} md={12} className="d-flex align-center">
                       <div className="MainOurCourses">
                         <h3 className="landingHeading">Our Courses</h3>
-                        <p className="mt-4" >
-                          My mission is to empower and equip nurses with the necessary knowledge and skills to respond confidently to cardiac arrest situations and save the lives of their patients. Drawing on years of experience working in life-saving situations with resuscitation teams, I recognize the importance of maintaining courage, confidence, and competence in such high-pressure situations.
+                        <p className="mt-4">
+                          My mission is to empower and equip nurses with the necessary knowledge and skills to respond confidently to cardiac arrest
+                          situations and save the lives of their patients. Drawing on years of experience working in life-saving situations with
+                          resuscitation teams, I recognize the importance of maintaining courage, confidence, and competence in such high-pressure
+                          situations.
                         </p>
                       </div>
                     </Col>
@@ -155,14 +151,21 @@ const LandingPage = (props) => {
                           </div>
                           <div className="">
                             <div className="libraryTitle HomeCourseTitle text-center pt-5 pb-3">Codeprep</div>
-                            <div className="libraryBody homecoursedescription text-center pt-3 pb-5 ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</div>
+                            <div className="libraryBody homecoursedescription text-center pt-3 pb-5 ">
+                              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
+                              dummy text ever since the 1500s.
+                            </div>
                           </div>
-                          <div className="HomeExploreCourse mt-4 mb-3 text-center"><button> <a href="/professional-profile/library" target="_blank" >
-                            Explore Courses
-                          </a></button></div>
+                          <div className="HomeExploreCourse mt-4 mb-3 text-center">
+                            <button>
+                              {" "}
+                              <a href="/professional-profile/library" target="_blank">
+                                Explore Courses
+                              </a>
+                            </button>
+                          </div>
                         </div>
                       </Col>
-
 
                       {/* <Col md={4} className="pt-3 d-flex">
                       <div className="p-4 homecourses">
@@ -216,7 +219,6 @@ const LandingPage = (props) => {
                   </div>
                 </div>
               </div> */}
-
 
                   {/* <div className="landingSlider landingObjectives">
                 <h3 className="landingHeading"><span>Objectives</span></h3>
@@ -273,88 +275,87 @@ const LandingPage = (props) => {
       } */}
       {/* BLOG */}
 
-
       {/* upcoming event */}
-      {
-        !loading && (
-          <>
-            <Container>
-              <Col md={12} className="">
-                <div className="landingSlider landingUpEvent">
-                  {/* <h3 className="landingHeading">UPCOMING <span>EVENTS</span></h3> */}
-                  <div className="landingUpEventBox">
-                    {_.get(trainer, "events", []).length > 0 && (
-                      <div className="row">
-                        {_.get(trainer, "events", []).map((event, idx) => (
-                          <>
-                            <div className="col-lg-5 col-md-12">
-                              <div className="UpEventImg"><img className="img-fluid w-100" src={`${process.env.REACT_APP_API_URL}/uploads/event/${event.event_img}`} alt="" /></div>
+      {!loading && (
+        <>
+          <Container>
+            <Col md={12} className="">
+              <div className="landingSlider landingUpEvent">
+                {/* <h3 className="landingHeading">UPCOMING <span>EVENTS</span></h3> */}
+                <div className="landingUpEventBox">
+                  {_.get(trainer, "events", []).length > 0 && (
+                    <div className="row">
+                      {_.get(trainer, "events", []).map((event, idx) => (
+                        <>
+                          <div className="col-lg-5 col-md-12">
+                            <div className="UpEventImg">
+                              <img className="img-fluid w-100" src={`${process.env.REACT_APP_API_URL}/uploads/event/${event.event_img}`} alt="" />
                             </div>
-                            <div className="col-lg-7 col-md-12">
-                              <div className="UpEventText">
-                                <p dangerouslySetInnerHTML={{__html: event.event_short_desc }}></p>                              
-                                <div className="HomeRegister mt-4"><button onClick={RegisterShow}>
-                                  Register Now
-                                </button></div>
+                          </div>
+                          <div className="col-lg-7 col-md-12">
+                            <div className="UpEventText">
+                              <p dangerouslySetInnerHTML={{ __html: event.event_short_desc }}></p>
+                              <div className="HomeRegister mt-4">
+                                <button onClick={RegisterShow}>Register Now</button>
                               </div>
                             </div>
-                          </>
-                        ))}
-
-                      </div>
-                    )}
-                  </div>
-
+                          </div>
+                        </>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              </Col>
-            </Container>
-          </>
-        )
-      }
-
+              </div>
+            </Col>
+          </Container>
+        </>
+      )}
 
       {/* NEED TRAINER */}
 
-      {
-        !loading && (
-          <>
-            <section className="">
-              <Container>
-                <Col md={12} className="HomeTraining">
-                  <div className="landingSlider landingUpEvent">
-                    {/* <h3 className="landingHeading">UPCOMING <span>EVENTS</span></h3> */}
-                    <div className="landingUpEventBox">
-                      <div className="row">
-                        <div className="col-lg-7 col-md-12">
-                        </div>
-                        <div className="col-lg-5 col-md-12">
-                          <div className="">
-                            <h3 className="landingHeading mb-5">Join Community</h3>
-                            <p className="mb-4 homeobjective">Objectives</p>
-                            <ul className="ulDesign">
-                              <li>
-                                To analyze and disseminate Code Blue data to improve resuscitation efforts, quality, and outcomes, reducing hospital mortality.
-                              </li>
-                              <li className="mt-4 mb-4">Make recommendations regarding improvements of code blue processes centered on Evidence-Based Practice.</li>
-                              <li>Continually provide education and training associated with the standards of care in high-quality resuscitative efforts</li>
-                            </ul>
+      {!loading && (
+        <>
+          <section className="">
+            <Container>
+              <Col md={12} className="HomeTraining">
+                <div className="landingSlider landingUpEvent">
+                  {/* <h3 className="landingHeading">UPCOMING <span>EVENTS</span></h3> */}
+                  <div className="landingUpEventBox">
+                    <div className="row">
+                      <div className="col-lg-7 col-md-12"></div>
+                      <div className="col-lg-5 col-md-12">
+                        <div className="">
+                          <h3 className="landingHeading mb-5">Join Community</h3>
+                          <p className="mb-4 homeobjective">Objectives</p>
+                          <ul className="ulDesign">
+                            <li>
+                              To analyze and disseminate Code Blue data to improve resuscitation efforts, quality, and outcomes, reducing hospital
+                              mortality.
+                            </li>
+                            <li className="mt-4 mb-4">
+                              Make recommendations regarding improvements of code blue processes centered on Evidence-Based Practice.
+                            </li>
+                            <li>
+                              Continually provide education and training associated with the standards of care in high-quality resuscitative efforts
+                            </li>
+                          </ul>
 
-
-                            <div className="HomeRegister HomeJoinNow mt-5"><button className="text-left w-100 mt-3" variant="primary" onClick={handleShow}>   Join Now
-                            </button></div>
+                          <div className="HomeRegister HomeJoinNow mt-5">
+                            <button className="text-left w-100 mt-3" variant="primary" onClick={handleShow}>
+                              {" "}
+                              Join Now
+                            </button>
                           </div>
                         </div>
                       </div>
-
                     </div>
-
                   </div>
-                </Col>
-              </Container>
-            </section>
-          </>
-        )
-      }
+                </div>
+              </Col>
+            </Container>
+          </section>
+        </>
+      )}
 
       {/* <Col md={10} className="landingEventsSection">
             <p className="kickoffDate">29 DAYS TO THE EVENT</p>
@@ -401,41 +402,42 @@ const LandingPage = (props) => {
         )
       } */}
 
-      {
-        !loading && (
-          <>
-            <Container>
-              <Col md={12} className="footerdesign">
-
-                <div className="row">
-                  <div className="col-md-12">
-                    <div className="Footermail text-center">
-                      {/* <p className="mb-4">Rescue RN™ • CodePRep</p>
+      {!loading && (
+        <>
+          <Container>
+            <Col md={12} className="footerdesign">
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="Footermail text-center">
+                    {/* <p className="mb-4">Rescue RN™ • CodePRep</p>
                       <p>Inquires:</p>
                       <p ><a href="mailto:susan@rescuern.com">susan@rescuern.com</a></p>
 
                       <p className="mb-4">+1(863) 445-0911</p> */}
 
-                      <p className="text-left">Subscribe to Our Rescue RN™ Newsletter</p>
-                      <TeacherSubscribe type="inLine" />
-                    </div>
+                    <p className="text-left">Subscribe to Our Rescue RN™ Newsletter</p>
+                    <TeacherSubscribe type="inLine" />
                   </div>
-                  {/* <div className="col-md-6 mt-2 mb-2">
+                </div>
+                {/* <div className="col-md-6 mt-2 mb-2">
                     <img src="../assets/images/footer.jpg" className="img-fluid w-100" alt="" />
                   </div> */}
-                </div>
-              </Col>
-            </Container>
-          </>
-        )
-      }
+              </div>
+            </Col>
+          </Container>
+        </>
+      )}
 
       {/* JOIN COMMUNITY FORM */}
       <Modal size="lg" show={show} onHide={handleClose} className="JoinNowModal">
         <Modal.Header className="justify-content-center" closeButton>
-          <Modal.Title> <h3 className="landingHeading">Join Community</h3></Modal.Title>
+          <Modal.Title>
+            {" "}
+            <h3 className="landingHeading">Join Community</h3>
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body className="mt-3">Be a part of our community and gain access to exclusive content, events, and opportunities to connect with other members.
+        <Modal.Body className="mt-3">
+          Be a part of our community and gain access to exclusive content, events, and opportunities to connect with other members.
           <br></br>
           <Form>
             <Form.Group className="mt-3 mb-2">
@@ -458,8 +460,8 @@ const LandingPage = (props) => {
       {/* Register FORM */}
       {_.get(trainer, "events", []).length > 0 && (
         <Modal size="lg" show={RegiShow} onHide={RegisterClose} className="JoinNowModal">
-          <RegisterForm />
-        </Modal>        
+          <RegisterForm formType="event" eventData={trainer.events[0]} />
+        </Modal>
       )}
       {/* Register FORM */}
     </>
