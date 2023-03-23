@@ -429,38 +429,28 @@ const LandingPage = (props) => {
       )}
 
       {/* JOIN COMMUNITY FORM */}
-      <Modal size="lg" show={show} onHide={handleClose} className="JoinNowModal">
-        <Modal.Header className="justify-content-center" closeButton>
-          <Modal.Title>
-            {" "}
-            <h3 className="landingHeading">Join Community</h3>
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="mt-3">
-          Be a part of our community and gain access to exclusive content, events, and opportunities to connect with other members.
-          <br></br>
-          <Form>
-            <Form.Group className="mt-3 mb-2">
-              <Form.Control type="name" placeholder="Enter Name" required />
-            </Form.Group>
-
-            <Form.Group className="mb-2">
-              <Form.Control type="email" placeholder="Enter Email" required />
-            </Form.Group>
-            <div className="HomeRegister JoinButtonModal">
-              <Button type="submit" className="mt-5 w-100 text-left">
-                Join
-              </Button>
-            </div>
-          </Form>
-        </Modal.Body>
+      <Modal size="lg" show={show} onHide={handleClose} className="JoinNowModal" closeButton>
+        <RegisterForm
+          formType="blog"
+          id={0}
+          heading="Join Community"
+          bodyText="Be a part of our community and gain access to exclusive content, events, and opportunities to connect with other members."
+          cta="Join"
+        />
       </Modal>
       {/* JOIN COMMUNITY FORM */}
 
       {/* Register FORM */}
       {_.get(trainer, "events", []).length > 0 && (
         <Modal size="lg" show={RegiShow} onHide={RegisterClose} className="JoinNowModal" closeButton>
-          <RegisterForm formType="event" eventData={trainer.events[0]} />
+          <RegisterForm
+            formType="event"
+            id={trainer.events[0].id}
+            heading="EVENT PARTICIPATION"
+            subHeading={trainer.events[0].event_short_desc}
+            bodyText="Please complete the form to register for the event."
+            cta="Register"
+          />
         </Modal>
       )}
       {/* Register FORM */}

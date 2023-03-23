@@ -1,23 +1,21 @@
 import React, { useEffect, useState, useContext } from "react";
 import UserContext from "../../contexts/UserContext";
 import Utils from "../../Utils";
-import { Button, Modal, Form, Alert, Spinner } from "reactstrap";
+import { Button, Modal, Form, Alert, Spinner } from "react-bootstrap";
 import _ from "lodash";
 const RegisterForm = (props) => {
   const slug = Utils.subdomain();
   const { setServerData } = useContext(UserContext);
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({ success: false, message: "" });
-  const { eventData, formType } = props;
+  const { formType } = props;
 
   const onSave = (e) => {
     const frm = e.currentTarget;
     e.preventDefault();
     let frmdata = new FormData(frm);
     frmdata.append("type", formType);
-    if (formType === "event") {
-      frmdata.append("trainer_event_id", eventData.id);
-    }
+    frmdata.append("trainer_event_id", props.id);
     setSaving(true);
     setServerData("trainer/event-participant", frmdata, "post").then((res) => {
       setSaving(false);
@@ -29,13 +27,13 @@ const RegisterForm = (props) => {
       <Modal.Header className="justify-content-center">
         <Modal.Title>
           <div className="UpEventText text-center">
-            <h3>EVENT PARTICIPATION</h3>
-            <h4 dangerouslySetInnerHTML={{ __html: eventData.event_short_desc }}></h4>
+            <h3>{props.heading}</h3>
+            <h4 dangerouslySetInnerHTML={{ __html: props.subHeading }}></h4>
           </div>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="mt-3">
-        Please complete the form to register for the event.
+        {props.bodyText}
         <br></br>
         <Form onSubmit={onSave}>
           <Form.Group className="mt-3 mb-2">
@@ -47,7 +45,7 @@ const RegisterForm = (props) => {
           <div className="HomeRegister JoinButtonModal">
             {!saving && response.message === "" && (
               <Button type="submit" className="mt-5 w-100 text-left">
-                Register
+                {props.cta}
               </Button>
             )}
 
