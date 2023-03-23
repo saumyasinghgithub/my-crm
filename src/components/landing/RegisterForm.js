@@ -10,8 +10,6 @@ const RegisterForm = (props) => {
   const [response, setResponse] = useState({ success: false, message: "" });
   const { eventData, formType } = props;
 
-  console.log(props);
-
   const onSave = (e) => {
     const frm = e.currentTarget;
     e.preventDefault();
@@ -28,7 +26,7 @@ const RegisterForm = (props) => {
   };
   return (
     <>
-      <Modal.Header className="justify-content-center" closeButton>
+      <Modal.Header className="justify-content-center">
         <Modal.Title>
           <div className="UpEventText text-center">
             <h3>EVENT PARTICIPATION</h3>

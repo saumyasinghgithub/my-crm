@@ -459,7 +459,7 @@ const LandingPage = (props) => {
 
       {/* Register FORM */}
       {_.get(trainer, "events", []).length > 0 && (
-        <Modal size="lg" show={RegiShow} onHide={RegisterClose} className="JoinNowModal">
+        <Modal size="lg" show={RegiShow} onHide={RegisterClose} className="JoinNowModal" closeButton>
           <RegisterForm formType="event" eventData={trainer.events[0]} />
         </Modal>
       )}
