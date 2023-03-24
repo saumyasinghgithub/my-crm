@@ -84,7 +84,7 @@ const Footer = () => {
       <footer className="footer footerFixed">
         <div className="container">
 
-          <ul className="footerLeft text-uppercase">
+          <ul className="footerLeft">
             <li className="footerline"> © {(new Date().getFullYear())} by Dr. Susan Davis, Rescue RN™    </li>
             <li className="footerline ml-2">
               <a href={`${process.env.REACT_APP_PUBLIC_URL}/privacy-policy`}>
