@@ -87,7 +87,7 @@ const Login = (props) => {
           //var path = "http://" + trainerSlug + "." + subDomain;
           var path = "https://dr-susan-davis.kstverse.com/";
           console.log(path);
-          window.location.replace(path);
+          window.location.replace(path); 
        // } else {
          // window.location.reload();
         //}
