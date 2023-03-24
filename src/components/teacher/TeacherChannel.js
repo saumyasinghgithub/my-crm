@@ -47,7 +47,11 @@ const TeacherChannel = (props) => {
 
   useEffect(window.scrollEffect, []);
 
-  return <>{ydata.length > 0 && <div className="row">{ydata.length > 0 && ydata.map(youtubeItem)}</div>}</>;
+  return <>{ydata.length > 0 && <>
+    <div className="freeResouces lineANimation slideInUp wow ">Free Resources</div>
+    <div className="row">{ydata.length > 0 && ydata.map(youtubeItem)}</div>
+    </>
+  }</>;
 };
 
 export default TeacherChannel;

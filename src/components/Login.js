@@ -80,16 +80,17 @@ const Login = (props) => {
           win.postMessage(Utils.setUserData(), "*");
         }
         var isTrainer = Utils.isTrainer();
-        if (isTrainer) {
+       // if (isTrainer) {
           var userData = Utils.getUserData();
           var subDomain = Utils.subdomain();
           var trainerSlug = userData.slug;
-          var path = "http://" + trainerSlug + "." + subDomain;
+          //var path = "https://" + trainerSlug + "." + subDomain;
+          var path = "https://dr-susan-davis.kstverse.com/";
           console.log(path);
           window.location.replace(path);
-        } else {
-          window.location.reload();
-        }
+        //} else {
+          //window.location.reload();
+        //}
         
       }
     });
@@ -123,17 +124,6 @@ const Login = (props) => {
       <div className="modal-dialog modal-full">
         <div className="modal-content">
           <div className="overlay"></div>
-          <button
-            type="button"
-            className="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
-            <img
-              className="img-fluid"
-              src="/assets/images/close-circle.png"
-            />
-          </button>
           <form
             ref={moodleFrm}
             method="post"

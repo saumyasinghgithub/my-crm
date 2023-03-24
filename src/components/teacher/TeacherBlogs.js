@@ -78,8 +78,7 @@ const TeacherBlogs = (props) => {
 
         <div className="knowledgBody">
           {!_.isEmpty(props.youtube) && (
-            <>
-              <div className="freeResouces lineANimation slideInUp wow ">Free Resources</div>
+            <>              
               <TeacherChannel youtube={props.youtube} />
             </>
           )}
