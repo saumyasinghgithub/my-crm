@@ -6590,16 +6590,6 @@ ul.ulDesign li {
     border: 2px solid #ababab !important;
 }
 
-.ContactLogo {
-    width: 13%;
-}
-
-.ContactLogos {
-    width: 30%;
-    margin-left: 25px;
-    display: flex;
-    align-items: center;
-}
 
 .Contactemail a {
     color: #4f5052;
