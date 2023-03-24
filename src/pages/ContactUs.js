@@ -174,7 +174,7 @@ const ContactUs = (props) => {
               <Container>
                 <div className="ContactDetails">
                   <img
-                    src={`${process.env.REACT_APP_API_URL}/uploads/logo/${_.get(trainer, "logo", "default.png")}`}
+                    src={`${process.env.REACT_APP_API_URL}/uploads/logo/${_.get(trainer, "logo_image", "../../logo-default.png")}`}
                     className="img-fluid w-50 ml-0"
                     alt={_.get(trainer, "company", process.env.REACT_APP_CONTACT_NAME)}
                   />

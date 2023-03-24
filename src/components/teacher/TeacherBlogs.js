@@ -9,8 +9,7 @@ import { RegisterForm } from "./../landing";
 import { Modal } from "react-bootstrap";
 
 const TeacherBlogs = (props) => {
-  const [bdata, setBdata] = useState([]);
-  const data = props.data;
+  const { data, blogs } = props;
   const { getServerData } = useContext(UserContext);
 
   const [RegiShow, setRegiShow] = useState(false);
@@ -18,11 +17,6 @@ const TeacherBlogs = (props) => {
   const RegisterClose = () => setRegiShow(false);
   const RegisterShow = () => setRegiShow(true);
 
-  useEffect(() => {
-    getServerData("trainer/my-blog")
-      .then(setBdata)
-      .catch((err) => console.log(err));
-  }, []);
   useEffect(window.scrollEffect, []);
   const blogItem = (blog) => {
     return (
@@ -54,11 +48,11 @@ const TeacherBlogs = (props) => {
   return (
     <>
       <div className="row">
-        {Utils.isTrainer() && Utils.getUserData().id === bdata.user_id && (
+        {Utils.isTrainer() && Utils.getUserData().id === data.user_id && (
           <div className="container mb-3 editTrainerdetails">
             <div className="row">
               <div className="col-12 text-right">
-                <a className="p-2 text-white rounded" href="/my-profile#blogs">
+                <a className="p-2 text-white rounded" href="/my-profile#community">
                   Edit <i className="fas fa-edit text-white"></i>
                 </a>
               </div>
@@ -66,27 +60,31 @@ const TeacherBlogs = (props) => {
           </div>
         )}
         <div className="col-lg-12 col-md-12 col-12 pt-2 pb-1">
-          <img className="img-fluid imgTransfer" src={`${process.env.REACT_APP_API_URL}/uploads/blog/${encodeURI(bdata.blog_image)}`} alt="blog" />
+          <img
+            className="img-fluid imgTransfer"
+            src={`${process.env.REACT_APP_API_URL}/uploads/community/${encodeURI(data.community_image)}`}
+            alt="blog"
+          />
         </div>
       </div>
 
       <div className="serviceWrapper container">
         <div className="serviceHeading">
           <h1 className="headingtext slideInUp wow ">Community</h1>
-          <div className="subHeading slideInUp wow " dangerouslySetInnerHTML={{ __html: bdata.about_blog }}></div>
+          <div className="subHeading slideInUp wow " dangerouslySetInnerHTML={{ __html: data.about_community }}></div>
         </div>
 
         <div className="knowledgBody">
           {!_.isEmpty(props.youtube) && (
-            <>              
-              <TeacherChannel youtube={props.youtube} />
+            <>
+              <TeacherChannel youtube={data.youtube_community} />
             </>
           )}
 
-          {data.length > 0 && (
+          {blogs.length > 0 && (
             <>
               <div className="freeResouces lineANimation slideInUp wow ">Blogs</div>
-              <div className="row">{data.length > 0 && data.map(blogItem)}</div>
+              <div className="row">{blogs.length > 0 && blogs.map(blogItem)}</div>
             </>
           )}
 
