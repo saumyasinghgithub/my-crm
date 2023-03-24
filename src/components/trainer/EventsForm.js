@@ -5,6 +5,7 @@ import Accordion from "react-bootstrap/Accordion";
 import UserContext from "../../contexts/UserContext";
 import Utils from "./../../Utils";
 import { Editor } from "@tinymce/tinymce-react";
+import moment from "moment";
 const EventsForm = (props) => {
   const [eventData, setEventData] = useState([]);
   const [featured, setFeatured] = useState(-1);
@@ -20,7 +21,7 @@ const EventsForm = (props) => {
       .then((data) => {
         console.log("fetching data" + data);
         while (data.length < 2) {
-          data = [...data, { id: 0, event_img: "", event_short_desc: "", featured: 0, participants: 0 }];
+          data = [...data, { id: 0, heading: "", sub_heading: "", event_on: "", event_img: "", event_short_desc: "", featured: 0, participants: 0 }];
         }
         setEventData(data);
         setFeatured(eventData.findIndex((v) => v.featured));
@@ -49,7 +50,10 @@ const EventsForm = (props) => {
   };
 
   const addAData = (e) => {
-    let newdata = [...eventData, { id: 0, event_img: "", event_short_desc: "", featured: 0, participants: 0 }];
+    let newdata = [
+      ...eventData,
+      { id: 0, heading: "", sub_heading: "", event_on: "", event_img: "", event_short_desc: "", featured: 0, participants: 0 },
+    ];
     setEventData(newdata);
   };
   const removeAData = (pos) => (e) => {
@@ -110,6 +114,37 @@ const EventsForm = (props) => {
                   </Row>
                   <Row>
                     <Form.Control type="hidden" name={`id`} value={_.get(eventData, `${k}.id`, "")} />
+                    <Col className="col-12 py-3">
+                      <Form.Label>Event Heading *</Form.Label>
+                      <Form.Control
+                        type="text"
+                        name={`heading`}
+                        defaultValue={_.get(eventData, `${k}.heading`, "")}
+                        placeholder="Enter Heading *"
+                        required
+                      />
+                    </Col>
+                    <Col className="col-8 py-3">
+                      <Form.Label>Event Sub Heading *</Form.Label>
+                      <Form.Control
+                        type="text"
+                        name={`sub_heading`}
+                        defaultValue={_.get(eventData, `${k}.sub_heading`, "")}
+                        placeholder="Enter Sub-Heading *"
+                        required
+                      />
+                    </Col>
+
+                    <Col className="col-4 py-3">
+                      <Form.Label>Event Date *</Form.Label>
+                      <Form.Control
+                        type="datetime-local"
+                        name={`event_on`}
+                        defaultValue={moment(_.get(eventData, `${k}.event_on`, "")).format("YYYY-MM-DD HH:mm")}
+                        required
+                      />
+                    </Col>
+
                     <Col className="col-6 py-3">{photoUploader("event", "Upload Large Event Image (1236px by 450px)", k)}</Col>
 
                     <Col className="col-6 py-3">

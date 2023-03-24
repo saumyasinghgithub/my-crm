@@ -8,14 +8,14 @@ const RegisterForm = (props) => {
   const { setServerData } = useContext(UserContext);
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({ success: false, message: "" });
-  const { formType } = props;
+  const { eventData, formType } = props;
 
   const onSave = (e) => {
     const frm = e.currentTarget;
     e.preventDefault();
     let frmdata = new FormData(frm);
     frmdata.append("type", formType);
-    frmdata.append("trainer_event_id", props.id);
+    frmdata.append("trainer_event_id", eventData.id);
     setSaving(true);
     setServerData("trainer/event-participant", frmdata, "post").then((res) => {
       setSaving(false);
@@ -27,13 +27,13 @@ const RegisterForm = (props) => {
       <Modal.Header className="justify-content-center">
         <Modal.Title>
           <div className="UpEventText text-center">
-            <h3>{props.heading}</h3>
-            <h4 dangerouslySetInnerHTML={{ __html: props.subHeading }}></h4>
+            <h3>{eventData.heading}</h3>
+            {_.get(eventData, "sub_heading", false) && <h4>{eventData.sub_heading}</h4>}
           </div>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="mt-3">
-        {props.bodyText}
+        <p dangerouslySetInnerHTML={{ __html: eventData.event_short_desc }}></p>
         <br></br>
         <Form onSubmit={onSave}>
           <Form.Group className="mt-3 mb-2">

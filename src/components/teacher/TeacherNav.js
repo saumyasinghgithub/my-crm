@@ -9,7 +9,7 @@ const TeacherNav = (props) => {
     service: "Services",
     codeprep: "CodePRep",
     //community: "Community",
-    blogs: "Blogs",
+    community: "Community",
     library: "Courses",
   };
 
@@ -39,7 +39,7 @@ const TeacherNav = (props) => {
   /* {pathname.indexOf("/professional-profile") > -1 && menuItem("Profile", "")}
       {pathname.indexOf("/professional-profile") === -1 && menuItem("Professional Profile", "professional-profile/about")} */
   return (
-    <ul className="navbar-nav mt-2 mt-lg-0">      
+    <ul className="navbar-nav mt-2 mt-lg-0">
       {pathname.indexOf("/professional-profile") > -1 && menuItem("Home", "")}
       {pathname.indexOf("/professional-profile") === -1 && menuItem("Home", "")}
       {_.map(navs, (label, k) => menuItem(label, `professional-profile/${k}`))}

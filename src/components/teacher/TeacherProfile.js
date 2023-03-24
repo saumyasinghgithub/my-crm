@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Container, Spinner, Alert } from "react-bootstrap";
 
-import { TeacherSubscribe, TeacherAbout, TeacherService, TeacherKnowledge, TeacherCommunity, TeacherLibrary,TeacherBlogs } from "./index";
+import { TeacherSubscribe, TeacherAbout, TeacherService, TeacherKnowledge, TeacherBlogs, TeacherLibrary } from "./index";
 
 import _ from "lodash";
 
@@ -34,7 +34,7 @@ const TeacherProfile = (props) => {
   }, []);
 
   useEffect(window.scrollEffect, [trainer]);
-  console.log('trainerdata'+trainer.awards);
+  console.log("trainerdata" + trainer.awards);
 
   return (
     <Container fluid className="h-100 p-0">
@@ -92,8 +92,9 @@ const TeacherProfile = (props) => {
                   )}
                   {page === "service" && <TeacherService data={trainer.service} {...params} />}
                   {page === "codeprep" && <TeacherKnowledge data={trainer.knowledge} blogs={trainer.blogs} {...params} />}
-                  {/*page === "community" && <TeacherCommunity data={trainer.community} {...params} />*/}
-                  {page === "blogs" && <TeacherBlogs data={trainer.blogs} {...params} />}
+                  {page === "community" && (
+                    <TeacherBlogs data={trainer.blogs} {...params} youtube={trainer.community.youtube_community} events={trainer.events} />
+                  )}
                   {page === "library" && <TeacherLibrary data={trainer.library} courses={trainer.courses} {...params} />}
                 </div>
               </div>

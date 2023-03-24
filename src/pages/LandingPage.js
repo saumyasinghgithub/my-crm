@@ -1,15 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Container, Row, Col, Button, Modal, Form, Alert } from "react-bootstrap";
+import { Container, Row, Col, Modal } from "react-bootstrap";
 import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
 
 import { TeacherSubscribe } from "../components/teacher";
-import { LandingBlog, RegisterForm } from "../components/landing";
+import { RegisterForm } from "../components/landing";
 import Utils from "./../Utils";
 import UserContext from "./../contexts/UserContext";
 import _ from "lodash";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
-import { faFacebook, faTwitter, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import moment from "moment";
 import { Loader } from "../components";
 
 const LandingPage = (props) => {
@@ -90,34 +88,7 @@ const LandingPage = (props) => {
           </>
         )}
       </Container>
-      {/* Join Community */}
-      {/* <Col md={10} className="landingSlider landingVideo">
-            <Col md={7} className="landingFloatVideo">
-              <video src={video} controls poster={poster} width="100%" height="360"></video>
-            </Col>
-            <Col md={5} className="landingFloatText">
-              <Col md={12}>
-                <h2 className="objHeading">
-                  <span className="floatLeftSpan">Objectives:</span>
-                  <span className="objectiveImg"></span>
-                </h2>
-              </Col>
-              <Col md={12} className="objectiveLi">
-                <ul className="ulDesign">
-                  <li>
-                    To analyze and disseminate Code Blue data to improve resuscitation efforts, quality, and outcomes, reducing hospital mortality.
-                  </li>
-                  <li>Make recommendations regarding improvements of code blue processes centered on Evidence-Based Practice.</li>
-                  <li>Continually provide education and training associated with the standards of care in high-quality resuscitative efforts</li>
-                </ul>
-              </Col>
-              <Col md={12} className="jnNwBtnDiv">
-                <a className="joinnowBtn" href="/contact-us">
-                  Join Now
-                </a>
-              </Col>
-            </Col>
-          </Col> */}
+
       {!loading && (
         <>
           <section className="HomeMainCourses">
@@ -281,7 +252,6 @@ const LandingPage = (props) => {
           <Container>
             <Col md={12} className="">
               <div className="landingSlider landingUpEvent">
-                {/* <h3 className="landingHeading">UPCOMING <span>EVENTS</span></h3> */}
                 <div className="landingUpEventBox">
                   {_.get(trainer, "events", []).length > 0 && (
                     <div className="row">
@@ -294,6 +264,9 @@ const LandingPage = (props) => {
                           </div>
                           <div className="col-lg-7 col-md-12">
                             <div className="UpEventText">
+                              <h3>{event.heading}</h3>
+                              <h4>{event.sub_heading}</h4>
+                              <div>{moment(event.event_on).format("MMM DD, h:mm a")}</div>
                               <p dangerouslySetInnerHTML={{ __html: event.event_short_desc }}></p>
                               <div className="HomeRegister mt-4">
                                 <button onClick={RegisterShow}>Register Now</button>
@@ -357,51 +330,6 @@ const LandingPage = (props) => {
         </>
       )}
 
-      {/* <Col md={10} className="landingEventsSection">
-            <p className="kickoffDate">29 DAYS TO THE EVENT</p>
-            <h3 className="eventHeading">KickStart My Heart</h3>
-            <p className="eventTime">Apr 01, 7:00 AM | Virtual Event - A Podcast Series</p>
-            <p className="eventDescription">
-              Do you strut into a code blue with confidence, knowing you're going to nail it, no matter what? Or do you stumble in with unease and
-              anxiety, feeling unprepared and overwhelmed? Let's face it, code blue events can leave you feeling like you've been hit by a bus, and
-              that's not a good look on anyone.
-            </p>
-            <p className="eventDescription">Can you make it?</p>
-            <p className="eventRegisBtn">
-              <a href="">Register Now</a>
-            </p>
-            <div className="socialLinksEvents">
-              <a href="">
-                <FontAwesomeIcon icon={faFacebook} className="fontawesomeCustomClass" />
-              </a>
-              <a href="">
-                <FontAwesomeIcon icon={faTwitter} className="fontawesomeCustomClass" />
-              </a>
-              <a href="">
-                <FontAwesomeIcon icon={faLinkedin} className="fontawesomeCustomClass" />
-              </a>
-            </div>
-          </Col> */}
-      {/* upcoming event */}
-
-      {/* <Col md={10} className="landingEvents"></Col> */}
-      {/* {
-        !loading && (
-          <>
-            <Col md={12} className="landingSlider LandingSubscribe">
-              <TeacherSubscribe type="inLine" />
-            </Col>
-          </>
-        )
-      } */}
-      {/* {
-        !loading && (
-          <>
-            <hr />
-          </>
-        )
-      } */}
-
       {!loading && (
         <>
           <Container>
@@ -409,19 +337,10 @@ const LandingPage = (props) => {
               <div className="row">
                 <div className="col-md-12">
                   <div className="Footermail text-center">
-                    {/* <p className="mb-4">Rescue RN™ • CodePRep</p>
-                      <p>Inquires:</p>
-                      <p ><a href="mailto:susan@rescuern.com">susan@rescuern.com</a></p>
-
-                      <p className="mb-4">+1(863) 445-0911</p> */}
-
                     <p className="text-left">Subscribe to Our Rescue RN™ Newsletter</p>
                     <TeacherSubscribe type="inLine" />
                   </div>
                 </div>
-                {/* <div className="col-md-6 mt-2 mb-2">
-                    <img src="../assets/images/footer.jpg" className="img-fluid w-100" alt="" />
-                  </div> */}
               </div>
             </Col>
           </Container>
@@ -432,9 +351,13 @@ const LandingPage = (props) => {
       <Modal size="lg" show={show} onHide={handleClose} className="JoinNowModal" closeButton>
         <RegisterForm
           formType="blog"
+          eventData={{
+            id: 0,
+            heading: "Join Community",
+            event_short_desc:
+              "Be a part of our community and gain access to exclusive content, events, and opportunities to connect with other members.",
+          }}
           id={0}
-          heading="Join Community"
-          bodyText="Be a part of our community and gain access to exclusive content, events, and opportunities to connect with other members."
           cta="Join"
         />
       </Modal>
@@ -443,14 +366,7 @@ const LandingPage = (props) => {
       {/* Register FORM */}
       {_.get(trainer, "events", []).length > 0 && (
         <Modal size="lg" show={RegiShow} onHide={RegisterClose} className="JoinNowModal" closeButton>
-          <RegisterForm
-            formType="event"
-            id={trainer.events[0].id}
-            heading="EVENT PARTICIPATION"
-            subHeading={trainer.events[0].event_short_desc}
-            bodyText="Please complete the form to register for the event."
-            cta="Register"
-          />
+          <RegisterForm formType="event" eventData={trainer.events[0]} cta="Register" />
         </Modal>
       )}
       {/* Register FORM */}
