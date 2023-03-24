@@ -6633,6 +6633,22 @@ ul.ulDesign li {
     margin-top: 15px;
 }
 
+/* .BlogEvents {
+    border: 1px solid #7a7a7a;
+} */
+
+.BlogEventImg {
+    padding-left: 25px;
+}
+
+.BlogPaddingright {
+    padding-right: 25px;
+}
+
+/* .blogborder {
+    border-right: 2px solid #7a7a7a;
+} */
+
 @media only screen and (max-width: 1024px) {
     .homecoursedescription {
         height: 110px;
@@ -6651,6 +6667,18 @@ ul.ulDesign li {
 
     .UpEventText {
         padding-top: 30px;
+    }
+
+    .blogborder {
+        border-right: 0px;
+    }
+
+    .BlogEventImg {
+        padding-left: 0px;
+    }
+
+    .BlogPaddingright {
+        padding-right: 0px;
     }
 }
 

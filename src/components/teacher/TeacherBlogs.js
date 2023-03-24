@@ -16,7 +16,7 @@ const TeacherBlogs = (props) => {
     useEffect(window.scrollEffect, []);
     const blogItem = (blog) => {
         return (
-            <div className="col-sm-6 col-md-4" key={blog.id}>
+            <div className="col-md-6 col-lg-4" key={blog.id}>
                 <a href={`/trainers/${props.slug}/blogs/${blog.slug}`}>
                     <div className="knowledgeBox slideInUp wow ">
                         <div className="knowledgeImg">
@@ -65,15 +65,31 @@ const TeacherBlogs = (props) => {
 
             <div className="serviceWrapper container">
                 <div className="serviceHeading">
-                    <h1 className="headingtext slideInUp wow ">Blogs</h1>
+                    <h1 className="headingtext slideInUp wow ">Community</h1>
                     <div className="subHeading slideInUp wow " dangerouslySetInnerHTML={{ __html: bdata.about_blog }}></div>
                 </div>
                 {data.length > 0 && (
                     <div className="knowledgBody">
-                        <div className="freeResouces lineANimation slideInUp wow ">Free Resources</div>
+                        <div className="freeResouces lineANimation slideInUp wow ">Blogs</div>
                         <div className="row">{data.length > 0 && data.map(blogItem)}</div>
+                        <div className="freeResouces lineANimation slideInUp wow ">Events</div>
+                        <div className='row BlogEvents'>
+                            <div className='col-lg-6 col-md-12 col-12 d-flex align-center mt-2 mb-2 blogborder'>
+                                <div className='BlogPaddingright'>
+                                    <p>Continually provide education and training associated with the standards of care in high-quality resuscitative efforts</p>
+                                    <div className="HomeRegister mt-4 text-right"><button>
+                                        Register Now
+                                    </button></div>
+                                </div>
+                            </div>
+                            <div className='col-lg-6 col-md-12 col-12 mt-2 mb-2'>
+                                <img src='../assets/images/ourcourse1.png' className='img-fluid w-100 BlogEventImg' alt=''></img>
+                            </div>
+                        </div>
                     </div>
+
                 )}
+
             </div>
         </>
     );
