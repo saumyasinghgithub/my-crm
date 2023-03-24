@@ -79,9 +79,10 @@ const Login = (props) => {
           var win = document.getElementById("mainDomainIframe").contentWindow;
           win.postMessage(Utils.setUserData(), "*");
         }
+        
         var isTrainer = Utils.isTrainer();
         //if (isTrainer) {
-          var userData = Utils.getUserData();
+          var userData  = Utils.getUserData(); 
           var subDomain = Utils.subdomain();
           var trainerSlug = userData.slug;
           //var path = "http://" + trainerSlug + "." + subDomain;
