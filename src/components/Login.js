@@ -80,16 +80,16 @@ const Login = (props) => {
           win.postMessage(Utils.setUserData(), "*");
         }
         var isTrainer = Utils.isTrainer();
-       // if (isTrainer) {
+        //if (isTrainer) {
           var userData = Utils.getUserData();
           var subDomain = Utils.subdomain();
           var trainerSlug = userData.slug;
-          //var path = "https://" + trainerSlug + "." + subDomain;
+          //var path = "http://" + trainerSlug + "." + subDomain;
           var path = "https://dr-susan-davis.kstverse.com/";
           console.log(path);
           window.location.replace(path);
-        //} else {
-          //window.location.reload();
+       // } else {
+         // window.location.reload();
         //}
         
       }
