@@ -151,7 +151,7 @@ const TeacherAbout = (props) => {
                 </ul>
               </div>
               <ul className="profile-socail-icon">
-                <Helmet>
+                <Helmet> 
                 <meta property="og:title" content={`${trainerName}`} />
                 <meta property="og:description" content={`${trimText(trainerIntro,150)}`} />
                 <meta property="og:image" content={`${data.base_image}`} />
