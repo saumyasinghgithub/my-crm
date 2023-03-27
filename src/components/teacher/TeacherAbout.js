@@ -152,6 +152,8 @@ const TeacherAbout = (props) => {
               </div>
               <ul className="profile-socail-icon">
                 <Helmet>
+                  <meta property="og:title" content={`${trainerName}`} />
+                  <meta property="og:description" content={`${trimText(trainerIntro,100)}`} />
                   <meta property="og:image" content={`${data.base_image}`} />
                 </Helmet>
                 <li><a href={`https://twitter.com/intent/tweet?url=${trainerUrl}&text=${trimText(trainerIntro,230)}`}><TwitterIcon size={32} round={true} /></a></li>
