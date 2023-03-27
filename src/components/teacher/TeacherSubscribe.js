@@ -25,7 +25,7 @@ const TeacherSubscribe = (props) => {
         console.log(`Email: ${email}, trainerUrl: ${trainerUrl}`);
 
         let params = `?email=${email}&trainerUrl=${trainerUrl}`;
-        if(email){
+        if (email) {
             axios.get(Utils.apiUrl('trainer/subscribers' + params), Utils.apiHeaders()).then(res => {
                 if (res.data.length > 0) {
                     setMessage("You have already subscribed for this trainer");
@@ -86,7 +86,7 @@ const TeacherSubscribe = (props) => {
             <Modal isOpen={modal} toggle={toggle}>
                 <ModalHeader toggle={toggle}>Subscription</ModalHeader>
                 <ModalBody>
-                    <p>Subscribe to our newsletter and be the first to know about new courses, special offers, and events! from {trainerFullName}</p>
+                    <p>Subscribe to our newsletter and be the first to know about new courses, special offers, and events!</p>
                     <p>To sign up, simply enter your email address below and click "Subscribe".</p>
                     <p>By subscribing, you agree to receive occasional marketing emails from us. We promise not to spam you, and you can unsubscribe at any time.</p>
                     <p><b>{message}</b></p>

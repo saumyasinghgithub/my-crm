@@ -103,17 +103,14 @@ const LandingPage = (props) => {
                       <div className="MainOurCourses">
                         <h3 className="landingHeading">Our Courses</h3>
                         <p className="mt-4">
-                          My mission is to empower and equip nurses with the necessary knowledge and skills to respond confidently to cardiac arrest
-                          situations and save the lives of their patients. Drawing on years of experience working in life-saving situations with
-                          resuscitation teams, I recognize the importance of maintaining courage, confidence, and competence in such high-pressure
-                          situations.
+                          Our mission is to empower and equip nurses and other healthcare professionals with the necessary knowledge and skills to respond confidently to cardiac arrest situations and save the lives of their patients. Drawing on years of experience working in life-saving situations with resuscitation teams, we recognize the importance of maintaining courage, confidence, and competence in such high-pressure situations.
                         </p>
                       </div>
                     </Col>
                   </Row>
                   <Container>
                     <Row className="mt-5 justify-content-center">
-                      <h3 className="landingHeading mb-5">Be Prepared for an Emergency: Learn CPR. Save a life.</h3>
+                      <h3 className="landingHeading mb-5">CodePRep; Bridging the Gap Between Bi-Annual Life Support Training And Clinical Performance</h3>
                       <Col lg={4} md={6} className="pt-3 d-flex">
                         <div className="p-4 homecourses">
                           <div className="">
@@ -121,16 +118,17 @@ const LandingPage = (props) => {
                             <img className="img-fluid rounded" src="assets/images/ourcourse1.png" alt="Tverse" />
                           </div>
                           <div className="">
-                            <div className="libraryTitle HomeCourseTitle text-center pt-5 pb-3">Codeprep</div>
+                            <div className="libraryTitle HomeCourseTitle text-center pt-5 pb-3">CodePRep</div>
                             <div className="libraryBody homecoursedescription text-center pt-3 pb-5 ">
-                              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-                              dummy text ever since the 1500s.
+                              Improving clinical CPR performance, optimizing patient outcomes, and promoting staff engagement.
+                              Emphasizing the importance of mastering the basics before teaching advanced resuscitation skills.
+
                             </div>
                           </div>
                           <div className="HomeExploreCourse mt-4 mb-3 text-center">
                             <button>
                               {" "}
-                              <a href="/professional-profile/library" target="_blank">
+                              <a href="/professional-profile/trainercourses" target="_blank">
                                 Explore Courses
                               </a>
                             </button>
