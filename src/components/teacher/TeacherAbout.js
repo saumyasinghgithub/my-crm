@@ -152,12 +152,13 @@ const TeacherAbout = (props) => {
               </div>
               <ul className="profile-socail-icon">
                 <Helmet> 
-                <meta property="og:title" content={`${trainerName}`} />
-                <meta property="og:description" content={`${trimText(trainerIntro,150)}`} />
-                <meta property="og:image" content={`${data.base_image}`} />
-                <meta property="og:url" content={`${trainerUrl}professional-profile/about/`} />
-                <meta property="og:type" content="website" />
-              </Helmet>
+                  <link rel="canonical" href={`${trainerUrl}professional-profile/about`} />
+                  <meta property="og:title" content={`${trainerName}`} />
+                  <meta property="og:description" content={`${trimText(trainerIntro,150)}`} />
+                  <meta property="og:image" content={`${data.base_image}`} />
+                  <meta property="og:url" content={`${trainerUrl}professional-profile/about`} />
+                  <meta property="og:type" content="website" />
+                </Helmet>
                 <li><a href={`https://twitter.com/intent/tweet?url=${trainerUrl}&text=${trimText(trainerIntro,230)}`}><TwitterIcon size={32} round={true} /></a></li>
                 <li><a href={`https://www.facebook.com/sharer/sharer.php?u=${trainerUrl}&quote=${trainerIntro}&imageURL=${data.base_image}`}><FacebookIcon size={32} round={true} /></a></li>
                 <li><a href={`https://www.linkedin.com/sharing/share-offsite/?url=${trainerUrl}professional-profile/about/&title=${trainerName}&summary=${trimText(trainerIntro,150)}&source=TVerse&mini=true&ro=true&imageUrl=${data.base_image}`}><LinkedinIcon size={32} round={true} /></a></li>

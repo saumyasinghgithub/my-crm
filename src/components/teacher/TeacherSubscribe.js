@@ -25,18 +25,22 @@ const TeacherSubscribe = (props) => {
         console.log(`Email: ${email}, trainerUrl: ${trainerUrl}`);
 
         let params = `?email=${email}&trainerUrl=${trainerUrl}`;
-        axios.get(Utils.apiUrl('trainer/subscribers' + params), Utils.apiHeaders()).then(res => {
-            if (res.data.length > 0) {
-                setMessage("You have already subscribed for this trainer");
-            } else {
-                axios.post(Utils.apiUrl(`trainer/subscribe`), frmdata, Utils.apiHeaders({ token: token }))
-                    .then(res => {
-                        setMessage("Thank You for subscribing with us !");
-                    }).catch(err => {
-                        console.log(err);
-                    });
-            }
-        });
+        if(email){
+            axios.get(Utils.apiUrl('trainer/subscribers' + params), Utils.apiHeaders()).then(res => {
+                if (res.data.length > 0) {
+                    setMessage("You have already subscribed for this trainer");
+                } else {
+                    axios.post(Utils.apiUrl(`trainer/subscribe`), frmdata, Utils.apiHeaders({ token: token }))
+                        .then(res => {
+                            setMessage("Thank You for subscribing with us !");
+                        }).catch(err => {
+                            console.log(err);
+                        });
+                }
+            });
+        } else {
+            setMessage("Please enter your email address !");
+        }
     };
 
     return (<div>

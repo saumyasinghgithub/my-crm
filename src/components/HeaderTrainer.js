@@ -91,7 +91,7 @@ const HeaderTrainer = (props) => {
     </li>*/}
             {!loggedIn && (
               <li className="nav-item">
-                <a href={`${process.env.REACT_APP_PUBLIC_URL}/login`}>Log in</a>
+                <a href={Utils.getTrainerURL(`login`)}>Log in</a>
               </li>
             )}
 
