@@ -10,7 +10,7 @@ const TeacherNav = (props) => {
     codeprep: "CodePRep",
     //community: "Community",
     community: "Community",
-    library: "Courses",
+    trainercourses: "Courses",
   };
 
   const { pathname } = useLocation();

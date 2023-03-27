@@ -87,12 +87,12 @@ const Footer = () => {
           <ul className="footerLeft">
             <li className="footerline"> © {(new Date().getFullYear())} by Dr. Susan Davis, Rescue RN™    </li>
             <li className="footerline ml-2">
-              <a href={`${process.env.REACT_APP_PUBLIC_URL}/privacy-policy`}>
+              <a href={Utils.getTrainerURL(`privacy-policy`)}>
                 Privacy Policy
               </a>
             </li>
             <li className="footerline ml-2">
-              <a href={`${process.env.REACT_APP_PUBLIC_URL}/term-conditions`}>
+              <a href={Utils.getTrainerURL(`term-conditions`)}>
                 Terms of use
               </a>
             </li>

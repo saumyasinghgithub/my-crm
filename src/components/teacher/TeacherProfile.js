@@ -93,7 +93,7 @@ const TeacherProfile = (props) => {
                   {page === "service" && <TeacherService data={trainer.service} {...params} />}
                   {page === "codeprep" && <TeacherKnowledge data={trainer.knowledge} blogs={trainer.blogs} {...params} />}
                   {page === "community" && <TeacherBlogs data={trainer.community} youtube={trainer.community.youtube_community} {...params} events={trainer.events} blogs={trainer.blogs} />}
-                  {page === "library" && <TeacherLibrary data={trainer.library} courses={trainer.courses} {...params} />}
+                  {page === "trainercourses" && <TeacherLibrary data={trainer.library} courses={trainer.courses} {...params} />}
                 </div>
               </div>
             </>
