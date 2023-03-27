@@ -14,27 +14,25 @@ const Footer = () => {
 
   const fetchList = () => {
     setList({ ...list, loading: true });
-    axios
-      .get(Utils.apiUrl("sociallink/list"), Utils.apiHeaders())
-      .then((res) => {
-        if (res.data.success) {
-          setList({
-            ...list,
-            loading: false,
-            error: false,
-            pageInfo: res.data.pageInfo,
-            data: res.data.data,
-          });
-        } else {
-          setList({
-            ...list,
-            loading: false,
-            error: res.data.message,
-            pageInfo: {},
-            data: [],
-          });
-        }
-      });
+    axios.get(Utils.apiUrl("sociallink/list"), Utils.apiHeaders()).then((res) => {
+      if (res.data.success) {
+        setList({
+          ...list,
+          loading: false,
+          error: false,
+          pageInfo: res.data.pageInfo,
+          data: res.data.data,
+        });
+      } else {
+        setList({
+          ...list,
+          loading: false,
+          error: res.data.message,
+          pageInfo: {},
+          data: [],
+        });
+      }
+    });
   };
 
   const sendLocalStorage = () => {
@@ -67,15 +65,12 @@ const Footer = () => {
     if (!hasSubdomain) {
       win = window.parent;
     }
-    win.postMessage(
-      Utils.isLoggedIn() ? JSON.stringify(Utils.getUserData()) : "false",
-      "*"
-    );
+    win.postMessage(Utils.isLoggedIn() ? JSON.stringify(Utils.getUserData()) : "false", "*");
   };
 
   useEffect(fetchList, []);
 
-  useEffect(sendLocalStorage, []);
+  //useEffect(sendLocalStorage, []);
 
   useEffect(syncLocalStorage, []);
 
@@ -83,18 +78,13 @@ const Footer = () => {
     <>
       <footer className="footer footerFixed">
         <div className="container">
-
           <ul className="footerLeft">
-            <li className="footerline"> © {(new Date().getFullYear())} by Dr. Susan Davis, Rescue RN™    </li>
+            <li className="footerline"> © {new Date().getFullYear()} by Dr. Susan Davis, Rescue RN™ </li>
             <li className="footerline ml-2">
-              <a href={Utils.getTrainerURL(`privacy-policy`)}>
-                Privacy Policy
-              </a>
+              <a href={Utils.getTrainerURL(`privacy-policy`)}>Privacy Policy</a>
             </li>
             <li className="footerline ml-2">
-              <a href={Utils.getTrainerURL(`term-conditions`)}>
-                Terms of use
-              </a>
+              <a href={Utils.getTrainerURL(`term-conditions`)}>Terms of use</a>
             </li>
 
             {/* <li>
@@ -105,10 +95,30 @@ const Footer = () => {
           </ul>
           <ul className="footerRight">
             <ul>
-              <li><a href="https://www.instagram.com/codeprepcprcoach/"> <i className="fab fa-instagram"></i></a></li>
-              <li><a href="https://www.facebook.com/susan.davis.733076"> <i className="fab fa-facebook"></i></a></li>
-              <li><a href="https://www.linkedin.com/in/susan-b-davis-dnp-msn-rn-pmd-5bb403173/?original_referer="> <i className="fab fa-linkedin"></i></a></li>
-              <li><a href="https://www.youtube.com/channel/UClcIAZFQp_SWizNeaZqMj8A"> <i className="fab fa-youtube"></i></a></li>
+              <li>
+                <a href="https://www.instagram.com/codeprepcprcoach/">
+                  {" "}
+                  <i className="fab fa-instagram"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.facebook.com/susan.davis.733076">
+                  {" "}
+                  <i className="fab fa-facebook"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/in/susan-b-davis-dnp-msn-rn-pmd-5bb403173/?original_referer=">
+                  {" "}
+                  <i className="fab fa-linkedin"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/channel/UClcIAZFQp_SWizNeaZqMj8A">
+                  {" "}
+                  <i className="fab fa-youtube"></i>
+                </a>
+              </li>
             </ul>
             {/*list.data.map((record, idx) => (
               <li key={idx}>
@@ -119,13 +129,7 @@ const Footer = () => {
             ))*/}
           </ul>
         </div>
-        {hasSubdomain && (
-          <iframe
-            className="d-none"
-            id="mainDomainIframe"
-            src={`${process.env.REACT_APP_PUBLIC_URL}/readls`}
-          ></iframe>
-        )}
+        {hasSubdomain && <iframe className="d-none" id="mainDomainIframe" src={`${process.env.REACT_APP_PUBLIC_URL}/readls`}></iframe>}
       </footer>
     </>
   );

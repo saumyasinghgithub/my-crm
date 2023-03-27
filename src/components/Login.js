@@ -21,16 +21,10 @@ const Login = (props) => {
 
   useEffect(() => {
     $(".modal").on("show.bs.modal", function (e) {
-      $(".modal .modal-dialog").attr(
-        "class",
-        "modal-dialog modal-full  zoomIn  animated"
-      );
+      $(".modal .modal-dialog").attr("class", "modal-dialog modal-full  zoomIn  animated");
     });
     $(".modal").on("hide.bs.modal", function (e) {
-      $(".modal .modal-dialog").attr(
-        "class",
-        "modal-dialog  zoomOut modal-full  animated"
-      );
+      $(".modal .modal-dialog").attr("class", "modal-dialog  zoomOut modal-full  animated");
     });
 
     if (window.location.href.endsWith("/login") && !Utils.isLoggedIn()) {
@@ -77,22 +71,13 @@ const Login = (props) => {
         //loginToMoodle(data).then(() => window.location.reload());
         if (hasSubdomain) {
           var win = document.getElementById("mainDomainIframe").contentWindow;
-          win.postMessage(Utils.setUserData(), "*");
+          win.postMessage(Utils.getUserData(), "*");
         }
-        
-        var isTrainer = Utils.isTrainer();
-        //if (isTrainer) {
-          var userData  = Utils.getUserData(); 
-          var subDomain = Utils.subdomain();
-          var trainerSlug = userData.slug;
-          //var path = "http://" + trainerSlug + "." + subDomain;
-          var path = "https://dr-susan-davis.kstverse.com/";
-          console.log(path);
-          window.location.replace(path); 
-       // } else {
-         // window.location.reload();
-        //}
-        
+
+        var path = Utils.getTrainerURL("");
+        //var path = "https://dr-susan-davis.kstverse.com/";
+
+        window.location.replace(path);
       }
     });
     return false;
@@ -121,15 +106,11 @@ const Login = (props) => {
   };
 
   return (
-    <>      
+    <>
       <div className="modal-dialog modal-full">
         <div className="modal-content">
           <div className="overlay"></div>
-          <form
-            ref={moodleFrm}
-            method="post"
-            action={`${process.env.REACT_APP_MOODLE_URL}/login/index.php`}
-          >
+          <form ref={moodleFrm} method="post" action={`${process.env.REACT_APP_MOODLE_URL}/login/index.php`}>
             <input type="hidden" name="username" />
             <input type="hidden" name="password" />
           </form>
@@ -174,56 +155,23 @@ const Login = (props) => {
                 </>
               )}
               {loginResp.message !== "" && (
-                <div
-                  className={`alert alert-${
-                    loginResp.success ? "info" : "danger"
-                  } p-5`}
-                >
+                <div className={`alert alert-${loginResp.success ? "info" : "danger"} p-5`}>
                   {loginResp.message}
-                  {loginResp.success && (
-                    <div className="pt-3">
-                      Redirecting to your login area..
-                    </div>
-                  )}
+                  {loginResp.success && <div className="pt-3">Redirecting to your login area..</div>}
                 </div>
               )}
 
-              {fPassing.message !== "" && (
-                <div
-                  className={`alert alert-${
-                    fPassing.success ? "warning" : "danger"
-                  } p-5 m-5`}
-                >
-                  {fPassing.message}
-                </div>
-              )}
+              {fPassing.message !== "" && <div className={`alert alert-${fPassing.success ? "warning" : "danger"} p-5 m-5`}>{fPassing.message}</div>}
 
               {fPassing.message === "" && (
-                <form
-                  onSubmit={mode === 1 ? onLogin : onFPass}
-                  className="needs-validation"
-                  noValidate
-                >
+                <form onSubmit={mode === 1 ? onLogin : onFPass} className="needs-validation" noValidate>
                   <div className="form-group">
-                    <input
-                      className="form-control"
-                      name="email"
-                      placeholder="Email"
-                      type="email"
-                      required
-                    />
-                    <div className="invalid-feedback">
-                      Enter your valid email address!
-                    </div>
+                    <input className="form-control" name="email" placeholder="Email" type="email" required />
+                    <div className="invalid-feedback">Enter your valid email address!</div>
                   </div>
                   {mode === 1 && (
                     <div className="form-group">
-                      <input
-                        className="form-control"
-                        name="pass"
-                        placeholder="Password"
-                        type="password"
-                      />
+                      <input className="form-control" name="pass" placeholder="Password" type="password" />
                     </div>
                   )}
                   <button type="submit" className="btn btnSubmit">
@@ -241,17 +189,10 @@ const Login = (props) => {
                       Click here!
                     </a>
                   </p>
-                  <p>
-                    By signing up, you agree to our Terms of Use and Privacy
-                    Policy.
-                  </p>
-                  <ul>                   
+                  <p>By signing up, you agree to our Terms of Use and Privacy Policy.</p>
+                  <ul>
                     <li>
-                      <a
-                        href="#signUpStudent"
-                        data-toggle="modal"
-                        data-dismiss="modal"
-                      >
+                      <a href="#signUpStudent" data-toggle="modal" data-dismiss="modal">
                         Join as a Student
                       </a>
                     </li>
