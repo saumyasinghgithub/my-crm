@@ -7,10 +7,11 @@ import UserContext from "./../../contexts/UserContext";
 import { useParams } from "react-router-dom";
 import { TwitterIcon, FacebookIcon,LinkedinIcon } from "react-share";
 import sanitizeHtml from 'sanitize-html';
+import { Helmet } from "react-helmet";
 
-function trimText(text) {
-  if (text.length > 230) {
-    return text.substr(0, 230) + "...";
+function trimText(text,number) {
+  if (text.length > number) {
+    return text.substr(0, number) + "...";
   } else {
     return text;
   }
@@ -150,9 +151,12 @@ const TeacherAbout = (props) => {
                 </ul>
               </div>
               <ul className="profile-socail-icon">
-                <li><a href={`https://twitter.com/intent/tweet?url=${trainerUrl}&text=${trimText(trainerIntro)}`}><TwitterIcon size={32} round={true} /></a></li>
+                <Helmet>
+                  <meta property="og:image" content={`${data.base_image}`} />
+                </Helmet>
+                <li><a href={`https://twitter.com/intent/tweet?url=${trainerUrl}&text=${trimText(trainerIntro,230)}`}><TwitterIcon size={32} round={true} /></a></li>
                 <li><a href={`https://www.facebook.com/sharer/sharer.php?u=${trainerUrl}&quote=${trainerIntro}&imageURL=${data.base_image}`}><FacebookIcon size={32} round={true} /></a></li>
-                <li><a href={`https://www.linkedin.com/sharing/share-offsite/?url=${trainerUrl}&title=${trainerName}&summary=${trainerIntro}&source=TVerse&mini=true&ro=true&imageUrl=${data.base_image}`}><LinkedinIcon size={32} round={true} /></a></li>
+                <li><a href={`https://www.linkedin.com/sharing/share-offsite/?url=${trainerUrl}&title=${trainerName}&summary=${trimText(trainerIntro,100)}&source=TVerse&mini=true&ro=true&imageUrl=${data.base_image}`}><LinkedinIcon size={32} round={true} /></a></li>
               </ul>
             </div>
             <img
