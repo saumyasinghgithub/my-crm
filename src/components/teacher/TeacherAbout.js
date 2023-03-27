@@ -5,7 +5,8 @@ import StarRatings from "react-star-ratings";
 import _ from "lodash";
 import UserContext from "./../../contexts/UserContext";
 import { useParams } from "react-router-dom";
-import { InlineShareButtons } from "sharethis-reactjs";
+import { TwitterIcon, FacebookIcon,LinkedinIcon } from "react-share";
+import sanitizeHtml from 'sanitize-html';
 
 const TeacherAbout = (props) => {
   const socialPlatforms = ["facebook", "instagram", "linkedin", "pinterest", "twitter", "youtube"];
@@ -46,12 +47,7 @@ const TeacherAbout = (props) => {
   };
   const trainerSlug = Utils.getUserData().slug;
   const trainerUrl = Utils.getTrainerURL("", trainerSlug);
-  //const testUrl = 'https://www.npmjs.com/search?q=sharethis';
-  const networks = ["facebook", "twitter", "linkedin"];
-  const trainerImage = Utils.getUserData().base_image;
-  const trainerFullName = Utils.getUserData().firstname + " " + Utils.getUserData().middlename + " " + Utils.getUserData().lastname;
-  const trainerUsername = Utils.getUserData().firstname;
-  const trainerIntro = Utils.getUserData().intro;
+  const trainerIntro = sanitizeHtml(data.biography, { allowedTags: [] });
 
   return (
     <>
@@ -145,35 +141,9 @@ const TeacherAbout = (props) => {
                 </ul>
               </div>
               <ul className="profile-socail-icon">
-                <li>
-                  <div>
-                    <InlineShareButtons
-                      config={{
-                        alignment: "center", // alignment of buttons (left, center, right)
-                        color: "social", // set the color of buttons (social, white)
-                        enabled: true, // show/hide buttons (true, false)
-                        font_size: 16, // font size for the buttons
-                        labels: "cta", // button labels (cta, counts, null)
-                        language: "en", // which language to use (see LANGUAGES)
-                        networks: networks,
-                        padding: 10, // padding within buttons (INTEGER)
-                        radius: 4, // the corner radius on each button (INTEGER)
-                        show_total: true,
-                        size: 30, // the size of each button (INTEGER)
-
-                        // OPTIONAL PARAMETERS
-                        url: trainerUrl, // (defaults to current url)
-                        image: trainerImage, // (defaults to og:image or twitter:image)
-                        description: trainerIntro, // (defaults to og:description or twitter:description)
-                        title: trainerFullName, // (defaults to og:title or twitter:title)
-                        message: trainerIntro, // (only for email sharing)
-                        subject: trainerUsername, // (only for email sharing)
-                        username: trainerUsername, // (only for twitter sharing)
-                      }}
-                    />
-                  </div>
-                </li>
-                {/* <li className='mr-2'><div className="addthis_inline_share_toolbox"></div></li> */}
+                <li><a href={`https://twitter.com/intent/tweet?url=${trainerUrl}&text=${trainerIntro}`}><TwitterIcon size={32} round={true} /></a></li>
+                <li><a href={`https://www.facebook.com/sharer/sharer.php?u=${trainerUrl}&quote=${trainerIntro}&imageURL=${data.base_image}`}><FacebookIcon size={32} round={true} /></a></li>
+                <li><a href={`https://www.linkedin.com/sharing/share-offsite/?url=${trainerUrl}&title=${trainerIntro}&summary=${trainerIntro}`}><LinkedinIcon size={32} round={true} /></a></li>
               </ul>
             </div>
             <img
