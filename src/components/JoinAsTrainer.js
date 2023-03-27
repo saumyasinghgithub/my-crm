@@ -52,22 +52,22 @@ const JoinAsTrainer = (props) => {
         if (!validator.isStrongPassword(frm.password.value, {
             minLength: 8, minLowercase: 1,
             minUppercase: 1, minNumbers: 1, minSymbols: 1
-          })) {
+        })) {
             frm.password.setCustomValidity("Passwords Don't Match");
             $(frm.password).next().html("Please use Upper case, lower case");
         }
-        else{
+        else {
             frm.password.setCustomValidity("");
             $(frm.password).next().html('');
         }
-         if(frm.password.value != frm.conf_password.value) {
+        if (frm.password.value != frm.conf_password.value) {
             frm.conf_password.setCustomValidity("Passwords Don't Match");
             $(frm.conf_password).next().html("Passwords Don't Match!!!");
         } else {
             frm.conf_password.setCustomValidity("");
             $(frm.conf_password).next().html('');
         }
-    }; 
+    };
 
     useEffect(() => {
         $('.modal').on('show.bs.modal', function (e) {
@@ -118,7 +118,7 @@ const JoinAsTrainer = (props) => {
                                     <div className="row">
                                         <div className="col-sm-6">
                                             <div className="form-group">
-                                                <input className="form-control" name="firstname" placeholder="First name" type="text" required />
+                                                <input className="form-control" name="firstname" placeholder="First name*" type="text" required />
                                                 <div className="invalid-feedback">First name is required!</div>
                                             </div>
                                             <div className="form-group">
@@ -126,11 +126,11 @@ const JoinAsTrainer = (props) => {
                                                 <div className="invalid-feedback"></div>
                                             </div>
                                             <div className="form-group">
-                                                <input className="form-control" name="lastname" placeholder="Last name" type="text" required />
+                                                <input className="form-control" name="lastname" placeholder="Last name*" type="text" required />
                                                 <div className="invalid-feedback">Last name is required!</div>
                                             </div>
                                             <div className="form-group downArrow">
-                                                <input className="form-control" name="country" placeholder="country" type="text" required />
+                                                <input className="form-control" name="country" placeholder="country*" type="text" required />
                                                 <div className="invalid-feedback">Contry name required!</div>
                                             </div>
                                             <div className="form-group">
@@ -145,15 +145,15 @@ const JoinAsTrainer = (props) => {
                                         </div>
                                         <div className="col-sm-6">
                                             <div className="form-group">
-                                                <input className="form-control" name="mobile" placeholder="Phone" type="text" required />
+                                                <input className="form-control" name="mobile" placeholder="Phone*" type="text" required />
                                                 <div className="invalid-feedback">Phone cannot be empty!</div>
                                             </div>
                                             <div className="form-group">
-                                                <input className="form-control" name="email" placeholder="Email" type="email" required />
+                                                <input className="form-control" name="email" placeholder="Email*" type="email" required />
                                                 <div className="invalid-feedback">Email cannot be empty!</div>
                                             </div>
                                             <div className="form-group">
-                                                <input className="form-control" name="password" onKeyUp={validatePassword} placeholder="Password" type="password" required />
+                                                <input className="form-control" name="password" onKeyUp={validatePassword} placeholder="Password*" type="password" required />
                                                 <div className="invalid-feedback">Invalid Password</div>
                                             </div>
                                             <div className="form-group">
