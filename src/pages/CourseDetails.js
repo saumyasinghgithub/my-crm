@@ -329,13 +329,19 @@ const CourseDetails = (props) => {
                                       {!Utils.isLoggedIn() && (
                                         <>
                                           <a
+                                            href="/login"
+                                            className="btn btnBlue"
+                                          >
+                                            Login to Enroll
+                                      </a>
+                                          {/*<a
                                             href="#"
                                             data-toggle="modal"
                                             data-target="#loginModal"
                                             className="btn btnBlue"
                                           >
                                             Login to Enroll
-                                          </a>
+                                      </a>*/}
                                         </>
                                       )}
                                       {Utils.isLoggedIn() && (
