@@ -6653,6 +6653,11 @@ ul.ulDesign li {
     font-family: 'segoe UI';
 }
 
+.nav-item a {
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 600;
+}
+
 @media only screen and (max-width: 1024px) {
     .homecoursedescription {
         height: 110px;
