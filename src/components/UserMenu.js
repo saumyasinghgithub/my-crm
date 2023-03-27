@@ -59,18 +59,18 @@ const UserMenu = (props) => {
             )}
             {Utils.isStudent() && (
               <li>
-                <a href={`${process.env.PUBLIC_URL}/my-order`}>My Order</a>
+                <a href={Utils.getTrainerURL(`my-order`)}>My Order</a>
               </li>
             )}
             {Utils.isTrainer() && (
               <>
                 <li>
-                  <a href={`${process.env.PUBLIC_URL}/my-corporate-groups`}>
+                  <a href={Utils.getTrainerURL(`my-corporate-groups`)}>
                     My Corporate Groups
                   </a>
                 </li>
                 <li>
-                  <a href={`${process.env.PUBLIC_URL}/my-sales`}>My Sales</a>
+                  <a href={Utils.getTrainerURL(`my-sales`)}>My Sales</a>
                 </li>
               </>
             )}
@@ -81,18 +81,18 @@ const UserMenu = (props) => {
             )*/}
             {Utils.isTrainer() && (
               <li>
-                <a href={`${process.env.PUBLIC_URL}/my-course`}>Manage Library
+                <a href={Utils.getTrainerURL(`my-course`)}>Manage Library
                 </a>
               </li>
             )}
             {Utils.isTrainer() && (
               <li>
-                <a href={`${process.env.PUBLIC_URL}/manage-coupons`}>Manage Coupons</a>
+                <a href={Utils.getTrainerURL(`manage-coupons`)}>Manage Coupons</a>
               </li>
             )}
             {Utils.isStudent() && loggedIn && (
               <li>
-                <a href={`${process.env.PUBLIC_URL}/preferred-courses`}>
+                <a href={Utils.getTrainerURL(`preferred-courses`)}>
                   Preferred Courses
                 </a>
               </li>
@@ -146,7 +146,7 @@ const UserMenu = (props) => {
                   <a href={getSlug()+'professional-profile'}>Professional Profile</a>
                   </li>*/}
                 <li>
-                  <a href={`${process.env.PUBLIC_URL}/preferred-trainers`}>
+                  <a href={Utils.getTrainerURL(`preferred-trainers`)}>
                     Preferred Trainer
                   </a>
                 </li>
@@ -155,13 +155,13 @@ const UserMenu = (props) => {
 
             {Utils.isTrainer() && (
               <li>
-                <a href={`${process.env.PUBLIC_URL}/my-blog`}>Manage Blogs
+                <a href={Utils.getTrainerURL(`my-blog`)}>Manage Blogs
                 </a>
               </li>
             )}
 
             <li>
-              <a href={`${process.env.PUBLIC_URL}/chgpwd`}>Change Password</a>
+              <a href={Utils.getTrainerURL(`chgpwd`)}>Change Password</a>
             </li>
 
             <li>
