@@ -8,6 +8,14 @@ import { useParams } from "react-router-dom";
 import { TwitterIcon, FacebookIcon,LinkedinIcon } from "react-share";
 import sanitizeHtml from 'sanitize-html';
 
+function trimText(text) {
+  if (text.length > 230) {
+    return text.substr(0, 230) + "...";
+  } else {
+    return text;
+  }
+}
+
 const TeacherAbout = (props) => {
   const socialPlatforms = ["facebook", "instagram", "linkedin", "pinterest", "twitter", "youtube"];
   const data = props.data;
@@ -48,6 +56,7 @@ const TeacherAbout = (props) => {
   const trainerSlug = Utils.getUserData().slug;
   const trainerUrl = Utils.getTrainerURL("", trainerSlug);
   const trainerIntro = sanitizeHtml(data.biography, { allowedTags: [] });
+  const trainerName = data.firstname+' '+data.lastname;
 
   return (
     <>
@@ -141,9 +150,9 @@ const TeacherAbout = (props) => {
                 </ul>
               </div>
               <ul className="profile-socail-icon">
-                <li><a href={`https://twitter.com/intent/tweet?url=${trainerUrl}&text=${trainerIntro}`}><TwitterIcon size={32} round={true} /></a></li>
+                <li><a href={`https://twitter.com/intent/tweet?url=${trainerUrl}&text=${trimText(trainerIntro)}`}><TwitterIcon size={32} round={true} /></a></li>
                 <li><a href={`https://www.facebook.com/sharer/sharer.php?u=${trainerUrl}&quote=${trainerIntro}&imageURL=${data.base_image}`}><FacebookIcon size={32} round={true} /></a></li>
-                <li><a href={`https://www.linkedin.com/sharing/share-offsite/?url=${trainerUrl}&title=${trainerIntro}&summary=${trainerIntro}`}><LinkedinIcon size={32} round={true} /></a></li>
+                <li><a href={`https://www.linkedin.com/sharing/share-offsite/?url=${trainerUrl}&title=${trainerName}&summary=${trainerIntro}&source=TVerse&mini=true&ro=true&imageUrl=${data.base_image}`}><LinkedinIcon size={32} round={true} /></a></li>
               </ul>
             </div>
             <img

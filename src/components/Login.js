@@ -245,16 +245,7 @@ const Login = (props) => {
                     By signing up, you agree to our Terms of Use and Privacy
                     Policy.
                   </p>
-                  <ul>
-                    <li>
-                      <a
-                        href="#signUpTrainer"
-                        data-toggle="modal"
-                        data-dismiss="modal"
-                      >
-                        Join as a Trainer
-                      </a>
-                    </li>
+                  <ul>                   
                     <li>
                       <a
                         href="#signUpStudent"
