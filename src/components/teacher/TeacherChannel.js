@@ -18,6 +18,7 @@ const TeacherChannel = (props) => {
       .catch((err) => console.log(err));
   };
   useEffect(fetchYoutube, []);
+  console.log('yotube-data'+ydata);
 
   const youtubeItem = ({ id, snippet }) => {
     return (
