@@ -111,62 +111,31 @@ const LandingPage = (props) => {
                   <Container>
                     <Row className="mt-5 justify-content-center">
                       <h3 className="landingHeading mb-5">CodePRep; Bridging the Gap Between Bi-Annual Life Support Training And Clinical Performance</h3>
-                      <Col lg={4} md={6} className="pt-3 d-flex">
-                        <div className="p-4 homecourses">
-                          <div className="">
-                            <span className="new">New</span>
-                            <img className="img-fluid rounded" src="assets/images/ourcourse1.png" alt="Tverse" />
-                          </div>
-                          <div className="">
-                            <div className="libraryTitle HomeCourseTitle text-center pt-5 pb-3">CodePRep</div>
-                            <div className="libraryBody homecoursedescription text-center pt-3 pb-5 ">
-                              Improving clinical CPR performance, optimizing patient outcomes, and promoting staff engagement.
-                              Emphasizing the importance of mastering the basics before teaching advanced resuscitation skills.
-
+                      {_.get(trainer, "courses", []).length > 0 && ( <>
+                        {_.get(trainer, "courses", []).map((course, ide) => (
+                        <Col lg={4} md={6} className="pt-3 d-flex">
+                          <div className="p-4 homecourses">
+                            <div className="">
+                              <span className="new">New</span>
+                              <img className="img-fluid rounded" src="assets/images/ourcourse1.png" alt="Tverse" />
+                            </div>
+                            <div className="">
+                              <div className="libraryTitle HomeCourseTitle text-center pt-5 pb-3">{course.name}</div>
+                              <div className="libraryBody homecoursedescription text-center pt-3 pb-5 ">{course.short_description}</div>
+                            </div>
+                            <div className="HomeExploreCourse mt-4 mb-3 text-center">
+                              <button>
+                                {" "}
+                                <a href={Utils.getTrainerURL(`professional-profile/trainercourses`)} target="_blank">
+                                  Explore Courses
+                                </a>
+                              </button>
                             </div>
                           </div>
-                          <div className="HomeExploreCourse mt-4 mb-3 text-center">
-                            <button>
-                              {" "}
-                              <a href="/professional-profile/trainercourses" target="_blank">
-                                Explore Courses
-                              </a>
-                            </button>
-                          </div>
-                        </div>
-                      </Col>
-
-                      {/* <Col md={4} className="pt-3 d-flex">
-                      <div className="p-4 homecourses">
-                        <div className="">
-                          <span className="new">New</span>
-                          <img className="img-fluid rounded" src="assets/images/ourcourse1.png" alt="Tverse" />
-                        </div>
-                        <div className="">
-                          <div className="libraryTitle HomeCourseTitle text-center pt-5 pb-3">10 Tips for a Healthy Heart</div>
-                          <div className="libraryBody homecoursedescription text-center pt-3 pb-5 ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</div>
-                        </div>
-                        <div className="HomeExploreCourse mt-4 mb-3 text-center"><button> <a href="/professional-profile/library" target="_blank" >
-                          Explore Courses
-                        </a></button></div>
-                      </div>
-                    </Col>
-
-                    <Col md={4} className="pt-3 d-flex">
-                      <div className="p-4 homecourses">
-                        <div className="">
-                          <span className="new">New</span>
-                          <img className="img-fluid rounded" src="assets/images/ourcourse1.png" alt="Tverse" />
-                        </div>
-                        <div className="">
-                          <div className="libraryTitle HomeCourseTitle text-center pt-5 pb-3">Lee Health's Simulation Lab:</div>
-                          <div className="libraryBody homecoursedescription text-center pt-3 pb-5 ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</div>
-                        </div>
-                        <div className="HomeExploreCourse mt-4 mb-3 text-center"><button> <a href="/professional-profile/library" target="_blank" >
-                          Explore Courses
-                        </a></button></div>
-                      </div>
-                    </Col> */}
+                        </Col>
+                        ))}
+                        </>
+                      )}
                     </Row>
                   </Container>
                   {/* <h3 className="landingHeading">Join <span>Community</span></h3>
