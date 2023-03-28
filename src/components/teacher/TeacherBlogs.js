@@ -69,10 +69,13 @@ const TeacherBlogs = (props) => {
       </div>
 
       <div className="serviceWrapper container">
-        <div className="serviceHeading">
-          <h1 className="headingtext slideInUp wow ">Community</h1>
-          <div className="subHeading slideInUp wow " dangerouslySetInnerHTML={{ __html: data.about_community }}></div>
-        </div>
+
+        {blogs.length > 0 && (
+          <>
+            <div className="freeResouces lineANimation slideInUp wow ">Blogs</div>
+            <div className="row">{blogs.length > 0 && blogs.map(blogItem)}</div>
+          </>
+        )}
 
         <div className="knowledgBody">
           {!_.isEmpty(props.youtube) && (
@@ -81,12 +84,11 @@ const TeacherBlogs = (props) => {
             </>
           )}
 
-          {blogs.length > 0 && (
-            <>
-              <div className="freeResouces lineANimation slideInUp wow ">Blogs</div>
-              <div className="row">{blogs.length > 0 && blogs.map(blogItem)}</div>
-            </>
-          )}
+
+          <div className="serviceHeading mb-5">
+            <h1 className="headingtext slideInUp wow mt-3">Community</h1>
+            <div className="subHeading slideInUp wow mb-3" dangerouslySetInnerHTML={{ __html: data.about_community }}></div>
+          </div>
 
           {_.get(props, "events.0.id", false) && (
             <>

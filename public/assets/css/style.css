@@ -1921,6 +1921,7 @@ ul.profile-socail-icon {
 
 ul.profile-socail-icon li {
     display: inline-block;
+    padding: 0px 3px;
 }
 
 ul.profile-socail-icon li img {
