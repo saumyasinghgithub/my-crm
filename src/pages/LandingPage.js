@@ -117,11 +117,11 @@ const LandingPage = (props) => {
                           <div className="p-4 homecourses">
                             <div className="">
                               <span className="new">New</span>
-                              <img className="img-fluid rounded" src="assets/images/ourcourse1.png" alt="Tverse" />
+                              <img className="img-fluid rounded" src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`} alt="Tverse" />
                             </div>
                             <div className="">
                               <div className="libraryTitle HomeCourseTitle text-center pt-5 pb-3">{course.name}</div>
-                              <div className="libraryBody homecoursedescription text-center pt-3 pb-5 ">{course.short_description}</div>
+                              <div className="libraryBody homecoursedescription text-center pt-3 pb-5 " dangerouslySetInnerHTML={{__html:course.short_description}}></div>
                             </div>
                             <div className="HomeExploreCourse mt-4 mb-3 text-center">
                               <button>

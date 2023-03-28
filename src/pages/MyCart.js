@@ -296,7 +296,7 @@ const MyCart = (props) => {
                             <div className="nav-item" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">
                                 {/* <span className='btnSubmit'> Log in</span> */}
                                 <div className='w-25'>
-                                    <button type="submit" className="btn btnSubmit"> Log In</button>
+                                    <a href={Utils.getTrainerURL(`login`)} className="btn btnSubmit"> Log In</a>
                                 </div>
                             </div>
                         </div>

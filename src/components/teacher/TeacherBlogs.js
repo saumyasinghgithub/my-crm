@@ -78,11 +78,12 @@ const TeacherBlogs = (props) => {
         )}
 
         <div className="knowledgBody">
-          {!_.isEmpty(props.youtube) && (
+        <TeacherChannel youtube={data.youtube_community} />
+          {/*!_.isEmpty(props.youtube) && (
             <>
               <TeacherChannel youtube={data.youtube_community} />
             </>
-          )}
+          )*/}
 
 
           <div className="serviceHeading mb-5">
