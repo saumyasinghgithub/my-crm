@@ -5,6 +5,7 @@ import Utils from "../Utils";
 const Login = (props) => {
   const hasSubdomain = Utils.hasSubdomain();
   const [mode, setMode] = useState(1); // 1 = login ; 2 = forgot pass
+  const searchParams = new URLSearchParams(window.location.search);
 
   const [fPassing, setFPassing] = useState({
     loading: false,
@@ -49,6 +50,7 @@ const Login = (props) => {
   };
 
   const onLogin = (e) => {
+    
     const frm = e.currentTarget;
     e.preventDefault();
     frm.classList.add("was-validated");
@@ -62,6 +64,7 @@ const Login = (props) => {
     const data = {
       email: frm.email.value,
       pass: frm.pass.value,
+      courseitem : frm.courseitem.value,
     };
 
     goLogin(data, (success, message) => {
@@ -73,8 +76,13 @@ const Login = (props) => {
           var win = document.getElementById("mainDomainIframe").contentWindow;
           win.postMessage(Utils.getUserData(), "*");
         }
-
-        var path = Utils.getTrainerURL("");
+        if(data.courseitem){
+          var path = Utils.getTrainerURL("");
+          path = path+'courses/'+data.courseitem;
+        } else {
+          var path = Utils.getTrainerURL("");
+        }
+        
         //var path = "https://dr-susan-davis.kstverse.com/";
 
         window.location.replace(path);
@@ -165,6 +173,7 @@ const Login = (props) => {
 
               {fPassing.message === "" && (
                 <form onSubmit={mode === 1 ? onLogin : onFPass} className="needs-validation" noValidate>
+                  <input type="hidden" value={searchParams.get('courseitem')} name="courseitem" />
                   <div className="form-group">
                     <input className="form-control" name="email" placeholder="Email" type="email" required />
                     <div className="invalid-feedback">Enter your valid email address!</div>

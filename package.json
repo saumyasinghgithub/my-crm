@@ -24,7 +24,7 @@
     "react-flash-message": "^1.0.8",
     "react-helmet": "^6.1.0",
     "react-loader-spinner": "^5.3.4",
-    "react-router-dom": "^6.8.1",
+    "react-router-dom": "^6.9.0",
     "react-scripts": "^5.0.1",
     "react-share": "^4.4.1",
     "react-star-ratings": "^2.3.0",

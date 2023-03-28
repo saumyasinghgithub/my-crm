@@ -329,7 +329,7 @@ const CourseDetails = (props) => {
                                       {!Utils.isLoggedIn() && (
                                         <>
                                           <a
-                                            href="/login"
+                                            href={`/login?courseitem=${course.course.slug}`}
                                             className="btn btnBlue"
                                           >
                                             Login to Enroll
