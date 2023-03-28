@@ -72,7 +72,7 @@ const TeacherBlogs = (props) => {
 
         {blogs.length > 0 && (
           <>
-            <div className="freeResouces lineANimation slideInUp wow ">Blogs</div>
+            <div className="freeResouces lineANimation slideInUp wow mt-5">Blogs</div>
             <div className="row">{blogs.length > 0 && blogs.map(blogItem)}</div>
           </>
         )}
