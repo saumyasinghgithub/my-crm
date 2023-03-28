@@ -109,10 +109,9 @@ const CourseDetails = (props) => {
     return (
       <li>
         <div
-          className={`circleBox wow zoomIn ${
-            _.findIndex(bp, (b) => b.id === resource.id) > -1 ? "selected" : ""
-          }`}
-          /*onClick={() => bundleProduct(resource)}*/
+          className={`circleBox wow zoomIn ${_.findIndex(bp, (b) => b.id === resource.id) > -1 ? "selected" : ""
+            }`}
+        /*onClick={() => bundleProduct(resource)}*/
         >
           <img
             className="img-fluid"
@@ -219,9 +218,10 @@ const CourseDetails = (props) => {
                         <div className="row">
                           <div className="col-md-6 wow slideInUp">
                             <div
-                              className="imgWrapper rounded"
+                              className="imgWrapper rounded ViewCourseImg"
                               style={{
-                                backgroundImage: `url("${process.env.REACT_APP_API_URL}/uploads/courses/${course.course.course_image}")`,
+                                backgroundImage: `url("${process.env.REACT_APP_API_URL}/uploads/courses/${course.course.course_image}")`
+                                ,
                               }}
                             >
                               <span className="new">New</span>
@@ -333,7 +333,7 @@ const CourseDetails = (props) => {
                                             className="btn btnBlue"
                                           >
                                             Login to Enroll
-                                      </a>
+                                          </a>
                                           {/*<a
                                             href="#"
                                             data-toggle="modal"

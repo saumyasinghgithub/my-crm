@@ -24,7 +24,7 @@ const TeacherLibrary = (props) => {
             <div className="col-md-3 col-12">
               <div className="">
                 <span className="new">New</span>
-                <img className="img-fluid rounded" src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`} alt="AD" />
+                <img className="img-fluid rounded" src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`} alt="Tverse" />
               </div>
             </div>
             <div className="col-md-7 col-12">
@@ -32,7 +32,7 @@ const TeacherLibrary = (props) => {
                 <div className="libraryTitle">{course.name}</div>
                 <div className="libraryBody" dangerouslySetInnerHTML={{ __html: course.short_description }}></div>
                 <div className="libraryAuthorInfo">
-                  Date: 6/2019 | Level: {course.level} | Duration: {course.duration}
+                  Date: 1/2023 | Level: {course.level} | Duration: {course.duration}
                 </div>
                 <StarRatings
                   rating={course.rating.rating}

@@ -6663,6 +6663,10 @@ ul.ulDesign li {
     font-weight: 600;
 }
 
+.ViewCourseImg {
+    background-position: top;
+}
+
 @media only screen and (max-width: 1024px) {
     .homecoursedescription {
         height: 110px;
