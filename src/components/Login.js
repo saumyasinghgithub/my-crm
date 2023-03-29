@@ -75,15 +75,13 @@ const Login = (props) => {
           var win = document.getElementById("mainDomainIframe").contentWindow;
           win.postMessage(Utils.getUserData(), "*");
         }
-        if(document.referrer){
-          var path = document.referrer;
+        var path = document.referrer;
+        if(path){
+          window.location.replace(path);
         } else {
-          var path = Utils.getTrainerURL("");
-        }
-        
-        //var path = "https://dr-susan-davis.kstverse.com/";
-
-        window.location.replace(path);
+          var trainpath = Utils.getTrainerURL("");
+          window.location.replace(trainpath);
+        }        
       }
     });
     return false;

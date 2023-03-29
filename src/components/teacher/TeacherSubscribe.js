@@ -53,7 +53,7 @@ const TeacherSubscribe = (props) => {
                             <div className="row">
                                 <div className="col-md-5 col-md-offset-3 contactSubs">
                                     <input type="hidden" name="trainerUrl" value={trainerUrl} />
-                                    <input placeholder="Please enter your email here for subscription" type="email" className="input-text form-control landingpageInput p-3" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} {...register("email", { required: true})} />
+                                    <input placeholder="Please enter your email here for subscription" type="email" className="input-text form-control landingpageInput p-3" name="email" id="email" {...register("email", { required: true})} />
                                     <p className="mt-4 text-left subsmessage">{message}</p>
                                 </div>
                                 <div className="col-md-2 col-md-offset-2 contactSubs">
