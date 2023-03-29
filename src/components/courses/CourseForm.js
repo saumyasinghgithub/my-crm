@@ -73,10 +73,10 @@ const CourseForm = (props) => {
       </Col>
     </Row>
     <Row>
-      <Col md={4} className="mt-4">
+      {/*<Col md={4} className="mt-4">
         <Form.Label>SKU: </Form.Label>
-        <Form.Control type="text" name="sku" placeholder="Enter course sku" defaultValue={_.get(mycourse,'sku','')} />
-      </Col>
+        <Form.Control type="text" name="sku" placeholder="Enter course sku" defaultValue={//_.get(mycourse,'sku','')} />
+</Col>*/}
       <Col md={8} className="mt-4">
         <Form.Label>Course URL / Slug: </Form.Label>
         <Form.Control type="text" name="slug" placeholder="Enter course slug" defaultValue={_.get(mycourse,'slug','')} />
@@ -154,18 +154,18 @@ const CourseForm = (props) => {
       </Col> 
     </Row>
     <Row>
-      <Col md={4} className="mt-3">  
+      {/*<Col md={4} className="mt-3">  
         <Form.Label>Stock Quantity: </Form.Label>
         <Form.Control type="number" name="stock_qnty" placeholder="Enter stock quantity" defaultValue={_.get(mycourse,'stock_qnty','')} />
-      </Col>
+      </Col>*/}
       <Col md={4} className="mt-3">
         <Form.Label>Course Duration (In Hours): </Form.Label>
         <Form.Control type="number" name="duration" placeholder="Enter course duration" defaultValue={_.get(mycourse,'duration','')} />
       </Col> 
-      <Col md={4} className="mt-3">
+      {/*<Col md={4} className="mt-3">
         <Form.Label>Number of Lectures: </Form.Label>
         <Form.Control type="number" name="lectures" placeholder="Enter no. of lecture in course" defaultValue={_.get(mycourse,'lectures','')} />
-      </Col>       
+    </Col>*/}      
     </Row>
     <Row>
       <Col md={12} className="mt-3 text-right">
