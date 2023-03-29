@@ -76,7 +76,7 @@ const Login = (props) => {
           win.postMessage(Utils.getUserData(), "*");
         }
         if(document.referrer){
-          path = document.referrer;
+          var path = document.referrer;
         } else {
           var path = Utils.getTrainerURL("");
         }
