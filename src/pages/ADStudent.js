@@ -14,7 +14,7 @@ const ADStudent = (props) => {
                         </ol>
     </nav>*/}
             <div className="">
-               <img src="assets/images/Help_for_students.jpg" alt="" />
+               <img src="assets/images/help.png" alt="" />
                <div className="AD-help">
                   <div className="row">
                      <div className="col-sm-12">
