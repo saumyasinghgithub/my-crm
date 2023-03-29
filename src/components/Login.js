@@ -64,7 +64,6 @@ const Login = (props) => {
     const data = {
       email: frm.email.value,
       pass: frm.pass.value,
-      courseitem : frm.courseitem.value,
     };
 
     goLogin(data, (success, message) => {
@@ -76,9 +75,8 @@ const Login = (props) => {
           var win = document.getElementById("mainDomainIframe").contentWindow;
           win.postMessage(Utils.getUserData(), "*");
         }
-        if(data.courseitem){
-          var path = Utils.getTrainerURL("");
-          path = path+'courses/'+data.courseitem;
+        if(document.referrer){
+          path = document.referrer;
         } else {
           var path = Utils.getTrainerURL("");
         }
@@ -173,7 +171,6 @@ const Login = (props) => {
 
               {fPassing.message === "" && (
                 <form onSubmit={mode === 1 ? onLogin : onFPass} className="needs-validation" noValidate>
-                  <input type="hidden" value={searchParams.get('courseitem')} name="courseitem" />
                   <div className="form-group">
                     <input className="form-control" name="email" placeholder="Email" type="email" required />
                     <div className="invalid-feedback">Enter your valid email address!</div>

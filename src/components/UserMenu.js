@@ -81,7 +81,7 @@ const UserMenu = (props) => {
             )*/}
             {Utils.isTrainer() && (
               <li>
-                <a href={Utils.getTrainerURL(`my-course`)}>Manage Library
+                <a href={Utils.getTrainerURL(`my-course`)}>Manage Course
                 </a>
               </li>
             )}

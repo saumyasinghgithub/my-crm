@@ -4,6 +4,7 @@ import axios from "axios";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup } from 'reactstrap';
 import { useParams } from "react-router-dom";
 import { Col } from 'react-bootstrap';
+import { useForm } from "react-hook-form";
 
 const TeacherSubscribe = (props) => {
     const [modal, setModal] = useState(true);
@@ -17,8 +18,8 @@ const TeacherSubscribe = (props) => {
     const trainerSlug = Utils.getUserData().slug;
     const trainerUrl = Utils.getTrainerURL("", trainerSlug);
     const trainerFullName = Utils.getUserData().firstname + ' ' + Utils.getUserData().middlename + ' ' + Utils.getUserData().lastname;
-
-    const handleSubmit = (event) => {
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSave = (event) => {
         const frm = frmRef.current;
         event.preventDefault();
         let frmdata = new FormData(frm);
@@ -45,42 +46,23 @@ const TeacherSubscribe = (props) => {
 
     return (<div>
         {inLine ? (
-            // <div className="landingSubBlock">
-            //     <h3 className="landingAlign">Subscribe to Our Rescue RN™ Newsletter</h3>
-            //     <Col md={8} className="subsCol">
-            //         <form ref={frmRef} onSubmit={handleSubmit} method="post">
-            //             <Col md={8} className="formItems">
-            //                 <label>Email*</label>
-            //                 <input type="hidden" name="trainerUrl" value={trainerUrl} />
-            //                 <input placeholder="Please enter your email here for subscription" type="email" className="input-text form-control landingpageInput" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            //                 <p><b>{message}</b></p>
-            //             </Col>
-            //             <Col md={8} className="formBtn">
-            //                 <Button className="btnSubmitSubs" color="secondary" type="submit" onClick={handleSubmit}>Submit</Button>{' '}
-            //             </Col>                        
-            //         </form>
-            //     </Col>
-            // </div>
             <div class="landingUpEvent">
-                {/* <div class="landingSubsBox"> */}
                 <div class="SubsTextBox">
-                    {/* <div class="subText">Subscribe to Our Rescue RN™ Newsletter</div> */}
                     <div class="SubsInputBox">
-                        <form ref={frmRef} onSubmit={handleSubmit} method="post">
+                        <form ref={frmRef} onSubmit={handleSubmit(onSave)} method="post">
                             <div className="row">
                                 <div className="col-md-5 col-md-offset-3 contactSubs">
                                     <input type="hidden" name="trainerUrl" value={trainerUrl} />
-                                    <input placeholder="Please enter your email here for subscription" type="email" className="input-text form-control landingpageInput p-3" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                                    <input placeholder="Please enter your email here for subscription" type="email" className="input-text form-control landingpageInput p-3" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} {...register("email", { required: true})} />
                                     <p className="mt-4 text-left subsmessage">{message}</p>
                                 </div>
                                 <div className="col-md-2 col-md-offset-2 contactSubs">
-                                    <div class="HomeRegister SubmitHomeSubscribe"> <Button className="" color="secondary" type="submit" onClick={handleSubmit}>SUBSCRIBE</Button>{' '}</div>
+                                    <div class="HomeRegister SubmitHomeSubscribe"> <Button className="" color="secondary" type="submit" onClick={handleSubmit(onSave)}>SUBSCRIBE</Button>{' '}</div>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-                {/* </div> */}
             </div>
         ) : (
             <Modal isOpen={modal} toggle={toggle}>
@@ -90,15 +72,15 @@ const TeacherSubscribe = (props) => {
                     <p>To sign up, simply enter your email address below and click "Subscribe".</p>
                     <p>By subscribing, you agree to receive occasional marketing emails from us. We promise not to spam you, and you can unsubscribe at any time.</p>
                     <p><b>{message}</b></p>
-                    <form ref={frmRef} onSubmit={handleSubmit} method="post">
+                    <form ref={frmRef} onSubmit={handleSubmit(onSave)} method="post">
                         <FormGroup>
                             <input type="hidden" name="trainerUrl" value={trainerUrl} />
-                            <input placeholder="Please enter your email here for subscription" type="email" className="input-text form-control" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <input placeholder="Please enter your email here for subscription" type="email" className="input-text form-control" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} {...register("email", { required: true})}/>
                         </FormGroup>
                     </form>
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="secondary" type="submit" onClick={handleSubmit}>Subscribe</Button>{' '}
+                    <Button color="secondary" type="submit" onClick={handleSubmit(onSave)}>Subscribe</Button>{' '}
                 </ModalFooter>
             </Modal>
         )

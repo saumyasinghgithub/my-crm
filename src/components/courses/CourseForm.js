@@ -4,6 +4,7 @@ import UserContext from './../../contexts/UserContext';
 import { Editor } from "@tinymce/tinymce-react";
 import _ from 'lodash';
 import Utils from './../../Utils';
+import { useForm } from "react-hook-form";
 
 
 const CourseForm = (props) => {
@@ -14,6 +15,7 @@ const CourseForm = (props) => {
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({success: false, message: ""});
   const {getServerData,setServerData} = useContext(UserContext);
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onContentChange = (fld) => (value) => {
     let c = {...mycourse};
@@ -61,21 +63,21 @@ const CourseForm = (props) => {
     </>;
   }
 
-  const renderForm = () => <Form onSubmit={onSave}>
+  const renderForm = () => <Form onSubmit={handleSubmit(onSave)}>
     <Form.Control type="hidden" name="id" defaultValue={_.get(mycourse,'id','')} />
     <Form.Control type="hidden" name="mid" defaultValue={_.get(mycourse,'moodle_id','')} />
     <Form.Control type="hidden" name="old_product_image" defaultValue={_.get(mycourse,'product_image','')} />
     
     <Row>
       <Col md={12} className="mt-3">
-        <Form.Label>Course Title: </Form.Label>
-        <Form.Control type="text" name="name" placeholder="Enter course Title" defaultValue={_.get(mycourse,'name','')} />
+        <Form.Label>Course Title * : </Form.Label>
+        <Form.Control type="text" name="name" placeholder="Enter course Title" defaultValue={_.get(mycourse,'name','')} {...register("name", { required: true})} />
       </Col>
     </Row>
     <Row>
       {/*<Col md={4} className="mt-4">
         <Form.Label>SKU: </Form.Label>
-        <Form.Control type="text" name="sku" placeholder="Enter course sku" defaultValue={//_.get(mycourse,'sku','')} />
+        <Form.Control type="text" name="sku" placeholder="Enter course sku" defaultValue={_.get(mycourse,'sku','')} />
 </Col>*/}
       <Col md={8} className="mt-4">
         <Form.Label>Course URL / Slug: </Form.Label>
@@ -88,7 +90,7 @@ const CourseForm = (props) => {
         {photoUploader('course_image','Upload product image (Image dimension should be 1000cm x 667cm)')}
       </Col>
       <Col md={9} className="mt-3">  
-      <Form.Label>Short Description: </Form.Label>
+      <Form.Label>Short Description * : </Form.Label>
       <Editor apiKey={process.env.TINYMCE_API_KEY}
         value={_.get(mycourse,'short_description','')}
         init={{
@@ -96,13 +98,13 @@ const CourseForm = (props) => {
         menubar: false,
         }}
         onEditorChange={onContentChange('short_description')}
-        />
+        {...register("short_description", { required: true})} />
         </Col>
     </Row>
     
     <Row>  
       <Col md={12} className="mt-3">  
-      <Form.Label>Description: </Form.Label>
+      <Form.Label>Description * : </Form.Label>
       <Editor apiKey={process.env.TINYMCE_API_KEY}
         value={_.get(mycourse,'description','')}
         init={{
@@ -110,7 +112,7 @@ const CourseForm = (props) => {
         menubar: false,
         }}
         onEditorChange={onContentChange('description')}
-        />
+        {...register("description", { required: true})} />
         </Col>
     </Row>
     <Row>  
@@ -165,7 +167,7 @@ const CourseForm = (props) => {
       {/*<Col md={4} className="mt-3">
         <Form.Label>Number of Lectures: </Form.Label>
         <Form.Control type="number" name="lectures" placeholder="Enter no. of lecture in course" defaultValue={_.get(mycourse,'lectures','')} />
-    </Col>*/}      
+    </Col>*/}    
     </Row>
     <Row>
       <Col md={12} className="mt-3 text-right">
