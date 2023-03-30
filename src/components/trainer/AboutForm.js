@@ -5,6 +5,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import _ from "lodash";
 import { Modal, ModalHeader } from "reactstrap";
 import TeacherAbout from "../../components/teacher/TeacherAbout";
+import Utils from "../../Utils";
 
 const AboutForm = (props) => {
   const [myabout, setMyabout] = useState({});
@@ -142,6 +143,12 @@ const AboutForm = (props) => {
           </Col>
           <Col md={6} className="mt-3">
             {photoUploader("logo", "Upload Company Logo (300cm x 300cm)")}
+          </Col>
+        </Row>
+        <Row>
+          <Col md={6} className="mt-3">
+            <Form.Label>Company Url: </Form.Label>
+            <Form.Control type="text" name="company_url" placeholder="Enter your company url" defaultValue={_.get(myabout, "company_url", Utils.getTrainerURL())} />
           </Col>
         </Row>
 

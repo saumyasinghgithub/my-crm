@@ -173,7 +173,7 @@ const ContactUs = (props) => {
             <Col lg={6} md={12} className="mt-2 mb-2">
               <Container>
                 <div className="ContactDetails">
-                  <a href="/">
+                  <a href={`${_.get(trainer, "company_url", "")}`}>
                     <img
                       src={`${process.env.REACT_APP_API_URL}/uploads/logo/${_.get(trainer, "logo_image", "../../logo-default.png")}`}
                       className="img-fluid w-50 ml-0"
