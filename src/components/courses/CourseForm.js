@@ -15,10 +15,7 @@ const CourseForm = (props) => {
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({success: false, message: ""});
   const {getServerData,setServerData} = useContext(UserContext);
-  const { register, handleSubmit, formState: { errors } } = useForm();
   const frmRef = useRef('courseform');
-  const [error, setError] = useState(false);
-  const [showMessage, setShowMessage] = useState(false);
 
   const onContentChange = (fld) => (value) => {
     let c = {...mycourse};
@@ -43,7 +40,9 @@ const CourseForm = (props) => {
     const frm = frmRef.current;
     e.preventDefault();
     frm.classList.add("was-validated");
-    if(((_.get(mycourse,'short_description','')) === '') || ((_.get(mycourse,'description','')) === '')){
+    if(((_.get(mycourse,'short_description','')) === '')){
+      const element = document.querySelector('.short_description');
+      element.style.display = 'block';
       return false;
     }
     if (frm.checkValidity() === false) {
@@ -102,34 +101,36 @@ const CourseForm = (props) => {
       </Col>
       <Col md={9} className="mt-3">  
       <Form.Label>Short Description * : </Form.Label>
-      <Editor id="short_description" required apiKey={process.env.TINYMCE_API_KEY} 
+      <Editor id="short_description" name="short_description" required apiKey={process.env.TINYMCE_API_KEY} 
         value={_.get(mycourse,'short_description','')}
         init={{
         height: 200,
         menubar: false,
         }}
-        onEditorChange={onContentChange('short_description')} />
-        <div className="invalid-feedback">Short description is required!</div>
+        onEditorChange={onContentChange('short_description')} 
+        />
+        <div className="short_description invalid-feedback">Short description is required!</div>
         </Col>
     </Row>
     
     <Row>  
       <Col md={12} className="mt-3">  
-      <Form.Label>Description * : </Form.Label>
-      <Editor apiKey={process.env.TINYMCE_API_KEY}
+      <Form.Label>Description: </Form.Label>
+      <Editor id="description" name="description" apiKey={process.env.TINYMCE_API_KEY}
         value={_.get(mycourse,'description','')}
         init={{
+          selector: 'textarea',
         height: 200,
         menubar: false,
         }}
-        onEditorChange={onContentChange('description')} required/>
-        <div className="invalid-feedback">Description is required!</div>
+        onEditorChange={onContentChange('description')}/>
+        <div className="description invalid-feedback">Description is required!</div>
         </Col>
     </Row>
     <Row>  
       <Col md={6} className="mt-3">  
       <Form.Label>Learn brief guide to student: </Form.Label>
-      <Editor apiKey={process.env.TINYMCE_API_KEY}
+      <Editor id="learn_brief" name="learn_brief" apiKey={process.env.TINYMCE_API_KEY}
         value={_.get(mycourse,'learn_brief','')}
         init={{
         height: 200,
@@ -140,7 +141,7 @@ const CourseForm = (props) => {
         </Col>
         <Col md={6} className="mt-3">  
       <Form.Label>Requirements for course access: </Form.Label>
-      <Editor apiKey={process.env.TINYMCE_API_KEY}
+      <Editor id="requirements" name="requirements" apiKey={process.env.TINYMCE_API_KEY}
         value={_.get(mycourse,'requirements','')}
         init={{
         height: 200,
@@ -152,18 +153,20 @@ const CourseForm = (props) => {
     </Row>
     <Row>
       <Col md={4} className="mt-3">
-        <Form.Label>Course Level: </Form.Label>
-        <Form.Control as="select" name="level" defaultValue={_.get(mycourse,`level`,'')}>
+        <Form.Label>Course Level * : </Form.Label>
+        <Form.Control as="select" name="level" defaultValue={_.get(mycourse,`level`,'')} required>
           <option value=""> - Select Level - </option>
           {Utils.courseLevel.map(v => <option key={v} selected={v==_.get(mycourse,`level`,'')} value={v}>{v}</option>)}
         </Form.Control>
+        <div className="invalid-feedback">Level is required!</div>
       </Col> 
       <Col md={4} className="mt-3">
-        <Form.Label>Course language: </Form.Label>
-        <Form.Control as="select" name="language" defaultValue={_.get(mycourse,`language`,'')}>
+        <Form.Label>Course language * : </Form.Label>
+        <Form.Control as="select" name="language" defaultValue={_.get(mycourse,`language`,'')} required>
           <option value=""> - Select Language - </option>
           {Utils.country.map(v => <option key={v} selected={v==_.get(mycourse,`language`,'')} value={v} >{v}</option>)}
         </Form.Control>
+        <div className="invalid-feedback">Language is required!</div>
       </Col> 
     </Row>
     <Row>
