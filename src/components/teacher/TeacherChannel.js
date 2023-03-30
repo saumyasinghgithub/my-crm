@@ -56,13 +56,15 @@ const TeacherChannel = (props) => {
       }
       {ydata.length === 0 && <>
         <div className="freeResouces lineANimation slideInUp wow ">Free Resources</div>
-        <div className="col-sm-6 col-md-4">Coming Soon</div>
+        <div className="subHeading slideInUp wow mb-3"><b>Coming Soon!</b></div>
+        {/* <div className="col-sm-6 col-md-4">Coming Soon</div> */}
       </>
       }
     </>}
-    {!props.youtube && <>      
-        <div className="freeResouces lineANimation slideInUp wow ">Free Resources</div>
-        <div className="col-sm-6 col-md-4">Coming Soon</div>      
+    {!props.youtube && <>
+      <div className="freeResouces lineANimation slideInUp wow ">Free Resources</div>
+      <div className="subHeading slideInUp wow mb-3"><b>Coming Soon!</b></div>
+      {/* <div className="col-sm-6 col-md-4">Coming Soon</div> */}
     </>}
     {/*ydata.length > 0 && <>
       <div className="freeResouces lineANimation slideInUp wow ">Free Resources</div>
