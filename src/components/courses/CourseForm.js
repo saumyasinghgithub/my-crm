@@ -1,4 +1,4 @@
-import {useEffect, useContext, useState} from 'react';
+import {useEffect, useContext, useState,useRef} from 'react';
 import {Form, Alert, Spinner, Row, Col, Button, Modal} from 'react-bootstrap';
 import UserContext from './../../contexts/UserContext';
 import { Editor } from "@tinymce/tinymce-react";
@@ -16,6 +16,9 @@ const CourseForm = (props) => {
   const [response, setResponse] = useState({success: false, message: ""});
   const {getServerData,setServerData} = useContext(UserContext);
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const frmRef = useRef('courseform');
+  const [error, setError] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
 
   const onContentChange = (fld) => (value) => {
     let c = {...mycourse};
@@ -37,9 +40,17 @@ const CourseForm = (props) => {
   
 
   const onSave = (e) => {
-    const frm = e.currentTarget;
+    const frm = frmRef.current;
     e.preventDefault();
+    frm.classList.add("was-validated");
+    if(((_.get(mycourse,'short_description','')) === '') || ((_.get(mycourse,'description','')) === '')){
+      return false;
+    }
+    if (frm.checkValidity() === false) {
+      return false;
+    }    
     let frmdata = new FormData(frm);
+    
     frmdata.append('old_courses_image',_.get(mycourse,'course_image',''));
     frmdata.append('short_description',_.get(mycourse,'short_description',''));
     frmdata.append('description',_.get(mycourse,'description',''));
@@ -63,15 +74,15 @@ const CourseForm = (props) => {
     </>;
   }
 
-  const renderForm = () => <Form onSubmit={handleSubmit(onSave)}>
+  const renderForm = () => <Form noValidate ref={frmRef} id="course-form" onSubmit={onSave} method="post" className="form contact alertdesign needs-validation">
     <Form.Control type="hidden" name="id" defaultValue={_.get(mycourse,'id','')} />
     <Form.Control type="hidden" name="mid" defaultValue={_.get(mycourse,'moodle_id','')} />
-    <Form.Control type="hidden" name="old_product_image" defaultValue={_.get(mycourse,'product_image','')} />
-    
+    <Form.Control type="hidden" name="old_product_image" defaultValue={_.get(mycourse,'product_image','')} />    
     <Row>
       <Col md={12} className="mt-3">
         <Form.Label>Course Title * : </Form.Label>
-        <Form.Control type="text" name="name" placeholder="Enter course Title" defaultValue={_.get(mycourse,'name','')} {...register("name", { required: true})} />
+        <Form.Control type="text" name="name" placeholder="Enter course Title" defaultValue={_.get(mycourse,'name','')} required />
+        <div className="invalid-feedback">Course Title is required!</div>
       </Col>
     </Row>
     <Row>
@@ -91,14 +102,14 @@ const CourseForm = (props) => {
       </Col>
       <Col md={9} className="mt-3">  
       <Form.Label>Short Description * : </Form.Label>
-      <Editor apiKey={process.env.TINYMCE_API_KEY}
+      <Editor id="short_description" required apiKey={process.env.TINYMCE_API_KEY} 
         value={_.get(mycourse,'short_description','')}
         init={{
         height: 200,
         menubar: false,
         }}
-        onEditorChange={onContentChange('short_description')}
-        {...register("short_description", { required: true})} />
+        onEditorChange={onContentChange('short_description')} />
+        <div className="invalid-feedback">Short description is required!</div>
         </Col>
     </Row>
     
@@ -111,8 +122,8 @@ const CourseForm = (props) => {
         height: 200,
         menubar: false,
         }}
-        onEditorChange={onContentChange('description')}
-        {...register("description", { required: true})} />
+        onEditorChange={onContentChange('description')} required/>
+        <div className="invalid-feedback">Description is required!</div>
         </Col>
     </Row>
     <Row>  
