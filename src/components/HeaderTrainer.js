@@ -83,7 +83,7 @@ const HeaderTrainer = (props) => {
           <ul className="navbar-nav">
             <li className="nav-item">
               <a href="/my-cart">
-                <img className="img-fluid shoppingIcon" src="/assets/images/cart.png" alt="autodidact" />
+                <img className="img-fluid shoppingIcon" src="/assets/images/cart.png" alt="cart" />
               </a>
             </li>
             {/*!loggedIn && <li className="nav-item" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">
@@ -106,9 +106,170 @@ const HeaderTrainer = (props) => {
                 )}
               </li>
             )}
+            <li className="nav-item ">
+              <div className="Dropdown-Help">
+                <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                  Log in
+                </button>
+
+                <ul className="dropdown-menu" role="menu">
+                  <li className="dropdown-item HelpDropdown">
+                    <h4 className="lineANimation">
+                      Hello <br></br> {udata.firstname} {udata.lastname}!
+                    </h4>
+                  </li>
+                  {Utils.isTrainer() && (
+                    <li className="dropdown-item HelpDropdown">
+                      <a href={`${process.env.PUBLIC_URL}/my-profile#about`}>Edit Profile</a>
+                    </li>
+                  )}
+                  {Utils.isStudent() && (
+                    <li className="dropdown-item HelpDropdown">
+                      <a href={`${process.env.PUBLIC_URL}/student/my-profile/edit`}>
+                        My Profile
+                      </a>
+                    </li>
+                  )}
+                  {Utils.isStudent() && (
+                    <li className="dropdown-item HelpDropdown">
+                      <a href={Utils.getTrainerURL(`my-order`)}>My Order</a>
+                    </li>
+                  )}
+                  {Utils.isTrainer() && (
+                    <>
+                      <li className="dropdown-item HelpDropdown">
+                        <a href={Utils.getTrainerURL(`my-corporate-groups`)}>
+                          My Corporate Groups
+                        </a>
+                      </li>
+                      <li className="dropdown-item HelpDropdown">
+                        <a href={Utils.getTrainerURL(`my-sales`)}>My Sales</a>
+                      </li>
+                    </>
+                  )}
+                  {/*Utils.isTrainer() && (
+              <li>
+                <a href={getSlug()}>My Profile</a>
+              </li>
+            )*/}
+                  {Utils.isTrainer() && (
+                    <li className="dropdown-item HelpDropdown">
+                      <a href={Utils.getTrainerURL(`my-course`)}>Manage Course
+                      </a>
+                    </li>
+                  )}
+                  {Utils.isTrainer() && (
+                    <li className="dropdown-item HelpDropdown">
+                      <a href={Utils.getTrainerURL(`manage-coupons`)}>Manage Coupons</a>
+                    </li>
+                  )}
+                  {Utils.isStudent() && loggedIn && (
+                    <li className="dropdown-item HelpDropdown">
+                      <a href={Utils.getTrainerURL(`preferred-courses`)}>
+                        Preferred Courses
+                      </a>
+                    </li>
+                  )}
+                  {/* <li>
+              <a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a>
+            </li> */}
+                  {Utils.isStudent() && (
+                    <li className="dropdown-item HelpDropdown">
+                      <a href={`${process.env.PUBLIC_URL}/ad-student`}>
+                        Help for you
+                      </a>
+                    </li>
+                  )}
+                  {/*Utils.isTrainer() && (
+              <li>
+                <a href={`${process.env.PUBLIC_URL}/ad-trainer`}>
+                  Help for you
+                </a>
+              </li>
+            )*/}
+                  {/*<li>
+              <a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a>
+            </li>*/}
+
+                  {loggedIn && (
+                    <>
+                      <form
+                        name="moodleLoginForm"
+                        method="post"
+                        action={`${process.env.REACT_APP_MOODLE_URL}/login/index.php`}
+                      >
+                        <input type="hidden" name="username" />
+                        <input type="hidden" name="password" />
+                      </form>
+                      <li className="dropdown-item HelpDropdown">
+                        {/* <a
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            loginToMoodle(document.forms.moodleLoginForm);
+                          }}
+                        >
+                          Manage LMS
+                        </a> */}
+                        Manage LMS
+                      </li>
+                      {/*<li>
+                  <a href={getSlug()+'professional-profile'}>Professional Profile</a>
+                  </li>*/}
+                      <li className="dropdown-item HelpDropdown">
+                        <a href={Utils.getTrainerURL(`preferred-trainers`)}>
+                          Preferred Trainer
+                        </a>
+                      </li>
+                    </>
+                  )}
+
+                  {Utils.isTrainer() && (
+                    <li className="dropdown-item HelpDropdown">
+                      <a href={Utils.getTrainerURL(`my-blog`)}>Manage Blogs
+                      </a>
+                    </li>
+                  )}
+
+                  <li className="dropdown-item HelpDropdown">
+                    <a href={Utils.getTrainerURL(`chgpwd`)}>Change Password</a>
+                  </li>
+
+                  <li className="dropdown-item HelpDropdown">
+                    {/* <a href="logout" onClick={onLogout}>
+                      Log Out
+                    </a> */}
+                    <a href="logout">
+                      Log Out
+                    </a>
+                  </li>
+
+                </ul>
+
+              </div>
+            </li>
 
             <li className="nav-item ">
-              <img className="img-fluid menu-toggle" src="/assets/images/toggle-black.png" alt="toggle-img" />
+              <div className="Dropdown-Helps">
+                <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                  <img className="img-fluid" src="/assets/images/toggle-black.png" alt="toggle-img" />
+                </button>
+                <ul className="dropdown-menu" role="menu">
+                  <li className="dropdown-item HelpDropdown">
+                    <a href={Utils.getTrainerURL(`ad-student`)}>
+                      Help for Student
+                      {/* <span>Start with a plan and finish with results.</span> */}
+                    </a>
+                  </li>
+                  <li className="dropdown-item HelpDropdown">
+                    <a href={Utils.getTrainerURL(`contact-us`)}>
+                      Contact
+                      {/* <span>Get to know us, get to work with us.</span> */}
+                    </a>
+                  </li>
+                </ul>
+
+              </div>
             </li>
           </ul>
         </div>

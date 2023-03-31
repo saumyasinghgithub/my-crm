@@ -295,7 +295,7 @@ const CourseDetails = (props) => {
                                   />
                                   <div className="mx-2 my-1">
                                     ({rating.ratings}) {rating.enrollments}{" "}
-                                    students enrolled
+
                                   </div>
                                 </div>
                               )}
@@ -397,7 +397,7 @@ const CourseDetails = (props) => {
                   </div>
                 </div>
                 <div className="courseDesWrapper">
-                  <div className="container">
+                  {/* <div className="container">
                     {course.contents.map((c) => (
                       <div className="courseDesBox slideInUp wow" key={c.id}>
                         <div
@@ -436,7 +436,7 @@ const CourseDetails = (props) => {
                         </div>
                       </div>
                     ))}
-                  </div>
+                  </div> */}
                 </div>
               </>
             )}
