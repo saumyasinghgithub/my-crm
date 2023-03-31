@@ -15,6 +15,8 @@ const TeacherLibrary = (props) => {
   useEffect(window.scrollEffect, []);
 
   const renderCourses = (course) => {
+    const date = new Date(course.created_at);
+    const formattedDate = date.toLocaleDateString();
     return (
       <Container>
         {" "}
@@ -32,7 +34,7 @@ const TeacherLibrary = (props) => {
                 <div className="libraryTitle">{course.name}</div>
                 <div className="libraryBody" dangerouslySetInnerHTML={{ __html: course.short_description }}></div>
                 <div className="libraryAuthorInfo">
-                  Date: 1/2023 | Level: {course.level} | Duration: {course.duration}
+                  Date: {formattedDate} | Level: {course.level} | Duration: {course.duration}
                 </div>
                 <StarRatings
                   rating={course.rating.rating}
