@@ -1157,6 +1157,7 @@ p {
 
 .cardInfoBox {
     margin-bottom: 20px;
+    line-height: 30px;
 }
 
 .courseWrapper {
@@ -3146,6 +3147,10 @@ button.navbar-toggler h4 {
     width: 13rem !important;
 }
 
+.Dropdown-Help .dropdown-menu li {
+    width: 100%;
+}
+
 .Dropdown-Help .dropdown-menu .HelpDropdown h4:hover {
     color: rgba(0, 0, 0, 0.7);
 }
@@ -3160,6 +3165,12 @@ button.navbar-toggler h4 {
 
 .cardInfoBox span.textBold {
     font-family: 'segoe UI';
+    font-weight: 700;
+}
+
+.CourseDetailsHr {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .searchBOx .dropdown-item.active,
@@ -4959,7 +4970,8 @@ div.drum-wrapper figure {
 }
 
 .circleBox.selected {
-    background-color: #f3ac1b69 !important;
+    background-color: #ffffff !important;
+    /* background-color: #f3ac1b69 !important; */
 }
 
 
@@ -6738,7 +6750,13 @@ ul.ulDesign li {
     background-color: transparent;
 }
 
+.nav-item.profile_toggle {
+    padding: 0px;
+}
 
+.Headingpara {
+    font-weight: 400;
+}
 
 @media only screen and (max-width: 1024px) {
     .homecoursedescription {

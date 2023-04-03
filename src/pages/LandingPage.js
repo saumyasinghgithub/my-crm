@@ -110,31 +110,31 @@ const LandingPage = (props) => {
                   </Row>
                   <Container>
                     <Row className="mt-5 justify-content-center">
-                      <h3 className="landingHeading mb-5">CodePRep; Bridging the Gap Between Bi-Annual Life Support Training And Clinical Performance</h3>
-                      {_.get(trainer, "courses", []).length > 0 && ( <>
+                      <h3 className="landingHeading mb-5">CodePRep<br></br><br></br> <span className="Headingpara">Bridging the Gap Between Bi-Annual Life Support Training And Clinical Performance</span></h3>
+                      {_.get(trainer, "courses", []).length > 0 && (<>
                         {_.get(trainer, "courses", []).map((course, ide) => (
-                        <Col lg={4} md={6} className="pt-3 d-flex">
-                          <div className="p-4 homecourses">
-                            <div className="">
-                              {/*<span className="new">}New</span>*/}
-                              <img className="img-fluid rounded" src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`} alt="Tverse" />
+                          <Col lg={4} md={6} className="pt-3 d-flex">
+                            <div className="p-4 homecourses">
+                              <div className="">
+                                {/*<span className="new">}New</span>*/}
+                                <img className="img-fluid rounded" src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`} alt="Tverse" />
+                              </div>
+                              <div className="">
+                                <div className="libraryTitle HomeCourseTitle text-center pt-5 pb-3">{course.name}</div>
+                                <div className="libraryBody homecoursedescription text-center pt-3 pb-5 " dangerouslySetInnerHTML={{ __html: course.short_description }}></div>
+                              </div>
+                              <div className="HomeExploreCourse mt-4 mb-3 text-center">
+                                <button>
+                                  {" "}
+                                  <a href={Utils.getTrainerURL(`professional-profile/trainercourses`)} target="_blank">
+                                    Explore Courses
+                                  </a>
+                                </button>
+                              </div>
                             </div>
-                            <div className="">
-                              <div className="libraryTitle HomeCourseTitle text-center pt-5 pb-3">{course.name}</div>
-                              <div className="libraryBody homecoursedescription text-center pt-3 pb-5 " dangerouslySetInnerHTML={{__html:course.short_description}}></div>
-                            </div>
-                            <div className="HomeExploreCourse mt-4 mb-3 text-center">
-                              <button>
-                                {" "}
-                                <a href={Utils.getTrainerURL(`professional-profile/trainercourses`)} target="_blank">
-                                  Explore Courses
-                                </a>
-                              </button>
-                            </div>
-                          </div>
-                        </Col>
+                          </Col>
                         ))}
-                        </>
+                      </>
                       )}
                     </Row>
                   </Container>

@@ -242,6 +242,7 @@ const CourseDetails = (props) => {
                                   __html: course.course.short_description,
                                 }}
                               ></div>
+                              <hr className="CourseDetailsHr"></hr>
                               <div className="cardInfoBox">
                                 <span className="textBold">Created by</span>{" "}
                                 {course.about.firstname} {course.about.lastname}{" "}
