@@ -264,7 +264,7 @@ const LandingPage = (props) => {
                     <div className="row">
                       <div className="col-lg-7 col-md-12"></div>
                       <div className="col-lg-5 col-md-12">
-                        <div className="">
+                        <div className="text-white-Join">
                           <h3 className="landingHeading mb-5">Join Community</h3>
                           <p className="mb-4 homeobjective">Objectives</p>
                           <ul className="ulDesign">

@@ -59,35 +59,35 @@ const HeaderTrainer = (props) => {
 
       <header className="header fixed-top whiteHeader">
         <div className="container">
-          <a className="navbar-brand">TVERSE</a>         
+          <a className="navbar-brand">TVERSE</a>
           <ul className="navbar-nav">
             <li className="nav-item">
               <a href="/my-cart">
                 <img className="img-fluid shoppingIcon" src="/assets/images/cart.png" alt="cart" />
               </a>
-            </li>            
+            </li>
             <li className="nav-item profile_toggle">
               <div className="Dropdown-Help">
                 {!loggedIn && (
-                <a href={Utils.getTrainerURL(`login`)} className="btn btn-default">
-                  Log in
-                </a>
+                  <a href={Utils.getTrainerURL(`login`)} className="btn btn-default">
+                    Log in
+                  </a>
                 )}
-                {loggedIn && ( <>
-                <a href={Utils.getTrainerURL(`login`)} type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                  {_.get(udata, "base_image", "") !== "" && (
-                  <img
-                    src={`${process.env.REACT_APP_API_URL}/uploads/${Utils.isTrainer() ? "base" : "student/base"}/${_.get(udata, "base_image", "")}`}
-                    className="img-fluid"
-                    title={`Logged in as ${udata.firstname} ${udata.lastname}`}
-                  />
-                )}
-                </a> 
-                <ul className="dropdown-menu" role="menu"><UserMenu /></ul>               
+                {loggedIn && (<>
+                  <a href={Utils.getTrainerURL(`login`)} type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    {_.get(udata, "base_image", "") !== "" && (
+                      <img
+                        src={`${process.env.REACT_APP_API_URL}/uploads/${Utils.isTrainer() ? "base" : "student/base"}/${_.get(udata, "base_image", "")}`}
+                        className="img-fluid"
+                        title={`Logged in as ${udata.firstname} ${udata.lastname}`}
+                      />
+                    )}
+                  </a>
+                  <ul className="dropdown-menu" role="menu"><UserMenu /></ul>
                 </>
-                )}                
+                )}
               </div>
-            </li>            
+            </li>
             <li className="nav-item ">
               <div className="Dropdown-Helps">
                 <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
