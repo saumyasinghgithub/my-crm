@@ -40,11 +40,16 @@ const CourseForm = (props) => {
     const frm = frmRef.current;
     e.preventDefault();
     frm.classList.add("was-validated");
-    if(((_.get(mycourse,'short_description','')) === '')){
+    /*if(((_.get(mycourse,'short_description','')) === '')){
       const element = document.querySelector('.short_description');
       element.style.display = 'block';
       return false;
     }
+    if(((_.get(mycourse,'description','')) === '')){
+      const element = document.querySelector('.description');
+      element.style.display = 'block';
+      return false;
+    }*/
     if (frm.checkValidity() === false) {
       return false;
     }    
@@ -115,7 +120,7 @@ const CourseForm = (props) => {
     
     <Row>  
       <Col md={12} className="mt-3">  
-      <Form.Label>Description: </Form.Label>
+      <Form.Label>Description * : </Form.Label>
       <Editor id="description" name="description" apiKey={process.env.TINYMCE_API_KEY}
         value={_.get(mycourse,'description','')}
         init={{
@@ -123,7 +128,7 @@ const CourseForm = (props) => {
         height: 200,
         menubar: false,
         }}
-        onEditorChange={onContentChange('description')}/>
+        onEditorChange={onContentChange('description')} required/>
         <div className="description invalid-feedback">Description is required!</div>
         </Col>
     </Row>
