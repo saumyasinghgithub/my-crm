@@ -224,7 +224,7 @@ const CourseDetails = (props) => {
                                 ,
                               }}
                             >
-                              <span className="new">New</span>
+                              {/*<span className="new">New</span>*/}
                               <div className="circleBox">
                                 <img
                                   className="img-fluid"

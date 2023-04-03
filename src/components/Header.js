@@ -47,7 +47,7 @@ const Header = (props) => {
                         we will help, support and find a way!</span></a></li>
                     <li><a href={`${process.env.REACT_APP_PUBLIC_URL}/ad-studio`}>Tverse Studio <span>World best learning plaform.</span></a></li>
     <li><a href={`${process.env.REACT_APP_PUBLIC_URL}/ad-trainer`}>Help for Trainer <span>Get to know us, get to work with us.</span></a></li> */}
-                    <li><a href={`${process.env.REACT_APP_PUBLIC_URL}/ad-student`}>Help for Student <span>Start with a plan and finish with results.</span></a></li>
+                    <li><a href={`${process.env.REACT_APP_PUBLIC_URL}/help-for-student`}>Help for Student <span>Start with a plan and finish with results.</span></a></li>
                     <li><a href={`${process.env.REACT_APP_PUBLIC_URL}/contact-us`}>Contact <span>Get to know us, get to work with us.</span></a></li>
                 </ul>
             </div>

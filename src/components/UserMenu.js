@@ -32,19 +32,7 @@ const UserMenu = (props) => {
     return false;
   };
 
-  return (
-    <div className="slide-in-content slide-in-contentteacher">
-      <div className="student_prof_cross">
-        <img src="/assets/images/student_profile_crossicon.png" alt="AD" />
-      </div>
-      <div className="row">
-        <div className="col-12">
-          <h4 className="lineANimation">
-            Hello {udata.firstname} {udata.lastname}!
-          </h4>
-        </div>
-        <div className="col-sm-6">
-          <ul className="profile_menu_list">
+  return (<>            
             {Utils.isTrainer() && (
               <li>
                 <a href={`${process.env.PUBLIC_URL}/my-profile#about`}>Edit Profile</a>
@@ -102,7 +90,7 @@ const UserMenu = (props) => {
             </li> */}
             {Utils.isStudent() && (
               <li>
-                <a href={`${process.env.PUBLIC_URL}/ad-student`}>
+                <a href={`${process.env.PUBLIC_URL}/help-for-student`}>
                   Help for you
                 </a>
               </li>
@@ -117,10 +105,9 @@ const UserMenu = (props) => {
             {/*<li>
               <a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a>
             </li>*/}
-          </ul>
-        </div>
-        <div className="col-sm-6">
-          <ul className="profile_menu_list">
+         
+        
+          
             {loggedIn && (
               <>
                 <form
@@ -169,10 +156,7 @@ const UserMenu = (props) => {
                 Log Out
               </a>
             </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+        </>
   );
 };
 

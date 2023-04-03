@@ -127,7 +127,7 @@ const CustomRoutes = [
     component: Page.SearchResult,
   },
   {
-    path: "/ad-student",
+    path: "/help-for-student",
     secure: false,
     exact: true,
     layout: Layout.StaticPageLayout,

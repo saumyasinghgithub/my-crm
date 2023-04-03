@@ -43,12 +43,8 @@ const HeaderTrainer = (props) => {
             <input className="form-control" type="text" placeholder="How can I help you ?" />
           </form>
           <ul className="navList">
-            {/* <li><a href={`${process.env.REACT_APP_PUBLIC_URL}/about-us`}>About us <span>Any queries? Problems with upload? No matter what the issue is,
-                        we will help, support and find a way!</span></a></li>
-                    <li><a href={`${process.env.REACT_APP_PUBLIC_URL}/ad-studio`}>Tverse Studio <span>World best learning plaform.</span></a></li>
-                    <li><a href={`${process.env.REACT_APP_PUBLIC_URL}/ad-trainer`}>Help for Trainer <span>Get to know us, get to work with us.</span></a></li>*/}
             <li>
-              <a href={Utils.getTrainerURL(`ad-student`)}>
+              <a href={Utils.getTrainerURL(`help-for-student`)}>
                 Help for Student <span>Start with a plan and finish with results.</span>
               </a>
             </li>
@@ -63,192 +59,35 @@ const HeaderTrainer = (props) => {
 
       <header className="header fixed-top whiteHeader">
         <div className="container">
-          <a className="navbar-brand" /*href={`${process.env.REACT_APP_PUBLIC_URL}/`}*/>TVERSE</a>
-          {/* <form className="searchBOx" >
-                <div className="input-group">
-                    <div className="input-group-btn search-panel" data-search="students">
-                        <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            <span className="search_by">All</span> <span><img src={`${process.env.PUBLIC_URL}/assets/images/arrow.png`} alt="AD" /></span>
-                        </button>
-                        <ul className="dropdown-menu" role="menu">
-                            <li className="dropdown-item"><a data-search="industry">Industry</a></li>
-                            <li className="dropdown-item"><a data-search="industry1">Industry 1</a></li>
-                            <li className="dropdown-item"><a data-search="industry2">Industry 2</a></li>
-                            <li className="dropdown-item"><a data-search="industry3">Industry 3</a></li>
-                        </ul>
-                    </div>   
-                   <input className="form-control" type="text" name="x" placeholder="How can I help you ?" />              
-                </div> 
-        </form> */}
+          <a className="navbar-brand">TVERSE</a>         
           <ul className="navbar-nav">
             <li className="nav-item">
               <a href="/my-cart">
                 <img className="img-fluid shoppingIcon" src="/assets/images/cart.png" alt="cart" />
               </a>
-            </li>
-            {/*!loggedIn && <li className="nav-item" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">
-                        Log in
-    </li>*/}
-            {!loggedIn && (
-              <li className="nav-item">
-                <a href={Utils.getTrainerURL(`login`)}>Log in</a>
-              </li>
-            )}
-
-            {loggedIn && (
-              <li className="nav-item profile_toggle">
-                {_.get(udata, "base_image", "") !== "" && (
+            </li>            
+            <li className="nav-item profile_toggle">
+              <div className="Dropdown-Help">
+                {!loggedIn && (
+                <a href={Utils.getTrainerURL(`login`)} className="btn btn-default">
+                  Log in
+                </a>
+                )}
+                {loggedIn && ( <>
+                <a href={Utils.getTrainerURL(`login`)} type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                  {_.get(udata, "base_image", "") !== "" && (
                   <img
                     src={`${process.env.REACT_APP_API_URL}/uploads/${Utils.isTrainer() ? "base" : "student/base"}/${_.get(udata, "base_image", "")}`}
                     className="img-fluid"
                     title={`Logged in as ${udata.firstname} ${udata.lastname}`}
                   />
                 )}
-              </li>
-            )}
-            <li className="nav-item ">
-              <div className="Dropdown-Help">
-                <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                  Log in
-                </button>
-
-                <ul className="dropdown-menu" role="menu">
-                  <li className="dropdown-item HelpDropdown">
-                    <h4 className="lineANimation">
-                      Hello <br></br> {udata.firstname} {udata.lastname}!
-                    </h4>
-                  </li>
-                  {Utils.isTrainer() && (
-                    <li className="dropdown-item HelpDropdown">
-                      <a href={`${process.env.PUBLIC_URL}/my-profile#about`}>Edit Profile</a>
-                    </li>
-                  )}
-                  {Utils.isStudent() && (
-                    <li className="dropdown-item HelpDropdown">
-                      <a href={`${process.env.PUBLIC_URL}/student/my-profile/edit`}>
-                        My Profile
-                      </a>
-                    </li>
-                  )}
-                  {Utils.isStudent() && (
-                    <li className="dropdown-item HelpDropdown">
-                      <a href={Utils.getTrainerURL(`my-order`)}>My Order</a>
-                    </li>
-                  )}
-                  {Utils.isTrainer() && (
-                    <>
-                      <li className="dropdown-item HelpDropdown">
-                        <a href={Utils.getTrainerURL(`my-corporate-groups`)}>
-                          My Corporate Groups
-                        </a>
-                      </li>
-                      <li className="dropdown-item HelpDropdown">
-                        <a href={Utils.getTrainerURL(`my-sales`)}>My Sales</a>
-                      </li>
-                    </>
-                  )}
-                  {/*Utils.isTrainer() && (
-              <li>
-                <a href={getSlug()}>My Profile</a>
-              </li>
-            )*/}
-                  {Utils.isTrainer() && (
-                    <li className="dropdown-item HelpDropdown">
-                      <a href={Utils.getTrainerURL(`my-course`)}>Manage Course
-                      </a>
-                    </li>
-                  )}
-                  {Utils.isTrainer() && (
-                    <li className="dropdown-item HelpDropdown">
-                      <a href={Utils.getTrainerURL(`manage-coupons`)}>Manage Coupons</a>
-                    </li>
-                  )}
-                  {Utils.isStudent() && loggedIn && (
-                    <li className="dropdown-item HelpDropdown">
-                      <a href={Utils.getTrainerURL(`preferred-courses`)}>
-                        Preferred Courses
-                      </a>
-                    </li>
-                  )}
-                  {/* <li>
-              <a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a>
-            </li> */}
-                  {Utils.isStudent() && (
-                    <li className="dropdown-item HelpDropdown">
-                      <a href={`${process.env.PUBLIC_URL}/ad-student`}>
-                        Help for you
-                      </a>
-                    </li>
-                  )}
-                  {/*Utils.isTrainer() && (
-              <li>
-                <a href={`${process.env.PUBLIC_URL}/ad-trainer`}>
-                  Help for you
-                </a>
-              </li>
-            )*/}
-                  {/*<li>
-              <a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a>
-            </li>*/}
-
-                  {loggedIn && (
-                    <>
-                      <form
-                        name="moodleLoginForm"
-                        method="post"
-                        action={`${process.env.REACT_APP_MOODLE_URL}/login/index.php`}
-                      >
-                        <input type="hidden" name="username" />
-                        <input type="hidden" name="password" />
-                      </form>
-                      <li className="dropdown-item HelpDropdown">
-                        {/* <a
-                          href="#"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            loginToMoodle(document.forms.moodleLoginForm);
-                          }}
-                        >
-                          Manage LMS
-                        </a> */}
-                        Manage LMS
-                      </li>
-                      {/*<li>
-                  <a href={getSlug()+'professional-profile'}>Professional Profile</a>
-                  </li>*/}
-                      <li className="dropdown-item HelpDropdown">
-                        <a href={Utils.getTrainerURL(`preferred-trainers`)}>
-                          Preferred Trainer
-                        </a>
-                      </li>
-                    </>
-                  )}
-
-                  {Utils.isTrainer() && (
-                    <li className="dropdown-item HelpDropdown">
-                      <a href={Utils.getTrainerURL(`my-blog`)}>Manage Blogs
-                      </a>
-                    </li>
-                  )}
-
-                  <li className="dropdown-item HelpDropdown">
-                    <a href={Utils.getTrainerURL(`chgpwd`)}>Change Password</a>
-                  </li>
-
-                  <li className="dropdown-item HelpDropdown">
-                    {/* <a href="logout" onClick={onLogout}>
-                      Log Out
-                    </a> */}
-                    <a href="logout">
-                      Log Out
-                    </a>
-                  </li>
-
-                </ul>
-
+                </a> 
+                <ul className="dropdown-menu" role="menu"><UserMenu /></ul>               
+                </>
+                )}                
               </div>
-            </li>
-
+            </li>            
             <li className="nav-item ">
               <div className="Dropdown-Helps">
                 <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -256,15 +95,13 @@ const HeaderTrainer = (props) => {
                 </button>
                 <ul className="dropdown-menu" role="menu">
                   <li className="dropdown-item HelpDropdown">
-                    <a href={Utils.getTrainerURL(`ad-student`)}>
+                    <a href={Utils.getTrainerURL(`help-for-student`)}>
                       Help for Student
-                      {/* <span>Start with a plan and finish with results.</span> */}
                     </a>
                   </li>
                   <li className="dropdown-item HelpDropdown">
                     <a href={Utils.getTrainerURL(`contact-us`)}>
                       Contact
-                      {/* <span>Get to know us, get to work with us.</span> */}
                     </a>
                   </li>
                 </ul>
@@ -293,11 +130,11 @@ const HeaderTrainer = (props) => {
         </nav>
 
         {/* New Header */}
-        {loggedIn && (
+        {/*loggedIn && (
           <div className="profile_menu from-right">
             <UserMenu />
           </div>
-        )}
+        )*/}
       </header>
     </>
   );

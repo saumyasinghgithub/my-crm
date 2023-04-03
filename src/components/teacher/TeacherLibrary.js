@@ -25,7 +25,7 @@ const TeacherLibrary = (props) => {
           <div className="libraryInfobox slideInUp wow ">
             <div className="col-md-3 col-12">
               <div className="">
-                <span className="new">New</span>
+                {/*<span className="new">New</span>*/}
                 <img className="img-fluid rounded" src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`} alt="Tverse" />
               </div>
             </div>

@@ -116,7 +116,7 @@ const LandingPage = (props) => {
                         <Col lg={4} md={6} className="pt-3 d-flex">
                           <div className="p-4 homecourses">
                             <div className="">
-                              <span className="new">New</span>
+                              {/*<span className="new">}New</span>*/}
                               <img className="img-fluid rounded" src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`} alt="Tverse" />
                             </div>
                             <div className="">
