@@ -128,13 +128,6 @@ const HeaderTrainer = (props) => {
             {Utils.hasSubdomain() && <TeacherNav slug={props.slug} page={props.page} onPageChange={props.onPageChange} />}
           </div>
         </nav>
-
-        {/* New Header */}
-        {/*loggedIn && (
-          <div className="profile_menu from-right">
-            <UserMenu />
-          </div>
-        )*/}
       </header>
     </>
   );
