@@ -40,15 +40,15 @@ const PreferredTrainers = (props) => {
     const renderMyFavs = () => {
         return <>
             <Row>
-                {favs.data.map(rec => <Col xs={12} lg={4} md={12} xl={4} key={rec.id}>
+                {favs.data.map(rec => <Col xs={12} lg={6} md={6} xl={4} key={rec.id}>
                     <Card className="m-2 preferredtrainercard">
                         <Card.Body>
                             <img className="img-fluid p-2 text-center h-100 w-100" src={`${process.env.REACT_APP_API_URL}/uploads/base/${rec.base_image}`} alt={_.get(rec, 'firstname', '')} />
                             <h3 className="text-center p-2">{_.get(rec, 'firstname', '')} {_.get(rec, 'lastname', '')}</h3>
                             <Container>
                                 <Row>
-                                    <Col className="col-4 text-left"><button className="btn btn-danger" onClick={removeFav(rec.user_id)}>Remove</button></Col>
-                                    <Col className="col-8 text-right"><a href={`${process.env.PUBLIC_URL}/trainers/${rec.slug}`} className="btn btn-info">View Profile</a></Col>
+                                    <Col className="col-md-4 col-12 text-left mt-2"><button className="btn btn-danger TrainerActionButton" onClick={removeFav(rec.user_id)}>Remove</button></Col>
+                                    <Col className="col-md-8 col-12 mt-2 TrainerActionButton2"><a href={`${process.env.PUBLIC_URL}/trainers/${rec.slug}`} className="btn btn-info TrainerActionButton">View Profile</a></Col>
                                 </Row>
                             </Container>
                         </Card.Body>

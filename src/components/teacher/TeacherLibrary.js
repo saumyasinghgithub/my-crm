@@ -114,7 +114,7 @@ const TeacherLibrary = (props) => {
                 </ul> */}
           <div className="subHeading slideInUp wow " dangerouslySetInnerHTML={{ __html: data.about_library }}></div>
         </div>
-        <nav className="navbar navbar-expand-md  filterMenu slideInUp wow ">
+        {/* <nav className="navbar navbar-expand-md  filterMenu slideInUp wow ">
           <button
             className="navbar-toggler"
             type="button"
@@ -128,7 +128,7 @@ const TeacherLibrary = (props) => {
               Filter for course <img src="/assets/images/arrow.png" className="img-fluid" alt="AD" />
             </h4>
           </button>
-        </nav>
+        </nav> */}
 
         <div className="libraryBody">{courses.map(renderCourses)}</div>
       </div>

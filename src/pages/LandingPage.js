@@ -53,7 +53,7 @@ const LandingPage = (props) => {
         {!loading && (
           <>
             <Row className="landingPageRow">
-              <div className="landingSlider">
+              <div className="landingSlider carouselslider">
                 {_.get(trainer, "slides", []).length > 0 && (
                   <MDBCarousel showIndicators fade>
                     {_.get(trainer, "slides", []).map((slide, idx) => (

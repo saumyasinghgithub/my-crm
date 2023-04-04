@@ -47,7 +47,7 @@ const TeacherSubscribe = (props) => {
 
     return (<div>
         {inLine ? (
-            <div class="landingUpEvent">
+            <div class="container landingUpEvent">
                 <div class="SubsTextBox">
                     <div class="SubsInputBox">
                         <form noValidate ref={frmRef} id="subscription-form" onSubmit={onSave} method="post" className="form contact alertdesign needs-validation">

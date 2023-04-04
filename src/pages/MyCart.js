@@ -199,7 +199,7 @@ const MyCart = (props) => {
                             <div className="container">
                                 <h1>My Cart</h1>
                                 <Row>
-                                    <Col md={7} className="mt-3">
+                                    <Col md={12} lg={7} className="mt-3">
                                         <div className="libraryBody allCourses">
                                             <div className="cartInfobox">
                                                 {cart.data.map(cData => <Row className="add-space">
@@ -240,7 +240,7 @@ const MyCart = (props) => {
                                             </div>
                                         </div>
                                     </Col>
-                                    <Col md={4} className="slideInUp wow animated cartRightBox">
+                                    <Col md={12} lg={4} className="slideInUp wow animated cartRightBox">
                                         <h6 className="cartheading">Cart Summary</h6>
                                         {cart.data.map(cData => <Row className="cbox-dash mx-0" key={cData.id}>
                                             <Col sm={8}>
@@ -265,11 +265,11 @@ const MyCart = (props) => {
                                         <Form onSubmit={onDiscountApply}>
                                             <Form.Control type="hidden" name="expiry_date" defaultValue={currentDate.getFullYear() + '-' + currentDate.toLocaleString(undefined, { month: '2-digit' }) + '-' + currentDate.getDate()} />
                                             <Row className="cbox-space mx-0">
-                                                <Col sm={7} className="text-left p-0 pr-1">
+                                                <Col sm={7} className="text-left p-0 pr-1 mt-2">
                                                     <Form.Control className="py-0 coupon" type="text" name="coupon_code" placeholder="Coupon Code" />
                                                 </Col>
                                                 <Col sm={5} className="text-right p-0">
-                                                    <Button className="btn btn-sm btnBlue font-weight-normal" type="submit">Apply Discount</Button>
+                                                    <Button className="btn btn-sm btnBlue font-weight-normal mt-2" type="submit">Apply Discount</Button>
                                                 </Col>
                                             </Row>
                                         </Form>

@@ -48,11 +48,13 @@ const TeacherService = (props) => {
           </div>
           {data.consultancy ? (
             <div className="servicesTextBox slideInUp wow ">
+
+
               <div className="row">
-                <div className="col-sm-2">
+                <div className="col-xl-2 col-12">
                   {/* <div className="Sheading">Merchandise</div> */}
                 </div>
-                <div className="col-sm-10">
+                <div className="col-xl-10 col-12">
                   <div dangerouslySetInnerHTML={{ __html: data.consultancy }}></div>
                 </div>
               </div>
@@ -61,10 +63,10 @@ const TeacherService = (props) => {
           {data.coaching ? (
             <div className="servicesTextBox slideInUp wow ">
               <div className="row">
-                <div className="col-sm-2">
+                <div className="col-xl-2 col-12">
                   {/* <div className="Sheading">Coaching </div> */}
                 </div>
-                <div className="col-sm-10">
+                <div className="col-xl-10 col-12">
                   <div dangerouslySetInnerHTML={{ __html: data.coaching }}></div>
                 </div>
               </div>

@@ -59,56 +59,58 @@ const HeaderTrainer = (props) => {
 
       <header className="header fixed-top whiteHeader">
         <div className="container">
-          <a className="navbar-brand">TVERSE</a>
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <a href="/my-cart">
-                <img className="img-fluid shoppingIcon" src="/assets/images/cart.png" alt="cart" />
-              </a>
-            </li>
-            <li className="nav-item profile_toggle">
-              <div className="Dropdown-Help">
-                {!loggedIn && (
-                  <a href={Utils.getTrainerURL(`login`)} className="btn btn-default">
-                    Log in
-                  </a>
-                )}
-                {loggedIn && (<>
-                  <a href={Utils.getTrainerURL(`login`)} type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    {_.get(udata, "base_image", "") !== "" && (
-                      <img
-                        src={`${process.env.REACT_APP_API_URL}/uploads/${Utils.isTrainer() ? "base" : "student/base"}/${_.get(udata, "base_image", "")}`}
-                        className="img-fluid"
-                        title={`Logged in as ${udata.firstname} ${udata.lastname}`}
-                      />
-                    )}
-                  </a>
-                  <ul className="dropdown-menu" role="menu"><UserMenu /></ul>
-                </>
-                )}
-              </div>
-            </li>
-            <li className="nav-item ">
-              <div className="Dropdown-Helps">
-                <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                  <img className="img-fluid" src="/assets/images/toggle-black.png" alt="toggle-img" />
-                </button>
-                <ul className="dropdown-menu" role="menu">
-                  <li className="dropdown-item HelpDropdown">
-                    <a href={Utils.getTrainerURL(`help-for-student`)}>
-                      Help for Student
+          <div className="HeaderNavigation">
+            <a className="navbar-brand">TVERSE</a>
+            <ul className="navbar-nav HeaderNavUl">
+              <li className="nav-item">
+                <a href="/my-cart">
+                  <img className="img-fluid shoppingIcon" src="/assets/images/cart.png" alt="cart" />
+                </a>
+              </li>
+              <li className="nav-item profile_toggle">
+                <div className="Dropdown-Help">
+                  {!loggedIn && (
+                    <a href={Utils.getTrainerURL(`login`)} className="btn btn-default">
+                      Log in
                     </a>
-                  </li>
-                  <li className="dropdown-item HelpDropdown">
-                    <a href={Utils.getTrainerURL(`contact-us`)}>
-                      Contact
+                  )}
+                  {loggedIn && (<>
+                    <a href={Utils.getTrainerURL(`login`)} type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      {_.get(udata, "base_image", "") !== "" && (
+                        <img
+                          src={`${process.env.REACT_APP_API_URL}/uploads/${Utils.isTrainer() ? "base" : "student/base"}/${_.get(udata, "base_image", "")}`}
+                          className="img-fluid"
+                          title={`Logged in as ${udata.firstname} ${udata.lastname}`}
+                        />
+                      )}
                     </a>
-                  </li>
-                </ul>
+                    <ul className="dropdown-menu" role="menu"><UserMenu /></ul>
+                  </>
+                  )}
+                </div>
+              </li>
+              <li className="nav-item ">
+                <div className="Dropdown-Helps">
+                  <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <img className="img-fluid" src="/assets/images/toggle-black.png" alt="toggle-img" />
+                  </button>
+                  <ul className="dropdown-menu" role="menu">
+                    <li className="dropdown-item HelpDropdown">
+                      <a href={Utils.getTrainerURL(`help-for-student`)}>
+                        Help for Student
+                      </a>
+                    </li>
+                    <li className="dropdown-item HelpDropdown">
+                      <a href={Utils.getTrainerURL(`contact-us`)}>
+                        Contact
+                      </a>
+                    </li>
+                  </ul>
 
-              </div>
-            </li>
-          </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
         {/* New Header */}
 

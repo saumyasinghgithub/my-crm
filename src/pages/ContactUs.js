@@ -171,28 +171,28 @@ const ContactUs = (props) => {
               </form>
             </Col>
             <Col lg={6} md={12} className="mt-2 mb-2">
-              <Container>
-                <div className="ContactDetails">
-                  <a href={`${_.get(trainer, "company_url", "")}`} target="_blank">
-                    <img
-                      src={`${process.env.REACT_APP_API_URL}/uploads/logo/${_.get(trainer, "logo_image", "../../logo-default.png")}`}
-                      className="img-fluid w-50 ml-0"
-                      alt={_.get(trainer, "company", process.env.REACT_APP_CONTACT_NAME)}
-                    /></a>
 
-                  <p className="mt-5 mb-2">{_.get(trainer, "phone", process.env.REACT_APP_CONTACT_PHONE)}</p>
+              <div className="ContactDetails">
+                <a href={`${_.get(trainer, "company_url", "")}`} target="_blank">
+                  <img
+                    src={`${process.env.REACT_APP_API_URL}/uploads/logo/${_.get(trainer, "logo_image", "../../logo-default.png")}`}
+                    className="img-fluid w-50 ml-0"
+                    alt={_.get(trainer, "company", process.env.REACT_APP_CONTACT_NAME)}
+                  /></a>
 
-                  <p className="mb-3 mt-1 Contactemail">
-                    <a href={`mailto:${_.get(trainer, "email", process.env.REACT_APP_CONTACT_EMAIL)}`}>
-                      {_.get(trainer, "email", process.env.REACT_APP_CONTACT_EMAIL)}
-                    </a>
-                  </p>
-                  <p className="text-left ContactSubscribe mt-4">
-                    Subscribe to Our {_.get(trainer, "company", process.env.REACT_APP_CONTACT_NAME)} Newsletter
-                  </p>
-                  <TeacherSubscribe type="inLine" />
-                </div>
-              </Container>
+                <p className="mt-5 mb-2">{_.get(trainer, "phone", process.env.REACT_APP_CONTACT_PHONE)}</p>
+
+                <p className="mb-3 mt-1 Contactemail">
+                  <a href={`mailto:${_.get(trainer, "email", process.env.REACT_APP_CONTACT_EMAIL)}`}>
+                    {_.get(trainer, "email", process.env.REACT_APP_CONTACT_EMAIL)}
+                  </a>
+                </p>
+                <p className="text-left ContactSubscribe mt-4">
+                  Subscribe to Our {_.get(trainer, "company", process.env.REACT_APP_CONTACT_NAME)} Newsletter
+                </p>
+                <TeacherSubscribe type="inLine" />
+              </div>
+
             </Col>
           </Row>
         </div>
