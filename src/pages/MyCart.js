@@ -220,7 +220,7 @@ const MyCart = (props) => {
                                                         <div className="LPriceInfoBoxCart">
                                                             <i className="fa fa-heart"></i>
                                                             <a here='' onClick={deleteRecord(cData.id)}><i className="fa fa-trash pl-2 pr-2"></i></a>
-                                                            <a href={`${process.env.REACT_APP_PUBLIC_URL}/courses/${cData.slug}`}><i className="fa fa-edit"></i></a>
+                                                            <a href={Utils.getTrainerURL(`courses/${cData.slug}`)}><i className="fa fa-edit"></i></a>
                                                         </div>
                                                     </Col>
                                                 </Row>)}
@@ -229,7 +229,7 @@ const MyCart = (props) => {
                                                 <Container>
                                                     <Row className="add-space">
                                                         <Col sm={5} className="text-left p-0 mb-2">
-                                                            <a href="/search-results" className="btn btn-sm btnBlue font-weight-normal" >Continue Shopping</a>
+                                                            <a href={Utils.getTrainerURL()} className="btn btn-sm btnBlue font-weight-normal" >Continue Shopping</a>
                                                         </Col>
                                                         <Col sm={2}></Col>
                                                         <Col sm={5} className="text-right p-0">

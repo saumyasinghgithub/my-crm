@@ -14,7 +14,7 @@ const MyCourse = (props) => {
     const [list,setList] = useState({loading: false, error: false, pageInfo: {}, data: []});
     const [showForm,setShowForm] = useState({id: false, mode: 0}); // 0=do not show, 1=add, 2=edit
     
-    const listColumns = ['level','language','id','name','sku','price','stock_qnty','duration','lectures','created_at'];
+    const listColumns = ['level','language','id','name','duration','created_at'];
 
     const columns = listColumns.map(v => ({
         name: v.toUpperCase(),
@@ -39,7 +39,7 @@ const MyCourse = (props) => {
         name: "Action",
         cell: row => <>
             <Button size='sm' variant="light" className="mr-1" onClick={() => setShowmc({show: true, row: row, type: 'resource'})} data-toggle="tooltip" title="Course Resources"><i className="fas fa-suitcase" /></Button>
-            <Button size='sm' variant="light" className="mr-1" onClick={() => setShowmc({show: true, row: row, type: 'content'})} data-toggle="tooltip" title="Course Content"><i className="fa fa-book" /></Button>
+           {/* <Button size='sm' variant="light" className="mr-1" onClick={() => setShowmc({show: true, row: row, type: 'content'})} data-toggle="tooltip" title="Course Content"><i className="fa fa-book" /></Button>*/}
             <Button size='sm' variant="light" className="mr-1" onClick={()=>setShowForm({mode: 2, id: row.id})} data-toggle="tooltip" title="Edit Course"><i className="fa fa-edit" /></Button>
             <Button size='sm' variant="light" className="mr-1" onClick={deleteRecord(row.id)} data-toggle="tooltip" title="Delete Course"><i className="fa fa-trash text-danger" /></Button>
         </>,
