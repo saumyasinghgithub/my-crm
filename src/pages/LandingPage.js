@@ -113,7 +113,7 @@ const LandingPage = (props) => {
                       <h3 className="landingHeading mb-5">CodePRep<br></br><br></br> <span className="Headingpara">Bridging the Gap Between Bi-Annual Life Support Training And Clinical Performance</span></h3>
                       {_.get(trainer, "courses", []).length > 0 && (<>
                         {_.get(trainer, "courses", []).map((course, ide) => (
-                          <Col lg={4} md={6} className="pt-3 d-flex">
+                          <Col xl={4} lg={6} md={6} className="pt-3 d-flex">
                             <div className="p-4 homecourses">
                               <div className="">
                                 {/*<span className="new">}New</span>*/}
