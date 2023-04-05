@@ -33,7 +33,8 @@ const MyCourse = (props) => {
         sortable: true,
         omit: ['level','language'].includes(v),
         maxWidth: 300
-    }));
+    })); 
+    
     
     columns.push({
         name: "Action",
