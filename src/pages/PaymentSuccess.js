@@ -80,7 +80,7 @@ const Success = (props) => {
                            <div className="col-sm-12">
                               <h1 className="successheading slideInUp wow ">Hey, {udata.firstname} ! Your Order has been Successfully Placed!</h1>
                               <p>
-                                 <strong>Thank you for purchaged the course. </strong>
+                                 <strong>Thank you for purchased the course. </strong>
                               </p>
                               <p>Your Order References No. :  <strong>{getOrderDump('razorpayOrderId')}</strong></p>
                               <hr />
@@ -90,7 +90,7 @@ const Success = (props) => {
 
                               <ol className="faq pt-3">
                                  <li>We have Successfully send mail in your regidterd email ID.</li>
-                                 <li>Verify your courses your have purchages in your email.</li>
+                                 <li>Verify your courses your have purchased in your email.</li>
                               </ol>
                               <div className="succpage">
 
