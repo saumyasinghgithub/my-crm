@@ -14,24 +14,25 @@ const MyCourse = (props) => {
     const [list,setList] = useState({loading: false, error: false, pageInfo: {}, data: []});
     const [showForm,setShowForm] = useState({id: false, mode: 0}); // 0=do not show, 1=add, 2=edit
     
-    const listColumns = ['level','language','id','name','duration','created_at'];
+    const listColumns = ['id','name','level','language','duration','created_at'];
 
     const columns = listColumns.map(v => ({
         name: v.toUpperCase(),
         selector: row => row[v],
         format: row => {
-          if(v=='name'){
+          if(v=='duration'){
             return <div>
-              {row[v]}<br />
-              <Badge>Level:</Badge>{row.level}<br />
-              <Badge>Language:</Badge>{row.language}<br />
+              {row[v]} Hour              
             </div>
-          }else{
-            return row[v];
-          }
+          }else if(v=='created_at'){
+            const date = new Date(row[v]);
+            return date.toLocaleDateString();
+         } else {
+          return row[v];
+         }
         },
         sortable: true,
-        omit: ['level','language'].includes(v),
+        //omit: ['level','language'].includes(v),
         maxWidth: 300
     })); 
     
