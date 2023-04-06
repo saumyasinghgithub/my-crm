@@ -82,7 +82,7 @@ const EventsForm = (props) => {
     });
   };
 
-  const exportParticipants = (type, id = "") => {};
+  const exportParticipants = (type, id = "") => { };
 
   const renderEventFields = () => {
     return (
@@ -156,6 +156,8 @@ const EventsForm = (props) => {
                           height: 200,
                           menubar: false,
                         }}
+                        toolbar="undo redo | bold italic underline strikethrough | code | fontselect | fontsizeselect | formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl"
+                        plugins="code"
                         onEditorChange={onContentChange(k, "event_short_desc")}
                       />
                     </Col>

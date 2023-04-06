@@ -79,6 +79,14 @@ const CommunityForm = (props) => {
             init={{
               height: 200,
               menubar: false,
+              plugins: [
+                'advlist', 'autolink',
+                'lists', 'link', 'image', 'code', 'charmap', 'preview', 'anchor', 'searchreplace', 'visualblocks',
+                'fullscreen', 'insertdatetime', 'media', 'table', 'help', 'wordcount'
+              ],
+              toolbar: 'undo redo | blocks | ' +
+                'bold italic underline forecolor | styleselect  | alignleft aligncenter ' +
+                'alignright alignjustify | code | backcolor bullist numlist | outdent indent | link | code fontselect fontsizeselect | removeformat',
             }}
             onEditorChange={onContentChange("about_community")}
           />
