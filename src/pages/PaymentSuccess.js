@@ -35,8 +35,8 @@ const Success = (props) => {
    const showCourses = () => {
       const dump = JSON.parse(orderData.data.dump);
       const details = dump.description.split(" AND ");
-      return <ul>
-         {details.map(d => <li><b>{d.split('||')[0]}</b> - ({d.split('||').splice(1).join(',')})</li>)}
+      return <ul className='ShowCoursePay'>
+         {details.map(d => <li className='mt-2 mb-2'>{d.split('||')[0]} - ({d.split('||').splice(1).join(',')})</li>)}
       </ul>;
    }
 
@@ -73,35 +73,59 @@ const Success = (props) => {
                <li className="current"><em>Success</em></li>
             </ol>
             </nav>*/}
-                  <div className="">
-                     <img src="/assets/images/success-page.jpg" alt="AD" />
+                  <div className="container">
+                     <img src="/assets/images/payment.png" alt="PaymentImg" />
                      <div className="AD-help">
                         <div className="row">
-                           <div className="col-sm-12">
-                              <h1 className="successheading slideInUp wow ">Hey, {udata.firstname} ! Your Order has been Successfully Placed!</h1>
-                              <p>
-                                 <strong>Thank you for purchased the course. </strong>
-                              </p>
-                              <p>Your Order References No. :  <strong>{getOrderDump('razorpayOrderId')}</strong></p>
-                              <hr />
-                              <p>
-                                 <h4>Course(s) bought by you :</h4>  {showCourses()}
-                              </p>
-
-                              <ol className="faq pt-3">
-                                 <li>We have Successfully send mail in your regidterd email ID.</li>
-                                 <li>Verify your courses your have purchased in your email.</li>
-                              </ol>
-                              <div className="succpage">
-
-
+                           <div className='col-12 col-lg-2 col-md-12'></div>
+                           <div className='col-12 col-lg-9 col-md-12 mt-5'>
+                              <div className='d-flex align-center Sucesmsgimg mt-5 mb-5'>
+                                 <div className='row align-center'>
+                                    <div className='col-12 col-md-2 col-lg-2 text-center'>
+                                       <img src='/assets/images/tick.png' alt='' />
+                                    </div>
+                                    <div className='col-12 col-md-10 col-lg-10'>
+                                       <h1 className="successheading slideInUp wow text-left mt-0">Hey, {udata.firstname} ! Your Order has been Successfully Placed!</h1>
+                                    </div>
+                                 </div>
                               </div>
                            </div>
+                           <div className='col-12 col-lg-1 col-md-12'></div>
+                           <div className="col-sm-12 mt-5 PaymtOrderdet">
+                              <p className='mb-2'>
+                                 We're glad you bought the course.
+                              </p>
+                              <p>Your Order References No. :  <strong>{getOrderDump('razorpayOrderId')}</strong></p>
+                              <div className="succpage">
+
+                              </div>
+                              <hr />
+                           </div>
+
+                           <div className="col-lg-4 col-12 mt-5">
+                              <p>
+                                 <h4 className='mt-1 mb-1'><b>The course(s) you bought: </b></h4>
+                              </p>
+                           </div>
+                           <div className="col-lg-8 col-12 mt-5">
+                              <ol className=''>
+                                 <li className=''>{showCourses()}</li>
+                              </ol>
+                           </div>
+                           <div className='col-12 mt-4'>
+                              <hr />
+                              <p className='PaymntSteps mt-5'>Steps:</p>
+                              <ol className="faq pt-3">
+                                 <li className='mt-4 mb-4'>We've sent a message to your registered email address successfully.</li>
+                                 <li className='mt-4 mb-4'>Please verify the courses you have purchased from your inbox.</li>
+                              </ol>
+                           </div>
+
                         </div>
-                        <div className="row">
-                           <div className="col-sm-4 text-right"><strong><a href={`${process.env.PUBLIC_URL}/search-results`} className="btn btn-primary">Continue Order...</a></strong></div>
-                           <div className="col-sm-4 text-left"><strong><a href={`${process.env.PUBLIC_URL}/my-order`} className="btn btn-success"> View My Orders</a></strong></div>
-                           <div className="col-sm-4 text-left"><strong><button className="btn btn-warning text-white EnrolNowOrder" onClick={() => loginToMoodle(document.forms.moodleLoginForm)}>Visit Your Learning Center</button></strong></div>
+                        <div className="row mt-5 PaymentBtn">
+                           <div className="col-12 col-md-4 col-lg-4 col-xl-6 text-left HomeRegister "><strong><button className="btn text-white EnrolNowOrder" onClick={() => loginToMoodle(document.forms.moodleLoginForm)}>Visit Your Learning Center</button></strong></div>
+                           <div className="col-12 col-md-4 col-lg-4 col-xl-3 text-right HomeRegister"><strong><a href={`${process.env.PUBLIC_URL}/professional-profile/trainercourses`} className=""><button> Continue Order</button></a></strong></div>
+                           <div className="col-12 col-md-4 col-lg-4 col-xl-3 text-right HomeRegister"><strong><a href={`${process.env.PUBLIC_URL}/my-order`} className=""><button> View My Orders</button></a></strong></div>
                         </div>
                      </div>
                   </div>

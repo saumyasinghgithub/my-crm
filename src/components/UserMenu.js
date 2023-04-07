@@ -32,131 +32,134 @@ const UserMenu = (props) => {
     return false;
   };
 
-  return (<>            
-            {Utils.isTrainer() && (
-              <li>
-                <a href={`${process.env.PUBLIC_URL}/my-profile#about`}>Edit Profile</a>
-              </li>
-            )}
-            {Utils.isStudent() && (
-              <li>
-                <a href={`${process.env.PUBLIC_URL}/student/my-profile/edit`}>
-                  My Profile
-                </a>
-              </li>
-            )}
-            {Utils.isStudent() && (
-              <li>
-                <a href={Utils.getTrainerURL(`my-order`)}>My Order</a>
-              </li>
-            )}
-            {Utils.isTrainer() && (
-              <>
-                <li>
-                  <a href={Utils.getTrainerURL(`my-corporate-groups`)}>
-                    My Corporate Groups
-                  </a>
-                </li>
-                <li>
-                  <a href={Utils.getTrainerURL(`my-sales`)}>My Sales</a>
-                </li>
-              </>
-            )}
-            {/*Utils.isTrainer() && (
+  return (<>
+    {Utils.isTrainer() && (
+      <li>
+        <a href={`${process.env.PUBLIC_URL}/my-profile#about`}>Edit Profile</a>
+      </li>
+    )}
+    {Utils.isStudent() && (
+      <li>
+        <a href={`${process.env.PUBLIC_URL}/student/my-profile/edit`}>
+          My Profile
+        </a>
+      </li>
+    )}
+    {Utils.isStudent() && (
+      <li>
+        <a href={Utils.getTrainerURL(`my-order`)}>My Order</a>
+      </li>
+    )}
+    {Utils.isTrainer() && (
+      <>
+
+        <li>
+          <a href={Utils.getTrainerURL(`my-sales`)}>My Sales</a>
+        </li>
+      </>
+    )}
+    {/*Utils.isTrainer() && (
               <li>
                 <a href={getSlug()}>My Profile</a>
               </li>
             )*/}
-            {Utils.isTrainer() && (
-              <li>
-                <a href={Utils.getTrainerURL(`my-course`)}>Manage Course
-                </a>
-              </li>
-            )}
-            {Utils.isTrainer() && (
-              <li>
-                <a href={Utils.getTrainerURL(`manage-coupons`)}>Manage Coupons</a>
-              </li>
-            )}
-            {Utils.isStudent() && loggedIn && (
-              <li>
-                <a href={Utils.getTrainerURL(`preferred-courses`)}>
-                  Preferred Courses
-                </a>
-              </li>
-            )}
-            {/* <li>
+    {Utils.isTrainer() && (
+      <li>
+        <a href={Utils.getTrainerURL(`my-course`)}>Manage Course
+        </a>
+      </li>
+    )}
+    {Utils.isTrainer() && (
+      <li>
+        <a href={Utils.getTrainerURL(`manage-coupons`)}>Manage Coupons</a>
+      </li>
+    )}
+    {Utils.isStudent() && loggedIn && (
+      <li>
+        <a href={Utils.getTrainerURL(`preferred-courses`)}>
+          Preferred Courses
+        </a>
+      </li>
+    )}
+    {/* <li>
               <a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a>
             </li> */}
-            {Utils.isStudent() && (
-              <li>
-                <a href={`${process.env.PUBLIC_URL}/help-for-student`}>
-                  Help for you
-                </a>
-              </li>
-            )}
-            {/*Utils.isTrainer() && (
+    {Utils.isStudent() && (
+      <li>
+        <a href={`${process.env.PUBLIC_URL}/help-for-student`}>
+          Help for you
+        </a>
+      </li>
+    )}
+    {/*Utils.isTrainer() && (
               <li>
                 <a href={`${process.env.PUBLIC_URL}/ad-trainer`}>
                   Help for you
                 </a>
               </li>
             )*/}
-            {/*<li>
+    {/*<li>
               <a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a>
             </li>*/}
-         
-        
-          
-            {loggedIn && (
-              <>
-                <form
-                  name="moodleLoginForm"
-                  method="post"
-                  action={`${process.env.REACT_APP_MOODLE_URL}/login/index.php`}
-                >
-                  <input type="hidden" name="username" />
-                  <input type="hidden" name="password" />
-                </form>
-                <li>
-                  <a
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      loginToMoodle(document.forms.moodleLoginForm);
-                    }}
-                  >
-                    Manage LMS
-                  </a>
-                </li>
-                {/*<li>
+
+
+
+    {loggedIn && (
+      <>
+        <form
+          name="moodleLoginForm"
+          method="post"
+          action={`${process.env.REACT_APP_MOODLE_URL}/login/index.php`}
+        >
+          <input type="hidden" name="username" />
+          <input type="hidden" name="password" />
+        </form>
+        <li>
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              loginToMoodle(document.forms.moodleLoginForm);
+            }}
+          >
+            Manage LMS
+          </a>
+        </li>
+        {/*<li>
                   <a href={getSlug()+'professional-profile'}>Professional Profile</a>
                   </li>*/}
-                <li>
-                  <a href={Utils.getTrainerURL(`preferred-trainers`)}>
-                    Preferred Trainer
-                  </a>
-                </li>
-              </>
-            )}
+        <li>
+          <a href={Utils.getTrainerURL(`preferred-trainers`)}>
+            Preferred Trainer
+          </a>
+        </li>
+      </>
+    )}
 
-            {Utils.isTrainer() && (
-              <li>
-                <a href={Utils.getTrainerURL(`my-blog`)}>Manage Blogs
-                </a>
-              </li>
-            )}
+    {Utils.isTrainer() && (
+      <>
+        <li>
+          <a href={Utils.getTrainerURL(`my-blog`)}>Manage Blogs
+          </a>
+        </li>
+        <li>
+          <a href={Utils.getTrainerURL(`my-corporate-groups`)}>
+            My Corporate Groups
+          </a>
+        </li>
+      </>
+    )}
 
-            <li>
-              <a href={Utils.getTrainerURL(`chgpwd`)}>Change Password</a>
-            </li>
+    <li>
+      <a href={Utils.getTrainerURL(`chgpwd`)}>Change Password</a>
+    </li>
 
-            <li>
-              <a href="logout" onClick={onLogout}>
-                Log Out
-              </a>
-            </li>
-        </>
+    <li>
+      <a href="logout" onClick={onLogout}>
+        Log Out
+      </a>
+    </li>
+  </>
   );
 };
 
