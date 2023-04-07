@@ -55,7 +55,7 @@ const CustomRoutes = [
   },
   {
     path: "/my-course",
-    secure: false,
+    secure: true,
     exact: true,
     layout: Layout.StaticPageLayout,
     component: Page.MyCourse,

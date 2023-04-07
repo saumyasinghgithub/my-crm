@@ -96,9 +96,9 @@ const MyCart = (props) => {
                 'email': udata.email,
                 'contact': '+919868256219'
             },
-            image: `${process.env.PUBLIC_URL}/logo192.png`,
+            image: `${process.env.PUBLIC_URL}/favicon.ico`,
             theme: {
-                color: "#e0a019",
+                color: "##0f79aa",
             },
             handler: (res1) => {
                 axios.post(Utils.apiUrl("cart/orderSuccess"), {
@@ -229,7 +229,7 @@ const MyCart = (props) => {
                                                 <Container>
                                                     <Row className="add-space">
                                                         <Col sm={5} className="text-left p-0 mb-2">
-                                                            <a href={Utils.getTrainerURL()} className="btn btn-sm btnBlue font-weight-normal" >Continue Shopping</a>
+                                                            <a href={Utils.getTrainerURL('professional-profile/trainercourses')} className="btn btn-sm btnBlue font-weight-normal" >Continue Shopping</a>
                                                         </Col>
                                                         <Col sm={2}></Col>
                                                         <Col sm={5} className="text-right p-0">
