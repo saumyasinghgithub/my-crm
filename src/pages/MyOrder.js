@@ -86,7 +86,7 @@ const MyOrder = (props) => {
                         <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" style={{"width": "100%"}}></div>
                     </div>
                 </div>}
-                {data.loading===false && data.data.length === 0 && <h4 className="p-5 text-center">Hey, you have not ordered anything yet.. You should have a look at the <a href={process.env.REACT_APP_PUBLIC_URL}>courses</a> we have.</h4>}
+                {data.loading===false && data.data.length === 0 && <h4 className="p-5 text-center">Hey, you have not ordered anything yet.. You should have a look at the <a href={Utils.getTrainerURL(`professional-profile/trainercourses`)}>courses</a> we have.</h4>}
                 {data.loading===false && data.data.length > 0 && renderDataGrid()}                
             </div>
         </div>    
