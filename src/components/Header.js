@@ -1,4 +1,4 @@
-import React,{useEffect, useState, useContext} from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import Utils from './../Utils';
 
@@ -7,40 +7,40 @@ import UserMenu from './UserMenu';
 
 const Header = (props) => {
 
-    const [loggedIn,setLoggedIn] = useState(Utils.isLoggedIn());
-    
+    const [loggedIn, setLoggedIn] = useState(Utils.isLoggedIn());
+
     const udata = Utils.getUserData();
     const $ = window.$;
-        
-    useEffect(()=>{
 
-            $(".menu-toggle").on('click',function() {
-                $(".sidenav").addClass("width100");
-                $("body").addClass("menuopen");
-            });
-            $(".closemenu").on('click',function() {
-                $(".sidenav").removeClass("width100");
-                $("body").removeClass("menuopen")
-            });
+    useEffect(() => {
 
-            if(loggedIn){
-                $('.profile_toggle').on('click',function() {
-                    $('.profile_menu').addClass('profile_width100');
-                });
-                $('.student_prof_cross').on('click',function() {
+        $(".menu-toggle").on('click', function () {
+            $(".sidenav").addClass("width100");
+            $("body").addClass("menuopen");
+        });
+        $(".closemenu").on('click', function () {
+            $(".sidenav").removeClass("width100");
+            $("body").removeClass("menuopen")
+        });
+
+        if (loggedIn) {
+            $('.profile_toggle').on('click', function () {
+                $('.profile_menu').addClass('profile_width100');
+            });
+            $('.student_prof_cross').on('click', function () {
                 $('.profile_menu').removeClass('profile_width100');
-                });
-            }
+            });
+        }
 
-    },[]);
+    }, []);
 
-    return(<>
+    return (<>
         <div className="sidenav">
             <div className="sidebarInner">
                 <div className="overlay"></div>
                 <img className="img-fluid closemenu" src="/assets/images/close-circle.png" />
                 <form className="searchBOx mobileView" >
-                <input className="form-control" type="text" placeholder="How can I help you ?" />
+                    <input className="form-control" type="text" placeholder="How can I help you ?" />
                 </form>
                 <ul className="navList">
                     {/*<li><a href={`${process.env.REACT_APP_PUBLIC_URL}/about-us`}>About us <span>Any queries? Problems with upload? No matter what the issue is, 
@@ -72,16 +72,39 @@ const Header = (props) => {
                     </div> 
                 </form> */}
                 <ul className="navbar-nav">
-                    <li className="nav-item"><a href="/my-cart"><img className="img-fluid shoppingIcon" src="/assets/images/cart-white.png" alt="autodidact"/></a></li>
+                    <li className="nav-item"><a href="/my-cart"><img className="img-fluid shoppingIcon" src="/assets/images/cart-white.png" alt="autodidact" /></a></li>
                     {!loggedIn && <li className="nav-item" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">
                         Log in
                     </li>}
-                    
-                    {loggedIn && <li className="nav-item profile_toggle">                        
-                    {_.get(udata,'base_image','')!=='' && 
-                    
-                        <img src={`${process.env.REACT_APP_API_URL}/uploads/${ Utils.isTrainer() ?  "base" : "student/base"}/${_.get(udata,'base_image','')}`} className="img-fluid" title={`Logged in as ${udata.firstname} ${udata.lastname}`} />}
-                    </li>}
+
+                    {/* {loggedIn && <li className="nav-item profile_toggle">
+                        {_.get(udata, 'base_image', '') !== '' &&
+
+                            <img src={`${process.env.REACT_APP_API_URL}/uploads/${Utils.isTrainer() ? "base" : "student/base"}/${_.get(udata, 'base_image', '')}`} className="img-fluid" title={`Logged in as ${udata.firstname} ${udata.lastname}`} />}
+                    </li>} */}
+
+                    <li className="nav-item profile_toggle">
+                        <div className="Dropdown-Help">
+                            {/* {!loggedIn && (
+                                <a href={Utils.getTrainerURL(`login`)} className="btn btn-default">
+                                    Log in
+                                </a>
+                            )} */}
+                            {loggedIn && (<>
+                                <a href={Utils.getTrainerURL(`login`)} type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    {_.get(udata, "base_image", "") !== "" && (
+                                        <img
+                                            src={`${process.env.REACT_APP_API_URL}/uploads/${Utils.isTrainer() ? "base" : "student/base"}/${_.get(udata, "base_image", "")}`}
+                                            className="img-fluid"
+                                            title={`Logged in as ${udata.firstname} ${udata.lastname}`}
+                                        />
+                                    )}
+                                </a>
+                                <ul className="dropdown-menu" role="menu"><UserMenu /></ul>
+                            </>
+                            )}
+                        </div>
+                    </li>
 
                     <li className="nav-item ">
                         <img className="img-fluid menu-toggle" src="/assets/images/toggle.png" alt="toggle-img" />
@@ -89,9 +112,9 @@ const Header = (props) => {
                 </ul>
             </div>
 
-            {loggedIn && <div className="profile_menu from-right">
+            {/* {loggedIn && <div className="profile_menu from-right">
                 <UserMenu />
-            </div>}
+            </div>} */}
 
 
         </header>
