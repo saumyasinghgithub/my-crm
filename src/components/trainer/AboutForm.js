@@ -148,7 +148,7 @@ const AboutForm = (props) => {
         <Row>
           <Col md={6} className="mt-3">
             <Form.Label>Company Url: </Form.Label>
-            <Form.Control type="text" name="company_url" placeholder="Enter your company url" defaultValue={_.get(myabout, "company_url", Utils.getTrainerURL())} />
+            <Form.Control type="text" name="company_url" placeholder="Enter your company url" defaultValue={_.get(myabout, "company_url", "")} />
           </Col>
         </Row>
 

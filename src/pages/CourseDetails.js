@@ -356,6 +356,7 @@ const CourseDetails = (props) => {
                                               Enroll Now
                                             </a>
                                           )}
+                                          {Utils.isStudent === true && <>
                                           <a
                                             href="#"
                                             className="btn btnBorder"
@@ -377,6 +378,8 @@ const CourseDetails = (props) => {
                                               </span>
                                             )}
                                           </a>
+                                          </>
+                                          }
                                         </>
                                       )}
                                     </div>

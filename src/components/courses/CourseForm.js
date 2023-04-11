@@ -90,10 +90,9 @@ const CourseForm = (props) => {
       </Col>
     </Row>
     <Row>
-      {/*<Col md={4} className="mt-4">
-        <Form.Label>SKU: </Form.Label>
-        <Form.Control type="text" name="sku" placeholder="Enter course sku" defaultValue={_.get(mycourse,'sku','')} />
-</Col>*/}
+  
+        <Form.Control type="hidden" name="sku" defaultValue={_.get(mycourse,'sku','')} />
+
       <Col md={8} className="mt-4">
         <Form.Label>Course URL / Slug: </Form.Label>
         <Form.Control type="text" name="slug" placeholder="Enter course slug" defaultValue={_.get(mycourse, 'slug', '')} />

@@ -232,9 +232,13 @@ const MyCart = (props) => {
                                                             <a href={Utils.getTrainerURL('professional-profile/trainercourses')} className="btn btn-sm btnBlue font-weight-normal" >Continue Shopping</a>
                                                         </Col>
                                                         <Col sm={2}></Col>
-                                                        <Col sm={5} className="text-right p-0">
+                                                        {cart.data.length !==0 && <>
+                                                            <Col sm={5} className="text-right p-0">
                                                             <Button className="btn btn-sm btnBlue font-weight-normal btn btn-primary" type="button" onClick={emptyCart} >Clear Cart</Button>
-                                                        </Col>
+                                                            </Col>
+                                                        </>
+                                                        }
+                                                        
                                                     </Row>
                                                 </Container>
                                             </div>
@@ -262,6 +266,7 @@ const MyCart = (props) => {
                                             <Col sm={8}><span>Net Total</span></Col>
                                             <Col sm={4} className="text-right"><b>$ {cartTotalPriceafterDiscount()}</b></Col>
                                         </Row>
+                                        {cart.data.length !== 0 && <>
                                         <Form onSubmit={onDiscountApply}>
                                             <Form.Control type="hidden" name="expiry_date" defaultValue={currentDate.getFullYear() + '-' + currentDate.toLocaleString(undefined, { month: '2-digit' }) + '-' + currentDate.getDate()} />
                                             <Row className="cbox-space mx-0">
@@ -273,11 +278,14 @@ const MyCart = (props) => {
                                                 </Col>
                                             </Row>
                                         </Form>
+                                        
                                         <Row>
                                             <Col sm={12}>
                                                 <Button className="btn btn-sm btnBlue font-weight-normal" type="button" onClick={checkout} >Proceed to pay</Button>
                                             </Col>
                                         </Row>
+                                        </>
+                                        }
                                     </Col>
                                 </Row>
 
