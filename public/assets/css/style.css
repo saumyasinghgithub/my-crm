@@ -4164,6 +4164,16 @@ h2.subheading {
     list-style: none;
     counter-reset: li;
 } */
+.HelpStudent li {
+    clear: both;
+    padding-left: 50px;
+    position: relative;
+    counter-increment: step;
+    margin-top: 18px;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
 .faq li {
     clear: both;
     padding-left: 50px;
@@ -4679,6 +4689,24 @@ div.drum-wrapper figure {
     font-weight: bold;
 }
 
+.HelpStudent li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0px;
+    font-size: 30px;
+    font-weight: bold;
+    justify-content: center;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+    margin-bottom: 15px;
+    border-radius: 50px;
+}
+
 .faq li:before {
     /* content: counter(step, decimal-leading-zero);
     position: absolute;
@@ -4708,8 +4736,19 @@ div.drum-wrapper figure {
     list-style: decimal !important;
 }
 
+.HelpStudent ol li {
+    list-style: decimal !important;
+}
+
 .faq ol li {
     list-style: decimal !important;
+}
+
+
+.HelpStudent ol {
+    list-style-position: outside;
+    margin: 0px;
+    padding: 0px 0px 0px 15px;
 }
 
 .faq ol {
@@ -4718,11 +4757,22 @@ div.drum-wrapper figure {
     padding: 0px 0px 0px 15px;
 }
 
+.HelpStudent ol li {
+    list-style: decimal;
+    margin: 0px;
+    padding: 0px;
+    counter-increment: none;
+}
+
 .faq ol li {
     list-style: decimal;
     margin: 0px;
     padding: 0px;
     counter-increment: none;
+}
+
+.HelpStudent ol li:before {
+    content: none;
 }
 
 .faq ol li:before {
@@ -5332,7 +5382,7 @@ div.drum-wrapper figure {
 .my-course .rdt_TableCol:nth-child(6),
 .my-course .rdt_TableCell:nth-child(6) {
     max-width: 110px !important;
-    min-width: 108px !important;
+    min-width: 130px !important;
 }
 
 .my-course .rdt_TableCol:nth-child(7),
@@ -6831,6 +6881,11 @@ ul.ulDesign li {
 
 .ViewCourseImg {
     background-position: top;
+}
+
+.HelpStudent {
+    font-family: 'segoe UI';
+    padding-left: 0px;
 }
 
 .faq {

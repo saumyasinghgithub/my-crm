@@ -19,7 +19,7 @@ const ADStudent = (props) => {
                   <div className="row">
                      <div className="col-sm-12">
                         <h1 className="headingtext slideInUp wow ">Help for Student</h1>
-                        <ol className="faq pt-3">
+                        <ol className="HelpStudent pt-3">
                            <li>
                               <strong>Why should I use Tverse to find a personal trainer?</strong>
                               <p>A personal trainer can help you reach your professional goals faster, using verified learning material. You can use the filters on the page to find the trainer whose qualifications and experience meets your needs.</p>

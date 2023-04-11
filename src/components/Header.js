@@ -106,8 +106,28 @@ const Header = (props) => {
                         </div>
                     </li>
 
-                    <li className="nav-item ">
+                    {/* <li className="nav-item ">
                         <img className="img-fluid menu-toggle" src="/assets/images/toggle.png" alt="toggle-img" />
+                    </li> */}
+                    <li className="nav-item ">
+                        <div className="Dropdown-Helps">
+                            <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <img className="img-fluid" src="/assets/images/toggle.png" alt="toggle-img" />
+                            </button>
+                            <ul className="dropdown-menu" role="menu">
+                                <li className="dropdown-item HelpDropdown">
+                                    <a href={Utils.getTrainerURL(`help-for-student`)}>
+                                        Help for Student
+                                    </a>
+                                </li>
+                                <li className="dropdown-item HelpDropdown">
+                                    <a href={Utils.getTrainerURL(`contact-us`)}>
+                                        Contact
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </div>
                     </li>
                 </ul>
             </div>
