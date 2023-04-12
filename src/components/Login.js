@@ -6,6 +6,7 @@ const Login = (props) => {
   const hasSubdomain = Utils.hasSubdomain();
   const [mode, setMode] = useState(1); // 1 = login ; 2 = forgot pass 
   //add loader on login page
+  //new line for building code 
   //setting
   const searchParams = new URLSearchParams(window.location.search);
 
