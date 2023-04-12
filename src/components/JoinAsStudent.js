@@ -90,29 +90,19 @@ const JoinAsStudent = (props) => {
                         <div className="container">
                             <div className="loginWrapper signupWrapper">
                                 <h3>Join in <span className='joinastrainer'> NOW TO CONNECT with </span> <br />the world's top branded trainers</h3>
-                                {/* <ul>
-                                <li>Sign Up with</li>
-                                <li><a href=""><img className="img-fluid" src="/assets/images/fb.png" alt="AD on FB" /></a></li>
-                                
-                                <li><a href=""><img className="img-fluid" src="/assets/images/google-plus.png" alt="AD on google" /></a></li>
-                                
-                                <li><a href=""><img className="img-fluid" src="/assets/images/linkedin.png" alt="AD on LinkedIn" /></a></li>
-                                
-                                <li><a href=""><img className="img-fluid" src="/assets/images/mail.png" alt="AD on Email" /></a></li>
-                            </ul>*/}
                                 <form ref={frmRef} method="post" className="needs-validation" noValidate onSubmit={submitForm}>
                                     {showMessage &&
                                         <div className='alert alert-info p-3'>
-
-                                            <strong>Record saved successfully!</strong>
-
+                                            <strong>Congrats for successfully submitting your information. To continue, kindly click the button <div className="trainersignup"> login
+                                            <a href={Utils.getTrainerURL(`login`)}><div className="icon">
+                                                    <svg height="24" width="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"></path><path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path></svg>
+                                                </div></a>
+                                            </div></strong>
                                         </div>
                                     }
                                     {error !== false &&
                                         <div className='alert alert-danger p-3'>
-
                                             <strong>{error}</strong>
-
                                         </div>
                                     }
                                     <div className="row">
@@ -144,7 +134,8 @@ const JoinAsStudent = (props) => {
                                         </div>
                                         <div className="col-sm-6">
                                             <div className="form-group">
-                                                <input className="form-control" name="mobile" placeholder="Phone" type="text" />
+                                                <input className="form-control" name="mobile" placeholder="Phone*" type="number" required />
+                                                <div className="invalid-feedback">Phone number is required!</div>
                                             </div>
                                             <div className="form-group">
                                                 <input className="form-control" name="email" placeholder="Email*" type="email" required />
@@ -166,13 +157,10 @@ const JoinAsStudent = (props) => {
                                                     <svg height="24" width="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"></path><path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path></svg>
                                                 </div>
                                             </button>
-
-                                            {/* <button type="submit" className="btn btnSubmit btnSubmitRed">Sign Up</button> */}
                                             <p>By signing up, you agree to our Terms of Use and Privacy Policy.</p>
                                             <p>Already have an account? <a href="" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Log In</a></p>
                                         </div>
                                     </div>
-
                                 </form>
                             </div>
                         </div>
