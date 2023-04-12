@@ -21,6 +21,18 @@ const BlogForm = (props) => {
     setMyBlog(c);
   }
 
+  const setupEditor = (editor) => {
+    editor.on('submit', () => {
+      const length = editor.getContent({ format: 'text' }).length;
+      if (length < 50) {
+        editor.notificationManager.open({
+          text: 'Content should be at least 50 characters long',
+          type: 'error'
+        });
+      }
+    });
+  };
+
   useEffect(() => {
     if (_.get(props, 'id', false)) {
       getServerData('trainer/my-blogs?where[id]=' + props.id)
@@ -37,6 +49,10 @@ const BlogForm = (props) => {
   const onSave = (e) => {
     const frm = e.currentTarget;
     e.preventDefault();
+    frm.classList.add("was-validated");
+    if (frm.checkValidity() === false) {
+      return false;
+    }
     let frmdata = new FormData(frm);
     frmdata.append('short_description', _.get(myblog, 'short_description', ''));
     frmdata.append('description', _.get(myblog, 'description', ''));
@@ -58,7 +74,7 @@ const BlogForm = (props) => {
     </>;
   }
 
-  const renderForm = () => <Form onSubmit={onSave}>
+  const renderForm = () => <Form onSubmit={onSave} noValidate className="form contact alertdesign needs-validation">
     <Form.Control type="hidden" name="id" defaultValue={_.get(myblog, 'id', '')} />
     <Form.Control type="hidden" name="old_blog_image" defaultValue={_.get(myblog, 'blog_image', '')} />
     <Form.Control type="hidden" name="old_banner_image" defaultValue={_.get(myblog, 'banner_image', '')} />
@@ -66,7 +82,8 @@ const BlogForm = (props) => {
     <Row>
       <Col md={12} className="mt-3">
         <Form.Label>Blog Title: </Form.Label>
-        <Form.Control type="text" name="name" placeholder="Enter blog Title" defaultValue={_.get(myblog, 'name', '')} />
+        <Form.Control type="text" name="name" placeholder="Enter blog Title*" defaultValue={_.get(myblog, 'name', '')} required/>
+        <div className="invalid-feedback">Blog Title is required!</div>
       </Col>
     </Row>
     <Row>
@@ -90,9 +107,14 @@ const BlogForm = (props) => {
           init={{
             height: 200,
             menubar: false,
+            plugins: [
+              'advlist autolink lists link image charmap print preview anchor',
+              'searchreplace visualblocks code fullscreen',
+              'insertdatetime media table paste code help wordcount'
+            ]
           }}
           toolbar="undo redo | bold italic underline strikethrough | fontselect | fontsizeselect | formatselect | code | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl "
-          plugins="code"
+          onInit={(evt, editor) => setupEditor(editor)}          
           onEditorChange={onContentChange('short_description')}
         />
       </Col>

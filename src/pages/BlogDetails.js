@@ -6,6 +6,7 @@ import {useParams} from "react-router-dom";
 import Utils from './../Utils';
 import _ from 'lodash';
 import moment from 'moment';
+import { Loader } from '../components';
 
 const BlogDetails = (props) => {
       const { slug } = useParams();
@@ -32,12 +33,9 @@ const BlogDetails = (props) => {
     <Container className="h-100 ">
 
 {loading && <>
-   <div className="profile-wrapper">
-      <div className='container'>
-         <h1>Blog Details</h1>
-            <Alert variant="warning"><div className="m-5">Looking for trainer courses <Spinner animation="border" size="sm" /></div></Alert>
-      </div>
-   </div>
+   <>
+          <Loader />
+        </>
 </>}
 
 {!loading && <>

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import UserContext from '../contexts/UserContext';
 import Utils from './../Utils';
 import _, { get } from 'lodash';
+import { Loader } from '../components';
 
 const Success = (props) => {
 
@@ -36,7 +37,7 @@ const Success = (props) => {
       const dump = JSON.parse(orderData.data.dump);
       const details = dump.description.split(" AND ");
       return <ul className='ShowCoursePay'>
-         {details.map(d => <li className='mt-2 mb-2'>{d.split('||')[0]} - ({d.split('||').splice(1).join(',')})</li>)}
+         {details.map(d => <li className='mt-2 mb-2'>{d.split('||')[0]} - <span className="text-uppercase">({d.split('||').splice(1).join(',')})</span></li>)}
       </ul>;
    }
 
@@ -48,12 +49,9 @@ const Success = (props) => {
    return (<>
       <Container className="h-100 PaymentSuccess">
          {loading && <>
-            <div className="profile-wrapper">
-               <div className='container'>
-                  <h1>Success Page Information</h1>
-                  <Alert variant="warning"><div className="m-5">loading Success page...! <Spinner animation="border" size="sm" /></div></Alert>
-               </div>
-            </div>
+            <>
+          <Loader />
+        </>
          </>}
 
          {!loading && <>

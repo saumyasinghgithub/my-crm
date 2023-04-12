@@ -6,6 +6,7 @@ import UserContext from './../contexts/UserContext';
 import Utils from './../Utils';
 import _ from 'lodash';
 import moment from 'moment';
+import { Loader } from '../components';
 
 const BlogList = (props) => {
 
@@ -67,12 +68,9 @@ const BlogList = (props) => {
     <Container fluid className="h-100 p-0">
 
         {loading && <>
-                <div className="profile-wrapper">
-                    <div className='container'>
-                        <h1>Courses By Trainer</h1>
-                        <Alert variant="warning"><div className="m-5">Looking for trainer courses <Spinner animation="border" size="sm" /></div></Alert>
-                    </div>
-                </div>
+            <>
+          <Loader />
+        </>
             </>}
 
             {!loading && <>

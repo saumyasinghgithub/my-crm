@@ -4,6 +4,7 @@ import _ from 'lodash';
 import UserContext from './../contexts/UserContext';
 import axios from 'axios';
 import Utils from '../Utils';
+import { Loader } from '../components';
 
 const MyCart = (props) => {
 
@@ -187,12 +188,9 @@ const MyCart = (props) => {
 
                 {processing === false && <>
                     {cart.loading && <>
-                        <div className="profile-wrapper">
-                            <div className='container'>
-                                <h1>Course</h1>
-                                <Alert variant="warning"><div className="m-5">Fetching your cart items <Spinner animation="border" size="sm" /></div></Alert>
-                            </div>
-                        </div>
+                        <>
+          <Loader />
+        </>
                     </>}
                     {!cart.loading && <>
                         <div className="profile-wrapper">
@@ -217,11 +215,11 @@ const MyCart = (props) => {
                                                         {showBundleResources(cData)}
                                                     </Col>
                                                     <Col md={2}>
-                                                        <div className="LPriceInfoBoxCart">
-                                                            <i className="fa fa-heart"></i>
+                                                        {<div className="LPriceInfoBoxCart">
+                                                            {/*<i className="fa fa-heart"></i>*/}
                                                             <a here='' onClick={deleteRecord(cData.id)}><i className="fa fa-trash pl-2 pr-2"></i></a>
                                                             <a href={Utils.getTrainerURL(`courses/${cData.slug}`)}><i className="fa fa-edit"></i></a>
-                                                        </div>
+                                                        </div>}
                                                     </Col>
                                                 </Row>)}
 

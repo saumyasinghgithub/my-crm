@@ -4,6 +4,7 @@ import { Container, Row, Col, Spinner, Alert } from "react-bootstrap";
 import UserContext from "./../contexts/UserContext";
 import _ from "lodash";
 import moment from "moment";
+import { Loader } from "../components";
 
 const StudentProfileView = (props) => {
   const [data, setData] = useState({});
@@ -31,18 +32,8 @@ const StudentProfileView = (props) => {
       <Container className="h-100 p-0">
         {loading && (
           <>
-            <div className="profile-wrapper">
-              <div className="container">
-                <h1>Student Profile</h1>
-                <Alert variant="warning">
-                  <div className="m-5">
-                    Looking for Student Profile{" "}
-                    <Spinner animation="border" size="sm" />
-                  </div>
-                </Alert>
-              </div>
-            </div>
-          </>
+          <Loader />
+        </>
         )}
         {!loading && (
           <>

@@ -6,6 +6,7 @@ import _ from "lodash";
 import moment from "moment";
 import Utils from "./../Utils";
 import StarRatings from "react-star-ratings";
+import { Loader } from "../components";
 
 const CourseDetails = (props) => {
   const { slug } = useParams();
@@ -159,21 +160,11 @@ const CourseDetails = (props) => {
           </>
         )}
 
-        {loading && (
-          <>
-            <div className="profile-wrapper">
-              <div className="container">
-                <h1>Course</h1>
-                <Alert variant="warning">
-                  <div className="m-5">
-                    Looking for course details{" "}
-                    <Spinner animation="border" size="sm" />
-                  </div>
-                </Alert>
-              </div>
-            </div>
-          </>
-        )}
+      {loading && (
+        <>
+          <Loader />
+        </>
+      )}
 
         {!addingToCart && !loading && (
           <>
@@ -193,20 +184,6 @@ const CourseDetails = (props) => {
               <>
                 <div className="cardWrapper">
                   <div className="container">
-                    {/*<nav className="breadcrumb-list" aria-label="breadcrumb">
-                      <span className="backarrow">
-                        <a href={`${process.env.PUBLIC_URL}/search-results`}>
-                          <img src="/assets/images/back-arrow.png" alt="AD" />
-                          Back to search
-                        </a>
-                      </span>
-                      <ol className="breadcrumb">
-                        <li className="breadcrumb-item active">
-                          {course.course.name}
-                        </li>
-                      </ol>
-            </nav>*/}
-
                     <ul className="iconList nav nav-tabs">
                       {_.map(course.resources, renderResource)}
                     </ul>
@@ -224,7 +201,6 @@ const CourseDetails = (props) => {
                                 ,
                               }}
                             >
-                              {/*<span className="new">New</span>*/}
                               <div className="circleBox">
                                 <img
                                   className="img-fluid"
@@ -335,14 +311,6 @@ const CourseDetails = (props) => {
                                           >
                                             Login to Enroll
                                           </a>
-                                          {/*<a
-                                            href="#"
-                                            data-toggle="modal"
-                                            data-target="#loginModal"
-                                            className="btn btnBlue"
-                                          >
-                                            Login to Enroll
-                                      </a>*/}
                                         </>
                                       )}
                                       {Utils.isLoggedIn() && (
@@ -356,7 +324,7 @@ const CourseDetails = (props) => {
                                               Enroll Now
                                             </a>
                                           )}
-                                          {Utils.isStudent === true && <>
+                                          {/*Utils.isStudent === true && <>
                                           <a
                                             href="#"
                                             className="btn btnBorder"
@@ -379,7 +347,7 @@ const CourseDetails = (props) => {
                                             )}
                                           </a>
                                           </>
-                                          }
+                                            */}
                                         </>
                                       )}
                                     </div>
@@ -400,47 +368,7 @@ const CourseDetails = (props) => {
                     </div>
                   </div>
                 </div>
-                <div className="courseDesWrapper">
-                  {/* <div className="container">
-                    {course.contents.map((c) => (
-                      <div className="courseDesBox slideInUp wow" key={c.id}>
-                        <div
-                          dangerouslySetInnerHTML={{ __html: c.description }}
-                        ></div>
-                        <div className="table-responsive">
-                          <table className="table table-borderless CourseTabledesign">
-                            <thead>
-                              <tr className="CourseRow">
-                                <th>Course content</th>
-                                <th>Expand all</th>
-                                <th>22 lectures</th>
-                                <th>01:53:04</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr className="hideicon">
-                                <td>
-                                  <i className="fas fa-plus"></i> Welcome
-                                </td>
-                                <td></td>
-                                <td>1 lecture</td>
-                                <td>01:21</td>
-                              </tr>
-                              <tr className="hideicon">
-                                <td>
-                                  <i className="fas fa-plus"></i> Interest Rates
-                                  and LIBOR
-                                </td>
-                                <td></td>
-                                <td>5 lectures </td>
-                                <td>09:48</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    ))}
-                  </div> */}
+                <div className="courseDesWrapper">                 
                 </div>
               </>
             )}
