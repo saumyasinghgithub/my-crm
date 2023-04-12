@@ -24,9 +24,9 @@ const BlogForm = (props) => {
   const setupEditor = (editor) => {
     editor.on('submit', () => {
       const length = editor.getContent({ format: 'text' }).length;
-      if (length < 50) {
+      if (length === 0) {
         editor.notificationManager.open({
-          text: 'Content should be at least 50 characters long',
+          text: 'Short description is mandatory!',
           type: 'error'
         });
       }
