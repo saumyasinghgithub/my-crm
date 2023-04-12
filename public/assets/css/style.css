@@ -4678,9 +4678,9 @@ div.drum-wrapper figure {
 }
 
 .alert {
-    padding: 0.3rem 0.5rem !important;
-    width: 80% !important;
-    margin-left: 10% !important;
+    padding: 0.6rem 0.5rem !important;
+    width: 90% !important;
+    margin-left: 5% !important;
     text-align: center;
 }
 
@@ -6961,6 +6961,53 @@ ul.ulDesign li {
 
 .PaymtOrderdet {
     font-size: 25px;
+}
+
+.LoginStudent {
+    padding: 1em 4em;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #fff;
+    background-color: #0f79aa;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+.LoginStudent a {
+    color: #fff;
+    font-family: 'segoe UI';
+}
+
+.LoginStudent:hover {
+    background-color: #fff;
+    box-shadow: 0px 15px 20px rgba(15, 121, 170, 0.4);
+    color: #0f79aa;
+    transform: translateY(-5px);
+    text-decoration: none;
+}
+
+.LoginStudent:hover a {
+    color: #0f79aa;
+}
+
+.LoginStudent a:hover {
+    color: #0f79aa;
+}
+
+.LoginStudent:active {
+    transform: translateY(-1px);
+}
+
+.d-inline-flex {
+    margin: auto;
+    display: inline-flex;
+    align-items: center;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1024px) {

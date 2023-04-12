@@ -92,12 +92,20 @@ const JoinAsStudent = (props) => {
                                 <h3>Join in <span className='joinastrainer'> NOW TO CONNECT with </span> <br />the world's top branded trainers</h3>
                                 <form ref={frmRef} method="post" className="needs-validation" noValidate onSubmit={submitForm}>
                                     {showMessage &&
-                                        <div className='alert alert-info p-3'>
-                                            <strong>Congrats for successfully submitting your information. To continue, kindly click the button <div className="trainersignup"> login
-                                            <a href={Utils.getTrainerURL(`login`)}><div className="icon">
-                                                    <svg height="24" width="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"></path><path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path></svg>
-                                                </div></a>
-                                            </div></strong>
+                                        <div className='alert alert-success p-3'>
+
+                                            <strong className='d-inline-flex'>Congrats for successfully submitting your information. To continue, kindly click the button
+                                                <a href={Utils.getTrainerURL(`login`)}>
+                                                    <div className='LoginStudent ml-3'>
+                                                        login
+                                                    </div>
+                                                </a>
+                                                {/* <div className="trainersignup"> login
+                                                    <a href={Utils.getTrainerURL(`login`)}><div className="icon">
+                                                    </div></a>
+                                                </div> */}
+
+                                            </strong>
                                         </div>
                                     }
                                     {error !== false &&
