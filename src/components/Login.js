@@ -218,7 +218,11 @@ const Login = (props) => {
                         name="pass"
                         placeholder="Password"
                         type="password"
+                        required
                       />
+                      <div className="invalid-feedback">
+                      Enter your password!
+                      </div>
                     </div>
                   )}
                   <button type="submit" className="btn btnSubmit">
