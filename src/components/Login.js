@@ -5,6 +5,7 @@ import Utils from "../Utils";
 const Login = (props) => {
   const hasSubdomain = Utils.hasSubdomain();
   const [mode, setMode] = useState(1); // 1 = login ; 2 = forgot pass 
+  //setting variables
   //setting
   const searchParams = new URLSearchParams(window.location.search);
 
