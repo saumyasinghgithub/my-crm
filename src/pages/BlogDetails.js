@@ -11,7 +11,7 @@ import { Loader } from "../components";
 const BlogDetails = (props) => {
   const { slug } = useParams();
   const [data, setData] = useState({});
-  console.log(slug);
+  //console.log(slug);
   const [loading, setLoading] = useState(true);
 
   const { getServerData } = useContext(UserContext);
