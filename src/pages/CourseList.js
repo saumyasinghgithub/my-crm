@@ -71,54 +71,64 @@ const CourseList = (props) => {
                         <a href={Utils.getTrainerURL(`courses/${course.slug}`,slug)} className="btn btnBlue mt-2" >View Course </a>
                     </div>
                 </div>
-
-
-
-
             </Row>
-
         </Container>
     }
 
-    return (<>
+    return (
+      <>
         <Container fluid className="h-100 p-0">
+          {loading && (
+            <>
+                <Loader />
+            </>
+          )}
 
-            {loading && <>
+          {!loading && (
+            <>
+              {_.get(data, "success", false) === false && (
                 <>
-          <Loader />
-        </>
-            </>}
-
-            {!loading && <>
-                {_.get(data, 'success', false) === false && <>
-                    <div className="profile-wrapper">
-                        <div className='container'>
-                            <h1>Courses By Trainer</h1>
-                            <Alert variant="danger"><div className="m-5">{data.message}</div></Alert>
-                        </div>
+                  <div className="profile-wrapper">
+                    <div className="container">
+                      <h1>Courses By Trainer</h1>
+                      <Alert variant="danger">
+                        <div className="m-5">{data.message}</div>
+                      </Alert>
                     </div>
-                </>}
+                  </div>
+                </>
+              )}
 
-                {_.get(data, 'success', false) !== false && <>
-
-                    <div className="profile-wrapper">
-                        <div className="container100">
-                            <div className="libraryeWrapper container">
-                                <div className="libraryHeading">
-                                    <h1 className="headingtext courselist">All courses taught by {data.trainer.firstname} {data.trainer.lastname}</h1>
-                                    <div className="subHeading" dangerouslySetInnerHTML={{ __html: data.trainer.biography }}></div>
-                                </div>
-                                <div className="libraryBody allCourses">
-                                    {data.courses.map(renderCourseBox)}
-                                </div>
-                            </div>
+              {_.get(data, "success", false) !== false && (
+                <>
+                  <div className="profile-wrapper">
+                    <div className="container100">
+                      <div className="libraryeWrapper container">
+                        <div className="libraryHeading">
+                          <h1 className="headingtext courselist">
+                            All courses taught by {data.trainer.firstname}{" "}
+                            {data.trainer.lastname}
+                          </h1>
+                          <div
+                            className="subHeading"
+                            dangerouslySetInnerHTML={{
+                              __html: data.trainer.biography,
+                            }}
+                          ></div>
                         </div>
+                        <div className="libraryBody allCourses">
+                          {data.courses.map(renderCourseBox)}
+                        </div>
+                      </div>
                     </div>
-
-                </>}
-            </>}
+                  </div>
+                </>
+              )}
+            </>
+          )}
         </Container>
-    </>);
+      </>
+    );
 };
 
 export default CourseList;

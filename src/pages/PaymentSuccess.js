@@ -65,12 +65,6 @@ const Success = (props) => {
             </>}
             {_.get(orderData, 'success', false) !== false && <>
                <div className="help-wrapper">
-                  {/*<nav>
-            <ol className="cd-breadcrumb">
-               <li><a href="/">Home</a></li>
-               <li className="current"><em>Success</em></li>
-            </ol>
-            </nav>*/}
                   <div className="container">
                      <img src="/assets/images/payment.png" alt="PaymentImg" />
                      <div className="AD-help">

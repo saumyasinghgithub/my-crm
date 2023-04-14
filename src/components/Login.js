@@ -83,6 +83,8 @@ const Login = (props) => {
           win.postMessage(Utils.getUserData(), "*");
         }
         var path = document.referrer;
+        console.log('path');
+        console.log(path);
         if (path) {
           window.location.replace(path);
         } else {

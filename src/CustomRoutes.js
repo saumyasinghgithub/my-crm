@@ -41,14 +41,14 @@ const CustomRoutes = [
 
   {
     path: "/my-profile",
-    secure: false,
+    secure: true,
     exact: true,
     layout: Layout.StaticPageLayout,
     component: Page.MyProfile,
   },
   {
     path: "/my-profile/*",
-    secure: false,
+    secure: true,
     exact: true,
     layout: Layout.StaticPageLayout,
     component: Page.MyProfile,

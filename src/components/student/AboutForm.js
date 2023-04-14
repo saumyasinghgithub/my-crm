@@ -68,7 +68,7 @@ const AboutForm = (props) => {
         <Form.Control type="text" name="lastname" placeholder="Enter your last name" defaultValue={_.get(myabout,'lastname','')} />
       </Col>
     </Row>
-    <Row>
+    {/*<Row>
       <Col md={12} className="mt-3">
         <Form.Label>Trainer Profile URL: </Form.Label>
         <Form.Control type="text" name="slug" placeholder="Enter your slug" defaultValue={_.get(myabout,'slug','')} />
@@ -89,16 +89,15 @@ const AboutForm = (props) => {
             {Utils.academicQualifications.map(v => <option key={v} value={v} selected={_.get(myabout,`qualification`,'')===v}>{v}</option>)}
           </Form.Control>
       </Col> 
-    </Row>
-
+</Row>*/}
     <Row>
-      <Col md={6} className="mt-3">
+      {/*<Col md={6} className="mt-3">
         <Form.Label>Interested Field: </Form.Label>
         <Form.Control as="select" name="interested_field">
             <option value=""> - Select Interested Field - </option>
-            {Utils.interestedField.map(v => <option key={v} value={v} selected={_.get(myabout,`interested_field`,'')===v}>{v}</option>)}
+            {//Utils.interestedField.map(v => <option key={v} value={v} selected={_.get(myabout,`interested_field`,'')===v}>{v}</option>)}
           </Form.Control>
-      </Col> 
+</Col>*/}
       <Col md={6} className="mt-3">
         <Form.Label>Country: </Form.Label>
         <Form.Control as="select" name="country">
@@ -110,13 +109,13 @@ const AboutForm = (props) => {
     
 
     <Row>  
-      <Col md={6} className="mt-3">  
-        {photoUploader('profile','Upload Large Profile Pic (Image dimension should be 360cm x 260cm)')}
-      </Col>
+      {/*<Col md={6} className="mt-3">  
+        {//photoUploader('profile','Upload Large Profile Pic (Image dimension should be 360cm x 260cm)')}
+</Col>*/}
       <Col className="mt-3">{photoUploader('base','Upload Base Profile Pic (Image dimension should be 100cm x 100cm)')}</Col>
       </Row>
       <Row>
-      <Col md={12} className="mt-3">  
+      {/* <Col md={12} className="mt-3">  
       <Form.Label>Student Profile Details: </Form.Label>
       <Editor apiKey={process.env.TINYMCE_API_KEY}
         value={_.isEmpty(_.get(myabout,'biography','')) ? '' : myabout.biography}
@@ -129,10 +128,10 @@ const AboutForm = (props) => {
         plugins='code'
         onEditorChange={onContentChange('biography')}
         />
-        </Col>
+        </Col> */}
     </Row>
 
-    <Row>
+    {/* <Row>
       <Col md={6} className="mt-3">
         <Form.Label>LinkedIn Profile URL: </Form.Label>
         <Form.Control type="text" name="linkedin" placeholder="Enter your LinkedIn Profile URL" defaultValue={_.get(myabout,'linkedin','')} />
@@ -151,7 +150,7 @@ const AboutForm = (props) => {
         <Form.Label>Twitter Profile URL: </Form.Label>
         <Form.Control type="text" name="twitter" placeholder="Enter your Twitter Profile URL" defaultValue={_.get(myabout,'twitter','')} />
       </Col>
-    </Row>
+    </Row> */}
 
     <Row>
       <Col md={12} className="mt-3 text-right">
