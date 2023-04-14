@@ -102,6 +102,7 @@ const BlogForm = (props) => {
       </Col>
       <Col md={9} className="mt-3">
         <Form.Label>Short Description: </Form.Label>
+      
         <Editor apiKey={process.env.TINYMCE_API_KEY}
           value={_.get(myblog, 'short_description', '')}
           init={{
