@@ -1,13 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import Utils from "./../Utils";
 import axios from "axios";
 import { TeacherSubscribe } from "../components/teacher";
-import UserContext from "../contexts/UserContext";
 
 const Footer = () => {
   const hasSubdomain = Utils.hasSubdomain();
-  const { getServerData } = useContext(UserContext);
-  const [trainer, setTrainer] = useState({});
   const [list, setList] = useState({
     loading: false,
     error: false,
@@ -74,28 +71,14 @@ const Footer = () => {
   useEffect(fetchList, []);
 
   useEffect(syncLocalStorage, []);
-  const slug = Utils.subdomain();
-  useEffect(() => {
-    getServerData(`trainer/profile/${slug}`, true)
-      .then((tData) => {
-        setTrainer(tData);
-      })
-      .catch((msg) => {
-        setTrainer({ success: false, message: msg });
-      });
-  }, []);
-  //console.log(trainer.about.firstname);
+  
+
   return (
     <>
       <footer className="footer footerFixed">
         <div className="container">
           <ul className="footerLeft">
-            <li className="footerline"> © {new Date().getFullYear()} by {`${trainer.about.firstname} ${trainer.about.lastname}`}, {trainer.about.company && (
-              <>{`${trainer.about.company}`}</>
-            )}
-            {!trainer.about.company && (
-              <>TVERSE</>
-            )}</li>
+            <li className="footerline"> © {new Date().getFullYear()} by Dr. Susan Davis, Rescue RN™ </li>
             <li className="footerline ml-2">
               <a href={Utils.getTrainerURL(`privacy-policy`)}>Privacy Policy</a>
             </li>
