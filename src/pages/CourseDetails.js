@@ -23,8 +23,7 @@ const CourseDetails = (props) => {
     enrollments: 0,
   });
 
-  const { getServerData, setServerData , loginToMoodle} = useContext(UserContext);
-  const [enrollment, setEnrollment] = useState([]);
+  const { getServerData, setServerData } = useContext(UserContext);
 
   const $ = window.$;
 
@@ -111,10 +110,9 @@ const CourseDetails = (props) => {
     return (
       <li>
         <div
-          className={`circleBox wow zoomIn ${
-            _.findIndex(bp, (b) => b.id === resource.id) > -1 ? "selected" : ""
-          }`}
-          /*onClick={() => bundleProduct(resource)}*/
+          className={`circleBox wow zoomIn ${_.findIndex(bp, (b) => b.id === resource.id) > -1 ? "selected" : ""
+            }`}
+        /*onClick={() => bundleProduct(resource)}*/
         >
           <img
             className="img-fluid"
@@ -143,24 +141,6 @@ const CourseDetails = (props) => {
     //.then(() => $(e.target).show())
   };
 
-  useEffect(() => {
-    getServerData(`student/my-enrollments`, true)
-      .then((enrols) => {
-        if (
-          Array.isArray(enrols.enrolled) &&
-          enrols.enrolled.every((e) => typeof e === "object")
-        ) {
-          let enrollmentArray = enrols.enrolled.map(
-            (enrols) => enrols.course_id
-          );
-          setEnrollment(enrollmentArray);
-        }
-      })
-      .catch((msg) => {
-        setEnrollment({ success: false, message: msg });
-      });
-  }, []);
-  console.log(enrollment);
   return (
     <>
       <Container fluid className="h-100 p-0">
@@ -180,11 +160,11 @@ const CourseDetails = (props) => {
           </>
         )}
 
-        {loading && (
-          <>
-            <Loader />
-          </>
-        )}
+      {loading && (
+        <>
+          <Loader />
+        </>
+      )}
 
         {!addingToCart && !loading && (
           <>
@@ -217,7 +197,8 @@ const CourseDetails = (props) => {
                             <div
                               className="imgWrapper rounded ViewCourseImg"
                               style={{
-                                backgroundImage: `url("${process.env.REACT_APP_API_URL}/uploads/courses/${course.course.course_image}")`,
+                                backgroundImage: `url("${process.env.REACT_APP_API_URL}/uploads/courses/${course.course.course_image}")`
+                                ,
                               }}
                             >
                               <div className="circleBox">
@@ -291,6 +272,7 @@ const CourseDetails = (props) => {
                                   />
                                   <div className="mx-2 my-1">
                                     ({rating.ratings}) {rating.enrollments}{" "}
+
                                   </div>
                                 </div>
                               )}
@@ -317,14 +299,6 @@ const CourseDetails = (props) => {
                                   __html: course.course.description,
                                 }}
                               ></div>
-                              <form
-                                name="moodleLoginForm"
-                                method="post"
-                                action={`${process.env.REACT_APP_MOODLE_URL}/login/index.php`}
-                              >
-                                <input type="hidden" name="username" />
-                                <input type="hidden" name="password" />
-                              </form>
                               <div className="coursebtn">
                                 <div className="row">
                                   <div className="col-lg-6">
@@ -341,35 +315,39 @@ const CourseDetails = (props) => {
                                       )}
                                       {Utils.isLoggedIn() && (
                                         <>
-                                          {enrollment.includes(course.course.id) ? (
-                                            <>
-                                              <a
-                                                href="#"
-                                                onClick={(e) => {
-                                                  e.preventDefault();
-                                                  loginToMoodle(
-                                                    document.forms
-                                                      .moodleLoginForm
-                                                  );
-                                                }}
-                                                className="btn btnBlue"
-                                              >
-                                                Proceed To LMS{" "}
-                                              </a>
-                                            </>
-                                          ) : (
-                                            <>
-                                              {_.get(bp, "length", 0) > 0 && (
-                                                <a
-                                                  href="#"
-                                                  onClick={addToCart}
-                                                  className="btn btnBlue"
-                                                >
-                                                  Enroll Now
-                                                </a>
-                                              )}
-                                            </>
+                                          {_.get(bp, "length", 0) > 0 && (
+                                            <a
+                                              href="#"
+                                              onClick={addToCart}
+                                              className="btn btnBlue"
+                                            >
+                                              Enroll Now
+                                            </a>
                                           )}
+                                          {/*Utils.isStudent === true && <>
+                                          <a
+                                            href="#"
+                                            className="btn btnBorder"
+                                            onClick={markFav(
+                                              course.course.id,
+                                              course.isFav ? 0 : 1
+                                            )}
+                                          >
+                                            {course.isFav === false && (
+                                              <span>
+                                                Mark Favourite{" "}
+                                                <i className="far fa-heart ml-2" />
+                                              </span>
+                                            )}
+                                            {course.isFav === true && (
+                                              <span>
+                                                Remove Favourite{" "}
+                                                <i className="fas fa-heart ml-2 text-danger" />
+                                              </span>
+                                            )}
+                                          </a>
+                                          </>
+                                            */}
                                         </>
                                       )}
                                     </div>
@@ -390,7 +368,8 @@ const CourseDetails = (props) => {
                     </div>
                   </div>
                 </div>
-                <div className="courseDesWrapper"></div>
+                <div className="courseDesWrapper">                 
+                </div>
               </>
             )}
           </>
