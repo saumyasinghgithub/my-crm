@@ -70,9 +70,8 @@ const Footer = () => {
 
   useEffect(fetchList, []);
 
-  //useEffect(sendLocalStorage, []);
-
   useEffect(syncLocalStorage, []);
+  
 
   return (
     <>
@@ -86,12 +85,6 @@ const Footer = () => {
             <li className="footerline ml-2">
               <a href={Utils.getTrainerURL(`term-conditions`)}>Terms of use</a>
             </li>
-
-            {/* <li>
-              <a href={`${process.env.REACT_APP_PUBLIC_URL}/cookie-policy`}>
-                Cookie Policy
-              </a>
-            </li> */}
           </ul>
           <ul className="footerRight">
             <ul>
@@ -120,13 +113,6 @@ const Footer = () => {
                 </a>
               </li>
             </ul>
-            {/*list.data.map((record, idx) => (
-              <li key={idx}>
-                <a href={`${record.link}`} target="blank">
-                  <i className={`${record.class}`}></i>
-                </a>
-              </li>
-            ))*/}
           </ul>
         </div>
         {hasSubdomain && <iframe className="d-none" id="mainDomainIframe" src={`${process.env.REACT_APP_PUBLIC_URL}/readls`}></iframe>}
