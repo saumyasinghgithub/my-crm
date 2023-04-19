@@ -236,7 +236,8 @@ const LandingPage = (props) => {
                               <div>{moment(event.event_on).format("MMM DD, h:mm a")}</div>
                               <p dangerouslySetInnerHTML={{ __html: event.event_short_desc }}></p>
                               <div className="HomeRegister mt-4">
-                                <button onClick={RegisterShow}>Register Now</button>
+                                {/*<button onClick={RegisterShow}>Register Now</button>*/}
+                                <a href="https://www.rnegade.pro/kickstart">Register Now</a>
                               </div>
                             </div>
                           </div>
