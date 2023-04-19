@@ -71,29 +71,6 @@ const Footer = () => {
   useEffect(fetchList, []);
 
   useEffect(syncLocalStorage, []);
-
-  const fetchTrainerData = () => {
-    axios.get(Utils.apiUrl("sociallink/list"), Utils.apiHeaders()).then((res) => {
-      if (res.data.success) {
-        setList({
-          ...list,
-          loading: false,
-          error: false,
-          pageInfo: res.data.pageInfo,
-          data: res.data.data,
-        });
-      } else {
-        setList({
-          ...list,
-          loading: false,
-          error: res.data.message,
-          pageInfo: {},
-          data: [],
-        });
-      }
-    });
-  };
-  useEffect(fetchTrainerData, []);
   
 
   return (

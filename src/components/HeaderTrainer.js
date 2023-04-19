@@ -60,7 +60,7 @@ const HeaderTrainer = (props) => {
       <header className="header fixed-top whiteHeader">
         <div className="container">
           <div className="HeaderNavigation">
-            <a className="navbar-brand">TVERSE</a>
+            <a className="navbar-brand">RESCUE RN</a>
             <ul className="navbar-nav HeaderNavUl">
               <li className="nav-item">
                 <a href="/my-cart">

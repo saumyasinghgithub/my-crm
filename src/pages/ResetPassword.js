@@ -141,9 +141,7 @@ const ResetPassword = (props) => {
               <div className="alert alert-info p-3">
                 <strong>
                   Your password has been updated successfully! Please
-                  <a href="#" onClick={openLoginModal}>
-                    login again
-                  </a>
+                  <a href="https://dr-susan-davis.kstverse.com/login"> login again </a>
                   with new password.
                 </strong>
               </div>

@@ -77,7 +77,7 @@ const CustomRoutes = [
   },
   {
     path: "/my-blog",
-    secure: false,
+    secure: true,
     exact: true,
     layout: Layout.StaticPageLayout,
     component: Page.MyBlog,

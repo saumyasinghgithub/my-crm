@@ -218,7 +218,7 @@ const MyCart = (props) => {
                                                         {<div className="LPriceInfoBoxCart">
                                                             {/*<i className="fa fa-heart"></i>*/}
                                                             <a here='' onClick={deleteRecord(cData.id)}><i className="fa fa-trash pl-2 pr-2"></i></a>
-                                                            <a href={Utils.getTrainerURL(`courses/${cData.slug}`)}><i className="fa fa-edit"></i></a>
+                                                            <a href={Utils.getTrainerURL(`courses/${cData.slug}`)}><i className="fa fa-eye"></i></a>
                                                         </div>}
                                                     </Col>
                                                 </Row>)}

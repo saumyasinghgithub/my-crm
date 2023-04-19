@@ -11,7 +11,7 @@ const MyOrder = (props) => {
     const {getServerData} = useContext(UserContext);
     
     const fetchData = () => {
-        getServerData(`student/my-order?start=${filters.start}&limit=${filters.limit}`,true)
+        getServerData(`student/my-orders?start=${filters.start}&limit=${filters.limit}`,true)
         .then(res => {
             setData({...res, loading: false});           
         })
@@ -67,7 +67,7 @@ const MyOrder = (props) => {
                 <td>{dump.razorpayOrderId}</td>
                 <td>
                     <ul>
-                        {details.map(d => <li><b>{d.split('||')[0]}</b> - ({d.split('||').splice(1).join(',')})</li>)}                    
+                        {details.map(d => <li><a href={`/courses/${rec.courseSlug}`}><b>{d.split('||')[0]}</b> - <span className="text-uppercase">({d.split('||').splice(1).join(',')})</span></a></li>)}                    
                     </ul>
                 </td>
                 <td>{rec.currency} {parseFloat(rec.amount).toFixed(2)}</td>

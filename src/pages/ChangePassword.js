@@ -107,8 +107,7 @@ const ChangePassword = (props) => {
               Change your account password
             </h1>
             <p>
-              if you have questions, requests or simply want to talk,
-              <a href={`mailto:${process.env.REACT_APP_CONTACT_EMAIL}`}>
+              if you have questions, requests or simply want to talk, <a href={`mailto:${process.env.REACT_APP_CONTACT_EMAIL}`}>
                 {process.env.REACT_APP_CONTACT_EMAIL}
               </a>
             </p>

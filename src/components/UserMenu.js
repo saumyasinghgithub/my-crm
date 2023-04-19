@@ -21,6 +21,7 @@ const UserMenu = (props) => {
   };
 
   const onLogout = (e) => {
+    //localStorage.removeItem(process.env.REACT_APP_APPNAME + "-userData");
     e.preventDefault();
     logout(() => {
       if (hasSubdomain) {
@@ -58,11 +59,6 @@ const UserMenu = (props) => {
         </li>
       </>
     )}
-    {/*Utils.isTrainer() && (
-              <li>
-                <a href={getSlug()}>My Profile</a>
-              </li>
-            )*/}
     {Utils.isTrainer() && (
       <li>
         <a href={Utils.getTrainerURL(`my-course`)}>Manage Course
@@ -74,36 +70,6 @@ const UserMenu = (props) => {
         <a href={Utils.getTrainerURL(`manage-coupons`)}>Manage Coupons</a>
       </li>
     )}
-    {Utils.isStudent() && loggedIn && (
-      <li>
-        <a href={Utils.getTrainerURL(`preferred-courses`)}>
-          Preferred Courses
-        </a>
-      </li>
-    )}
-    {/* <li>
-              <a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a>
-            </li> */}
-    {Utils.isStudent() && (
-      <li>
-        <a href={`${process.env.PUBLIC_URL}/help-for-student`}>
-          Help for you
-        </a>
-      </li>
-    )}
-    {/*Utils.isTrainer() && (
-              <li>
-                <a href={`${process.env.PUBLIC_URL}/ad-trainer`}>
-                  Help for you
-                </a>
-              </li>
-            )*/}
-    {/*<li>
-              <a href={`${process.env.PUBLIC_URL}/ad-studio`}>Ad Studio</a>
-            </li>*/}
-
-
-
     {loggedIn && (
       <>
         <form
@@ -128,11 +94,11 @@ const UserMenu = (props) => {
         {/*<li>
                   <a href={getSlug()+'professional-profile'}>Professional Profile</a>
                   </li>*/}
-        <li>
+        {/*<li>
           <a href={Utils.getTrainerURL(`preferred-trainers`)}>
             Preferred Trainer
           </a>
-        </li>
+                </li>*/}
       </>
     )}
 
