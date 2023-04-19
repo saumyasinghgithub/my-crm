@@ -78,7 +78,7 @@ const Footer = () => {
       <footer className="footer footerFixed">
         <div className="container">
           <ul className="footerLeft">
-            <li className="footerline"> © {new Date().getFullYear()} by Dr. Susan Davis, Rescue RN™ </li>
+            <li className="footerline"> © {new Date().getFullYear()} by Dr. Susan Davis, RescueRN Academy </li>
             <li className="footerline ml-2">
               <a href={Utils.getTrainerURL(`privacy-policy`)}>Privacy Policy</a>
             </li>

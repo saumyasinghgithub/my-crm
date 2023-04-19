@@ -50,7 +50,7 @@ const Header = (props) => {
         </div>
         <header className="header fixed-top">
             <div className="container">
-                <a className="navbar-brand" href={`${process.env.REACT_APP_PUBLIC_URL}/`}>RESCUE RN</a>                
+                <a className="navbar-brand" href={`${process.env.REACT_APP_PUBLIC_URL}/`}>RescueRN Academy</a>                
                 <ul className="navbar-nav">
                     <li className="nav-item"><a href="/my-cart"><img className="img-fluid shoppingIcon" src="/assets/images/cart-white.png" alt="autodidact" /></a></li>
                     {!loggedIn && <li className="nav-item" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">
