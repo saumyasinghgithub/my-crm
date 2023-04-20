@@ -5,11 +5,11 @@ import StarRatings from "react-star-ratings";
 import _ from "lodash";
 import UserContext from "./../../contexts/UserContext";
 import { useParams } from "react-router-dom";
-import { TwitterIcon, FacebookIcon,LinkedinIcon } from "react-share";
+import { TwitterIcon, FacebookIcon, LinkedinIcon } from "react-share";
 import sanitizeHtml from 'sanitize-html';
 import { Helmet } from "react-helmet";
 
-function trimText(text,number) {
+function trimText(text, number) {
   if (text.length > number) {
     return text.substr(0, number) + "...";
   } else {
@@ -57,7 +57,7 @@ const TeacherAbout = (props) => {
   const trainerSlug = Utils.getUserData().slug;
   const trainerUrl = Utils.getTrainerURL("", trainerSlug);
   const trainerIntro = sanitizeHtml(data.biography, { allowedTags: [] });
-  const trainerName = data.firstname+' '+data.lastname;
+  const trainerName = data.firstname + ' ' + data.lastname;
 
   return (
     <>
@@ -132,8 +132,9 @@ const TeacherAbout = (props) => {
               </div>
 
               <p className="joindetails mt-3">
-                Joined {Utils.shortDate(data.created_at)} &nbsp;&nbsp;&nbsp;&nbsp; Students {props.total.students} &nbsp;&nbsp;&nbsp;&nbsp; Courses{" "}
-                {props.total.courses}
+                Joined {Utils.shortDate(data.created_at)}
+                {/* &nbsp;&nbsp;&nbsp;&nbsp; Students {props.total.students} &nbsp;&nbsp;&nbsp;&nbsp; Courses{" "}
+                {props.total.courses} */}
               </p>
               <div className="profileFollowList">
                 <h5>Follow {data.firstname}</h5>
@@ -151,17 +152,17 @@ const TeacherAbout = (props) => {
                 </ul>
               </div>
               <ul className="profile-socail-icon">
-                <Helmet> 
+                <Helmet>
                   <link rel="canonical" href={`${trainerUrl}professional-profile/about`} />
                   <meta property="og:title" content={`${trainerName}`} />
-                  <meta property="og:description" content={`${trimText(trainerIntro,150)}`} />
+                  <meta property="og:description" content={`${trimText(trainerIntro, 150)}`} />
                   <meta property="og:image" content={`${data.base_image}`} />
                   <meta property="og:url" content={`${trainerUrl}professional-profile/about`} />
                   <meta property="og:type" content="website" />
                 </Helmet>
-                <li><a href={`https://twitter.com/intent/tweet?url=${trainerUrl}&text=${trimText(trainerIntro,230)}`}><TwitterIcon size={32} round={true} /></a></li>
+                <li><a href={`https://twitter.com/intent/tweet?url=${trainerUrl}&text=${trimText(trainerIntro, 230)}`}><TwitterIcon size={32} round={true} /></a></li>
                 <li><a href={`https://www.facebook.com/sharer/sharer.php?u=${trainerUrl}&quote=${trainerIntro}&imageURL=${data.base_image}`}><FacebookIcon size={32} round={true} /></a></li>
-                <li><a href={`https://www.linkedin.com/sharing/share-offsite/?url=${trainerUrl}professional-profile/about&title=${trainerName}&summary=${trimText(trainerIntro,150)}&source=TVerse&mini=true&ro=true&imageUrl=${data.base_image}`}><LinkedinIcon size={32} round={true} /></a></li>
+                <li><a href={`https://www.linkedin.com/sharing/share-offsite/?url=${trainerUrl}professional-profile/about&title=${trainerName}&summary=${trimText(trainerIntro, 150)}&source=TVerse&mini=true&ro=true&imageUrl=${data.base_image}`}><LinkedinIcon size={32} round={true} /></a></li>
               </ul>
             </div>
             <img

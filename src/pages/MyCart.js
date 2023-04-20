@@ -189,8 +189,8 @@ const MyCart = (props) => {
                 {processing === false && <>
                     {cart.loading && <>
                         <>
-          <Loader />
-        </>
+                            <Loader />
+                        </>
                     </>}
                     {!cart.loading && <>
                         <div className="profile-wrapper">
@@ -218,7 +218,7 @@ const MyCart = (props) => {
                                                         {<div className="LPriceInfoBoxCart">
                                                             {/*<i className="fa fa-heart"></i>*/}
                                                             <a here='' onClick={deleteRecord(cData.id)}><i className="fa fa-trash pl-2 pr-2"></i></a>
-                                                            <a href={Utils.getTrainerURL(`courses/${cData.slug}`)}><i className="fa fa-eye"></i></a>
+                                                            <a className='Cart-fa-eye' href={Utils.getTrainerURL(`courses/${cData.slug}`)}><i className="fa fa-eye"></i></a>
                                                         </div>}
                                                     </Col>
                                                 </Row>)}
@@ -230,13 +230,13 @@ const MyCart = (props) => {
                                                             <a href={Utils.getTrainerURL('professional-profile/trainercourses')} className="btn btn-sm btnBlue font-weight-normal" >Continue Shopping</a>
                                                         </Col>
                                                         <Col sm={2}></Col>
-                                                        {cart.data.length !==0 && <>
+                                                        {cart.data.length !== 0 && <>
                                                             <Col sm={5} className="text-right p-0">
-                                                            <Button className="btn btn-sm btnBlue font-weight-normal btn btn-primary" type="button" onClick={emptyCart} >Clear Cart</Button>
+                                                                <Button className="btn btn-sm btnBlue font-weight-normal btn btn-primary" type="button" onClick={emptyCart} >Clear Cart</Button>
                                                             </Col>
                                                         </>
                                                         }
-                                                        
+
                                                     </Row>
                                                 </Container>
                                             </div>
@@ -265,23 +265,23 @@ const MyCart = (props) => {
                                             <Col sm={4} className="text-right"><b>$ {cartTotalPriceafterDiscount()}</b></Col>
                                         </Row>
                                         {cart.data.length !== 0 && <>
-                                        <Form onSubmit={onDiscountApply}>
-                                            <Form.Control type="hidden" name="expiry_date" defaultValue={currentDate.getFullYear() + '-' + currentDate.toLocaleString(undefined, { month: '2-digit' }) + '-' + currentDate.getDate()} />
-                                            <Row className="cbox-space mx-0">
-                                                <Col sm={7} className="text-left p-0 pr-1 mt-2">
-                                                    <Form.Control className="py-0 coupon" type="text" name="coupon_code" placeholder="Coupon Code" />
-                                                </Col>
-                                                <Col sm={5} className="text-right p-0">
-                                                    <Button className="btn btn-sm btnBlue font-weight-normal mt-2" type="submit">Apply Discount</Button>
+                                            <Form onSubmit={onDiscountApply}>
+                                                <Form.Control type="hidden" name="expiry_date" defaultValue={currentDate.getFullYear() + '-' + currentDate.toLocaleString(undefined, { month: '2-digit' }) + '-' + currentDate.getDate()} />
+                                                <Row className="cbox-space mx-0">
+                                                    <Col sm={7} className="text-left p-0 pr-1 mt-2">
+                                                        <Form.Control className="py-0 coupon" type="text" name="coupon_code" placeholder="Coupon Code" />
+                                                    </Col>
+                                                    <Col sm={5} className="text-right p-0">
+                                                        <Button className="btn btn-sm btnBlue font-weight-normal mt-2" type="submit">Apply Discount</Button>
+                                                    </Col>
+                                                </Row>
+                                            </Form>
+
+                                            <Row>
+                                                <Col sm={12}>
+                                                    <Button className="btn btn-sm btnBlue font-weight-normal" type="button" onClick={checkout} >Proceed to pay</Button>
                                                 </Col>
                                             </Row>
-                                        </Form>
-                                        
-                                        <Row>
-                                            <Col sm={12}>
-                                                <Button className="btn btn-sm btnBlue font-weight-normal" type="button" onClick={checkout} >Proceed to pay</Button>
-                                            </Col>
-                                        </Row>
                                         </>
                                         }
                                     </Col>

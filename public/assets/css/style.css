@@ -7010,6 +7010,14 @@ ul.ulDesign li {
     align-items: center;
 }
 
+.Cart-fa-eye {
+    color: #4f5052;
+}
+
+.LPriceInfoBoxCart .fa:hover {
+    transform: scale(1.1);
+}
+
 @media only screen and (min-width: 992px) and (max-width: 1024px) {
     .homecoursedescription {
         height: 110px;
