@@ -7018,6 +7018,21 @@ ul.ulDesign li {
     transform: scale(1.1);
 }
 
+.orderitemscolor ul li a {
+    color: #4f5052;
+    text-decoration: underline;
+}
+
+.orderitemscolor ul li a:hover {
+    color: #4f5052;
+    text-decoration: none;
+}
+
+.awardTextWrapper .awardTextInner a {
+    color: #4f5052;
+    text-decoration: underline;
+}
+
 @media only screen and (min-width: 992px) and (max-width: 1024px) {
     .homecoursedescription {
         height: 110px;
