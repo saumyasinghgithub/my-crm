@@ -33,6 +33,8 @@ const HeaderTrainer = (props) => {
     }
   }, []);
 
+
+
   return (
     <>
       <div className="sidenav">

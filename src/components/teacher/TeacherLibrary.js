@@ -51,7 +51,7 @@ const TeacherLibrary = (props) => {
                 <img
                   className="img-fluid rounded"
                   src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`}
-                  alt="Tverse"
+                  alt="RescueRN"
                 />
               </div>
             </div>

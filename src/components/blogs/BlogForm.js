@@ -82,7 +82,7 @@ const BlogForm = (props) => {
     <Row>
       <Col md={12} className="mt-3">
         <Form.Label>Blog Title: </Form.Label>
-        <Form.Control type="text" name="name" placeholder="Enter blog Title*" defaultValue={_.get(myblog, 'name', '')} required/>
+        <Form.Control type="text" name="name" placeholder="Enter blog Title*" defaultValue={_.get(myblog, 'name', '')} required />
         <div className="invalid-feedback">Blog Title is required!</div>
       </Col>
     </Row>
@@ -102,7 +102,7 @@ const BlogForm = (props) => {
       </Col>
       <Col md={9} className="mt-3">
         <Form.Label>Short Description: </Form.Label>
-      
+
         <Editor apiKey={process.env.TINYMCE_API_KEY}
           value={_.get(myblog, 'short_description', '')}
           init={{
@@ -115,8 +115,8 @@ const BlogForm = (props) => {
             ]
           }}
           toolbar="undo redo | bold italic underline strikethrough | fontselect | fontsizeselect | formatselect | code | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl "
-          onInit={(evt, editor) => setupEditor(editor)}  
-          plugins="code"      
+          onInit={(evt, editor) => setupEditor(editor)}
+          plugins="code"
           onEditorChange={onContentChange('short_description')}
         />
       </Col>

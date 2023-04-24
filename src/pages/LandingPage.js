@@ -117,7 +117,7 @@ const LandingPage = (props) => {
                             <div className="p-4 homecourses">
                               <div className="">
                                 {/*<span className="new">}New</span>*/}
-                                <img className="img-fluid rounded" src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`} alt="Tverse" />
+                                <img className="img-fluid rounded" src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`} alt="RescueRN" />
                               </div>
                               <div className="">
                                 <div className="libraryTitle HomeCourseTitle text-center pt-5 pb-3">{course.name}</div>
@@ -237,7 +237,7 @@ const LandingPage = (props) => {
                               <p dangerouslySetInnerHTML={{ __html: event.event_short_desc }}></p>
                               <div className="HomeRegister mt-4">
                                 {/*<button onClick={RegisterShow}>Register Now</button>*/}
-                                <a href="https://www.rnegade.pro/kickstart">Register Now</a>
+                                <button> <a href="https://www.rnegade.pro/kickstart" target="_blank">Register Now</a></button>
                               </div>
                             </div>
                           </div>
