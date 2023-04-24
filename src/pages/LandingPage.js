@@ -117,7 +117,7 @@ const LandingPage = (props) => {
                             <div className="p-4 homecourses">
                               <div className="">
                                 {/*<span className="new">}New</span>*/}
-                                <img className="img-fluid rounded" src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`} alt="Tverse" />
+                                <img className="img-fluid rounded" src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`} alt="RescueRN" />
                               </div>
                               <div className="">
                                 <div className="libraryTitle HomeCourseTitle text-center pt-5 pb-3">{course.name}</div>

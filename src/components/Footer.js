@@ -71,7 +71,7 @@ const Footer = () => {
   useEffect(fetchList, []);
 
   useEffect(syncLocalStorage, []);
-  
+
 
   return (
     <>
