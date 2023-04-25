@@ -1,5 +1,5 @@
-import {useEffect, useContext, useState} from 'react';
-import {Form, Alert, Spinner, Row, Col, Button} from 'react-bootstrap';
+import { useEffect, useContext, useState } from 'react';
+import { Form, Alert, Spinner, Row, Col, Button } from 'react-bootstrap';
 import UserContext from './../../contexts/UserContext';
 import { Editor } from "@tinymce/tinymce-react";
 import Utils from './../../Utils';
@@ -10,62 +10,62 @@ const AboutForm = (props) => {
 
   const [myabout, setMyabout] = useState({});
   const [saving, setSaving] = useState(false);
-  const [response, setResponse] = useState({success: false, message: ""});
-  const {getServerData,setServerData} = useContext(UserContext);
+  const [response, setResponse] = useState({ success: false, message: "" });
+  const { getServerData, setServerData } = useContext(UserContext);
 
   const onContentChange = (fld) => (value) => {
-    let c = {...myabout};
+    let c = { ...myabout };
     c[fld] = value;
     setMyabout(c);
   }
 
   useEffect(() => {
     getServerData('student/my-about')
-    .then(setMyabout)
-    .catch(err => console.log(err));
-  },[]);
-  useEffect(window.scrollEffect,[]);
+      .then(setMyabout)
+      .catch(err => console.log(err));
+  }, []);
+  useEffect(window.scrollEffect, []);
 
-  useEffect(() => {window.setTimeout(() => setResponse({message: ""}), 5000)},[response]);
-  
+  useEffect(() => { window.setTimeout(() => setResponse({ message: "" }), 5000) }, [response]);
+
 
   const onSave = (e) => {
     const frm = e.currentTarget;
     e.preventDefault();
     let frmdata = new FormData(frm);
-    frmdata.append('biography',_.get(myabout,'biography',''));
+    frmdata.append('biography', _.get(myabout, 'biography', ''));
     setSaving(true);
-    setServerData('student/my-about',frmdata)
-    .then(res => {
-      setSaving(false);
-      setResponse(res);
-    })
+    setServerData('student/my-about', frmdata)
+      .then(res => {
+        setSaving(false);
+        setResponse(res);
+      })
   }
 
-  const photoUploader = (fld,title) => {
+  const photoUploader = (fld, title) => {
     return <>
       <Form.Label>{title}</Form.Label>
-      <Form.Control type="file" size="lg" name={fld+'_image'} accept=".jpeg,.png,.PNG,.jpg;" />
-      <div className="text-center">{!_.isEmpty(_.get(myabout,fld+'_image','')) && <img src={`${process.env.REACT_APP_API_URL}/uploads/student/${fld}/${myabout[fld+'_image']}`} className="thumbnail mt-3" />}</div>
+      <Form.Control type="file" size="lg" name={fld + '_image'} accept=".jpeg,.png,.PNG,.jpg;" />
+      <div className="text-center">{!_.isEmpty(_.get(myabout, fld + '_image', '')) && <img src={`${process.env.REACT_APP_API_URL}/uploads/student/${fld}/${myabout[fld + '_image']}`} className="thumbnail mt-3" />}</div>
     </>;
   }
 
   return <Form onSubmit={onSave}>
-    <Form.Control type="hidden" name="id" defaultValue={_.get(myabout,'id','')} />
-    <Form.Control type="hidden" name="old_profile_image" defaultValue={_.get(myabout,'profile_image','')} />
-    <Form.Control type="hidden" name="old_base_image" defaultValue={_.get(myabout,'base_image','')} />
+    <Form.Control type="hidden" name="id" defaultValue={_.get(myabout, 'id', '')} />
+    <Form.Control type="hidden" name="old_profile_image" defaultValue={_.get(myabout, 'profile_image', '')} />
+    <Form.Control type="hidden" name="old_base_image" defaultValue={_.get(myabout, 'base_image', '')} />
     <Row>
       <Col md={4} className="mt-3">
         <Form.Label>First Name: </Form.Label>
-        <Form.Control type="text" name="firstname" placeholder="Enter your first name" defaultValue={_.get(myabout,'firstname','')} />
+        <Form.Control type="text" name="firstname" placeholder="Enter your first name" defaultValue={_.get(myabout, 'firstname', '')} />
       </Col>
       <Col md={4} className="mt-3">
         <Form.Label>Middle Name: </Form.Label>
-        <Form.Control type="text" name="middlename" placeholder="Enter your middle name" defaultValue={_.get(myabout,'middlename','')} />
+        <Form.Control type="text" name="middlename" placeholder="Enter your middle name" defaultValue={_.get(myabout, 'middlename', '')} />
       </Col>
       <Col md={4} className="mt-3">
-        <Form.Label>last Name: </Form.Label>
-        <Form.Control type="text" name="lastname" placeholder="Enter your last name" defaultValue={_.get(myabout,'lastname','')} />
+        <Form.Label>Last Name: </Form.Label>
+        <Form.Control type="text" name="lastname" placeholder="Enter your last name" defaultValue={_.get(myabout, 'lastname', '')} />
       </Col>
     </Row>
     {/*<Row>
@@ -101,20 +101,20 @@ const AboutForm = (props) => {
       <Col md={6} className="mt-3">
         <Form.Label>Country: </Form.Label>
         <Form.Control as="select" name="country">
-            <option value=""> - Select Country - </option>
-            {Utils.countryList.map(v => <option key={v} value={v} selected={_.get(myabout,`country`,'')===v}>{v}</option>)}
-          </Form.Control>
-      </Col> 
+          <option value=""> - Select Country - </option>
+          {Utils.countryList.map(v => <option key={v} value={v} selected={_.get(myabout, `country`, '') === v}>{v}</option>)}
+        </Form.Control>
+      </Col>
     </Row>
-    
 
-    <Row>  
+
+    <Row>
       {/*<Col md={6} className="mt-3">  
         {//photoUploader('profile','Upload Large Profile Pic (Image dimension should be 360cm x 260cm)')}
 </Col>*/}
-      <Col className="mt-3">{photoUploader('base','Upload Base Profile Pic (Image dimension should be 100cm x 100cm)')}</Col>
-      </Row>
-      <Row>
+      <Col className="mt-3">{photoUploader('base', 'Upload Base Profile Pic (Image dimension should be 100cm x 100cm)')}</Col>
+    </Row>
+    <Row>
       {/* <Col md={12} className="mt-3">  
       <Form.Label>Student Profile Details: </Form.Label>
       <Editor apiKey={process.env.TINYMCE_API_KEY}
@@ -155,11 +155,11 @@ const AboutForm = (props) => {
     <Row>
       <Col md={12} className="mt-3 text-right">
         {saving && <>Saving.. <Spinner animation="border" /></>}
-        {!saving && response.message==="" && <Button type="submit" className="profile-save">Save</Button>}
-        {!saving && response.message!=="" && <Alert variant={response.success ? 'info' : 'danger'} className="p-3 mt-2 text-center">{response.message}</Alert>}
+        {!saving && response.message === "" && <Button type="submit" className="profile-save">Save</Button>}
+        {!saving && response.message !== "" && <Alert variant={response.success ? 'info' : 'danger'} className="p-3 mt-2 text-center">{response.message}</Alert>}
       </Col>
     </Row>
-  
+
   </Form>
 
 };

@@ -277,7 +277,7 @@ const LandingPage = (props) => {
                               Make recommendations regarding improvements of code blue processes centered on Evidence-Based Practice.
                             </li>
                             <li>
-                              Continually provide education and training associated with the standards of care in high-quality resuscitative efforts
+                              Continually provide education and training associated with the standards of care in high-quality resuscitative efforts.
                             </li>
                           </ul>
 

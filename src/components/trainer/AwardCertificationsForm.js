@@ -71,73 +71,80 @@ const AwardCertificationsForm = (props) => {
     return (
       <>
         {awardData.map((v, k) => (
-           <Accordion defaultActiveKey={[0]} alwaysOpen>
-          <Row>
-          <Accordion.Item eventKey={k} 
-              className="my-1"
-              style={{ backgroundColor: k % 2 === 0 ? "#ddf4f4" : "#f8f8f8" }}>
-                <Accordion.Header className="mb-0"><strong>Awards/Certification {k+1} </strong></Accordion.Header>
-                <Accordion.Body>
-                  <Row>
-            <Col md={3} className="mt-3">
-              <Form.Control
-                as="select"
-                name="year"
-                onChange={saveAData(k, "year")}
-              >
-                <option value=""> - Select year - </option>
-                {new Array(51).fill(1).map((v, k1) => {
-                  year = moment().year() - 50 + k1;
-                  return (
-                    <option
-                      key={k1}
-                      value={year}
-                      selected={_.get(awardData, `${k}.year`, "") === year}
-                    >
-                      {year}
-                    </option>
-                  );
-                })}
-              </Form.Control>
-            </Col>
-            <Col md={9} className="mt-3">
-              <Form.Control
-                type="text"
-                name="award"
-                placeholder="Certification/Award Name"
-                defaultValue={_.get(awardData, `${k}.award`, "")}
-                onChange={saveAData(k, "award")}
-              />
-            </Col>
+          <Accordion defaultActiveKey={[0]} alwaysOpen>
+            <Row>
+              <Col className="col-11">
+                <Accordion.Item eventKey={k}
+                  className="my-1"
+                  style={{ backgroundColor: k % 2 === 0 ? "#ddf4f4" : "#f8f8f8" }}>
+                  <Accordion.Header className="mb-0"><strong>Awards/Certification {k + 1} </strong></Accordion.Header>
+                  <Accordion.Body>
+                    <Row>
+                      <Col md={3} className="mt-3">
+                        <Form.Control
+                          as="select"
+                          name="year"
+                          onChange={saveAData(k, "year")}
+                        >
+                          <option value=""> - Select year - </option>
+                          {new Array(51).fill(1).map((v, k1) => {
+                            year = moment().year() - 50 + k1;
+                            return (
+                              <option
+                                key={k1}
+                                value={year}
+                                selected={_.get(awardData, `${k}.year`, "") === year}
+                              >
+                                {year}
+                              </option>
+                            );
+                          })}
+                        </Form.Control>
+                      </Col>
+                      <Col md={9} className="mt-3">
+                        <Form.Control
+                          type="text"
+                          name="award"
+                          placeholder="Certification/Award Name"
+                          defaultValue={_.get(awardData, `${k}.award`, "")}
+                          onChange={saveAData(k, "award")}
+                        />
+                      </Col>
 
-            <Col md={6} className="mt-3">
-              <Form.Control
-                type="text"
-                name="organisation"
-                placeholder="Enter Issuing Organization's Name"
-                defaultValue={_.get(awardData, `${k}.organisation`, "")}
-                onChange={saveAData(k, "organisation")}
-              />
-            </Col>
-            <Col md={6} className="mt-3 mb-3">
-              <Form.Control
-                type="text"
-                name="url"
-                placeholder="Enter Certificate URL "
-                defaultValue={_.get(awardData, `${k}.url`, "")}
-                onChange={saveAData(k, "url")}
-              />
-            </Col>
+                      <Col md={6} className="mt-3">
+                        <Form.Control
+                          type="text"
+                          name="organisation"
+                          placeholder="Enter Issuing Organization's Name"
+                          defaultValue={_.get(awardData, `${k}.organisation`, "")}
+                          onChange={saveAData(k, "organisation")}
+                        />
+                      </Col>
+                      <Col md={6} className="mt-3 mb-3">
+                        <Form.Control
+                          type="text"
+                          name="url"
+                          placeholder="Enter Certificate URL "
+                          defaultValue={_.get(awardData, `${k}.url`, "")}
+                          onChange={saveAData(k, "url")}
+                        />
+                      </Col>
+                    </Row>
+                  </Accordion.Body>
+                </Accordion.Item>
+              </Col>
+
+              <Col className="col-1 d-flex align-center">
+                {k > 3 && (
+                  <i
+                    className="position-relative fa fa-minus-circle fa-lg mt-2 cursor-pointer text-danger remove-award"
+                    onClick={removeAData(k)}
+                  />
+                )}
+              </Col>
+
+
             </Row>
-                </Accordion.Body>
-              </Accordion.Item>
-            {k > 3 && (
-              <i
-                className="fa fa-minus-circle fa-lg mt-2 cursor-pointer text-danger remove-award"
-                onClick={removeAData(k)}
-              />
-            )}
-          </Row>
           </Accordion>
         ))}
       </>

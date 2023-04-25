@@ -7033,6 +7033,10 @@ ul.ulDesign li {
     text-decoration: underline;
 }
 
+select.form-control {
+    text-transform: capitalize;
+}
+
 @media only screen and (min-width: 992px) and (max-width: 1024px) {
     .homecoursedescription {
         height: 110px;

@@ -86,7 +86,7 @@ const AboutForm = (props) => {
             <Form.Control type="text" name="middlename" placeholder="Enter your middle name" defaultValue={_.get(myabout, "middlename", "")} />
           </Col>
           <Col md={4} className="mt-3">
-            <Form.Label>last Name: </Form.Label>
+            <Form.Label>Last Name: </Form.Label>
             <Form.Control type="text" name="lastname" placeholder="Enter your last name" defaultValue={_.get(myabout, "lastname", "")} />
           </Col>
         </Row>

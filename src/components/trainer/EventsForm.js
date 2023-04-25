@@ -90,81 +90,86 @@ const EventsForm = (props) => {
         {eventData.map((v, k) => (
           <Accordion defaultActiveKey={[eventData.length - 1]} alwaysOpen={true}>
             <Row>
-              <Accordion.Item eventKey={k} className="my-1 hide" style={{ backgroundColor: k % 2 === 0 ? "#ddf4f4" : "#f8f8f8" }}>
-                <Accordion.Header className="mb-0">
-                  <strong>Event {k + 1} </strong>
-                  {v.participants > 0 && (
-                    <button className="btn btn-sm btn-info ml-2 p-1" onClick={exportParticipants("event", v.id)}>
-                      Export Participants ({v.participants}) <span className="fa fa-file-excel"></span>
-                    </button>
-                  )}
-                </Accordion.Header>
-                <Accordion.Body>
-                  <Row>
-                    <Col className="col-3 py-3">
-                      <Form.Check
-                        type="radio"
-                        label={`Featured Event`}
-                        name="featured"
-                        value={k}
-                        defaultChecked={_.get(eventData, `${k}.featured`, 0)}
-                      />
-                    </Col>
-                    <Col className="col-3 py-9"></Col>
-                  </Row>
-                  <Row>
-                    <Form.Control type="hidden" name={`id`} value={_.get(eventData, `${k}.id`, "")} />
-                    <Col className="col-12 py-3">
-                      <Form.Label>Event Heading *</Form.Label>
-                      <Form.Control
-                        type="text"
-                        name={`heading`}
-                        defaultValue={_.get(eventData, `${k}.heading`, "")}
-                        placeholder="Enter Heading *"
-                        required
-                      />
-                    </Col>
-                    <Col className="col-8 py-3">
-                      <Form.Label>Event Sub Heading *</Form.Label>
-                      <Form.Control
-                        type="text"
-                        name={`sub_heading`}
-                        defaultValue={_.get(eventData, `${k}.sub_heading`, "")}
-                        placeholder="Enter Sub-Heading *"
-                        required
-                      />
-                    </Col>
+              <Col className="col-11">
+                <Accordion.Item eventKey={k} className="my-1 hide" style={{ backgroundColor: k % 2 === 0 ? "#ddf4f4" : "#f8f8f8" }}>
+                  <Accordion.Header className="mb-0">
+                    <strong>Event {k + 1} </strong>
+                    {v.participants > 0 && (
+                      <button className="btn btn-sm btn-info ml-2 p-1" onClick={exportParticipants("event", v.id)}>
+                        Export Participants ({v.participants}) <span className="fa fa-file-excel"></span>
+                      </button>
+                    )}
+                  </Accordion.Header>
+                  <Accordion.Body>
+                    <Row>
+                      <Col className="col-3 py-3">
+                        <Form.Check
+                          type="radio"
+                          label={`Featured Event`}
+                          name="featured"
+                          value={k}
+                          defaultChecked={_.get(eventData, `${k}.featured`, 0)}
+                        />
+                      </Col>
+                      <Col className="col-3 py-9"></Col>
+                    </Row>
+                    <Row>
+                      <Form.Control type="hidden" name={`id`} value={_.get(eventData, `${k}.id`, "")} />
+                      <Col className="col-12 py-3">
+                        <Form.Label>Event Heading *</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name={`heading`}
+                          defaultValue={_.get(eventData, `${k}.heading`, "")}
+                          placeholder="Enter Heading *"
+                          required
+                        />
+                      </Col>
+                      <Col className="col-8 py-3">
+                        <Form.Label>Event Sub Heading *</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name={`sub_heading`}
+                          defaultValue={_.get(eventData, `${k}.sub_heading`, "")}
+                          placeholder="Enter Sub-Heading *"
+                          required
+                        />
+                      </Col>
 
-                    <Col className="col-4 py-3">
-                      <Form.Label>Event Date *</Form.Label>
-                      <Form.Control
-                        type="datetime-local"
-                        name={`event_on`}
-                        defaultValue={moment(_.get(eventData, `${k}.event_on`, "")).format("YYYY-MM-DD HH:mm")}
-                        required
-                      />
-                    </Col>
+                      <Col className="col-4 py-3">
+                        <Form.Label>Event Date *</Form.Label>
+                        <Form.Control
+                          type="datetime-local"
+                          name={`event_on`}
+                          defaultValue={moment(_.get(eventData, `${k}.event_on`, "")).format("YYYY-MM-DD HH:mm")}
+                          required
+                        />
+                      </Col>
 
-                    <Col className="col-6 py-3">{photoUploader("event", "Upload Large Event Image (1236px by 450px)", k)}</Col>
+                      <Col className="col-6 py-3">{photoUploader("event", "Upload Large Event Image (1236px by 450px)", k)}</Col>
 
-                    <Col className="col-6 py-3">
-                      <Form.Label>Event Text</Form.Label>
-                      <Editor
-                        apiKey={process.env.TINYMCE_API_KEY}
-                        value={_.get(eventData, `${k}.event_short_desc`, "")}
-                        init={{
-                          height: 200,
-                          menubar: false,
-                        }}
-                        toolbar="undo redo | bold italic underline strikethrough | code | fontselect | fontsizeselect | formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl"
-                        plugins="code"
-                        onEditorChange={onContentChange(k, "event_short_desc")}
-                      />
-                    </Col>
-                  </Row>
-                </Accordion.Body>
-              </Accordion.Item>
-              {k > 1 && <i className="fa fa-minus-circle fa-lg mt-2 cursor-pointer text-danger remove-award" onClick={removeAData(k)} />}
+                      <Col className="col-6 py-3">
+                        <Form.Label>Event Text</Form.Label>
+                        <Editor
+                          apiKey={process.env.TINYMCE_API_KEY}
+                          value={_.get(eventData, `${k}.event_short_desc`, "")}
+                          init={{
+                            height: 200,
+                            menubar: false,
+                          }}
+                          toolbar="undo redo | bold italic underline strikethrough | code | fontselect | fontsizeselect | formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl"
+                          plugins="code"
+                          onEditorChange={onContentChange(k, "event_short_desc")}
+                        />
+                      </Col>
+                    </Row>
+                  </Accordion.Body>
+                </Accordion.Item>
+              </Col>
+              <Col className="col-1">
+                {k > 1 && <i className="position-relative fa fa-minus-circle fa-lg mt-2 cursor-pointer text-danger remove-award" onClick={removeAData(k)} />}
+              </Col>
+
             </Row>
           </Accordion>
         ))}

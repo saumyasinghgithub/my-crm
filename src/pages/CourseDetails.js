@@ -23,7 +23,7 @@ const CourseDetails = (props) => {
     enrollments: 0,
   });
 
-  const { getServerData, setServerData , loginToMoodle} = useContext(UserContext);
+  const { getServerData, setServerData, loginToMoodle } = useContext(UserContext);
   const [enrollment, setEnrollment] = useState([]);
 
   const $ = window.$;
@@ -111,10 +111,9 @@ const CourseDetails = (props) => {
     return (
       <li>
         <div
-          className={`circleBox wow zoomIn ${
-            _.findIndex(bp, (b) => b.id === resource.id) > -1 ? "selected" : ""
-          }`}
-          /*onClick={() => bundleProduct(resource)}*/
+          className={`circleBox wow zoomIn ${_.findIndex(bp, (b) => b.id === resource.id) > -1 ? "selected" : ""
+            }`}
+        /*onClick={() => bundleProduct(resource)}*/
         >
           <img
             className="img-fluid"
@@ -252,13 +251,13 @@ const CourseDetails = (props) => {
                                   Also available:
                                 </span>{" "}
                                 {course.course.language} <br />
-                                <span className="textBold">Media:</span>
+                                <span className="textBold">Media: </span>
                                 {Utils.mediaTypes.map(
                                   (m) =>
                                     _.find(course.resources, {
                                       type: m[0],
                                     }) && (
-                                      <span className="px-2">
+                                      <span className="pr-2">
                                         {m[1]}{" "}
                                         <img
                                           src={`/assets/images/${m[2]}`}
