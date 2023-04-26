@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState} from "react";
 import { Container } from "react-bootstrap";
 import {Header, HeaderTrainer, Footer, LoginModal, JoinAsStudent, JoinAsTrainer} from './../components';
 import Utils from "../Utils";
 import HeaderStudent from "./../components/student/HeaderStudent";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { useState } from "react";
 
 
 const DefaultLayout = ({ children }) => {
