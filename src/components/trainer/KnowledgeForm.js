@@ -52,7 +52,7 @@ const KnowledgeForm = (props) => {
   return <Form onSubmit={onSave}>
     <Form.Control type="hidden" name="id" defaultValue={_.get(myknowledge, 'id', '')} />
     <Form.Control type="hidden" name="old_knowledge_image" defaultValue={_.get(myknowledge, 'knowledge_image', '')} />
-    <h1>Trainer CodePRep</h1>
+    <h1 className='MobileHeader'>Trainer CodePRep</h1>
 
     <Row>
       <Col md={3} className="mt-3">

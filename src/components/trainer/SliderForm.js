@@ -66,7 +66,7 @@ const SliderForm = (props) => {
         {sliderData.map((v, k) => (
           <Accordion defaultActiveKey={[sliderData.length - 1]} alwaysOpen={true}>
             <Row>
-              <Col className="col-11">
+              <Col className="col-10 col-lg-11">
                 <Accordion.Item eventKey={k} className="my-1 hide" style={{ backgroundColor: k % 2 === 0 ? "#ddf4f4" : "#f8f8f8" }}>
                   <Accordion.Header className="mb-0">
                     <strong>Landing Page Slide {k + 1} </strong>
@@ -74,9 +74,9 @@ const SliderForm = (props) => {
                   <Accordion.Body>
                     <Row>
                       <Form.Control type="hidden" name={`id`} value={_.get(sliderData, `${k}.id`, "")} />
-                      <Col className="col-6 py-3">{photoUploader("slider", "Upload Large Slider Image (1236px by 450px)", k)}</Col>
+                      <Col className="col-12 col-lg-6 py-3">{photoUploader("slider", "Upload Large Slider Image (1236px by 450px)", k)}</Col>
 
-                      <Col className="col-6 py-3">
+                      <Col className="col-12 col-lg-6 py-3">
                         <Form.Label>Slider Text</Form.Label>
                         <Form.Control
                           type="text"
@@ -98,7 +98,7 @@ const SliderForm = (props) => {
                   </Accordion.Body>
                 </Accordion.Item>
               </Col>
-              <Col className="col-1">
+              <Col className="col-2 col-lg-1">
                 {k > 1 && <i className="position-relative fa fa-minus-circle fa-lg mt-2 cursor-pointer text-danger remove-award" onClick={removeAData(k)} />}
               </Col>
             </Row>
@@ -124,7 +124,7 @@ const SliderForm = (props) => {
         <Form.Control type="hidden" name="user_id" value={trainerDetails.id} />
         <Form.Control type="hidden" name="created_at" value={Date().toLocaleString()} />
         <h1>
-          Landing Page Slider <i className="fa fa-plus-circle text-success Adddetails" onClick={addAData} />
+          Landing Page Slider <i className="mobileaddDetails fa fa-plus-circle text-success Adddetails" onClick={addAData} />
         </h1>
         {renderSliderFields()}
         <Row>

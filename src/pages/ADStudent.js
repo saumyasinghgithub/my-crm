@@ -18,7 +18,7 @@ const ADStudent = (props) => {
                <div className="AD-help">
                   <div className="row">
                      <div className="col-sm-12">
-                        <h1 className="headingtext slideInUp wow ">Help for Student</h1>
+                        <h1 className="headingtext slideInUp wow MobileHeader">Help for Student</h1>
                         <ol className="HelpStudent pt-3">
                            <li>
                               <strong>Why should I use RescueRN to find a personal trainer?</strong>

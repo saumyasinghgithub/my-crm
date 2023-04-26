@@ -89,7 +89,7 @@ const CalibForm = (props) => {
 
   return <Form onSubmit={onSave}>
     <Row>
-      <Col md={12}><h1>Trainer Attribute Details</h1></Col>
+      <Col md={12}><h1 className='MobileHeader'>Trainer Attribute Details</h1></Col>
       {renderPA()}
       <Col md={12} className="text-right">
         {saving && <>Saving.. <Spinner animation="border" /></>}

@@ -5960,9 +5960,18 @@ button:not(:disabled) {
 
 @media (max-width:767px) {
     .headingtext {
-        font-size: 36px !important;
+        font-size: 34px !important;
         line-height: 32px;
         width: 100% !important;
+    }
+
+    .MobileHeader {
+        font-size: 30px !important;
+    }
+
+    .mobileaddDetails {
+        position: relative;
+        top: -10px;
     }
 
     .profileDetailRating {
@@ -7253,13 +7262,23 @@ select.form-control {
         font-size: 16px;
     }
 
+    .HomeRegister {
+        text-align: end;
+    }
+
+    .HomeJoinNow button {
+        text-align: end !important;
+    }
+
     .HeaderNavigation {
         display: flex;
         align-items: center;
     }
 
     .footerline:after {
-        display: none;
+        display: block;
+        top: 3px;
+        right: -5px;
     }
 
     .libraryTitle {
@@ -7364,7 +7383,7 @@ select.form-control {
     }
 
     .footerline:after {
-        display: none;
+        display: block;
     }
 
     .JoinNowModal .modal-body {

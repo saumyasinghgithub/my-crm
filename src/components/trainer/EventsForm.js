@@ -90,7 +90,7 @@ const EventsForm = (props) => {
         {eventData.map((v, k) => (
           <Accordion defaultActiveKey={[eventData.length - 1]} alwaysOpen={true}>
             <Row>
-              <Col className="col-11">
+              <Col className="col-10 col-lg-11">
                 <Accordion.Item eventKey={k} className="my-1 hide" style={{ backgroundColor: k % 2 === 0 ? "#ddf4f4" : "#f8f8f8" }}>
                   <Accordion.Header className="mb-0">
                     <strong>Event {k + 1} </strong>
@@ -102,7 +102,7 @@ const EventsForm = (props) => {
                   </Accordion.Header>
                   <Accordion.Body>
                     <Row>
-                      <Col className="col-3 py-3">
+                      <Col className="col-12 col-lg-3 py-3">
                         <Form.Check
                           type="radio"
                           label={`Featured Event`}
@@ -111,7 +111,7 @@ const EventsForm = (props) => {
                           defaultChecked={_.get(eventData, `${k}.featured`, 0)}
                         />
                       </Col>
-                      <Col className="col-3 py-9"></Col>
+                      <Col className="col-12 col-lg-3 py-9"></Col>
                     </Row>
                     <Row>
                       <Form.Control type="hidden" name={`id`} value={_.get(eventData, `${k}.id`, "")} />
@@ -125,7 +125,7 @@ const EventsForm = (props) => {
                           required
                         />
                       </Col>
-                      <Col className="col-8 py-3">
+                      <Col className="col-12 col-lg-8 py-3">
                         <Form.Label>Event Sub Heading *</Form.Label>
                         <Form.Control
                           type="text"
@@ -136,7 +136,7 @@ const EventsForm = (props) => {
                         />
                       </Col>
 
-                      <Col className="col-4 py-3">
+                      <Col className="col-12 col-lg-4 py-3">
                         <Form.Label>Event Date *</Form.Label>
                         <Form.Control
                           type="datetime-local"
@@ -146,9 +146,9 @@ const EventsForm = (props) => {
                         />
                       </Col>
 
-                      <Col className="col-6 py-3">{photoUploader("event", "Upload Large Event Image (1236px by 450px)", k)}</Col>
+                      <Col className="col-12 col-lg-6 py-3">{photoUploader("event", "Upload Large Event Image (1236px by 450px)", k)}</Col>
 
-                      <Col className="col-6 py-3">
+                      <Col className="col-12 col-lg-6 py-3">
                         <Form.Label>Event Text</Form.Label>
                         <Editor
                           apiKey={process.env.TINYMCE_API_KEY}
@@ -166,7 +166,7 @@ const EventsForm = (props) => {
                   </Accordion.Body>
                 </Accordion.Item>
               </Col>
-              <Col className="col-1">
+              <Col className="col-2 col-lg-1">
                 {k > 1 && <i className="position-relative fa fa-minus-circle fa-lg mt-2 cursor-pointer text-danger remove-award" onClick={removeAData(k)} />}
               </Col>
 
@@ -182,9 +182,9 @@ const EventsForm = (props) => {
       <Form onSubmit={onSave}>
         <Form.Control type="hidden" name="user_id" value={trainerDetails.id} />
         <Form.Control type="hidden" name="created_at" value={Date().toLocaleString()} />
-        <h1>
+        <h1 className='MobileHeader'>
           Manage Events
-          <i className="fa fa-plus-circle text-success Adddetails" onClick={addAData} />
+          <i className="mobileaddDetails fa fa-plus-circle text-success Adddetails" onClick={addAData} />
         </h1>
         {renderEventFields()}
         <Row>

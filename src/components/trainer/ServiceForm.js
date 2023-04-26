@@ -54,7 +54,7 @@ const ServiceForm = (props) => {
   return <Form onSubmit={onSave}>
     <Form.Control type="hidden" name="id" defaultValue={_.get(myservices, 'id', '')} />
     <Form.Control type="hidden" name="old_service_image" defaultValue={_.get(myservices, 'service_image', '')} />
-    <h1>Trainer Services</h1>
+    <h1 className='MobileHeader'>Trainer Services</h1>
 
     <Row>
       <Col md={3} className="mt-3">

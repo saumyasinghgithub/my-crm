@@ -26,7 +26,7 @@ const CouponForm = (props) => {
         const frm = e.currentTarget;
         e.preventDefault();
         let frmdata = new FormData(frm);
-        frmdata.append('item_id',JSON.stringify(selectedOptions));
+        frmdata.append('item_id', JSON.stringify(selectedOptions));
         console.log(selectedOptions);
         axios.post(Utils.apiUrl(`coupons/add`), frmdata, Utils.apiHeaders())
             .then(res => {
@@ -44,7 +44,7 @@ const CouponForm = (props) => {
     }
     const courseList = [];
     for (let i = 0; i < mycourse.length; i++) {
-        courseList.push(<>           
+        courseList.push(<>
             <option key={mycourse[i].id} value={mycourse[i].id}>{mycourse[i].name}</option>
         </>);
     }
@@ -90,8 +90,8 @@ const CouponForm = (props) => {
                 <p>* Mandatory Field</p>
             </Col>
             <Col md={6} className="mt-3">
-                <Form.Label>Set Value :</Form.Label>
-                <Form.Control type="text" name="discount_value" placeholder="Enter discount value." required/>
+                <Form.Label>Set Value:</Form.Label>
+                <Form.Control type="text" name="discount_value" placeholder="Enter discount value." required />
                 <p>* Mandatory Field</p>
             </Col>
         </Row>
