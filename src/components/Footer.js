@@ -3,7 +3,7 @@ import Utils from "./../Utils";
 import axios from "axios";
 import { TeacherSubscribe } from "../components/teacher";
 
-const Footer = () => {
+const Footer = (props) => {
   const hasSubdomain = Utils.hasSubdomain();
   const [list, setList] = useState({
     loading: false,
@@ -78,7 +78,7 @@ const Footer = () => {
       <footer className="footer footerFixed">
         <div className="container">
           <ul className="footerLeft">
-            <li className="footerline"> © {new Date().getFullYear()} by Dr. Susan Davis, RescueRN</li>
+            <li className="footerline"> © {new Date().getFullYear()} by {props.sitesetting.firstname} {props.sitesetting.middlename} {props.sitesetting.lastname}, {props.sitesetting.company_name}</li>
             <li className="footerline ml-2">
               <a href={Utils.getTrainerURL(`privacy-policy`)}>Privacy Policy</a>
             </li>
