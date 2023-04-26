@@ -38,6 +38,13 @@ const CustomRoutes = [
     layout: Layout.StaticPageLayout,
     component: Page.ADTrainer,
   },
+  {
+    path: "/site-settings",
+    secure: true,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.SiteSettings,
+  },
 
   {
     path: "/my-profile",

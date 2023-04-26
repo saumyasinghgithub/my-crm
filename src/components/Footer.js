@@ -4,6 +4,10 @@ import axios from "axios";
 import { TeacherSubscribe } from "../components/teacher";
 
 const Footer = (props) => {
+  //console.log(props.sitesetting);
+  if (JSON.stringify(props.sitesetting) === "{}") {
+    console.log("The object is empty");
+  }
   const hasSubdomain = Utils.hasSubdomain();
   const [list, setList] = useState({
     loading: false,
@@ -14,25 +18,27 @@ const Footer = (props) => {
 
   const fetchList = () => {
     setList({ ...list, loading: true });
-    axios.get(Utils.apiUrl("sociallink/list"), Utils.apiHeaders()).then((res) => {
-      if (res.data.success) {
-        setList({
-          ...list,
-          loading: false,
-          error: false,
-          pageInfo: res.data.pageInfo,
-          data: res.data.data,
-        });
-      } else {
-        setList({
-          ...list,
-          loading: false,
-          error: res.data.message,
-          pageInfo: {},
-          data: [],
-        });
-      }
-    });
+    axios
+      .get(Utils.apiUrl("sociallink/list"), Utils.apiHeaders())
+      .then((res) => {
+        if (res.data.success) {
+          setList({
+            ...list,
+            loading: false,
+            error: false,
+            pageInfo: res.data.pageInfo,
+            data: res.data.data,
+          });
+        } else {
+          setList({
+            ...list,
+            loading: false,
+            error: res.data.message,
+            pageInfo: {},
+            data: [],
+          });
+        }
+      });
   };
 
   const sendLocalStorage = () => {
@@ -65,20 +71,37 @@ const Footer = (props) => {
     if (!hasSubdomain) {
       win = window.parent;
     }
-    win.postMessage(Utils.isLoggedIn() ? JSON.stringify(Utils.getUserData()) : "false", "*");
+    win.postMessage(
+      Utils.isLoggedIn() ? JSON.stringify(Utils.getUserData()) : "false",
+      "*"
+    );
   };
 
   useEffect(fetchList, []);
 
   useEffect(syncLocalStorage, []);
 
-
   return (
     <>
       <footer className="footer footerFixed">
         <div className="container">
           <ul className="footerLeft">
-            <li className="footerline"> © {new Date().getFullYear()} by {props.sitesetting.firstname} {props.sitesetting.middlename} {props.sitesetting.lastname}, {props.sitesetting.company_name}</li>
+            {/*JSON.stringify(props.sitesetting) === "{}" && (
+              <>
+                <li className="footerline">
+                  {" "}
+                  © {new Date().getFullYear()} by {props.sitesetting.firstname}{" "}
+                  {props.sitesetting.middlename} {props.sitesetting.lastname},{" "}
+                  {props.sitesetting.company_name}
+                </li>
+              </>
+            )*/}
+            {JSON.stringify(props.sitesetting) !== "{}" && (
+              <li className="footerline">
+                {" "}
+                © {new Date().getFullYear()} {props.sitesetting.copywrite_text}{" "}
+              </li>
+            )}
             <li className="footerline ml-2">
               <a href={Utils.getTrainerURL(`privacy-policy`)}>Privacy Policy</a>
             </li>
@@ -115,7 +138,13 @@ const Footer = (props) => {
             </ul>
           </ul>
         </div>
-        {hasSubdomain && <iframe className="d-none" id="mainDomainIframe" src={`${process.env.REACT_APP_PUBLIC_URL}/readls`}></iframe>}
+        {hasSubdomain && (
+          <iframe
+            className="d-none"
+            id="mainDomainIframe"
+            src={`${process.env.REACT_APP_PUBLIC_URL}/readls`}
+          ></iframe>
+        )}
       </footer>
     </>
   );

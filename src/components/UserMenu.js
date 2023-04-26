@@ -34,10 +34,13 @@ const UserMenu = (props) => {
   };
 
   return (<>
-    {Utils.isTrainer() && (
+    {Utils.isTrainer() && (<>
       <li>
         <a href={`${process.env.PUBLIC_URL}/my-profile#about`}>Edit Profile</a>
       </li>
+      <li>
+      <a href={`${process.env.PUBLIC_URL}/site-settings`}>Edit Site Settings</a>
+    </li></>
     )}
     {Utils.isStudent() && (
       <li>
