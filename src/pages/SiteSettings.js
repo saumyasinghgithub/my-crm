@@ -31,27 +31,21 @@ const SiteSettings = () => {
     setServerData("settings/add-site-settings", frmdata).then((res) => {
       setSaving(false);
       setResponse(res);
-    });
-
-    getServerData(`settings/site-settings`, true)
-      .then((tData) => {
-        setMysitesettings(tData);
-      })
-      .catch((msg) => {
-        setMysitesettings({ success: false, message: msg });
-      });
+      setTimeout(() => (window.location.reload()), 3000);
+    });    
   };
 
   useEffect(() => {
-    axios.get(Utils.apiUrl('settings/site-settings'),Utils.apiHeaders()).then((res) => {
-      console.log(res.data.type);
-      if(res.data.type === 'default'){
-        setMysitesettings({});
-      } else {
-        setMysitesettings(res.data.data[0]);
-      }
-      
-    });
+    axios
+      .get(Utils.apiUrl("settings/site-settings"), Utils.apiHeaders())
+      .then((res) => {
+        console.log(res.data.type);
+        if (res.data.type === "default") {
+          setMysitesettings({});
+        } else {
+          setMysitesettings(res.data.data[0]);
+        }
+      });
   }, []);
 
   const onContentChange = (fld) => (value) => {
@@ -97,6 +91,11 @@ const SiteSettings = () => {
                 type="hidden"
                 name="id"
                 defaultValue={_.get(mysitesettings, "id", "")}
+              />
+              <Form.Control
+                type="hidden"
+                name="old_logo"
+                defaultValue={_.get(mysitesettings, "logo", "")}
               />
               <Row>
                 <Col md={6} className="mt-3">
@@ -193,7 +192,15 @@ const SiteSettings = () => {
                       variant={response.success ? "info" : "danger"}
                       className="p-3 mt-2 text-center"
                     >
-                      {response.message}
+                      {response.success && (
+                        <>
+                          <p>
+                            Your Site Data have been submitted successfully !{" "}
+                          </p>
+                          <p>This page will reload automatically !</p>
+                        </>
+                      )}
+                      {/*response.message*/}
                     </Alert>
                   )}
                 </Col>

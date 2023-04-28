@@ -102,7 +102,7 @@ const TeacherBlogs = (props) => {
                     <div>{moment(props.events[0].event_on).format("MMM DD, h:mm a")}</div>
                     <p dangerouslySetInnerHTML={{ __html: props.events[0].event_short_desc }}></p>
                     <div className="HomeRegister mt-4 text-right">
-                      <button onClick={RegisterShow}>Register Now</button>
+                      <button /*onClick={RegisterShow}*/><a href={props.events[0].cta} target="_blank">Register Now</a></button>
                     </div>
                   </div>
                 </div>

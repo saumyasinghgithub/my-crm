@@ -69,7 +69,7 @@ const ManageCoupons = (props) => {
             <h1>My Coupons </h1>
             <Tab.Container id="left-tabs-example">
               <div className="card-header ui-sortable-handle">
-                <h3 className="card-title">Course List #</h3>
+                <h3 className="card-title">Coupon List #</h3>
                 <span className="btn float-right">
                   <button className="btn btn-success btn-sm" onClick={() => setShowForm({ mode: 1, id: false })}>
                     Add Coupon <i className="fas fa-plus"></i>

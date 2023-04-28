@@ -125,6 +125,16 @@ const EventsForm = (props) => {
                           required
                         />
                       </Col>
+                      <Col className="col-12 py-3">
+                        <Form.Label>Event CTA *</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name={`cta`}
+                          defaultValue={_.get(eventData, `${k}.cta`, "")}
+                          placeholder="Enter Event CTA *"
+                          required
+                        />
+                      </Col>
                       <Col className="col-12 col-lg-8 py-3">
                         <Form.Label>Event Sub Heading *</Form.Label>
                         <Form.Control

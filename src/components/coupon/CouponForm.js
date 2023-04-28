@@ -14,13 +14,18 @@ const CouponForm = (props) => {
     const { getServerData, setServerData } = useContext(UserContext);
     const [mycourse, setMycourse] = useState({});
     const [selectedOptions, setSelectedOptions] = useState([]);
-
+    
     useEffect(() => {
-        getServerData('coupons/courselist')
-            .then(setMycourse)
-            .catch(err => console.log(err));
-    }, []);
-    useEffect(window.scrollEffect, []);
+        const slug = Utils.subdomain();
+        getServerData(`trainer/profile/${slug}`, true)
+          .then((tData) => {
+            console.log(tData.courses);
+            setMycourse(tData.courses);
+          })
+          .catch((msg) => {
+            
+          });
+      }, []);
 
     const onSave = (e) => {
         const frm = e.currentTarget;

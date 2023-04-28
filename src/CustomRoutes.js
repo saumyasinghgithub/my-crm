@@ -69,7 +69,7 @@ const CustomRoutes = [
   },
   {
     path: "/manage-coupons",
-    secure: false,
+    secure: true,
     exact: true,
     layout: Layout.StaticPageLayout,
     component: Page.ManageCoupons,

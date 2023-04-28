@@ -237,7 +237,7 @@ const LandingPage = (props) => {
                               <p dangerouslySetInnerHTML={{ __html: event.event_short_desc }}></p>
                               <div className="HomeRegister mt-4">
                                 {/*<button onClick={RegisterShow}>Register Now</button>*/}
-                                <button> <a href="https://www.rnegade.pro/kickstart" target="_blank">Register Now</a></button>
+                                <button> <a href={event.cta} target="_blank">Register Now</a></button>
                               </div>
                             </div>
                           </div>
