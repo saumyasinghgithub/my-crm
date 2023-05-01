@@ -317,6 +317,7 @@ const LandingPage = (props) => {
 
       {/* JOIN COMMUNITY FORM */}
       <Modal size="lg" show={show} onHide={handleClose} className="JoinNowModal" closeButton>
+        <button type="button" class="btn-close" onClick={handleClose}></button>
         <RegisterForm
           formType="blog"
           eventData={{

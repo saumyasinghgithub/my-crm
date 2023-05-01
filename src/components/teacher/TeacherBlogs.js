@@ -21,7 +21,7 @@ const TeacherBlogs = (props) => {
   const blogItem = (blog) => {
     return (
       <div className="col-md-6 col-lg-4" key={blog.id}>
-        <a href={`/trainers/${props.slug}/blogs/${blog.slug}`}>
+        <a href={`/trainers/${props.slug}/blogs/${blog.slug}`} rel="noreferrer" target="_blank">
           <div className="knowledgeBox slideInUp wow ">
             <div className="knowledgeImg">
               <img className="img-fluid" src={`${process.env.REACT_APP_API_URL}/uploads/blog/${blog.blog_image}`} alt="ad blog" />
@@ -78,7 +78,7 @@ const TeacherBlogs = (props) => {
         )}
 
         <div className="knowledgBody">
-        <TeacherChannel youtube={data.youtube_community} />
+          <TeacherChannel youtube={data.youtube_community} />
           {/*!_.isEmpty(props.youtube) && (
             <>
               <TeacherChannel youtube={data.youtube_community} />
