@@ -226,6 +226,10 @@ const MyCart = (props) => {
 
                                                 <Container>
                                                     <Row className="add-space">
+                                                        {cart.data.length === 0 && <>
+                                                            <p class="alert alert-warning mt-3 mb-5">Ooopss! Your cart is empty. Click on the button to continue shopping.</p>
+                                                        </>
+                                                        }
                                                         <Col sm={5} className="text-left p-0 mb-2">
                                                             <a href={Utils.getTrainerURL('professional-profile/trainercourses')} className="btn btn-sm btnBlue font-weight-normal" >Continue Shopping</a>
                                                         </Col>
