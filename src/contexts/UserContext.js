@@ -45,8 +45,7 @@ const UserProvider = (props) => {
   
   const logout = (callback) => {
     setUserData(false);
-    Utils.setUserData(false); 
-       
+    Utils.setUserData(false);        
     callback();
   };
 

@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState,useContext } from "react";
 import { Alert, Container, ProgressBar } from "react-bootstrap";
 import Utils from "./../Utils";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import _ from "lodash";
 import validator from "validator";
+import UserContext from "../contexts/UserContext";
 
 const ChangePassword = (props) => {
   const frmRef = useRef("ResetPassForm");
@@ -13,7 +14,20 @@ const ChangePassword = (props) => {
   const $ = window.$;
   const [error, setError] = useState(false);
   const [processing, setProcessing] = useState(false);
+  const [trainer, setTrainer] = useState({ email: "" });
+  const slug = Utils.subdomain();
+  const { getServerData } = useContext(UserContext);
+  const [userData, setUserData] = useState(Utils.getUserData());
 
+  useEffect(() => {
+    getServerData(`trainer/about/${slug}`, true)
+      .then((tData) => {
+        setTrainer(tData);
+      })
+      .catch((msg) => {
+        setTrainer({ success: false, message: msg });
+      });
+  }, []);
   const submitForm = (e) => {
     const frm = frmRef.current;
     e.preventDefault();
@@ -42,6 +56,7 @@ const ChangePassword = (props) => {
       .then((res) => {
         if (res.data.success) {
           setShowMessage(true);
+          Utils.setUserData(false); 
         } else {
           throw res.data;
         }
@@ -87,7 +102,7 @@ const ChangePassword = (props) => {
     e.preventDefault();
     $("#loginModal").modal("show");
   };
-
+  console.log(trainer);
   return (
     <>
       <Container className="h-100 ">
@@ -107,8 +122,8 @@ const ChangePassword = (props) => {
               Change your account password
             </h1>
             <p>
-              if you have questions, requests or simply want to talk, <a href={`mailto:${process.env.REACT_APP_CONTACT_EMAIL}`}>
-                {process.env.REACT_APP_CONTACT_EMAIL}
+              if you have questions, requests or simply want to talk, <a href={`mailto:${trainer.email ? trainer.email : process.env.REACT_APP_CONTACT_EMAIL}`}>
+              {trainer.email ? trainer.email : process.env.REACT_APP_CONTACT_EMAIL}
               </a>
             </p>
           </div>
@@ -133,7 +148,7 @@ const ChangePassword = (props) => {
                 <div className="alert alert-info p-3">
                   <strong>
                     Your password has been updated successfully! Please
-                    <a href="#" className="px-2" onClick={openLoginModal}>
+                    <a href={`${Utils.getTrainerURL('login')}`} className="px-2">
                       login again
                     </a>
                     with new password.
