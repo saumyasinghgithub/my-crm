@@ -246,7 +246,7 @@ const MyCart = (props) => {
                                             </div>
                                         </div>
                                     </Col>
-                                    <Col md={12} lg={4} className="slideInUp wow animated cartRightBox">
+                                    <Col md={12} lg={4} className="cartRightBox">
                                         <h6 className="cartheading">Cart Summary</h6>
                                         {cart.data.map(cData => <Row className="cbox-dash mx-0" key={cData.id}>
                                             <Col sm={8}>
