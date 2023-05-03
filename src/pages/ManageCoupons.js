@@ -28,6 +28,9 @@ const ManageCoupons = (props) => {
     selector: (row) => row[v],
     format: (row) => {
       if(v=='expiry_date'){
+        if(row[v] === 0){
+          console.log('no expiry');
+        }
         const date = new Date(row[v]);
         const formattedDate = date.toLocaleDateString();
         return formattedDate;
