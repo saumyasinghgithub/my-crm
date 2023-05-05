@@ -1,14 +1,10 @@
 import { useEffect, useContext, useState } from "react";
 import { Form, Alert, Spinner, Row, Col, Button, Modal } from "react-bootstrap";
 import UserContext from "./../../contexts/UserContext";
-import { Editor } from "@tinymce/tinymce-react";
 import _ from "lodash";
 import Utils from "./../../Utils";
-import axios from "axios";
-import trainer from "../trainer";
 
 const CouponForm = (props) => {
-  console.log(props);
   const [mode, setMode] = useState("Add");
   const [mycoupon, setMycoupon] = useState({});
   const [saving, setSaving] = useState(false);
@@ -17,8 +13,8 @@ const CouponForm = (props) => {
   const [mycourse, setMycourse] = useState({});
   const [mystudents, setMystudents] = useState({});
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [trainerdata,setTrainerdata] = useState(Utils.getUserData());
-  const [selectedStudentOptions,setSelectedStudentOptions] = useState([]);
+  const [trainerdata, setTrainerdata] = useState(Utils.getUserData());
+  const [selectedStudentOptions, setSelectedStudentOptions] = useState([]);
 
   useEffect(() => {
     const slug = Utils.subdomain();
@@ -30,14 +26,14 @@ const CouponForm = (props) => {
       .catch((msg) => {});
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     getServerData(`user/student-list`, true)
       .then((tData) => {
         console.log(tData.list);
         setMystudents(tData.list);
       })
       .catch((msg) => {});
-  },[]);
+  }, []);
 
   const onSave = (e) => {
     const frm = e.currentTarget;
@@ -45,17 +41,12 @@ const CouponForm = (props) => {
     let frmdata = new FormData(frm);
     frmdata.append("item_id", selectedOptions);
     frmdata.append("user_id", selectedStudentOptions);
-    console.log(selectedOptions);
-    console.log(selectedStudentOptions);
-    axios
-      .post(Utils.apiUrl(`coupons/add`), frmdata, Utils.apiHeaders())
+    setServerData("coupons/add", frmdata, "post")
       .then((res) => {
-        console.log(res);
-        setResponse({success:true,message:"Your coupons have been submitted to database successfully !"});
+        setResponse({ success: res.data.success, message: res.data.message });
       })
       .catch((err) => {
-        setResponse(err);
-        console.log(err);
+        setResponse({ success: false, message: err });
       });
   };
 
@@ -64,7 +55,7 @@ const CouponForm = (props) => {
     selectedOptions.push(parseInt(event.target.value));
     setSelectedOptions(selectedOptions);
   };
-  const handleOnclickStudentOption = (events) =>{
+  const handleOnclickStudentOption = (events) => {
     selectedStudentOptions.push(parseInt(events.target.value));
     setSelectedStudentOptions(selectedStudentOptions);
   };
@@ -79,69 +70,44 @@ const CouponForm = (props) => {
     );
   }
   const studentList = [];
-  for (let r = 0; r < mystudents.length;r++ ){
-    studentList.push(<>
-      <option key={mystudents[r].id} value={mystudents[r].id}>
-        {mystudents[r].firstname} {mystudents[r].lastname}
-      </option>
-    </>);
+  for (let r = 0; r < mystudents.length; r++) {
+    studentList.push(
+      <>
+        <option key={mystudents[r].id} value={mystudents[r].id}>
+          {mystudents[r].firstname} {mystudents[r].lastname}
+        </option>
+      </>
+    );
   }
   const renderForm = () => (
     <Form onSubmit={onSave}>
       <Form.Control
         type="hidden"
         name="created_at"
-        defaultValue={
-          currentDate.getFullYear() +
-          "-" +
-          currentDate.toLocaleString(undefined, { month: "2-digit" }) +
-          "-" +
-          currentDate.getDate()
-        }
+        defaultValue={currentDate.getFullYear() + "-" + currentDate.toLocaleString(undefined, { month: "2-digit" }) + "-" + currentDate.getDate()}
       />
-      <Form.Control
-        type="hidden"
-        name="trainer_id"
-        defaultValue={trainerdata.id}
-      />
+      <Form.Control type="hidden" name="trainer_id" defaultValue={trainerdata.id} />
       <Row>
         <Col md={4} className="mt-3">
           <Form.Label>Coupon Code: </Form.Label>
-          <Form.Control
-            type="text"
-            name="coupon_code"
-            placeholder="Enter coupon code"
-          />
+          <Form.Control type="text" name="coupon_code" placeholder="Enter coupon code" />
           <p>* Mandatory Field</p>
         </Col>
         <Col md={4} className="mt-3">
           <Form.Label>Usage Limit: </Form.Label>
-          <Form.Control
-            type="number"
-            name="usage_limit"
-            placeholder="Enter usage limit"
-          />
+          <Form.Control type="number" name="usage_limit" placeholder="Enter usage limit" />
           <p>Note - If not set it is set for unlimited period</p>
         </Col>
         <Col md={4} className="mt-3">
           <Form.Label>Expiry Date: </Form.Label>
-          <Form.Control
-            type="date"
-            name="expiry_date"
-            placeholder="Enter expiry date"
-          />
+          <Form.Control type="date" name="expiry_date" placeholder="Enter expiry date" />
           <p>Note - If not set it is set for unlimited period</p>
         </Col>
       </Row>
       <Row>
         <Col md={6} className="mt-3">
           <Form.Label>Select Course: </Form.Label>
-          <select
-            value={selectedOptions}
-            onChange={handleOnclickOption}
-            multiple="multiple"
-            className="form-control"
-          >
+          <select value={selectedOptions} onChange={handleOnclickOption} multiple="multiple" className="form-control">
             <option value=""> - Select Course - </option>
             {courseList}
           </select>
@@ -149,12 +115,7 @@ const CouponForm = (props) => {
         </Col>
         <Col md={6} className="mt-3">
           <Form.Label>Select Students: </Form.Label>
-          <select
-            value={selectedStudentOptions}
-            onChange={handleOnclickStudentOption}
-            multiple="multiple"
-            className="form-control"
-          >
+          <select value={selectedStudentOptions} onChange={handleOnclickStudentOption} multiple="multiple" className="form-control">
             <option value=""> - Select Students - </option>
             {studentList}
           </select>
@@ -173,12 +134,7 @@ const CouponForm = (props) => {
         </Col>
         <Col md={6} className="mt-3">
           <Form.Label>Set Value:</Form.Label>
-          <Form.Control
-            type="text"
-            name="discount_value"
-            placeholder="Enter discount value."
-            required
-          />
+          <Form.Control type="text" name="discount_value" placeholder="Enter discount value." required />
           <p>* Mandatory Field</p>
         </Col>
       </Row>
@@ -195,10 +151,7 @@ const CouponForm = (props) => {
             </Button>
           )}
           {!saving && response.message !== "" && (
-            <Alert
-              variant={response.success ? "info" : "danger"}
-              className="p-3 mt-2 text-center"
-            >
+            <Alert variant={response.success ? "info" : "danger"} className="p-3 mt-2 text-center">
               {response.message}
             </Alert>
           )}

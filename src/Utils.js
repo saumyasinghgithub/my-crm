@@ -19,13 +19,11 @@ const Utils = {
   getTrainerURL: (path = "", slug = false) => {
     let url = process.env.REACT_APP_PUBLIC_URL;
 
-    if (!slug) {
+    if (slug !== false || Utils.hasSubdomain()) {
       slug = Utils.subdomain();
+      url = url.split("://", 2);
+      url = url[0] + "://" + slug + "." + url[1];
     }
-
-    url = url.split("://", 2);
-
-    url = url[0] + "://" + slug + "." + url[1];
 
     if (path != "" || path != "/") {
       url += "/" + path;
@@ -34,30 +32,8 @@ const Utils = {
     return url;
   },
 
-  apiHeaders: (extraHeaders = null) => {
-    let headers = {
-      headers: {
-        "x-api-key": "$2a$08$66e6e.5m5kDsdU/O7guw/ej8ETNuSfe9k5W1AME4V/Lno6PjvMbay",
-        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "PUT,GET,POST,DELETE,OPTIONS,PATCH",
-        "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token, token, access-control-allow-origin",
-        Accept: "application/json, text/plain, */*",
-        ...extraHeaders,
-      },
-    };
-
-    const uData = Utils.getUserData();
-    if (uData && _.get(uData, "token", false)) {
-      headers["headers"]["token"] = uData.token;
-    }
-
-    return headers;
-  },
-
-  isLoggedIn: () => {
-    const dt = Utils.getUserData();
-    return _.get(dt, "token", false) !== false;
+  isLoggedIn: (userData) => {
+    return _.get(userData, "token", false) !== false;
   },
 
   removeSession: () => {
@@ -68,30 +44,15 @@ const Utils = {
     localStorage.setItem(process.env.REACT_APP_APPNAME + "-userData", JSON.stringify(dt));
   },
 
-  getUserData: () => {
-    let userData = localStorage.getItem(process.env.REACT_APP_APPNAME + "-userData");
-    if (userData) {
-      return JSON.parse(userData);
+  siteCookieName: `${process.env.REACT_APP_APPNAME}-userData`,
+
+  getCookieOptions: () => ({ secure: false }),
+
+  getUserData: (data) => {
+    if (data) {
+      return JSON.parse(data);
     } else {
       return false;
-    }
-  },
-
-  setUserData: (data) => {
-    const uData = _.get(data, "userData", false);
-    // return;
-    if (uData === false) {
-      //=== logout
-      localStorage.removeItem(process.env.REACT_APP_APPNAME + "-userData");
-    } else {
-      let userData = Utils.getUserData();
-      if (!userData) {
-        userData = {};
-      }
-      uData["token"] = _.get(data, "token", false);
-      uData[`stepData${userData.id}`] = userData[`stepData${userData.id}`];
-      userData = { ...userData, ...uData };
-      localStorage.setItem(process.env.REACT_APP_APPNAME + "-userData", JSON.stringify(userData));
     }
   },
 
@@ -111,12 +72,10 @@ const Utils = {
     localStorage.setItem(process.env.REACT_APP_APPNAME + "-userData", JSON.stringify(userData));
   },
 
-  isStudent: () => {
-    let userData = Utils.getUserData();
+  isStudent: (userData) => {
     return parseInt(_.get(userData, "role_id", 0)) === parseInt(process.env.REACT_APP_STUDENT_ROLE);
   },
-  isTrainer: () => {
-    let userData = Utils.getUserData();
+  isTrainer: (userData) => {
     return parseInt(_.get(userData, "role_id", 0)) === parseInt(process.env.REACT_APP_TRAINER_ROLE);
   },
 

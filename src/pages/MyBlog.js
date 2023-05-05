@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
-import _, { noConflict } from "lodash";
+import React, { useState, useEffect, useContext } from "react";
+import _ from "lodash";
 import { Container, Tab, Row, Col, Button } from "react-bootstrap";
 import BlogForm from "../components/blogs/BlogForm";
 import DataTableGrid from "../components/DataTableGrid";
 import axios from "axios";
 import Utils from "../Utils";
+import UserContext from "./../contexts/UserContext";
 
 const MyBlog = (props) => {
+  const { apiHeaders } = useContext(UserContext);
   const [showmc, setShowmc] = useState({ show: false, row: null, type: null });
 
   const [list, setList] = useState({ loading: false, error: false, pageInfo: {}, data: [] });
@@ -42,7 +44,7 @@ const MyBlog = (props) => {
 
   const deleteRecord = (id) => (e) => {
     if (window.confirm("You are going to delete record, are you sure?")) {
-      axios.delete(Utils.apiUrl(`trainer/my-blogs/${id}`), Utils.apiHeaders()).then((res) => {
+      axios.delete(Utils.apiUrl(`trainer/my-blogs/${id}`), apiHeaders()).then((res) => {
         fetchList();
         window.alert(res.data.message);
       });
@@ -51,7 +53,7 @@ const MyBlog = (props) => {
 
   const fetchList = () => {
     setList({ ...list, loading: true });
-    axios.get(Utils.apiUrl("trainer/my-blogs"), Utils.apiHeaders()).then((res) => {
+    axios.get(Utils.apiUrl("trainer/my-blogs"), apiHeaders()).then((res) => {
       if (res.data.success) {
         setList({ ...list, loading: false, error: false, pageInfo: res.data.pageInfo, data: res.data.data.map((v) => _.pick(v, listColumns)) });
       } else {

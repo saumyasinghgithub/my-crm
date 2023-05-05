@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState,useContext } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import { Alert, Container, ProgressBar } from "react-bootstrap";
 import Utils from "./../Utils";
 import { useParams } from "react-router-dom";
@@ -16,7 +16,7 @@ const ChangePassword = (props) => {
   const [processing, setProcessing] = useState(false);
   const [trainer, setTrainer] = useState({ email: "" });
   const slug = Utils.subdomain();
-  const { getServerData } = useContext(UserContext);
+  const { getServerData, apiHeaders } = useContext(UserContext);
   const [userData, setUserData] = useState(Utils.getUserData());
 
   useEffect(() => {
@@ -40,23 +40,17 @@ const ChangePassword = (props) => {
     let frmdata = new FormData(frm);
     if (_.get(frm, "password.value", false)) {
       if (frm.password.value !== frm.conf_password.value) {
-        setError(
-          "Password verification failed, please verify your password correctly!"
-        );
+        setError("Password verification failed, please verify your password correctly!");
         return false;
       }
     }
     setProcessing(true);
     axios
-      .post(
-        Utils.apiUrl(`user/chgpwd`),
-        frmdata,
-        Utils.apiHeaders({ token: token })
-      )
+      .post(Utils.apiUrl(`user/chgpwd`), frmdata, apiHeaders({ token: token }))
       .then((res) => {
         if (res.data.success) {
           setShowMessage(true);
-          Utils.setUserData(false); 
+          Utils.setUserData(false);
         } else {
           throw res.data;
         }
@@ -80,9 +74,7 @@ const ChangePassword = (props) => {
       })
     ) {
       frm.password.setCustomValidity("Passwords Don't Match");
-      $(frm.password)
-        .next()
-        .html("Please enter appropriate password as per above instructions.");
+      $(frm.password).next().html("Please enter appropriate password as per above instructions.");
     } else {
       frm.password.setCustomValidity("");
       $(frm.password).next().html("");
@@ -118,12 +110,11 @@ const ChangePassword = (props) => {
             </ol>
   </nav>*/}
           <div className="">
-            <h1 className="slideInUp wow animated pt-4 pb-4 mb-0">
-              Change your account password
-            </h1>
+            <h1 className="slideInUp wow animated pt-4 pb-4 mb-0">Change your account password</h1>
             <p>
-              if you have questions, requests or simply want to talk, <a href={`mailto:${trainer.email ? trainer.email : process.env.REACT_APP_CONTACT_EMAIL}`}>
-              {trainer.email ? trainer.email : process.env.REACT_APP_CONTACT_EMAIL}
+              if you have questions, requests or simply want to talk,{" "}
+              <a href={`mailto:${trainer.email ? trainer.email : process.env.REACT_APP_CONTACT_EMAIL}`}>
+                {trainer.email ? trainer.email : process.env.REACT_APP_CONTACT_EMAIL}
               </a>
             </p>
           </div>
@@ -136,19 +127,12 @@ const ChangePassword = (props) => {
             </Alert>
           )}
           {!processing && (
-            <form
-              ref={frmRef}
-              className="form forgotPassword needs-validation"
-              id="contact-form"
-              method="post"
-              noValidate
-              onSubmit={submitForm}
-            >
+            <form ref={frmRef} className="form forgotPassword needs-validation" id="contact-form" method="post" noValidate onSubmit={submitForm}>
               {showMessage && (
                 <div className="alert alert-info p-3">
                   <strong>
                     Your password has been updated successfully! Please
-                    <a href={`${Utils.getTrainerURL('login')}`} className="px-2">
+                    <a href={`${Utils.getTrainerURL("login")}`} className="px-2">
                       login again
                     </a>
                     with new password.
@@ -176,9 +160,7 @@ const ChangePassword = (props) => {
                           type="password"
                           required
                         />
-                        <div className="invalid-feedback my-2">
-                          Invalid Password
-                        </div>
+                        <div className="invalid-feedback my-2">Invalid Password</div>
                       </div>
                     </div>
                   </div>
@@ -199,9 +181,7 @@ const ChangePassword = (props) => {
                           type="password"
                           required
                         />
-                        <div className="invalid-feedback my-2">
-                          Invalid Password
-                        </div>
+                        <div className="invalid-feedback my-2">Invalid Password</div>
                       </div>
                     </div>
                   </div>
@@ -219,9 +199,7 @@ const ChangePassword = (props) => {
                       type="password"
                       required
                     />
-                    <div className="invalid-feedback my-2">
-                      Passwords Don't Match
-                    </div>
+                    <div className="invalid-feedback my-2">Passwords Don't Match</div>
                   </div>
                 </div>
 
@@ -238,8 +216,7 @@ const ChangePassword = (props) => {
                       </div>
                       <div>
                         <i className="fas fa-exclamation-circle mr-2 text-info"></i>
-                        Passwords must have at least 1 non-alphanumeric
-                        character(s) such as as *, -, or #.
+                        Passwords must have at least 1 non-alphanumeric character(s) such as as *, -, or #.
                       </div>
                     </div>
                   </div>
@@ -249,11 +226,7 @@ const ChangePassword = (props) => {
                   <div className="col-sm-12 text-right">
                     <div className="actions-toolbar">
                       <div className="primary">
-                        <button
-                          type="submit"
-                          title="Submit"
-                          className="action submit submitbtn"
-                        >
+                        <button type="submit" title="Submit" className="action submit submitbtn">
                           Submit
                         </button>
                       </div>

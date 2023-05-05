@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Utils from "./../Utils";
-import axios from "axios";
-import { TeacherSubscribe } from "../components/teacher";
+import UserContext from "./../contexts/UserContext";
 
 const Footer = (props) => {
   //console.log(props.sitesetting);
+  const { getServerData } = useContext(UserContext);
   if (JSON.stringify(props.sitesetting) === "{}") {
     console.log("The object is empty");
   }
@@ -18,27 +18,25 @@ const Footer = (props) => {
 
   const fetchList = () => {
     setList({ ...list, loading: true });
-    axios
-      .get(Utils.apiUrl("sociallink/list"), Utils.apiHeaders())
-      .then((res) => {
-        if (res.data.success) {
-          setList({
-            ...list,
-            loading: false,
-            error: false,
-            pageInfo: res.data.pageInfo,
-            data: res.data.data,
-          });
-        } else {
-          setList({
-            ...list,
-            loading: false,
-            error: res.data.message,
-            pageInfo: {},
-            data: [],
-          });
-        }
-      });
+    getServerData("sociallink/list", true).then((res) => {
+      if (res.data.success) {
+        setList({
+          ...list,
+          loading: false,
+          error: false,
+          pageInfo: res.data.pageInfo,
+          data: res.data.data,
+        });
+      } else {
+        setList({
+          ...list,
+          loading: false,
+          error: res.data.message,
+          pageInfo: {},
+          data: [],
+        });
+      }
+    });
   };
 
   const sendLocalStorage = () => {
@@ -71,10 +69,7 @@ const Footer = (props) => {
     if (!hasSubdomain) {
       win = window.parent;
     }
-    win.postMessage(
-      Utils.isLoggedIn() ? JSON.stringify(Utils.getUserData()) : "false",
-      "*"
-    );
+    win.postMessage(Utils.isLoggedIn() ? JSON.stringify(Utils.getUserData()) : "false", "*");
   };
 
   useEffect(fetchList, []);
@@ -138,13 +133,7 @@ const Footer = (props) => {
             </ul>
           </ul>
         </div>
-        {hasSubdomain && (
-          <iframe
-            className="d-none"
-            id="mainDomainIframe"
-            src={`${process.env.REACT_APP_PUBLIC_URL}/readls`}
-          ></iframe>
-        )}
+        {hasSubdomain && <iframe className="d-none" id="mainDomainIframe" src={`${process.env.REACT_APP_PUBLIC_URL}/readls`}></iframe>}
       </footer>
     </>
   );

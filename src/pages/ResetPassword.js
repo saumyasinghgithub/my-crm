@@ -1,12 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import { Container } from "react-bootstrap";
 import Utils from "./../Utils";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import _ from "lodash";
 import validator from "validator";
+import UserContext from "./../contexts/UserContext";
 
 const ResetPassword = (props) => {
+  const { apiHeaders } = useContext(UserContext);
   const frmRef = useRef("ResetPassForm");
   const { token } = useParams();
   const [showMessage, setShowMessage] = useState(false);
@@ -25,18 +27,12 @@ const ResetPassword = (props) => {
     let frmdata = new FormData(frm);
     if (_.get(frm, "password.value", false)) {
       if (frm.password.value !== frm.conf_password.value) {
-        setError(
-          "Password verification failed, please verify your password correctly!"
-        );
+        setError("Password verification failed, please verify your password correctly!");
         return false;
       }
     }
     axios
-      .post(
-        Utils.apiUrl(`user/resetpass`),
-        frmdata,
-        Utils.apiHeaders({ token: token })
-      )
+      .post(Utils.apiUrl(`user/resetpass`), frmdata, apiHeaders({ token: token }))
       .then((res) => {
         if (res.data.success) {
           setShowMessage(true);
@@ -99,14 +95,10 @@ const ResetPassword = (props) => {
   </nav>*/}
           <div className="">
             <img src="assets/images/contact.jpg" className="img-fluid" alt="" />
-            <h1 className="slideInUp wow animated pt-4 pb-4 mb-0">
-              Reset Password
-            </h1>
+            <h1 className="slideInUp wow animated pt-4 pb-4 mb-0">Reset Password</h1>
             <p>
               if you have questions, requests or simply want to talk,
-              <a href={`mailto:${process.env.REACT_APP_CONTACT_EMAIL}`}>
-                {process.env.REACT_APP_CONTACT_EMAIL}
-              </a>
+              <a href={`mailto:${process.env.REACT_APP_CONTACT_EMAIL}`}>{process.env.REACT_APP_CONTACT_EMAIL}</a>
             </p>
 
             <div className="row">
@@ -122,26 +114,18 @@ const ResetPassword = (props) => {
                   </div>
                   <div>
                     <i className="fas fa-exclamation-circle mr-2 text-info"></i>
-                    Passwords must have at least 1 non-alphanumeric character(s)
-                    such as as *, -, or #.
+                    Passwords must have at least 1 non-alphanumeric character(s) such as as *, -, or #.
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <form
-            ref={frmRef}
-            className="form forgotPassword needs-validation"
-            id="contact-form"
-            method="post"
-            noValidate
-            onSubmit={submitForm}
-          >
+          <form ref={frmRef} className="form forgotPassword needs-validation" id="contact-form" method="post" noValidate onSubmit={submitForm}>
             {showMessage && (
               <div className="alert alert-info p-3">
                 <strong>
                   Your password has been updated successfully! Please
-                  <a href={`${Utils.getTrainerURL('login')}`}> login again </a>
+                  <a href={`${Utils.getTrainerURL("login")}`}> login again </a>
                   with new password.
                 </strong>
               </div>
@@ -177,9 +161,7 @@ const ResetPassword = (props) => {
                         type="password"
                         required
                       />
-                      <div className="invalid-feedback">
-                        Passwords Don't Match
-                      </div>
+                      <div className="invalid-feedback">Passwords Don't Match</div>
                     </div>
                   </div>
                 </div>
@@ -188,11 +170,7 @@ const ResetPassword = (props) => {
                 <div className="col-sm-8 text-right">
                   <div className="actions-toolbar">
                     <div className="primary">
-                      <button
-                        type="submit"
-                        title="Submit"
-                        className="action submit submitbtn"
-                      >
+                      <button type="submit" title="Submit" className="action submit submitbtn">
                         Submit
                       </button>
                     </div>

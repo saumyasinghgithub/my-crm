@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import { Container } from "react-bootstrap";
 import Utils from "./../Utils";
-import axios from "axios";
 import _ from "lodash";
 import UserContext from "./../contexts/UserContext";
 import { Row, Col } from "react-bootstrap";
@@ -12,7 +11,7 @@ const ContactUs = (props) => {
   const [trainer, setTrainer] = useState({ email: "" });
   const [loading, setLoading] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
-  const { getServerData } = useContext(UserContext);
+  const { getServerData, setServerData } = useContext(UserContext);
   const $ = window.$;
   const [error, setError] = useState(false);
   const slug = Utils.subdomain();
@@ -40,19 +39,9 @@ const ContactUs = (props) => {
     setError(false);
     setShowMessage(false);
     let frmdata = new FormData(frm);
-    axios
-      .post(Utils.apiUrl(`contact/add`), frmdata, Utils.apiHeaders())
-      .then((res) => {
-        if (res.data.success) {
-          setShowMessage(true);
-        } else {
-          throw res.data;
-        }
-      })
-      .catch((err) => {
-        setError(err.message);
-        //console.log(err);
-      });
+    setServerData(`contact/add`, frmdata, "post")
+      .then(() => setShowMessage(true))
+      .catch(setError);
   };
 
   useEffect(window.scrollEffect, []);
@@ -171,14 +160,14 @@ const ContactUs = (props) => {
               </form>
             </Col>
             <Col lg={6} md={12} className="mt-2 mb-2">
-
               <div className="ContactDetails">
                 <a href={`${_.get(trainer, "company_url", "")}`} target="_blank">
                   <img
                     src={`${process.env.REACT_APP_API_URL}/uploads/logo/${_.get(trainer, "logo_image", "../../logo-default.png")}`}
                     className="img-fluid w-50 ml-0"
                     alt={_.get(trainer, "company", process.env.REACT_APP_CONTACT_NAME)}
-                  /></a>
+                  />
+                </a>
 
                 <p className="mt-5 mb-2">{_.get(trainer, "phone", process.env.REACT_APP_CONTACT_PHONE)}</p>
 
@@ -192,7 +181,6 @@ const ContactUs = (props) => {
                 </p>
                 <TeacherSubscribe type="inLine" />
               </div>
-
             </Col>
           </Row>
         </div>

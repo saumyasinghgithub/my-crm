@@ -5,11 +5,11 @@ import Utils from "./../Utils";
 import _ from "lodash";
 import UserMenu from "./UserMenu";
 import TeacherNav from "./teacher/TeacherNav";
+import UserContext from "./../contexts/UserContext";
 
 const HeaderTrainer = (props) => {
-  const [loggedIn, setLoggedIn] = useState(Utils.isLoggedIn());
-
-  const udata = Utils.getUserData();
+  const { userData } = useContext(UserContext);
+  const [loggedIn, setLoggedIn] = useState(Utils.isLoggedIn(userData));
 
   const $ = window.$;
 
@@ -32,8 +32,6 @@ const HeaderTrainer = (props) => {
       });
     }
   }, []);
-
-
 
   return (
     <>
@@ -76,18 +74,25 @@ const HeaderTrainer = (props) => {
                       Log in
                     </a>
                   )}
-                  {loggedIn && (<>
-                    <a href={Utils.getTrainerURL(`login`)} type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                      {_.get(udata, "base_image", "") !== "" && (
-                        <img
-                          src={`${process.env.REACT_APP_API_URL}/uploads/${Utils.isTrainer() ? "base" : "student/base"}/${_.get(udata, "base_image", "")}`}
-                          className="img-fluid"
-                          title={`Logged in as ${udata.firstname} ${udata.lastname}`}
-                        />
-                      )}
-                    </a>
-                    <ul className="dropdown-menu" role="menu"><UserMenu /></ul>
-                  </>
+                  {loggedIn && (
+                    <>
+                      <a href={Utils.getTrainerURL(`login`)} type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        {_.get(userData, "base_image", "") !== "" && (
+                          <img
+                            src={`${process.env.REACT_APP_API_URL}/uploads/${Utils.isTrainer() ? "base" : "student/base"}/${_.get(
+                              userData,
+                              "base_image",
+                              ""
+                            )}`}
+                            className="img-fluid"
+                            title={`Logged in as ${userData.firstname} ${userData.lastname}`}
+                          />
+                        )}
+                      </a>
+                      <ul className="dropdown-menu" role="menu">
+                        <UserMenu />
+                      </ul>
+                    </>
                   )}
                 </div>
               </li>
@@ -98,17 +103,12 @@ const HeaderTrainer = (props) => {
                   </button>
                   <ul className="dropdown-menu" role="menu">
                     <li className="dropdown-item HelpDropdown">
-                      <a href={Utils.getTrainerURL(`help-for-student`)}>
-                        Help for Student
-                      </a>
+                      <a href={Utils.getTrainerURL(`help-for-student`)}>Help for Student</a>
                     </li>
                     <li className="dropdown-item HelpDropdown">
-                      <a href={Utils.getTrainerURL(`contact-us`)}>
-                        Contact
-                      </a>
+                      <a href={Utils.getTrainerURL(`contact-us`)}>Contact</a>
                     </li>
                   </ul>
-
                 </div>
               </li>
             </ul>

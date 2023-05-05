@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from "react";
-import _, { noConflict } from "lodash";
+import React, { useState, useEffect, useContext } from "react";
+import _ from "lodash";
 import { Container, Tab, Row, Col, Button, Badge } from "react-bootstrap";
 import CouponForm from "../components/coupon/CouponForm";
 import DataTableGrid from "../components/DataTableGrid";
-import axios from "axios";
+import UserContext from "./../contexts/UserContext";
 import Utils from "../Utils";
+import axios from "axios";
 
 const ManageCoupons = (props) => {
+  const { apiHeaders } = useContext(UserContext);
   const [showForm, setShowForm] = useState({ id: false, mode: 0 }); // 0=do not show, 1=add, 2=edit
   const listColumns = ["id", "coupon_code", "usage_limit", "items", "expiry_date"];
   const [list, setList] = useState({ loading: false, error: false, pageInfo: {}, data: [] });
 
   const fetchList = () => {
     setList({ ...list, loading: true });
-    axios.get(Utils.apiUrl("coupons/list"), Utils.apiHeaders()).then((res) => {
+    axios.get(Utils.apiUrl("coupons/list"), apiHeaders()).then((res) => {
       if (res.data.success) {
         setList({ ...list, loading: false, error: false, pageInfo: res.data.pageInfo, data: res.data.data.map((v) => _.pick(v, listColumns)) });
       } else {
@@ -27,16 +29,16 @@ const ManageCoupons = (props) => {
     name: v.toUpperCase(),
     selector: (row) => row[v],
     format: (row) => {
-      if(v=='expiry_date'){
-        if(row[v] === 0){
-          console.log('no expiry');
+      if (v == "expiry_date") {
+        if (row[v] === 0) {
+          console.log("no expiry");
         }
         const date = new Date(row[v]);
         const formattedDate = date.toLocaleDateString();
         return formattedDate;
       } else {
         return row[v];
-      }      
+      }
     },
     sortable: true,
   }));
@@ -63,7 +65,7 @@ const ManageCoupons = (props) => {
   });
   const deleteRecord = (id) => (e) => {
     if (window.confirm("You are going to delete record, are you sure?")) {
-      axios.delete(Utils.apiUrl(`coupons/${id}`), Utils.apiHeaders()).then((res) => {
+      axios.delete(Utils.apiUrl(`coupons/${id}`), apiHeaders()).then((res) => {
         fetchList();
         window.alert(res.data.message);
       });

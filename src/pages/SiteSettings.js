@@ -1,18 +1,8 @@
 import { useEffect, useContext, useState } from "react";
-import {
-  Form,
-  Alert,
-  Spinner,
-  Container,
-  Row,
-  Col,
-  Button,
-} from "react-bootstrap";
+import { Form, Alert, Spinner, Container, Row, Col, Button } from "react-bootstrap";
 import _ from "lodash";
 import { Editor } from "@tinymce/tinymce-react";
 import UserContext from "../contexts/UserContext";
-import Utils from "../Utils";
-import axios from "axios";
 const SiteSettings = () => {
   const [mysitesettings, setMysitesettings] = useState({});
   const [saving, setSaving] = useState(false);
@@ -24,28 +14,22 @@ const SiteSettings = () => {
     e.preventDefault();
     let frmdata = new FormData(frm);
     setSaving(true);
-    frmdata.append(
-      "contact_address",
-      _.get(mysitesettings, "contact_address", "")
-    );
+    frmdata.append("contact_address", _.get(mysitesettings, "contact_address", ""));
     setServerData("settings/add-site-settings", frmdata).then((res) => {
       setSaving(false);
       setResponse(res);
-      setTimeout(() => (window.location.reload()), 3000);
-    });    
+      setTimeout(() => window.location.reload(), 3000);
+    });
   };
 
   useEffect(() => {
-    axios
-      .get(Utils.apiUrl("settings/site-settings"), Utils.apiHeaders())
-      .then((res) => {
-        console.log(res.data.type);
-        if (res.data.type === "default") {
-          setMysitesettings({});
-        } else {
-          setMysitesettings(res.data.data[0]);
-        }
-      });
+    getServerData("settings/site-settings").then((data) => {
+      if (data.type === "default") {
+        setMysitesettings({});
+      } else {
+        setMysitesettings(data.data[0]);
+      }
+    });
   }, []);
 
   const onContentChange = (fld) => (value) => {
@@ -57,18 +41,10 @@ const SiteSettings = () => {
     return (
       <>
         <Form.Label>{title}</Form.Label>
-        <Form.Control
-          type="file"
-          size="lg"
-          name={fld}
-          accept=".jpeg,.png,.PNG,.jpg;"
-        />
+        <Form.Control type="file" size="lg" name={fld} accept=".jpeg,.png,.PNG,.jpg;" />
         <div className="text-center">
           {!_.isEmpty(_.get(mysitesettings, fld, "")) && (
-            <img
-              src={`${process.env.REACT_APP_API_URL}/uploads/${fld}/${mysitesettings[fld]}`}
-              className="thumbnail mt-3"
-            />
+            <img src={`${process.env.REACT_APP_API_URL}/uploads/${fld}/${mysitesettings[fld]}`} className="thumbnail mt-3" />
           )}
         </div>
       </>
@@ -80,23 +56,13 @@ const SiteSettings = () => {
         <div className="container">
           <h1>Site Settings</h1>
           <p className="alert alert-warning disclaimer mt-3 mb-3">
-            All fields are optional and can override default settings. Please
-            use your judgment when filling them out. Leaving a field blank uses
-            the default setting. Your completion of any field acknowledges
-            acceptance of overriding the default settings. Thank you.
+            All fields are optional and can override default settings. Please use your judgment when filling them out. Leaving a field blank uses the
+            default setting. Your completion of any field acknowledges acceptance of overriding the default settings. Thank you.
           </p>
           <Col md={12}>
             <Form onSubmit={onSave}>
-              <Form.Control
-                type="hidden"
-                name="id"
-                defaultValue={_.get(mysitesettings, "id", "")}
-              />
-              <Form.Control
-                type="hidden"
-                name="old_logo"
-                defaultValue={_.get(mysitesettings, "logo", "")}
-              />
+              <Form.Control type="hidden" name="id" defaultValue={_.get(mysitesettings, "id", "")} />
+              <Form.Control type="hidden" name="old_logo" defaultValue={_.get(mysitesettings, "logo", "")} />
               <Row>
                 <Col md={6} className="mt-3">
                   <Form.Label>Company Name: </Form.Label>
@@ -139,20 +105,13 @@ const SiteSettings = () => {
               </Row>
               <Row>
                 <Col md={6} className="mt-3">
-                  {photoUploader(
-                    "logo",
-                    "Upload logo (Image dimension should be 88cm x 40cm)"
-                  )}
+                  {photoUploader("logo", "Upload logo (Image dimension should be 88cm x 40cm)")}
                 </Col>
                 <Col md={6} className="mt-3">
                   <Form.Label>Contact Address: </Form.Label>
                   <Editor
                     apiKey={process.env.TINYMCE_API_KEY}
-                    value={
-                      _.isEmpty(_.get(mysitesettings, "contact_address", ""))
-                        ? ""
-                        : mysitesettings.contact_address
-                    }
+                    value={_.isEmpty(_.get(mysitesettings, "contact_address", "")) ? "" : mysitesettings.contact_address}
                     init={{
                       height: 200,
                       menubar: false,
@@ -188,15 +147,10 @@ const SiteSettings = () => {
                     </Button>
                   )}
                   {!saving && response.message !== "" && (
-                    <Alert
-                      variant={response.success ? "info" : "danger"}
-                      className="p-3 mt-2 text-center"
-                    >
+                    <Alert variant={response.success ? "info" : "danger"} className="p-3 mt-2 text-center">
                       {response.success && (
                         <>
-                          <p>
-                            Your Site Data have been submitted successfully !{" "}
-                          </p>
+                          <p>Your Site Data have been submitted successfully ! </p>
                           <p>This page will reload automatically !</p>
                         </>
                       )}
