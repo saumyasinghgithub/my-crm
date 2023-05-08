@@ -9,12 +9,12 @@ import moment from "moment";
 const EventsForm = (props) => {
   const [eventData, setEventData] = useState([]);
   const [featured, setFeatured] = useState(-1);
-  const { getServerData, setServerData } = useContext(UserContext);
+  const { getUserData, getServerData, setServerData } = useContext(UserContext);
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({ success: false, message: "" });
   const [lastinsertid, setLastinsertid] = useState();
 
-  const trainerDetails = Utils.getUserData();
+  const trainerDetails = getUserData();
 
   useEffect(() => {
     getServerData("trainer/events")
@@ -82,7 +82,7 @@ const EventsForm = (props) => {
     });
   };
 
-  const exportParticipants = (type, id = "") => { };
+  const exportParticipants = (type, id = "") => {};
 
   const renderEventFields = () => {
     return (
@@ -177,9 +177,10 @@ const EventsForm = (props) => {
                 </Accordion.Item>
               </Col>
               <Col className="col-2 col-lg-1">
-                {k > 1 && <i className="position-relative fa fa-minus-circle fa-lg mt-2 cursor-pointer text-danger remove-award" onClick={removeAData(k)} />}
+                {k > 1 && (
+                  <i className="position-relative fa fa-minus-circle fa-lg mt-2 cursor-pointer text-danger remove-award" onClick={removeAData(k)} />
+                )}
               </Col>
-
             </Row>
           </Accordion>
         ))}
@@ -192,7 +193,7 @@ const EventsForm = (props) => {
       <Form onSubmit={onSave}>
         <Form.Control type="hidden" name="user_id" value={trainerDetails.id} />
         <Form.Control type="hidden" name="created_at" value={Date().toLocaleString()} />
-        <h1 className='MobileHeader'>
+        <h1 className="MobileHeader">
           Manage Events
           <i className="mobileaddDetails fa fa-plus-circle text-success Adddetails" onClick={addAData} />
         </h1>

@@ -4,7 +4,7 @@ import UserContext from "./../contexts/UserContext";
 
 const Footer = (props) => {
   //console.log(props.sitesetting);
-  const { getServerData } = useContext(UserContext);
+  const { userData, getUserData, isLoggedIn, getServerData } = useContext(UserContext);
   if (JSON.stringify(props.sitesetting) === "{}") {
     console.log("The object is empty");
   }
@@ -39,42 +39,7 @@ const Footer = (props) => {
     });
   };
 
-  const sendLocalStorage = () => {
-    if (hasSubdomain) {
-      window.onmessage = function (e) {
-        if (e.origin !== process.env.REACT_APP_PUBLIC_URL) {
-          return;
-        }
-        //window.alert(e.data);
-        if (e.data === "false" && Utils.isLoggedIn()) {
-          Utils.removeSession();
-          window.location.reload();
-        } else if (e.data !== "false" && !Utils.isLoggedIn()) {
-          var payload = JSON.parse(e.data);
-          Utils.addToUserData(payload);
-          window.location.reload();
-        }
-      };
-    } else {
-      window.onmessage = function (e) {
-        if (e.data === "false" && Utils.isLoggedIn()) {
-          Utils.removeSession();
-        }
-      };
-    }
-  };
-
-  const syncLocalStorage = () => {
-    var win = window;
-    if (!hasSubdomain) {
-      win = window.parent;
-    }
-    win.postMessage(Utils.isLoggedIn() ? JSON.stringify(Utils.getUserData()) : "false", "*");
-  };
-
   useEffect(fetchList, []);
-
-  useEffect(syncLocalStorage, []);
 
   return (
     <>

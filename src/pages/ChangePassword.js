@@ -16,8 +16,8 @@ const ChangePassword = (props) => {
   const [processing, setProcessing] = useState(false);
   const [trainer, setTrainer] = useState({ email: "" });
   const slug = Utils.subdomain();
-  const { getServerData, apiHeaders } = useContext(UserContext);
-  const [userData, setUserData] = useState(Utils.getUserData());
+  const { getUserData, getServerData, apiHeaders } = useContext(UserContext);
+  const [userData, setUserData] = useState(getUserData());
 
   useEffect(() => {
     getServerData(`trainer/about/${slug}`, true)

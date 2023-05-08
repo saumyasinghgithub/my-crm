@@ -14,6 +14,7 @@ import { UserProvider } from "./contexts/UserContext";
 import Utils from "./Utils";
 import { NotFound } from "./components";
 import { useCookies } from "react-cookie";
+import _ from "lodash";
 
 const App = (props) => {
   const [cookies] = useCookies([Utils.siteCookieName]);
@@ -23,7 +24,7 @@ const App = (props) => {
       <Router basename={process.env.REACT_APP_BASENAME || ""}>
         <Routes>
           {CustomRoutes.map((route, index) => {
-            if (route.secure && !Utils.isLoggedIn(cookies[Utils.siteCookieName])) {
+            if (route.secure && !_.get(cookies, `${Utils.siteCookieName}.token`, false)) {
               return (
                 <Route
                   key={index}

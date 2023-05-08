@@ -1,18 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 
 import _ from "lodash";
-
-import TeacherNav from "./TeacherNav";
-import Utils from "../../Utils";
+import UserContext from "../../contexts/UserContext";
 
 const TeacherService = (props) => {
+  const { getUserData, isTrainer } = useContext(UserContext);
   const data = props.data;
 
   useEffect(window.scrollEffect, []);
 
   return (
     <>
-      {Utils.isTrainer() && Utils.getUserData().id === data.user_id && (
+      {isTrainer() && getUserData().id === data.user_id && (
         <div className="container mb-3 editTrainerdetails">
           <div className="row">
             <div className="col-12 text-right">
@@ -48,30 +47,28 @@ const TeacherService = (props) => {
           </div>
           {data.consultancy ? (
             <div className="servicesTextBox slideInUp wow ">
-
-
               <div className="row">
-                <div className="col-xl-2 col-12">
-                  {/* <div className="Sheading">Merchandise</div> */}
-                </div>
+                <div className="col-xl-2 col-12">{/* <div className="Sheading">Merchandise</div> */}</div>
                 <div className="col-xl-10 col-12">
                   <div dangerouslySetInnerHTML={{ __html: data.consultancy }}></div>
                 </div>
               </div>
             </div>
-          ) : (<p></p>)}
+          ) : (
+            <p></p>
+          )}
           {data.coaching ? (
             <div className="servicesTextBox slideInUp wow ">
               <div className="row">
-                <div className="col-xl-2 col-12">
-                  {/* <div className="Sheading">Coaching </div> */}
-                </div>
+                <div className="col-xl-2 col-12">{/* <div className="Sheading">Coaching </div> */}</div>
                 <div className="col-xl-10 col-12">
                   <div dangerouslySetInnerHTML={{ __html: data.coaching }}></div>
                 </div>
               </div>
             </div>
-          ) : (<p></p>)}
+          ) : (
+            <p></p>
+          )}
         </div>
       </div>
     </>

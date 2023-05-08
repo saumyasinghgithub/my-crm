@@ -35,7 +35,7 @@ const TeacherNav = (props) => {
   );
 
   // const trainerUrl = Utils.getTrainerURL();
-  // const checkLogin = Utils.isLoggedIn();
+  // const checkLogin = isLoggedIn();
   /* {pathname.indexOf("/professional-profile") > -1 && menuItem("Profile", "")}
       {pathname.indexOf("/professional-profile") === -1 && menuItem("Professional Profile", "professional-profile/about")} */
   return (

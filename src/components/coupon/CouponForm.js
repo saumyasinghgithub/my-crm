@@ -9,11 +9,11 @@ const CouponForm = (props) => {
   const [mycoupon, setMycoupon] = useState({});
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({ success: false, message: "" });
-  const { getServerData, setServerData } = useContext(UserContext);
+  const { getUserData, getServerData, setServerData } = useContext(UserContext);
   const [mycourse, setMycourse] = useState({});
   const [mystudents, setMystudents] = useState({});
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [trainerdata, setTrainerdata] = useState(Utils.getUserData());
+  const [trainerdata, setTrainerdata] = useState(getUserData());
   const [selectedStudentOptions, setSelectedStudentOptions] = useState([]);
 
   useEffect(() => {

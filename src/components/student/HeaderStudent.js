@@ -2,87 +2,123 @@ import React, { useEffect, useState, useContext } from "react";
 import Utils from "../../Utils";
 import _ from "lodash";
 import UserMenu from "../UserMenu";
-
+import UserContext from "../../contexts/UserContext";
 
 const HeaderStudent = (props) => {
+  const { getUserData, isLoggedIn, isTrainer } = useContext(UserContext);
 
-    const [loggedIn, setLoggedIn] = useState(Utils.isLoggedIn());
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn());
 
-    const udata = Utils.getUserData();
+  const udata = getUserData();
 
-    const $ = window.$;
+  const $ = window.$;
 
-    useEffect(() => {
+  useEffect(() => {
+    $(".menu-toggle").on("click", function () {
+      $(".sidenav").addClass("width100");
+      $("body").addClass("menuopen");
+    });
+    $(".closemenu").on("click", function () {
+      $(".sidenav").removeClass("width100");
+      $("body").removeClass("menuopen");
+    });
 
-        $(".menu-toggle").on('click', function () {
-            $(".sidenav").addClass("width100");
-            $("body").addClass("menuopen");
-        });
-        $(".closemenu").on('click', function () {
-            $(".sidenav").removeClass("width100");
-            $("body").removeClass("menuopen")
-        });
+    if (loggedIn) {
+      $(".profile_toggle").on("click", function () {
+        $(".profile_menu").addClass("profile_width100");
+      });
+      $(".student_prof_cross").on("click", function () {
+        $(".profile_menu").removeClass("profile_width100");
+      });
+    }
+  }, []);
 
-        if (loggedIn) {
-            $('.profile_toggle').on('click', function () {
-                $('.profile_menu').addClass('profile_width100');
-            });
-            $('.student_prof_cross').on('click', function () {
-                $('.profile_menu').removeClass('profile_width100');
-            });
-        }
-
-    }, []);
-
-
-    return (<>
-        <div className="sidenav">
-            <div className="sidebarInner">
-                <div className="overlay"></div>
-                <img className="img-fluid closemenu" src="/assets/images/close-circle.png" />
-                <form className="searchBOx mobileView" >
-                    <input className="form-control" type="text" placeholder="How can I help you ?" />
-                </form>
-                <ul className="navList">
-                    <li><a href={`${process.env.REACT_APP_PUBLIC_URL}/about-us`}>About us <span>Any queries? Problems with upload? No matter what the issue is,
-                        we will help, support and find a way!</span></a></li>
-                    <li><a href={`${process.env.REACT_APP_PUBLIC_URL}/ad-studio`}>AD Studio <span>World best learning plaform.</span></a></li>
-                    <li><a href={`${process.env.REACT_APP_PUBLIC_URL}/ad-trainer`}>Help for Trainer <span>Get to know us, get to work with us.</span></a></li>
-                    <li><a href={`${process.env.REACT_APP_PUBLIC_URL}/help-for-student`}>Help for Student <span>Start with a plan and finish with results.</span></a></li>
-                    <li><a href={`${process.env.REACT_APP_PUBLIC_URL}/contact-us`}>Contact <span>Get to know us, get to work with us.</span></a></li>
-                </ul>
-            </div>
+  return (
+    <>
+      <div className="sidenav">
+        <div className="sidebarInner">
+          <div className="overlay"></div>
+          <img className="img-fluid closemenu" src="/assets/images/close-circle.png" />
+          <form className="searchBOx mobileView">
+            <input className="form-control" type="text" placeholder="How can I help you ?" />
+          </form>
+          <ul className="navList">
+            <li>
+              <a href={`${process.env.REACT_APP_PUBLIC_URL}/about-us`}>
+                About us <span>Any queries? Problems with upload? No matter what the issue is, we will help, support and find a way!</span>
+              </a>
+            </li>
+            <li>
+              <a href={`${process.env.REACT_APP_PUBLIC_URL}/ad-studio`}>
+                AD Studio <span>World best learning plaform.</span>
+              </a>
+            </li>
+            <li>
+              <a href={`${process.env.REACT_APP_PUBLIC_URL}/ad-trainer`}>
+                Help for Trainer <span>Get to know us, get to work with us.</span>
+              </a>
+            </li>
+            <li>
+              <a href={`${process.env.REACT_APP_PUBLIC_URL}/help-for-student`}>
+                Help for Student <span>Start with a plan and finish with results.</span>
+              </a>
+            </li>
+            <li>
+              <a href={`${process.env.REACT_APP_PUBLIC_URL}/contact-us`}>
+                Contact <span>Get to know us, get to work with us.</span>
+              </a>
+            </li>
+          </ul>
         </div>
+      </div>
 
-        <header className="header fixed-top whiteHeader">
-            <div className="container">
-                <a className="navbar-brand" href={`${process.env.REACT_APP_PUBLIC_URL}/`}>AD</a>
-               
-                <ul className="navbar-nav">
-                    <li className="nav-item"><a href="/my-cart"><img className="img-fluid shoppingIcon" src="/assets/images/cart.png" alt="autodidact" /></a></li>
-                    {/*!loggedIn && <li className="nav-item" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">
+      <header className="header fixed-top whiteHeader">
+        <div className="container">
+          <a className="navbar-brand" href={`${process.env.REACT_APP_PUBLIC_URL}/`}>
+            AD
+          </a>
+
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <a href="/my-cart">
+                <img className="img-fluid shoppingIcon" src="/assets/images/cart.png" alt="autodidact" />
+              </a>
+            </li>
+            {/*!loggedIn && <li className="nav-item" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">
                         Log in
     </li>*/}
-    {!loggedIn && <li className="nav-item">
-                        <a href={`${process.env.REACT_APP_PUBLIC_URL}/login`}>Log in</a>
-                    </li>}
+            {!loggedIn && (
+              <li className="nav-item">
+                <a href={`${process.env.REACT_APP_PUBLIC_URL}/login`}>Log in</a>
+              </li>
+            )}
 
-                    {loggedIn && <li className="nav-item profile_toggle">
-                        {_.get(udata, 'base_image', '') !== '' &&
-                            <img src={`${process.env.REACT_APP_API_URL}/uploads/${Utils.isTrainer() ? "base" : "student/base"}/${_.get(udata, 'base_image', '')}`} className="img-fluid" title={`Logged in as ${udata.firstname} ${udata.lastname}`} />}
-                    </li>}
+            {loggedIn && (
+              <li className="nav-item profile_toggle">
+                {_.get(udata, "base_image", "") !== "" && (
+                  <img
+                    src={`${process.env.REACT_APP_API_URL}/uploads/${isTrainer() ? "base" : "student/base"}/${_.get(udata, "base_image", "")}`}
+                    className="img-fluid"
+                    title={`Logged in as ${udata.firstname} ${udata.lastname}`}
+                  />
+                )}
+              </li>
+            )}
 
-                    <li className="nav-item ">
-                        <img className="img-fluid menu-toggle" src="/assets/images/toggle-black.png" alt="toggle-img" />
-                    </li>
-                </ul>
-            </div>
-            
-            {loggedIn && <div className="profile_menu from-right">
-                <UserMenu />
-            </div>}
-        </header>
-    </>);
+            <li className="nav-item ">
+              <img className="img-fluid menu-toggle" src="/assets/images/toggle-black.png" alt="toggle-img" />
+            </li>
+          </ul>
+        </div>
+
+        {loggedIn && (
+          <div className="profile_menu from-right">
+            <UserMenu />
+          </div>
+        )}
+      </header>
+    </>
+  );
 };
 
 export default HeaderStudent;

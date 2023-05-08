@@ -7,8 +7,10 @@ import _ from "lodash";
 import validator from "validator";
 import UserContext from "./../contexts/UserContext";
 
+import Pages from "./../pages";
+
 const ResetPassword = (props) => {
-  const { apiHeaders } = useContext(UserContext);
+  const { apiHeaders, isLoggedIn } = useContext(UserContext);
   const frmRef = useRef("ResetPassForm");
   const { token } = useParams();
   const [showMessage, setShowMessage] = useState(false);
@@ -79,110 +81,114 @@ const ResetPassword = (props) => {
     $("#loginModal").modal("show");
   };
 
-  return (
-    <>
-      <Container className="h-100 ">
-        <div className="help-wrapper">
-          {/*<nav>
-            <ol className="cd-breadcrumb">
-              <li>
-                <a href="/">Home</a>
-              </li>
-              <li className="current">
-                <em>Reset Password</em>
-              </li>
-            </ol>
-  </nav>*/}
-          <div className="">
-            <img src="assets/images/contact.jpg" className="img-fluid" alt="" />
-            <h1 className="slideInUp wow animated pt-4 pb-4 mb-0">Reset Password</h1>
-            <p>
-              if you have questions, requests or simply want to talk,
-              <a href={`mailto:${process.env.REACT_APP_CONTACT_EMAIL}`}>{process.env.REACT_APP_CONTACT_EMAIL}</a>
-            </p>
+  if (isLoggedIn()) {
+    return <Pages.Home />;
+  } else {
+    return (
+      <>
+        <Container className="h-100 ">
+          <div className="help-wrapper">
+            {/*<nav>
+              <ol className="cd-breadcrumb">
+                <li>
+                  <a href="/">Home</a>
+                </li>
+                <li className="current">
+                  <em>Reset Password</em>
+                </li>
+              </ol>
+    </nav>*/}
+            <div className="">
+              <img src="assets/images/contact.jpg" className="img-fluid" alt="" />
+              <h1 className="slideInUp wow animated pt-4 pb-4 mb-0">Reset Password</h1>
+              <p>
+                if you have questions, requests or simply want to talk,
+                <a href={`mailto:${process.env.REACT_APP_CONTACT_EMAIL}`}>{process.env.REACT_APP_CONTACT_EMAIL}</a>
+              </p>
 
-            <div className="row">
-              <div className="col-sm-8">
-                <div className="bg-light p-3 mb-3">
-                  <div>
-                    <i className="fas fa-exclamation-circle mr-2 text-info"></i>
-                    Passwords must be at least 8 characters long.
-                  </div>
-                  <div>
-                    <i className="fas fa-exclamation-circle mr-2 text-info"></i>
-                    Passwords must have at least 1 digit(s).
-                  </div>
-                  <div>
-                    <i className="fas fa-exclamation-circle mr-2 text-info"></i>
-                    Passwords must have at least 1 non-alphanumeric character(s) such as as *, -, or #.
+              <div className="row">
+                <div className="col-sm-8">
+                  <div className="bg-light p-3 mb-3">
+                    <div>
+                      <i className="fas fa-exclamation-circle mr-2 text-info"></i>
+                      Passwords must be at least 8 characters long.
+                    </div>
+                    <div>
+                      <i className="fas fa-exclamation-circle mr-2 text-info"></i>
+                      Passwords must have at least 1 digit(s).
+                    </div>
+                    <div>
+                      <i className="fas fa-exclamation-circle mr-2 text-info"></i>
+                      Passwords must have at least 1 non-alphanumeric character(s) such as as *, -, or #.
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+            <form ref={frmRef} className="form forgotPassword needs-validation" id="contact-form" method="post" noValidate onSubmit={submitForm}>
+              {showMessage && (
+                <div className="alert alert-info p-3">
+                  <strong>
+                    Your password has been updated successfully! Please
+                    <a href={`${Utils.getTrainerURL("login")}`}> login again </a>
+                    with new password.
+                  </strong>
+                </div>
+              )}
+              {error !== false && (
+                <div className="alert alert-danger p-3">
+                  <strong>{error}</strong>
+                </div>
+              )}
+              <fieldset className="fieldset">
+                <div className="row">
+                  <div className="col-sm-8">
+                    <div className="field name required">
+                      <div className="control">
+                        <input
+                          className="input-text form-control"
+                          name="password"
+                          onKeyUp={validatePassword}
+                          placeholder="Password"
+                          type="password"
+                          required
+                        />
+                        <div className="invalid-feedback">Invalid Password</div>
+                      </div>
+                    </div>
+                    <div className="field telephone">
+                      <div className="control">
+                        <input
+                          className="input-text form-control"
+                          name="conf_password"
+                          onKeyUp={validatePassword}
+                          placeholder="Re-enter Password"
+                          type="password"
+                          required
+                        />
+                        <div className="invalid-feedback">Passwords Don't Match</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-8 text-right">
+                    <div className="actions-toolbar">
+                      <div className="primary">
+                        <button type="submit" title="Submit" className="action submit submitbtn">
+                          Submit
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
           </div>
-          <form ref={frmRef} className="form forgotPassword needs-validation" id="contact-form" method="post" noValidate onSubmit={submitForm}>
-            {showMessage && (
-              <div className="alert alert-info p-3">
-                <strong>
-                  Your password has been updated successfully! Please
-                  <a href={`${Utils.getTrainerURL("login")}`}> login again </a>
-                  with new password.
-                </strong>
-              </div>
-            )}
-            {error !== false && (
-              <div className="alert alert-danger p-3">
-                <strong>{error}</strong>
-              </div>
-            )}
-            <fieldset className="fieldset">
-              <div className="row">
-                <div className="col-sm-8">
-                  <div className="field name required">
-                    <div className="control">
-                      <input
-                        className="input-text form-control"
-                        name="password"
-                        onKeyUp={validatePassword}
-                        placeholder="Password"
-                        type="password"
-                        required
-                      />
-                      <div className="invalid-feedback">Invalid Password</div>
-                    </div>
-                  </div>
-                  <div className="field telephone">
-                    <div className="control">
-                      <input
-                        className="input-text form-control"
-                        name="conf_password"
-                        onKeyUp={validatePassword}
-                        placeholder="Re-enter Password"
-                        type="password"
-                        required
-                      />
-                      <div className="invalid-feedback">Passwords Don't Match</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-sm-8 text-right">
-                  <div className="actions-toolbar">
-                    <div className="primary">
-                      <button type="submit" title="Submit" className="action submit submitbtn">
-                        Submit
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </fieldset>
-          </form>
-        </div>
-      </Container>
-    </>
-  );
+        </Container>
+      </>
+    );
+  }
 };
 
 export default ResetPassword;

@@ -23,7 +23,7 @@ const CourseDetails = (props) => {
     enrollments: 0,
   });
 
-  const { getServerData, setServerData, loginToMoodle } = useContext(UserContext);
+  const { isLoggedIn, getServerData, setServerData, loginToMoodle } = useContext(UserContext);
   const [enrollment, setEnrollment] = useState([]);
 
   const $ = window.$;
@@ -81,12 +81,7 @@ const CourseDetails = (props) => {
     e.preventDefault();
     let cartData = new FormData();
     cartData.append("course_id", course.course.id);
-    cartData.append(
-      "course_resources",
-      JSON.stringify(
-        _.map(bp, (b) => _.pick(b, ["id", "type", "name", "price"]))
-      )
-    );
+    cartData.append("course_resources", JSON.stringify(_.map(bp, (b) => _.pick(b, ["id", "type", "name", "price"]))));
     cartData.append("price", showBundlePrice());
     cartData.append("is_bundle", parseInt(_.get(bp, "length", 0)) > 0 ? 1 : 0);
 
@@ -111,14 +106,10 @@ const CourseDetails = (props) => {
     return (
       <li>
         <div
-          className={`circleBox wow zoomIn ${_.findIndex(bp, (b) => b.id === resource.id) > -1 ? "selected" : ""
-            }`}
-        /*onClick={() => bundleProduct(resource)}*/
+          className={`circleBox wow zoomIn ${_.findIndex(bp, (b) => b.id === resource.id) > -1 ? "selected" : ""}`}
+          /*onClick={() => bundleProduct(resource)}*/
         >
-          <img
-            className="img-fluid"
-            src={`/assets/images/${_.get(restype, resource.type, "pdf.png")}`}
-          />
+          <img className="img-fluid" src={`/assets/images/${_.get(restype, resource.type, "pdf.png")}`} />
           <span className="usdheading">USD {resource.price}</span>
           <span className="usdtext">{resource.type}</span>
         </div>
@@ -129,11 +120,7 @@ const CourseDetails = (props) => {
   const markFav = (course_id, fav) => (e) => {
     e.preventDefault();
     //$(e.target).fadeOut();
-    setServerData(
-      "course/markfav",
-      `course_id=${course_id}&fav=${fav}`,
-      "post"
-    ).then(() =>
+    setServerData("course/markfav", `course_id=${course_id}&fav=${fav}`, "post").then(() =>
       setCourse({
         ...course,
         isFav: !course.isFav,
@@ -145,13 +132,8 @@ const CourseDetails = (props) => {
   useEffect(() => {
     getServerData(`student/my-enrollments`, true)
       .then((enrols) => {
-        if (
-          Array.isArray(enrols.enrolled) &&
-          enrols.enrolled.every((e) => typeof e === "object")
-        ) {
-          let enrollmentArray = enrols.enrolled.map(
-            (enrols) => enrols.course_id
-          );
+        if (Array.isArray(enrols.enrolled) && enrols.enrolled.every((e) => typeof e === "object")) {
+          let enrollmentArray = enrols.enrolled.map((enrols) => enrols.course_id);
           setEnrollment(enrollmentArray);
         }
       })
@@ -170,8 +152,7 @@ const CourseDetails = (props) => {
                 <h1>Course</h1>
                 <Alert variant="info">
                   <div className="m-5">
-                    Adding course to cart{" "}
-                    <Spinner animation="border" size="sm" />
+                    Adding course to cart <Spinner animation="border" size="sm" />
                   </div>
                 </Alert>
               </div>
@@ -203,14 +184,9 @@ const CourseDetails = (props) => {
               <>
                 <div className="cardWrapper">
                   <div className="container">
-                    <ul className="iconList nav nav-tabs">
-                      {_.map(course.resources, renderResource)}
-                    </ul>
+                    <ul className="iconList nav nav-tabs">{_.map(course.resources, renderResource)}</ul>
                     <div className="tab-content">
-                      <div
-                        className="courseWrapper coursecard tab-pane active"
-                        id="PDF"
-                      >
+                      <div className="courseWrapper coursecard tab-pane active" id="PDF">
                         <div className="row">
                           <div className="col-md-6 wow slideInUp">
                             <div
@@ -220,14 +196,8 @@ const CourseDetails = (props) => {
                               }}
                             >
                               <div className="circleBox">
-                                <img
-                                  className="img-fluid"
-                                  src="/assets/images/bundle.png"
-                                  alt="AD"
-                                />
-                                <span className="usdheading active">
-                                  USD {showBundlePrice()}
-                                </span>
+                                <img className="img-fluid" src="/assets/images/bundle.png" alt="AD" />
+                                <span className="usdheading active">USD {showBundlePrice()}</span>
                               </div>
                             </div>
                             <div className="textBoxCard">
@@ -238,19 +208,11 @@ const CourseDetails = (props) => {
                               ></div>
                               <hr className="CourseDetailsHr"></hr>
                               <div className="cardInfoBox">
-                                <span className="textBold">Created by</span>{" "}
-                                {course.about.firstname} {course.about.lastname}{" "}
-                                <span className="textBold">| Last updated</span>{" "}
-                                {moment(course.course.created_at).format(
-                                  "DD/MM/YYYY"
-                                )}
+                                <span className="textBold">Created by</span> {course.about.firstname} {course.about.lastname}{" "}
+                                <span className="textBold">| Last updated</span> {moment(course.course.created_at).format("DD/MM/YYYY")}
                                 <br />
-                                <span className="textBold">Language:</span>{" "}
-                                {course.course.language} |{" "}
-                                <span className="textBold">
-                                  Also available:
-                                </span>{" "}
-                                {course.course.language} <br />
+                                <span className="textBold">Language:</span> {course.course.language} |{" "}
+                                <span className="textBold">Also available:</span> {course.course.language} <br />
                                 <span className="textBold">Media: </span>
                                 {Utils.mediaTypes.map(
                                   (m) =>
@@ -258,19 +220,12 @@ const CourseDetails = (props) => {
                                       type: m[0],
                                     }) && (
                                       <span className="pr-2">
-                                        {m[1]}{" "}
-                                        <img
-                                          src={`/assets/images/${m[2]}`}
-                                          alt="AD"
-                                          width="15"
-                                        />
+                                        {m[1]} <img src={`/assets/images/${m[2]}`} alt="AD" width="15" />
                                       </span>
                                     )
                                 )}
                                 <br />
-                                <span className="textBold">Level:</span>{" "}
-                                {course.course.level}{" "}
-                                <span className="textBold">| Duration:</span>{" "}
+                                <span className="textBold">Level:</span> {course.course.level} <span className="textBold">| Duration:</span>{" "}
                                 {course.course.duration} Hours.
                               </div>
                               {!starLoading && (
@@ -282,11 +237,7 @@ const CourseDetails = (props) => {
                                     starHoverColor="#bfa700"
                                     starDimension="20px"
                                     starSpacing="2px"
-                                    changeRating={
-                                      Utils.isLoggedIn()
-                                        ? setCourseRating
-                                        : false
-                                    }
+                                    changeRating={isLoggedIn() ? setCourseRating : false}
                                   />
                                   <div className="mx-2 my-1">
                                     ({rating.ratings}) {rating.enrollments}{" "}
@@ -316,11 +267,7 @@ const CourseDetails = (props) => {
                                   __html: course.course.description,
                                 }}
                               ></div>
-                              <form
-                                name="moodleLoginForm"
-                                method="post"
-                                action={`${process.env.REACT_APP_MOODLE_URL}/login/index.php`}
-                              >
+                              <form name="moodleLoginForm" method="post" action={`${process.env.REACT_APP_MOODLE_URL}/login/index.php`}>
                                 <input type="hidden" name="username" />
                                 <input type="hidden" name="password" />
                               </form>
@@ -328,17 +275,14 @@ const CourseDetails = (props) => {
                                 <div className="row">
                                   <div className="col-lg-6">
                                     <div className="addButns">
-                                      {!Utils.isLoggedIn() && (
+                                      {!isLoggedIn() && (
                                         <>
-                                          <a
-                                            href={`/login`}
-                                            className="btn btnBlue"
-                                          >
+                                          <a href={`/login`} className="btn btnBlue">
                                             Login to Enroll
                                           </a>
                                         </>
                                       )}
-                                      {Utils.isLoggedIn() && (
+                                      {isLoggedIn() && (
                                         <>
                                           {enrollment.includes(course.course.id) ? (
                                             <>
@@ -346,10 +290,7 @@ const CourseDetails = (props) => {
                                                 href="#"
                                                 onClick={(e) => {
                                                   e.preventDefault();
-                                                  loginToMoodle(
-                                                    document.forms
-                                                      .moodleLoginForm
-                                                  );
+                                                  loginToMoodle(document.forms.moodleLoginForm);
                                                 }}
                                                 className="btn btnBlue"
                                               >
@@ -359,11 +300,7 @@ const CourseDetails = (props) => {
                                           ) : (
                                             <>
                                               {_.get(bp, "length", 0) > 0 && (
-                                                <a
-                                                  href="#"
-                                                  onClick={addToCart}
-                                                  className="btn btnBlue"
-                                                >
+                                                <a href="#" onClick={addToCart} className="btn btnBlue">
                                                   Enroll Now
                                                 </a>
                                               )}
@@ -374,11 +311,7 @@ const CourseDetails = (props) => {
                                     </div>
                                   </div>
                                   <div className="col-lg-6">
-                                    {_.get(bp, "length", 0) > 0 && (
-                                      <div className="coursePrice">
-                                        USD {showBundlePrice()}
-                                      </div>
-                                    )}
+                                    {_.get(bp, "length", 0) > 0 && <div className="coursePrice">USD {showBundlePrice()}</div>}
                                   </div>
                                 </div>
                               </div>

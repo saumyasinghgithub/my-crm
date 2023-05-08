@@ -1,9 +1,8 @@
 import Layout from "./layouts";
 import Page from "./pages";
-import Utils from "./Utils";
 
 const CustomRoutes = [
- /*{
+  /*{
     path: "/login",
     secure: false,
     exact: true,
@@ -221,8 +220,8 @@ const CustomRoutes = [
     path: "/resetpass/:token",
     secure: false,
     exact: true,
-    layout: Utils.isLoggedIn() ? Layout.DefaultLayout : Layout.StaticPageLayout,
-    component: Utils.isLoggedIn() ? Page.Home : Page.ResetPassword,
+    layout: Layout.SwitchLayout,
+    component: Page.ResetPassword,
   },
   {
     path: "/chgpwd",

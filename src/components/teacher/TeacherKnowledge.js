@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 
 import _ from "lodash";
 
@@ -6,7 +6,10 @@ import Utils from "./../../Utils";
 
 import TeacherNav from "./TeacherNav";
 
+import UserContext from "../../contexts/UserContext";
+
 const TeacherKnowledge = (props) => {
+  const { getUserData, isTrainer } = useContext(UserContext);
   const data = props.data;
 
   const blogs = props.blogs;
@@ -80,7 +83,7 @@ const TeacherKnowledge = (props) => {
 
   return (
     <>
-      {Utils.isTrainer() && Utils.getUserData().id === _.get(data, "0.user_id", "") && (
+      {isTrainer() && getUserData().id === _.get(data, "0.user_id", "") && (
         <div className="container mb-3 editTrainerdetails">
           <div className="row">
             <div className="col-12 text-right">

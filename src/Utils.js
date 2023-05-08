@@ -20,7 +20,7 @@ const Utils = {
     let url = process.env.REACT_APP_PUBLIC_URL;
 
     if (slug !== false || Utils.hasSubdomain()) {
-      slug = Utils.subdomain();
+      slug = slug ? slug : Utils.subdomain();
       url = url.split("://", 2);
       url = url[0] + "://" + slug + "." + url[1];
     }
@@ -32,52 +32,9 @@ const Utils = {
     return url;
   },
 
-  isLoggedIn: (userData) => {
-    return _.get(userData, "token", false) !== false;
-  },
-
-  removeSession: () => {
-    let dt = Utils.getUserData();
-    // console.log(dt, "session data")
-    dt.token = false;
-    // const backup = localStorage.getItem(process.env.REACT_APP_APPNAME + '-userData');
-    localStorage.setItem(process.env.REACT_APP_APPNAME + "-userData", JSON.stringify(dt));
-  },
-
   siteCookieName: `${process.env.REACT_APP_APPNAME}-userData`,
 
   getCookieOptions: () => ({ secure: false }),
-
-  getUserData: (data) => {
-    if (data) {
-      return JSON.parse(data);
-    } else {
-      return false;
-    }
-  },
-
-  saveUserData: (data, otherData) => {
-    if (_.get(data, "token", false)) {
-      data[`otherData${data.id}`] = otherData;
-      localStorage.setItem(process.env.REACT_APP_APPNAME + "-userData", JSON.stringify(data));
-    }
-  },
-
-  addToUserData: (data) => {
-    let userData = Utils.getUserData();
-    if (!userData) {
-      userData = {};
-    }
-    userData = { ...userData, ...data };
-    localStorage.setItem(process.env.REACT_APP_APPNAME + "-userData", JSON.stringify(userData));
-  },
-
-  isStudent: (userData) => {
-    return parseInt(_.get(userData, "role_id", 0)) === parseInt(process.env.REACT_APP_STUDENT_ROLE);
-  },
-  isTrainer: (userData) => {
-    return parseInt(_.get(userData, "role_id", 0)) === parseInt(process.env.REACT_APP_TRAINER_ROLE);
-  },
 
   loadJS: (src, failedmsg) => {
     return new Promise((resolve, reject) => {

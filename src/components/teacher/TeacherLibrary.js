@@ -1,10 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-
-import TeacherNav from "./TeacherNav";
-
 import _ from "lodash";
-
-import Utils from "./../../Utils";
 import { Row, Container } from "react-bootstrap";
 import StarRatings from "react-star-ratings";
 import UserContext from "../../contexts/UserContext";
@@ -13,21 +8,16 @@ const TeacherLibrary = (props) => {
   const data = props.data;
   const courses = props.courses;
 
-  const { getServerData, loginToMoodle } = useContext(UserContext);
+  const { getUserData, isLoggedIn, getServerData, loginToMoodle, isTrainer } = useContext(UserContext);
   const [enrollment, setEnrollment] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(Utils.isLoggedIn());
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn());
 
   useEffect(window.scrollEffect, []);
   useEffect(() => {
     getServerData(`student/my-enrollments`, true)
       .then((enrols) => {
-        if (
-          Array.isArray(enrols.enrolled) &&
-          enrols.enrolled.every((e) => typeof e === "object")
-        ) {
-          let enrollmentArray = enrols.enrolled.map(
-            (enrols) => enrols.course_id
-          );
+        if (Array.isArray(enrols.enrolled) && enrols.enrolled.every((e) => typeof e === "object")) {
+          let enrollmentArray = enrols.enrolled.map((enrols) => enrols.course_id);
           setEnrollment(enrollmentArray);
         }
       })
@@ -48,23 +38,15 @@ const TeacherLibrary = (props) => {
             <div className="col-md-3 col-12">
               <div className="">
                 {/*<span className="new">New</span>*/}
-                <img
-                  className="img-fluid rounded"
-                  src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`}
-                  alt="RescueRN"
-                />
+                <img className="img-fluid rounded" src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`} alt="RescueRN" />
               </div>
             </div>
             <div className="col-md-7 col-12">
               <div className="">
                 <div className="libraryTitle">{course.name}</div>
-                <div
-                  className="libraryBody"
-                  dangerouslySetInnerHTML={{ __html: course.short_description }}
-                ></div>
+                <div className="libraryBody" dangerouslySetInnerHTML={{ __html: course.short_description }}></div>
                 <div className="libraryAuthorInfo">
-                  Date: {formattedDate} | Level: {course.level} | Duration:{" "}
-                  {course.duration}
+                  Date: {formattedDate} | Level: {course.level} | Duration: {course.duration}
                 </div>
                 <StarRatings
                   rating={course.rating.rating}
@@ -95,10 +77,7 @@ const TeacherLibrary = (props) => {
                       </>
                     ) : (
                       <>
-                        <a
-                          href={`/courses/${course.slug}`}
-                          className="btn btnBlue"
-                        >
+                        <a href={`/courses/${course.slug}`} className="btn btnBlue">
                           View Course{" "}
                         </a>
                       </>
@@ -122,14 +101,11 @@ const TeacherLibrary = (props) => {
   return (
     <>
       <div className="row">
-        {Utils.isTrainer() && Utils.getUserData().id === data.user_id && (
+        {isTrainer() && getUserData().id === data.user_id && (
           <div className="container mb-3 editTrainerdetails">
             <div className="row">
               <div className="col-12 text-right">
-                <a
-                  className=" bg-primary p-2 text-white rounded"
-                  href="/my-profile#library"
-                >
+                <a className=" bg-primary p-2 text-white rounded" href="/my-profile#library">
                   Edit <i className="fas fa-edit text-white"></i>
                 </a>
               </div>
@@ -139,9 +115,7 @@ const TeacherLibrary = (props) => {
         <div className="col-lg-12 col-md-12 col-12 pt-2 pb-1">
           <img
             className="img-fluid imgTransfer w-100"
-            src={`${process.env.REACT_APP_API_URL}/uploads/library/${encodeURI(
-              data.library_image
-            )}`}
+            src={`${process.env.REACT_APP_API_URL}/uploads/library/${encodeURI(data.library_image)}`}
             alt="service"
           />
         </div>
@@ -149,16 +123,9 @@ const TeacherLibrary = (props) => {
       <div className="serviceWrapper container">
         <div className="serviceHeading w-100">
           <h1 className="headingtext slideInUp wow w-100">Courses</h1>
-          <div
-            className="subHeading slideInUp wow "
-            dangerouslySetInnerHTML={{ __html: data.about_library }}
-          ></div>
+          <div className="subHeading slideInUp wow " dangerouslySetInnerHTML={{ __html: data.about_library }}></div>
         </div>
-        <form
-          name="moodleLoginForm"
-          method="post"
-          action={`${process.env.REACT_APP_MOODLE_URL}/login/index.php`}
-        >
+        <form name="moodleLoginForm" method="post" action={`${process.env.REACT_APP_MOODLE_URL}/login/index.php`}>
           <input type="hidden" name="username" />
           <input type="hidden" name="password" />
         </form>

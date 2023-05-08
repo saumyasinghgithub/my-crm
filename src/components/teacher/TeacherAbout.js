@@ -6,7 +6,7 @@ import _ from "lodash";
 import UserContext from "./../../contexts/UserContext";
 import { useParams } from "react-router-dom";
 import { TwitterIcon, FacebookIcon, LinkedinIcon } from "react-share";
-import sanitizeHtml from 'sanitize-html';
+import sanitizeHtml from "sanitize-html";
 import { Helmet } from "react-helmet";
 
 function trimText(text, number) {
@@ -24,8 +24,8 @@ const TeacherAbout = (props) => {
   const [loading, setLoading] = useState(true);
   const [starLoading, setStarLoading] = useState(false);
   const [rating, setRating] = useState(props.rating);
-  const { getServerData, setServerData } = useContext(UserContext);
-  const [loggedIn, setLoggedIn] = useState(Utils.isLoggedIn());
+  const { getUserData, isLoggedIn, isTrainer, setServerData } = useContext(UserContext);
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn());
 
   //useEffect(window.scrollEffect, []);
   /*let addthis = false;
@@ -54,10 +54,10 @@ const TeacherAbout = (props) => {
         // do nothing
       });
   };
-  const trainerSlug = Utils.getUserData().slug;
+  const trainerSlug = getUserData().slug;
   const trainerUrl = Utils.getTrainerURL("", trainerSlug);
   const trainerIntro = sanitizeHtml(data.biography, { allowedTags: [] });
-  const trainerName = data.firstname + ' ' + data.lastname;
+  const trainerName = data.firstname + " " + data.lastname;
 
   return (
     <>
@@ -78,7 +78,7 @@ const TeacherAbout = (props) => {
                                     starHoverColor="#bfa700"
                                     starDimension="20px"
                                     starSpacing="2px"
-                                    changeRating={Utils.isLoggedIn() ? setTrainerRating : false}
+                                    changeRating={isLoggedIn() ? setTrainerRating : false}
                                 />
                                 <div className="mx-2 my-1">{rating.ratings} ratings</div>
                             </div>}
@@ -96,7 +96,7 @@ const TeacherAbout = (props) => {
                     </div>
                 </div>
             </div> */}
-        {Utils.isTrainer() && loggedIn && Utils.getUserData().id === data.user_id && (
+        {isTrainer() && loggedIn && getUserData().id === data.user_id && (
           <div className="editTrainerdetails">
             <div className="row">
               <div className="col-12 text-right">
@@ -124,7 +124,7 @@ const TeacherAbout = (props) => {
                       starHoverColor="#bfa700"
                       starDimension="20px"
                       starSpacing="2px"
-                      changeRating={Utils.isLoggedIn() ? setTrainerRating : false}
+                      changeRating={isLoggedIn() ? setTrainerRating : false}
                     />
                     <div className="mx-2 my-1">{rating.ratings} ratings</div>
                   </div>
@@ -160,9 +160,26 @@ const TeacherAbout = (props) => {
                   <meta property="og:url" content={`${trainerUrl}professional-profile/about`} />
                   <meta property="og:type" content="website" />
                 </Helmet>
-                <li><a href={`https://twitter.com/intent/tweet?url=${trainerUrl}&text=${trimText(trainerIntro, 230)}`}><TwitterIcon size={32} round={true} /></a></li>
-                <li><a href={`https://www.facebook.com/sharer/sharer.php?u=${trainerUrl}&quote=${trainerIntro}&imageURL=${data.base_image}`}><FacebookIcon size={32} round={true} /></a></li>
-                <li><a href={`https://www.linkedin.com/sharing/share-offsite/?url=${trainerUrl}professional-profile/about&title=${trainerName}&summary=${trimText(trainerIntro, 150)}&source=TVerse&mini=true&ro=true&imageUrl=${data.base_image}`}><LinkedinIcon size={32} round={true} /></a></li>
+                <li>
+                  <a href={`https://twitter.com/intent/tweet?url=${trainerUrl}&text=${trimText(trainerIntro, 230)}`}>
+                    <TwitterIcon size={32} round={true} />
+                  </a>
+                </li>
+                <li>
+                  <a href={`https://www.facebook.com/sharer/sharer.php?u=${trainerUrl}&quote=${trainerIntro}&imageURL=${data.base_image}`}>
+                    <FacebookIcon size={32} round={true} />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`https://www.linkedin.com/sharing/share-offsite/?url=${trainerUrl}professional-profile/about&title=${trainerName}&summary=${trimText(
+                      trainerIntro,
+                      150
+                    )}&source=TVerse&mini=true&ro=true&imageUrl=${data.base_image}`}
+                  >
+                    <LinkedinIcon size={32} round={true} />
+                  </a>
+                </li>
               </ul>
             </div>
             <img
@@ -240,7 +257,8 @@ const TeacherAbout = (props) => {
             <div className="awardTextInner">
               {props.awards.map((a) => (
                 <div className="awadText slideInUp wow ">
-                  <span className="awardYear">{a.year}</span> <span className="boldText">{a.award}</span> | <a href={a.url}>{a.organisation}</a>                </div>
+                  <span className="awardYear">{a.year}</span> <span className="boldText">{a.award}</span> | <a href={a.url}>{a.organisation}</a>{" "}
+                </div>
               ))}
             </div>
           </div>

@@ -18,10 +18,10 @@ const SearchResult = (props) => {
 
   const $ = window.$;
 
-  const { getServerData, setServerData } = useContext(UserContext);
+  const { getUserData, isLoggedIn, getServerData, setServerData } = useContext(UserContext);
 
   const fetchSearchResults = () => {
-    let calibs = _.get(Utils.getUserData(), "calibs", []);
+    let calibs = _.get(getUserData(), "calibs", []);
     let data = {};
     _.each(calibs, (pval, pk) => {
       if (pval != "") {
@@ -32,11 +32,9 @@ const SearchResult = (props) => {
     setTData({ ...tData, loading: true });
 
     getServerData(
-      `trainer/search?calibs=${JSON.stringify(
-        data
-      )}&paCalibs=${Utils.searchCalibs.join(",")}&start=${
-        filters.start
-      }&limit=${filters.limit}&loadStats=${loadStats ? 1 : 0}`,
+      `trainer/search?calibs=${JSON.stringify(data)}&paCalibs=${Utils.searchCalibs.join(",")}&start=${filters.start}&limit=${
+        filters.limit
+      }&loadStats=${loadStats ? 1 : 0}`,
       true
     )
       .then((res) => {
@@ -76,15 +74,8 @@ const SearchResult = (props) => {
   }, [tData]);
 
   const handleScroll = (e) => {
-    const bottom =
-      Number((e.target.scrollHeight - e.target.scrollTop).toFixed(0)) -
-        e.target.clientHeight <
-      100;
-    if (
-      isScrollTriggered === false &&
-      bottom &&
-      filters.start + filters.limit < tData.pageInfo.total
-    ) {
+    const bottom = Number((e.target.scrollHeight - e.target.scrollTop).toFixed(0)) - e.target.clientHeight < 100;
+    if (isScrollTriggered === false && bottom && filters.start + filters.limit < tData.pageInfo.total) {
       setIsScrollTriggered(true); //== this should avoid triggering load repeatative
       setFilters({ ...filters, start: filters.start + filters.limit });
     }
@@ -97,17 +88,11 @@ const SearchResult = (props) => {
       trainer_id: trainer_id,
       fav: tData.favTrainers.includes(trainer_id) ? 0 : 1,
     };
-    setServerData(
-      "user/markfav",
-      `trainer_id=${data.trainer_id}&fav=${data.fav}`,
-      "post"
-    )
+    setServerData("user/markfav", `trainer_id=${data.trainer_id}&fav=${data.fav}`, "post")
       .then(() =>
         setTData({
           ...tData,
-          favTrainers: data.fav
-            ? _.concat(tData.favTrainers, trainer_id)
-            : _.filter(tData.favTrainers, (tid) => tid != trainer_id),
+          favTrainers: data.fav ? _.concat(tData.favTrainers, trainer_id) : _.filter(tData.favTrainers, (tid) => tid != trainer_id),
         })
       )
       .then(() => $(e.target).show());
@@ -115,21 +100,11 @@ const SearchResult = (props) => {
 
   const renderResultAnalysis = () => {
     const ratios = {
-      trainers:
-        parseInt(_.get(tData, "stats.trainers", 0)) /
-        parseInt(_.get(tData, "stats.allTrainers", 0)),
-      courses:
-        parseInt(_.get(tData, "stats.courses", 0)) /
-        parseInt(_.get(tData, "stats.allCourses", 0)),
-      books:
-        parseInt(_.get(tData, "stats.books", 0)) /
-        parseInt(_.get(tData, "stats.allBooks", 0)),
-      videos:
-        parseInt(_.get(tData, "stats.videos", 0)) /
-        parseInt(_.get(tData, "stats.allVideos", 0)),
-      audios:
-        parseInt(_.get(tData, "stats.audios", 0)) /
-        parseInt(_.get(tData, "stats.allAudios", 0)),
+      trainers: parseInt(_.get(tData, "stats.trainers", 0)) / parseInt(_.get(tData, "stats.allTrainers", 0)),
+      courses: parseInt(_.get(tData, "stats.courses", 0)) / parseInt(_.get(tData, "stats.allCourses", 0)),
+      books: parseInt(_.get(tData, "stats.books", 0)) / parseInt(_.get(tData, "stats.allBooks", 0)),
+      videos: parseInt(_.get(tData, "stats.videos", 0)) / parseInt(_.get(tData, "stats.allVideos", 0)),
+      audios: parseInt(_.get(tData, "stats.audios", 0)) / parseInt(_.get(tData, "stats.allAudios", 0)),
     };
     _.each(ratios, (r, k) => (ratios[k] = Math.round(r * 100)));
 
@@ -139,58 +114,33 @@ const SearchResult = (props) => {
           <>
             <ul className="resultlist">
               <li>
-                <div
-                  className="circleChart"
-                  id="1"
-                  data-value={ratios.trainers}
-                  data-text={ratios.trainers + "%"}
-                ></div>
+                <div className="circleChart" id="1" data-value={ratios.trainers} data-text={ratios.trainers + "%"}></div>
                 <span>Trainers</span>
               </li>
               <li>
                 <div className="canvas-wrap">
-                  <div
-                    className="circleChart"
-                    id="2"
-                    data-value={ratios.courses}
-                    data-text={ratios.courses + "%"}
-                  ></div>
+                  <div className="circleChart" id="2" data-value={ratios.courses} data-text={ratios.courses + "%"}></div>
                   <span id="procent2" classs="procent"></span>
                 </div>
                 <span>Courses</span>
               </li>
               <li>
                 <div className="canvas-wrap">
-                  <div
-                    className="circleChart"
-                    id="3"
-                    data-value={ratios.books}
-                    data-text={ratios.books + "%"}
-                  ></div>
+                  <div className="circleChart" id="3" data-value={ratios.books} data-text={ratios.books + "%"}></div>
                   <span id="procent3" classs="procent"></span>
                 </div>
                 <span>Books</span>
               </li>
               <li>
                 <div className="canvas-wrap">
-                  <div
-                    className="circleChart"
-                    id="4"
-                    data-value={ratios.audios}
-                    data-text={ratios.audios + "%"}
-                  ></div>
+                  <div className="circleChart" id="4" data-value={ratios.audios} data-text={ratios.audios + "%"}></div>
                   <span id="procent4" classs="procent"></span>
                 </div>
                 <span>Audios</span>
               </li>
               <li>
                 <div className="canvas-wrap">
-                  <div
-                    className="circleChart"
-                    id="5"
-                    data-value={ratios.videos}
-                    data-text={ratios.videos + "%"}
-                  ></div>
+                  <div className="circleChart" id="5" data-value={ratios.videos} data-text={ratios.videos + "%"}></div>
                   <span id="procent5" classs="procent"></span>
                 </div>
                 <span>Videos</span>
@@ -270,10 +220,7 @@ const SearchResult = (props) => {
           <ul>
             <li>{course.name}</li>
             <li>
-              <img
-                className="img-fluid iconImg"
-                src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`}
-              />
+              <img className="img-fluid iconImg" src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`} />
             </li>
             {renderResources(course.resources)}
           </ul>
@@ -288,61 +235,30 @@ const SearchResult = (props) => {
     let trainerbg = `${process.env.REACT_APP_API_URL}/uploads/profile/${trainer.profile_image}`;
     return (
       <div className="tab-content">
-        <div
-          className="tab-pane active trainerbg"
-          style={{ backgroundImage: `url("${trainerbg}")` }}
-          id="tab_a"
-        >
+        <div className="tab-pane active trainerbg" style={{ backgroundImage: `url("${trainerbg}")` }} id="tab_a">
           <div className="tab-text-box">
             <img
               className="img-fluid progileImg"
-              src={`${process.env.REACT_APP_API_URL}/uploads/base/${encodeURI(
-                trainer.base_image
-              )}`}
+              src={`${process.env.REACT_APP_API_URL}/uploads/base/${encodeURI(trainer.base_image)}`}
               alt={_.get(trainer, "firstname", "")}
             />
             <div className="bio-data-header">
               <h3>
                 <a href={Utils.getTrainerURL("about", trainer.slug)}>
-                  {_.get(trainer, "firstname", "")}{" "}
-                  {_.get(trainer, "lastname", "")}
+                  {_.get(trainer, "firstname", "")} {_.get(trainer, "lastname", "")}
                 </a>
               </h3>
               <div className="bioInfo">
-                Industry{" "}
-                <span>
-                  {_.map(
-                    _.filter(_.get(trainer, "calibs", []), { pa_id: 1 }),
-                    (c) => c.pa_value
-                  ).join(",")}
-                </span>
+                Industry <span>{_.map(_.filter(_.get(trainer, "calibs", []), { pa_id: 1 }), (c) => c.pa_value).join(",")}</span>
               </div>
               <div className="bioInfo">
-                Qualification{" "}
-                <span>
-                  {_.map(
-                    _.filter(_.get(trainer, "calibs", []), { pa_id: 51 }),
-                    (c) => c.pa_value
-                  ).join(",")}
-                </span>
+                Qualification <span>{_.map(_.filter(_.get(trainer, "calibs", []), { pa_id: 51 }), (c) => c.pa_value).join(",")}</span>
               </div>
               <div className="bioInfo">
-                Year of Experience{" "}
-                <span>
-                  {_.map(
-                    _.filter(_.get(trainer, "calibs", []), { pa_id: 68 }),
-                    (c) => c.pa_value
-                  ).join(",")}
-                </span>
+                Year of Experience <span>{_.map(_.filter(_.get(trainer, "calibs", []), { pa_id: 68 }), (c) => c.pa_value).join(",")}</span>
               </div>
               <div className="bioInfo">
-                Country{" "}
-                <span>
-                  {_.map(
-                    _.filter(_.get(trainer, "calibs", []), { pa_id: 83 }),
-                    (c) => c.pa_value
-                  ).join(",")}
-                </span>
+                Country <span>{_.map(_.filter(_.get(trainer, "calibs", []), { pa_id: 83 }), (c) => c.pa_value).join(",")}</span>
               </div>
             </div>
             <div className="profileRating">
@@ -359,31 +275,16 @@ const SearchResult = (props) => {
             <div className="bio-data-body">
               {_.get(trainer, "courses.courses", []).map(renderCourseItem)}
               <div className="txtR">
-                <a
-                  href={Utils.getTrainerURL("", trainer.slug)}
-                  className="action tocart primary btn btnBlue"
-                >
+                <a href={Utils.getTrainerURL("", trainer.slug)} className="action tocart primary btn btnBlue">
                   <span>View Profile</span>
                 </a>
-                <a
-                  href={Utils.getTrainerURL("courses", trainer.slug)}
-                  target="_blank"
-                  className="action tocart primary btn btnBlue"
-                >
+                <a href={Utils.getTrainerURL("courses", trainer.slug)} target="_blank" className="action tocart primary btn btnBlue">
                   <span>View Courses</span>
                 </a>
-                {Utils.isLoggedIn() && (
-                  <a
-                    href="#"
-                    className="action tocart primary btn btnBlue"
-                    onClick={markFav(trainer.user_id)}
-                  >
-                    {!tData.favTrainers.includes(trainer.user_id) && (
-                      <span>Mark Favourite</span>
-                    )}
-                    {tData.favTrainers.includes(trainer.user_id) && (
-                      <span>Remove Favourite</span>
-                    )}
+                {isLoggedIn() && (
+                  <a href="#" className="action tocart primary btn btnBlue" onClick={markFav(trainer.user_id)}>
+                    {!tData.favTrainers.includes(trainer.user_id) && <span>Mark Favourite</span>}
+                    {tData.favTrainers.includes(trainer.user_id) && <span>Remove Favourite</span>}
                   </a>
                 )}
               </div>
@@ -494,12 +395,7 @@ const SearchResult = (props) => {
             {
               <ul className="nav datascroll" onScroll={handleScroll}>
                 {_.get(tData, "data", []).map((trainer, idx) => (
-                  <li
-                    key={idx}
-                    className={
-                      trainer.user_id === viewTrainer.user_id ? "active" : ""
-                    }
-                  >
+                  <li key={idx} className={trainer.user_id === viewTrainer.user_id ? "active" : ""}>
                     <span onClick={() => setViewTrainer(trainer)}>
                       <img
                         className="img-fluid"
@@ -507,8 +403,7 @@ const SearchResult = (props) => {
                         alt={_.get(trainer, "firstname", "")}
                       />
                       <span>
-                        {_.get(trainer, "firstname", "")}{" "}
-                        {_.get(trainer, "lastname", "")}
+                        {_.get(trainer, "firstname", "")} {_.get(trainer, "lastname", "")}
                       </span>
                     </span>
                   </li>
@@ -519,9 +414,7 @@ const SearchResult = (props) => {
               {showPageInfo()} <i className="far fa-eye"></i>
             </div>
           </div>
-          <div className="flexItem flex80">
-            {_.get(viewTrainer, "user_id", 0) > 0 && showTrainerDetail()}
-          </div>
+          <div className="flexItem flex80">{_.get(viewTrainer, "user_id", 0) > 0 && showTrainerDetail()}</div>
         </div>
       </div>
     </div>
@@ -529,9 +422,7 @@ const SearchResult = (props) => {
 
   return (
     <>
-      <section className="home-result-wrapper">
-        {renderResultAnalysis()}
-      </section>
+      <section className="home-result-wrapper">{renderResultAnalysis()}</section>
       {renderResults()}
     </>
   );

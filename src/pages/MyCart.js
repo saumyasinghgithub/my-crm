@@ -7,8 +7,8 @@ import Utils from "../Utils";
 import { Loader } from "../components";
 
 const MyCart = (props) => {
-  const { getServerData, apiHeaders } = useContext(UserContext);
-  const [loggedIn, setLoggedIn] = useState(Utils.isLoggedIn());
+  const { getUserData, isLoggedIn, getServerData, apiHeaders } = useContext(UserContext);
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn());
   const [cart, setCart] = useState({ loading: true });
   const [coupons, setCoupons] = useState();
   const [calDiscount, setCalDiscount] = useState(0);
@@ -86,7 +86,7 @@ const MyCart = (props) => {
   };
 
   const displayRazorpay = (orderData) => {
-    const udata = Utils.getUserData();
+    const udata = getUserData();
 
     const options = {
       ...orderData,

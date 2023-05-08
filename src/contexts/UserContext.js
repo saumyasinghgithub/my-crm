@@ -11,9 +11,22 @@ import { useCookies } from "react-cookie";
 const UserContext = createContext();
 
 const UserProvider = (props) => {
-  const [cookies, setCookie] = useCookies([Utils.siteCookieName]);
-
+  const [cookies, setCookie, removeCookie] = useCookies([Utils.siteCookieName]);
   const [userData, setUserData] = useState(cookies[Utils.siteCookieName]);
+
+  const getUserData = () => {
+    return userData ? userData : false;
+  };
+
+  const addToUserData = (data) => {
+    setUserData({ ...userData, ...data });
+    const cookieData = { ...cookies[Utils.siteCookieName], ...data };
+    setCookie(Utils.siteCookieName, JSON.stringify(cookieData), Utils.getCookieOptions());
+  };
+
+  const isLoggedIn = () => {
+    return _.get(userData, "token", false) !== false;
+  };
 
   const goLogin = ({ email, pass }, callback) => {
     axios
@@ -50,7 +63,7 @@ const UserProvider = (props) => {
 
   const logout = (callback) => {
     setUserData(false);
-    Utils.setUserData(false);
+    removeCookie(Utils.siteCookieName);
     callback();
   };
 
@@ -105,8 +118,31 @@ const UserProvider = (props) => {
     });
   };
 
+  const isStudent = () => {
+    return parseInt(_.get(userData, "role_id", 0)) === parseInt(process.env.REACT_APP_STUDENT_ROLE);
+  };
+
+  const isTrainer = () => {
+    return parseInt(_.get(userData, "role_id", 0)) === parseInt(process.env.REACT_APP_TRAINER_ROLE);
+  };
+
   return (
-    <UserContext.Provider value={{ userData, goLogin, goForgotPassword, logout, getServerData, setServerData, loginToMoodle, apiHeaders }}>
+    <UserContext.Provider
+      value={{
+        getUserData,
+        isLoggedIn,
+        isStudent,
+        isTrainer,
+        goLogin,
+        goForgotPassword,
+        logout,
+        getServerData,
+        setServerData,
+        loginToMoodle,
+        apiHeaders,
+        addToUserData,
+      }}
+    >
       {props.children}
     </UserContext.Provider>
   );

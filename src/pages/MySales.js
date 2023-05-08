@@ -2,8 +2,6 @@ import React, { useState, useContext, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import DataTable from "react-data-table-component";
 import UserContext from "./../contexts/UserContext";
-import axios from "axios";
-import Utils from "../Utils";
 import _ from "lodash";
 
 const MySales = (props) => {
@@ -13,6 +11,7 @@ const MySales = (props) => {
   const [filters, setFilters] = useState({ where: { startDate: startDate, endDate: endDate }, limit: 15, start: 0 });
   const [searchcustomer, setSearchCustomer] = useState("");
   const [searchorder, setSearchOrder] = useState("");
+  const { getUserData, getServerData } = useContext(UserContext);
 
   const columns = [
     {
@@ -54,7 +53,7 @@ const MySales = (props) => {
   ];
   const fetchList = () => {
     setData({ ...data, loading: true });
-    const uData = Utils.getUserData();
+    const uData = getUserData();
     const userid = uData.id;
     let params = `?limit=${filters.limit}&start=${filters.start}&user_id=` + userid + `&`;
     params += _.map(filters.where, (v, k) => `where[${k}]=${v}`).join("&");
@@ -97,8 +96,6 @@ const MySales = (props) => {
    * Stats Dynamic data display
    */
   const [stats, setStats] = useState({ success: false, stats: [] });
-
-  const { getServerData } = useContext(UserContext);
 
   const loadStats = () => {
     getServerData("trainer/my-sales-stats", true).then(setStats);

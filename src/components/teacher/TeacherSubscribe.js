@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import UserContext from "./../../contexts/UserContext";
 
 const TeacherSubscribe = (props) => {
-  const { apiHeaders } = useContext(UserContext);
+  const { apiHeaders, getUserData } = useContext(UserContext);
   const [modal, setModal] = useState(true);
   const toggle = () => setModal(!modal);
   const frmRef = useRef("SubscribeForm");
@@ -15,7 +15,7 @@ const TeacherSubscribe = (props) => {
   const [error, setError] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
 
-  const trainerSlug = Utils.getUserData().slug;
+  const trainerSlug = getUserData().slug;
   const trainerUrl = Utils.getTrainerURL("", trainerSlug);
 
   const onSave = (event) => {

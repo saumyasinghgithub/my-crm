@@ -13,7 +13,7 @@ const LoginModal = (props) => {
   });
   const [loginResp, setLoginResp] = useState({ success: false, message: "" });
   const [logining, setLogining] = useState(false);
-  const { goLogin, goForgotPassword } = useContext(UserContext);
+  const { getUserData, isLoggedIn, goLogin, goForgotPassword, isTrainer } = useContext(UserContext);
 
   const moodleFrm = useRef();
 
@@ -27,7 +27,7 @@ const LoginModal = (props) => {
       $(".modal .modal-dialog").attr("class", "modal-dialog  zoomOut modal-full  animated");
     });
 
-    if (window.location.href.endsWith("/login") && !Utils.isLoggedIn()) {
+    if (window.location.href.endsWith("/login") && !isLoggedIn()) {
       $("#loginModal").modal("show");
     }
   }, []);
@@ -69,13 +69,9 @@ const LoginModal = (props) => {
       setLoginResp({ success: success, message: message });
       if (success) {
         //loginToMoodle(data).then(() => window.location.reload());
-        if (hasSubdomain) {
-          var win = document.getElementById("mainDomainIframe").contentWindow;
-          win.postMessage(Utils.getUserData(), "*");
-        }
-        var isTrainer = Utils.isTrainer();
+        var isTrainer = isTrainer();
         if (isTrainer) {
-          var userData = Utils.getUserData();
+          var userData = getUserData();
           var subDomain = Utils.subdomain();
           var trainerSlug = userData.slug;
           var path = "http://" + trainerSlug + "." + subDomain;

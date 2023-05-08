@@ -7,11 +7,11 @@ import UserMenu from "./UserMenu";
 import UserContext from "./../contexts/UserContext";
 
 const Header = (props) => {
-  const { userData } = useContext(UserContext);
+  const { isLoggedIn, getUserData, isTrainer } = useContext(UserContext);
 
-  const [loggedIn, setLoggedIn] = useState(Utils.isLoggedIn(userData));
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn());
 
-  const udata = { ...userData };
+  const udata = getUserData();
   const $ = window.$;
   console.log(udata);
   useEffect(() => {
@@ -80,11 +80,7 @@ const Header = (props) => {
                     <a href={Utils.getTrainerURL(`login`)} type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
                       {_.get(udata, "base_image", "") !== "" && (
                         <img
-                          src={`${process.env.REACT_APP_API_URL}/uploads/${Utils.isTrainer() ? "base" : "student/base"}/${_.get(
-                            udata,
-                            "base_image",
-                            ""
-                          )}`}
+                          src={`${process.env.REACT_APP_API_URL}/uploads/${isTrainer() ? "base" : "student/base"}/${_.get(udata, "base_image", "")}`}
                           className="img-fluid"
                           title={`Logged in as ${udata.firstname} ${udata.lastname}`}
                         />

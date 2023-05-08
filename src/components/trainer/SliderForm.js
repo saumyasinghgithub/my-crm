@@ -6,12 +6,12 @@ import UserContext from "../../contexts/UserContext";
 import Utils from "./../../Utils";
 const SliderForm = (props) => {
   const [sliderData, setSliderData] = useState([]);
-  const { getServerData, setServerData } = useContext(UserContext);
+  const { getUserData, getServerData, setServerData } = useContext(UserContext);
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({ success: false, message: "" });
   const [lastinsertid, setLastinsertid] = useState();
 
-  const trainerDetails = Utils.getUserData();
+  const trainerDetails = getUserData();
 
   useEffect(() => {
     getServerData("trainer/sliders")
@@ -99,7 +99,9 @@ const SliderForm = (props) => {
                 </Accordion.Item>
               </Col>
               <Col className="col-2 col-lg-1">
-                {k > 1 && <i className="position-relative fa fa-minus-circle fa-lg mt-2 cursor-pointer text-danger remove-award" onClick={removeAData(k)} />}
+                {k > 1 && (
+                  <i className="position-relative fa fa-minus-circle fa-lg mt-2 cursor-pointer text-danger remove-award" onClick={removeAData(k)} />
+                )}
               </Col>
             </Row>
           </Accordion>

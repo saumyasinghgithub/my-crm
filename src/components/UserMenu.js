@@ -6,16 +6,16 @@ import UserContext from "./../contexts/UserContext";
 import _ from "lodash";
 
 const UserMenu = (props) => {
-  const { userData, logout, loginToMoodle } = useContext(UserContext);
+  const { getUserData, isLoggedIn, isTrainer, isStudent, logout, loginToMoodle } = useContext(UserContext);
 
-  const [loggedIn, setLoggedIn] = useState(Utils.isLoggedIn(userData));
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn());
 
   const hasSubdomain = Utils.hasSubdomain();
 
   const getSlug = () => {
     let url = process.env.REACT_APP_PUBLIC_URL + "/student/my-profile";
-    if (Utils.isTrainer(userData)) {
-      url = Utils.getTrainerURL("", Utils.getUserData().slug);
+    if (isTrainer()) {
+      url = Utils.getTrainerURL("", getUserData().slug);
     }
     return url;
   };
@@ -35,7 +35,7 @@ const UserMenu = (props) => {
 
   return (
     <>
-      {Utils.isTrainer(userData) && (
+      {isTrainer() && (
         <>
           <li>
             <a href={`${process.env.PUBLIC_URL}/my-profile#about`}>Edit Profile</a>
@@ -45,29 +45,29 @@ const UserMenu = (props) => {
           </li>
         </>
       )}
-      {Utils.isStudent(userData) && (
+      {isStudent() && (
         <li>
           <a href={`${process.env.PUBLIC_URL}/student/my-profile/edit`}>My Profile</a>
         </li>
       )}
-      {Utils.isStudent(userData) && (
+      {isStudent() && (
         <li>
           <a href={Utils.getTrainerURL(`my-order`)}>My Order</a>
         </li>
       )}
-      {Utils.isTrainer(userData) && (
+      {isTrainer() && (
         <>
           <li>
             <a href={Utils.getTrainerURL(`my-sales`)}>My Sales</a>
           </li>
         </>
       )}
-      {Utils.isTrainer(userData) && (
+      {isTrainer() && (
         <li>
           <a href={Utils.getTrainerURL(`my-course`)}>Manage Course</a>
         </li>
       )}
-      {Utils.isTrainer(userData) && (
+      {isTrainer() && (
         <li>
           <a href={Utils.getTrainerURL(`manage-coupons`)}>Manage Coupons</a>
         </li>
@@ -92,15 +92,13 @@ const UserMenu = (props) => {
           {/*<li>
                   <a href={getSlug()+'professional-profile'}>Professional Profile</a>
                   </li>*/}
-          {/*<li>
-          <a href={Utils.getTrainerURL(`preferred-trainers`)}>
-            Preferred Trainer
-          </a>
-                </li>*/}
+          <li>
+            <a href={Utils.getTrainerURL(`preferred-trainers`)}>Preferred Trainer</a>
+          </li>
         </>
       )}
 
-      {Utils.isTrainer(userData) && (
+      {isTrainer() && (
         <>
           <li>
             <a href={Utils.getTrainerURL(`my-blog`)}>Manage Blogs</a>

@@ -8,10 +8,12 @@ import TeacherNav from "./teacher/TeacherNav";
 import UserContext from "./../contexts/UserContext";
 
 const HeaderTrainer = (props) => {
-  const { userData } = useContext(UserContext);
-  const [loggedIn, setLoggedIn] = useState(Utils.isLoggedIn(userData));
+  const { getUserData, isLoggedIn, isTrainer } = useContext(UserContext);
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn());
 
   const $ = window.$;
+
+  const userData = getUserData();
 
   useEffect(() => {
     $(".menu-toggle").on("click", function () {
@@ -79,7 +81,7 @@ const HeaderTrainer = (props) => {
                       <a href={Utils.getTrainerURL(`login`)} type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         {_.get(userData, "base_image", "") !== "" && (
                           <img
-                            src={`${process.env.REACT_APP_API_URL}/uploads/${Utils.isTrainer() ? "base" : "student/base"}/${_.get(
+                            src={`${process.env.REACT_APP_API_URL}/uploads/${isTrainer() ? "base" : "student/base"}/${_.get(
                               userData,
                               "base_image",
                               ""

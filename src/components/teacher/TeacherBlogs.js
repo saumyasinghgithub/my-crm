@@ -10,7 +10,7 @@ import { Modal } from "react-bootstrap";
 
 const TeacherBlogs = (props) => {
   const { data, blogs } = props;
-  const { getServerData } = useContext(UserContext);
+  const { getUserData, isTrainer } = useContext(UserContext);
 
   const [RegiShow, setRegiShow] = useState(false);
 
@@ -48,7 +48,7 @@ const TeacherBlogs = (props) => {
   return (
     <>
       <div className="row">
-        {Utils.isTrainer() && Utils.getUserData().id === data.user_id && (
+        {isTrainer() && getUserData().id === data.user_id && (
           <div className="container mb-3 editTrainerdetails">
             <div className="row">
               <div className="col-12 text-right">
@@ -69,7 +69,6 @@ const TeacherBlogs = (props) => {
       </div>
 
       <div className="serviceWrapper container">
-
         {blogs.length > 0 && (
           <>
             <div className="freeResouces lineANimation slideInUp wow mt-5">Blogs</div>
@@ -84,7 +83,6 @@ const TeacherBlogs = (props) => {
               <TeacherChannel youtube={data.youtube_community} />
             </>
           )*/}
-
 
           <div className="serviceHeading mb-5">
             <h1 className="headingtext slideInUp wow mt-3">Community</h1>
@@ -102,7 +100,11 @@ const TeacherBlogs = (props) => {
                     <div>{moment(props.events[0].event_on).format("MMM DD, h:mm a")}</div>
                     <p dangerouslySetInnerHTML={{ __html: props.events[0].event_short_desc }}></p>
                     <div className="HomeRegister mt-4 text-right">
-                      <button /*onClick={RegisterShow}*/><a href={props.events[0].cta} target="_blank">Register Now</a></button>
+                      <button /*onClick={RegisterShow}*/>
+                        <a href={props.events[0].cta} target="_blank">
+                          Register Now
+                        </a>
+                      </button>
                     </div>
                   </div>
                 </div>
