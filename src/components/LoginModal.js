@@ -69,8 +69,7 @@ const LoginModal = (props) => {
       setLoginResp({ success: success, message: message });
       if (success) {
         //loginToMoodle(data).then(() => window.location.reload());
-        var isTrainer = isTrainer();
-        if (isTrainer) {
+        if (isTrainer()) {
           var userData = getUserData();
           var subDomain = Utils.subdomain();
           var trainerSlug = userData.slug;
