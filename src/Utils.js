@@ -8,12 +8,12 @@ const Utils = {
 
   apiUrl: (path) => process.env.REACT_APP_API_URL + "/" + path,
 
-  subdomain: () => window.location.host.replace("." + process.env.REACT_APP_HOST, ""),
+  subdomain: () => (window.location.host != process.env.REACT_APP_HOST ? window.location.host.replace("." + process.env.REACT_APP_HOST, "") : ""),
 
   hasSubdomain: () => {
     const reservedSubDomains = _.get(process.env, "REACT_APP_RESERVED_SD", "").split(",");
     const sd = Utils.subdomain();
-    return window.location.host !== sd && !reservedSubDomains.includes(sd);
+    return sd != "" && !reservedSubDomains.includes(sd);
   },
 
   getTrainerURL: (path = "", slug = false) => {
@@ -34,7 +34,7 @@ const Utils = {
 
   siteCookieName: `${process.env.REACT_APP_APPNAME}-userData`,
 
-  getCookieOptions: () => ({ secure: false }),
+  getCookieOptions: () => ({ secure: false, domain: process.env.REACT_APP_COOKIE_DOMAIN }),
 
   loadJS: (src, failedmsg) => {
     return new Promise((resolve, reject) => {

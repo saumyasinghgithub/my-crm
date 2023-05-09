@@ -24,7 +24,7 @@ const LoginLayout = ({ children }) => {
   });
   const { getServerData, setServerData } = useContext(UserContext);
   const callbackfn = () => {
-    if (Utils.subdomain() !== process.env.REACT_APP_HOST) {
+    if (Utils.hasSubdomain()) {
       getServerData(`trainer/profiledata/${Utils.subdomain()}`, true).then((res) => {
         if (res.data.user_id > 0) {
           setServerData("settings/site-settings", `&id=${res.data.user_id}`, "post").then((res) => {

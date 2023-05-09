@@ -2,47 +2,46 @@ import { useEffect, useContext, useState } from "react";
 import { Form, Alert, Spinner, Row, Col, Button, Modal } from "react-bootstrap";
 import UserContext from "./../../contexts/UserContext";
 import _ from "lodash";
-import Utils from "./../../Utils";
+import moment from "moment";
 
 const CouponForm = (props) => {
-  const [mode, setMode] = useState("Add");
-  const [mycoupon, setMycoupon] = useState({});
+  const [mode, setMode] = useState(props.mode === 2 ? "Update" : "Add");
+  const [data, setData] = useState({});
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({ success: false, message: "" });
-  const { getUserData, getServerData, setServerData } = useContext(UserContext);
-  const [mycourse, setMycourse] = useState({});
-  const [mystudents, setMystudents] = useState({});
-  const [selectedOptions, setSelectedOptions] = useState([]);
-  const [trainerdata, setTrainerdata] = useState(getUserData());
-  const [selectedStudentOptions, setSelectedStudentOptions] = useState([]);
+  const { getUserData, isTrainer, getServerData, setServerData } = useContext(UserContext);
+  const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    const slug = Utils.subdomain();
-    getServerData(`trainer/profile/${slug}`, true)
-      .then((tData) => {
-        console.log(tData.courses);
-        setMycourse(tData.courses);
-      })
-      .catch((msg) => {});
+    if (isTrainer() && props.mode === 2 && props.id > 0) {
+      getServerData(`coupons/edit/${props.id}`)
+        .then((data) => {
+          console.log("cdet", data);
+          setData(data);
+        })
+        .catch((msg) => {});
+    }
   }, []);
 
   useEffect(() => {
-    getServerData(`user/student-list`, true)
-      .then((tData) => {
-        console.log(tData.list);
-        setMystudents(tData.list);
-      })
-      .catch((msg) => {});
+    if (isTrainer()) {
+      const slug = getUserData().slug;
+      getServerData(`trainer/profile/${slug}?mode[]=courses`, true)
+        .then((tData) => {
+          setCourses(tData.courses);
+        })
+        .catch((msg) => {});
+    }
   }, []);
 
   const onSave = (e) => {
     const frm = e.currentTarget;
     e.preventDefault();
     let frmdata = new FormData(frm);
-    frmdata.append("item_id", selectedOptions);
-    frmdata.append("user_id", selectedStudentOptions);
-    setServerData("coupons/add", frmdata, "post")
+    setServerData(props.mode === 2 ? `coupons/${props.id}` : "coupons/", frmdata, props.mode === 2 ? "put" : "post")
       .then((res) => {
+        props.onSave();
+        props.onClose();
         setResponse({ success: res.data.success, message: res.data.message });
       })
       .catch((err) => {
@@ -50,76 +49,41 @@ const CouponForm = (props) => {
       });
   };
 
-  const currentDate = new Date();
-  const handleOnclickOption = (event) => {
-    selectedOptions.push(parseInt(event.target.value));
-    setSelectedOptions(selectedOptions);
-  };
-  const handleOnclickStudentOption = (events) => {
-    selectedStudentOptions.push(parseInt(events.target.value));
-    setSelectedStudentOptions(selectedStudentOptions);
-  };
-  const courseList = [];
-  for (let i = 0; i < mycourse.length; i++) {
-    courseList.push(
-      <>
-        <option key={mycourse[i].id} value={mycourse[i].id}>
-          {mycourse[i].name}
-        </option>
-      </>
-    );
-  }
-  const studentList = [];
-  for (let r = 0; r < mystudents.length; r++) {
-    studentList.push(
-      <>
-        <option key={mystudents[r].id} value={mystudents[r].id}>
-          {mystudents[r].firstname} {mystudents[r].lastname}
-        </option>
-      </>
-    );
-  }
   const renderForm = () => (
     <Form onSubmit={onSave}>
-      <Form.Control
-        type="hidden"
-        name="created_at"
-        defaultValue={currentDate.getFullYear() + "-" + currentDate.toLocaleString(undefined, { month: "2-digit" }) + "-" + currentDate.getDate()}
-      />
-      <Form.Control type="hidden" name="trainer_id" defaultValue={trainerdata.id} />
       <Row>
         <Col md={4} className="mt-3">
           <Form.Label>Coupon Code: </Form.Label>
-          <Form.Control type="text" name="coupon_code" placeholder="Enter coupon code" />
-          <p>* Mandatory Field</p>
+          <Form.Control type="text" name="coupon_code" placeholder="Enter coupon code" defaultValue={_.get(data, "coupon_code", "")} />
+          <p className="text-danger">* Mandatory Field</p>
         </Col>
         <Col md={4} className="mt-3">
-          <Form.Label>Usage Limit: </Form.Label>
-          <Form.Control type="number" name="usage_limit" placeholder="Enter usage limit" />
-          <p>Note - If not set it is set for unlimited period</p>
+          <Form.Label>Usage Limit per user: </Form.Label>
+          <Form.Control type="number" name="usage_limit" placeholder="Enter usage limit" defaultValue={_.get(data, "usage_limit", "")} />
+          <p className="text-info">If left blank, it is set for unlimited usage</p>
         </Col>
         <Col md={4} className="mt-3">
           <Form.Label>Expiry Date: </Form.Label>
-          <Form.Control type="date" name="expiry_date" placeholder="Enter expiry date" />
-          <p>Note - If not set it is set for unlimited period</p>
+          <Form.Control
+            type="date"
+            name="expiry_date"
+            placeholder="Enter expiry date"
+            defaultValue={_.get(data, "expiry_date", "") === "" ? "" : moment(data.expiry_date).format("YYYY-MM-DD")}
+          />
+          <p className="text-info">If left blank, it is set forever</p>
         </Col>
       </Row>
       <Row>
-        <Col md={6} className="mt-3">
+        <Col md={12} className="mt-3">
           <Form.Label>Select Course: </Form.Label>
-          <select value={selectedOptions} onChange={handleOnclickOption} multiple="multiple" className="form-control">
-            <option value=""> - Select Course - </option>
-            {courseList}
+          <select multiple="multiple" name="course_ids" className="form-control">
+            {courses.map((c) => (
+              <option key={c.id} value={c.id} selected={!_.isEmpty(data.course_ids) && _.get(data, "course_ids", []).includes(c.id)}>
+                {c.name}
+              </option>
+            ))}
           </select>
-          <p>Note - If not set it is for all courses</p>
-        </Col>
-        <Col md={6} className="mt-3">
-          <Form.Label>Select Students: </Form.Label>
-          <select value={selectedStudentOptions} onChange={handleOnclickStudentOption} multiple="multiple" className="form-control">
-            <option value=""> - Select Students - </option>
-            {studentList}
-          </select>
-          <p>Note - If not set it is for all students</p>
+          <p className="text-info">If no course is seleted, it is applicable for all courses</p>
         </Col>
       </Row>
       <Row>
@@ -127,15 +91,25 @@ const CouponForm = (props) => {
           <Form.Label>Coupon Type: </Form.Label>
           <Form.Control as="select" name="coupon_type" required>
             <option value=""> - Select Type - </option>
-            <option value="1">Total cart percentage</option>
-            <option value="2">Total cart value</option>
+            <option value="1" selected={parseInt(_.get(data, "coupon_type", 0)) === 1}>
+              Total cart percentage
+            </option>
+            <option value="2" selected={parseInt(_.get(data, "coupon_type", 0)) === 2}>
+              Total cart value
+            </option>
           </Form.Control>
-          <p>* Mandatory Field</p>
+          <p className="text-danger">* Mandatory Field</p>
         </Col>
         <Col md={6} className="mt-3">
           <Form.Label>Set Value:</Form.Label>
-          <Form.Control type="text" name="discount_value" placeholder="Enter discount value." required />
-          <p>* Mandatory Field</p>
+          <Form.Control
+            type="text"
+            name="discount_value"
+            placeholder="Enter discount value."
+            required
+            defaultValue={_.get(data, "discount_value", "")}
+          />
+          <p className="text-danger">* Mandatory Field</p>
         </Col>
       </Row>
       <Row>

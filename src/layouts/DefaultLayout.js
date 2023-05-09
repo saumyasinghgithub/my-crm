@@ -26,7 +26,7 @@ const DefaultLayout = ({ children }) => {
   });
 
   const callbackfn = () => {
-    if (Utils.subdomain() !== process.env.REACT_APP_HOST) {
+    if (Utils.hasSubdomain()) {
       //const id = 57;
       getServerData(`trainer/profiledata/${Utils.subdomain()}`).then((data) => {
         if (data.user_id > 0) {

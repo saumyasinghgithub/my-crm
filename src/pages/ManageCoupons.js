@@ -10,7 +10,7 @@ import axios from "axios";
 const ManageCoupons = (props) => {
   const { apiHeaders } = useContext(UserContext);
   const [showForm, setShowForm] = useState({ id: false, mode: 0 }); // 0=do not show, 1=add, 2=edit
-  const listColumns = ["id", "coupon_code", "usage_limit", "items", "expiry_date"];
+  const listColumns = ["id", "coupon_code", "usage_limit", "courses", "expiry_date"];
   const [list, setList] = useState({ loading: false, error: false, pageInfo: {}, data: [] });
 
   const fetchList = () => {
@@ -30,12 +30,13 @@ const ManageCoupons = (props) => {
     selector: (row) => row[v],
     format: (row) => {
       if (v == "expiry_date") {
-        if (row[v] === 0) {
-          console.log("no expiry");
+        if (!_.isEmpty(row[v]) && row[v] != "0000-00-00") {
+          const date = new Date(row[v]);
+          const formattedDate = date.toLocaleDateString();
+          return formattedDate;
+        } else {
+          return "";
         }
-        const date = new Date(row[v]);
-        const formattedDate = date.toLocaleDateString();
-        return formattedDate;
       } else {
         return row[v];
       }
@@ -94,7 +95,13 @@ const ManageCoupons = (props) => {
               </Row>
             </Tab.Container>
             {showForm.mode > 0 && (
-              <CouponForm type="modal" id={showForm.id} onClose={() => setShowForm({ ...showForm, mode: 0 })} onSave={fetchList} />
+              <CouponForm
+                type="modal"
+                id={showForm.id}
+                mode={showForm.mode}
+                onClose={() => setShowForm({ ...showForm, mode: 0 })}
+                onSave={fetchList}
+              />
             )}
           </div>
         </div>
