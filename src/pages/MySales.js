@@ -2,14 +2,12 @@ import React, { useState, useContext, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import DataTable from "react-data-table-component";
 import UserContext from "./../contexts/UserContext";
-import _ from "lodash";
+import _, { filter } from "lodash";
+import Utils from "./../Utils";
 
 const MySales = (props) => {
   const [data, setData] = useState({ loading: true, error: false, pageInfo: {}, data: [] });
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
-  const [filters, setFilters] = useState({ where: { startDate: startDate, endDate: endDate }, limit: 15, start: 0 });
-  const [searchcustomer, setSearchCustomer] = useState("");
+  const [filters, setFilters] = useState({ where: { startDate: "", endDate: "", customer: "" }, limit: 10, start: 0 });
   const [searchorder, setSearchOrder] = useState("");
   const { getUserData, getServerData } = useContext(UserContext);
 
@@ -53,41 +51,30 @@ const MySales = (props) => {
   ];
   const fetchList = () => {
     setData({ ...data, loading: true });
-    const uData = getUserData();
-    const userid = uData.id;
-    let params = `?limit=${filters.limit}&start=${filters.start}&user_id=` + userid + `&`;
+    let params = `?limit=${filters.limit}&start=${filters.start}&`;
     params += _.map(filters.where, (v, k) => `where[${k}]=${v}`).join("&");
     getServerData("sales/list" + params, true).then((res) => {
-      if (res.data.success) {
-        const min = Date.parse(startDate);
-        const max = Date.parse(endDate);
-        let salesData = res.data.data;
-        if (startDate != null && endDate != null) {
-          const filterSales = salesData.filter((d) => {
-            return d.timestampvalue * 1000 >= min && d.timestampvalue * 1000 <= max;
-          });
-          setData({ ...data, loading: false, error: false, pageInfo: res.data.pageInfo, data: filterSales });
-        } else if (searchcustomer != null) {
-          const filterCustomers = salesData.filter((cus) => {
-            return cus.email.toLowerCase().includes(searchcustomer.toLowerCase());
-          });
-          setData({ ...data, loading: false, error: false, pageInfo: res.data.pageInfo, data: filterCustomers });
-        } else {
-          setData({ ...data, loading: false, error: false, pageInfo: res.data.pageInfo, data: res.data.data });
-        }
+      if (res.success) {
+        setData({ ...data, loading: false, error: false, pageInfo: res.pageInfo, data: res.data });
       } else {
       }
     });
   };
-  useEffect(fetchList, [filters, startDate, endDate, searchcustomer]);
+
+  const gotoPage = (page) => (e) => {
+    const start = (page - 1) * filters.limit;
+    setFilters({ ...filters, start: start });
+  };
+
+  useEffect(fetchList, [filters]);
   const handleStartDate = (e) => {
-    setStartDate(e.target.value);
+    setFilters({ ...filters, start: 0, where: { ...filters.where, startDate: e.target.value } });
   };
   const handleEndDate = (e) => {
-    setEndDate(e.target.value);
+    setFilters({ ...filters, start: 0, where: { ...filters.where, endDate: e.target.value } });
   };
   const handleSearchCustomer = (e) => {
-    setSearchCustomer(e.target.value);
+    setFilters({ ...filters, start: 0, where: { ...filters.where, customer: e.target.value } });
   };
   const handleSearchOrder = (e) => {
     setSearchOrder(e.target.value);
@@ -190,7 +177,7 @@ const MySales = (props) => {
                     </div>
                     <input
                       type="email"
-                      value={searchcustomer}
+                      value={filters.where.customer}
                       onChange={handleSearchCustomer}
                       className="form-control"
                       placeholder="Enter Your Email Address"
@@ -216,7 +203,7 @@ const MySales = (props) => {
                       inputmode="numeric"
                       name="startDate"
                       onChange={handleStartDate}
-                      value={startDate}
+                      value={filters.where.startDate}
                     />
                   </div>
                 </div>
@@ -239,7 +226,7 @@ const MySales = (props) => {
                       inputmode="numeric"
                       name="endDate"
                       onChange={handleEndDate}
-                      value={endDate}
+                      value={filters.where.endDate}
                     />
                   </div>
                 </div>
@@ -248,6 +235,8 @@ const MySales = (props) => {
             <Row>
               <Col md={12}>
                 <DataTable columns={columns} data={data.data} />
+                {_.get(data, "pageInfo.total", 0) > filters.limit &&
+                  Utils.showPagination({ ...data.pageInfo, ..._.pick(filters, ["start", "limit"]) }, gotoPage)}
               </Col>
             </Row>
           </div>

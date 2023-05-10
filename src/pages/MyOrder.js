@@ -1,6 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import { Container, Alert } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Container } from "react-bootstrap";
 import UserContext from "./../contexts/UserContext";
 import Utils from "./../Utils";
 import _ from "lodash";
