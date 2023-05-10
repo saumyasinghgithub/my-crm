@@ -2,19 +2,17 @@ import React, { useEffect, useState, useContext } from "react";
 import { Container, Form, Button, Row, Col, Alert, Spinner } from "react-bootstrap";
 import _ from "lodash";
 import UserContext from "./../contexts/UserContext";
-import axios from "axios";
 import Utils from "../Utils";
 import { Loader } from "../components";
-
+import axios from "axios";
 const MyCart = (props) => {
-  const { getUserData, isLoggedIn, getServerData, apiHeaders } = useContext(UserContext);
+  const { getUserData, isLoggedIn, getServerData, setServerData, apiHeaders } = useContext(UserContext);
   const [loggedIn, setLoggedIn] = useState(isLoggedIn());
   const [cart, setCart] = useState({ loading: true });
-  const [coupons, setCoupons] = useState();
   const [calDiscount, setCalDiscount] = useState(0);
   const [processing, setProcessing] = useState(false);
-  const [formData, setFormData] = useState(null);
-  const [filteredData, setFilteredData] = useState();
+  const [cError, setCError] = useState("");
+  const [coupon, setCoupon] = useState(false);
 
   const deleteRecord = (id) => (e) => {
     if (window.confirm("You are going to delete record, are you sure?")) {
@@ -46,18 +44,6 @@ const MyCart = (props) => {
 
   useEffect(window.scrollEffect, [cart]);
 
-  useEffect(() => {
-    getServerData("coupons/list")
-      .then((couponData) => {
-        setCoupons(couponData);
-      })
-      .catch((err) => {
-        setCoupons({ ...coupons, data: [], message: err.message, loading: false });
-      });
-  }, []);
-
-  useEffect(window.scrollEffect, [coupons]);
-
   const checkout = (e) => {
     e.preventDefault();
     setProcessing({ mode: "info", msg: "Processing your cart items for checkout.." });
@@ -71,8 +57,7 @@ const MyCart = (props) => {
 
   const generateOrder = () => {
     return new Promise((resolve, reject) => {
-      axios
-        .post(Utils.apiUrl("cart/generateOrder"), "action=checkout", apiHeaders())
+      setServerData("cart/generateOrder", "action=checkout", "post")
         .then((res) => {
           if (_.get(res, "data.success", false)) {
             setProcessing({ mode: "info", msg: "Processing your payment.." });
@@ -165,24 +150,38 @@ const MyCart = (props) => {
 
   const onDiscountApply = (e) => {
     e.preventDefault();
-    const form = e.target;
-    const data = new FormData(form);
-    const formentries = Object.fromEntries(data);
-    setFormData(formentries);
-    const filteredDataVar = coupons.filter((item) => item.coupon_code === formentries.coupon_code && item.expiry_date >= formentries.expiry_date);
-    setFilteredData(filteredDataVar);
-    if (filteredDataVar.length > 0) {
-      console.log("filteredData" + filteredDataVar);
-      const originalValue = filteredDataVar[0].discount;
-      console.log("originalValue" + originalValue);
-      const dividedValue = originalValue / 100;
-      const netDiscount = cartTotalPrice() * dividedValue;
-      setCalDiscount(netDiscount);
-    } else {
-      setCalDiscount(0);
+    let frm = e.target;
+
+    if (!_.isEmpty(frm.coupon_code.value)) {
+      setServerData(`coupons/fetch`, `coupon=${frm.coupon_code.value}`, "post")
+        .then((res) => {
+          setCoupon(res.data);
+        })
+        .catch((err) => setCError(err));
     }
   };
-  const currentDate = new Date();
+
+  const couponChanged = (e) => {
+    setCoupon(false);
+    if (_.isEmpty(e.target.value)) {
+      setCError(false);
+    }
+  };
+
+  useEffect(() => {
+    if (
+      coupon &&
+      !_.isEmpty(coupon.course_ids) &&
+      _.intersection(coupon.course_ids.split(","), _.flattenDeep(_.map(cart.data, (c) => c.course_id.toString()))).length === 0
+    ) {
+      console.log();
+      setCError("Coupon not applicable");
+    } else {
+      console.log("found matching course");
+      setCError("");
+    }
+  }, [coupon]);
+
   return (
     <>
       <Container fluid className="h-100 p-0">
@@ -300,24 +299,60 @@ const MyCart = (props) => {
                                 <Col sm={4} className="text-right">
                                   $ {parseFloat(cData.price).toFixed(2)}
                                 </Col>
+                                {coupon && !_.isEmpty(coupon.course_ids) && coupon.course_ids.split(",").includes(cData.course_id.toString()) && (
+                                  <>
+                                    <Col sm={8} className="text-danger">
+                                      <small>Discount applied:</small>
+                                    </Col>
+                                    <Col sm={4} className="text-danger text-right">
+                                      <small>
+                                        {" "}
+                                        - ${" "}
+                                        {parseFloat(
+                                          coupon.coupon_type === 1
+                                            ? (cData.price * coupon.discount_value) / 100
+                                            : cData.price > coupon.discount_value
+                                            ? coupon.discount_value
+                                            : cData.price
+                                        ).toFixed(2)}
+                                      </small>
+                                    </Col>
+                                  </>
+                                )}
                               </Row>
                             ))}
-                            <Row className="cbox-space mx-0">
-                              <Col sm={8}>
-                                <span>Coupon Discount</span>
-                              </Col>
-                              <Col sm={4} className="text-right">
-                                <span>${calDiscount}</span>
-                              </Col>
-                            </Row>
-                            <Row className="cbox-space mx-0">
-                              <Col sm={8}>
-                                <span>Total</span>
-                              </Col>
-                              <Col sm={4} className="text-right">
-                                <b>$ {cartTotalPrice()}</b>
-                              </Col>
-                            </Row>
+
+                            {coupon && _.isEmpty(coupon.course_ids) && (
+                              <Row className="cbox-space mx-0">
+                                <Col sm={8}>
+                                  <span>Total</span>
+                                </Col>
+                                <Col sm={4} className="text-right">
+                                  <b>$ {cartTotalPrice()}</b>
+                                </Col>
+                              </Row>
+                            )}
+
+                            {coupon && _.isEmpty(coupon.course_ids) && (
+                              <Row className="cbox-space mx-0 text-danger">
+                                <Col sm={8}>
+                                  <small>Coupon Discount</small>
+                                </Col>
+                                <Col sm={4} className="text-right">
+                                  <small>
+                                    - ${" "}
+                                    {parseFloat(
+                                      coupon.coupon_type === 1
+                                        ? (cartTotalPrice() * coupon.discount_value) / 100
+                                        : cartTotalPrice() > coupon.discount_value
+                                        ? coupon.discount_value
+                                        : cartTotalPrice()
+                                    ).toFixed(2)}
+                                  </small>
+                                </Col>
+                              </Row>
+                            )}
+
                             <Row className="cbox-space mx-0">
                               <Col sm={8}>
                                 <span>Net Total</span>
@@ -329,26 +364,27 @@ const MyCart = (props) => {
                             {cart.data.length !== 0 && (
                               <>
                                 <Form onSubmit={onDiscountApply}>
-                                  <Form.Control
-                                    type="hidden"
-                                    name="expiry_date"
-                                    defaultValue={
-                                      currentDate.getFullYear() +
-                                      "-" +
-                                      currentDate.toLocaleString(undefined, { month: "2-digit" }) +
-                                      "-" +
-                                      currentDate.getDate()
-                                    }
-                                  />
                                   <Row className="cbox-space mx-0">
                                     <Col sm={7} className="text-left p-0 pr-1 mt-2">
-                                      <Form.Control className="py-0 coupon" type="text" name="coupon_code" placeholder="Coupon Code" />
+                                      <Form.Control
+                                        className="py-0 coupon"
+                                        type="text"
+                                        name="coupon_code"
+                                        placeholder="Coupon Code"
+                                        onChange={couponChanged}
+                                      />
                                     </Col>
                                     <Col sm={5} className="text-right p-0">
                                       <Button className="btn btn-sm btnBlue font-weight-normal mt-2" type="submit">
                                         Apply Discount
                                       </Button>
                                     </Col>
+                                    {!_.isEmpty(cError) && (
+                                      <Col sm={12} className="text-danger pt-1">
+                                        <span className="fa fa-exclamation-triangle pr-2"></span>
+                                        {cError}
+                                      </Col>
+                                    )}
                                   </Row>
                                 </Form>
 
