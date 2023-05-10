@@ -34,7 +34,13 @@ const Utils = {
 
   siteCookieName: `${process.env.REACT_APP_APPNAME}-userData`,
 
-  getCookieOptions: () => ({ secure: false, domain: process.env.REACT_APP_COOKIE_DOMAIN }),
+  getCookieOptions: () => {
+    let co = { secure: false };
+    if (process.env.REACT_APP_COOKIE_DOMAIN !== "localhost") {
+      co["domain"] = process.env.REACT_APP_COOKIE_DOMAIN;
+    }
+    return co;
+  },
 
   loadJS: (src, failedmsg) => {
     return new Promise((resolve, reject) => {

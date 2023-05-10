@@ -10,7 +10,7 @@ import axios from "axios";
 const ManageCoupons = (props) => {
   const { apiHeaders } = useContext(UserContext);
   const [showForm, setShowForm] = useState({ id: false, mode: 0 }); // 0=do not show, 1=add, 2=edit
-  const listColumns = ["id", "coupon_code", "usage_limit", "courses", "expiry_date"];
+  const listColumns = ["id", "coupon_code", "coupon_type", "discount_value", "usage_limit", "courses", "expiry_date"];
   const [list, setList] = useState({ loading: false, error: false, pageInfo: {}, data: [] });
 
   const fetchList = () => {
@@ -29,7 +29,10 @@ const ManageCoupons = (props) => {
     name: v.toUpperCase(),
     selector: (row) => row[v],
     format: (row) => {
-      if (v == "expiry_date") {
+      console.log(row);
+      if (v == "discount_value") {
+        return row.discount_value + " " + (row.coupon_type === 2 ? "USD" : "%");
+      } else if (v == "expiry_date") {
         if (!_.isEmpty(row[v]) && row[v] != "0000-00-00") {
           const date = new Date(row[v]);
           const formattedDate = date.toLocaleDateString();
@@ -42,6 +45,8 @@ const ManageCoupons = (props) => {
       }
     },
     sortable: true,
+    omit: v === "coupon_type",
+    wrap: v === "courses",
   }));
   columns.push({
     name: "Action",
@@ -90,7 +95,7 @@ const ManageCoupons = (props) => {
               </div>
               <Row>
                 <Col sm={12}>
-                  <DataTableGrid columns={columns} data={list.data} className="coupon-table" />
+                  <DataTableGrid columns={columns} pagination data={list.data} className="coupon-table" />
                 </Col>
               </Row>
             </Tab.Container>
