@@ -8,10 +8,11 @@ import Utils from "../Utils";
 import UserContext from "./../contexts/UserContext";
 
 const MyCourse = (props) => {
-  const { apiHeaders } = useContext(UserContext);
+  const { apiHeaders, getServerData } = useContext(UserContext);
   const [showmc, setShowmc] = useState({ show: false, row: null, type: null });
 
   const [list, setList] = useState({ loading: false, error: false, pageInfo: {}, data: [] });
+  const [filters, setFilters] = useState({ limit: 10, start: 0 });
   const [showForm, setShowForm] = useState({ id: false, mode: 0 }); // 0=do not show, 1=add, 2=edit
 
   const listColumns = ["id", "name", "level", "language", "duration", "created_at"];
@@ -76,13 +77,19 @@ const MyCourse = (props) => {
     }
   };
 
+  const gotoPage = (page) => (e) => {
+    const start = (page - 1) * filters.limit;
+    setFilters({ ...filters, start: start });
+  };
+
   const fetchList = () => {
     setList({ ...list, loading: true });
-    axios.get(Utils.apiUrl("trainer/my-courses"), apiHeaders()).then((res) => {
-      if (res.data.success) {
-        setList({ ...list, loading: false, error: false, pageInfo: res.data.pageInfo, data: res.data.data.map((v) => _.pick(v, listColumns)) });
+    let params = `?limit=${filters.limit}&start=${filters.start}&`;
+    getServerData("trainer/my-courses" + params, true).then((res) => {
+      if (res.success) {
+        setList({ ...list, loading: false, error: false, pageInfo: res.pageInfo, data: res.data.map((v) => _.pick(v, listColumns)) });
       } else {
-        setList({ ...list, loading: false, error: res.data.message, pageInfo: {}, data: [] });
+        setList({ ...list, loading: false, error: res.message, pageInfo: {}, data: [] });
       }
     });
   };
@@ -95,7 +102,7 @@ const MyCourse = (props) => {
   }, []);
 
   useEffect(window.scrollEffect, []);
-  useEffect(fetchList, []);
+  useEffect(fetchList, [filters]);
 
   return (
     <>
@@ -118,6 +125,8 @@ const MyCourse = (props) => {
                   <DataTableGrid columns={columns} data={list.data} />
                 </Col>
               </Row>
+              {_.get(list, "pageInfo.total", 0) > filters.limit &&
+                Utils.showPagination({ ...list.pageInfo, ..._.pick(filters, ["start", "limit"]) }, gotoPage)}
             </Tab.Container>
 
             {showForm.mode > 0 && (
