@@ -139,7 +139,19 @@ const MyCart = (props) => {
     return parseFloat(_.reduce(cart.data, (result, cd) => result + cd.price, 0)).toFixed(2);
   };
   const cartTotalPriceafterDiscount = () => {
-    return cartTotalPrice() - calDiscount;
+    let netAmount = cartTotalPrice();
+    if (coupon) {
+      if (cartDiscountAmount() > 0) {
+        netAmount -= cartDiscountAmount();
+      } else if (!_.isEmpty(coupon.course_ids)) {
+        netAmount -= _.reduce(
+          cart.data.map((cData) => courseDiscountAmount(cData.course_id, cData.price)),
+          (sum, n) => sum + n,
+          0
+        );
+      }
+    }
+    return netAmount;
   };
   /*const cartDiscount = () => {
         const discount = cartTotalPrice() * calDiscount;
@@ -166,6 +178,28 @@ const MyCart = (props) => {
     if (_.isEmpty(e.target.value)) {
       setCError(false);
     }
+  };
+
+  const courseDiscountAmount = (cid, price) => {
+    let disAmount = 0;
+
+    if (coupon && !_.isEmpty(coupon.course_ids) && coupon.course_ids.split(",").includes(cid.toString())) {
+      disAmount = coupon.coupon_type === 1 ? (price * coupon.discount_value) / 100 : price > coupon.discount_value ? coupon.discount_value : price;
+    }
+    return disAmount;
+  };
+
+  const cartDiscountAmount = () => {
+    let disAmount = 0;
+    if (coupon && _.isEmpty(coupon.course_ids)) {
+      disAmount =
+        coupon.coupon_type === 1
+          ? (cartTotalPrice() * coupon.discount_value) / 100
+          : cartTotalPrice() > coupon.discount_value
+          ? coupon.discount_value
+          : cartTotalPrice();
+    }
+    return disAmount;
   };
 
   useEffect(() => {
@@ -299,23 +333,13 @@ const MyCart = (props) => {
                                 <Col sm={4} className="text-right">
                                   $ {parseFloat(cData.price).toFixed(2)}
                                 </Col>
-                                {coupon && !_.isEmpty(coupon.course_ids) && coupon.course_ids.split(",").includes(cData.course_id.toString()) && (
+                                {courseDiscountAmount(cData.course_id, cData.price) > 0 && (
                                   <>
                                     <Col sm={8} className="text-danger">
                                       <small>Discount applied:</small>
                                     </Col>
                                     <Col sm={4} className="text-danger text-right">
-                                      <small>
-                                        {" "}
-                                        - ${" "}
-                                        {parseFloat(
-                                          coupon.coupon_type === 1
-                                            ? (cData.price * coupon.discount_value) / 100
-                                            : cData.price > coupon.discount_value
-                                            ? coupon.discount_value
-                                            : cData.price
-                                        ).toFixed(2)}
-                                      </small>
+                                      <small> - $ {parseFloat(courseDiscountAmount(cData.course_id, cData.price)).toFixed(2)}</small>
                                     </Col>
                                   </>
                                 )}
@@ -333,22 +357,13 @@ const MyCart = (props) => {
                               </Row>
                             )}
 
-                            {coupon && _.isEmpty(coupon.course_ids) && (
+                            {cartDiscountAmount() > 0 && (
                               <Row className="cbox-space mx-0 text-danger">
                                 <Col sm={8}>
                                   <small>Coupon Discount</small>
                                 </Col>
                                 <Col sm={4} className="text-right">
-                                  <small>
-                                    - ${" "}
-                                    {parseFloat(
-                                      coupon.coupon_type === 1
-                                        ? (cartTotalPrice() * coupon.discount_value) / 100
-                                        : cartTotalPrice() > coupon.discount_value
-                                        ? coupon.discount_value
-                                        : cartTotalPrice()
-                                    ).toFixed(2)}
-                                  </small>
+                                  <small>- $ {parseFloat(cartDiscountAmount()).toFixed(2)}</small>
                                 </Col>
                               </Row>
                             )}
@@ -358,7 +373,7 @@ const MyCart = (props) => {
                                 <span>Net Total</span>
                               </Col>
                               <Col sm={4} className="text-right">
-                                <b>$ {cartTotalPriceafterDiscount()}</b>
+                                <b>$ {parseFloat(cartTotalPriceafterDiscount()).toFixed(2)}</b>
                               </Col>
                             </Row>
                             {cart.data.length !== 0 && (

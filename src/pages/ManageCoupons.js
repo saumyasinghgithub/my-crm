@@ -29,16 +29,19 @@ const ManageCoupons = (props) => {
     name: v.toUpperCase(),
     selector: (row) => row[v],
     format: (row) => {
-      console.log(row);
       if (v == "discount_value") {
         return row.discount_value + " " + (row.coupon_type === 2 ? "USD" : "%");
+      } else if (v == "usage_limit") {
+        return row.usage_limit > 0 ? row.usage_limit : "Unlimited";
+      } else if (v == "courses") {
+        return !_.isEmpty(row.courses) ? row.courses : "All courses";
       } else if (v == "expiry_date") {
         if (!_.isEmpty(row[v]) && row[v] != "0000-00-00") {
           const date = new Date(row[v]);
           const formattedDate = date.toLocaleDateString();
           return formattedDate;
         } else {
-          return "";
+          return "Unlimited";
         }
       } else {
         return row[v];

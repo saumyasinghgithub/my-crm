@@ -59,7 +59,13 @@ const CouponForm = (props) => {
         </Col>
         <Col md={4} className="mt-3">
           <Form.Label>Usage Limit per user: </Form.Label>
-          <Form.Control type="number" name="usage_limit" placeholder="Enter usage limit" defaultValue={_.get(data, "usage_limit", "")} />
+          <Form.Control
+            type="number"
+            name="usage_limit"
+            min="1"
+            placeholder="Enter usage limit"
+            defaultValue={parseInt(_.get(data, "usage_limit", "0")) > 0 ? data.usage_limit : ""}
+          />
           <p className="text-info">If left blank, it is set for unlimited usage</p>
         </Col>
         <Col md={4} className="mt-3">
@@ -70,7 +76,7 @@ const CouponForm = (props) => {
             placeholder="Enter expiry date"
             defaultValue={_.get(data, "expiry_date", "") === "" ? "" : moment(data.expiry_date).format("YYYY-MM-DD")}
           />
-          <p className="text-info">If left blank, it is set forever</p>
+          <p className="text-info">If left blank, it is set for unlimited</p>
         </Col>
       </Row>
       <Row>
