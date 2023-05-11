@@ -4,6 +4,7 @@ import { Container, Tab, Row, Col, Button } from "react-bootstrap";
 import BlogForm from "../components/blogs/BlogForm";
 import DataTableGrid from "../components/DataTableGrid";
 import axios from "axios";
+import moment from "moment";
 import Utils from "../Utils";
 import UserContext from "./../contexts/UserContext";
 
@@ -20,6 +21,9 @@ const MyBlog = (props) => {
     name: v.toUpperCase(),
     selector: (row) => row[v],
     format: (row) => {
+      if (v === "created_at") {
+        return moment(row[v]).format("DD MMM YYYY");
+      }
       return row[v];
     },
     sortable: true,
