@@ -57,7 +57,15 @@ const MyCart = (props) => {
 
   const generateOrder = () => {
     return new Promise((resolve, reject) => {
-      setServerData("cart/generateOrder", "action=checkout", "post")
+      let params = {
+        action: "checkout",
+      };
+
+      if (coupon) {
+        params["coupon_id"] = coupon.id;
+      }
+
+      setServerData("cart/generateOrder", params, "post", { "Content-Type": "application/json" })
         .then((res) => {
           if (_.get(res, "success", false)) {
             setProcessing({ mode: "info", msg: "Processing your payment.." });
