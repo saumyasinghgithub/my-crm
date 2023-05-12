@@ -59,11 +59,11 @@ const MyCart = (props) => {
     return new Promise((resolve, reject) => {
       setServerData("cart/generateOrder", "action=checkout", "post")
         .then((res) => {
-          if (_.get(res, "data.success", false)) {
+          if (_.get(res, "success", false)) {
             setProcessing({ mode: "info", msg: "Processing your payment.." });
-            resolve(res.data.data);
+            resolve(res.data);
           } else {
-            throw res.data.message;
+            throw res.message;
           }
         })
         .catch(reject);
@@ -85,22 +85,22 @@ const MyCart = (props) => {
         color: "##0f79aa",
       },
       handler: (res1) => {
-        axios
-          .post(
-            Utils.apiUrl("cart/orderSuccess"),
-            {
-              ..._.omit(orderData, ["key", "order_id"]),
-              razorpayPaymentId: res1.razorpay_payment_id,
-              razorpayOrderId: res1.razorpay_order_id,
-              razorpaySignature: res1.razorpay_signature,
-            },
-            apiHeaders({ "Content-Type": "application/json" })
-          )
+        setServerData(
+          "cart/orderSuccess",
+          {
+            ..._.omit(orderData, ["key", "order_id"]),
+            razorpayPaymentId: res1.razorpay_payment_id,
+            razorpayOrderId: res1.razorpay_order_id,
+            razorpaySignature: res1.razorpay_signature,
+          },
+          "post",
+          { "Content-Type": "application/json" }
+        )
           .then((res2) => {
-            if (res2.data.success) {
-              window.location.href = "/payment/success/" + res2.data.id;
+            if (res2.success) {
+              window.location.href = "/payment/success/" + res2.id;
             } else {
-              throw res2.data.message;
+              throw res2.message;
             }
           })
           .catch((err) => {
