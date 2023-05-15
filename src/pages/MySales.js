@@ -40,7 +40,19 @@ const MySales = (props) => {
     },
     {
       name: "ORDER AMOUNT",
-      selector: (row) => row.amount,
+      selector: (row) => {
+        const dump = JSON.parse(row.dump);
+        return (
+          <div>
+            <div className="text-bold">{row.amount}</div>
+            {_.get(dump, "coupon_amount", false) && (
+              <div className="text-info text-bold">
+                {dump["coupon_code"]}: {dump.coupon_amount}
+              </div>
+            )}
+          </div>
+        );
+      },
       sortable: true,
     },
     {

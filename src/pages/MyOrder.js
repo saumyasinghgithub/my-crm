@@ -64,7 +64,16 @@ const MyOrder = (props) => {
     return (
       <tr>
         <td>{filters.start + idx + 1}</td>
-        <td>{dump.razorpayOrderId}</td>
+        <td>
+          {dump.razorpayOrderId}
+          {!_.isNull(rec.coupon_id) && (
+            <>
+              <span className="badge bg-info text-dark">{dump.coupon_code}</span>
+              <br />
+              Discount: USD {dump.coupon_amount}
+            </>
+          )}
+        </td>
         <td>
           <ul>
             {details.map((d, idx2) => {

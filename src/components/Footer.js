@@ -98,7 +98,6 @@ const Footer = (props) => {
             </ul>
           </ul>
         </div>
-        {hasSubdomain && <iframe className="d-none" id="mainDomainIframe" src={`${process.env.REACT_APP_PUBLIC_URL}/readls`}></iframe>}
       </footer>
     </>
   );
