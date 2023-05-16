@@ -11,7 +11,7 @@ const AboutForm = (props) => {
   const [myabout, setMyabout] = useState({});
   const [saving, setSaving] = useState(false);
   const [response, setResponse] = useState({ success: false, message: "" });
-  const { getServerData, setServerData } = useContext(UserContext);
+  const { getServerData, setServerData, addToUserData } = useContext(UserContext);
 
   const [trainer, setTrainer] = useState({});
   const [showPreview, setShowPreview] = useState(false);
@@ -22,11 +22,12 @@ const AboutForm = (props) => {
     setMyabout(c);
   };
 
-  useEffect(() => {
+  const loadAbout = () => {
     getServerData("trainer/my-about")
       .then(setMyabout)
       .catch((err) => console.log(err));
-  }, []);
+  };
+  useEffect(loadAbout, []);
   useEffect(window.scrollEffect, []);
 
   useEffect(() => {
@@ -40,11 +41,14 @@ const AboutForm = (props) => {
     frmdata.append("biography", _.get(myabout, "biography", ""));
     frmdata.append("trainings", _.get(myabout, "trainings", ""));
     setSaving(true);
-    setServerData("trainer/my-about", frmdata).then((res) => {
-      setSaving(false);
-      setResponse(res);
-    });
+    setServerData("trainer/my-about", frmdata)
+      .then((res) => {
+        setSaving(false);
+        setResponse(res);
+      })
+      .then(loadAbout);
 
+    /*
     getServerData(`trainer/profile/${myabout.slug}`, true)
       .then((tData) => {
         setTrainer(tData);
@@ -52,8 +56,10 @@ const AboutForm = (props) => {
       .catch((msg) => {
         setTrainer({ success: false, message: msg });
       });
-    setShowPreview(true);
+    setShowPreview(true);*/
   };
+
+  useEffect(() => addToUserData(_.pick(myabout, ["slug", "base_image", "firstname", "middlename", "lastname"])), [myabout]);
   const photoUploader = (fld, title) => {
     return (
       <>
@@ -74,7 +80,6 @@ const AboutForm = (props) => {
         <Form.Control type="hidden" name="old_award_image" defaultValue={_.get(myabout, "award_image", "")} />
         <Form.Control type="hidden" name="old_profile_image" defaultValue={_.get(myabout, "profile_image", "")} />
         <Form.Control type="hidden" name="old_base_image" defaultValue={_.get(myabout, "base_image", "")} />
-        <Form.Control type="hidden" name="old_logo_image" defaultValue={_.get(myabout, "logo_image", "")} />
         <h1>About Me</h1>
         <Row>
           <Col md={4} className="mt-3">
@@ -122,33 +127,6 @@ const AboutForm = (props) => {
           </Col>
           <Col md={6} className="mt-3">
             {photoUploader("base", "Upload Base Profile Pic (Image dimension should be 100cm x 100cm)")}
-          </Col>
-        </Row>
-
-        <Row>
-          <Col md={6} className="mt-3">
-            <Form.Label>Phone Number: </Form.Label>
-            <Form.Control type="text" name="phone" placeholder="Enter your phone number" defaultValue={_.get(myabout, "phone", "")} />
-          </Col>
-          <Col md={6} className="mt-3">
-            <Form.Label>Email: </Form.Label>
-            <Form.Control type="email" name="email" placeholder="Enter your Email" defaultValue={_.get(myabout, "email", "")} />
-          </Col>
-        </Row>
-
-        <Row>
-          <Col md={6} className="mt-3">
-            <Form.Label>Company Name: </Form.Label>
-            <Form.Control type="text" name="company" placeholder="Enter your company name" defaultValue={_.get(myabout, "company", "")} />
-          </Col>
-          <Col md={6} className="mt-3">
-            {photoUploader("logo", "Upload Company Logo (300cm x 300cm)")}
-          </Col>
-        </Row>
-        <Row>
-          <Col md={6} className="mt-3">
-            <Form.Label>Company Url: </Form.Label>
-            <Form.Control type="text" name="company_url" placeholder="Enter your company url" defaultValue={_.get(myabout, "company_url", "")} />
           </Col>
         </Row>
 
