@@ -26,8 +26,8 @@ const RegisterLayout = ({ children }) => {
     if (Utils.hasSubdomain()) {
       getServerData(`trainer/profiledata/${Utils.subdomain()}`).then((res) => {
         if (res.user_id > 0) {
-          setServerData("settings/site-settings", `&id=${res.data.user_id}`, "post").then((res) => {
-            setSitesetting(res.data[0]);
+          getServerData(`settings/trainer/${res.user_id}`).then((res) => {
+            setSitesetting(res.data);
           });
         }
       });

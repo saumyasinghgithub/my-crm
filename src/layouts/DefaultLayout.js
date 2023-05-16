@@ -20,7 +20,7 @@ const DefaultLayout = ({ children }) => {
     contact_email: null,
     contact_address: null,
     contact_phone: null,
-    copywrite_text: "by KS TVERSE",
+    copyright_text: "by KS TVERSE",
     created_at: "2023-04-26T05:41:26.000Z",
     updated_at: null,
   });
@@ -30,9 +30,9 @@ const DefaultLayout = ({ children }) => {
       //const id = 57;
       getServerData(`trainer/profiledata/${Utils.subdomain()}`).then((data) => {
         if (data.user_id > 0) {
-          setServerData("settings/site-settings", `&id=${data.user_id}`, "post")
+          getServerData(`settings/trainer/${data.user_id}`)
             .then((res) => {
-              setSitesetting({ ...sitesetting, ..._.get(res, "data[0]", {}) });
+              setSitesetting({ ...sitesetting, ..._.get(res, "data", {}) });
             })
             .catch((err) => console.log("asdfdsafdsaf", err));
         }

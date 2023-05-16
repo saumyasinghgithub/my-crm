@@ -27,8 +27,8 @@ const LoginLayout = ({ children }) => {
     if (Utils.hasSubdomain()) {
       getServerData(`trainer/profiledata/${Utils.subdomain()}`, true).then((res) => {
         if (res.data.user_id > 0) {
-          setServerData("settings/site-settings", `&id=${res.data.user_id}`, "post").then((res) => {
-            setSitesetting(res.data[0]);
+          getServerData(`settings/trainer/${res.data.user_id}`).then((res) => {
+            setSitesetting(res.data);
           });
         }
       });

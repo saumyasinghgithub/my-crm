@@ -13,9 +13,9 @@ const SiteSettings = () => {
     const frm = e.currentTarget;
     e.preventDefault();
     let frmdata = new FormData(frm);
-    setSaving(true);
     frmdata.append("contact_address", _.get(mysitesettings, "contact_address", ""));
-    setServerData("settings/add-site-settings", frmdata).then((res) => {
+    setSaving(true);
+    setServerData("settings", frmdata, "put").then((res) => {
       setSaving(false);
       setResponse(res);
       setTimeout(() => window.location.reload(), 3000);
@@ -23,11 +23,11 @@ const SiteSettings = () => {
   };
 
   useEffect(() => {
-    getServerData("settings/site-settings").then((data) => {
+    getServerData("settings").then((data) => {
       if (data.type === "default") {
         setMysitesettings({});
       } else {
-        setMysitesettings(data.data[0]);
+        setMysitesettings(data.data);
       }
     });
   }, []);
@@ -63,57 +63,56 @@ const SiteSettings = () => {
             <Form onSubmit={onSave}>
               <Form.Control type="hidden" name="id" defaultValue={_.get(mysitesettings, "id", "")} />
               <Form.Control type="hidden" name="old_logo" defaultValue={_.get(mysitesettings, "logo", "")} />
+              <Form.Control type="hidden" name="old_favicon" defaultValue={_.get(mysitesettings, "favicon", "")} />
               <Row>
-                <Col md={6} className="mt-3">
-                  <Form.Label>Company Name: </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="company_name"
-                    placeholder="Enter name of your company"
-                    defaultValue={_.get(mysitesettings, "company_name", "")}
-                  />
+                <Col md={6}>
+                  <Row>
+                    <Col md={12} className="mt-3">
+                      <Form.Label>Company Name: </Form.Label>
+                      <Form.Control
+                        type="text"
+                        name="company_name"
+                        placeholder="Enter name of your company"
+                        defaultValue={_.get(mysitesettings, "company_name", "")}
+                      />
+                    </Col>
+                    <Col md={12} className="mt-1">
+                      <Form.Label>Company URL: </Form.Label>
+                      <Form.Control
+                        type="url"
+                        name="company_url"
+                        placeholder="Enter website url of your company"
+                        defaultValue={_.get(mysitesettings, "company_url", "")}
+                      />
+                    </Col>
+                    <Col md={12} className="mt-1">
+                      <Form.Label>Contact Phone: </Form.Label>
+                      <Form.Control
+                        type="number"
+                        name="contact_phone"
+                        placeholder="Enter your contact phone"
+                        defaultValue={_.get(mysitesettings, "contact_phone", "")}
+                      />
+                    </Col>
+                    <Col md={12} className="mt-1">
+                      <Form.Label>Contact Email: </Form.Label>
+                      <Form.Control
+                        type="text"
+                        name="contact_email"
+                        placeholder="Enter your contact email"
+                        defaultValue={_.get(mysitesettings, "contact_email", "")}
+                      />
+                    </Col>
+                  </Row>
                 </Col>
-                <Col md={6} className="mt-3">
-                  <Form.Label>Page Title: </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="site_title"
-                    placeholder="Enter your site title"
-                    defaultValue={_.get(mysitesettings, "site_title", "")}
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col md={6} className="mt-3">
-                  <Form.Label>Contact Phone: </Form.Label>
-                  <Form.Control
-                    type="number"
-                    name="contact_phone"
-                    placeholder="Enter your contact phone"
-                    defaultValue={_.get(mysitesettings, "contact_phone", "")}
-                  />
-                </Col>
-                <Col md={6} className="mt-3">
-                  <Form.Label>Contact Email: </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="contact_email"
-                    placeholder="Enter your contact email"
-                    defaultValue={_.get(mysitesettings, "contact_email", "")}
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col md={6} className="mt-3">
-                  {photoUploader("logo", "Upload logo (Image dimension should be 88cm x 40cm)")}
-                </Col>
+
                 <Col md={6} className="mt-3">
                   <Form.Label>Contact Address: </Form.Label>
                   <Editor
                     apiKey={process.env.TINYMCE_API_KEY}
                     value={_.isEmpty(_.get(mysitesettings, "contact_address", "")) ? "" : mysitesettings.contact_address}
                     init={{
-                      height: 200,
+                      height: 250,
                       menubar: false,
                     }}
                     toolbar="undo redo | bold italic underline strikethrough | code | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl"
@@ -123,14 +122,39 @@ const SiteSettings = () => {
                   />
                 </Col>
               </Row>
+
+              <Row>
+                <Col md={6} className="mt-3">
+                  {photoUploader("logo", "Company logo (Image dimension should be 88cm x 40cm)")}
+                  {!_.isEmpty(mysitesettings.logo) && (
+                    <div className="custom-control custom-switch">
+                      <input className="custom-control-input" type="checkbox" id="dellogo" name="deletelogo" value="1" />
+                      <label className="custom-control-label" for="dellogo">
+                        Delete this Logo
+                      </label>
+                    </div>
+                  )}
+                </Col>
+                <Col md={6} className="mt-3">
+                  {photoUploader("favicon", "Company Favicon (Image dimension should be 30px x 30px)")}
+                  {!_.isEmpty(mysitesettings.favicon) && (
+                    <div className="custom-control custom-switch">
+                      <input className="custom-control-input" type="checkbox" id="delficon" name="deletefavicon" value="1" />
+                      <label className="custom-control-label" for="delficon">
+                        Delete this Favicon
+                      </label>
+                    </div>
+                  )}
+                </Col>
+              </Row>
               <Row>
                 <Col md={12} className="mt-3">
-                  <Form.Label>Copywrite Text: </Form.Label>
+                  <Form.Label>Copyright Text: </Form.Label>
                   <Form.Control
                     type="text"
-                    name="copywrite_text"
-                    placeholder="Enter your copywrite text"
-                    defaultValue={_.get(mysitesettings, "copywrite_text", "")}
+                    name="copyright_text"
+                    placeholder="Enter your copyright text"
+                    defaultValue={_.get(mysitesettings, "copyright_text", "")}
                   />
                 </Col>
               </Row>

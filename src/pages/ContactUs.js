@@ -20,8 +20,10 @@ const ContactUs = (props) => {
     setLoading(true);
     getServerData(`trainer/about/${slug}`, true)
       .then((tData) => {
-        setTrainer(tData);
-        setLoading(false);
+        getServerData(`settings/trainer/${tData.id}`).then((res) => {
+          setTrainer({ ...tData, ..._.omit(res.data, ["id"]) });
+          setLoading(false);
+        });
       })
       .catch((msg) => {
         setTrainer({ success: false, message: msg });
@@ -39,8 +41,9 @@ const ContactUs = (props) => {
     setError(false);
     setShowMessage(false);
     let frmdata = new FormData(frm);
+    frmdata.append("slug", slug);
     setServerData(`contact/add`, frmdata, "post")
-      .then(() => setShowMessage(true))
+      .then((res) => setShowMessage(res.message))
       .catch(setError);
   };
 
@@ -65,8 +68,8 @@ const ContactUs = (props) => {
             <h1 className="slideInUp wow animated pt-4 pb-4 mb-0 Contactus">Contact us</h1>
             <p className="slideInUp wow animated pb-4">
               Reach out to us, if you have questions, requests or simply want to talk,{" "}
-              {!_.isEmpty(_.get(trainer, "email", "")) && <a href={`mailto:${trainer.email}`}>{trainer.email}</a>}
-              {_.isEmpty(_.get(trainer, "email", "")) && (
+              {!_.isEmpty(_.get(trainer, "contact_email", "")) && <a href={`mailto:${trainer.contact_email}`}>{trainer.contact_email}</a>}
+              {_.isEmpty(_.get(trainer, "contact_email", "")) && (
                 <a href={`mailto:${process.env.REACT_APP_CONTACT_EMAIL}`}>{process.env.REACT_APP_CONTACT_EMAIL}</a>
               )}
             </p>
@@ -83,9 +86,9 @@ const ContactUs = (props) => {
                 noValidate
                 onSubmit={submitForm}
               >
-                {showMessage && (
+                {showMessage !== false && (
                   <div className="alert alert-info p-3">
-                    <strong>Record saved successfully!</strong>
+                    <strong>{showMessage}</strong>
                   </div>
                 )}
                 {error !== false && (
@@ -163,21 +166,23 @@ const ContactUs = (props) => {
               <div className="ContactDetails">
                 <a href={`${_.get(trainer, "company_url", "")}`} target="_blank">
                   <img
-                    src={`${process.env.REACT_APP_API_URL}/uploads/logo/${_.get(trainer, "logo_image", "../../logo-default.png")}`}
+                    src={`${process.env.REACT_APP_API_URL}/uploads/logo/${_.get(trainer, "logo", "../../logo-default.png")}`}
                     className="img-fluid w-50 ml-0"
-                    alt={_.get(trainer, "company", process.env.REACT_APP_CONTACT_NAME)}
+                    alt={_.get(trainer, "company_name", process.env.REACT_APP_CONTACT_NAME)}
                   />
                 </a>
-
-                <p className="mt-5 mb-2">{_.get(trainer, "phone", process.env.REACT_APP_CONTACT_PHONE)}</p>
-
+                {_.get(trainer, "contact_address", "") !== "" && (
+                  <div className="mt-5 mb-2" dangerouslySetInnerHTML={{ __html: _.get(trainer, "contact_address", "") }}></div>
+                )}
+                <p className="mt-5 mb-2">Phone: {_.get(trainer, "contact_phone", process.env.REACT_APP_CONTACT_PHONE)}</p>
                 <p className="mb-3 mt-1 Contactemail">
-                  <a href={`mailto:${_.get(trainer, "email", process.env.REACT_APP_CONTACT_EMAIL)}`}>
-                    {_.get(trainer, "email", process.env.REACT_APP_CONTACT_EMAIL)}
+                  Email:{" "}
+                  <a href={`mailto:${_.get(trainer, "contact_email", process.env.REACT_APP_CONTACT_EMAIL)}`}>
+                    {_.get(trainer, "contact_email", process.env.REACT_APP_CONTACT_EMAIL)}
                   </a>
                 </p>
                 <p className="text-left ContactSubscribe mt-4">
-                  Subscribe to Our {_.get(trainer, "company", process.env.REACT_APP_CONTACT_NAME)} Newsletter
+                  Subscribe to Our {_.get(trainer, "company_name", process.env.REACT_APP_CONTACT_NAME)} Newsletter
                 </p>
                 <TeacherSubscribe type="inLine" />
               </div>

@@ -26,8 +26,8 @@ const StaticPageLayout = ({ children }) => {
     if (Utils.hasSubdomain()) {
       getServerData(`trainer/profiledata/${Utils.subdomain()}`).then((data) => {
         if (data.user_id > 0) {
-          setServerData("settings/site-settings", `&id=${data.user_id}`, "post").then((res) => {
-            setSitesetting(res.data[0]);
+          getServerData(`settings/trainer/${data.user_id}`).then((res) => {
+            setSitesetting(res.data);
           });
         }
       });

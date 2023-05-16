@@ -59,7 +59,7 @@ const Footer = (props) => {
             {JSON.stringify(props.sitesetting) !== "{}" && (
               <li className="footerline">
                 {" "}
-                © {new Date().getFullYear()} {props.sitesetting.copywrite_text}{" "}
+                © {new Date().getFullYear()} {props.sitesetting.copyright_text}{" "}
               </li>
             )}
             <li className="footerline ml-2">
