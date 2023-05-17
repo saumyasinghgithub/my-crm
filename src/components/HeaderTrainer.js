@@ -92,7 +92,7 @@ const HeaderTrainer = (props) => {
                         )}
                       </a>
                       <ul className="dropdown-menu" role="menu">
-                        <UserMenu />
+                        <UserMenu sitesetting={props.sitesetting} />
                       </ul>
                     </>
                   )}

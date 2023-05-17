@@ -13,12 +13,12 @@ const MyProfile = (props) => {
     "#service": "Trainer Services",
     "#codeprep": "Trainer CodePRep",
     "#community": "Trainer Community",
-    "#library": "Trainer Courses",
+    "#library": "Course Page settings",
     //"#blogs": "Trainer Blogs",
     "#social": "Social Platform",
     "#slider": "Image Slider",
     "#events": "Manage Events",
-    "#landingpage": "Landing Page Settings",
+    //"#landingpage": "Landing Page Settings",
   };
 
   const [tab, setTab] = useState("#about");

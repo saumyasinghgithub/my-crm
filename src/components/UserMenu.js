@@ -24,10 +24,6 @@ const UserMenu = (props) => {
     //localStorage.removeItem(process.env.REACT_APP_APPNAME + "-userData");
     e.preventDefault();
     logout(() => {
-      if (hasSubdomain) {
-        var win = document.getElementById("mainDomainIframe").contentWindow;
-        win.postMessage("false", process.env.REACT_APP_PUBLIC_URL);
-      }
       window.setTimeout(() => (window.location.href = "/"), 1000);
     });
     return false;
@@ -92,9 +88,16 @@ const UserMenu = (props) => {
           {/*<li>
                   <a href={getSlug()+'professional-profile'}>Professional Profile</a>
                   </li>*/}
-          <li>
-            <a href={Utils.getTrainerURL(`preferred-trainers`)}>Preferred Trainer</a>
-          </li>
+          {_.get(props, "sitesetting.preferred_courses", true) > 0 && (
+            <li>
+              <a href={Utils.getTrainerURL(`preferred-courses`)}>Preferred Courses</a>
+            </li>
+          )}
+          {_.get(props, "sitesetting.preferred_trainers", true) > 0 && (
+            <li>
+              <a href={Utils.getTrainerURL(`preferred-trainers`)}>Preferred Trainers</a>
+            </li>
+          )}
         </>
       )}
 

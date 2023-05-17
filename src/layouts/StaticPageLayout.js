@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, cloneElement } from "react";
 import { Container } from "react-bootstrap";
 import { HeaderTrainer, Footer, JoinAsStudent, JoinAsTrainer } from "./../components";
 import Utils from "../Utils";
@@ -40,7 +40,7 @@ const StaticPageLayout = ({ children }) => {
       {/* <LoginModal /> */}
       <JoinAsStudent />
       <JoinAsTrainer />
-      {children}
+      {cloneElement(children, { sitesetting: sitesetting })}
       {sitesetting && <Footer sitesetting={sitesetting} />}
     </Container>
   );

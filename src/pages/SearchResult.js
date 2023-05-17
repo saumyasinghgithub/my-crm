@@ -281,7 +281,7 @@ const SearchResult = (props) => {
                 <a href={Utils.getTrainerURL("courses", trainer.slug)} target="_blank" className="action tocart primary btn btnBlue">
                   <span>View Courses</span>
                 </a>
-                {isLoggedIn() && (
+                {isLoggedIn() && _.get(trainer, "sitesetting.preferred_trainers", 1) > 0 && (
                   <a href="#" className="action tocart primary btn btnBlue" onClick={markFav(trainer.user_id)}>
                     {!tData.favTrainers.includes(trainer.user_id) && <span>Mark Favourite</span>}
                     {tData.favTrainers.includes(trainer.user_id) && <span>Remove Favourite</span>}

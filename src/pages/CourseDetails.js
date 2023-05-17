@@ -306,6 +306,21 @@ const CourseDetails = (props) => {
                                               )}
                                             </>
                                           )}
+
+                                          {_.get(props, "sitesetting.preferred_courses", 1) > 0 && (
+                                            <a href="#" className="btn btnBorder" onClick={markFav(course.course.id, course.isFav ? 0 : 1)}>
+                                              {course.isFav === false && (
+                                                <span>
+                                                  Mark Favourite <i className="far fa-heart ml-2" />
+                                                </span>
+                                              )}
+                                              {course.isFav === true && (
+                                                <span>
+                                                  Remove Favourite <i className="fas fa-heart ml-2 text-danger" />
+                                                </span>
+                                              )}
+                                            </a>
+                                          )}
                                         </>
                                       )}
                                     </div>

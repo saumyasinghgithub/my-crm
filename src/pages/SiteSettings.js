@@ -127,22 +127,26 @@ const SiteSettings = () => {
                 <Col md={6} className="mt-3">
                   {photoUploader("logo", "Company logo (Image dimension should be 88cm x 40cm)")}
                   {!_.isEmpty(mysitesettings.logo) && (
-                    <div className="custom-control custom-switch">
-                      <input className="custom-control-input" type="checkbox" id="dellogo" name="deletelogo" value="1" />
-                      <label className="custom-control-label" for="dellogo">
-                        Delete this Logo
-                      </label>
+                    <div className="text-right">
+                      <div className="custom-control custom-switch">
+                        <input className="custom-control-input" type="checkbox" id="dellogo" name="deletelogo" value="1" />
+                        <label className="custom-control-label" for="dellogo">
+                          Delete this Logo
+                        </label>
+                      </div>
                     </div>
                   )}
                 </Col>
                 <Col md={6} className="mt-3">
                   {photoUploader("favicon", "Company Favicon (Image dimension should be 30px x 30px)")}
                   {!_.isEmpty(mysitesettings.favicon) && (
-                    <div className="custom-control custom-switch">
-                      <input className="custom-control-input" type="checkbox" id="delficon" name="deletefavicon" value="1" />
-                      <label className="custom-control-label" for="delficon">
-                        Delete this Favicon
-                      </label>
+                    <div className="text-right">
+                      <div className="custom-control custom-switch">
+                        <input className="custom-control-input" type="checkbox" id="delficon" name="deletefavicon" value="1" />
+                        <label className="custom-control-label" for="delficon">
+                          Delete this Favicon
+                        </label>
+                      </div>
                     </div>
                   )}
                 </Col>
@@ -158,6 +162,48 @@ const SiteSettings = () => {
                   />
                 </Col>
               </Row>
+              <Row>
+                <Col md={6} className="mt-3">
+                  <div className="custom-control custom-switch">
+                    <input
+                      className="custom-control-input"
+                      type="checkbox"
+                      id="preftrainers"
+                      name="preferred_trainers"
+                      value="1"
+                      checked={_.get(mysitesettings, "preferred_trainers", true)}
+                      onChange={(e) => setMysitesettings({ ...mysitesettings, preferred_trainers: e.target.checked })}
+                    />
+                    <label className="custom-control-label" for="preftrainers">
+                      Preferred Trainers Feature
+                    </label>
+                  </div>
+                  <p className="alert  border-secondary text-left mt-2">
+                    This feature allows you to mark trainer as favorite and enable you to quickly access them via Preferred Trainers page.
+                  </p>
+                </Col>
+                <Col md={6} className="mt-3">
+                  <div className="custom-control custom-switch">
+                    <input
+                      className="custom-control-input"
+                      type="checkbox"
+                      id="prefcourses"
+                      name="preferred_courses"
+                      value="1"
+                      checked={_.get(mysitesettings, "preferred_courses", true)}
+                      onChange={(e) => setMysitesettings({ ...mysitesettings, preferred_courses: e.target.checked })}
+                    />
+                    <label className="custom-control-label" for="prefcourses">
+                      Preferred Courses Feature
+                    </label>
+                  </div>
+
+                  <p className="alert  border-secondary text-left mt-2">
+                    This feature allows you to mark Courses as favorite and enable you to quickly access them via Preferred Courses page.
+                  </p>
+                </Col>
+              </Row>
+
               <Row>
                 <Col md={12} className="mt-3 text-right">
                   {saving && (
