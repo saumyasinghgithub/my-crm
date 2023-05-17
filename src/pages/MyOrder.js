@@ -77,7 +77,7 @@ const MyOrder = (props) => {
         <td>
           <ul>
             {details.map((d, idx2) => {
-              slug = _.get(_.find(data.slugs, { id: items[idx2].course }), "slug", "");
+              slug = _.get(_.find(data.slugs, { id: _.get(items, `${idx2}.course`, 0) }), "slug", "");
               return (
                 <li>
                   <a href={`/courses/${slug}`}>
