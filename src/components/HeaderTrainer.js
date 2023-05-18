@@ -71,28 +71,26 @@ const HeaderTrainer = (props) => {
               </li>
               <li className="nav-item profile_toggle">
                 <div className="Dropdown-Help">
-                  {!loggedIn && (
+                  {!isLoggedIn() && (
                     <a href={Utils.getTrainerURL(`login`)} className="btn btn-default">
                       Log in
                     </a>
                   )}
-                  {loggedIn && (
+                  {isLoggedIn() && (
                     <>
-                      <a href={Utils.getTrainerURL(`login`)} type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        {_.get(userData, "base_image", "") !== "" && (
-                          <img
-                            src={`${process.env.REACT_APP_API_URL}/uploads/${isTrainer() ? "base" : "student/base"}/${_.get(
-                              userData,
-                              "base_image",
-                              ""
-                            )}`}
-                            className="img-fluid"
-                            title={`Logged in as ${userData.firstname} ${userData.lastname}`}
-                          />
-                        )}
+                      <a href="#" type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <img
+                          src={`${process.env.REACT_APP_API_URL}/uploads/${isTrainer() ? "base" : "student/base"}/${_.get(
+                            userData,
+                            "base_image",
+                            ""
+                          )}`}
+                          className="img-fluid"
+                          title={`Logged in as ${userData.firstname} ${userData.lastname}`}
+                        />
                       </a>
                       <ul className="dropdown-menu" role="menu">
-                        <UserMenu sitesetting={props.sitesetting} />
+                        <UserMenu sitesetting={_.get(props, "sitesetting", {})} />
                       </ul>
                     </>
                   )}

@@ -9,6 +9,8 @@ import UserContext from "./../contexts/UserContext";
 const Header = (props) => {
   const { isLoggedIn, getUserData, isTrainer } = useContext(UserContext);
 
+  console.log(isLoggedIn());
+
   const [loggedIn, setLoggedIn] = useState(isLoggedIn());
 
   const udata = getUserData();
@@ -75,16 +77,14 @@ const Header = (props) => {
             )}
             <li className="nav-item profile_toggle">
               <div className="Dropdown-Help">
-                {loggedIn && (
+                {isLoggedIn() && (
                   <>
                     <a href={Utils.getTrainerURL(`login`)} type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                      {_.get(udata, "base_image", "") !== "" && (
-                        <img
-                          src={`${process.env.REACT_APP_API_URL}/uploads/${isTrainer() ? "base" : "student/base"}/${_.get(udata, "base_image", "")}`}
-                          className="img-fluid"
-                          title={`Logged in as ${udata.firstname} ${udata.lastname}`}
-                        />
-                      )}
+                      <img
+                        src={`${process.env.REACT_APP_API_URL}/uploads/${isTrainer() ? "base" : "student/base"}/${_.get(udata, "base_image", "")}`}
+                        className="img-fluid"
+                        title={`Logged in as ${udata.firstname} ${udata.lastname}`}
+                      />
                     </a>
                     <ul className="dropdown-menu" role="menu">
                       <UserMenu />
