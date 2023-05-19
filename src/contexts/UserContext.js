@@ -63,7 +63,7 @@ const UserProvider = (props) => {
 
   const logout = (callback) => {
     setUserData(false);
-    removeCookie(Utils.siteCookieName);
+    removeCookie(Utils.siteCookieName, Utils.getCookieOptions());
     callback();
   };
 
