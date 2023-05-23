@@ -151,9 +151,9 @@ const MyCart = (props) => {
     if (coupon) {
       if (cartDiscountAmount() > 0) {
         netAmount -= cartDiscountAmount();
-      } else if (!_.isEmpty(coupon.course_ids)) {
+      } else {
         netAmount -= _.reduce(
-          cart.data.map((cData) => courseDiscountAmount(cData.course_id, cData.price)),
+          cart.data.map((cData) => courseDiscountAmount(cData.course_id, cData.trainer_id, cData.price)),
           (sum, n) => sum + n,
           0
         );
@@ -188,18 +188,27 @@ const MyCart = (props) => {
     }
   };
 
-  const courseDiscountAmount = (cid, price) => {
-    let disAmount = 0;
+  const courseDiscountAmount = (cid, tid, price) => {
+    let disAmount = 0,
+      applyCoupon = false;
 
-    if (coupon && !_.isEmpty(coupon.course_ids) && coupon.course_ids.split(",").includes(cid.toString())) {
+    if (
+      coupon &&
+      ((!_.isEmpty(coupon.course_ids) && coupon.course_ids.split(",").includes(cid.toString())) ||
+        (_.isEmpty(coupon.course_ids) && cartHasMultiTrainerCourse() && coupon.trainer_id === tid))
+    ) {
       disAmount = coupon.coupon_type === 1 ? (price * coupon.discount_value) / 100 : price > coupon.discount_value ? coupon.discount_value : price;
     }
     return disAmount;
   };
 
+  const cartHasMultiTrainerCourse = () => {
+    return _.uniq(_.map(cart.data, (d) => d.trainer_id)).length > 1; /// has got multi trainer courses
+  };
+
   const cartDiscountAmount = () => {
     let disAmount = 0;
-    if (coupon && _.isEmpty(coupon.course_ids)) {
+    if (coupon && _.isEmpty(coupon.course_ids) && !cartHasMultiTrainerCourse() && coupon.trainer_id === cart.data[0].trainer_id) {
       disAmount =
         coupon.coupon_type === 1
           ? (cartTotalPrice() * coupon.discount_value) / 100
@@ -219,6 +228,7 @@ const MyCart = (props) => {
       console.log();
       setCError("Coupon not applicable");
     } else {
+      console.log(coupon, cart.data);
       console.log("found matching course");
       setCError("");
     }
@@ -341,20 +351,23 @@ const MyCart = (props) => {
                                 <Col sm={4} className="text-right">
                                   $ {parseFloat(cData.price).toFixed(2)}
                                 </Col>
-                                {courseDiscountAmount(cData.course_id, cData.price) > 0 && (
+                                {courseDiscountAmount(cData.course_id, cData.trainer_id, cData.price) > 0 && (
                                   <>
                                     <Col sm={8} className="text-danger">
                                       <small>Discount applied:</small>
                                     </Col>
                                     <Col sm={4} className="text-danger text-right">
-                                      <small> - $ {parseFloat(courseDiscountAmount(cData.course_id, cData.price)).toFixed(2)}</small>
+                                      <small>
+                                        {" "}
+                                        - $ {parseFloat(courseDiscountAmount(cData.course_id, cData.trainer_id, cData.price)).toFixed(2)}
+                                      </small>
                                     </Col>
                                   </>
                                 )}
                               </Row>
                             ))}
 
-                            {coupon && _.isEmpty(coupon.course_ids) && (
+                            {coupon && !cartHasMultiTrainerCourse() && (
                               <Row className="cbox-space mx-0">
                                 <Col sm={8}>
                                   <span>Total</span>
