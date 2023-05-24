@@ -35,7 +35,7 @@ const Utils = {
   siteCookieName: `${process.env.REACT_APP_APPNAME}-userData`,
 
   getCookieOptions: () => {
-    let co = { secure: false };
+    let co = { secure: false, path: "/" };
     if (process.env.REACT_APP_COOKIE_DOMAIN !== "localhost") {
       co["domain"] = process.env.REACT_APP_COOKIE_DOMAIN;
     }

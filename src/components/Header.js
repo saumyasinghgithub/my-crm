@@ -61,8 +61,9 @@ const Header = (props) => {
       </div>
       <header className="header fixed-top">
         <div className="container">
-          <a className="navbar-brand" href={`${process.env.REACT_APP_PUBLIC_URL}/`}>
-            {props.sitesetting.company_name}
+          <a className="navbar-brand" href={`${process.env.REACT_APP_PUBLIC_URL}/`} title={props.sitesetting.company_name}>
+            {!_.isEmpty(props.sitesetting.logo) && <img src={`${process.env.REACT_APP_PUBLIC_URL}/uploads/logo/${props.sitesetting.logo}`} />}
+            {_.isEmpty(props.sitesetting.logo) && <>{props.sitesetting.company_name}</>}
           </a>
           <ul className="navbar-nav">
             <li className="nav-item">

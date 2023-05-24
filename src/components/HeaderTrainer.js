@@ -62,7 +62,12 @@ const HeaderTrainer = (props) => {
       <header className="header fixed-top whiteHeader">
         <div className="container">
           <div className="HeaderNavigation">
-            <a className="navbar-brand">{props.sitesetting.company_name}</a>
+            <a className="navbar-brand" href={`${process.env.REACT_APP_PUBLIC_URL}/`} title={props.sitesetting.company_name}>
+              {!_.isEmpty(props.sitesetting.logo) && (
+                <img src={`${process.env.REACT_APP_API_URL}/uploads/logo/${props.sitesetting.logo}`} className="sitelogo" />
+              )}
+              {_.isEmpty(props.sitesetting.logo) && <>{props.sitesetting.company_name}</>}
+            </a>
             <ul className="navbar-nav HeaderNavUl">
               <li className="nav-item">
                 <a href="/my-cart">
