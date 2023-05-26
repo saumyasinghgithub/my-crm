@@ -103,38 +103,53 @@ const LandingPage = (props) => {
                       <div className="MainOurCourses">
                         <h3 className="landingHeading">Our Courses</h3>
                         <p className="mt-4">
-                          Our mission is to empower and equip nurses and other healthcare professionals with the necessary knowledge and skills to respond confidently to cardiac arrest situations and save the lives of their patients. Drawing on years of experience working in life-saving situations with resuscitation teams, we recognize the importance of maintaining courage, confidence, and competence in such high-pressure situations.
+                          Our mission is to empower and equip nurses and other healthcare professionals with the necessary knowledge and skills to
+                          respond confidently to cardiac arrest situations and save the lives of their patients. Drawing on years of experience
+                          working in life-saving situations with resuscitation teams, we recognize the importance of maintaining courage, confidence,
+                          and competence in such high-pressure situations.
                         </p>
                       </div>
                     </Col>
                   </Row>
                   <Container>
                     <Row className="mt-5 justify-content-center">
-                      <h3 className="landingHeading mb-5">CodePRep<br></br><br></br> <span className="Headingpara">Bridging the Gap Between Bi-Annual Life Support Training And Clinical Performance</span></h3>
-                      {_.get(trainer, "courses", []).length > 0 && (<>
-                        {_.get(trainer, "courses", []).map((course, ide) => (
-                          <Col xl={4} lg={6} md={6} className="pt-3 d-flex">
-                            <div className="p-4 homecourses">
-                              <div className="">
-                                {/*<span className="new">}New</span>*/}
-                                <img className="img-fluid rounded" src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`} alt="RescueRN" />
+                      <h3 className="landingHeading mb-5">
+                        CodePRep<br></br>
+                        <br></br>{" "}
+                        <span className="Headingpara">Bridging the Gap Between Bi-Annual Life Support Training And Clinical Performance</span>
+                      </h3>
+                      {_.get(trainer, "courses", []).length > 0 && (
+                        <>
+                          {_.get(trainer, "courses", []).map((course, ide) => (
+                            <Col xl={4} lg={6} md={6} className="pt-3 d-flex">
+                              <div className="p-4 homecourses">
+                                <div className="">
+                                  {/*<span className="new">}New</span>*/}
+                                  <img
+                                    className="img-fluid rounded"
+                                    src={`${process.env.REACT_APP_API_URL}/uploads/courses/${course.course_image}`}
+                                    alt="RescueRN"
+                                  />
+                                </div>
+                                <div className="">
+                                  <div className="libraryTitle HomeCourseTitle text-center pt-5 pb-3">{course.name}</div>
+                                  <div
+                                    className="libraryBody homecoursedescription text-center pt-3 pb-5 "
+                                    dangerouslySetInnerHTML={{ __html: course.short_description }}
+                                  ></div>
+                                </div>
+                                <div className="HomeExploreCourse mt-4 mb-3 text-center">
+                                  <button>
+                                    {" "}
+                                    <a href={Utils.getTrainerURL(`professional-profile/trainercourses`)} target="_blank">
+                                      Explore Courses
+                                    </a>
+                                  </button>
+                                </div>
                               </div>
-                              <div className="">
-                                <div className="libraryTitle HomeCourseTitle text-center pt-5 pb-3">{course.name}</div>
-                                <div className="libraryBody homecoursedescription text-center pt-3 pb-5 " dangerouslySetInnerHTML={{ __html: course.short_description }}></div>
-                              </div>
-                              <div className="HomeExploreCourse mt-4 mb-3 text-center">
-                                <button>
-                                  {" "}
-                                  <a href={Utils.getTrainerURL(`professional-profile/trainercourses`)} target="_blank">
-                                    Explore Courses
-                                  </a>
-                                </button>
-                              </div>
-                            </div>
-                          </Col>
-                        ))}
-                      </>
+                            </Col>
+                          ))}
+                        </>
                       )}
                     </Row>
                   </Container>
@@ -237,7 +252,12 @@ const LandingPage = (props) => {
                               <p dangerouslySetInnerHTML={{ __html: event.event_short_desc }}></p>
                               <div className="HomeRegister mt-4">
                                 {/*<button onClick={RegisterShow}>Register Now</button>*/}
-                                <button> <a href={event.cta} target="_blank">Register Now</a></button>
+                                <button>
+                                  {" "}
+                                  <a href={event.cta} target="_blank">
+                                    Register Now
+                                  </a>
+                                </button>
                               </div>
                             </div>
                           </div>
@@ -305,7 +325,7 @@ const LandingPage = (props) => {
               <div className="row">
                 <div className="col-md-12">
                   <div className="Footermail text-center">
-                    <p className="text-left">Subscribe to Our Rescue RN™ Newsletter</p>
+                    <p className="text-left">Subscribe to Our {_.get(props, "sitesetting.company_name", "KSTverse")} Newsletter</p>
                     <TeacherSubscribe type="inLine" />
                   </div>
                 </div>

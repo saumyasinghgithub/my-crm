@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, cloneElement } from "react";
 import { Container } from "react-bootstrap";
 import { Header, HeaderTrainer, Footer, LoginModal, JoinAsStudent, JoinAsTrainer } from "./../components";
 import Utils from "../Utils";
@@ -58,7 +58,7 @@ const DefaultLayout = ({ children }) => {
     <Container fluid className="h-100 p-0">
       {!hasSubdomain && sitesetting && <Header sitesetting={sitesetting} />}
       {hasSubdomain && sitesetting && location.pathname !== "/readls" && <HeaderTrainer sitesetting={sitesetting} />}
-      {children}
+      {cloneElement(children, { sitesetting: sitesetting })}
       <LoginModal />
       <JoinAsStudent />
       <JoinAsTrainer />
