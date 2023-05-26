@@ -78,7 +78,7 @@ const Home = (props) => {
 
   return (
     <>
-      {hasSubdomain && <LandingPage />}
+      {hasSubdomain && <LandingPage {...props} />}
       {!hasSubdomain && (
         <>
           <section className="home-wrapper">
