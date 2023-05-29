@@ -44,88 +44,6 @@ const MyCart = (props) => {
 
   useEffect(window.scrollEffect, [cart]);
 
-  const checkout = (e) => {
-    e.preventDefault();
-    setProcessing({ mode: "info", msg: "Processing your cart items for checkout.." });
-    Utils.loadJS("https://checkout.razorpay.com/v1/checkout.js", "Razorpay SDK failed to load. Are you online?")
-      .then(generateOrder)
-      .then(displayRazorpay)
-      .catch((err) => {
-        setProcessing({ mode: "danger", msg: err.message });
-      });
-  };
-
-  const generateOrder = () => {
-    return new Promise((resolve, reject) => {
-      let params = {
-        action: "checkout",
-      };
-
-      if (coupon) {
-        params["coupon_id"] = coupon.id;
-      }
-
-      setServerData("cart/generateOrder", params, "post", { "Content-Type": "application/json" })
-        .then((res) => {
-          if (_.get(res, "success", false)) {
-            setProcessing({ mode: "info", msg: "Processing your payment.." });
-            resolve(res.data);
-          } else {
-            throw res.message;
-          }
-        })
-        .catch(reject);
-    });
-  };
-
-  const displayRazorpay = (orderData) => {
-    const udata = getUserData();
-
-    const options = {
-      ...orderData,
-      prefill: {
-        name: `${udata.firstname} ${udata.middlename} ${udata.lastname}`,
-        email: udata.email,
-        contact: "+919868256219",
-      },
-      image: `${process.env.PUBLIC_URL}/favicon.ico`,
-      theme: {
-        color: "##0f79aa",
-      },
-      handler: (res1) => {
-        setServerData(
-          "cart/orderSuccess",
-          {
-            ..._.omit(orderData, ["key", "order_id"]),
-            razorpayPaymentId: res1.razorpay_payment_id,
-            razorpayOrderId: res1.razorpay_order_id,
-            razorpaySignature: res1.razorpay_signature,
-          },
-          "post",
-          { "Content-Type": "application/json" }
-        )
-          .then((res2) => {
-            if (res2.success) {
-              window.location.href = "/payment/success/" + res2.id;
-            } else {
-              throw res2.message;
-            }
-          })
-          .catch((err) => {
-            setProcessing({ mode: "danger", msg: err.message });
-          });
-      },
-      modal: {
-        ondismiss: function () {
-          setProcessing(false);
-        },
-      },
-    };
-
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
-  };
-
   const showBundleResources = (cData) => {
     let cres = JSON.parse(cData.course_resources);
     return (
@@ -426,9 +344,13 @@ const MyCart = (props) => {
 
                                 <Row>
                                   <Col sm={12}>
-                                    <Button className="btn btn-sm btnBlue font-weight-normal" type="button" onClick={checkout}>
+                                    <a
+                                      className="btn btn-sm btnBlue font-weight-normal"
+                                      type="button"
+                                      href={Utils.getTrainerURL(`checkout${_.get(coupon, "id", 0) > 0 ? `?cid=${coupon.id}` : ""}`)}
+                                    >
                                       Proceed to pay
-                                    </Button>
+                                    </a>
                                   </Col>
                                 </Row>
                               </>

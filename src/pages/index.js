@@ -35,6 +35,7 @@ import LandingPage from "./LandingPage";
 import ManageCoupons from "./ManageCoupons";
 import LoginPage from "./LoginPage";
 import SiteSettings from "./SiteSettings";
+import Checkout from "./Checkout";
 
 export default {
   Login,
@@ -74,4 +75,5 @@ export default {
   ManageCoupons,
   LoginPage,
   SiteSettings,
+  Checkout,
 };

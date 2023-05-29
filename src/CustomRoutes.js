@@ -154,6 +154,13 @@ const CustomRoutes = [
     component: Page.MyCart,
   },
   {
+    path: "/checkout",
+    secure: false,
+    exact: true,
+    layout: Layout.StaticPageLayout,
+    component: Page.Checkout,
+  },
+  {
     path: "/student/my-profile",
     secure: true,
     exact: true,

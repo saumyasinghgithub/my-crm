@@ -37,6 +37,10 @@ const DefaultLayout = ({ children }) => {
             .catch((err) => console.log("asdfdsafdsaf", err));
         }
       });
+    } else {
+      getServerData(`settings/trainer/0`).then((res) => {
+        setSitesetting(res.data);
+      });
     }
   };
   useEffect(callbackfn, []);

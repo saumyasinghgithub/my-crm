@@ -31,6 +31,10 @@ const StaticPageLayout = ({ children }) => {
           });
         }
       });
+    } else {
+      getServerData(`settings/trainer/0`).then((res) => {
+        setSitesetting(res.data);
+      });
     }
   };
   useEffect(callbackfn, []);
@@ -39,6 +43,7 @@ const StaticPageLayout = ({ children }) => {
       if (sitesetting.company_name !== undefined && sitesetting.company_name !== "") {
         document.querySelectorAll("head title")[0].innerText = sitesetting.company_name;
       }
+      console.log(sitesetting);
       if (sitesetting.favicon !== undefined && sitesetting.favicon !== "") {
         document.querySelectorAll("link[rel=icon]")[0].href = `${process.env.REACT_APP_API_URL}/uploads/favicon/${sitesetting.favicon}`;
       }
