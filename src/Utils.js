@@ -13,6 +13,7 @@ const Utils = {
   hasSubdomain: () => {
     const reservedSubDomains = _.get(process.env, "REACT_APP_RESERVED_SD", "").split(",");
     const sd = Utils.subdomain();
+    console.log(sd);
     return sd != "" && !reservedSubDomains.includes(sd);
   },
 
